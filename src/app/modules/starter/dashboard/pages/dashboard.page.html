@@ -1,0 +1,26 @@
+<ax-page>
+    <ax-page-content>
+        <h1>داشبورد</h1>
+
+        <ax-row>
+            <ax-col col-sm="6">
+                <ax-text-box label="لیبل "></ax-text-box>
+            </ax-col>
+            <ax-col col-sm="6">
+                <ax-text-box label="لیبل "></ax-text-box>
+            </ax-col>
+
+        </ax-row>
+        <div style="height: 500px;margin-top: 10px">
+            <ax-data-grid rtl="true">
+                <ax-data-source>
+                    <ax-callback-read [provideData]="provideGridData"></ax-callback-read>
+                </ax-data-source>
+                <ax-text-column field="id" caption="ردیف" [width]="100"></ax-text-column>
+                <ax-text-column field="userId" caption="کاربر" [width]="100"></ax-text-column>
+                <ax-text-column field="title" caption="عنوان" [width]="300"></ax-text-column>
+                <ax-check-column field="completed" caption="وضعیت" [width]="100"></ax-check-column>
+            </ax-data-grid>
+        </div>
+    </ax-page-content>
+</ax-page>

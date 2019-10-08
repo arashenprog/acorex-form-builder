@@ -1,0 +1,51 @@
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+@font-face {
+  font-family: Dana_Variable;
+  src: url("./assets/fonts/dana/dana2webGX.woff") format("woff-variations"),
+    url("./assets/fonts/dana/dana2webGX.woff") format("woff");
+  font-display: fallback;
+}
+@font-face {
+  font-family: Dana;
+  src: url("./assets/fonts/dana/Dana-FaNum-Regular.ttf") format("woff");
+  font-display: fallback;
+}
+@font-face {
+  font-family: Dana;
+  src: url("./assets/fonts/dana/Dana-FaNum-Bold.ttf") format("woff");
+  font-weight: bold;
+  font-display: fallback;
+}
+:root {
+}
+.rtl {
+  direction: rtl !important;
+  text-align: right !important;
+}
+.ax-page-content {
+  .inner-content {
+    height: 100%;
+  }
+}
+
+html,
+body {
+  font-family: Dana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@supports (font-variation-settings: normal) {
+  html,
+  body {
+    margin: 0;
+    font-family: Dana_Variable, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variation-settings: "wght" 300, "wdth" 100, "slnt" 0, "DOTQ" 1,
+      "KASH" 0, "FANU" 1;
+  }
+}
