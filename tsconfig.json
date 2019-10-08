@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "acorex-form-builder": [
+        "dist/acorex-form-builder"
+      ],
+      "acorex-form-builder/*": [
+        "dist/acorex-form-builder/*"
+      ]
+    }
   }
 }

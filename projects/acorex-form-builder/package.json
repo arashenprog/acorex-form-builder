@@ -1,0 +1,13 @@
+{
+  "name": "acorex-form-builder",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "dependencies": {
+    "acorex-editor": "file:C:/ACoreX/acorex-editor-0.0.1.tgz",
+    "acorex-spa": "file:C:/ACoreX/acorex-spa-0.0.1.tgz",
+    "acorex-ui": "file:C:/ACoreX/acorex-ui-0.0.1.tgz"
+  }
+}
