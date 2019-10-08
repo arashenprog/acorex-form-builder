@@ -5,45 +5,23 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
 import { ACoreXUIModule } from "acorex-ui";
-import {
-  ACoreXSPAModule,
-  AXNavMenuService,
-  AXHeaderBarMenuService
-} from "acorex-spa";
-import { NavMenuService } from "./shared/services/nav-menu.service";
-import { StarterDashboardPage } from "./modules/starter/dashboard/pages/dashboard.page";
-import { HeaderBarMenuService } from "./shared/services/header-bar-menu.service";
+
 import { SharedModule } from "./shared/shared.module";
-import { StarterDashboardModule } from "./modules/starter/dashboard/config/dashboard.module";
+import { BuilderModule } from './modules/form-builder/builder/config/dashboard.module';
+import { MasterLayout } from './shared/layouts/master.layout';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MasterLayout],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    StarterDashboardModule,
+    BuilderModule,
     ACoreXUIModule,
-    ACoreXSPAModule
   ],
   providers: [
-    {
-      provide: "startUpTab",
-      useValue: {
-        content: StarterDashboardPage,
-        title: "داشبورد",
-        closable: false
-      }
-    },
-    {
-      provide: AXNavMenuService,
-      useClass: NavMenuService
-    },
-    {
-      provide: AXHeaderBarMenuService,
-      useClass: HeaderBarMenuService
-    }
+
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

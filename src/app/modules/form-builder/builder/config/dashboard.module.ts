@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { StarterDashboardPage } from "../pages/dashboard.page";
+import { BuilderPage } from "../pages/builder.page";
 import { ACoreXUIModule } from 'acorex-ui';
 import { ACoreXSPAModule } from 'acorex-spa';
 
-const PAGES = [StarterDashboardPage];
+const pages = [BuilderPage];
 
 @NgModule({
-  declarations: [...PAGES],
+  declarations: [...pages],
   imports: [CommonModule, ACoreXUIModule, ACoreXSPAModule],
-  exports: [...PAGES],
+  exports: [...pages],
   providers: [],
-  entryComponents: [...PAGES]
+  entryComponents: [...pages]
 })
-export class StarterDashboardModule { }
+export class BuilderModule { }

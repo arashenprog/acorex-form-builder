@@ -2,11 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { AXBasePageComponent, PromisResult, AXHttpService } from "acorex-ui";
 
 @Component({
-  selector: "starter-dashboard",
-  templateUrl: "./dashboard.page.html",
-  styleUrls: ["./dashboard.page.scss"]
+  selector: "builder-dashboard",
+  templateUrl: "./builder.page.html",
+  styleUrls: ["./builder.page.scss"]
 })
-export class StarterDashboardPage extends AXBasePageComponent {
+export class BuilderPage extends AXBasePageComponent {
   constructor(private http: AXHttpService) {
     super();
   }

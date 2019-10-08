@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "acorex-starter-fa": {
+    "acorex-form-builder-sample": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/acorex-starter-fa",
+            "outputPath": "dist/acorex-form-builder-sample",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,18 +64,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "acorex-starter-fa:build"
+            "browserTarget": "acorex-form-builder-sample:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "acorex-starter-fa:build:production"
+              "browserTarget": "acorex-form-builder-sample:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "acorex-starter-fa:build"
+            "browserTarget": "acorex-form-builder-sample:build"
           }
         },
         "test": {
@@ -109,7 +109,7 @@
         }
       }
     },
-    "acorex-starter-fa-e2e": {
+    "acorex-form-builder-sample-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -118,11 +118,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "acorex-starter-fa:serve"
+            "devServerTarget": "acorex-form-builder-sample:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "acorex-starter-fa:serve:production"
+              "devServerTarget": "acorex-form-builder-sample:serve:production"
             }
           }
         },
@@ -173,5 +173,5 @@
       }
     }
   },
-  "defaultProject": "acorex-starter-fa"
+  "defaultProject": "acorex-form-builder-sample"
 }
