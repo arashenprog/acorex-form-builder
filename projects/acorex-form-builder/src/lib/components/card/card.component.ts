@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ACFCardComponent {
 
     @Input()
-    name: string;
+    text: string;
 
     @Input()
     icon: string;
