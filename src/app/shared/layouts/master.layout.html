@@ -1,4 +1,41 @@
-<div>
-    <h1>Layout</h1>
-    <router-outlet></router-outlet>
+<div class="master-layout-container">
+    <header>
+        <div class="controlls start-controlls">
+            <ax-button type="light" size="sm">
+                <i class="fas fa-desktop"></i>
+            </ax-button>
+            <ax-button type="light" size="sm">
+                <i class="fas fa-tablet-alt"></i>
+            </ax-button>
+            <ax-button type="light" size="sm">
+                <i class="fas fa-mobile-alt"></i>
+            </ax-button>
+
+
+        </div>
+        <div class="title">
+            <h1>ACorex form builder</h1>
+        </div>
+        <div class="controlls end-controlls">
+            <ax-button type="light" size="sm" tooltip="t" [placement]="bottom">
+                <i class="fas fa-undo-alt"></i>
+            </ax-button>
+            <ax-button type="light" size="sm">
+                <i class="fas fa-redo-alt"></i>
+            </ax-button>
+            <ax-button type="primary" size="sm">
+                <span>Save</span>&nbsp;
+                <i class="fas fa-save"></i>
+            </ax-button>
+            <ax-button type="secondary" size="sm">
+                <span>Publish</span>&nbsp;
+                <i class="fas fa-check-circle"></i>
+            </ax-button>
+
+        </div>
+    </header>
+    <article>
+        <router-outlet></router-outlet>
+    </article>
+
 </div>

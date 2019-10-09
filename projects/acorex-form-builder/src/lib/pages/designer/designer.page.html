@@ -1,1 +1,18 @@
-<h1>Designer Page</h1>
+<div class="designer-container">
+
+</div>
+
+<div class="empty-stage-container" *ngIf="enableDesigner">
+    <div class="empty-stage">
+        <h1>Let's get started</h1>
+        <br>
+        <br>
+        <div>
+            <ax-button type="primary" text="Create Form" (onClick)="onCreateFormClick()"></ax-button>
+            &nbsp;
+            <ax-button type="dark" text="Load Form"></ax-button>
+        </div>
+
+    </div>
+
+</div>
