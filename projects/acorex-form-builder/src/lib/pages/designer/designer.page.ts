@@ -15,7 +15,7 @@ export class ACFDesignerPage extends AXBasePageComponent {
 
     ngOnInit(): void { }
 
-    onCreateFormClick() {
+    onCreateElementClick() {
         this.popup.open(ACFToolsBoxPage, { title: "Add Component", size: "md" })
         this.enableDesigner = false;
 
