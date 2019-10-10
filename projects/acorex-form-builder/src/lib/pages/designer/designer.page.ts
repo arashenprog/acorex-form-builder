@@ -17,7 +17,7 @@ export class ACFDesignerPage extends AXBasePageComponent {
 
     onCreateElementClick() {
         this.popup.open(ACFToolsBoxPage, { title: "Add Component", size: "md" })
-        this.enableDesigner = false;
+        //this.enableDesigner = false;
 
     }
 }

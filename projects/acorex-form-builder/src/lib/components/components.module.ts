@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ACFCardModule } from './card/card.module';
+import { AXFWidgetRendererDirective } from './widget/widget-renderer.directive';
 
 const modules = [ACFCardModule]
 
 @NgModule({
-    declarations: [],
+    declarations: [AXFWidgetRendererDirective],
     imports: [CommonModule, ...modules],
-    exports: [...modules],
+    exports: [AXFWidgetRendererDirective,...modules],
     providers: [],
 })
 export class ACFComponentsModule { }

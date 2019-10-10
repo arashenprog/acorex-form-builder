@@ -4,21 +4,23 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ACoreXUIModule } from 'acorex-ui';
 import { ACFToolsBoxModule } from '../pages/tools-box/tools-box.module';
+import { AXFGenericWidgetsModule } from '../widgets/widgets.module';
 
-const modules = [
+const MODULES = [
   RouterModule,
   FormsModule,
   AXFDesignerModule,
   ACoreXUIModule,
-  ACFToolsBoxModule
+  ACFToolsBoxModule,
+  AXFGenericWidgetsModule
 ]
 
 @NgModule({
   declarations: [],
   imports: [
-    ...modules
+    ...MODULES
   ],
-  exports: [...modules],
+  exports: [...MODULES],
 
 })
 export class ACoreXFormBuilderModule { }

@@ -8,8 +8,4 @@ import { AXBasePageComponent } from 'acorex-ui';
 })
 export class ACFToolsBoxPage extends AXBasePageComponent {
     constructor() { super() }
-
-    onClosing() {
-
-    }
 }
