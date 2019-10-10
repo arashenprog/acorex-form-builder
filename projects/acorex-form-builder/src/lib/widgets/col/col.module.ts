@@ -18,6 +18,9 @@ export const COMPONENTS = [AXFColWidgetDesigner, AXFColWidgetView, AXFColWidgetP
 export class AXFColWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
+            title:"Column",
+            hint:"Column container element",
+            icon:"fas fa-columns",
             name: "col",
             designerClass: AXFColWidgetDesigner,
             printClass: AXFColWidgetView,

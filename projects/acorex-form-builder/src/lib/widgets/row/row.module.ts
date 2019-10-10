@@ -18,6 +18,9 @@ export const COMPONENTS = [AXFRowWidgetDesigner, AXFRowWidgetView, AXFRowWidgetP
 export class AXFRowWidgetModule {
     constructor(service:AXFWidgetService) {
         service.register({
+            title:"Row",
+            hint:"Row container element",
+            icon:"fas fa-row",
             name: "row",
             designerClass: AXFRowWidgetDesigner,
             printClass: AXFRowWidgetPrint,

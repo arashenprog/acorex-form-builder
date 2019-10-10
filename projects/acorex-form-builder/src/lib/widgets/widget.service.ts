@@ -4,6 +4,9 @@ import { Injectable, ComponentFactoryResolver, Renderer2, ApplicationRef, Inject
 
 
 export interface WidgetConfig {
+    title: string,
+    icon: string,
+    hint?: string,
     name: string;
     designerClass: any;
     viewClass: any;
