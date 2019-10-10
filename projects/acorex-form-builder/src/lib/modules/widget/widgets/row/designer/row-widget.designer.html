@@ -1,0 +1,13 @@
+<div class="axf-row row">
+    <ng-container *ngIf="widgets.length; else elseTemplate">
+        <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
+        </ng-container>
+    </ng-container>
+    <ng-template #elseTemplate>
+        <div>
+            <ax-button (onClick)="AddColumn(6,6);">6/12 + 6/12</ax-button>&nbsp;
+            <ax-button (onClick)="AddColumn(4,8);">4/12 + 8/12</ax-button>&nbsp;
+            <ax-button (onClick)="AddColumn(8,4);">8/12 + 4/12</ax-button>&nbsp;
+        </div>
+    </ng-template>
+</div>

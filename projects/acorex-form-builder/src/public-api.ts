@@ -1,5 +1,5 @@
 
-export * from './lib/pages/designer/designer.module';
-export * from './lib/pages/designer/designer.page';
-export * from './lib/config/acorex-form-builder.module';
+export * from './lib/modules/designer/config/designer.module';
+export * from './lib/modules/designer/pages/designer.page';
+export * from './lib/acorex-form-builder.module';
 
