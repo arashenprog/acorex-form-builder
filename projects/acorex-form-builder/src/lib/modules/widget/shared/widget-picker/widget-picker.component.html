@@ -1,6 +1,6 @@
-<div>
-    <div class="acf-card-container" *ngFor="let w of list">
-        <div><i class="{{w.icon}}"></i></div>
+<div class="list-container">
+    <div class="widget-item" *ngFor="let w of list">
+        <div class="icon"><i class="{{w.icon}}"></i></div>
         <div>{{ w.title }}</div>
     </div>
 </div>
