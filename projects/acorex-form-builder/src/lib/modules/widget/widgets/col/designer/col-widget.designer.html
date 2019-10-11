@@ -5,20 +5,20 @@
             </ng-container>
         </ng-container>
         <ng-template #elseTemplate>
-            <div class="text-center">
-                <ax-button type="primary btn-sm" (onClick)="addElement()"><i class="fa fa-plus"></i> Add Element
+            <div class="text-center" >
+                <ax-button type="primary" size="sm" (onClick)="addElement()" tooltip="Add new Element" [placement]="'top'"><i class="fa fa-plus"></i>
                 </ax-button>
             </div>
         </ng-template>
     </div>
     <div class="col-tools">
-        <div class="icon" (click)="delete()" title="Delete Column">
+        <div class="icon" (click)="delete()"  tooltip="Delete Column" [placement]="'bottom'">
             <i class="fas fa-trash"></i>
         </div>
-        <div class="icon" (click)="edit()" title="Edit Column">
+        <div class="icon" (click)="edit()"  tooltip="Edit Column" [placement]="'bottom'">
             <i class="fas fa-pen"></i>
         </div>
-        <div class="icon" (click)="addElement()" title="Append Element">
+        <div class="icon" (click)="addElement()"  tooltip="Append new Column" [placement]="'bottom'">
                 <i class="fas fa-plus"></i>
             </div>
     </div>
