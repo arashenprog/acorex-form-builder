@@ -2,3 +2,12 @@
     border: 1px dashed var(--gray-color);
     padding: var(--sp-md-size);
 }
+
+.add-column {
+    &.selected {
+        background-color: var(--primary-trans-color);
+    }
+
+    border: solid 1px var(--gray-color);
+    cursor: pointer;
+}

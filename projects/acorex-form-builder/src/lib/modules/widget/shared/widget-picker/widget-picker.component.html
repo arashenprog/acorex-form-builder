@@ -1,6 +1,26 @@
-<div class="list-container">
-    <div class="widget-item" *ngFor="let w of list">
-        <div class="icon"><i class="{{w.icon}}"></i></div>
-        <div>{{ w.title }}</div>
-    </div>
+<div class="ax-pad-sm">
+    <ax-tab-view>
+        <ax-tab title="All">
+            <div class="list-container">
+                <div class="widget-item" *ngFor="let w of list" (click)="selectWidget(w)">
+                    <div class="icon"><i class="{{w.icon}}"></i></div>
+                    <div class="text">
+                        <div class="title">{{ w.title }}</div>
+                        <div class="hint">{{ w.hint }}</div>
+                    </div>
+                </div>
+            </div>
+        </ax-tab>
+        <ax-tab title="Layout">
+            <div class="list-container">
+                <div class="widget-item" *ngFor="let w of list" (click)="selectWidget(w)">
+                    <div class="icon"><i class="{{w.icon}}"></i></div>
+                    <div class="text">
+                        <div class="title">{{ w.title }}</div>
+                        <div class="hint">{{ w.hint }}</div>
+                    </div>
+                </div>
+            </div>
+        </ax-tab>
+    </ax-tab-view>
 </div>

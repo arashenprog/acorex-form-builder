@@ -21,7 +21,7 @@ export class AXFRowWidgetModule {
         service.register({
             title:"Row",
             hint:"Row container element",
-            icon:"fas fa-row",
+            icon:"fas fa-align-justify",
             name: "row",
             designerClass: AXFRowWidgetDesigner,
             printClass: AXFRowWidgetPrint,

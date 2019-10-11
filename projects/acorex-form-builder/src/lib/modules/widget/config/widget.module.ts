@@ -4,13 +4,15 @@ import { AXFRowWidgetModule } from '../widgets/row/row.module';
 import { AXFColWidgetModule } from '../widgets/col/col.module';
 import { WidgetInjector } from './widget';
 import { AXFWidgetSharedModule } from '../shared/shared.module';
+import { AXFTextBlockWidgetModule } from '../widgets/text-block/text-block.module';
 
 
 const MODULES = [
     CommonModule,
     AXFWidgetSharedModule,
     AXFRowWidgetModule,
-    AXFColWidgetModule
+    AXFColWidgetModule,
+    AXFTextBlockWidgetModule
 ];
 
 @NgModule({

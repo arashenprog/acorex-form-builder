@@ -13,8 +13,6 @@ export abstract class AXFWidget {
     }
 
     appendChild(name: string, options?: any) {
-        debugger;
-        
         let w = Object.assign({},  this.widgetService.resolve(name));
         w.options = options;
         this.widgets.push(w);

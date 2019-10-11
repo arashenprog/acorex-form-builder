@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2 } from '@an
 import { AXFWidgetDesigner } from '../../../config/widget';
 import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
 import { AXPopupService } from 'acorex-ui';
+import { WidgetConfig } from '../../../services/widget.service';
 
 @Component({
     selector: "[axf-widget-col]",
@@ -24,6 +25,10 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
         this.popup.open(AXFWidgetPickerComponent, {
             title: "Add Element",
             size: "md"
+        }).closed((c) => {
+            if (c && c.data) {
+                this.appendChild((c.data as WidgetConfig).name);
+            }
         })
     }
 }
