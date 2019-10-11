@@ -11,9 +11,9 @@
                 </div>
             </div>
         </ax-tab>
-        <ax-tab title="Layout">
+        <ax-tab *ngFor="let cat of categories" [title]="cat">
             <div class="list-container">
-                <div class="widget-item" *ngFor="let w of list" (click)="selectWidget(w)">
+                <div class="widget-item" *ngFor="let w of getList(cat)" (click)="selectWidget(w)">
                     <div class="icon"><i class="{{w.icon}}"></i></div>
                     <div class="text">
                         <div class="title">{{ w.title }}</div>

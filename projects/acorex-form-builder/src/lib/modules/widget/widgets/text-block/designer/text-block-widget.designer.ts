@@ -12,6 +12,7 @@ import { WidgetConfig } from '../../../services/widget.service';
 })
 export class AXFTextBlockWidgetDesigner extends AXFWidgetDesigner {
    
+    text:string;
 
     constructor(private hostElement: ElementRef, private popup: AXPopupService) {
         super()

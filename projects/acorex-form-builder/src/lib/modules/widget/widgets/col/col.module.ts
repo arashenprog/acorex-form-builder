@@ -11,7 +11,7 @@ export const COMPONENTS = [AXFColWidgetDesigner, AXFColWidgetView, AXFColWidgetP
 
 @NgModule({
     declarations: [...COMPONENTS],
-    imports: [CommonModule,ACoreXUIModule,AXFWidgetSharedModule],
+    imports: [CommonModule, ACoreXUIModule, AXFWidgetSharedModule],
     exports: [...COMPONENTS],
     entryComponents: [...COMPONENTS],
     providers: [],
@@ -19,13 +19,23 @@ export const COMPONENTS = [AXFColWidgetDesigner, AXFColWidgetView, AXFColWidgetP
 export class AXFColWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title:"Column",
-            hint:"Column container element",
-            icon:"fas fa-columns",
+            title: "Column",
+            hint: "Column container element",
+            icon: "fas fa-columns",
+            category: "Layout",
+            visible: false,
             name: "col",
             designerClass: AXFColWidgetDesigner,
             printClass: AXFColWidgetView,
-            viewClass: AXFColWidgetPrint
+            viewClass: AXFColWidgetPrint,
+            properties: [
+                {
+                    name: "size",
+                    category: "General",
+                    defaultValue: 1,
+                    title: "Size",
+                }
+            ]
         })
     }
 }

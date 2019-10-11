@@ -1,23 +1,25 @@
 .designer-container {
+   
 }
 
 .empty-stage-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  display: flex;
-  position: relative;
-  .empty-stage {
-    background-image: url(assets/images/empty-stage.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    width: 50%;
-    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-  }
+    height: 100%;
+    display: flex;
+    position: relative;
+
+    .empty-stage {
+        background-image: url(assets/images/empty-stage.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        width: 50%;
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
 }

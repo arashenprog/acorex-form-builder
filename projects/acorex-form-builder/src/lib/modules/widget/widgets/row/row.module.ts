@@ -23,9 +23,12 @@ export class AXFRowWidgetModule {
             hint:"Row container element",
             icon:"fas fa-align-justify",
             name: "row",
+            category:"Layout",
+            visible:true,
             designerClass: AXFRowWidgetDesigner,
             printClass: AXFRowWidgetPrint,
-            viewClass: AXFRowWidgetView
+            viewClass: AXFRowWidgetView,
+            properties:[]
         })
     }
 }

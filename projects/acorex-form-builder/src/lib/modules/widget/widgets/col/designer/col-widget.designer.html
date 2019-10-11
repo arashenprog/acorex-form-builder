@@ -1,9 +1,21 @@
-<ng-container *ngIf="widgets.length; else elseTemplate">
-    <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
-    </ng-container>
-</ng-container>
-<ng-template #elseTemplate>
-    <div class="text-center">
-        <ax-button type="primary btn-sm" (onClick)="addElement()"><i class="fa fa-plus"></i> Add Element</ax-button>
-    </div>
-</ng-template>
+<div class="widget-designer">
+        <div class="widget-container">
+                <ng-container *ngIf="widgets.length; else elseTemplate">
+                    <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
+                    </ng-container>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <div class="text-center">
+                        <ax-button type="primary btn-sm" (onClick)="addElement()"><i class="fa fa-plus"></i> Add Element</ax-button>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="col-tools">
+                <div class="icon" (click)="delete()" title="Delete Column">
+                    <i class="fas fa-trash"></i>
+                </div>
+                <div class="icon" (click)="edit()" title="Edit Column">
+                    <i class="fas fa-pen"></i>
+                </div>
+            </div>
+</div>

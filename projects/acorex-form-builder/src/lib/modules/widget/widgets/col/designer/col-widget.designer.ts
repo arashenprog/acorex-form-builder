@@ -8,7 +8,6 @@ import { WidgetConfig } from '../../../services/widget.service';
     selector: "[axf-widget-col]",
     templateUrl: './col-widget.designer.html',
     styleUrls: ['./col-widget.designer.scss'],
-    encapsulation: ViewEncapsulation.None
 })
 export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     size: number = 1;

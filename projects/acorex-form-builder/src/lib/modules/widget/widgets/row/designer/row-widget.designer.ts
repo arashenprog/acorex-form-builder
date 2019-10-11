@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 @Component({
@@ -25,8 +25,19 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
         cols.forEach(c => {
             this.appendChild("col", { size: c });
         });
-        const sum = this.widgets.map(c => c.options.size).reduce((a, b) => a + b, 0)
+        this.calcLeftCols();
+    }
+
+    private calcLeftCols()
+    {
+        const sum = this.widgets.map(c => c.options.size).reduce((a, b) => a + b, 0);
+        this.range = 0;
         this.colLeft = Array(4 - (sum / 3)).fill(1);
+    }
+
+    refresh()
+    {
+        this.calcLeftCols();
     }
 
     handlePickerMouseHover(range: number) {

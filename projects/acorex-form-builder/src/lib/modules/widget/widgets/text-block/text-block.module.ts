@@ -21,11 +21,21 @@ export class AXFTextBlockWidgetModule {
         service.register({
             title:"Text Block",
             hint:"Text content element",
-            icon:"fas fa-text",
+            icon:"fas fa-font",
+            category:"Editors",
+            visible:true,
             name: "text",
             designerClass: AXFTextBlockWidgetDesigner,
             printClass: AXFTextBlockWidgetView,
-            viewClass: AXFTextBlockWidgetPrint
+            viewClass: AXFTextBlockWidgetPrint,
+            properties: [
+                {
+                    name: "text",
+                    category: "General",
+                    defaultValue: "Text Block Value",
+                    title: "Text",
+                }
+            ]
         })
     }
 }
