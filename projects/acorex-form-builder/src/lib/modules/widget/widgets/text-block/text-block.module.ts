@@ -6,6 +6,7 @@ import { AXFTextBlockWidgetPrint } from './print/text-block-widget.print';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
+import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [AXFTextBlockWidgetDesigner, AXFTextBlockWidgetView, AXFTextBlockWidgetPrint]
 
@@ -26,15 +27,11 @@ export class AXFTextBlockWidgetModule {
             visible:true,
             name: "text",
             designerClass: AXFTextBlockWidgetDesigner,
-            printClass: AXFTextBlockWidgetView,
-            viewClass: AXFTextBlockWidgetPrint,
+            printClass: AXFTextBlockWidgetPrint,
+            viewClass: AXFTextBlockWidgetView,
             properties: [
-                {
-                    name: "text",
-                    category: "General",
-                    defaultValue: "Text Block Value",
-                    title: "Text",
-                }
+                AXF_TEXT_PROPERTY,
+                AXF_NAME_PROPERTY,
             ]
         })
     }

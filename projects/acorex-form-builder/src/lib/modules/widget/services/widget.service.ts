@@ -9,6 +9,7 @@ export interface AXFWidgetProperty {
     hint?: string;
     defaultValue?: any;
     category: "General" | "Style" | "Behavior";
+    editor: any
 }
 
 export interface WidgetConfig {

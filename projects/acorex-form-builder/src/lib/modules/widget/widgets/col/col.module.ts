@@ -6,6 +6,8 @@ import { AXFColWidgetPrint } from './print/col-widget.print';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
+import { AXFTextEditorComponent } from '../../../property-editor/editors/text/text.editor';
+import { AXF_COLOR_PROPERTY, AXF_BG_COLOR_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [AXFColWidgetDesigner, AXFColWidgetView, AXFColWidgetPrint]
 
@@ -26,15 +28,18 @@ export class AXFColWidgetModule {
             visible: false,
             name: "col",
             designerClass: AXFColWidgetDesigner,
-            printClass: AXFColWidgetView,
-            viewClass: AXFColWidgetPrint,
+            printClass: AXFColWidgetPrint,
+            viewClass: AXFColWidgetView,
             properties: [
                 {
                     name: "size",
-                    category: "General",
+                    category: "Style",
                     defaultValue: 1,
                     title: "Size",
-                }
+                    editor: AXFTextEditorComponent,
+                },
+                AXF_COLOR_PROPERTY,
+                AXF_BG_COLOR_PROPERTY
             ]
         })
     }

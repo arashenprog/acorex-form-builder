@@ -6,7 +6,10 @@ import { AXFWidgetView } from '../../../config/widget';
     styleUrls: ['./text-block-widget.view.scss']
 })
 export class AXFTextBlockWidgetView extends AXFWidgetView {
+
+    text: String;
+
     constructor() {
         super()
-     }
+    }
 }

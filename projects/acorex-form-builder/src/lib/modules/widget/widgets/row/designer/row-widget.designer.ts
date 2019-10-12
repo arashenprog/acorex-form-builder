@@ -10,7 +10,7 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
 
     maxCol: number = 12;
-    minCol: number = 1;
+    minCol: number = 2;
     countCol: number = 6;
     colLeft: number[] = [];
     range: number = 0;
@@ -24,8 +24,7 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
     }
 
 
-    AddColumn(...cols) {
-        debugger;
+    addColumn(...cols) {
         cols.forEach(c => {
             this.appendChild("col", { size: c * this.minCol });
         });

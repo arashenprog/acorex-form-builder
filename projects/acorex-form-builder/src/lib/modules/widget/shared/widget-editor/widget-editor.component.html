@@ -1,0 +1,23 @@
+<div class="axf-widget-editor">
+    <div class="props">
+        <ax-tab-view>
+            <ax-tab *ngFor="let t of tabNames" [title]="t">
+                <div class="row" *ngFor="let e of getProps(t)">
+                    <div class="col-md-3">
+                        {{e.title}}:
+                    </div>
+                    <div class="col-md-9">
+                        <ng-container axf-editor-renderer (valueChange)="handleValueChange(e.name,$event)"
+                            [editor]="e.editor" [value]="config.options[e.name]">
+                        </ng-container>
+                    </div>
+                </div>
+            </ax-tab>
+
+        </ax-tab-view>
+    </div>
+    <div class="preview">
+        <ng-container axf-widget-renderer [widget]="config" mode="view">
+        </ng-container>
+    </div>
+</div>

@@ -28,7 +28,7 @@ export class AXFRowWidgetModule {
             designerClass: AXFRowWidgetDesigner,
             printClass: AXFRowWidgetPrint,
             viewClass: AXFRowWidgetView,
-            properties:[]
+            properties:[],
         })
     }
 }

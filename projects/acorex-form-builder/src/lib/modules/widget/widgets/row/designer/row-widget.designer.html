@@ -4,7 +4,7 @@
             <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
             </ng-container>
             <ng-container *ngFor="let c of colLeft;let i = index">
-                <div class="add-column col-md-{{minCol}}" [class.selected]="(i+1) <= range" (click)="AddColumn((i+1))"
+                <div class="add-column col-md-{{minCol}}" [class.selected]="(i+1) <= range" (click)="addColumn((i+1))"
                     (mouseenter)="handlePickerMouseHover(i+1)" (mouseleave)="handlePickerMouseOut(i+1)">
                     &nbsp;
                 </div>

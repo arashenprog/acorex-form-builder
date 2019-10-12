@@ -1,6 +1,7 @@
 import { Injector } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
-import { AXHtmlUtil } from 'acorex-ui'
+import { AXHtmlUtil, AXPopupService } from 'acorex-ui'
+import { AXFWidgetEditorComponent } from '../shared/widget-editor/widget-editor.component';
 
 export const WidgetInjector: { instance?: Injector } = {};
 
@@ -13,8 +14,10 @@ export abstract class AXFWidget {
 
     private widgetService: AXFWidgetService;
 
+
     constructor() {
         this.widgetService = WidgetInjector.instance.get(AXFWidgetService);
+
     }
 
     protected appendChild(name: string, options: any = {}) {
@@ -25,6 +28,25 @@ export abstract class AXFWidget {
         this.widgets.push(w);
     }
 
+
+
+    refresh() {
+
+    }
+
+    getJson() {
+
+    }
+
+}
+export abstract class AXFWidgetDesigner extends AXFWidget {
+
+    private popupService: AXPopupService;
+    constructor() {
+        super();
+        this.popupService = WidgetInjector.instance.get(AXPopupService);
+    }
+
     delete() {
         if (this.parent) {
             this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
@@ -33,26 +55,20 @@ export abstract class AXFWidget {
     }
 
     edit() {
+        this.popupService.open(AXFWidgetEditorComponent, {
+            title: this.config.title,
+            size: "lg",
+            data: {
+                config: this.config
+            }
+        }).closed((c) => {
 
+        })
     }
-
-    refresh()
+    copy()
     {
-
+        
     }
-
-    getJson()
-    {
-
-    }
-
-}
-export abstract class AXFWidgetDesigner extends AXFWidget {
-
-    constructor() {
-        super();
-    }
-
 }
 export abstract class AXFWidgetView extends AXFWidget {
     constructor() {
