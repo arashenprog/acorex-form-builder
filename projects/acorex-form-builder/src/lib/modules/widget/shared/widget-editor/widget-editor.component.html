@@ -1,7 +1,7 @@
 <div class="axf-widget-editor">
     <div class="props">
         <ax-tab-view>
-            <ax-tab *ngFor="let t of tabNames" [title]="t">
+            <ax-tab *ngFor="let t of tabNames" [caption]="t">
                 <div class="row" *ngFor="let e of getProps(t)">
                     <div class="col-md-3">
                         {{e.title}}:
