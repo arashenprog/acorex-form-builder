@@ -1,6 +1,5 @@
 import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, EventEmitter, Output } from '@angular/core';
 import { AXHtmlUtil } from 'acorex-ui';
-import { AXFWidgetEditorComponent } from 'acorex-form-builder/lib/modules/widget/shared/widget-editor/widget-editor.component';
 import { AXFProperyEditor } from '../config/editor';
 
 @Directive({
