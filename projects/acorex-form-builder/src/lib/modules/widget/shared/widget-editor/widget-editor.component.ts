@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { WidgetConfig, AXFWidgetProperty } from '../../services/widget.service';
 import { AXFWidgetRendererDirective } from '../widget-renderer/widget-renderer.directive';
 
 @Component({
     selector: 'axf-widget-editor',
     templateUrl: './widget-editor.component.html',
-    styleUrls: ['./widget-editor.component.scss']
+    styleUrls: ['./widget-editor.component.scss'],
+    encapsulation:ViewEncapsulation.None
 })
 export class AXFWidgetEditorComponent implements OnInit {
 
