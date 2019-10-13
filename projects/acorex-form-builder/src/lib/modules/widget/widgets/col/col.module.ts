@@ -7,7 +7,7 @@ import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFTextEditorComponent } from '../../../property-editor/editors/text/text.editor';
-import { AXF_COLOR_PROPERTY, AXF_BG_COLOR_PROPERTY, AXF_BOX_STYLE_PROPERTY } from '../../config/general-properties';
+import {  AXF_STYLE_GENERAL_PROPERTIES } from '../../config/general-properties';
 
 export const COMPONENTS = [AXFColWidgetDesigner, AXFColWidgetView, AXFColWidgetPrint]
 
@@ -38,9 +38,7 @@ export class AXFColWidgetModule {
                     title: "Size",
                     editor: AXFTextEditorComponent,
                 },
-                AXF_COLOR_PROPERTY,
-                AXF_BG_COLOR_PROPERTY,
-                AXF_BOX_STYLE_PROPERTY
+                ...AXF_STYLE_GENERAL_PROPERTIES
             ]
         })
     }

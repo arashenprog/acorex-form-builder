@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
@@ -9,7 +9,11 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
 
     text: String;
 
-    constructor() {
+    constructor(private el: ElementRef) {
         super()
+    }
+
+    ngOnInit(): void {
+        this.applyStyle(this.el.nativeElement)
     }
 }

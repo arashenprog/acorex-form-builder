@@ -43,3 +43,10 @@ export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
     title: "Box Style",
     editor: AXFBoxStyleEditorComponent
 }
+
+
+export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [
+    AXF_COLOR_PROPERTY,
+    AXF_BG_COLOR_PROPERTY,
+    AXF_BOX_STYLE_PROPERTY
+]

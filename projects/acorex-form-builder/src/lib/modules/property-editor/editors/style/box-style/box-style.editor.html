@@ -5,10 +5,10 @@
             <span>Margin</span>
         </div>
         <div class="start">
-            <ax-text-box [(text)]="value.margin.left" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+            <ax-text-box [text]="value.margin.left" (textChange)="handleInnerValueChange($event,'margin','left')"></ax-text-box>
         </div>
         <div class="center">
-            <ax-text-box [(text)]="value.margin.top" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+            <ax-text-box [text]="value.margin.top" (textChange)="handleInnerValueChange($event,'margin','top')"></ax-text-box>
             <div class="content">
                 <!-- Start Border Box-->
                 <div class="box-input border-box">
@@ -16,10 +16,10 @@
                         <span>Border</span>
                     </div>
                     <div class="start">
-                        <ax-text-box [(text)]="value.border.left" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+                        <ax-text-box [text]="value.border.left" (textChange)="handleInnerValueChange($event,'border','left')"></ax-text-box>
                     </div>
                     <div class="center">
-                        <ax-text-box [(text)]="value.border.top" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+                        <ax-text-box [text]="value.border.top" (textChange)="handleInnerValueChange($event,'border','top')"></ax-text-box>
                         <div class="content">
                             <!-- Start Padding Box-->
                             <div class="box-input padding-box">
@@ -27,33 +27,33 @@
                                     <span>Padding</span>
                                 </div>
                                 <div class="start">
-                                    <ax-text-box [(text)]="value.padding.left" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+                                    <ax-text-box [text]="value.padding.left" (textChange)="handleInnerValueChange($event,'padding','left')"></ax-text-box>
                                 </div>
                                 <div class="center">
-                                    <ax-text-box [(text)]="value.padding.top" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+                                    <ax-text-box [text]="value.padding.top" (textChange)="handleInnerValueChange($event,'padding','top')"></ax-text-box>
                                     <div class="content final-content">
 
                                     </div>
-                                    <ax-text-box [(text)]="value.padding.bottom" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+                                    <ax-text-box [text]="value.padding.bottom" (textChange)="handleInnerValueChange($event,'padding','bottom')"></ax-text-box>
                                 </div>
                                 <div class="end">
-                                    <ax-text-box [(text)]="value.padding.right" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+                                    <ax-text-box [text]="value.padding.right" (textChange)="handleInnerValueChange($event,'padding','right')"></ax-text-box>
                                 </div>
                             </div>
                             <!-- Finish Padding Box-->
                         </div>
-                        <ax-text-box [(text)]="value.border.bottom" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+                        <ax-text-box [text]="value.border.bottom" (textChange)="handleInnerValueChange($event,'border','bottom')"></ax-text-box>
                     </div>
                     <div class="end">
-                        <ax-text-box [(text)]="value.border.right" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+                        <ax-text-box [text]="value.border.right" (textChange)="handleInnerValueChange($event,'border','right')"></ax-text-box>
                     </div>
                 </div>
                 <!-- Finish Border Box-->
             </div>
-            <ax-text-box [(text)]="value.margin.bottom" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+            <ax-text-box [text]="value.margin.bottom" (textChange)="handleInnerValueChange($event,'margin','bottom')"></ax-text-box>
         </div>
         <div class="end">
-            <ax-text-box [(text)]="value.margin.right" (textChange)="handleInnerValueChange($event)"></ax-text-box>
+            <ax-text-box [text]="value.margin.right" (textChange)="handleInnerValueChange($event,'margin','right')"></ax-text-box>
         </div>
     </div>
     <!-- Finish Margin Box-->

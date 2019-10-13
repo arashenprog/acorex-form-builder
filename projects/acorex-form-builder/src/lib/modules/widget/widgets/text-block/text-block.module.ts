@@ -6,13 +6,13 @@ import { AXFTextBlockWidgetPrint } from './print/text-block-widget.print';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY } from '../../config/general-properties';
+import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES } from '../../config/general-properties';
 
 export const COMPONENTS = [AXFTextBlockWidgetDesigner, AXFTextBlockWidgetView, AXFTextBlockWidgetPrint]
 
 @NgModule({
     declarations: [...COMPONENTS],
-    imports: [CommonModule,ACoreXUIModule,AXFWidgetSharedModule],
+    imports: [CommonModule, ACoreXUIModule, AXFWidgetSharedModule],
     exports: [...COMPONENTS],
     entryComponents: [...COMPONENTS],
     providers: [],
@@ -20,11 +20,11 @@ export const COMPONENTS = [AXFTextBlockWidgetDesigner, AXFTextBlockWidgetView, A
 export class AXFTextBlockWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title:"Text Block",
-            hint:"Text content element",
-            icon:"fas fa-font",
-            category:"Editors",
-            visible:true,
+            title: "Text Block",
+            hint: "Text content element",
+            icon: "fas fa-font",
+            category: "Text",
+            visible: true,
             name: "text",
             designerClass: AXFTextBlockWidgetDesigner,
             printClass: AXFTextBlockWidgetPrint,
@@ -32,6 +32,55 @@ export class AXFTextBlockWidgetModule {
             properties: [
                 AXF_TEXT_PROPERTY,
                 AXF_NAME_PROPERTY,
+                ...AXF_STYLE_GENERAL_PROPERTIES
+            ]
+        })//
+        service.register({
+            title: "Heading",
+            hint: "Heading element",
+            icon: "fas fa-bold",
+            category: "Text",
+            visible: true,
+            name: "text",
+            designerClass: AXFTextBlockWidgetDesigner,
+            printClass: AXFTextBlockWidgetPrint,
+            viewClass: AXFTextBlockWidgetView,
+            properties: [
+                AXF_TEXT_PROPERTY,
+                AXF_NAME_PROPERTY,
+                ...AXF_STYLE_GENERAL_PROPERTIES
+            ]
+        })
+        service.register({
+            title: "Hint Note",
+            hint: "Hint note element",
+            icon: "fas fa-italic",
+            category: "Text",
+            visible: true,
+            name: "text",
+            designerClass: AXFTextBlockWidgetDesigner,
+            printClass: AXFTextBlockWidgetPrint,
+            viewClass: AXFTextBlockWidgetView,
+            properties: [
+                AXF_TEXT_PROPERTY,
+                AXF_NAME_PROPERTY,
+                ...AXF_STYLE_GENERAL_PROPERTIES
+            ]
+        })
+        service.register({
+            title: "Text Input",
+            hint: "Text input element",
+            icon: "fas fa-i-cursor",
+            category: "Editors",
+            visible: true,
+            name: "textbox",
+            designerClass: AXFTextBlockWidgetDesigner,
+            printClass: AXFTextBlockWidgetPrint,
+            viewClass: AXFTextBlockWidgetView,
+            properties: [
+                AXF_TEXT_PROPERTY,
+                AXF_NAME_PROPERTY,
+                ...AXF_STYLE_GENERAL_PROPERTIES
             ]
         })
     }

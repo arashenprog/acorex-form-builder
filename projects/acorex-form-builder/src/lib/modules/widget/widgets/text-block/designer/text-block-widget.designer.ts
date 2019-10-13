@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
 import { AXPopupService } from 'acorex-ui';
@@ -13,14 +13,16 @@ import { WidgetConfig } from '../../../services/widget.service';
 export class AXFTextBlockWidgetDesigner extends AXFWidgetDesigner {
    
     
-    text:string;
+    @ViewChild("el") el:ElementRef;
 
-    constructor(private hostElement: ElementRef, private popup: AXPopupService) {
+    text: String;
+
+    constructor() {
         super()
-
     }
+
     ngOnInit(): void {
-        //(this.hostElement.nativeElement as HTMLElement).classList.add("axf-col", "col-sm-12", `col-md-${this.size}`)
+        this.applyStyle(this.el.nativeElement)
     }
 
    

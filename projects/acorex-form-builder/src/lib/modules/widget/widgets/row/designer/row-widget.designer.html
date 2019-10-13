@@ -13,10 +13,10 @@
 
     </div>
     <div class="row-tools">
-        <div class="icon" (click)="delete()" title="Delete Row">
+        <div class="icon" (click)="delete()" tooltip="Delete Row" [placement]="'right'">
             <i class="fas fa-trash"></i>
         </div>
-        <div class="icon" (click)="edit()" title="Edit Row">
+        <div class="icon" (click)="edit()" tooltip="Edit Row" [placement]="'right'">
             <i class="fas fa-pen"></i>
         </div>
     </div>

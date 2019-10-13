@@ -1,3 +1,10 @@
+:host{
+    &.axf-col{
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+}
+
 .widget-designer {
 
     display: flex;
@@ -8,7 +15,7 @@
 
     .widget-container {
         border: 1px solid var(--border-color);
-        padding: var(--sp-md-size);
+        padding: var(--sp-sm-size);
         background-color: #fff;
     }
 

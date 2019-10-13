@@ -6,7 +6,7 @@ import { AXFRowWidgetPrint } from './print/row-widget.print';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_BOX_STYLE_PROPERTY } from '../../config/general-properties';
+import {  AXF_STYLE_GENERAL_PROPERTIES } from '../../config/general-properties';
 
 export const COMPONENTS = [AXFRowWidgetDesigner, AXFRowWidgetView, AXFRowWidgetPrint]
 
@@ -30,7 +30,7 @@ export class AXFRowWidgetModule {
             printClass: AXFRowWidgetPrint,
             viewClass: AXFRowWidgetView,
             properties:[
-                AXF_BOX_STYLE_PROPERTY
+                ...AXF_STYLE_GENERAL_PROPERTIES
             ],
         })
     }

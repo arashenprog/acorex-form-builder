@@ -5,8 +5,8 @@ export class AXFBoxStyleValue {
 }
 
 export class AXFBoxStyleBoxSizeValue {
-    left: number = 0;
-    right: number = 0;
-    top: number = 0;
-    bottom: number = 0;
+    left: string = "0";
+    right: string = "0";
+    top: string = "0";
+    bottom: string = "0";
 }
