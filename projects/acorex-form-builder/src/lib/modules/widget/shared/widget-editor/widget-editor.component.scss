@@ -1,30 +1,29 @@
 .axf-widget-editor {
-    padding: var(--sp-lg-size);
+  height: 100%;
+  display: flex;
+  flex: 1;
+  flex-grow: 12;
+  width: 100%;
+  height: 75vh;
+
+  ax-tab-view {
+    margin-top: 0;
     height: 100%;
+  }
+
+  .props {
+    flex: 7;
+    height: 100%;
+  }
+
+  .preview {
+    flex: 5;
     display: flex;
-    flex: 1;
-    flex-grow: 12;
-    width: 100%;
-    height: 75vh;
-
-    ax-tab-view {
-        margin-top: 0;
-        height: 100%;
-    }
-
-    .props {
-        flex: 7;
-        height: 100%;
-    }
-
-    .preview {
-        flex: 5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        border: 2px dashed var(--border-color);
-        height: 100%;
-        margin-left: var(--sp-lg-size);
-    }
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border: 2px dashed var(--border-color);
+    height: 100%;
+    margin-left: var(--sp-lg-size);
+  }
 }
