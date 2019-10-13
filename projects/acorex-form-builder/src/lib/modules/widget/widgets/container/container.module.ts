@@ -5,13 +5,15 @@ import { AXFContainerWidgetPrint } from './print/container-widget.print';
 import { AXFContainerWidgetView } from './view/container-widget.view';
 import { AXFWidgetService } from '../../services/widget.service';
 import { AXFTextEditorComponent } from '../../../property-editor/editors/text/text.editor';
+import { ACoreXUIModule } from 'acorex-ui';
+import { AXFWidgetSharedModule } from '../../shared/shared.module';
 
 export const COMPONENTS = [AXFContainerWidgetDesigner, AXFContainerWidgetPrint, AXFContainerWidgetView]
 
 
 @NgModule({
     declarations: [...COMPONENTS],
-    imports: [CommonModule],
+    imports: [CommonModule,ACoreXUIModule,AXFWidgetSharedModule],
     exports: [...COMPONENTS],
     entryComponents: [...COMPONENTS],
     providers: [],

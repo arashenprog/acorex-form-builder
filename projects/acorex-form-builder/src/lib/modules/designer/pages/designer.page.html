@@ -1,21 +1,23 @@
-<!-- <br>
-<br>
-<br>
-<br> -->
-<div class="designer-container container">
-    <axf-widget-row></axf-widget-row>
+<div class="designer-container container" *ngIf="widgets.length>0">
+    <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
+    </ng-container>
+    <div class="add-element-container">
+        <div class="add-element" (click)="handleStartClick()" tooltip="Append Element" [placement]="'top'">
+            <i class="fas fa-plus"></i>
+        </div>
+    </div>
 </div>
 
-<!-- <div class="empty-stage-container" *ngIf="enableDesigner">
+<div class="empty-stage-container" *ngIf="widgets.length==0">
     <div class="empty-stage">
         <h1>Let's get started</h1>
         <br>
         <br>
         <div>
-            <ax-button type="primary" text="Create Element" (onClick)="onCreateElementClick()"></ax-button>
+            <ax-button type="primary" text="Start Design" (onClick)="handleStartClick()"></ax-button>
             &nbsp;
-            <ax-button type="dark" text="Load Template"></ax-button>
+            <ax-button type="dark" text="Load Template"  (onClick)="handleLoadClick()" ></ax-button>
         </div>
     </div>
-   
-</div> -->
+
+</div>

@@ -1,6 +1,7 @@
 import { AXFTextEditorComponent } from '../../property-editor/editors/text/text.editor';
 import { AXFWidgetProperty } from '../services/widget.service';
 import { AXFBoxStyleEditorComponent } from '../../property-editor/editors/style/box-style/box-style.editor';
+import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 
 export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     name: "text",
@@ -22,7 +23,7 @@ export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
 export const AXF_COLOR_PROPERTY: AXFWidgetProperty = {
     name: "color",
     category: "Style",
-    defaultValue: "#fff",
+    defaultValue: "#000",
     title: "Color",
     editor: AXFTextEditorComponent
 }
@@ -30,7 +31,7 @@ export const AXF_COLOR_PROPERTY: AXFWidgetProperty = {
 export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
     name: "bgColor",
     category: "Style",
-    defaultValue: "#000",
+    defaultValue: "#fff",
     title: "Background Color",
     editor: AXFTextEditorComponent
 }
@@ -38,7 +39,7 @@ export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
 export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
     name: "boxStyle",
     category: "Style",
-    defaultValue: {},
+    defaultValue: new AXFBoxStyleValue(),
     title: "Box Style",
     editor: AXFBoxStyleEditorComponent
 }
