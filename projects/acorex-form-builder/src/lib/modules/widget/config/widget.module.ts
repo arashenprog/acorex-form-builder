@@ -5,6 +5,7 @@ import { AXFColWidgetModule } from '../widgets/col/col.module';
 import { WidgetInjector } from './widget';
 import { AXFWidgetSharedModule } from '../shared/shared.module';
 import { AXFTextBlockWidgetModule } from '../widgets/text-block/text-block.module';
+import { AXFContainerWidgetModule } from '../widgets/container/container.module';
 
 
 const MODULES = [
@@ -12,7 +13,8 @@ const MODULES = [
     AXFWidgetSharedModule,
     AXFRowWidgetModule,
     AXFColWidgetModule,
-    AXFTextBlockWidgetModule
+    AXFTextBlockWidgetModule,
+    AXFContainerWidgetModule
 ];
 
 @NgModule({
