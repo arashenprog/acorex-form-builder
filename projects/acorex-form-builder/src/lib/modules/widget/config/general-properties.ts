@@ -44,6 +44,13 @@ export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
     editor: AXFBoxStyleEditorComponent
 }
 
+export const AXF_LABEL_PROPERTY: AXFWidgetProperty = {
+    name: "label",
+    category: "General",
+    defaultValue: "",
+    title: "Label",
+    editor: AXFTextEditorComponent
+}
 
 export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [
     AXF_COLOR_PROPERTY,

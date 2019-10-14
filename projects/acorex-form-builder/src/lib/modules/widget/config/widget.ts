@@ -2,7 +2,7 @@ import { Injector } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
 import { AXHtmlUtil, AXPopupService } from 'acorex-ui'
 import { AXFWidgetEditorComponent } from '../shared/widget-editor/widget-editor.component';
-import { AXFBoxStyleValue } from 'acorex-form-builder/lib/modules/property-editor/editors/style/box-style/box-style.class';
+import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 
 export const WidgetInjector: { instance?: Injector } = {};
 
@@ -52,20 +52,27 @@ export abstract class AXFWidget {
         // apply padding
         if (this["boxStyle"]) {
             let boxStyle = this["boxStyle"] as AXFBoxStyleValue;
-            el.style.paddingTop = `${boxStyle.padding.top}px`;
-            el.style.paddingBottom = `${boxStyle.padding.bottom}px`;
-            el.style.paddingLeft = `${boxStyle.padding.left}px`;
-            el.style.paddingRight = `${boxStyle.padding.right}px`;
+            // apply padding size
+            if (boxStyle.padding!=null) {
+                el.style.paddingTop = `${boxStyle.padding.top}px`;
+                el.style.paddingBottom = `${boxStyle.padding.bottom}px`;
+                el.style.paddingLeft = `${boxStyle.padding.left}px`;
+                el.style.paddingRight = `${boxStyle.padding.right}px`;
+            }
             // apply border size
-            el.style.borderTop = `${boxStyle.border.top}px solid #000`;
-            el.style.borderBottom = `${boxStyle.border.bottom}px solid #000`;
-            el.style.borderLeft = `${boxStyle.border.left}px solid #000`;
-            el.style.borderRight = `${boxStyle.border.right}px solid #000`;
+            if (boxStyle.border!=null) {
+                el.style.borderTop = `${boxStyle.border.top}px solid #000`;
+                el.style.borderBottom = `${boxStyle.border.bottom}px solid #000`;
+                el.style.borderLeft = `${boxStyle.border.left}px solid #000`;
+                el.style.borderRight = `${boxStyle.border.right}px solid #000`;
+            }
             // apply margin size
-            el.style.marginTop = `${boxStyle.margin.top}px`;
-            el.style.marginBottom = `${boxStyle.margin.bottom}px`;
-            el.style.marginLeft = `${boxStyle.margin.left}px`;
-            el.style.marginRight = `${boxStyle.margin.right}px`;
+            if (boxStyle.margin!=null) {
+                el.style.marginTop = `${boxStyle.margin.top}px`;
+                el.style.marginBottom = `${boxStyle.margin.bottom}px`;
+                el.style.marginLeft = `${boxStyle.margin.left}px`;
+                el.style.marginRight = `${boxStyle.margin.right}px`;
+            }
         }
     }
 
@@ -100,7 +107,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
 
     }
 
-  
+
 }
 export abstract class AXFWidgetView extends AXFWidget {
     constructor() {

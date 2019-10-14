@@ -6,6 +6,7 @@ import { ACoreXUIModule } from 'acorex-ui';
 import { AXFDesignerModule } from './modules/designer/config/designer.module';
 import { AXFWidgetModule } from './modules/widget/config/widget.module';
 import { AXFLoadTemplateModule } from './modules/loadtemplate/config/loadtemplate.module';
+import { AXFTextInputWidgetModule } from './modules/widget/widgets/text-input/text-input.module';
 
 const MODULES = [
   RouterModule,
@@ -13,7 +14,8 @@ const MODULES = [
   AXFDesignerModule,
   AXFLoadTemplateModule,
   ACoreXUIModule,
-  AXFWidgetModule
+  AXFWidgetModule,
+  AXFTextInputWidgetModule
 ]
 
 @NgModule({

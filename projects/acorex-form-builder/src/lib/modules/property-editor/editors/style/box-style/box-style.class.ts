@@ -5,6 +5,14 @@ export class AXFBoxStyleValue {
 }
 
 export class AXFBoxStyleBoxSizeValue {
+
+    constructor(value: string = "0") {
+        this.left = value;
+        this.right = value;
+        this.top = value;
+        this.bottom = value;
+    }
+
     left: string = "0";
     right: string = "0";
     top: string = "0";

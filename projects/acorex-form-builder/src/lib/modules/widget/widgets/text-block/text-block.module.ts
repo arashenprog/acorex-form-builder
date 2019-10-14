@@ -67,21 +67,6 @@ export class AXFTextBlockWidgetModule {
                 ...AXF_STYLE_GENERAL_PROPERTIES
             ]
         })
-        service.register({
-            title: "Text Input",
-            hint: "Text input element",
-            icon: "fas fa-i-cursor",
-            category: "Editors",
-            visible: true,
-            name: "textbox",
-            designerClass: AXFTextBlockWidgetDesigner,
-            printClass: AXFTextBlockWidgetPrint,
-            viewClass: AXFTextBlockWidgetView,
-            properties: [
-                AXF_TEXT_PROPERTY,
-                AXF_NAME_PROPERTY,
-                ...AXF_STYLE_GENERAL_PROPERTIES
-            ]
-        })
+        
     }
 }

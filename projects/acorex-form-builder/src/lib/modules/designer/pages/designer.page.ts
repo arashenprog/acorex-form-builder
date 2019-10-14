@@ -27,14 +27,15 @@ export class ACFDesignerPage extends AXBasePageComponent {
         }).closed((c) => {
             if (c && c.data) {
                 let w = Object.assign({}, this.widgetService.resolve((c.data as WidgetConfig).name));
-                w.options = {};
+                if (!w.options)
+                    w.options = {};
                 w.options.uid = AXHtmlUtil.getUID();
                 w.options.parent = this;
                 this.widgets.push(w);
             }
         })
     }
-    handleLoadClick(){
-        this.popup.open(AXFLoadTemplatePage,"Load Template (coming soon ...)")
+    handleLoadClick() {
+        this.popup.open(AXFLoadTemplatePage, "Load Template (coming soon ...)")
     }
 }
