@@ -19,8 +19,7 @@ export class AXFColWidgetView extends AXFWidgetView {
         super()
     }
 
-    ngOnInit(): void {
-        debugger;
+    onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         el.classList.add("col-sm-12", `col-md-${this.size}`);
         // apply background color

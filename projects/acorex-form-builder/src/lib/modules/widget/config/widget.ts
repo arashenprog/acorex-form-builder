@@ -1,4 +1,4 @@
-import { Injector } from '@angular/core';
+import { Injector, EventEmitter } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
 import { AXHtmlUtil, AXPopupService } from 'acorex-ui'
 import { AXFWidgetEditorComponent } from '../shared/widget-editor/widget-editor.component';
@@ -13,30 +13,39 @@ export abstract class AXFWidget {
     parent: AXFWidget;
     widgets: WidgetConfig[] = [];
 
+
+    onRefresh: EventEmitter<any> = new EventEmitter<any>();
+
     private widgetService: AXFWidgetService;
 
 
     constructor() {
         this.widgetService = WidgetInjector.instance.get(AXFWidgetService);
-
     }
 
     protected appendChild(name: string, options: any = {}) {
-        let w = Object.assign({}, this.widgetService.resolve(name));
-        w.options = options;
+        let w = this.widgetService.resolve(name);
+        if (!w.options)
+            w.options = {};
+        Object.assign(w.options, options);
         w.options.uid = AXHtmlUtil.getUID();
         w.options.parent = this;
         this.widgets.push(w);
+        this.refresh();
     }
 
-
-
     refresh() {
-
+        this.config.options.widgets = this.widgets;
+        this.onRefresh.emit(this.config.options);
+        this.onRender();
     }
 
     getJson() {
 
+    }
+
+    ngOnInit(): void {
+        this.onRender();
     }
 
     applyStyle(el: HTMLElement): void {
@@ -53,27 +62,31 @@ export abstract class AXFWidget {
         if (this["boxStyle"]) {
             let boxStyle = this["boxStyle"] as AXFBoxStyleValue;
             // apply padding size
-            if (boxStyle.padding!=null) {
+            if (boxStyle.padding != null) {
                 el.style.paddingTop = `${boxStyle.padding.top}px`;
                 el.style.paddingBottom = `${boxStyle.padding.bottom}px`;
                 el.style.paddingLeft = `${boxStyle.padding.left}px`;
                 el.style.paddingRight = `${boxStyle.padding.right}px`;
             }
             // apply border size
-            if (boxStyle.border!=null) {
+            if (boxStyle.border != null) {
                 el.style.borderTop = `${boxStyle.border.top}px solid #000`;
                 el.style.borderBottom = `${boxStyle.border.bottom}px solid #000`;
                 el.style.borderLeft = `${boxStyle.border.left}px solid #000`;
                 el.style.borderRight = `${boxStyle.border.right}px solid #000`;
             }
             // apply margin size
-            if (boxStyle.margin!=null) {
+            if (boxStyle.margin != null) {
                 el.style.marginTop = `${boxStyle.margin.top}px`;
                 el.style.marginBottom = `${boxStyle.margin.bottom}px`;
                 el.style.marginLeft = `${boxStyle.margin.left}px`;
                 el.style.marginRight = `${boxStyle.margin.right}px`;
             }
         }
+    }
+
+    onRender(): void {
+
     }
 
 }
@@ -90,6 +103,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
             this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
             this.parent.refresh();
         }
+        this.refresh();
     }
 
     edit() {
@@ -100,7 +114,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 config: this.config
             }
         }).closed((c) => {
-
+            this.refresh();
         })
     }
     copy() {

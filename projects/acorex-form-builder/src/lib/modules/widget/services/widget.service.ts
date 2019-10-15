@@ -47,7 +47,24 @@ export class AXFWidgetService {
     }
 
     resolve(name: string): WidgetConfig {
-        return AXFWidgetService.WIDGET_ITEMS.find(c => c.name == name)
+        let c = AXFWidgetService.WIDGET_ITEMS.find(c => c.name == name)
+        let res: WidgetConfig = {
+            category: c.category,
+            hint: c.hint,
+            icon: c.icon,
+            name: c.name,
+            title: c.title,
+            designerClass: c.designerClass,
+            printClass: c.printClass,
+            viewClass: c.viewClass,
+            visible: c.visible,
+            properties: []
+        }
+        if (c.properties)
+            res.properties = JSON.parse(JSON.stringify(c.properties));
+        if (c.options)
+            res.options = JSON.parse(JSON.stringify(c.options));
+        return res;
     }
 
 }

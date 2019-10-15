@@ -32,7 +32,6 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
     }
 
     private calcLeftCols() {
-        debugger;
         this.countCol = this.maxCol / this.minCol;
         const sum = this.widgets.map(c => c.options.size).reduce((a, b) => a + b, 0);
         this.range = 0;
@@ -41,6 +40,7 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
 
     refresh() {
         this.calcLeftCols();
+        super.refresh();
     }
 
     handlePickerMouseHover(range: number) {

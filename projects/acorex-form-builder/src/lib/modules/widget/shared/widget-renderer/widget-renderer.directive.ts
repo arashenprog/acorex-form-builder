@@ -1,18 +1,21 @@
-import { Directive, ViewContainerRef, ComponentFactoryResolver, Input } from '@angular/core';
+import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, Output, EventEmitter } from '@angular/core';
 import { WidgetConfig } from '../../services/widget.service';
-import { AXHtmlUtil } from 'acorex-ui';
+import { AXFWidget } from '../../config/widget';
 
 @Directive({
     selector: '[axf-widget-renderer]',
 })
 export class AXFWidgetRendererDirective {
-    
+
 
     @Input()
     widget: WidgetConfig;
 
     @Input()
     mode: "designer" | "view" | "print" = "designer";
+
+    @Output()
+    onRender: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
 
     constructor(
         private target: ViewContainerRef,
@@ -45,16 +48,21 @@ export class AXFWidgetRendererDirective {
         }
         //
         let cmpRef = this.target.createComponent(factory)
-        Object.assign(cmpRef.instance, this.widget.options);
         Object.assign(cmpRef.instance, { config: this.widget });
         let pp: any = {};
         this.widget.properties.forEach(p => {
-            if (!cmpRef.instance[p.name] && p.defaultValue) {
+            if (!cmpRef.instance[p.name] && p.defaultValue && !this.widget.options[p.name]) {
                 pp[p.name] = p.defaultValue;
                 this.widget.options[p.name] = p.defaultValue;
             }
         });
         Object.assign(cmpRef.instance, pp);
+        Object.assign(cmpRef.instance, this.widget.options);
+        const w = (cmpRef.instance as AXFWidget);
+        w.onRefresh.subscribe(c => {
+            Object.assign(w, c);
+            this.onRender.emit(w);
+        });
         (cmpRef.location.nativeElement as HTMLElement).style.position = "relative";
     }
 

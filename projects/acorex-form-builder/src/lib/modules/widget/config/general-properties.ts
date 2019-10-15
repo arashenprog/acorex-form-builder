@@ -1,6 +1,4 @@
-import { AXFTextEditorComponent } from '../../property-editor/editors/text/text.editor';
 import { AXFWidgetProperty } from '../services/widget.service';
-import { AXFBoxStyleEditorComponent } from '../../property-editor/editors/style/box-style/box-style.editor';
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 
 export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
@@ -8,7 +6,7 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     category: "General",
     defaultValue: "Text Value",
     title: "Text",
-    editor: AXFTextEditorComponent
+    editor: "TextEditor"
 }
 
 export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
@@ -16,7 +14,7 @@ export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
     category: "General",
     defaultValue: "",
     title: "Name",
-    editor: AXFTextEditorComponent
+    editor: "TextEditor"
 }
 
 
@@ -25,7 +23,7 @@ export const AXF_COLOR_PROPERTY: AXFWidgetProperty = {
     category: "Style",
     defaultValue: "#000",
     title: "Color",
-    editor: AXFTextEditorComponent
+    editor: "TextEditor"
 }
 
 export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
@@ -33,7 +31,7 @@ export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
     category: "Style",
     defaultValue: "#fff",
     title: "Background Color",
-    editor: AXFTextEditorComponent
+    editor: "TextEditor"
 }
 
 export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
@@ -41,7 +39,7 @@ export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
     category: "Style",
     defaultValue: new AXFBoxStyleValue(),
     title: "Box Style",
-    editor: AXFBoxStyleEditorComponent
+    editor: "BoxStyleEditor"
 }
 
 export const AXF_LABEL_PROPERTY: AXFWidgetProperty = {
@@ -49,7 +47,7 @@ export const AXF_LABEL_PROPERTY: AXFWidgetProperty = {
     category: "General",
     defaultValue: "",
     title: "Label",
-    editor: AXFTextEditorComponent
+    editor: "TextEditor"
 }
 
 export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [

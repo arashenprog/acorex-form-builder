@@ -18,14 +18,12 @@ export class AXFBoxStyleEditorComponent extends AXFProperyEditor<AXFBoxStyleValu
     }
 
     ngOnInit(): void {
-        debugger;
         if (!this.value)
             this.value = new AXFBoxStyleValue();
     }
 
 
     handleInnerValueChange(e: string, style: string, position: string) {
-        debugger;
         this.value[style][position] = e;
         if (position == "top" && this.prevValue[style].top == this.prevValue[style].left)
             this.value[style].left = this.value[style].top;

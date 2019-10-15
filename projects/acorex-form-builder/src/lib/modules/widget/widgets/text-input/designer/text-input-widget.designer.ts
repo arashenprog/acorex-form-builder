@@ -20,7 +20,7 @@ export class AXFTextInputWidgetDesigner extends AXFWidgetDesigner {
         super()
     }
 
-    ngOnInit(): void {
+    onRender(): void {
         let s = this.el.nativeElement.querySelector<HTMLFieldSetElement>("fieldset");
         s.style.visibility = "hidden";
         s.style.display = "none";

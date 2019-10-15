@@ -13,7 +13,7 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
         super()
     }
 
-    ngOnInit(): void {
+    onRender(): void {
         this.applyStyle(this.el.nativeElement)
     }
 }

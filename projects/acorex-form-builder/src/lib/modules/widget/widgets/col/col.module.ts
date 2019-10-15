@@ -8,6 +8,7 @@ import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFTextEditorComponent } from '../../../property-editor/editors/text/text.editor';
 import {  AXF_STYLE_GENERAL_PROPERTIES } from '../../config/general-properties';
+import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 
 export const COMPONENTS = [AXFColWidgetDesigner, AXFColWidgetView, AXFColWidgetPrint]
 
@@ -30,13 +31,20 @@ export class AXFColWidgetModule {
             designerClass: AXFColWidgetDesigner,
             printClass: AXFColWidgetPrint,
             viewClass: AXFColWidgetView,
+            options: {
+                boxStyle: {
+                    border: new AXFBoxStyleBoxSizeValue("1"),
+                    padding: new AXFBoxStyleBoxSizeValue("2"),
+                    margin: new AXFBoxStyleBoxSizeValue("0")
+                }
+            },
             properties: [
                 {
                     name: "size",
                     category: "Style",
                     defaultValue: 1,
                     title: "Size",
-                    editor: AXFTextEditorComponent,
+                    editor: "TextEditor",
                 },
                 ...AXF_STYLE_GENERAL_PROPERTIES
             ]

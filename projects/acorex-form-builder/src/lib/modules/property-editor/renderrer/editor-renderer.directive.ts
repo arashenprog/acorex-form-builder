@@ -1,6 +1,7 @@
 import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, EventEmitter, Output } from '@angular/core';
 import { AXHtmlUtil } from 'acorex-ui';
 import { AXFProperyEditor } from '../config/editor';
+import { AXFEditorService } from '../services/editor.service';
 
 @Directive({
     selector: '[axf-editor-renderer]',
@@ -21,6 +22,7 @@ export class AXFEditorRendererDirective {
     constructor(
         private target: ViewContainerRef,
         private componentFactoryResolver: ComponentFactoryResolver,
+        private editorService: AXFEditorService
     ) { }
 
     ngOnInit(): void {
@@ -28,10 +30,12 @@ export class AXFEditorRendererDirective {
     }
 
     createComponent() {
-        if (!this.editor)
+        const editorClass = this.editorService.resolve(this.editor);
+        if (!editorClass)
             return;
         //
-        let factory = this.componentFactoryResolver.resolveComponentFactory(this.editor);
+
+        let factory = this.componentFactoryResolver.resolveComponentFactory(editorClass);
         //
         let cmpRef = this.target.createComponent(factory)
         let instance = cmpRef.instance as AXFProperyEditor<any>;

@@ -3,6 +3,7 @@ import { AXPopupService, AXBasePageComponent, AXHtmlUtil } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { AXFWidgetPickerComponent } from '../../widget/shared/widget-picker/widget-picker.component';
 import { AXFLoadTemplatePage } from '../../loadtemplate/pages/loadtemplate.page';
+import { AXFWidget } from '../../widget/config/widget';
 
 @Component({
     selector: 'acf-designer',
@@ -37,5 +38,15 @@ export class ACFDesignerPage extends AXBasePageComponent {
     }
     handleLoadClick() {
         this.popup.open(AXFLoadTemplatePage, "Load Template (coming soon ...)")
+    }
+
+    handleRender(a:AXFWidget)
+    {
+        console.log(this.widgets);
+    }
+
+    ngDoCheck()
+    {
+       
     }
 }

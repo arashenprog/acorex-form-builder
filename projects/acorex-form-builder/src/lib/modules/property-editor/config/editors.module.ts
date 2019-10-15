@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AXFTextEditorComponent } from '../editors/text/text.editor';
-import { ACoreXUIModule } from 'acorex-ui';
 import { AXFEditorRendererDirective } from '../renderrer/editor-renderer.directive';
-import { AXFBoxStyleEditorComponent } from '../editors/style/box-style/box-style.editor';
+import { AXFEditorService } from '../services/editor.service';
+import { AXFTextEditorModule } from '../editors/text/text.module';
+import { AXFBoxStyleEditorModule } from '../editors/style/box-style/box-style.module';
 
-const WDIGET_EDITORS = [
-    AXFTextEditorComponent,
-    AXFBoxStyleEditorComponent
+const WDIGET_MODULES = [
+    AXFBoxStyleEditorModule,
+    AXFTextEditorModule
 ]
 
 @NgModule({
-    declarations: [AXFEditorRendererDirective, ...WDIGET_EDITORS],
-    imports: [CommonModule, ACoreXUIModule],
-    exports: [AXFEditorRendererDirective, ...WDIGET_EDITORS],
-    entryComponents: [WDIGET_EDITORS],
-    providers: [],
+    declarations: [AXFEditorRendererDirective],
+    imports: [CommonModule,...WDIGET_MODULES],
+    exports: [AXFEditorRendererDirective],
+    providers: [AXFEditorService],
 })
 export class AXFEditorsModule { }

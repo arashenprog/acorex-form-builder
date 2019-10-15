@@ -1,5 +1,5 @@
 <div class="widget-designer">
-    <div class="widget-container">
+    <div class="widget-container" #el>
         <ng-container *ngIf="widgets.length; else elseTemplate">
             <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
             </ng-container>

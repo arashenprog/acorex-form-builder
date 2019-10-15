@@ -21,7 +21,7 @@ export class AXFTextBlockWidgetDesigner extends AXFWidgetDesigner {
         super()
     }
 
-    ngOnInit(): void {
+    onRender(): void {
         this.applyStyle(this.el.nativeElement)
     }
 

@@ -1,5 +1,5 @@
 <div class="designer-container container" *ngIf="widgets.length>0">
-    <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
+    <ng-container *ngFor="let w of widgets" (onRender)="handleRender($event)" axf-widget-renderer [widget]="w">
     </ng-container>
     <div class="add-element-container">
         <div class="add-element" (click)="handleStartClick()" tooltip="Append Element" [placement]="'bottom'">
