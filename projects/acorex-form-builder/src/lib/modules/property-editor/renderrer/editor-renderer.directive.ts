@@ -12,6 +12,9 @@ export class AXFEditorRendererDirective {
     editor: any;
 
     @Input()
+    options: any;
+
+    @Input()
     value: any;
 
     @Output()
@@ -40,6 +43,7 @@ export class AXFEditorRendererDirective {
         let cmpRef = this.target.createComponent(factory)
         let instance = cmpRef.instance as AXFProperyEditor<any>;
         //
+        Object.assign(instance, this.options);
         Object.assign(instance, { value: this.value });
         //
         instance.valueChange.subscribe(value => {

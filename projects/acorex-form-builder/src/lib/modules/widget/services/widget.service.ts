@@ -10,6 +10,7 @@ export interface AXFWidgetProperty {
     defaultValue?: any;
     category: "General" | "Style" | "Behavior";
     editor: any
+    options?:any
 }
 
 export interface WidgetConfig {

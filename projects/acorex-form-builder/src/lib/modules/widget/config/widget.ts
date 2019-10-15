@@ -70,10 +70,10 @@ export abstract class AXFWidget {
             }
             // apply border size
             if (boxStyle.border != null) {
-                el.style.borderTop = `${boxStyle.border.top}px solid #000`;
-                el.style.borderBottom = `${boxStyle.border.bottom}px solid #000`;
-                el.style.borderLeft = `${boxStyle.border.left}px solid #000`;
-                el.style.borderRight = `${boxStyle.border.right}px solid #000`;
+                el.style.borderTop = `${boxStyle.border.top}px solid var(--border-color)`;
+                el.style.borderBottom = `${boxStyle.border.bottom}px solid var(--border-color)`;
+                el.style.borderLeft = `${boxStyle.border.left}px solid var(--border-color)`;
+                el.style.borderRight = `${boxStyle.border.right}px solid var(--border-color)`;
             }
             // apply margin size
             if (boxStyle.margin != null) {

@@ -6,7 +6,10 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     category: "General",
     defaultValue: "Text Value",
     title: "Text",
-    editor: "TextEditor"
+    editor: "TextEditor",
+    options: {
+        allowHtml: true
+    }
 }
 
 export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
@@ -34,6 +37,21 @@ export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
     editor: "TextEditor"
 }
 
+
+const a={ id: 0, title: "Horizontal" };
+export const AXF_TEXT_DIRECTION_PROPERTY: AXFWidgetProperty = {
+    name: "textDirection",
+    category: "Style",
+    defaultValue: [a],
+    title: "Text Direction",
+    editor: "SelectionEditor",
+    options: {
+        items: [a, { id: 1, title: "Vertical" }],
+        mode: "single",
+        direction: "horizontal"
+    }
+}
+
 export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
     name: "boxStyle",
     category: "Style",
@@ -53,5 +71,6 @@ export const AXF_LABEL_PROPERTY: AXFWidgetProperty = {
 export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [
     AXF_COLOR_PROPERTY,
     AXF_BG_COLOR_PROPERTY,
-    AXF_BOX_STYLE_PROPERTY
+    AXF_BOX_STYLE_PROPERTY,
+    AXF_TEXT_DIRECTION_PROPERTY
 ]
