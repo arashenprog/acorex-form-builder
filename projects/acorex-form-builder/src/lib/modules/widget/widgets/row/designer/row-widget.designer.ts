@@ -1,8 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, ViewChild } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 @Component({
-    selector: "axf-widget-row",
+    selector: "[axf-widget-row]",
     templateUrl: './row-widget.designer.html',
     styleUrls: ['./row-widget.designer.scss'],
     providers: [{ provide: AXFWidgetDesigner, useExisting: AXFRowWidgetDesigner }]
@@ -16,19 +16,22 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
     range: number = 0;
 
 
-    constructor(
-    ) {
-        super()
+    @ViewChild("el") el:ElementRef;
 
+
+
+    constructor(private hostElement: ElementRef) {
+        super()
         this.calcLeftCols();
     }
 
+ 
 
     addColumn(...cols) {
         cols.forEach(c => {
             this.appendChild("col", { size: c * this.minCol });
         });
-        this.calcLeftCols();
+        this.refresh();
     }
 
     private calcLeftCols() {
@@ -38,9 +41,12 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
         this.colLeft = Array(this.countCol - (sum / this.minCol)).fill(1);
     }
 
-    refresh() {
+
+
+    onRender()
+    {
+        this.applyStyle(this.el.nativeElement);
         this.calcLeftCols();
-        super.refresh();
     }
 
     handlePickerMouseHover(range: number) {

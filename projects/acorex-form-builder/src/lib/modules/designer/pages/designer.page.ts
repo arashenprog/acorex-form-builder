@@ -18,7 +18,15 @@ export class ACFDesignerPage extends AXBasePageComponent {
     widgets: WidgetConfig[] = [];
 
 
+    mode = "designer";
+
+
     ngOnInit(): void {
+    }
+
+    setMode(mode: string) {
+        this.mode = mode;
+        console.log(mode);
     }
 
     handleStartClick() {
@@ -40,13 +48,11 @@ export class ACFDesignerPage extends AXBasePageComponent {
         this.popup.open(AXFLoadTemplatePage, "Load Template (coming soon ...)")
     }
 
-    handleRender(a:AXFWidget)
-    {
+    handleRender(a: AXFWidget) {
         console.log(this.widgets);
     }
 
-    ngDoCheck()
-    {
-       
+    ngDoCheck() {
+
     }
 }

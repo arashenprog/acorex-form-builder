@@ -7,6 +7,7 @@ import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import {  AXF_STYLE_GENERAL_PROPERTIES } from '../../config/general-properties';
+import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 
 export const COMPONENTS = [AXFRowWidgetDesigner, AXFRowWidgetView, AXFRowWidgetPrint]
 
@@ -29,6 +30,14 @@ export class AXFRowWidgetModule {
             designerClass: AXFRowWidgetDesigner,
             printClass: AXFRowWidgetPrint,
             viewClass: AXFRowWidgetView,
+            options: {
+                boxStyle: {
+                    border: new AXFBoxStyleBoxSizeValue("0"),
+                    padding: new AXFBoxStyleBoxSizeValue("0"),
+                    margin: new AXFBoxStyleBoxSizeValue("0")
+                },
+                bgColor:"transparent"
+            },
             properties:[
                 ...AXF_STYLE_GENERAL_PROPERTIES
             ],

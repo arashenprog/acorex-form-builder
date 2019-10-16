@@ -58,6 +58,21 @@ export abstract class AXFWidget {
         if (this["color"]) {
             el.style.color = this["color"];
         }
+        if (this["textAlign"]) {
+            el.style.textAlign = this["textAlign"][0];
+        }
+        if (this["verticalAlign"]) {
+            el.style.verticalAlign = this["verticalAlign"][0];
+        }
+        if (this["textDirection"]) {
+            el.style.writingMode = this["textDirection"][0];
+        }
+        if (this["textStyle"]) {
+            el.style.fontWeight = this["textStyle"].includes('bold') ? "bold" : "inherit";
+            el.style.fontStyle = this["textStyle"].includes('italic') ? "italic" : "inherit";
+            el.style.textDecoration = this["textStyle"].includes('underline') ? "underline" : "inherit";
+        }
+        
         // apply padding
         if (this["boxStyle"]) {
             let boxStyle = this["boxStyle"] as AXFBoxStyleValue;
@@ -82,6 +97,7 @@ export abstract class AXFWidget {
                 el.style.marginLeft = `${boxStyle.margin.left}px`;
                 el.style.marginRight = `${boxStyle.margin.right}px`;
             }
+            
         }
     }
 

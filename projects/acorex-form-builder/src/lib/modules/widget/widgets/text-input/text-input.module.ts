@@ -36,7 +36,8 @@ export class AXFTextInputWidgetModule {
                     border: new AXFBoxStyleBoxSizeValue("1"),
                     padding: new AXFBoxStyleBoxSizeValue("2"),
                     margin: new AXFBoxStyleBoxSizeValue("1")
-                }
+                },
+                bgColor:"transparent"
             },
             properties: [
                 AXF_TEXT_PROPERTY,

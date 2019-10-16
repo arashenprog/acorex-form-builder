@@ -38,19 +38,66 @@ export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
 }
 
 
-const a={ id: 0, title: "Horizontal" };
 export const AXF_TEXT_DIRECTION_PROPERTY: AXFWidgetProperty = {
     name: "textDirection",
     category: "Style",
-    defaultValue: [a],
+    defaultValue: ["unset"],
     title: "Text Direction",
     editor: "SelectionEditor",
     options: {
-        items: [a, { id: 1, title: "Vertical" }],
+        items: [{ value: "inherit", title: "Horizontal" }, { value: "tb", title: "Vertical" }],
         mode: "single",
         direction: "horizontal"
     }
 }
+
+export const AXF_TEXT_STYLE_PROPERTY: AXFWidgetProperty = {
+    name: "textStyle",
+    category: "Style",
+    defaultValue: [],
+    title: "Text Style",
+    editor: "SelectionEditor",
+    options: {
+        items: [{ value: "bold", title: "Bold" }, { value: "italic", title: "Italic" },{ value: "underline", title: "Underline" }],
+        mode: "multiple",
+        direction: "horizontal"
+    }
+
+
+}
+
+
+
+export const AXF_HORIZONTAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
+    name: "textAlign",
+    category: "Style",
+    defaultValue:[ "left"],
+    title: "Horizontal Alignment",
+    editor: "SelectionEditor",
+    options: {
+        items: [{ value: "left", title: "Left" }, { value: "center", title: "Center" }, { value: "right", title: "Right" }],
+        mode: "single",
+        direction: "horizontal"
+    }
+}
+
+export const AXF_VERTICAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
+    name: "verticalAlign",
+    category: "Style",
+    defaultValue: ["top"],
+    title: "Vertical Alignment",
+    editor: "SelectionEditor",
+    options: {
+        items: [{ value: "top", title: "Top" }, { value: "middle", title: "Middle" }, { value: "bottom", title: "Bottom" }],
+        mode: "single",
+        direction: "horizontal"
+    }
+}
+
+
+
+
+
 
 export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
     name: "boxStyle",
@@ -72,5 +119,8 @@ export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [
     AXF_COLOR_PROPERTY,
     AXF_BG_COLOR_PROPERTY,
     AXF_BOX_STYLE_PROPERTY,
-    AXF_TEXT_DIRECTION_PROPERTY
+    AXF_TEXT_STYLE_PROPERTY,
+    AXF_TEXT_DIRECTION_PROPERTY,
+    AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
+    AXF_VERTICAL_ALIGNMENT_PROPERTY
 ]

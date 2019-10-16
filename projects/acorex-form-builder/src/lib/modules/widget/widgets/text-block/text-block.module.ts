@@ -7,6 +7,7 @@ import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES } from '../../config/general-properties';
+import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 
 export const COMPONENTS = [AXFTextBlockWidgetDesigner, AXFTextBlockWidgetView, AXFTextBlockWidgetPrint]
 
@@ -29,6 +30,14 @@ export class AXFTextBlockWidgetModule {
             designerClass: AXFTextBlockWidgetDesigner,
             printClass: AXFTextBlockWidgetPrint,
             viewClass: AXFTextBlockWidgetView,
+            options: {
+                boxStyle: {
+                    border: new AXFBoxStyleBoxSizeValue("0"),
+                    padding: new AXFBoxStyleBoxSizeValue("2"),
+                    margin: new AXFBoxStyleBoxSizeValue("2")
+                },
+                bgColor:"inherit"
+            },
             properties: [
                 AXF_TEXT_PROPERTY,
                 AXF_NAME_PROPERTY,
@@ -45,6 +54,15 @@ export class AXFTextBlockWidgetModule {
             designerClass: AXFTextBlockWidgetDesigner,
             printClass: AXFTextBlockWidgetPrint,
             viewClass: AXFTextBlockWidgetView,
+            options: {
+                boxStyle: {
+                    border: new AXFBoxStyleBoxSizeValue("0"),
+                    padding: new AXFBoxStyleBoxSizeValue("2"),
+                    margin: new AXFBoxStyleBoxSizeValue("2")
+                },
+                bgColor:"inherit",
+                textStyle:["bold"]
+            },
             properties: [
                 AXF_TEXT_PROPERTY,
                 AXF_NAME_PROPERTY,
@@ -61,6 +79,15 @@ export class AXFTextBlockWidgetModule {
             designerClass: AXFTextBlockWidgetDesigner,
             printClass: AXFTextBlockWidgetPrint,
             viewClass: AXFTextBlockWidgetView,
+            options: {
+                boxStyle: {
+                    border: new AXFBoxStyleBoxSizeValue("0"),
+                    padding: new AXFBoxStyleBoxSizeValue("2"),
+                    margin: new AXFBoxStyleBoxSizeValue("2")
+                },
+                bgColor:"inherit",
+                color:"#ccc"
+            },
             properties: [
                 AXF_TEXT_PROPERTY,
                 AXF_NAME_PROPERTY,

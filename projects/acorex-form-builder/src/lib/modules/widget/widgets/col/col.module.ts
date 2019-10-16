@@ -33,10 +33,11 @@ export class AXFColWidgetModule {
             viewClass: AXFColWidgetView,
             options: {
                 boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("1"),
-                    padding: new AXFBoxStyleBoxSizeValue("2"),
+                    border: new AXFBoxStyleBoxSizeValue("0"),
+                    padding: new AXFBoxStyleBoxSizeValue("5"),
                     margin: new AXFBoxStyleBoxSizeValue("0")
-                }
+                },
+                bgColor:"inherit"
             },
             properties: [
                 {

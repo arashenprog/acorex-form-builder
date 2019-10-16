@@ -13,16 +13,16 @@ import { WidgetConfig } from '../../../services/widget.service';
 export class AXFTextBlockWidgetDesigner extends AXFWidgetDesigner {
    
     
-    @ViewChild("el") el:ElementRef;
 
     text: String;
 
-    constructor() {
+    constructor(private hostElement: ElementRef) {
         super()
     }
 
     onRender(): void {
-        this.applyStyle(this.el.nativeElement)
+        let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
+        this.applyStyle(el);
     }
 
    

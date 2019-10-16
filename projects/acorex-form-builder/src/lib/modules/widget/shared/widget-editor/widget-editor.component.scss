@@ -49,10 +49,15 @@
         flex: 5;
 
         .content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100%;
+            width: 100%;
+            padding: 30px;
+            display: table;
+
+            &>* {
+                outline: 1px dashed var(--border-color);
+                outline-offset: 20px;
+            }
         }
     }
 }
