@@ -26,7 +26,6 @@ export class ACFDesignerPage extends AXBasePageComponent {
 
     setMode(mode: string) {
         this.mode = mode;
-        console.log(mode);
     }
 
     handleStartClick() {

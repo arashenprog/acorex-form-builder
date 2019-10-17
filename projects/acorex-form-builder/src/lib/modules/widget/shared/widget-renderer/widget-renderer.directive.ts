@@ -48,20 +48,22 @@ export class AXFWidgetRendererDirective {
         }
         //
         let cmpRef = this.target.createComponent(factory)
-        Object.assign(cmpRef.instance, { config: this.widget });
+        const widgetInst = (cmpRef.instance as AXFWidget);
+        Object.assign(widgetInst, { config: this.widget });
         let pp: any = {};
         this.widget.properties.forEach(p => {
-            if (!cmpRef.instance[p.name] && p.defaultValue && !this.widget.options[p.name]) {
+            if (!widgetInst[p.name] && p.defaultValue && !this.widget.options[p.name]) {
                 pp[p.name] = p.defaultValue;
                 this.widget.options[p.name] = p.defaultValue;
             }
         });
-        Object.assign(cmpRef.instance, pp);
-        Object.assign(cmpRef.instance, this.widget.options);
-        const w = (cmpRef.instance as AXFWidget);
-        w.onRefresh.subscribe(c => {
-            Object.assign(w, c);
-            this.onRender.emit(w);
+        
+        Object.assign(widgetInst, pp);
+        Object.assign(widgetInst, this.widget.options);
+        
+        widgetInst.onRefresh.subscribe(c => {
+            Object.assign(widgetInst, c);
+            this.onRender.emit(widgetInst);
         });
         (cmpRef.location.nativeElement as HTMLElement).style.position = "relative";
     }

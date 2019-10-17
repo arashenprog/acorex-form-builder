@@ -36,7 +36,9 @@ export class AXFTextBlockWidgetModule {
                     padding: new AXFBoxStyleBoxSizeValue("2"),
                     margin: new AXFBoxStyleBoxSizeValue("2")
                 },
-                bgColor:"inherit"
+                text:"Block Text",
+                bgColor:"inherit",
+                fontSize:["small"]
             },
             properties: [
                 AXF_TEXT_PROPERTY,
@@ -50,7 +52,7 @@ export class AXFTextBlockWidgetModule {
             icon: "fas fa-bold",
             category: "Text",
             visible: true,
-            name: "text",
+            name: "text-heading",
             designerClass: AXFTextBlockWidgetDesigner,
             printClass: AXFTextBlockWidgetPrint,
             viewClass: AXFTextBlockWidgetView,
@@ -61,7 +63,9 @@ export class AXFTextBlockWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("2")
                 },
                 bgColor:"inherit",
-                textStyle:["bold"]
+                textStyle:["bold"],
+                text:"Heading Text",
+                fontSize:["medium"]
             },
             properties: [
                 AXF_TEXT_PROPERTY,
@@ -75,7 +79,7 @@ export class AXFTextBlockWidgetModule {
             icon: "fas fa-italic",
             category: "Text",
             visible: true,
-            name: "text",
+            name: "text-hint",
             designerClass: AXFTextBlockWidgetDesigner,
             printClass: AXFTextBlockWidgetPrint,
             viewClass: AXFTextBlockWidgetView,
@@ -86,7 +90,9 @@ export class AXFTextBlockWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("2")
                 },
                 bgColor:"inherit",
-                color:"#ccc"
+                color:"#999",
+                text:"Hint Text",
+                fontSize:["x-small"]
             },
             properties: [
                 AXF_TEXT_PROPERTY,

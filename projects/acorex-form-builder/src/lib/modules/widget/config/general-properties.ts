@@ -41,7 +41,7 @@ export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
 export const AXF_TEXT_DIRECTION_PROPERTY: AXFWidgetProperty = {
     name: "textDirection",
     category: "Style",
-    defaultValue: ["unset"],
+    defaultValue: ["inherit"],
     title: "Text Direction",
     editor: "SelectionEditor",
     options: {
@@ -58,12 +58,45 @@ export const AXF_TEXT_STYLE_PROPERTY: AXFWidgetProperty = {
     title: "Text Style",
     editor: "SelectionEditor",
     options: {
-        items: [{ value: "bold", title: "Bold" }, { value: "italic", title: "Italic" },{ value: "underline", title: "Underline" }],
+        items: [{ value: "bold", title: "Bold" }, { value: "italic", title: "Italic" }, { value: "underline", title: "Underline" }],
         mode: "multiple",
         direction: "horizontal"
     }
+}
 
-
+export const AXF_TEXT_SIZE_PROPERTY: AXFWidgetProperty = {
+    name: "fontSize",
+    category: "Style",
+    defaultValue:["inherit"],
+    title: "Font Size",
+    editor: "DropdownEditor",
+    options: {
+        items: [
+            // { value: "8px", title: "8" }, 
+            // { value: "9px", title: "9" }, 
+            // { value: "10px", title: "10" }, 
+            // { value: "11px", title: "11" }, 
+            // { value: "12px", title: "12" }, 
+            // { value: "13px", title: "13" }, 
+            // { value: "14px", title: "14" },
+            // { value: "15px", title: "15" },
+            // { value: "16px", title: "16" },
+            // { value: "17px", title: "17" },
+            // { value: "18px", title: "18" },
+            // { value: "19px", title: "19" },
+            // { value: "20px", title: "20" },
+            {value:"inherit",title:"inherit"},
+            {value:"xx-small",title:"xx-small"},
+            {value:"x-small",title:"x-small"},
+            {value:"smaller",title:"smaller"},
+            {value:"small",title:"small"},
+            {value:"medium",title:"medium"},
+            {value:"large",title:"large"},
+            {value:"larger",title:"larger"},
+            {value:"x-large",title:"x-large"},
+            {value:"xx-large",title:"xx-large"},
+        ],
+    }
 }
 
 
@@ -71,7 +104,7 @@ export const AXF_TEXT_STYLE_PROPERTY: AXFWidgetProperty = {
 export const AXF_HORIZONTAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
     name: "textAlign",
     category: "Style",
-    defaultValue:[ "left"],
+    defaultValue: ["left"],
     title: "Horizontal Alignment",
     editor: "SelectionEditor",
     options: {
@@ -119,6 +152,7 @@ export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [
     AXF_COLOR_PROPERTY,
     AXF_BG_COLOR_PROPERTY,
     AXF_BOX_STYLE_PROPERTY,
+    AXF_TEXT_SIZE_PROPERTY,
     AXF_TEXT_STYLE_PROPERTY,
     AXF_TEXT_DIRECTION_PROPERTY,
     AXF_HORIZONTAL_ALIGNMENT_PROPERTY,

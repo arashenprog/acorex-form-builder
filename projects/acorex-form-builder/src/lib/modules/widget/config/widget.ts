@@ -1,4 +1,4 @@
-import { Injector, EventEmitter } from '@angular/core';
+import { Injector, EventEmitter, Input, Output } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
 import { AXHtmlUtil, AXPopupService } from 'acorex-ui'
 import { AXFWidgetEditorComponent } from '../shared/widget-editor/widget-editor.component';
@@ -11,7 +11,27 @@ export abstract class AXFWidget {
     uid: string;
     config: WidgetConfig;
     parent: AXFWidget;
-    widgets: WidgetConfig[] = [];
+    //widgets: WidgetConfig[] = [];
+
+
+    //private _widgets : WidgetConfig[];
+
+    @Output()
+    widgetsChange: EventEmitter<WidgetConfig[]> = new EventEmitter<WidgetConfig[]>();
+
+    @Input()
+    public get widgets(): WidgetConfig[] {
+        if (!this.config || !this.config.options)
+            return []
+        if (!this.config.options.widgets)
+            this.config.options.widgets = [];
+        return this.config.options.widgets;
+    }
+    public set widgets(v: WidgetConfig[]) {
+        this.config.options.widgets = v;
+        this.widgetsChange.emit(this.config.options.widgets);
+    }
+
 
 
     onRefresh: EventEmitter<any> = new EventEmitter<any>();
@@ -35,7 +55,7 @@ export abstract class AXFWidget {
     }
 
     refresh() {
-        this.config.options.widgets = this.widgets;
+        //this.config.options.widgets = this.widgets;
         this.onRefresh.emit(this.config.options);
         this.onRender();
     }
@@ -49,7 +69,6 @@ export abstract class AXFWidget {
     }
 
     applyStyle(el: HTMLElement): void {
-
         // apply background color
         if (this["bgColor"]) {
             el.style.backgroundColor = this["bgColor"];
@@ -60,6 +79,9 @@ export abstract class AXFWidget {
         }
         if (this["textAlign"]) {
             el.style.textAlign = this["textAlign"][0];
+        }
+        if (this["fontSize"]) {
+            el.style.fontSize = this["fontSize"][0];
         }
         if (this["verticalAlign"]) {
             el.style.verticalAlign = this["verticalAlign"][0];
@@ -72,7 +94,7 @@ export abstract class AXFWidget {
             el.style.fontStyle = this["textStyle"].includes('italic') ? "italic" : "inherit";
             el.style.textDecoration = this["textStyle"].includes('underline') ? "underline" : "inherit";
         }
-        
+
         // apply padding
         if (this["boxStyle"]) {
             let boxStyle = this["boxStyle"] as AXFBoxStyleValue;
@@ -97,7 +119,7 @@ export abstract class AXFWidget {
                 el.style.marginLeft = `${boxStyle.margin.left}px`;
                 el.style.marginRight = `${boxStyle.margin.right}px`;
             }
-            
+
         }
     }
 
@@ -115,11 +137,13 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     delete() {
+        debugger;
         if (this.parent) {
             this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
-            this.parent.refresh();
+            if (this.parent.refresh)
+                this.parent.refresh();
         }
-        this.refresh();
+        //this.refresh();
     }
 
     edit() {

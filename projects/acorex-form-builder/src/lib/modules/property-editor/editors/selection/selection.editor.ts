@@ -20,5 +20,6 @@ export class AXFSelectionEditorComponent extends AXFProperyEditor<any[]> impleme
         super();
     }
 
-    ngOnInit(): void { }
+    ngOnInit(): void { 
+    }
 }
