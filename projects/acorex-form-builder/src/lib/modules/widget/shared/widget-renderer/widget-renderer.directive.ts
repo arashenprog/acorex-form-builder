@@ -1,12 +1,16 @@
 import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, Output, EventEmitter } from '@angular/core';
 import { WidgetConfig } from '../../services/widget.service';
 import { AXFWidget } from '../../config/widget';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { AXFWidgetToolboxComponent } from '../widget-toolbox/widget-toolbox.component';
 
 @Directive({
     selector: '[axf-widget-renderer]',
 })
 export class AXFWidgetRendererDirective {
-
+    private renderChangeObserver: any;
+    private widgetInst: any;
 
     @Input()
     widget: WidgetConfig;
@@ -26,10 +30,27 @@ export class AXFWidgetRendererDirective {
         this.render();
     }
 
+    refresh() {
+        if (!this.renderChangeObserver) {
+            Observable.create(observer => {
+                this.renderChangeObserver = observer;
+            })
+                .pipe(debounceTime(100))
+                .pipe(distinctUntilChanged())
+                .subscribe(c => {
+                    Object.assign(this.widgetInst, this.widget.options);
+                    this.widgetInst.refresh();
+                });
+        }
+
+        this.renderChangeObserver.next(new Date().getTime());
+    }
+
     render() {
         this.target.clear();
         this.createComponent();
     }
+
 
     createComponent() {
         if (!this.widget)
@@ -48,24 +69,46 @@ export class AXFWidgetRendererDirective {
         }
         //
         let cmpRef = this.target.createComponent(factory)
-        const widgetInst = (cmpRef.instance as AXFWidget);
-        Object.assign(widgetInst, { config: this.widget });
+        this.widgetInst = (cmpRef.instance as AXFWidget);
+        Object.assign(this.widgetInst, { config: this.widget });
         let pp: any = {};
         this.widget.properties.forEach(p => {
-            if (!widgetInst[p.name] && p.defaultValue && !this.widget.options[p.name]) {
+            if (!this.widgetInst[p.name] && p.defaultValue && !this.widget.options[p.name]) {
                 pp[p.name] = p.defaultValue;
                 this.widget.options[p.name] = p.defaultValue;
             }
         });
-        
-        Object.assign(widgetInst, pp);
-        Object.assign(widgetInst, this.widget.options);
-        
-        widgetInst.onRefresh.subscribe(c => {
-            Object.assign(widgetInst, c);
-            this.onRender.emit(widgetInst);
+
+        Object.assign(this.widgetInst, pp);
+        Object.assign(this.widgetInst, this.widget.options);
+
+        this.widgetInst.onRefresh.subscribe(c => {
+            Object.assign(this.widgetInst, c);
+            this.onRender.emit(this.widgetInst);
         });
-        (cmpRef.location.nativeElement as HTMLElement).style.position = "relative";
+        if (!this.widget.toolbox)
+            this.widget.toolbox = {};
+        //(cmpRef.location.nativeElement as HTMLElement).style.position = "relative";
+        if (this.mode == "designer" && this.widget.toolbox.visible != false) {
+            let toolboxFactory = this.componentFactoryResolver.resolveComponentFactory(AXFWidgetToolboxComponent);
+            let toolbox = this.target.createComponent(toolboxFactory);
+            let toolboxInstance = toolbox.instance as AXFWidgetToolboxComponent;
+            if (this.widget.toolbox.edite != false) {
+                toolboxInstance.edit.subscribe(c => { this.widgetInst.edit(); });
+            }
+            else {
+                toolboxInstance.allowEdit = false;
+            }
+            // delete
+            if (this.widget.toolbox.delete != false) {
+                toolboxInstance.delete.subscribe(c => { this.widgetInst.delete(); });
+            }
+            else {
+                toolboxInstance.allowDelete = false;
+            }
+        }
+
+
     }
 
 }

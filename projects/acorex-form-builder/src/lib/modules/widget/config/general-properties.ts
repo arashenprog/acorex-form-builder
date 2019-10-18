@@ -4,7 +4,7 @@ import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/
 export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     name: "text",
     category: "General",
-    defaultValue: "Text Value",
+    defaultValue: null,
     title: "Text",
     editor: "TextEditor",
     options: {
@@ -13,8 +13,8 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
 }
 
 export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
-    name: "NAME",
-    category: "General",
+    name: "name",
+    category: "Data",
     defaultValue: "",
     title: "Name",
     editor: "TextEditor"
@@ -24,17 +24,17 @@ export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
 export const AXF_COLOR_PROPERTY: AXFWidgetProperty = {
     name: "color",
     category: "Style",
-    defaultValue: "#000",
+    defaultValue: "#000000",
     title: "Color",
-    editor: "TextEditor"
+    editor: "ColorEditor"
 }
 
 export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
     name: "bgColor",
     category: "Style",
-    defaultValue: "#fff",
+    defaultValue: "#ffffff",
     title: "Background Color",
-    editor: "TextEditor"
+    editor: "ColorEditor"
 }
 
 
@@ -151,10 +151,10 @@ export const AXF_LABEL_PROPERTY: AXFWidgetProperty = {
 export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [
     AXF_COLOR_PROPERTY,
     AXF_BG_COLOR_PROPERTY,
-    AXF_BOX_STYLE_PROPERTY,
     AXF_TEXT_SIZE_PROPERTY,
     AXF_TEXT_STYLE_PROPERTY,
     AXF_TEXT_DIRECTION_PROPERTY,
     AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
-    AXF_VERTICAL_ALIGNMENT_PROPERTY
+    AXF_VERTICAL_ALIGNMENT_PROPERTY,
+    AXF_BOX_STYLE_PROPERTY,
 ]

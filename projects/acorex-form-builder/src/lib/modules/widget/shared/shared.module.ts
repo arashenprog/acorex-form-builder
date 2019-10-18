@@ -11,7 +11,7 @@ import { AXFWidgetToolboxComponent } from './widget-toolbox/widget-toolbox.compo
     declarations: [AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetEditorComponent, AXFWidgetToolboxComponent],
     imports: [CommonModule, ACoreXUIModule, AXFEditorsModule],
     exports: [AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetEditorComponent, AXFWidgetToolboxComponent, AXFEditorsModule],
-    entryComponents: [AXFWidgetPickerComponent, AXFWidgetEditorComponent],
+    entryComponents: [AXFWidgetPickerComponent, AXFWidgetEditorComponent,AXFWidgetToolboxComponent],
     providers: [],
 })
 export class AXFWidgetSharedModule { }

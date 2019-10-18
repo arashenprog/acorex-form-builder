@@ -1,15 +1,15 @@
 <div class="widget-toolbox">
     <ul>
-        <li>
+        <li *ngIf="allowMove">
             <i class="fas fa-arrows-alt"></i>
         </li>
-        <li (click)="widget.edit()">
+        <li (click)="edit.emit()" *ngIf="allowEdit">
             <i class="fas fa-pen"></i>
         </li>
-        <li (click)="widget.copy()">
+        <li (click)="copy.emit()" *ngIf="allowCopy">
             <i class="fas fa-copy"></i>
         </li>
-        <li (click)="widget.delete()">
+        <li (click)="delete.emit()" *ngIf="allowDelete">
             <i class="fas fa-trash"></i>
         </li>
     </ul>

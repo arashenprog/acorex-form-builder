@@ -1,54 +1,56 @@
 .list-container {
-  display: flex;
-  flex-direction: row;
-  padding: var(--sp-sm-size);
-  min-height: 200px;
-  align-items: flex-start;
-
-  .widget-item {
-    margin-inline-end: var(--sp-sm-size);
-    padding: var(--sp-sm-size);
-    cursor: pointer;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: row;
-    border: 1px solid transparent;
+    padding: var(--sp-sm-size);
+    min-height: 200px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    align-content: baseline;
 
-    &:hover {
-      border: 1px solid var(--primary-color);
+    .widget-item {
+        margin-inline-end: var(--sp-sm-size);
+        padding: var(--sp-sm-size);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        border: 1px solid transparent;
 
-      .icon {
-        background-color: var(--primary-color);
-      }
+        &:hover {
+            border: 1px solid var(--primary-color);
+
+            .icon {
+                background-color: var(--primary-color);
+            }
+        }
+
+        .icon {
+            background-color: var(--black-color);
+            color: var(--white-color);
+            width: var(--el-lg-size);
+            height: var(--el-lg-size);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius-size);
+        }
+
+        .text {
+            margin-left: var(--sp-sm-size);
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+        }
+
+        .title {
+            font-size: var(--font-md-size);
+            font-weight: bold;
+        }
+
+        .hint {
+            font-size: var(--font-sm-size);
+            color: var(--gray);
+        }
     }
-
-    .icon {
-      background-color: var(--black-color);
-      color: var(--white-color);
-      width: var(--el-lg-size);
-      height: var(--el-lg-size);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--border-radius-size);
-    }
-
-    .text {
-      margin-left: var(--sp-sm-size);
-      display: flex;
-      flex-direction: column;
-      justify-items: center;
-    }
-
-    .title {
-      font-size: var(--font-md-size);
-      font-weight: bold;
-    }
-
-    .hint {
-      font-size: var(--font-sm-size);
-      color: var(--gray);
-    }
-  }
 }

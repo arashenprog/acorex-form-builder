@@ -1,18 +1,18 @@
 :host {
     &.widget-toolbox-container {
-        position: absolute;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        bottom: 0;
+        // position: absolute;
+        // left: 0;
+        // right: 0;
+        // width: 100%;
+        // height: 100%;
+        // top: 0;
+        // bottom: 0;
 
-        &:hover {
-            .widget-toolbox {
-                display: block;
-            }
-        }
+        // &:hover {
+        //     .widget-toolbox {
+        //         display: block;
+        //     }
+        // }
 
         .widget-toolbox {
             background: var(--gray-dark);
@@ -22,7 +22,6 @@
             width: -moz-fit-content;
             width: fit-content;
             margin: auto;
-            display: none;
             border-radius: var(--border-radius-size);
             ul {
                 padding: 0;

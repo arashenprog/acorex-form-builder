@@ -13,8 +13,9 @@ export class AXFTextInputWidgetView extends AXFWidgetView {
     constructor(private el: ElementRef<HTMLElement>){
         super()
     }
+    
 
-    ngOnInit(): void {
+    onRender(): void {
         let s = this.el.nativeElement.querySelector<HTMLFieldSetElement>("fieldset");
         s.style.visibility = "hidden";
         s.style.display = "none";

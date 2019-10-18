@@ -6,12 +6,14 @@ import { AXFTextEditorModule } from '../editors/text/text.module';
 import { AXFBoxStyleEditorModule } from '../editors/style/box-style/box-style.module';
 import { AXFSelectionEditorModule } from '../editors/selection/selection.module';
 import { AXFDropdownEditorModule } from '../editors/dropdown/dropdown.module';
+import { AXFColorEditorModule } from '../editors/color/color.module';
 
 const WDIGET_MODULES = [
     AXFBoxStyleEditorModule,
     AXFTextEditorModule,
     AXFSelectionEditorModule,
-    AXFDropdownEditorModule
+    AXFDropdownEditorModule,
+    AXFColorEditorModule
 ]
 
 @NgModule({

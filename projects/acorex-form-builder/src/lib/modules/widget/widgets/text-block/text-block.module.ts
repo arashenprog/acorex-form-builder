@@ -90,14 +90,14 @@ export class AXFTextBlockWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("2")
                 },
                 bgColor:"inherit",
-                color:"#999",
+                color:"#999999",
                 text:"Hint Text",
                 fontSize:["x-small"]
             },
             properties: [
                 AXF_TEXT_PROPERTY,
+                ...AXF_STYLE_GENERAL_PROPERTIES,
                 AXF_NAME_PROPERTY,
-                ...AXF_STYLE_GENERAL_PROPERTIES
             ]
         })
         

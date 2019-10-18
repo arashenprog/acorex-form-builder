@@ -3,13 +3,13 @@ import { AXFProperyEditor } from '../../config/editor';
 
 @Component({
     template: `
-        <ax-select-box  [allowSearch]="false" [selectedValues]="value" (selectedValuesChange)="handleValueChange($event)" [items]="items" [textField]="textField" [valueField]="valueField">
+        <ax-select-box  [allowSearch]="false" [selectedValues]="innerValue" (selectedValuesChange)="handleValueChange($event)" [items]="items" [textField]="textField" [valueField]="valueField">
         </ax-select-box>
     `,
 })
 export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]> implements OnInit {
 
-
+    innerValue: any[] = [];
     items: any[]=[];
     textField:string = "title";
     valueField:string = "value";
@@ -19,5 +19,6 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]> implemen
     }
 
     ngOnInit(): void { 
+        this.innerValue = this.value;
     }
 }

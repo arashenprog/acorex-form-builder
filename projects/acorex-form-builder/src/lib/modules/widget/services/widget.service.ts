@@ -8,9 +8,15 @@ export interface AXFWidgetProperty {
     title: string
     hint?: string;
     defaultValue?: any;
-    category: "General" | "Style" | "Behavior";
+    category: "General" | "Style" | "Behavior" | "Data";
     editor: any
-    options?:any
+    options?: any
+}
+
+export interface AXFWidgetToolboxProperty {
+    visible?: boolean;
+    delete?: boolean;
+    edite?: boolean;
 }
 
 export interface WidgetConfig {
@@ -25,6 +31,7 @@ export interface WidgetConfig {
     printClass: any;
     options?: any;
     properties: AXFWidgetProperty[];
+    toolbox?: AXFWidgetToolboxProperty;
 }
 
 
@@ -59,6 +66,7 @@ export class AXFWidgetService {
             printClass: c.printClass,
             viewClass: c.viewClass,
             visible: c.visible,
+            toolbox: c.toolbox,
             properties: []
         }
         if (c.properties)

@@ -18,7 +18,6 @@ export abstract class AXFProperyEditor<T>{
 
     handleValueChange(value: T) {
         this.value = value;
-
     }
 
 }

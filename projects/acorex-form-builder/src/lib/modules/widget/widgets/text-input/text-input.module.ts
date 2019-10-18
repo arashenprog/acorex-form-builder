@@ -37,12 +37,12 @@ export class AXFTextInputWidgetModule {
                     padding: new AXFBoxStyleBoxSizeValue("2"),
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
-                bgColor:"transparent"
+                bgColor: "#FFFFFF"
             },
             properties: [
                 AXF_TEXT_PROPERTY,
+                ...AXF_STYLE_GENERAL_PROPERTIES,
                 AXF_NAME_PROPERTY,
-                ...AXF_STYLE_GENERAL_PROPERTIES
             ]
         })
     }

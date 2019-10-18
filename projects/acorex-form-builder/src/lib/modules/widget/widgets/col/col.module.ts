@@ -7,7 +7,7 @@ import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFTextEditorComponent } from '../../../property-editor/editors/text/text.editor';
-import {  AXF_STYLE_GENERAL_PROPERTIES } from '../../config/general-properties';
+import { AXF_STYLE_GENERAL_PROPERTIES, AXF_BG_COLOR_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_HORIZONTAL_ALIGNMENT_PROPERTY, AXF_VERTICAL_ALIGNMENT_PROPERTY } from '../../config/general-properties';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 
 export const COMPONENTS = [AXFColWidgetDesigner, AXFColWidgetView, AXFColWidgetPrint]
@@ -31,13 +31,16 @@ export class AXFColWidgetModule {
             designerClass: AXFColWidgetDesigner,
             printClass: AXFColWidgetPrint,
             viewClass: AXFColWidgetView,
+            toolbox: {
+                visible: false
+            },
             options: {
                 boxStyle: {
                     border: new AXFBoxStyleBoxSizeValue("0"),
                     padding: new AXFBoxStyleBoxSizeValue("5"),
                     margin: new AXFBoxStyleBoxSizeValue("0")
                 },
-                bgColor:"inherit"
+                bgColor: "inherit"
             },
             properties: [
                 {
@@ -47,7 +50,10 @@ export class AXFColWidgetModule {
                     title: "Size",
                     editor: "TextEditor",
                 },
-                ...AXF_STYLE_GENERAL_PROPERTIES
+                AXF_BG_COLOR_PROPERTY,
+                AXF_BOX_STYLE_PROPERTY,
+                AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
+                AXF_VERTICAL_ALIGNMENT_PROPERTY
             ]
         })
     }
