@@ -10,8 +10,8 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
 
     maxCol: number = 12;
-    minCol: number = 2;
-    countCol: number = 6;
+    minCol: number = 1;
+    countCol: number = 12;
     colLeft: number[] = [];
     range: number = 0;
 

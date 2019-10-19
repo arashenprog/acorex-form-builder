@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { AXPopupService, AXBasePageComponent, AXHtmlUtil } from 'acorex-ui';
+import { AXPopupService, AXBasePageComponent, AXHtmlUtil, MenuItem } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { AXFWidgetPickerComponent } from '../../widget/shared/widget-picker/widget-picker.component';
 import { AXFLoadTemplatePage } from '../../loadtemplate/pages/loadtemplate.page';
@@ -20,12 +20,40 @@ export class ACFDesignerPage extends AXBasePageComponent {
 
     mode = "designer";
 
+    viewModeItems:MenuItem[]=[
+        {
+            startIcon:"fas fa-paint-brush",
+            name:"designer",
+            text:" Design View",
+            groupName:"mode",
+            selected:true,
+            style:"light"
+        },
+        {
+            startIcon:"fas fa-desktop",
+            name:"view",
+            text:" Form View",
+            groupName:"mode",
+            style:"light"
+        },
+        {
+            startIcon:"fas fa-print",
+            name:"print",
+            text:" Print View",
+            groupName:"mode",
+            style:"light",
+            disable:true
+        }
+    ]
 
     ngOnInit(): void {
     }
 
-    setMode(mode: string) {
-        this.mode = mode;
+
+
+    handleViewModeClick(e:MenuItem)
+    {
+        this.mode = e.name;
     }
 
     handleStartClick() {

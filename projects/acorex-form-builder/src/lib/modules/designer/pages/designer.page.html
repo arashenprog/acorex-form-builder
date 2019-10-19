@@ -1,18 +1,8 @@
 <div class="master-layout-container">
     <header>
         <div class="controlls start-controlls">
-            <ax-button type="light" size="sm" tooltip="Desktop Preview" [placement]="'bottom'"
-                (onClick)="setMode('designer')">
-                <i class="fas fa-desktop"></i>
-            </ax-button>
-            <ax-button type="light" size="sm" tooltip="Tablet Preview" [placement]="'bottom'">
-                <i class="fas fa-tablet-alt"></i>
-            </ax-button>
-            <ax-button type="light" size="sm" tooltip="Mobile Preview" [placement]="'bottom'"
-                (onClick)="setMode('view')">
-                <i class="fas fa-mobile-alt"></i>
-            </ax-button>
-
+            <ax-toolbar-menu [items]="viewModeItems" selection="single" (itemClick)="handleViewModeClick($event)">
+            </ax-toolbar-menu>
         </div>
         <div class="title">
             <h1>ACoreX form builder</h1>

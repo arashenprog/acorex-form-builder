@@ -6,6 +6,8 @@ import { WidgetInjector } from './widget';
 import { AXFWidgetSharedModule } from '../shared/shared.module';
 import { AXFTextBlockWidgetModule } from '../widgets/text-block/text-block.module';
 import { AXFContainerWidgetModule } from '../widgets/container/container.module';
+import { AXFPageBreakWidgetModule } from '../widgets/page-break/page-break.module';
+import { AXFDateInputWidgetModule } from '../widgets/date-input/date-input.module';
 
 
 const MODULES = [
@@ -14,7 +16,9 @@ const MODULES = [
     AXFRowWidgetModule,
     AXFColWidgetModule,
     AXFTextBlockWidgetModule,
-    AXFContainerWidgetModule
+    AXFContainerWidgetModule,
+    AXFPageBreakWidgetModule,
+    AXFDateInputWidgetModule
 ];
 
 @NgModule({

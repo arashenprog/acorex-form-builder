@@ -1,19 +1,20 @@
-import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { WidgetConfig } from '../../services/widget.service';
 import { AXFWidget } from '../../config/widget';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AXFWidgetToolboxComponent } from '../widget-toolbox/widget-toolbox.component';
+import { AXHtmlUtil } from 'acorex-ui';
 
 @Directive({
     selector: '[axf-widget-renderer]',
 })
 export class AXFWidgetRendererDirective {
     private renderChangeObserver: any;
-    private widgetInst: any;
+    private widgetInstance: any;
 
-    @Input()
-    widget: WidgetConfig;
+    @Input("widget")
+    widgetConfig: WidgetConfig;
 
     @Input()
     mode: "designer" | "view" | "print" = "designer";
@@ -23,6 +24,7 @@ export class AXFWidgetRendererDirective {
 
     constructor(
         private target: ViewContainerRef,
+        private zone: NgZone,
         private componentFactoryResolver: ComponentFactoryResolver,
     ) { }
 
@@ -38,8 +40,8 @@ export class AXFWidgetRendererDirective {
                 .pipe(debounceTime(100))
                 .pipe(distinctUntilChanged())
                 .subscribe(c => {
-                    Object.assign(this.widgetInst, this.widget.options);
-                    this.widgetInst.refresh();
+                    Object.assign(this.widgetInstance, this.widgetConfig.options);
+                    this.widgetInstance.refresh();
                 });
         }
 
@@ -53,59 +55,86 @@ export class AXFWidgetRendererDirective {
 
 
     createComponent() {
-        if (!this.widget)
+        if (!this.widgetConfig)
             return;
         //
-        let factory = null;
+        let widgetFactory = null;
         switch (this.mode) {
             case "designer":
-                factory = this.componentFactoryResolver.resolveComponentFactory(this.widget.designerClass);
+                widgetFactory = this.componentFactoryResolver.resolveComponentFactory(this.widgetConfig.designerClass);
                 break;
             case "view":
-                factory = this.componentFactoryResolver.resolveComponentFactory(this.widget.viewClass);
+                widgetFactory = this.componentFactoryResolver.resolveComponentFactory(this.widgetConfig.viewClass);
                 break;
             default:
-                factory = this.componentFactoryResolver.resolveComponentFactory(this.widget.printClass);
+                widgetFactory = this.componentFactoryResolver.resolveComponentFactory(this.widgetConfig.printClass);
         }
-        //
-        let cmpRef = this.target.createComponent(factory)
-        this.widgetInst = (cmpRef.instance as AXFWidget);
-        Object.assign(this.widgetInst, { config: this.widget });
+        // assign widgets value and options
+        let widgetComponent = this.target.createComponent(widgetFactory)
+        this.widgetInstance = (widgetComponent.instance as AXFWidget);
+        Object.assign(this.widgetInstance, { config: this.widgetConfig });
         let pp: any = {};
-        this.widget.properties.forEach(p => {
-            if (!this.widgetInst[p.name] && p.defaultValue && !this.widget.options[p.name]) {
+        this.widgetConfig.properties.forEach(p => {
+            if (!this.widgetInstance[p.name] && p.defaultValue && !this.widgetConfig.options[p.name]) {
                 pp[p.name] = p.defaultValue;
-                this.widget.options[p.name] = p.defaultValue;
+                this.widgetConfig.options[p.name] = p.defaultValue;
             }
         });
 
-        Object.assign(this.widgetInst, pp);
-        Object.assign(this.widgetInst, this.widget.options);
+        Object.assign(this.widgetInstance, pp);
+        Object.assign(this.widgetInstance, this.widgetConfig.options);
 
-        this.widgetInst.onRefresh.subscribe(c => {
-            Object.assign(this.widgetInst, c);
-            this.onRender.emit(this.widgetInst);
+        this.widgetInstance.onRefresh.subscribe(c => {
+            Object.assign(this.widgetInstance, c);
+            this.onRender.emit(this.widgetInstance);
         });
-        if (!this.widget.toolbox)
-            this.widget.toolbox = {};
-        //(cmpRef.location.nativeElement as HTMLElement).style.position = "relative";
-        if (this.mode == "designer" && this.widget.toolbox.visible != false) {
+        // render widget toolbox on mouseover event in designer mode
+        if (!this.widgetConfig.toolbox)
+            this.widgetConfig.toolbox = {};
+        if (this.mode == "designer" && this.widgetConfig.toolbox.visible != false) {
             let toolboxFactory = this.componentFactoryResolver.resolveComponentFactory(AXFWidgetToolboxComponent);
-            let toolbox = this.target.createComponent(toolboxFactory);
-            let toolboxInstance = toolbox.instance as AXFWidgetToolboxComponent;
-            if (this.widget.toolbox.edite != false) {
-                toolboxInstance.edit.subscribe(c => { this.widgetInst.edit(); });
+            let toolboxComponent = this.target.createComponent(toolboxFactory);
+            let toolboxInstance = toolboxComponent.instance as AXFWidgetToolboxComponent;
+            if (this.widgetConfig.toolbox.edite != false) {
+                toolboxInstance.edit.subscribe(c => { this.widgetInstance.edit(); });
             }
             else {
                 toolboxInstance.allowEdit = false;
             }
             // delete
-            if (this.widget.toolbox.delete != false) {
-                toolboxInstance.delete.subscribe(c => { this.widgetInst.delete(); });
+            if (this.widgetConfig.toolbox.delete != false) {
+                toolboxInstance.delete.subscribe(c => { this.widgetInstance.delete(); });
             }
             else {
                 toolboxInstance.allowDelete = false;
             }
+            //
+            this.zone.runOutsideAngular(() => {
+                let toolboxElement = (toolboxComponent.location.nativeElement as HTMLElement);
+                let widgetElement = (widgetComponent.location.nativeElement as HTMLElement);
+                widgetElement.addEventListener("mouseover", (c) => {
+                    c.stopPropagation();
+                    toolboxElement.style.display = "block";
+                    const bound = widgetElement.getBoundingClientRect();
+                    let x = bound.left + (bound.width / 2) - (toolboxElement.clientWidth / 2);
+                    let y = bound.top + (bound.height / 2) - (toolboxElement.clientHeight / 2);
+                    toolboxElement.style.top = `${y}px`;
+                    toolboxElement.style.left = `${x}px`;
+                });
+                document.addEventListener("mousemove", (c) => {
+                    let targetBound = widgetElement.getBoundingClientRect();
+                    let pos = { x: c.clientX, y: c.clientY };
+                    let inTarget = AXHtmlUtil.isInRecPoint(pos, {
+                        left: targetBound.left,
+                        width: targetBound.width,
+                        top: targetBound.top,
+                        height: targetBound.height
+                    });
+                    if (!inTarget) {
+                        toolboxElement.style.display = "none";
+                    }
+                });
+            });
         }
 
 
