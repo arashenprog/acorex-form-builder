@@ -10,15 +10,15 @@ import { AXFProperyEditor } from '../../config/editor';
 export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]> implements OnInit {
 
     innerValue: any[] = [];
-    items: any[]=[];
-    textField:string = "title";
-    valueField:string = "value";
+    items: any[] = [];
+    textField: string = "title";
+    valueField: string = "value";
 
     constructor() {
         super();
     }
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
         this.innerValue = this.value;
     }
 }
