@@ -35,7 +35,6 @@ export class AXFWidgetEditorComponent extends AXBasePageComponent implements OnI
     }
 
     handleValueChange(name: string, value: any) {
-        console.log(name,value);
         this.config.options[name] = value;
         this.widgetRenderer.refresh();
     }

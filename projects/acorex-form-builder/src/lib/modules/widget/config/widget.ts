@@ -159,8 +159,6 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     copy() {
 
     }
-
-
 }
 export abstract class AXFWidgetView extends AXFWidget {
     constructor() {

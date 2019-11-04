@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AXPopupService } from 'acorex-ui';
 import { AXFWidgetPickerComponent } from '../shared/widget-picker/widget-picker.component';
+import { JsonPipe } from '@angular/common';
 
 
 export interface AXFWidgetProperty {
@@ -20,9 +21,9 @@ export interface AXFWidgetToolboxProperty {
 }
 
 export interface WidgetConfig {
-    title: string,
-    icon: string,
-    hint?: string,
+    title: string;
+    icon: string;
+    hint?: string;
     name: string;
     category: string;
     visible: boolean;
@@ -74,6 +75,57 @@ export class AXFWidgetService {
         if (c.options)
             res.options = JSON.parse(JSON.stringify(c.options));
         return res;
+    }
+
+
+    serialize(items: WidgetConfig[]): string {
+        let obj: any[] = [];
+        items.forEach(i => {
+            obj.push(this.serializeInternal(i))
+        });
+        return JSON.stringify(obj);
+    }
+
+    private serializeInternal(item: WidgetConfig): any {
+        let obj: any = {};
+        obj.name = item.name;
+        obj.options = {};
+        item.properties.forEach(p => {
+            obj.options[p.name] = item.options[p.name]
+        });
+        if (item.options.widgets) {
+            obj.options.widgets = [];
+            item.options.widgets.forEach(w => {
+                obj.options.widgets.push(this.serializeInternal(w));
+            });
+        }
+        return obj;
+    }
+
+
+    parse(json: string): WidgetConfig[] {
+        debugger;
+        let items: WidgetConfig[] = [];
+        let obj = JSON.parse(json);
+        obj.forEach(o => {
+            items.push(this.parseInternal(o));
+        });
+        return items;
+    }
+
+    private parseInternal(obj: any): WidgetConfig {
+        let item: WidgetConfig = this.resolve(obj.name);
+        if (!item.options)
+            item.options = {};
+        Object.assign(item.options, obj.options);
+        if (obj.options.widgets) {
+            item.options.widgets = []
+            obj.options.widgets.forEach(w => {
+                item.options.widgets.push(this.parseInternal(w));
+            });
+        }
+
+        return item;
     }
 
 }

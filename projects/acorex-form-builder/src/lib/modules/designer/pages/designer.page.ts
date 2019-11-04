@@ -19,6 +19,7 @@ export class ACFDesignerPage extends AXBasePageComponent {
 
 
     mode = "designer";
+    view = "designer";
 
     viewModeItems:MenuItem[]=[
         {
@@ -27,14 +28,24 @@ export class ACFDesignerPage extends AXBasePageComponent {
             text:" Design View",
             groupName:"mode",
             selected:true,
-            style:"light"
+            style:"light",
+            data:"designer"
         },
         {
             startIcon:"fas fa-desktop",
-            name:"view",
+            name:"form",
             text:" Form View",
             groupName:"mode",
-            style:"light"
+            style:"light",
+            data:"view"
+        },
+        {
+            startIcon:"fas fa-mobile-alt",
+            name:"mobile",
+            text:" Mobile View",
+            groupName:"mode",
+            style:"light",
+            data:"view"
         },
         {
             startIcon:"fas fa-print",
@@ -42,7 +53,8 @@ export class ACFDesignerPage extends AXBasePageComponent {
             text:" Print View",
             groupName:"mode",
             style:"light",
-            disable:true
+            disable:true,
+            data:"print"
         }
     ]
 
@@ -53,7 +65,8 @@ export class ACFDesignerPage extends AXBasePageComponent {
 
     handleViewModeClick(e:MenuItem)
     {
-        this.mode = e.name;
+        this.view = e.name;
+        this.mode = e.data;
     }
 
     handleStartClick() {
@@ -76,7 +89,6 @@ export class ACFDesignerPage extends AXBasePageComponent {
     }
 
     handleRender(a: AXFWidget) {
-        console.log(this.widgets);
     }
 
     ngDoCheck() {

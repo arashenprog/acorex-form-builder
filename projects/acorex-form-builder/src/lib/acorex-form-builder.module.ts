@@ -7,11 +7,13 @@ import { AXFDesignerModule } from './modules/designer/config/designer.module';
 import { AXFWidgetModule } from './modules/widget/config/widget.module';
 import { AXFLoadTemplateModule } from './modules/loadtemplate/config/loadtemplate.module';
 import { AXFTextInputWidgetModule } from './modules/widget/widgets/text-input/text-input.module';
+import { AXFViewerModule } from './modules/viewer/config/viewer.module';
 
 const MODULES = [
   RouterModule,
   FormsModule,
   AXFDesignerModule,
+  AXFViewerModule,
   AXFLoadTemplateModule,
   ACoreXUIModule,
   AXFWidgetModule,

@@ -25,9 +25,9 @@
 
         </div>
     </header>
-    <article *ngIf="this.mode=='designer'">
-        <div class="designer-container container" *ngIf="widgets.length>0"  >
-            <ng-container   *ngFor="let w of widgets" (onRender)="handleRender($event)" axf-widget-renderer [widget]="w">
+    <article *ngIf="this.view=='designer'">
+        <div class="designer-container container" *ngIf="widgets.length>0">
+            <ng-container *ngFor="let w of widgets" (onRender)="handleRender($event)" axf-widget-renderer [widget]="w">
             </ng-container>
             <div class="add-element-container">
                 <div class="add-element" (click)="handleStartClick()" tooltip="Append Element" [placement]="'bottom'">
@@ -49,11 +49,25 @@
         </div>
     </article>
 
-    <article *ngIf="this.mode=='view'">
-        <div class="designer-container container" *ngIf="widgets.length>0">
-            <ng-container *ngFor="let w of widgets" (onRender)="handleRender($event)" axf-widget-renderer [widget]="w"
+    <article *ngIf="this.view=='form'">
+        <div class="designer-container container" >
+            <!-- <ng-container *ngFor="let w of widgets" (onRender)="handleRender($event)" axf-widget-renderer [widget]="w"
                 [mode]="'view'">
-            </ng-container>
+            </ng-container> -->
+            <acf-viewer-frame [widgets]="widgets"></acf-viewer-frame>
+        </div>
+    </article>
+
+    <article *ngIf="this.view=='mobile'">
+        <div class="phone-mockup">
+            <div class="phone-container">
+                <div class="phone-view">
+                    <!-- <ng-container *ngFor="let w of widgets" (onRender)="handleRender($event)" axf-widget-renderer
+                        [widget]="w" [mode]="'view'">
+                    </ng-container> -->
+                    <acf-viewer-frame [widgets]="widgets"></acf-viewer-frame>
+                </div>
+            </div>
         </div>
     </article>
 
