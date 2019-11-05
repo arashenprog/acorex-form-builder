@@ -4,7 +4,7 @@ import { AXFWidget } from '../../config/widget';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AXFWidgetToolboxComponent } from '../widget-toolbox/widget-toolbox.component';
-import { AXHtmlUtil } from 'acorex-ui';
+import { AXHtmlUtil, EventService } from 'acorex-ui';
 
 @Directive({
     selector: '[axf-widget-renderer]',
@@ -22,11 +22,21 @@ export class AXFWidgetRendererDirective {
     @Output()
     onRender: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
 
+    @Output()
+    onSelect: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
+
     constructor(
         private target: ViewContainerRef,
         private zone: NgZone,
         private componentFactoryResolver: ComponentFactoryResolver,
-    ) { }
+        private eventService: EventService
+    ) {
+        eventService.on("VALUE_CHANGE", v => {
+            if (v.uid == this.widgetInstance.uid) {
+                this.refresh();
+            }
+        })
+    }
 
     ngOnInit(): void {
         this.render();
@@ -51,6 +61,7 @@ export class AXFWidgetRendererDirective {
     render() {
         this.target.clear();
         this.createComponent();
+      
     }
 
 
@@ -83,61 +94,79 @@ export class AXFWidgetRendererDirective {
 
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
+        
 
-        this.widgetInstance.onRefresh.subscribe(c => {
-            Object.assign(this.widgetInstance, c);
-            this.onRender.emit(this.widgetInstance);
-        });
+
+
         // render widget toolbox on mouseover event in designer mode
         if (!this.widgetConfig.toolbox)
             this.widgetConfig.toolbox = {};
-        if (this.mode == "designer" && this.widgetConfig.toolbox.visible != false) {
-            let toolboxFactory = this.componentFactoryResolver.resolveComponentFactory(AXFWidgetToolboxComponent);
-            let toolboxComponent = this.target.createComponent(toolboxFactory);
-            let toolboxInstance = toolboxComponent.instance as AXFWidgetToolboxComponent;
-            if (this.widgetConfig.toolbox.edite != false) {
-                toolboxInstance.edit.subscribe(c => { this.widgetInstance.edit(); });
-            }
-            else {
-                toolboxInstance.allowEdit = false;
-            }
-            // delete
-            if (this.widgetConfig.toolbox.delete != false) {
-                toolboxInstance.delete.subscribe(c => { this.widgetInstance.delete(); });
-            }
-            else {
-                toolboxInstance.allowDelete = false;
-            }
-            //
-            this.zone.runOutsideAngular(() => {
-                let toolboxElement = (toolboxComponent.location.nativeElement as HTMLElement);
-                let widgetElement = (widgetComponent.location.nativeElement as HTMLElement);
-                widgetElement.addEventListener("mouseover", (c) => {
-                    c.stopPropagation();
-                    toolboxElement.style.display = "block";
-                    const bound = widgetElement.getBoundingClientRect();
-                    let x = bound.left + (bound.width / 2) - (toolboxElement.clientWidth / 2);
-                    let y = bound.top + (bound.height / 2) - (toolboxElement.clientHeight / 2);
-                    toolboxElement.style.top = `${y}px`;
-                    toolboxElement.style.left = `${x}px`;
-                });
-                document.addEventListener("mousemove", (c) => {
-                    let targetBound = widgetElement.getBoundingClientRect();
-                    let pos = { x: c.clientX, y: c.clientY };
-                    let inTarget = AXHtmlUtil.isInRecPoint(pos, {
-                        left: targetBound.left,
-                        width: targetBound.width,
-                        top: targetBound.top,
-                        height: targetBound.height
-                    });
-                    if (!inTarget) {
-                        toolboxElement.style.display = "none";
-                    }
-                });
+        if (this.mode == "designer") {
+
+            this.widgetInstance.onRefresh.subscribe(c => {
+                Object.assign(this.widgetInstance, c);
+                this.onRender.emit(this.widgetInstance);
             });
+            //
+            this.widgetInstance.onSelect.subscribe(c => {
+                this.eventService.broadcast("SELECT", c);
+            });
+            //
+            this.widgetInstance.onDelete.subscribe(c => {
+                this.eventService.broadcast("SELECT", null);
+            });
+
+            if (this.widgetConfig.toolbox.visible != false) {
+                let toolboxFactory = this.componentFactoryResolver.resolveComponentFactory(AXFWidgetToolboxComponent);
+                let toolboxComponent = this.target.createComponent(toolboxFactory);
+                let toolboxInstance = toolboxComponent.instance as AXFWidgetToolboxComponent;
+                if (this.widgetConfig.toolbox.edite != false) {
+                    toolboxInstance.edit.subscribe(c => {
+                        this.widgetInstance.edit();
+                    });
+                }
+                else {
+                    toolboxInstance.allowEdit = false;
+                }
+                // delete
+                if (this.widgetConfig.toolbox.delete != false) {
+                    toolboxInstance.delete.subscribe(c => { this.widgetInstance.delete(); });
+                }
+                else {
+                    toolboxInstance.allowDelete = false;
+                }
+                //
+                this.zone.runOutsideAngular(() => {
+                    let toolboxElement = (toolboxComponent.location.nativeElement as HTMLElement);
+                    let widgetElement = (widgetComponent.location.nativeElement as HTMLElement);
+                    widgetElement.addEventListener("mouseover", (c) => {
+                        c.stopPropagation();
+                        toolboxElement.style.display = "block";
+                        const bound = widgetElement.getBoundingClientRect();
+                        let x = bound.left + (bound.width / 2) - (toolboxElement.clientWidth / 2);
+                        let y = bound.top + (bound.height / 2) - (toolboxElement.clientHeight / 2);
+                        toolboxElement.style.top = `${y}px`;
+                        toolboxElement.style.left = `${x}px`;
+                        widgetElement.classList.add("widget-focus-outline");
+                    });
+
+                    document.addEventListener("mousemove", (c) => {
+                        let targetBound = widgetElement.getBoundingClientRect();
+                        let pos = { x: c.clientX, y: c.clientY };
+                        let inTarget = AXHtmlUtil.isInRecPoint(pos, {
+                            left: targetBound.left,
+                            width: targetBound.width,
+                            top: targetBound.top,
+                            height: targetBound.height
+                        });
+                        if (!inTarget) {
+                            toolboxElement.style.display = "none";
+                            widgetElement.classList.remove("widget-focus-outline");
+                        }
+                    });
+                });
+            }
         }
-
-
     }
 
 }

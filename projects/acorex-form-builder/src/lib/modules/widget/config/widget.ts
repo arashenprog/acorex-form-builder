@@ -1,7 +1,6 @@
 import { Injector, EventEmitter, Input, Output } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
-import { AXHtmlUtil, AXPopupService } from 'acorex-ui'
-import { AXFWidgetEditorComponent } from '../shared/widget-editor/widget-editor.component';
+import { AXHtmlUtil } from 'acorex-ui'
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 
 export const WidgetInjector: { instance?: Injector } = {};
@@ -10,11 +9,7 @@ export const WidgetInjector: { instance?: Injector } = {};
 export abstract class AXFWidget {
     uid: string;
     config: WidgetConfig;
-    parent: AXFWidget;
-    //widgets: WidgetConfig[] = [];
 
-
-    //private _widgets : WidgetConfig[];
 
     @Output()
     widgetsChange: EventEmitter<WidgetConfig[]> = new EventEmitter<WidgetConfig[]>();
@@ -32,37 +27,14 @@ export abstract class AXFWidget {
         this.widgetsChange.emit(this.config.options.widgets);
     }
 
-
-
-    onRefresh: EventEmitter<any> = new EventEmitter<any>();
-
-    private widgetService: AXFWidgetService;
+    protected widgetService: AXFWidgetService;
 
 
     constructor() {
         this.widgetService = WidgetInjector.instance.get(AXFWidgetService);
     }
 
-    protected appendChild(name: string, options: any = {}) {
-        let w = this.widgetService.resolve(name);
-        if (!w.options)
-            w.options = {};
-        Object.assign(w.options, options);
-        w.options.uid = AXHtmlUtil.getUID();
-        w.options.parent = this;
-        this.widgets.push(w);
-        this.refresh();
-    }
 
-    refresh() {
-        //this.config.options.widgets = this.widgets;
-        this.onRefresh.emit(this.config.options);
-        this.onRender();
-    }
-
-    getJson() {
-
-    }
 
     ngOnInit(): void {
         this.onRender();
@@ -130,10 +102,31 @@ export abstract class AXFWidget {
 }
 export abstract class AXFWidgetDesigner extends AXFWidget {
 
-    private popupService: AXPopupService;
+    onSelect: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
+    onDelete: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
+    onRefresh: EventEmitter<any> = new EventEmitter<any>();
+
+    parent: AXFWidgetDesigner;
+
     constructor() {
         super();
-        this.popupService = WidgetInjector.instance.get(AXPopupService);
+    }
+
+    protected appendChild(name: string, options: any = {}) {
+        let w = this.widgetService.resolve(name);
+        if (!w.options)
+            w.options = {};
+        Object.assign(w.options, options);
+        w.options.uid = AXHtmlUtil.getUID();
+        w.options.parent = this;
+        this.widgets.push(w);
+        this.refresh();
+        
+    }
+
+    refresh() {
+        this.onRefresh.emit(this.config.options);
+        this.onRender();
     }
 
     delete() {
@@ -142,20 +135,13 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
             if (this.parent.refresh)
                 this.parent.refresh();
         }
-        //this.refresh();
+        this.onDelete.emit(this);
     }
 
     edit() {
-        this.popupService.open(AXFWidgetEditorComponent, {
-            title: this.config.title,
-            size: "lg",
-            data: {
-                config: this.config
-            }
-        }).closed((c) => {
-            this.refresh();
-        })
+        this.onSelect.emit(this);
     }
+    
     copy() {
 
     }

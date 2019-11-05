@@ -6,11 +6,12 @@ import { AXFWidgetRendererDirective } from './widget-renderer/widget-renderer.di
 import { AXFWidgetEditorComponent } from './widget-editor/widget-editor.component';
 import { AXFEditorsModule } from '../../property-editor/config/editors.module';
 import { AXFWidgetToolboxComponent } from './widget-toolbox/widget-toolbox.component';
+import { AXFWidgetPropPanelComponent } from './widget-prop-panel/widget-prop-panel.component';
 
 @NgModule({
-    declarations: [AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetEditorComponent, AXFWidgetToolboxComponent],
+    declarations: [AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetEditorComponent, AXFWidgetToolboxComponent,AXFWidgetPropPanelComponent],
     imports: [CommonModule, ACoreXUIModule, AXFEditorsModule],
-    exports: [AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetEditorComponent, AXFWidgetToolboxComponent, AXFEditorsModule],
+    exports: [AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetEditorComponent, AXFWidgetToolboxComponent,AXFWidgetPropPanelComponent, AXFEditorsModule],
     entryComponents: [AXFWidgetPickerComponent, AXFWidgetEditorComponent,AXFWidgetToolboxComponent],
     providers: [],
 })

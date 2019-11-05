@@ -1,0 +1,22 @@
+.axf-widget-prop-panel {
+
+    .edit-row {
+        margin-bottom: var(--sp-md-size);
+        padding-bottom: var(--sp-md-size);
+        border-bottom: 1px solid var(--gray-color);
+
+        &:last-child
+        {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .prop-caption {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: small;
+            font-weight: bold;
+        }
+    }
+}

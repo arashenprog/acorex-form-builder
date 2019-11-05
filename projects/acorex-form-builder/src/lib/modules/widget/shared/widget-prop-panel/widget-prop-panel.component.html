@@ -1,0 +1,12 @@
+<div class="axf-widget-prop-panel">
+    <ax-panel-box *ngFor="let t of tabNames" [caption]="t">
+        <div class="edit-row" *ngFor="let e of getProps(t)">
+            <div class="prop-caption">
+                {{e.title}}
+            </div>
+            <ng-container axf-editor-renderer (valueChange)="handleValueChange(e.name,$event)" [editor]="e.editor"
+                [options]="e.options" [value]="widget.config.options[e.name]">
+            </ng-container>
+        </div>
+    </ax-panel-box>
+</div>

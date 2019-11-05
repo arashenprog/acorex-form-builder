@@ -8,12 +8,6 @@
             <h1>ACoreX form builder</h1>
         </div>
         <div class="controlls end-controlls">
-            <ax-button type="light" size="sm" tooltip="Undo" [placement]="'bottom'">
-                <i class="fas fa-undo-alt"></i>
-            </ax-button>
-            <ax-button type="light" size="sm" tooltip="Redo" [placement]="'bottom'">
-                <i class="fas fa-redo-alt"></i>
-            </ax-button>
             <ax-button type="primary" size="sm">
                 <span>Save</span>&nbsp;
                 <i class="fas fa-save"></i>
@@ -22,53 +16,74 @@
                 <span>Publish</span>&nbsp;
                 <i class="fas fa-check-circle"></i>
             </ax-button>
-
         </div>
     </header>
     <article *ngIf="this.view=='designer'">
-        <div class="designer-container container" *ngIf="widgets.length>0">
-            <ng-container *ngFor="let w of widgets" (onRender)="handleRender($event)" axf-widget-renderer [widget]="w">
+        <div class="designer-container">
+            <ng-container *ngIf="widgets.length>0">
+                <div class="property-panel">
+                    <div class="toolbar">
+
+                    </div>
+                    <div class="panel">
+                        <axf-widget-prop-panel [widget]="selectedWidget"></axf-widget-prop-panel>
+                    </div>
+                </div>
+                <div class="board">
+                    <div class="toolbar">
+                        <div class="controlls end-controlls">
+                            <ax-button type="light" size="sm" tooltip="Undo" [placement]="'bottom'">
+                                <i class="fas fa-undo-alt"></i>
+                            </ax-button>
+                            <ax-button type="light" size="sm" tooltip="Redo" [placement]="'bottom'">
+                                <i class="fas fa-redo-alt"></i>
+                            </ax-button>
+                        </div>
+                    </div>
+                    <div class="paper">
+                        <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
+                        </ng-container>
+                        <div class="add-element-container">
+                            <div class="add-element" (click)="handleStartClick()" tooltip="Append Element"
+                                [placement]="'bottom'">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </ng-container>
-            <div class="add-element-container">
-                <div class="add-element" (click)="handleStartClick()" tooltip="Append Element" [placement]="'bottom'">
-                    <i class="fas fa-plus"></i>
+            <ng-container *ngIf="widgets.length==0">
+                <div class="empty-stage-container">
+                    <div class="empty-stage">
+                        <h1>Let's get started</h1>
+                        <br>
+                        <br>
+                        <div>
+                            <ax-button type="primary" text="Start Design" (onClick)="handleStartClick()"></ax-button>
+                            &nbsp;
+                            <ax-button type="dark" text="Load Template" (onClick)="handleLoadClick()"></ax-button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="empty-stage-container" *ngIf="widgets.length==0">
-            <div class="empty-stage">
-                <h1>Let's get started</h1>
-                <br>
-                <br>
-                <div>
-                    <ax-button type="primary" text="Start Design" (onClick)="handleStartClick()"></ax-button>
-                    &nbsp;
-                    <ax-button type="dark" text="Load Template" (onClick)="handleLoadClick()"></ax-button>
-                </div>
-            </div>
+            </ng-container>
+
         </div>
     </article>
 
-    <article *ngIf="this.view=='form'">
-        <div class="designer-container container" >
-            <!-- <ng-container *ngFor="let w of widgets" (onRender)="handleRender($event)" axf-widget-renderer [widget]="w"
-                [mode]="'view'">
-            </ng-container> -->
+    <article *ngIf="this.view=='form' || this.view=='mobile'">
+        <div class="preview-container container">
             <acf-viewer-frame [widgets]="widgets"></acf-viewer-frame>
         </div>
     </article>
 
-    <article *ngIf="this.view=='mobile'">
+    <!-- <article *ngIf="this.view=='mobile'">
         <div class="phone-mockup">
             <div class="phone-container">
                 <div class="phone-view">
-                    <!-- <ng-container *ngFor="let w of widgets" (onRender)="handleRender($event)" axf-widget-renderer
-                        [widget]="w" [mode]="'view'">
-                    </ng-container> -->
                     <acf-viewer-frame [widgets]="widgets"></acf-viewer-frame>
                 </div>
             </div>
         </div>
-    </article>
+    </article> -->
 
 </div>

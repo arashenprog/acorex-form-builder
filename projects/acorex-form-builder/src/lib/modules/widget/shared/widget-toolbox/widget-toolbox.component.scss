@@ -2,6 +2,7 @@
     &.widget-toolbox-container {
         position: fixed;
         display: none;
+        pointer-events: none;
         
         // left: 0;
         // right: 0;
@@ -17,6 +18,7 @@
         // }
 
         .widget-toolbox {
+            pointer-events: all;
             background: var(--gray-dark);
             color: #fff;
             font-size: smaller;

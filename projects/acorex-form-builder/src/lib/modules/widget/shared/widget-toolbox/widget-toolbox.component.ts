@@ -12,9 +12,6 @@ export class AXFWidgetToolboxComponent implements OnInit {
     constructor() { }
     ngOnInit(): void { }
 
-    // @Input()
-    // widget: AXFWidgetDesigner;
-
     delete: EventEmitter<void> = new EventEmitter<void>();
     copy: EventEmitter<void> = new EventEmitter<void>();
     edit: EventEmitter<void> = new EventEmitter<void>();
