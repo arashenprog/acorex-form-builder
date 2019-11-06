@@ -6,7 +6,6 @@ import { AXFLoadTemplatePage } from '../../loadtemplate/pages/loadtemplate.page'
 import { AXFWidget } from '../../widget/config/widget';
 
 @Component({
-    selector: 'acf-designer',
     templateUrl: './designer.page.html',
     styleUrls: ['./designer.page.scss'],
     encapsulation: ViewEncapsulation.None
