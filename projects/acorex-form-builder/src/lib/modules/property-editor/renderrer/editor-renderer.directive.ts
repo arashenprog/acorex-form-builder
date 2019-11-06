@@ -1,5 +1,4 @@
 import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, EventEmitter, Output } from '@angular/core';
-import { AXHtmlUtil } from 'acorex-ui';
 import { AXFProperyEditor } from '../config/editor';
 import { AXFEditorService } from '../services/editor.service';
 
@@ -49,8 +48,6 @@ export class AXFEditorRendererDirective {
         instance.valueChange.subscribe(value => {
             this.valueChange.emit(value);
         })
-
-        //(cmpRef.location.nativeElement as HTMLElement).classList.add("widget-editor");
     }
 
 }

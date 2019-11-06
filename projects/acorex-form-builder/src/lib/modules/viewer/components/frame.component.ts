@@ -3,7 +3,7 @@ import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.ser
 
 
 @Component({
-    selector: "acf-viewer-frame",
+    selector: "axf-viewer-frame",
     template: `
         <iframe src="view" class="viewer"  frameBorder="0" #frame>
         </iframe>

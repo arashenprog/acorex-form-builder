@@ -3,16 +3,15 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetPickerComponent } from './widget-picker/widget-picker.component';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetRendererDirective } from './widget-renderer/widget-renderer.directive';
-import { AXFWidgetEditorComponent } from './widget-editor/widget-editor.component';
 import { AXFEditorsModule } from '../../property-editor/config/editors.module';
 import { AXFWidgetToolboxComponent } from './widget-toolbox/widget-toolbox.component';
 import { AXFWidgetPropPanelComponent } from './widget-prop-panel/widget-prop-panel.component';
 
 @NgModule({
-    declarations: [AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetEditorComponent, AXFWidgetToolboxComponent,AXFWidgetPropPanelComponent],
+    declarations: [AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetToolboxComponent,AXFWidgetPropPanelComponent],
     imports: [CommonModule, ACoreXUIModule, AXFEditorsModule],
-    exports: [AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetEditorComponent, AXFWidgetToolboxComponent,AXFWidgetPropPanelComponent, AXFEditorsModule],
-    entryComponents: [AXFWidgetPickerComponent, AXFWidgetEditorComponent,AXFWidgetToolboxComponent],
+    exports: [AXFWidgetPickerComponent, AXFWidgetRendererDirective,AXFWidgetToolboxComponent,AXFWidgetPropPanelComponent, AXFEditorsModule],
+    entryComponents: [AXFWidgetPickerComponent,AXFWidgetToolboxComponent],
     providers: [],
 })
 export class AXFWidgetSharedModule { }

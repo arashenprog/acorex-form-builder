@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AXPopupService } from 'acorex-ui';
-import { AXFWidgetPickerComponent } from '../shared/widget-picker/widget-picker.component';
-import { JsonPipe } from '@angular/common';
 
 
 export interface AXFWidgetProperty {

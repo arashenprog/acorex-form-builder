@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, HostListener } from '@angular/core';
-import { AXPopupService, AXBasePageComponent, AXHtmlUtil, MenuItem } from 'acorex-ui';
+import { Component, HostListener } from '@angular/core';
+import { AXBasePageComponent } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 
 @Component({
@@ -7,7 +7,8 @@ import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.ser
   styleUrls: ['./viewer.page.scss']
 })
 export class ACFViewerPage extends AXBasePageComponent {
-  constructor(private popup: AXPopupService, private widgetService: AXFWidgetService) { super() }
+
+  constructor(private widgetService: AXFWidgetService) { super(); }
 
 
 
