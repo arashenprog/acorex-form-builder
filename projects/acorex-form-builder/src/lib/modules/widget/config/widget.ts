@@ -117,12 +117,6 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         super();
     }
 
-    // protected appendChild(name: string, options: any = {}) {
-    //     let w = this.widgetService.addWidget(name, this, options);
-    //     this.widgets.push(w);
-    //     this.refresh();
-
-    // }
 
     refresh() {
         this.onRefresh.emit(this.config.options);
@@ -130,6 +124,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     delete() {
+        debugger;
         if (this.parent && this.parent.widgets) {
             this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
             if (this.parent.refresh)

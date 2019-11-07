@@ -10,7 +10,7 @@ import { AXFWidget, AXFWidgetContainer } from '../../widget/config/widget';
     styleUrls: ['./designer.page.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ACFDesignerPage extends AXBasePageComponent  implements AXFWidgetContainer{
+export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetContainer {
     constructor(
         private popup: AXPopupService,
         private widgetService: AXFWidgetService
@@ -70,7 +70,7 @@ export class ACFDesignerPage extends AXBasePageComponent  implements AXFWidgetCo
     handleStartClick() {
         this.widgetService.showPicker().then(w => {
             if (w) {
-                this.widgets.push(w)
+                this.widgetService.addWidget(w.name, this);
             };
         })
     }
