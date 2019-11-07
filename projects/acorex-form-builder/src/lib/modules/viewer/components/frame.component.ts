@@ -4,22 +4,12 @@ import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.ser
 
 @Component({
     selector: "axf-viewer-frame",
-    template: `
-        <iframe src="view" class="viewer"  frameBorder="0" #frame>
-        </iframe>
-    `,
-    styles: [`
-        .viewer
-        {
-            width: 100%;
-            height: 100%;
-        }
-    `]
+    templateUrl: "./frame.component.html",
+    styleUrls: ["./frame.component.scss"]
 })
 export class ACFViewerFrameComponent {
 
-    constructor(private widgetService:AXFWidgetService)
-    {
+    constructor(private widgetService: AXFWidgetService) {
 
     }
 

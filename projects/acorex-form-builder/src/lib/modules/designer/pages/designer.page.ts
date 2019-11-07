@@ -38,15 +38,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         {
             startIcon: "fas fa-desktop",
             name: "form",
-            text: " Form View",
-            groupName: "mode",
-            style: "light",
-            data: "view"
-        },
-        {
-            startIcon: "fas fa-mobile-alt",
-            name: "mobile",
-            text: " Mobile View",
+            text: " Preview",
             groupName: "mode",
             style: "light",
             data: "view"

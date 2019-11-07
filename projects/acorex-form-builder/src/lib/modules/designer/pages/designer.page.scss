@@ -46,6 +46,11 @@
     article {
         height: calc(100vh - 50px);
         overflow-y: auto;
+
+        &.preview-container {
+            display: flex;
+            justify-content: center;
+        }
     }
 }
 
@@ -90,7 +95,7 @@
         min-width: 296px;
         border-right: 1px solid var(--gray-color);
 
-      
+
     }
 
     .board {
@@ -162,14 +167,7 @@
     // background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
 }
 
-.preview-container {
-    height: calc(100% - 40px);
-    border: 1px solid;
-    padding: var(--sp-md-size);
-    margin-top: var(--sp-md-size);
-    border-color: var(--border-color);
-    box-shadow: 0px 0px 10px #dadada;
-}
+
 
 
 
