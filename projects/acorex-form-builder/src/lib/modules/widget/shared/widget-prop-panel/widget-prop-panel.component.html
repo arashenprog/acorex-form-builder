@@ -1,12 +1,29 @@
 <div class="axf-widget-prop-panel">
-    <ax-panel-box *ngFor="let t of tabNames" [caption]="t">
-        <div class="edit-row" *ngFor="let e of getProps(t)">
-            <div class="prop-caption">
-                {{e.title}}
-            </div>
-            <ng-container axf-editor-renderer (valueChange)="handleValueChange(e.name,$event)" [editor]="e.editor"
-                [options]="e.options" [value]="widget.config.options[e.name]">
+    <div class="toolbar" *ngIf="widget && widget.config">
+        <div class="start">
+            <ng-container>
+                <div class="icon"><i class="{{widget.config.icon}}"></i></div>
+                <div class="text">
+                    <div class="title">{{ widget.config.title }}</div>
+                </div>
             </ng-container>
         </div>
-    </ax-panel-box>
+        <div class="end">
+            <ax-button type="light" size="sm" tooltip="Delete" [placement]="'top'">
+                <i class="fas fa-trash danger"></i>
+            </ax-button>
+        </div>
+    </div>
+    <div class="panel">
+        <ax-panel-box *ngFor="let t of tabNames" [caption]="t">
+            <div class="edit-row" *ngFor="let e of getProps(t)">
+                <div class="prop-caption">
+                    {{e.title}}
+                </div>
+                <ng-container axf-editor-renderer (valueChange)="handleValueChange(e.name,$event)" [editor]="e.editor"
+                    [options]="e.options" [value]="widget.config.options[e.name]">
+                </ng-container>
+            </div>
+        </ax-panel-box>
+    </div>
 </div>

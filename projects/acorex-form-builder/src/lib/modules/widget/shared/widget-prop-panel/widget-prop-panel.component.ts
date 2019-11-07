@@ -12,6 +12,14 @@ import { EventService } from 'acorex-ui';
 export class AXFWidgetPropPanelComponent {
 
     constructor(private cdr: ChangeDetectorRef, private eventService: EventService) {
+        eventService.on("SELECT", c => {
+            this.widget = c;
+            this.widget.config.properties.forEach(p => {
+                if (!this.tabNames.includes(p.category)) {
+                    this.tabNames.push(p.category);
+                }
+            });
+        });
     }
 
     tabNames: string[] = [];
@@ -20,27 +28,7 @@ export class AXFWidgetPropPanelComponent {
     @Output()
     widgetChange: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
 
-    private _widget: AXFWidget;
-
-    @Input()
-    public get widget(): AXFWidget {
-        return this._widget;
-    }
-    public set widget(v: AXFWidget) {
-        console.log("from props", v);
-        this._widget = v;
-        this.widgetChange.emit(v);
-        this.tabNames = [];
-        if (this.widget) {
-
-            this.widget.config.properties.forEach(p => {
-                if (!this.tabNames.includes(p.category)) {
-                    this.tabNames.push(p.category);
-                }
-            });
-        }
-    }
-
+    widget: AXFWidget;
 
     getProps(category: string): AXFWidgetProperty[] {
         return this.widget.config.properties.filter(c => c.category == category);

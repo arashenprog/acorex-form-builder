@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WidgetConfig, AXFWidgetService } from '../../services/widget.service';
+import { WidgetConfig } from '../../services/widget.service';
 import { AXBasePageComponent } from 'acorex-ui';
 
 @Component({
@@ -11,9 +11,12 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
     list: WidgetConfig[];
     categories: string[] = [];
 
-    constructor(private widgetService: AXFWidgetService) {
-        super();
-        this.list = widgetService.getList();
+    constructor() {
+        super();      
+    }
+
+    ngOnInit()
+    {
         this.list.forEach(c => {
             if (!this.categories.includes(c.category)) {
                 this.categories.push(c.category);

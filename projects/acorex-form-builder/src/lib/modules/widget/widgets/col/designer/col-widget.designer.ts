@@ -11,14 +11,14 @@ import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-
     styleUrls: ['./col-widget.designer.scss'],
 })
 export class AXFColWidgetDesigner extends AXFWidgetDesigner {
-    
+
     size: number = 1;
     color: string;
     bgColor: string;
     boxStyle: AXFBoxStyleValue;
 
     @ViewChild("el")
-    container:ElementRef<HTMLDivElement>;
+    container: ElementRef<HTMLDivElement>;
 
     constructor(private hostElement: ElementRef, private popup: AXPopupService) {
         super()
@@ -33,13 +33,8 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     }
 
     addElement() {
-        this.popup.open(AXFWidgetPickerComponent, {
-            title: "Add Element",
-            size: "md"
-        }).closed((c) => {
-            if (c && c.data) {
-                this.appendChild((c.data as WidgetConfig).name);
-            }
+        this.widgetService.addWidget().then(w => {
+            if (w) this.appendChild(w.name);
         })
     }
 }

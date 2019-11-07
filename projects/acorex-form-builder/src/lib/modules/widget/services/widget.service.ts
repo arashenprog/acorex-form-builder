@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AXPopupService } from 'acorex-ui';
+import { AXPopupService, PromisResult, AXHtmlUtil } from 'acorex-ui';
+import { AXFWidgetPickerComponent } from '../shared/widget-picker/widget-picker.component';
 
 
 export interface AXFWidgetProperty {
@@ -41,6 +42,31 @@ export class AXFWidgetService {
 
     constructor(private popup: AXPopupService) {
 
+    }
+
+    addWidget(): PromisResult<WidgetConfig> {
+        return new PromisResult((resolve) => {
+            this.popup.open(AXFWidgetPickerComponent, {
+                title: "Add Element",
+                size: "md",
+                data: {
+                    list: this.getList()
+                }
+            }).closed((c) => {
+                if (c && c.data) {
+                    let w = Object.assign({}, this.resolve((c.data as WidgetConfig).name));
+                    if (!w.options)
+                        w.options = {};
+                    w.options.uid = AXHtmlUtil.getUID();
+                    w.options.parent = this;
+                    resolve(w);
+                }
+                else
+                {
+                    resolve(null);
+                }
+            })
+        })
     }
 
     getList(category?: string): WidgetConfig[] {

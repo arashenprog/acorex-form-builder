@@ -1,22 +1,72 @@
 .axf-widget-prop-panel {
+    height: 100%;
 
-    .edit-row {
-        margin-bottom: var(--sp-md-size);
-        padding-bottom: var(--sp-md-size);
+    .toolbar {
+        height: 50px;
         border-bottom: 1px solid var(--gray-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        padding: var(--sp-sm-size);
 
-        &:last-child
-        {
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .prop-caption {
-            height: 100%;
+        .start {
             display: flex;
             align-items: center;
-            font-size: small;
-            font-weight: bold;
+
+            .icon {
+                background-color: var(--primary-light-color);
+                color: var(--white-color);
+                width: calc(var(--el-md-size) * 1.2);
+                height: calc(var(--el-md-size) * 1.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: var(--border-radius-size);
+                border: 1px solid var(--primary-light-color);
+            }
+
+            .text {
+                color: var(--black-color);
+                margin-inline-start: var(--sp-sm-size);
+                display: flex;
+                flex-direction: column;
+                justify-items: center;
+
+                .title {
+                    font-size: var(--font-md-size);
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .end {}
+    }
+
+    .panel {
+        height: calc(100% - 50px);
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .edit-row {
+            margin-bottom: var(--sp-md-size);
+            padding-bottom: var(--sp-md-size);
+            border-bottom: 1px solid var(--gray-color);
+
+            &:last-child {
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+
+            .prop-caption {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-size: small;
+                font-weight: bold;
+            }
         }
     }
+
+
 }

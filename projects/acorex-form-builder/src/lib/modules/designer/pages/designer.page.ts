@@ -13,21 +13,15 @@ import { AXFWidget } from '../../widget/config/widget';
 export class ACFDesignerPage extends AXBasePageComponent {
     constructor(
         private popup: AXPopupService,
-        private widgetService: AXFWidgetService,
-        private eventService: EventService
+        private widgetService: AXFWidgetService
+
     ) {
         super();
-        eventService.on("SELECT", c => {
-            this.selectedWidget = c;
-        });
+
     }
 
 
     widgets: WidgetConfig[] = [];
-
-    selectedWidget: WidgetConfig;
-
-
     mode = "designer";
     view = "designer";
 
@@ -68,41 +62,19 @@ export class ACFDesignerPage extends AXBasePageComponent {
         }
     ]
 
-    ngOnInit(): void {
-    }
-
-
-
     handleViewModeClick(e: MenuItem) {
         this.view = e.name;
         this.mode = e.data;
     }
 
     handleStartClick() {
-        this.popup.open(AXFWidgetPickerComponent, {
-            title: "Add Element",
-            size: "md"
-        }).closed((c) => {
-            if (c && c.data) {
-                let w = Object.assign({}, this.widgetService.resolve((c.data as WidgetConfig).name));
-                if (!w.options)
-                    w.options = {};
-                w.options.uid = AXHtmlUtil.getUID();
-                w.options.parent = this;
-                this.widgets.push(w);
-            }
+        this.widgetService.addWidget().then(w => {
+            if (w) this.widgets.push(w);
         })
     }
+
     handleLoadClick() {
         this.popup.open(AXFLoadTemplatePage, "Load Template (coming soon ...)")
     }
 
-    handleRender(a: AXFWidget) {
-    }
-
-
-
-    ngDoCheck() {
-
-    }
 }
