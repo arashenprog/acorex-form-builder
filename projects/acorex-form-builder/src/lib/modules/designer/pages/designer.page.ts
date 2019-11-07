@@ -3,14 +3,14 @@ import { AXPopupService, AXBasePageComponent, AXHtmlUtil, MenuItem, EventService
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { AXFWidgetPickerComponent } from '../../widget/shared/widget-picker/widget-picker.component';
 import { AXFLoadTemplatePage } from '../../loadtemplate/pages/loadtemplate.page';
-import { AXFWidget } from '../../widget/config/widget';
+import { AXFWidget, AXFWidgetContainer } from '../../widget/config/widget';
 
 @Component({
     templateUrl: './designer.page.html',
     styleUrls: ['./designer.page.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ACFDesignerPage extends AXBasePageComponent {
+export class ACFDesignerPage extends AXBasePageComponent  implements AXFWidgetContainer{
     constructor(
         private popup: AXPopupService,
         private widgetService: AXFWidgetService
@@ -68,8 +68,10 @@ export class ACFDesignerPage extends AXBasePageComponent {
     }
 
     handleStartClick() {
-        this.widgetService.addWidget().then(w => {
-            if (w) this.widgets.push(w);
+        this.widgetService.showPicker().then(w => {
+            if (w) {
+                this.widgets.push(w)
+            };
         })
     }
 

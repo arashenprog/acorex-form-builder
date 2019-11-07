@@ -35,7 +35,7 @@ export class AXFWidgetRendererDirective {
             if (v.uid == this.widgetInstance.uid) {
                 this.refresh();
             }
-        })
+        });
     }
 
     ngOnInit(): void {
@@ -61,7 +61,7 @@ export class AXFWidgetRendererDirective {
     render() {
         this.target.clear();
         this.createComponent();
-      
+
     }
 
 
@@ -94,8 +94,6 @@ export class AXFWidgetRendererDirective {
 
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
-        
-
 
 
         // render widget toolbox on mouseover event in designer mode

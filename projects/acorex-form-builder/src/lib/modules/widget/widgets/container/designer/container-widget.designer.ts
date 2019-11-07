@@ -21,7 +21,7 @@ export class AXFContainerWidgetDesigner extends AXFWidgetDesigner  {
             size: "md"
         }).closed((c) => {
             if (c && c.data) {
-                this.appendChild((c.data as WidgetConfig).name);
+                //this.appendChild((c.data as WidgetConfig).name);
             }
         })
     }

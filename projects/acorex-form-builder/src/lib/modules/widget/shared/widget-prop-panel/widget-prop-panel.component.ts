@@ -13,12 +13,15 @@ export class AXFWidgetPropPanelComponent {
 
     constructor(private cdr: ChangeDetectorRef, private eventService: EventService) {
         eventService.on("SELECT", c => {
+            this.tabNames = [];
             this.widget = c;
-            this.widget.config.properties.forEach(p => {
-                if (!this.tabNames.includes(p.category)) {
-                    this.tabNames.push(p.category);
-                }
-            });
+            if (this.widget) {
+                this.widget.config.properties.forEach(p => {
+                    if (!this.tabNames.includes(p.category)) {
+                        this.tabNames.push(p.category);
+                    }
+                });
+            }
         });
     }
 

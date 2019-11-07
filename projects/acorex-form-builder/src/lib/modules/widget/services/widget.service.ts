@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AXPopupService, PromisResult, AXHtmlUtil } from 'acorex-ui';
+import { AXPopupService, PromisResult, AXHtmlUtil, EventService } from 'acorex-ui';
 import { AXFWidgetPickerComponent } from '../shared/widget-picker/widget-picker.component';
+import { AXFColWidgetDesigner } from '../widgets/col/designer/col-widget.designer';
+import { AXFWidgetContainer } from '../config/widget';
 
 
 export interface AXFWidgetProperty {
@@ -40,11 +42,11 @@ export class AXFWidgetService {
 
     static WIDGET_ITEMS: WidgetConfig[] = [];
 
-    constructor(private popup: AXPopupService) {
+    constructor(private popup: AXPopupService, private eventService: EventService) {
 
     }
 
-    addWidget(): PromisResult<WidgetConfig> {
+    showPicker(): PromisResult<WidgetConfig> {
         return new PromisResult((resolve) => {
             this.popup.open(AXFWidgetPickerComponent, {
                 title: "Add Element",
@@ -54,19 +56,26 @@ export class AXFWidgetService {
                 }
             }).closed((c) => {
                 if (c && c.data) {
-                    let w = Object.assign({}, this.resolve((c.data as WidgetConfig).name));
-                    if (!w.options)
-                        w.options = {};
-                    w.options.uid = AXHtmlUtil.getUID();
-                    w.options.parent = this;
-                    resolve(w);
+                    resolve(this.addWidget((c.data as WidgetConfig).name));
                 }
-                else
-                {
+                else {
                     resolve(null);
                 }
             })
         })
+    }
+
+    addWidget(name: string, parent?: AXFWidgetContainer, options?: any): WidgetConfig {
+        let w = Object.assign({}, this.resolve(name));
+        if (!w.options)
+            w.options = {};
+        Object.assign(w.options, options);
+        w.options.uid = AXHtmlUtil.getUID();
+        w.options.isSelected = true;
+        w.options.parent = parent;
+        if (parent)
+            parent.widgets.push(w)
+        return w;
     }
 
     getList(category?: string): WidgetConfig[] {

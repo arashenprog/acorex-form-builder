@@ -5,8 +5,12 @@ import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/
 
 export const WidgetInjector: { instance?: Injector } = {};
 
+export interface AXFWidgetContainer {
+    widgets: WidgetConfig[];
+}
 
-export abstract class AXFWidget {
+
+export abstract class AXFWidget implements AXFWidgetContainer {
     uid: string;
     config: WidgetConfig;
 
@@ -105,6 +109,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     onSelect: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
     onDelete: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
     onRefresh: EventEmitter<any> = new EventEmitter<any>();
+    isSelected: boolean = false;
 
     parent: AXFWidgetDesigner;
 
@@ -112,17 +117,12 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         super();
     }
 
-    protected appendChild(name: string, options: any = {}) {
-        let w = this.widgetService.resolve(name);
-        if (!w.options)
-            w.options = {};
-        Object.assign(w.options, options);
-        w.options.uid = AXHtmlUtil.getUID();
-        w.options.parent = this;
-        this.widgets.push(w);
-        this.refresh();
-        
-    }
+    // protected appendChild(name: string, options: any = {}) {
+    //     let w = this.widgetService.addWidget(name, this, options);
+    //     this.widgets.push(w);
+    //     this.refresh();
+
+    // }
 
     refresh() {
         this.onRefresh.emit(this.config.options);
@@ -130,7 +130,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     delete() {
-        if (this.parent) {
+        if (this.parent && this.parent.widgets) {
             this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
             if (this.parent.refresh)
                 this.parent.refresh();
@@ -141,9 +141,15 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     edit() {
         this.onSelect.emit(this);
     }
-    
+
     copy() {
 
+    }
+
+    ngAfterViewInit() {
+        if (this.isSelected) {
+            this.edit();
+        }
     }
 }
 export abstract class AXFWidgetView extends AXFWidget {

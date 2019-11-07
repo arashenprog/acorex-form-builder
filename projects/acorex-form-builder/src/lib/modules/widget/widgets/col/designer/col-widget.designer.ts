@@ -33,8 +33,11 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     }
 
     addElement() {
-        this.widgetService.addWidget().then(w => {
-            if (w) this.appendChild(w.name);
+        this.widgetService.showPicker().then(w => {
+            if (w) {
+                this.widgetService.addWidget(w.name, this);
+                this.refresh();
+            }
         })
     }
 }
