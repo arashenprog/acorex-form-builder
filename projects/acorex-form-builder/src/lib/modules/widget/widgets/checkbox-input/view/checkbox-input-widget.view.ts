@@ -7,18 +7,15 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFCheckboxInputWidgetView extends AXFWidgetView {
 
-    value: boolean=true;
-    label:string;
-    
-    constructor(private el: ElementRef<HTMLElement>){
+    value: boolean = true;
+    label: string;
+
+    constructor(private el: ElementRef<HTMLElement>) {
         super()
     }
-    
+
 
     onRender(): void {
-        // let s = this.el.nativeElement.querySelector<HTMLFieldSetElement>("fieldset");
-        // s.style.visibility = "hidden";
-        // s.style.display = "none";
-        // this.applyStyle(this.el.nativeElement.querySelector("input"));
+        this.applyStyle(this.el.nativeElement.querySelector("label"));
     }
 }

@@ -12,11 +12,10 @@ import { WidgetConfig } from '../../../services/widget.service';
 })
 export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
 
-    @ViewChild("el") el: ElementRef<HTMLElement>;
 
     value: boolean;
-    label:string="Check me";
-    constructor() {
+    label:string;
+    constructor(private el: ElementRef<HTMLElement>) {
         super()
     }
 
