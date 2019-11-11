@@ -10,7 +10,7 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     options: {
         allowHtml: true
     }
-}
+} 
 
 export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
     name: "name",
