@@ -1,4 +1,13 @@
-<div class="view-container" >
-    <iframe src="view" class="viewer" frameBorder="0" #frame [style.width.px]="800">
+<div class="view-container">
+    <iframe src="view" class="viewer" frameBorder="0" #frame [style.width.px]="size">
     </iframe>
+</div>
+<div class="device-size-container">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <!-- <button type="button" class="btn btn-sm btn-primary"><i class="fas fa-desktop"></i> Desktop</button>
+        <button type="button" class="btn btn-sm btn-primary active"><i class="fas fa-tablet-alt"></i> Tablet</button>
+        <button type="button" class="btn btn-sm btn-primary"><i class="fas fa-mobile-alt"></i> Mobile</button> -->
+
+        <button  *ngFor="let i of sizes" type="button" class="btn btn-sm btn-primary" [class.active]="i.active" (click)="handleSetSize(i)" ><i class="{{i.icon}}"></i> {{i.title}}</button>
+    </div>
 </div>

@@ -1,13 +1,30 @@
 .view-container {
-    height: calc(100% - 40px);
-    border: 1px solid;
+    height: calc(100% - 65px);
+    border: 2px solid;
     padding: var(--sp-md-size);
     margin-top: var(--sp-md-size);
-    border-color: var(--border-color);
-    box-shadow: 0px 0px 10px #dadada;
+    border-color: #cccccc;
+    box-shadow: 0 0 10px #dadada;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
 
     .viewer {
        
         height: 100%;
+    }
+}
+
+.device-size-container {
+    position: absolute;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    bottom: 10px;
+    .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+        background-color: var(--secondary-color) !important;
+        border-color: var(--secondary-color) !important;
     }
 }

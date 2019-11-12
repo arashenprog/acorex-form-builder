@@ -19,6 +19,30 @@ export class ACFViewerFrameComponent {
     @Input()
     widgets: WidgetConfig[] = [];
 
+    size: number = 800;
+
+
+    sizes: any[] = [
+        {
+            title: "Desktop",
+            icon: "fas fa-desktop",
+            value: 800,
+            active: true
+        },
+        {
+            title: "Tablet",
+            icon: "fas fa-tablet-alt",
+            value: 500,
+            active: false
+        },
+        {
+            title: "Mobile",
+            icon: "fas fa-mobile-alt",
+            value: 320,
+            active: false
+        }
+    ]
+
 
     @HostListener('window:message', ['$event'])
     handleMessage(e) {
@@ -30,5 +54,13 @@ export class ACFViewerFrameComponent {
                 }
             }, '*');
         }
+    }
+
+    handleSetSize(e) {
+        this.sizes.forEach(c => {
+            c.active = false;
+        })
+        this.size = e.value;
+        e.active = true;
     }
 }
