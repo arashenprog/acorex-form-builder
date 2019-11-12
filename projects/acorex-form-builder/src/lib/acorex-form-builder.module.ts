@@ -9,6 +9,10 @@ import { AXFLoadTemplateModule } from './modules/loadtemplate/config/loadtemplat
 import { AXFTextInputWidgetModule } from './modules/widget/widgets/text-input/text-input.module';
 import { AXFViewerModule } from './modules/viewer/config/viewer.module';
 import { AXFCheckboxInputWidgetModule } from './modules/widget/widgets/checkbox-input/checkbox-input.module';
+import { AXFImageInputWidgetModule } from './modules/widget/widgets/image-input/image-input.module';
+import { AXFSignatureInputWidgetModule } from './modules/widget/widgets/signature-input/signature-input.module';
+
+
 
 const MODULES = [
   RouterModule,
@@ -19,7 +23,9 @@ const MODULES = [
   ACoreXUIModule,
   AXFWidgetModule,
   AXFTextInputWidgetModule,
-  AXFCheckboxInputWidgetModule
+  AXFCheckboxInputWidgetModule,
+  AXFImageInputWidgetModule,
+  AXFSignatureInputWidgetModule
 ]
 
 @NgModule({

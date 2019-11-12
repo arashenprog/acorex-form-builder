@@ -46,7 +46,7 @@ export class AXFCheckboxInputWidgetModule {
                 AXF_TEXT_SIZE_PROPERTY,
                 AXF_TEXT_STYLE_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
-                AXF_NAME_PROPERTY,
+                //AXF_NAME_PROPERTY,
             ]
         })
     }

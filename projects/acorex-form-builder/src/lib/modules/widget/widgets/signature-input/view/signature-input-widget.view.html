@@ -1,0 +1,6 @@
+<div class="signature"  [ngStyle]="{'width.px': width,'height.px': height}">
+    <signature-pad [options]="signaturePadOptions" (onEndEvent)="drawComplete()"></signature-pad>
+    <div class="clear-box">
+        <button (click)="onClearClick()" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+    </div>
+</div>
