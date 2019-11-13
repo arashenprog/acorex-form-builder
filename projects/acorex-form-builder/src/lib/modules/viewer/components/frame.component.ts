@@ -10,7 +10,7 @@ import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.ser
 export class ACFViewerFrameComponent {
 
     constructor(private widgetService: AXFWidgetService) {
-
+        this.size = this.sizes[0].width;
     }
 
     @ViewChild('frame')
@@ -19,29 +19,31 @@ export class ACFViewerFrameComponent {
     @Input()
     widgets: WidgetConfig[] = [];
 
-    size: number = 800;
+
 
 
     sizes: any[] = [
         {
             title: "Desktop",
             icon: "fas fa-desktop",
-            value: 800,
+            width: 1024,
             active: true
         },
         {
             title: "Tablet",
             icon: "fas fa-tablet-alt",
-            value: 500,
+            width: 500,
             active: false
         },
         {
             title: "Mobile",
             icon: "fas fa-mobile-alt",
-            value: 320,
+            width: 320,
             active: false
         }
-    ]
+    ];
+
+    size: number;
 
 
     @HostListener('window:message', ['$event'])
@@ -60,7 +62,7 @@ export class ACFViewerFrameComponent {
         this.sizes.forEach(c => {
             c.active = false;
         })
-        this.size = e.value;
+        this.size = e.width;
         e.active = true;
     }
 }
