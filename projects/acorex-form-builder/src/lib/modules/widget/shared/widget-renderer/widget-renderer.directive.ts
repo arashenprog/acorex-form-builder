@@ -36,6 +36,15 @@ export class AXFWidgetRendererDirective {
                 this.refresh();
             }
         });
+
+        // eventService.on("SELECT", v => {
+        //     //widgetElement.classList.add("widget-selected");
+        //     if (v.uid == this.widgetInstance.uid) {
+        //         this.refresh();
+        //     }
+        // });
+
+        
     }
 
     ngOnInit(): void {
@@ -145,7 +154,7 @@ export class AXFWidgetRendererDirective {
                         let y = bound.top + (bound.height / 2) - (toolboxElement.clientHeight / 2);
                         toolboxElement.style.top = `${y}px`;
                         toolboxElement.style.left = `${x}px`;
-                        widgetElement.classList.add("widget-focus-outline");
+                        widgetElement.classList.add("widget-selected");
                     });
 
                     document.addEventListener("mousemove", (c) => {
@@ -159,7 +168,7 @@ export class AXFWidgetRendererDirective {
                         });
                         if (!inTarget) {
                             toolboxElement.style.display = "none";
-                            widgetElement.classList.remove("widget-focus-outline");
+                            widgetElement.classList.remove("widget-selected");
                         }
                     });
                 });

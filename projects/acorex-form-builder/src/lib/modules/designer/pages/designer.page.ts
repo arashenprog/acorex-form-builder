@@ -13,11 +13,13 @@ import { AXFWidget, AXFWidgetContainer } from '../../widget/config/widget';
 export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetContainer {
     constructor(
         private popup: AXPopupService,
-        private widgetService: AXFWidgetService
+        private widgetService: AXFWidgetService,
+       
 
     ) {
         super();
 
+        
     }
 
 
@@ -60,11 +62,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     }
 
     handleStartClick() {
-        this.widgetService.showPicker().then(w => {
-            if (w) {
-                this.widgetService.addWidget(w.name, this);
-            };
-        })
+        this.widgetService.addWidget("page", this);
     }
 
     handleLoadClick() {

@@ -23,7 +23,7 @@ Add-Content ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($Fi
     templateUrl: './$($FileName)-widget.print.html',
     styleUrls: ['./$($FileName)-widget.print.scss']
 })
-export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetDesigner implements OnInit {
+export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetPrint implements OnInit {
     constructor() { }
 
     ngOnInit(): void { }
@@ -38,7 +38,7 @@ Add-Content ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($Fi
     templateUrl: './$($FileName)-widget.view.html',
     styleUrls: ['./$($FileName)-widget.view.scss']
 })
-export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetDesigner implements OnInit {
+export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetView implements OnInit {
     constructor() { }
 
     ngOnInit(): void { }
@@ -56,8 +56,8 @@ import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { $WidgetDesigner } from './designer/$($FileName)-widget.designer';
-import { $WidgetView } from './print/$($FileName)-widget.print';
-import { $WidgetPrint } from './view/$($FileName)-widget.view';
+import { $WidgetPrint } from './print/$($FileName)-widget.print';
+import { $WidgetView } from './view/$($FileName)-widget.view';
 
 export const COMPONENTS = [
     $WidgetDesigner, 

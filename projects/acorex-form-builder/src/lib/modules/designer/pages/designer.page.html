@@ -38,12 +38,14 @@
                     <div class="paper">
                         <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
                         </ng-container>
-                        <div class="add-element-container">
-                            <div class="add-element" (click)="handleStartClick()" tooltip="Append Element"
-                                [placement]="'bottom'">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="document-tree">
+                        <ul>
+                            <li><a href="">Page</a></li>
+                            <li><a href="">Row</a></li>
+                            <li><a href="">Column</a></li>
+                            <li><a href="">Heading</a></li>
+                        </ul>
                     </div>
                 </div>
             </ng-container>
@@ -69,14 +71,5 @@
         <axf-viewer-frame [widgets]="widgets"></axf-viewer-frame>
     </article>
 
-    <!-- <article *ngIf="this.view=='mobile'">
-        <div class="phone-mockup">
-            <div class="phone-container">
-                <div class="phone-view">
-                    <axf-viewer-frame [widgets]="widgets"></axf-viewer-frame>
-                </div>
-            </div>
-        </div>
-    </article> -->
 
 </div>
