@@ -148,7 +148,7 @@
             }
         }
 
-        .document-tree {
+        .breadcrumb {
             display: flex;
             position: absolute;
             bottom: 0;
@@ -167,6 +167,11 @@
 
                 li {
                     margin-inline-start: 5px;
+                    color: #343434;
+                    cursor: pointer;
+                    &:hover{
+                        text-decoration: underline;
+                    }
 
                     &:after {
                         font-family: "Font Awesome 5 Free";
@@ -180,9 +185,7 @@
                     &:last-child::after {
                         content: "" !important;
                     }
-                    a{
-                        color: #343434;
-                    }
+                   
                 }
             }
         }

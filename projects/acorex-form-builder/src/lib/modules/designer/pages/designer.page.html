@@ -39,12 +39,10 @@
                         <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
                         </ng-container>
                     </div>
-                    <div class="document-tree">
+                    <div class="breadcrumb">
                         <ul>
-                            <li><a href="">Page</a></li>
-                            <li><a href="">Row</a></li>
-                            <li><a href="">Column</a></li>
-                            <li><a href="">Heading</a></li>
+                            <li *ngFor="let item of docTreeItems" (click)="handleBreadcrumbClick(item)">{{item.config.title}}</li>
+                            
                         </ul>
                     </div>
                 </div>

@@ -27,7 +27,7 @@ export class AXFPagePageWidgetModule {
         service.register({
             title: 'Page',
             hint: '',
-            icon: '',
+            icon: 'fas fa-file',
             category: 'Layout',
             visible: false,
             name: 'page',

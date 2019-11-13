@@ -3,7 +3,7 @@ import { AXPopupService, AXBasePageComponent, AXHtmlUtil, MenuItem, EventService
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { AXFWidgetPickerComponent } from '../../widget/shared/widget-picker/widget-picker.component';
 import { AXFLoadTemplatePage } from '../../loadtemplate/pages/loadtemplate.page';
-import { AXFWidget, AXFWidgetContainer } from '../../widget/config/widget';
+import { AXFWidget, AXFWidgetContainer, AXFWidgetDesigner } from '../../widget/config/widget';
 
 @Component({
     templateUrl: './designer.page.html',
@@ -14,14 +14,26 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     constructor(
         private popup: AXPopupService,
         private widgetService: AXFWidgetService,
-       
+        private eventService: EventService
+
 
     ) {
         super();
-
-        
+        eventService.on("SELECT", (c: AXFWidgetDesigner) => {
+            if (c) {
+                this.docTreeItems = [];
+                this.docTreeItems.push(c);
+                let parent: AXFWidgetDesigner = c.parent;
+                while (parent != null && parent.config) {
+                    this.docTreeItems.push(parent);
+                    parent = parent.parent;
+                }
+                this.docTreeItems = this.docTreeItems.reverse();
+            }
+        });
     }
 
+    docTreeItems: AXFWidgetDesigner[] = [];
 
     widgets: WidgetConfig[] = [];
     mode = "designer";
@@ -67,6 +79,11 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
 
     handleLoadClick() {
         this.popup.open(AXFLoadTemplatePage, "Load Template (coming soon ...)")
+    }
+
+    handleBreadcrumbClick(item:AXFWidgetDesigner)
+    {
+        this.eventService.broadcast("SELECT",item);
     }
 
 }
