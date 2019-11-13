@@ -50,7 +50,7 @@ $WidgetDesigner = "AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1
 $WidgetView = "AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetView"
 $WidgetPrint = "AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetPrint"
 
-Add-Content "\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\$($FileName).module.ts" "import { NgModule } from '@angular/core';
+Add-Content ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\$($FileName).module.ts" "import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
@@ -98,5 +98,5 @@ export class AXFPage$($FileName.substring(0,1).toupper()+$FileName.substring(1).
  / ___ |/ / /  / /_/ / /_/ / / / /  __/
 /_/  |_/_/_/  /_____/\____/_/ /_/\___/ 
                                        
-                                       
+
 "@
