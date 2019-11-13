@@ -15,18 +15,20 @@ export class AXFSignatureInputWidgetView extends AXFWidgetView {
     height:number;
     width:number; 
 
-    signaturePadOptions: any = { 
-        //minWidth: 5,
-        //canvasWidth: this.width,
-       // canvasHeight: this.height
-    };
+    signaturePadOptions: any ; 
     
     constructor() {
-        super()
+        super()  
     }
 
-    drawComplete() {
-        debugger
+    ngOnInit(): void {
+        this.signaturePadOptions={  
+            canvasWidth: this.width,
+            canvasHeight: this.height
+        }
+    }
+
+    drawComplete() { 
         this.value = this.signaturePad.toDataURL();
     }
  

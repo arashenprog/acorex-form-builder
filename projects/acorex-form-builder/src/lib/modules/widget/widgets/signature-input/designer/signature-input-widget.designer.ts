@@ -7,6 +7,7 @@ import { WidgetConfig } from '../../../services/widget.service';
 @Component({
     selector: "[axf-widget-signature]",
     templateUrl: './signature-input-widget.designer.html',
+    styleUrls: ['./signature-input-widget.designer.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class AXFSignatureInputWidgetDesigner extends AXFWidgetDesigner {
@@ -20,7 +21,7 @@ export class AXFSignatureInputWidgetDesigner extends AXFWidgetDesigner {
     }
 
     onRender(): void {
-        this.applyStyle(this.el.nativeElement.querySelector("img"));
+        this.applyStyle(this.el.nativeElement.querySelector("div"));
     }
 
 }
