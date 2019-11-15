@@ -1,21 +1,10 @@
 :host {
     &.widget-toolbox-container {
         position: fixed;
-        display: none;
-        pointer-events: none;
-        
-        // left: 0;
-        // right: 0;
-        // width: 100%;
-        // height: 100%;
-        // top: 0;
-        // bottom: 0;
-
-        // &:hover {
-        //     .widget-toolbox {
-        //         display: block;
-        //     }
-        // }
+        visibility: hidden;
+        background-color: rgba(78, 22, 147, 0.1);
+        cursor: pointer;
+        z-index: 1500;
 
         .widget-toolbox {
             pointer-events: all;
