@@ -57,6 +57,22 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
             this.range = 0;
     }
 
+    handleAction(action: string, e: MouseEvent,params?:any) {
+        e.stopPropagation();
+        switch (action) {
+            case "edit":
+                this.edit();
+                break;
+            case "delete":
+                this.delete();
+                break;
+            case "add":
+                this.addColumn(params)
+                break;
+        }
+        return false;
+    }
+
 
 
 }

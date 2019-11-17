@@ -65,9 +65,11 @@
         </div>
     </article>
 
-    <article *ngIf="this.view=='form' || this.view=='mobile'" class="preview-container">
+    <article *ngIf="this.view=='form'" class="preview-container">
         <axf-viewer-frame [widgets]="widgets"></axf-viewer-frame>
     </article>
+
+    
 
 
 </div>
