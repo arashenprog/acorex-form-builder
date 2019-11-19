@@ -124,7 +124,6 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     delete() {
-        debugger;
         if (this.parent && this.parent.widgets) {
             this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
             if (this.parent.refresh)

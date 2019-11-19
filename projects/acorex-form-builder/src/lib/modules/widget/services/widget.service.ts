@@ -137,7 +137,6 @@ export class AXFWidgetService {
 
 
     parse(json: string): WidgetConfig[] {
-        debugger;
         let items: WidgetConfig[] = [];
         let obj = JSON.parse(json);
         obj.forEach(o => {

@@ -20,7 +20,6 @@ export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
     }
 
     onRender(): void {
-        debugger
         //let s = this.el.nativeElement.firstElementChild as HTMLFieldSetElement;
         //s.style.visibility = "hidden";
         //s.style.display = "none";
