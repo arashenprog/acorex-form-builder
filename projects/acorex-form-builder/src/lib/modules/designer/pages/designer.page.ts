@@ -57,15 +57,14 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             style: "light",
             data: "view"
         },
-        {
-            startIcon: "fas fa-print",
-            name: "print",
-            text: " Print View",
-            groupName: "mode",
-            style: "light",
-            disable: true,
-            data: "print"
-        }
+        // {
+        //     startIcon: "fas fa-print",
+        //     name: "print",
+        //     text: " Print View",
+        //     groupName: "mode",
+        //     style: "light",
+        //     data: "print"
+        // }
     ]
 
     handleViewModeClick(e: MenuItem) {
@@ -81,9 +80,8 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         this.popup.open(AXFLoadTemplatePage, "Load Template (coming soon ...)")
     }
 
-    handleBreadcrumbClick(item:AXFWidgetDesigner)
-    {
-        this.eventService.broadcast("SELECT",item);
+    handleBreadcrumbClick(item: AXFWidgetDesigner) {
+        this.eventService.broadcast("SELECT", item);
     }
 
 }

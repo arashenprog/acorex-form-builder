@@ -37,7 +37,7 @@ export class AXFPagePageWidgetModule {
             options: {
                 boxStyle: {
                     border: new AXFBoxStyleBoxSizeValue("0"),
-                    padding: new AXFBoxStyleBoxSizeValue("0"),
+                    padding: new AXFBoxStyleBoxSizeValue("10"),
                     margin: new AXFBoxStyleBoxSizeValue("0")
                 },
                 bgColor: "inherit"

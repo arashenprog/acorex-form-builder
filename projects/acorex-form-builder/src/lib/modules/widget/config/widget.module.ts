@@ -12,6 +12,7 @@ import { AXFSignatureInputWidgetModule } from '../widgets/signature-input/signat
 import { AXFImageInputWidgetModule } from '../widgets/image-input/image-input.module';
 import { AXFCheckboxInputWidgetModule } from '../widgets/checkbox-input/checkbox-input.module';
 import { AXFTextInputWidgetModule } from '../widgets/text-input/text-input.module';
+import { AXFPageOutletWidgetModule } from '../widgets/outlet/outlet.module';
 
 
 
@@ -27,7 +28,8 @@ const MODULES = [
     AXFTextInputWidgetModule,
     AXFCheckboxInputWidgetModule,
     AXFImageInputWidgetModule,
-    AXFSignatureInputWidgetModule
+    AXFSignatureInputWidgetModule,
+    AXFPageOutletWidgetModule
 ];
 
 @NgModule({
