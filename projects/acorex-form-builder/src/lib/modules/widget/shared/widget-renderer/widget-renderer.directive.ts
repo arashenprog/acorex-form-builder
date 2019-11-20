@@ -184,6 +184,8 @@ export class AXFWidgetRendererDirective {
                 this.widgetElement.addEventListener("click", this.handleSelectElement.bind(this));
                 //});
             }
+            //});
+            //}
         }
     }
 
