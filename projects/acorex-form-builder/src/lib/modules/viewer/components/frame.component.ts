@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild, ElementRef, Input, Sanitizer } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef, Input } from '@angular/core';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
@@ -19,7 +19,7 @@ export class ACFViewerFrameComponent {
         this.url = sanitizer.bypassSecurityTrustResourceUrl("view?mode=view") ;
     }
 
-    @ViewChild('frame')
+    @ViewChild('frame', { static: true })
     frame: ElementRef;
 
     @Input()

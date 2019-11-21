@@ -16,7 +16,7 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
     range: number = 0;
 
 
-    @ViewChild("el") el: ElementRef;
+    @ViewChild("el",{static:true}) el: ElementRef;
 
 
 

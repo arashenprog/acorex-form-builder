@@ -9,7 +9,7 @@ import { typeWithParameters } from '@angular/compiler/src/render3/util';
 })
 export class AXFSignatureInputWidgetView extends AXFWidgetView {
 
-    @ViewChild(SignaturePad) signaturePad: SignaturePad; 
+    @ViewChild(SignaturePad,{static:true}) signaturePad: SignaturePad; 
     
     value: string;
     height:number;
