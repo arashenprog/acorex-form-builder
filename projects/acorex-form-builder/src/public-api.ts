@@ -1,6 +1,5 @@
 
-export * from './lib/modules/designer/config/designer.module';
-export * from './lib/modules/designer/pages/designer.page';
-export * from './lib/modules/viewer/pages/viewer.page';
+export * from './lib/modules/designer/config/api'
+export * from './lib/modules/viewer/config/api'
 export * from './lib/acorex-form-builder.module';
 

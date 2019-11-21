@@ -25,7 +25,7 @@ const MODULES = [
   imports: [
     ...MODULES
   ],
-  exports: [...MODULES],
+  exports: [AXFViewerModule,AXFDesignerModule],
 
 })
 export class ACoreXFormBuilderModule { }
