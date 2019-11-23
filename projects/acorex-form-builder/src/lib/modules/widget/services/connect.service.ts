@@ -11,11 +11,29 @@ export class AXFConnectService {
     }
 
 
-    public send(action: string, data?: any): PromisResult<any> {
+    public send(action: string, options?: any): PromisResult<any> {
+        // Mock Lists
+        if (action == "getList" && options && options.name) {
+            if (options.name == "template-list") {
+                return PromisResult.resolve({
+                    items: [
+                        {
+                            value: "tpl1",
+                            title: "Template 1"
+                        },
+                        {
+                            value: "tpl2",
+                            title: "Template 2"
+                        }
+                    ]
+                });
+            }
+        }
+        //
         return new PromisResult((resolve) => {
             window.parent.postMessage({
                 action: action,
-                data: data
+                data: options
             }, '*');
             this.messageQueue.push({
                 action: action,

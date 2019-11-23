@@ -14,12 +14,21 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]> implemen
     items: any[] = [];
     textField: string = "title";
     valueField: string = "value";
+    dataSource: string;
 
-    constructor(private dataService:AXFDataService) {
+    constructor(private dataService: AXFDataService) {
         super();
     }
 
+
+
     ngOnInit(): void {
+        debugger;
         this.innerValue = this.value;
+        if (this.dataSource) {
+            this.dataService.fetch(this.dataSource).then(items => {
+                this.items = items;
+            });
+        }
     }
 }

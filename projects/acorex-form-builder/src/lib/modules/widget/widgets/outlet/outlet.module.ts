@@ -25,7 +25,7 @@ export class AXFPageOutletWidgetModule {
         service.register({
             title: 'Saved Template',
             hint: 'Load template from gallery',
-            icon: 'fas fa-page',
+            icon: 'fas fa-database',
             category: 'Gallery',
             visible: true,
             name: 'outlet',
@@ -34,12 +34,12 @@ export class AXFPageOutletWidgetModule {
             viewClass: AXFOutletWidgetView,
             properties: [
                 {
-                    name: "ref",
+                    name: "template",
                     category: "General",
                     title: "Template",
                     editor: "DropdownEditor",
                     options: {
-                        dataSource:"TemplateList"
+                        dataSource:"template-list"
                     }
                 }
             ]
