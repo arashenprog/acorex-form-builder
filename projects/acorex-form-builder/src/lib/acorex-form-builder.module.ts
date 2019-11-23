@@ -11,7 +11,8 @@ import { AXFViewerModule } from './modules/viewer/config/viewer.module';
 import { AXFCheckboxInputWidgetModule } from './modules/widget/widgets/checkbox-input/checkbox-input.module';
 import { AXFImageInputWidgetModule } from './modules/widget/widgets/image-input/image-input.module';
 import { AXFSignatureInputWidgetModule } from './modules/widget/widgets/signature-input/signature-input.module';
-
+import { AXFListInputWidgetModule } from './modules/widget/widgets/list-input/list-input.module';
+import { AXFDropdownInputWidgetModule } from './modules/widget/widgets/dropdown-input/dropdown-input.module'; 
 
 
 const MODULES = [
@@ -25,7 +26,9 @@ const MODULES = [
   AXFTextInputWidgetModule,
   AXFCheckboxInputWidgetModule,
   AXFImageInputWidgetModule,
-  AXFSignatureInputWidgetModule
+  AXFSignatureInputWidgetModule,
+  AXFListInputWidgetModule,
+  AXFDropdownInputWidgetModule
 ]
 
 @NgModule({

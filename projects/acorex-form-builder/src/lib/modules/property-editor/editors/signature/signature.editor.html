@@ -1,0 +1,38 @@
+<div class="sigdiv"> 
+    <div class="spandiv">Type:</div>
+    <div><ax-selection-list direction="horizontal" mode="single" [selectedValues]="value.SignatureType" [items]="typeItems"
+        (selectedValuesChange)="signatureTypeChange($event)" textField="title" valueField="value">
+    </ax-selection-list></div>
+</div>
+<div class="sigdiv" *ngIf="value.SignatureType.includes('staff')">
+    <div class="spandiv">Staff Number:</div>
+    <div class="valdiv"><ax-text-box [(text)]="value.StaffNumber" (textChange)="staffNumberChange($event)"> 
+    </ax-text-box></div>
+</div>
+<div class="sigdiv" *ngIf="value.SignatureType.includes('staff')">
+        <div class="spandiv">Show as:</div>
+        <div><ax-selection-list direction="horizontal" mode="single" [selectedValues]="value.ShowType" [items]="showItems"
+        (selectedValuesChange)="showTypeChange($event)" textField="title" valueField="value">
+    </ax-selection-list></div>
+</div>
+<div *ngFor="let item of value.Items;let i = index" class="parentItem">
+    <div class="txtItem">
+        <ax-text-box [text]="item.Text" (textChange)="textItemChange(i,$event)" ></ax-text-box>        
+    </div> 
+    <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,item)">
+        <i class="fas fa-arrow-up primary"></i>
+    </ax-button>
+    <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,item)">
+        <i class="fas fa-arrow-down primary"></i>
+    </ax-button>
+    <ax-button type="light" size="sm" tooltip="Hidden" *ngIf="item.Value<3" (onClick)="hiddenClick(item.Value)">
+            <i [ngClass]="item.Visible?'fas fa-eye-slash danger':'fas fa-eye success'"></i>
+        </ax-button>
+    <ax-button type="light" size="sm" tooltip="Delete" *ngIf="item.Value>3" (onClick)="deleteClick(item.Value)">
+        <i class="fas fa-trash danger"></i>
+    </ax-button>
+</div>
+<ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
+    <span>Add New Item</span>&nbsp;
+    <i class="fas fa-plus"></i>
+</ax-button>

@@ -1,0 +1,20 @@
+.txtItem{
+    width: 60%;
+    float: left;
+    margin-right: 5px;
+}
+.parentItem
+{
+    float: left; 
+    margin-bottom: 5px;
+    border: 1px dotted var(--primary-color);
+    padding: 2px
+}
+
+.viewType{
+    margin-bottom: 5px;
+}
+
+.showother{
+    margin-top: 10px;
+}

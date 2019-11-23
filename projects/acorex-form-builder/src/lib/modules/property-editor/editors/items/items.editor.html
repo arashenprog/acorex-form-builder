@@ -1,0 +1,32 @@
+<div>
+    <div class="viewType" *ngIf="imagable">
+        <ax-selection-list direction="horizontal" mode="multiple" [selectedValues]="value.ContenView"
+            [items]="contentViewItems" (selectedValuesChange)="contentViewChange($event)" textField="title"
+            valueField="value">
+        </ax-selection-list>
+    </div>
+    <div *ngFor="let item of value.Content;let i = index" class="parentItem">
+        <div class="txtItem">
+            <ax-text-box *ngIf="value.ContenView.includes('text')" [text]="item.text"
+           (textChange)="textItemChange(i,$event)" ></ax-text-box>            
+            <ax-upload-file *ngIf="value.ContenView.includes('image')" type="inline" (onLoad)="uploadItemChange(i,$event)">
+            </ax-upload-file>
+        </div>
+        <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
+            <i class="fas fa-trash danger"></i>
+        </ax-button>
+        <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,item)">
+            <i class="fas fa-arrow-up primary"></i>
+        </ax-button>
+        <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,item)">
+            <i class="fas fa-arrow-down primary"></i>
+        </ax-button>
+    </div>
+    <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
+        <span>Add New Item</span>&nbsp;
+        <i class="fas fa-plus"></i>
+    </ax-button>
+    <div class="showother" *ngIf="otherable">
+        <ax-check-box label="Show Other" [value]="value.ShowOther" (change)="showOtherChange($event)"></ax-check-box>
+    </div>
+</div>
