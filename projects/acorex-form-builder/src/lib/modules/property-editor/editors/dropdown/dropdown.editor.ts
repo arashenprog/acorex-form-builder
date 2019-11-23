@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
+import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({
     template: `
@@ -14,7 +15,7 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]> implemen
     textField: string = "title";
     valueField: string = "value";
 
-    constructor() {
+    constructor(private dataService:AXFDataService) {
         super();
     }
 

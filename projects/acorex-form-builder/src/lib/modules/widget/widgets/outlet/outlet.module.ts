@@ -39,10 +39,7 @@ export class AXFPageOutletWidgetModule {
                     title: "Template",
                     editor: "DropdownEditor",
                     options: {
-                        items: [
-                            {value:"10",title:"template 1"},
-                            {value:"20",title:"template 2"},
-                        ],
+                        dataSource:"TemplateList"
                     }
                 }
             ]
