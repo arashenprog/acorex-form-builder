@@ -9,7 +9,6 @@ import { AXFLoadTemplateModule } from './modules/loadtemplate/config/loadtemplat
 import { AXFViewerModule } from './modules/viewer/config/viewer.module';
 
 
-
 const MODULES = [
   RouterModule,
   FormsModule,

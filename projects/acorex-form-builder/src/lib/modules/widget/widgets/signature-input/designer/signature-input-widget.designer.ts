@@ -1,7 +1,6 @@
 import { Component,  ViewEncapsulation, ElementRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
-
 @Component({
     selector: "[axf-widget-signature]",
     templateUrl: './signature-input-widget.designer.html',
@@ -10,16 +9,25 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 })
 export class AXFSignatureInputWidgetDesigner extends AXFWidgetDesigner {
 
-
-    value: string;
+    @ViewChild("el") el: ElementRef<HTMLElement>; 
     height:number;
     width:number; 
-    constructor(private el: ElementRef<HTMLElement>) {
-        super()
+    info:{SignatureType:string[],StaffNumber:number,ShowType:string[],Items:any[]}; 
+    columns:any[]=[];
+    rows:any[]=[];
+    constructor() {
+        super() 
     }
 
     onRender(): void {
-        this.applyStyle(this.el.nativeElement.querySelector("div"));
+        this.columns=this.info.Items.filter(w=>w.Visible==true); 
+        this.rows=new Array(this.info.StaffNumber); 
+        this.applyStyle(this.el.nativeElement);
+    }
+
+    getStyles() {  
+        let lengthCol= 12 / this.info.Items.filter(w=>w.Visible==true).length;
+        return 'col-md-'+Math.round(lengthCol);
     }
 
 }

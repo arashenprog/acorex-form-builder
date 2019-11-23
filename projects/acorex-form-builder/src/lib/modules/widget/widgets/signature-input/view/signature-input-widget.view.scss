@@ -13,3 +13,19 @@
     }
     
 }
+.row{
+    margin-bottom: 2px;
+
+     .child{
+        flex-direction: row;
+         display: flex;
+        .spanchild{
+            padding: 0 10px;
+            font-size: 14px;
+        }
+        .valuechild{
+            width: 100%;
+            margin: 0px 10px 0px 0px; 
+        }
+    }
+}

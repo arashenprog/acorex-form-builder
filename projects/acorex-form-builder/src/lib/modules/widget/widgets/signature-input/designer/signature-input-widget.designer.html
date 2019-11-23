@@ -1,1 +1,13 @@
-<div class="sign" [ngStyle]="{'width.px': width,'height.px': height}"></div>
+<div #el>
+    <div class="row" *ngFor="let rw of rows">
+        <div class="child" [ngClass]="getStyles()" *ngFor="let item of columns">
+            <div class="spanchild">{{item.Text}} </div>
+            <div class="valuechild">
+                <ax-text-box *ngIf="item.Type=='String'"></ax-text-box>
+                <ax-date-picker label="" *ngIf="item.Type=='Date'"></ax-date-picker>
+                <div class="sign" [ngStyle]="{'max-width.px': width,'height.px': height}"
+                    *ngIf="item.Type=='Signature'"></div>
+            </div>
+        </div>
+    </div>
+</div>

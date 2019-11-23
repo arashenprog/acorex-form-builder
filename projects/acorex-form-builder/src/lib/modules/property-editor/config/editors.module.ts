@@ -8,6 +8,10 @@ import { AXFSelectionEditorModule } from '../editors/selection/selection.module'
 import { AXFDropdownEditorModule } from '../editors/dropdown/dropdown.module';
 import { AXFColorEditorModule } from '../editors/color/color.module';
 import { AXFUploadEditorModule } from '../editors/upload/upload.module';
+import { AXFItemsEditorModule } from '../editors/items/items.modules';
+import { AXFCheckboxEditorModule } from '../editors/checkbox/checkbox.module'; 
+import { AXFSignatureEditorModule } from '../editors/signature/signature.module';
+
 
 const WDIGET_MODULES = [
     AXFBoxStyleEditorModule,
@@ -15,7 +19,10 @@ const WDIGET_MODULES = [
     AXFSelectionEditorModule,
     AXFDropdownEditorModule,
     AXFColorEditorModule,
-    AXFUploadEditorModule
+    AXFUploadEditorModule,
+    AXFItemsEditorModule,
+    AXFCheckboxEditorModule,
+    AXFSignatureEditorModule
 ]
 
 @NgModule({

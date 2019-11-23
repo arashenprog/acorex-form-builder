@@ -36,11 +36,19 @@ export class AXFSignatureInputWidgetModule {
             options: {
                 boxStyle: {
                     border: new AXFBoxStyleBoxSizeValue("1"),
-                    padding: new AXFBoxStyleBoxSizeValue("0"),
+                    padding: new AXFBoxStyleBoxSizeValue("5"),
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },                
-                height:200,
-                width:200 
+                height:100,
+                width:150 ,
+                info:{ 
+                    SignatureType:["supervisor"],
+                    StaffNumber:1,
+                    ShowType:["item"],
+                    Items:[{ Value:1,Text: "Name",Type:"String",Visible:true }, 
+                           { Value:2,Text: "Date",Type:"Date",Visible:true},
+                           { Value:3,Text: "Signature",Type:"Signature",Visible:true}],
+                 }
             },
             properties: [ 
                 {
@@ -56,7 +64,14 @@ export class AXFSignatureInputWidgetModule {
                     defaultValue: "100",
                     title: "Height (px)",
                     editor: "TextEditor"
-                }     ,           
+                }     , 
+                {
+                    name: "info",
+                    category: "General",
+                    defaultValue: {},
+                    title: "Info",
+                    editor: "SignatureEditor" 
+                },      
                 AXF_BOX_STYLE_PROPERTY 
             ]
         })
