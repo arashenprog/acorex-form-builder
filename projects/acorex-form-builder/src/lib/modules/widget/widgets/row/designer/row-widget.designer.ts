@@ -16,7 +16,7 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
     range: number = 0;
 
 
-    @ViewChild("el") el: ElementRef;
+    @ViewChild("el",{static:true}) el: ElementRef;
 
 
 
@@ -55,6 +55,22 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
     handlePickerMouseOut(range: number) {
         if (this.range == range)
             this.range = 0;
+    }
+
+    handleAction(action: string, e: MouseEvent,params?:any) {
+        e.stopPropagation();
+        switch (action) {
+            case "edit":
+                this.edit();
+                break;
+            case "delete":
+                this.delete();
+                break;
+            case "add":
+                this.addColumn(params)
+                break;
+        }
+        return false;
     }
 
 

@@ -3,13 +3,13 @@
         <li *ngIf="allowMove">
             <i class="fas fa-arrows-alt"></i>
         </li>
-        <li (click)="edit.emit()" *ngIf="allowEdit">
+        <li (click)="handleAction('edit',$event)" *ngIf="allowEdit">
             <i class="fas fa-pen"></i>
         </li>
-        <li (click)="copy.emit()" *ngIf="allowCopy">
+        <li (click)="handleAction('copy',$event)" *ngIf="allowCopy">
             <i class="fas fa-copy"></i>
         </li>
-        <li (click)="delete.emit()" *ngIf="allowDelete">
+        <li (click)="handleAction('delete',$event)" *ngIf="allowDelete">
             <i class="fas fa-trash"></i>
         </li>
     </ul>

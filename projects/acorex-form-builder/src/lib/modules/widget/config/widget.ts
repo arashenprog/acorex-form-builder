@@ -1,4 +1,4 @@
-import { Injector, EventEmitter, Input, Output } from '@angular/core';
+import { Injector, EventEmitter, Input, Output, Directive } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
 import { AXHtmlUtil } from 'acorex-ui'
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
@@ -10,6 +10,7 @@ export interface AXFWidgetContainer {
 }
 
 
+@Directive()
 export abstract class AXFWidget implements AXFWidgetContainer {
     uid: string;
     config: WidgetConfig;
@@ -124,7 +125,6 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     delete() {
-        debugger;
         if (this.parent && this.parent.widgets) {
             this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
             if (this.parent.refresh)

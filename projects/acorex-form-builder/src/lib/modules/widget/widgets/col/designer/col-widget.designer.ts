@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
-import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
 import { AXPopupService } from 'acorex-ui';
-import { WidgetConfig } from '../../../services/widget.service';
 import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
 
 @Component({
@@ -17,7 +15,7 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     bgColor: string;
     boxStyle: AXFBoxStyleValue;
 
-    @ViewChild("el")
+    @ViewChild("el", { static: true })
     container: ElementRef<HTMLDivElement>;
 
     constructor(private hostElement: ElementRef, private popup: AXPopupService) {
@@ -39,5 +37,21 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
                 this.refresh();
             }
         })
+    }
+
+    handleAction(action: string, e: MouseEvent) {
+        e.stopPropagation();
+        switch (action) {
+            case "edit":
+                this.edit();
+                break;
+            case "delete":
+                this.delete();
+                break;
+            case "add":
+                this.addElement();
+                break;
+        }
+        return false;
     }
 }

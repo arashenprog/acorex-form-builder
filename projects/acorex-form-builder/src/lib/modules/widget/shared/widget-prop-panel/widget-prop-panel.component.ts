@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, Output, ViewEncapsulation } from '@angular/core';
 import { WidgetConfig, AXFWidgetProperty } from '../../services/widget.service';
 import { AXFWidget } from '../../config/widget';
 import { EventService } from 'acorex-ui';

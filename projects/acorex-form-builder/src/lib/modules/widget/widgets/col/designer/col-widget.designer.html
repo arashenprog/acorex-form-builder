@@ -6,20 +6,20 @@
         </div>
         <ng-template #elseTemplate>
             <div class="align-center">
-                <div class="add-element" (click)="addElement()" tooltip="Add Element" [placement]="'top'">
+                <div class="add-element" (click)="handleAction('add',$event)" tooltip="Add Element" [placement]="'top'">
                     <i class="fas fa-plus"></i>
                 </div>
             </div>
         </ng-template>
     </div>
     <div class="col-tools">
-        <div class="icon" (click)="delete()" tooltip="Delete Column" [placement]="'bottom'">
+        <div class="icon" (click)="handleAction('delete',$event)" tooltip="Delete Column" [placement]="'bottom'">
             <i class="fas fa-trash"></i>
         </div>
-        <div class="icon" (click)="edit()" tooltip="Edit Column" [placement]="'bottom'">
+        <div class="icon" (click)="handleAction('edit',$event)" tooltip="Edit Column" [placement]="'bottom'">
             <i class="fas fa-pen"></i>
         </div>
-        <div class="icon" (click)="addElement()" tooltip="Append Element" [placement]="'bottom'">
+        <div class="icon" (click)="handleAction('add',$event)" tooltip="Append Element" [placement]="'bottom'">
             <i class="fas fa-plus"></i>
         </div>
     </div>

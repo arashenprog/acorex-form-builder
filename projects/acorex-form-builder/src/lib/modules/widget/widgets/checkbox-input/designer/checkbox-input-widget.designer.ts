@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
-import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
-import { AXPopupService } from 'acorex-ui';
-import { WidgetConfig } from '../../../services/widget.service';
+
 
 @Component({
     selector: "[axf-widget-checkbox]",
@@ -20,7 +18,6 @@ export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
     }
 
     onRender(): void {
-        debugger
         //let s = this.el.nativeElement.firstElementChild as HTMLFieldSetElement;
         //s.style.visibility = "hidden";
         //s.style.display = "none";

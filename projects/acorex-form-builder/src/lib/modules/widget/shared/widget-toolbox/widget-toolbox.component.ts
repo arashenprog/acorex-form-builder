@@ -20,4 +20,21 @@ export class AXFWidgetToolboxComponent implements OnInit {
     allowEdit: boolean = true;
     allowMove: boolean = true;
     allowCopy: boolean = true;
+
+    handleAction(action: string, e: MouseEvent) {
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        switch (action) {
+            case "edit":
+                this.edit.emit();
+                break;
+            case "delete":
+                this.delete.emit();
+                break;
+            case "copy":
+                this.delete.emit();
+                break;
+        }
+        return false;
+    }
 }

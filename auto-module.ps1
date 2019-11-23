@@ -23,7 +23,7 @@ Add-Content ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($Fi
     templateUrl: './$($FileName)-widget.print.html',
     styleUrls: ['./$($FileName)-widget.print.scss']
 })
-export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetDesigner implements OnInit {
+export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetPrint implements OnInit {
     constructor() { }
 
     ngOnInit(): void { }
@@ -38,7 +38,7 @@ Add-Content ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($Fi
     templateUrl: './$($FileName)-widget.view.html',
     styleUrls: ['./$($FileName)-widget.view.scss']
 })
-export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetDesigner implements OnInit {
+export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetView implements OnInit {
     constructor() { }
 
     ngOnInit(): void { }
@@ -46,7 +46,50 @@ export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolo
 "
 
 New-Item -Path ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\$($FileName).module.ts" -ItemType File -Force
+$WidgetDesigner = "AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetDesigner"
+$WidgetView = "AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetView"
+$WidgetPrint = "AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetPrint"
 
+Add-Content ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\$($FileName).module.ts" "import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AXFWidgetService } from '../../services/widget.service';
+import { ACoreXUIModule } from 'acorex-ui';
+import { AXFWidgetSharedModule } from '../../shared/shared.module';
+import { $WidgetDesigner } from './designer/$($FileName)-widget.designer';
+import { $WidgetPrint } from './print/$($FileName)-widget.print';
+import { $WidgetView } from './view/$($FileName)-widget.view';
+
+export const COMPONENTS = [
+    $WidgetDesigner, 
+    $WidgetView, 
+    $WidgetPrint
+]
+
+@NgModule({
+    declarations: [...COMPONENTS],
+    imports: [CommonModule, ACoreXUIModule, AXFWidgetSharedModule],
+    exports: [...COMPONENTS],
+    entryComponents: [...COMPONENTS],
+    providers: [],
+})
+export class AXFPage$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetModule {
+    constructor(service: AXFWidgetService) {
+        service.register({
+            title: '',
+            hint: '',
+            icon: '',
+            category: '',
+            visible: true,
+            name: '',
+            designerClass: $WidgetDesigner,
+            printClass: $WidgetPrint,
+            viewClass: $WidgetView,
+            properties: [
+            ]
+        })
+    }
+}
+"
 
 @"
     ___    ____   ____                 
@@ -55,5 +98,5 @@ New-Item -Path ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$(
  / ___ |/ / /  / /_/ / /_/ / / / /  __/
 /_/  |_/_/_/  /_____/\____/_/ /_/\___/ 
                                        
-                                       
+
 "@

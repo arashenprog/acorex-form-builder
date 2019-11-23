@@ -12,7 +12,7 @@ import { WidgetConfig } from '../../../services/widget.service';
 })
 export class AXFTextInputWidgetDesigner extends AXFWidgetDesigner {
 
-    @ViewChild("el") el: ElementRef<HTMLElement>;
+    @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
 
     text: String;
 

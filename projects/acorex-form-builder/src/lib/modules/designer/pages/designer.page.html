@@ -38,12 +38,12 @@
                     <div class="paper">
                         <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w">
                         </ng-container>
-                        <div class="add-element-container">
-                            <div class="add-element" (click)="handleStartClick()" tooltip="Append Element"
-                                [placement]="'bottom'">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="breadcrumb">
+                        <ul>
+                            <li *ngFor="let item of docTreeItems" (click)="handleBreadcrumbClick(item)">{{item.config.title}}</li>
+                            
+                        </ul>
                     </div>
                 </div>
             </ng-container>
@@ -65,18 +65,11 @@
         </div>
     </article>
 
-    <article *ngIf="this.view=='form' || this.view=='mobile'" class="preview-container">
+    <article *ngIf="this.view=='form'" class="preview-container">
         <axf-viewer-frame [widgets]="widgets"></axf-viewer-frame>
     </article>
 
-    <!-- <article *ngIf="this.view=='mobile'">
-        <div class="phone-mockup">
-            <div class="phone-container">
-                <div class="phone-view">
-                    <axf-viewer-frame [widgets]="widgets"></axf-viewer-frame>
-                </div>
-            </div>
-        </div>
-    </article> -->
+    
+
 
 </div>

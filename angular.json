@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/acorex-form-builder-sample",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -56,6 +57,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -148,6 +153,11 @@
           "options": {
             "tsConfig": "projects/acorex-form-builder/tsconfig.lib.json",
             "project": "projects/acorex-form-builder/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/acorex-form-builder/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -173,5 +183,8 @@
       }
     }
   },
-  "defaultProject": "acorex-form-builder-sample"
+  "defaultProject": "acorex-form-builder-sample",
+  "cli": {
+    "analytics": "f66d2e27-a706-4037-bc06-d2afdcf822b1"
+  }
 }

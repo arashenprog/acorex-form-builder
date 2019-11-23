@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AXPopupService, PromisResult, AXHtmlUtil, EventService } from 'acorex-ui';
 import { AXFWidgetPickerComponent } from '../shared/widget-picker/widget-picker.component';
-import { AXFColWidgetDesigner } from '../widgets/col/designer/col-widget.designer';
 import { AXFWidgetContainer } from '../config/widget';
 
 
@@ -137,7 +136,6 @@ export class AXFWidgetService {
 
 
     parse(json: string): WidgetConfig[] {
-        debugger;
         let items: WidgetConfig[] = [];
         let obj = JSON.parse(json);
         obj.forEach(o => {
