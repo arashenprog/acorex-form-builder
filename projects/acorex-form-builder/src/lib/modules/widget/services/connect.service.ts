@@ -13,6 +13,12 @@ export class AXFConnectService {
 
     public send(action: string, options?: any): PromisResult<any> {
         // Mock Lists
+        if (action == "getVars") {
+            let list: any[] = [{ key: "company-name", word: "Safetyminder" }, { key: "staff-name", word: "Arash" }]
+            return PromisResult.resolve({
+                items: list
+            });
+        }
         if (action == "getList" && options && options.name) {
             if (options.name == "template-list") {
                 return PromisResult.resolve({
@@ -25,7 +31,8 @@ export class AXFConnectService {
                             value: "tpl2",
                             title: "Template 2"
                         }
-                    ]
+                    ],
+                    count: 2
                 });
             }
         }

@@ -23,10 +23,9 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]> implemen
 
 
     ngOnInit(): void {
-        debugger;
         this.innerValue = this.value;
         if (this.dataSource) {
-            this.dataService.fetch(this.dataSource).then(items => {
+            this.dataService.getList(this.dataSource).then(items => {
                 this.items = items;
             });
         }

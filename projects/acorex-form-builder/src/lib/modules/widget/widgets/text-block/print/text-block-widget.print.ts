@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
@@ -6,7 +6,15 @@ import { AXFWidgetPrint } from '../../../config/widget';
     styleUrls: ['./text-block-widget.print.scss']
 })
 export class AXFTextBlockWidgetPrint extends AXFWidgetPrint {
-    constructor() {
+
+    text: String;
+    
+    constructor(private hostElement: ElementRef) {
         super()
+    }
+
+    onRender(): void {
+        let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
+        this.applyStyle(el);
     }
 }
