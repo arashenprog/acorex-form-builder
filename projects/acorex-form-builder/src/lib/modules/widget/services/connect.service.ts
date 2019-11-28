@@ -13,8 +13,14 @@ export class AXFConnectService {
 
     public send(action: string, options?: any): PromisResult<any> {
         // Mock Lists
-        if (action == "getVars") {
+        if (action == "getVarList") {
             let list: any[] = [{ key: "company-name", word: "Safetyminder" }, { key: "staff-name", word: "Arash" }]
+            return PromisResult.resolve({
+                items: list
+            });
+        }
+        if (action == "getDSList") {
+            let list: any[] = [{ key: "company-name", title: "Staff List" }, { key: "question-list", title: "Questions" }]
             return PromisResult.resolve({
                 items: list
             });

@@ -127,6 +127,17 @@ export const AXF_VERTICAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
     }
 }
 
+export const AXF_DS_PROPERTY: AXFWidgetProperty = {
+    name: "ds-name",
+    category: "Data",
+    defaultValue: "",
+    title: "List",
+    editor: "DropdownEditor",
+    options: {
+        dataSource:"ds-list"
+    }
+}
+
 
 
 
@@ -147,6 +158,9 @@ export const AXF_LABEL_PROPERTY: AXFWidgetProperty = {
     title: "Label",
     editor: "TextEditor"
 }
+
+
+
 
 export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [
     AXF_COLOR_PROPERTY,

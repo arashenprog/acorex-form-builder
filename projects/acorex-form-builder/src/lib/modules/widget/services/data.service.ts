@@ -3,24 +3,43 @@ import { AXFConnectService } from './connect.service';
 import { PromisResult } from 'acorex-ui';
 
 export interface VarItem {
-    key: string, value: any;
+    key: string, word: any;
+}
+
+export interface DSItem {
+    key: string, title: any;
 }
 const VARIABLES: VarItem[] = [];
+const DATASOURCES: DSItem[] = [];
 
-@Injectable({ providedIn: "root" })
+@Injectable()
 export class AXFDataService {
 
     constructor(private connectService: AXFConnectService) {
-        this.init();
+
     }
 
-    private init(): void {
-        if (!VARIABLES.length) {
-            this.connectService.send("getVars").then(c => {
-                console.log("fill variables");
-                VARIABLES.push(...c.items);
-            });
-        }
+    init(): Promise<any> {
+        let p1 = new Promise((resolve) => {
+            if (!VARIABLES.length) {
+                this.connectService.send("getVarList").then(c => {
+                    console.log("Load Variables ...")
+                    VARIABLES.push(...c.items);
+                    resolve()
+                });
+            }
+        });
+        let p2 = new Promise((resolve) => {
+            if (!DATASOURCES.length) {
+                this.connectService.send("getDSList").then(c => {
+                    console.log("Load DataSources ...")
+                    DATASOURCES.push(...c.items);
+                    resolve()
+                });
+            }
+        });
+
+        return Promise.all([p1, p2]);
     }
 
     getList(dataSourceName: String, params?: any): PromisResult<any[]> {
@@ -31,10 +50,15 @@ export class AXFDataService {
         });
     }
 
+
+    getDSList(): DSItem[] {
+        return DATASOURCES;
+    }
+
     getWord(key: string): string {
         let item = VARIABLES.find(c => c.key == key)
         if (item)
-            return item.value;
+            return item.word;
         return null;
     }
 }
