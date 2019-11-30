@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
+import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({
     template: `
@@ -13,12 +14,24 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]> implemen
     items: any[] = [];
     textField: string = "title";
     valueField: string = "value";
+    dataSource: string;
 
-    constructor() {
+    constructor(private dataService: AXFDataService) {
         super();
     }
 
+
+
     ngOnInit(): void {
-        this.innerValue = this.value;
+        debugger;
+        if (this.dataSource) {
+            this.dataService.getList(this.dataSource).then(items => {
+                this.items = items;
+                this.innerValue = this.value;
+            });
+        }
+        else {
+            this.innerValue = this.value;
+        }
     }
 }

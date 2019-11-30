@@ -1,0 +1,31 @@
+.sigdiv{
+    margin:15px 0;
+    clear: both;
+}
+
+.spandiv{
+    float: left; 
+    line-height: 1.5;
+    font-size: 14px;
+    padding: 0px 5px;
+}
+
+.valdiv{
+    width: 60%;
+    float: right;
+    margin-bottom: 10px;
+}
+
+.txtItem{
+    width: 60%;
+    float: left;
+    margin-right: 5px;
+}
+.parentItem
+{
+    float: left; 
+    margin-bottom: 5px;
+    border: 1px dotted var(--primary-color);
+    padding: 2px
+}
+ 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -7,8 +7,11 @@ import { AXFDesignerModule } from './modules/designer/config/designer.module';
 import { AXFWidgetModule } from './modules/widget/config/widget.module';
 import { AXFLoadTemplateModule } from './modules/loadtemplate/config/loadtemplate.module';
 import { AXFViewerModule } from './modules/viewer/config/viewer.module';
+import { AXFDataService } from './modules/widget/services/data.service';
 
-
+export function init_app(dataService: AXFDataService) {
+  return () => dataService.init();
+}
 
 const MODULES = [
   RouterModule,
@@ -25,7 +28,11 @@ const MODULES = [
   imports: [
     ...MODULES
   ],
-  exports: [...MODULES],
+  providers: [
+    AXFDataService,
+    { provide: APP_INITIALIZER, useFactory: init_app, deps: [AXFDataService], multi: true },
+  ],
+  exports: [AXFViewerModule, AXFDesignerModule],
 
 })
 export class ACoreXFormBuilderModule { }

@@ -1,8 +1,5 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, ViewChild } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
-import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
-import { AXPopupService } from 'acorex-ui';
-import { WidgetConfig } from '../../../services/widget.service';
 
 @Component({
     selector: "[axf-widget-signature]",
@@ -12,16 +9,25 @@ import { WidgetConfig } from '../../../services/widget.service';
 })
 export class AXFSignatureInputWidgetDesigner extends AXFWidgetDesigner {
 
-
-    value: string;
-    height:number;
-    width:number; 
-    constructor(private el: ElementRef<HTMLElement>) {
+    @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
+    height: number;
+    width: number;
+    info: { SignatureType: string[], StaffNumber: number, ShowType: string[], Items: any[] };
+    columns: any[] = [];
+    rows: any[] = [];
+    constructor() {
         super()
     }
 
     onRender(): void {
-        this.applyStyle(this.el.nativeElement.querySelector("div"));
+        this.columns = this.info.Items.filter(w => w.Visible == true);
+        this.rows = new Array(this.info.StaffNumber);
+        this.applyStyle(this.el.nativeElement);
+    }
+
+    getStyles() {
+        let lengthCol = 12 / this.info.Items.filter(w => w.Visible == true).length;
+        return 'col-md-' + Math.round(lengthCol);
     }
 
 }

@@ -8,7 +8,7 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFTextBlockWidgetView extends AXFWidgetView {
 
-    text: String;
+    text: string;
 
     
     constructor(private hostElement: ElementRef) {

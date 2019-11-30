@@ -12,9 +12,9 @@
         padding: var(--sp-sm-size);
         cursor: pointer;
         display: flex;
-        justify-content: center;
         align-items: center;
         flex-direction: row;
+        min-width: 200px;
         border: 1px solid transparent;
 
         &:hover {

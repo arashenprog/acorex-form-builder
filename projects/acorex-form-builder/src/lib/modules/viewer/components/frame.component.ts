@@ -19,7 +19,7 @@ export class ACFViewerFrameComponent {
         this.url = sanitizer.bypassSecurityTrustResourceUrl("view?mode=view") ;
     }
 
-    @ViewChild('frame')
+    @ViewChild('frame', { static: true })
     frame: ElementRef;
 
     @Input()

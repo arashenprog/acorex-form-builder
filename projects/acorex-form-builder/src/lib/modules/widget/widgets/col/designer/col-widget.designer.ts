@@ -15,7 +15,7 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     bgColor: string;
     boxStyle: AXFBoxStyleValue;
 
-    @ViewChild("el")
+    @ViewChild("el", { static: true })
     container: ElementRef<HTMLDivElement>;
 
     constructor(private hostElement: ElementRef, private popup: AXPopupService) {

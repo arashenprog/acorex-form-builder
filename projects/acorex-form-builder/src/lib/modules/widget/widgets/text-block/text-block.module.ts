@@ -8,8 +8,14 @@ import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES } from '../../config/general-properties';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
+import { AXFWordPipe } from '../../pipes/word.pipe';
 
-export const COMPONENTS = [AXFTextBlockWidgetDesigner, AXFTextBlockWidgetView, AXFTextBlockWidgetPrint]
+export const COMPONENTS = [
+    AXFWordPipe,
+    AXFTextBlockWidgetDesigner, 
+    AXFTextBlockWidgetView, 
+    AXFTextBlockWidgetPrint
+]
 
 @NgModule({
     declarations: [...COMPONENTS],

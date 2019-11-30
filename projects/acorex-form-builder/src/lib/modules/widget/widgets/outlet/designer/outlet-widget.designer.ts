@@ -8,6 +8,8 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 })
 export class AXFOutletWidgetDesigner extends AXFWidgetDesigner {
 
+    template:string;
+
     constructor() { 
         super();
     }

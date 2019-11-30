@@ -1,5 +1,6 @@
-import { Output, EventEmitter, Input } from '@angular/core';
+import { Output, EventEmitter, Input, Directive } from '@angular/core';
 
+@Directive()
 export abstract class AXFProperyEditor<T>{
 
     private _value: T;

@@ -11,11 +11,42 @@ export class AXFConnectService {
     }
 
 
-    public send(action: string, data?: any): PromisResult<any> {
+    public send(action: string, options?: any): PromisResult<any> {
+        // Mock Lists
+        if (action == "getVarList") {
+            let list: any[] = [{ key: "company-name", word: "Safetyminder" }, { key: "staff-name", word: "Arash" }]
+            return PromisResult.resolve({
+                items: list
+            });
+        }
+        if (action == "getDSList") {
+            let list: any[] = [{ key: "company-name", title: "Staff List" }, { key: "question-list", title: "Questions" }]
+            return PromisResult.resolve({
+                items: list
+            });
+        }
+        if (action == "getList" && options && options.name) {
+            if (options.name == "template-list") {
+                return PromisResult.resolve({
+                    items: [
+                        {
+                            value: "tpl1",
+                            title: "Template 1"
+                        },
+                        {
+                            value: "tpl2",
+                            title: "Template 2"
+                        }
+                    ],
+                    count: 2
+                });
+            }
+        }
+        //
         return new PromisResult((resolve) => {
             window.parent.postMessage({
                 action: action,
-                data: data
+                data: options
             }, '*');
             this.messageQueue.push({
                 action: action,

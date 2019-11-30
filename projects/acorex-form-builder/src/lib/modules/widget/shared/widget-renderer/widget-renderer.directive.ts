@@ -40,7 +40,8 @@ export class AXFWidgetRendererDirective {
         });
         this.eventService.on("SELECT", v => {
             this.zone.runOutsideAngular(() => {
-                this.widgetElement.classList.remove("widget-selected");
+                if (this.widgetElement)
+                    this.widgetElement.classList.remove("widget-selected");
                 if (v && this.widgetInstance && v.uid == this.widgetInstance.uid) {
                     this.widgetElement.classList.add("widget-selected");
                 }

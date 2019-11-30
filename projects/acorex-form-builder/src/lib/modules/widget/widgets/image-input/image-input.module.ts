@@ -72,7 +72,7 @@ export class AXFImageInputWidgetModule {
                     editor: "UploadEditor"
                 },                 
                 AXF_BOX_STYLE_PROPERTY,
-                //AXF_NAME_PROPERTY,
+                AXF_NAME_PROPERTY,
             ]
         })
     }

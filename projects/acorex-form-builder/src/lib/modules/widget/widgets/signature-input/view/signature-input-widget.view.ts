@@ -9,11 +9,14 @@ import { typeWithParameters } from '@angular/compiler/src/render3/util';
 })
 export class AXFSignatureInputWidgetView extends AXFWidgetView {
 
-    @ViewChild(SignaturePad) signaturePad: SignaturePad; 
+    @ViewChild(SignaturePad,{static:true}) signaturePad: SignaturePad; 
     
     value: string;
     height:number;
     width:number; 
+    info:{SignatureType:string[],StaffNumber:number,ShowType:string[],Items:any[]}; 
+    columns:any[]=[];
+    rows:any[]=[];
 
     signaturePadOptions: any ; 
     
@@ -22,19 +25,30 @@ export class AXFSignatureInputWidgetView extends AXFWidgetView {
     }
 
     ngOnInit(): void {
+        this.columns=this.info.Items.filter(w=>w.Visible==true); 
+        this.rows=new Array(this.info.StaffNumber); 
         this.signaturePadOptions={  
             canvasWidth: this.width,
             canvasHeight: this.height
         }
     }
 
-    drawComplete() { 
-        this.value = this.signaturePad.toDataURL();
+    drawComplete(ind) { 
+       //this.info.Items[ind].Value = this.signaturePad.toDataURL();
     }
  
 
-    onClearClick() {
-        this.signaturePad.clear();
-        this.value = null;
+    onClearClick(ind) {
+        let dfssf= document.querySelectorAll("signature-pad");
+        
+       ///dfssf[ind].clear();
+       //this.signaturePad.clear();
+        //this.info.Items[ind].Value = null;
     }
+
+    getStyles() {  
+        let lengthCol= 12 / this.info.Items.filter(w=>w.Visible==true).length;
+        return 'col-md-'+Math.round(lengthCol);
+    }
+
 }
