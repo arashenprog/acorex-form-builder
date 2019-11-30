@@ -30,11 +30,11 @@ export class AXFConnectService {
                 return PromisResult.resolve({
                     items: [
                         {
-                            value: "tpl1",
+                            value: '1',
                             title: "Template 1"
                         },
                         {
-                            value: "tpl2",
+                            value: "2",
                             title: "Template 2"
                         }
                     ],

@@ -7,7 +7,7 @@ import { AXFProperyEditor } from '../../config/editor';
         </ax-selection-list>
     `,
 })
-export class AXFSelectionEditorComponent extends AXFProperyEditor<any[]> implements OnInit {
+export class AXFSelectionEditorComponent extends AXFProperyEditor<any[]>  {
 
     innerValue: any[] = [];
 
@@ -21,7 +21,13 @@ export class AXFSelectionEditorComponent extends AXFProperyEditor<any[]> impleme
         super();
     }
 
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         this.innerValue = this.value;
+    }
+
+    handleValueChange(v: any) {
+        if (JSON.stringify(v)!=JSON.stringify(this.innerValue)) {
+            this.value = v;
+        }
     }
 }

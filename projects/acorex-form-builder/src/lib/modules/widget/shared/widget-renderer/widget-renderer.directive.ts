@@ -200,11 +200,11 @@ export class AXFWidgetRendererDirective {
     }
 
     ngOnDestroy(): void {
-        console.log("ngOnDestroy")
         this.zone.runOutsideAngular(() => {
-
-            this.widgetElement.removeEventListener("click", this.handleSelectElement);
-            this.toolboxElement.removeEventListener("click", this.handleSelectElement);
+            if (this.widgetElement)
+                this.widgetElement.removeEventListener("click", this.handleSelectElement);
+            if (this.toolboxElement)
+                this.toolboxElement.removeEventListener("click", this.handleSelectElement);
         });
     }
 

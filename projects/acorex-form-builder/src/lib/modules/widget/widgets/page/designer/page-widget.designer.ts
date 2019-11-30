@@ -14,14 +14,9 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
     boxStyle: AXFBoxStyleValue;
 
     constructor(
-        private eventService: EventService,
         private hostElement: ElementRef) {
         super();
-        eventService.on("SELECT", c => {
-            if (c == null) {
-                eventService.broadcast("SELECT", this);
-            }
-        });
+
     }
 
     handleStartClick() {

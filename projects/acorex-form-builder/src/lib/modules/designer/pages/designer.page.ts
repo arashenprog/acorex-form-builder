@@ -67,9 +67,49 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         // }
     ]
 
+    actionItems: MenuItem[] = [
+        {
+            startIcon: "fas fa-save",
+            text: "Save",
+            style: "ax-primary",
+            items: [
+                {
+                    name: "save",
+                    text: "Save",
+                },
+                {
+                    name: "saveAs",
+                    text: "Save As ...",
+                }
+            ]
+        },
+        {
+            startIcon: "fas fa-check-circle",
+            name: "publish",
+            text: "Publish",
+            style: "ax-secondary",
+        },
+
+    ]
+
     handleViewModeClick(e: MenuItem) {
         this.view = e.name;
         this.mode = e.data;
+    }
+
+    handleActionClick(e: MenuItem) {
+        switch (e.name) {
+            case "save":
+                {
+                    console.log(this.widgetService.serialize(this.widgets))
+                    break;
+                }
+            case "saveAs":
+                {
+                    console.log(this.widgetService.serialize(this.widgets[0].options.widgets));
+                    break;
+                }
+        }
     }
 
     handleStartClick() {
@@ -83,5 +123,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     handleBreadcrumbClick(item: AXFWidgetDesigner) {
         this.eventService.broadcast("SELECT", item);
     }
+
+
 
 }
