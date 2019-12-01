@@ -21,4 +21,15 @@
             </div>
         </div>
     </ax-tab>
+    <ax-tab [caption]="'Saved Widgets'">
+        <div class="list-container">
+            <div class="widget-item" *ngFor="let tpl of templates" (click)="selectTemplate(tpl)">
+                <div class="icon"><i class="fas fa-database"></i></div>
+                <div class="text">
+                    <div class="title">{{ tpl.name }}</div>
+                    <div class="hint">{{ tpl.hint }}</div>
+                </div>
+            </div>
+        </div>
+    </ax-tab>
 </ax-tab-view>

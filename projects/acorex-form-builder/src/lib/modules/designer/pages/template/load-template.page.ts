@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AXBasePageComponent } from 'acorex-ui';
 
 @Component({
-    templateUrl: './loadtemplate.page.html',
-    styleUrls: ['./loadtemplate.page.scss']
+    templateUrl: './load-template.page.html',
+    styles: [`
+        :host{
+            padding: 20px;
+        }
+    `]
 })
 export class AXFLoadTemplatePage extends AXBasePageComponent {
     constructor() { 

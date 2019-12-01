@@ -2,8 +2,9 @@ import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@ang
 import { AXPopupService, AXBasePageComponent, AXHtmlUtil, MenuItem, EventService } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { AXFWidgetPickerComponent } from '../../widget/shared/widget-picker/widget-picker.component';
-import { AXFLoadTemplatePage } from '../../loadtemplate/pages/loadtemplate.page';
 import { AXFWidget, AXFWidgetContainer, AXFWidgetDesigner } from '../../widget/config/widget';
+import { AXFLoadTemplatePage } from './template/load-template.page';
+import { AXFSaveTemplatePage } from './template/save-template.page';
 
 @Component({
     templateUrl: './designer.page.html',
@@ -101,12 +102,24 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         switch (e.name) {
             case "save":
                 {
-                    console.log(this.widgetService.serialize(this.widgets))
+                    this.popup.open(AXFSaveTemplatePage, {
+                        size: "sm",
+                        title: "Save",
+                        data: {
+                            widget: this.widgets[0]
+                        }
+                    })
                     break;
                 }
             case "saveAs":
                 {
-                    console.log(this.widgetService.serialize(this.widgets[0].options.widgets));
+                    this.popup.open(AXFSaveTemplatePage, {
+                        size: "sm",
+                        title: "Save as ...",
+                        data: {
+                            widget: this.widgets[0].options.widgets
+                        }
+                    })
                     break;
                 }
         }
@@ -123,7 +136,4 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     handleBreadcrumbClick(item: AXFWidgetDesigner) {
         this.eventService.broadcast("SELECT", item);
     }
-
-
-
 }
