@@ -18,24 +18,25 @@ export class AXFTemplateService {
     public checkExists(name: string): PromisResult<boolean> {
         return new PromisResult((resolve) => {
             this._db.templates
-                .where("name")
-                .equalsIgnoreCase(name)
-                .count((c) => {
+                .where({ name: name })
+                .count()
+                .then((c) => {
                     resolve(c > 0);
-                }).catch((c) => {
+                })
+                .catch((c) => {
                     resolve(false);
                 })
         })
     }
 
-    public saveForm(name: string, widget: WidgetConfig): PromisResult<boolean> {
+    public saveForm(name: string, type: "form" | "widget", widget: WidgetConfig, description?: string): PromisResult<boolean> {
         return new PromisResult((resolve) => {
             this._db.templates
                 .add({
                     id: new Date().getTime(),
-                    template: this.widgetService.serialize([widget]),
+                    template: this.widgetService.serialize(widget),
                     name: name,
-                    type: "form"
+                    type: type
                 })
                 .then((c) => {
                     resolve(true);
@@ -55,11 +56,12 @@ export class AXFTemplateService {
         })
     }
 
+
+
     public getFormList(): PromisResult<AXFTemplateModel[]> {
         return new PromisResult((resolve) => {
             this._db.templates
-                .where("type")
-                .equals("form")
+                .where({ type: "form" })
                 .toArray()
                 .then((result) => {
                     resolve(result);
@@ -68,11 +70,10 @@ export class AXFTemplateService {
     }
 
     public getWidgetList(): PromisResult<AXFTemplateModel[]> {
-       
+
         return new PromisResult((resolve) => {
             this._db.templates
-                .where("type")
-                .equals("widget")
+                .where({ type: "widget" })
                 .toArray()
                 .then((result) => {
                     resolve(result);

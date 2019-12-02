@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { WidgetConfig, AXFWidgetService } from '../../services/widget.service';
 import { AXBasePageComponent } from 'acorex-ui';
 import { AXFTemplateService } from '../../services/template/template.service';
@@ -24,7 +24,7 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
                 this.categories.push(c.category);
             }
         });
-        this.templateService.getFormList().then(c => {
+        this.templateService.getWidgetList().then(c => {
             this.templates.push(...c);
         });
     }

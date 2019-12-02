@@ -3,6 +3,7 @@ import Dexie from 'dexie';
 export interface AXFTemplateModel {
     id: number;
     name: string,
+    description?: string,
     template?: string,
     type: "form" | "widget";
 }
@@ -12,7 +13,8 @@ export class AXFDatabase extends Dexie {
     constructor() {
         super("AXF");
         this.version(1).stores({
-            templates: "++id,name,template,type"
+            templates: "++id, &name, description, template, &type",
+
         });
     }
 }

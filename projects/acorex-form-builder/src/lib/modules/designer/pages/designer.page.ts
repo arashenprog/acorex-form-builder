@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { AXPopupService, AXBasePageComponent, AXHtmlUtil, MenuItem, EventService } from 'acorex-ui';
+import { AXPopupService, AXBasePageComponent, AXHtmlUtil, MenuItem, EventService, AXToastService } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { AXFWidgetPickerComponent } from '../../widget/shared/widget-picker/widget-picker.component';
 import { AXFWidget, AXFWidgetContainer, AXFWidgetDesigner } from '../../widget/config/widget';
@@ -15,6 +15,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     constructor(
         private popup: AXPopupService,
         private widgetService: AXFWidgetService,
+        private toastService: AXToastService,
         private eventService: EventService
 
 
@@ -57,15 +58,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             groupName: "mode",
             style: "light",
             data: "view"
-        },
-        // {
-        //     startIcon: "fas fa-print",
-        //     name: "print",
-        //     text: " Print View",
-        //     groupName: "mode",
-        //     style: "light",
-        //     data: "print"
-        // }
+        }
     ]
 
     actionItems: MenuItem[] = [
@@ -77,10 +70,15 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                 {
                     name: "save",
                     text: "Save",
+                    visible: false
                 },
                 {
-                    name: "saveAs",
-                    text: "Save As ...",
+                    name: "saveAsForm",
+                    text: "Save as Form...",
+                },
+                {
+                    name: "saveAsWidget",
+                    text: "Save as Widget...",
                 }
             ]
         },
@@ -94,30 +92,55 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     ]
 
     handleViewModeClick(e: MenuItem) {
+        if (this.widgets == null || this.widgets.length == 0) {
+            this.toastService.error("The form is blank!")
+            return;
+        }
         this.view = e.name;
         this.mode = e.data;
     }
 
     handleActionClick(e: MenuItem) {
+        if (this.widgets == null || this.widgets.length == 0) {
+            this.toastService.error("The form is blank!")
+            return;
+        }
         switch (e.name) {
+            case "publish":{
+                console.log(this.widgets);
+                break;
+            }
             case "save":
+                {
+                    // this.popup.open(AXFSaveTemplatePage, {
+                    //     size: "sm",
+                    //     title: "Save",
+                    //     data: {
+                    //         widget: this.widgets[0]
+                    //     }
+                    // })
+                    break;
+                }
+            case "saveAsForm":
                 {
                     this.popup.open(AXFSaveTemplatePage, {
                         size: "sm",
-                        title: "Save",
+                        title: "Save as Form ...",
                         data: {
+                            type: "form",
                             widget: this.widgets[0]
                         }
                     })
                     break;
                 }
-            case "saveAs":
+            case "saveAsWidget":
                 {
                     this.popup.open(AXFSaveTemplatePage, {
                         size: "sm",
-                        title: "Save as ...",
+                        title: "Save as Widget ...",
                         data: {
-                            widget: this.widgets[0].options.widgets
+                            type: "widget",
+                            widget: this.widgets[0]
                         }
                     })
                     break;
@@ -126,7 +149,9 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     }
 
     handleStartClick() {
-        this.widgetService.addWidget("page", this);
+        let page = this.widgetService.resolve("page");
+        Object.assign(page.options, { parent: this, uid: AXHtmlUtil.getUID(), isSelected: true });
+        this.widgets.push(page);
     }
 
     handleLoadClick() {

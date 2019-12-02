@@ -141,6 +141,17 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
 
     }
 
+    addChild(widget: WidgetConfig, options?: any) {
+        let w = this.widgetService.parse(this.widgetService.serialize(widget));
+        if (!w.options)
+            w.options = {};
+        Object.assign(w.options, options);
+        w.options.uid = AXHtmlUtil.getUID();
+        w.options.isSelected = true;
+        w.options.parent = this;
+        this.widgets.push(w);
+    }
+
     ngAfterViewInit() {
         if (this.isSelected) {
             this.edit();

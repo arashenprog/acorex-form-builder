@@ -21,7 +21,7 @@
             </div>
         </div>
     </ax-tab>
-    <ax-tab [caption]="'Saved Widgets'">
+    <ax-tab [caption]="'Saved Widgets'" *ngIf="templates">
         <div class="list-container">
             <div class="widget-item" *ngFor="let tpl of templates" (click)="selectTemplate(tpl)">
                 <div class="icon"><i class="fas fa-database"></i></div>

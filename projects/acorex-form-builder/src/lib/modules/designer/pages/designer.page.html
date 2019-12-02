@@ -8,14 +8,6 @@
             <h1>ACoreX form builder</h1>
         </div>
         <div class="controlls end-controlls">
-            <!-- <ax-button type="primary" size="sm" (onClick)="handleSaveClick()">
-                <span>Save</span>&nbsp;
-                <i class="fas fa-save"></i>
-            </ax-button>
-            <ax-button type="secondary" size="sm">
-                <span>Publish</span>&nbsp;
-                <i class="fas fa-check-circle"></i>
-            </ax-button> -->
             <ax-toolbar-menu [items]="actionItems"  (itemClick)="handleActionClick($event)">
             </ax-toolbar-menu>
         </div>
@@ -68,10 +60,7 @@
     </article>
 
     <article *ngIf="this.view=='form'" class="preview-container">
-        <axf-viewer-frame [widgets]="widgets"></axf-viewer-frame>
+        <axf-viewer-frame [page]="widgets[0]"></axf-viewer-frame>
     </article>
-
-    
-
 
 </div>

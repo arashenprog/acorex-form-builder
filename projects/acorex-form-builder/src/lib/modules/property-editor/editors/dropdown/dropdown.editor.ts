@@ -36,6 +36,7 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]>  {
 
     handleValueChange(v: any) {
         if (JSON.stringify(v)!=JSON.stringify(this.innerValue)) {
+            this.innerValue = v;
             this.value = v;
         }
     }

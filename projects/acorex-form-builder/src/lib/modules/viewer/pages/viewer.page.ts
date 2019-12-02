@@ -25,7 +25,7 @@ export class ACFViewerPage extends AXBasePageComponent {
 
   ngAfterViewInit() {
     this.connectService.send("load").then(data => {
-      this.widgets = this.widgetService.parse(data.widgets);
+      this.widgets = [this.widgetService.parse(data.widgets)];
     })
   }
 }
