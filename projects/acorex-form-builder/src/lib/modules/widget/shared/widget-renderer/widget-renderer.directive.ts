@@ -1,6 +1,6 @@
 import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { WidgetConfig } from '../../services/widget.service';
-import { AXFWidget } from '../../config/widget';
+import { AXFWidget, AXFWidgetDesigner } from '../../config/widget';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AXFWidgetToolboxComponent } from '../widget-toolbox/widget-toolbox.component';
@@ -17,6 +17,9 @@ export class AXFWidgetRendererDirective {
 
     @Input("widget")
     widgetConfig: WidgetConfig;
+
+    @Input("parent")
+    widgetParent: AXFWidgetDesigner;
 
     @Input()
     mode: "designer" | "view" | "print" = "designer";
@@ -107,13 +110,17 @@ export class AXFWidgetRendererDirective {
 
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
-
+       
 
         // render widget toolbox on mouseover event in designer mode
         if (!this.widgetConfig.toolbox)
             this.widgetConfig.toolbox = {};
         if (this.mode == "designer") {
-
+            // add parent
+            if (this.widgetParent) {
+                this.widgetInstance.parent = this.widgetParent;
+            }
+            //
             this.widgetInstance.onRefresh.subscribe(c => {
                 Object.assign(this.widgetInstance, c);
                 this.onRender.emit(this.widgetInstance);
@@ -187,6 +194,8 @@ export class AXFWidgetRendererDirective {
             }
             //});
             //}
+            // select after added to container
+            this.widgetInstance.edit();
         }
     }
 

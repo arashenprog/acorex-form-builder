@@ -6,6 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFOutletWidgetDesigner } from './designer/outlet-widget.designer';
 import { AXFOutletWidgetPrint } from './print/outlet-widget.print';
 import { AXFOutletWidgetView } from './view/outlet-widget.view';
+import { AXF_NAME_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [
     AXFOutletWidgetDesigner, 
@@ -27,21 +28,13 @@ export class AXFPageOutletWidgetModule {
             hint: 'Load template from gallery',
             icon: 'fas fa-database',
             category: 'Gallery',
-            visible: true,
+            visible: false,
             name: 'outlet',
             designerClass: AXFOutletWidgetDesigner,
             printClass: AXFOutletWidgetPrint,
             viewClass: AXFOutletWidgetView,
             properties: [
-                {
-                    name: "template",
-                    category: "General",
-                    title: "Template",
-                    editor: "DropdownEditor",
-                    options: {
-                        dataSource:"template-list"
-                    }
-                }
+                AXF_NAME_PROPERTY,
             ]
         })
     }

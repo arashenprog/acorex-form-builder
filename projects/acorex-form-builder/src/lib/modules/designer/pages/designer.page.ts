@@ -106,8 +106,8 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             return;
         }
         switch (e.name) {
-            case "publish":{
-                console.log(this.widgets);
+            case "publish": {
+                console.log(this.widgetService.serialize(this.widgets[0]));
                 break;
             }
             case "save":
@@ -150,7 +150,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
 
     handleStartClick() {
         let page = this.widgetService.resolve("page");
-        Object.assign(page.options, { parent: this, uid: AXHtmlUtil.getUID(), isSelected: true });
+        Object.assign(page.options, { uid: AXHtmlUtil.getUID() });
         this.widgets.push(page);
     }
 

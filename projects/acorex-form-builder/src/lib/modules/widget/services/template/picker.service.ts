@@ -21,10 +21,7 @@ export class AXFWidgetPickerService {
                 }
             }).closed((c) => {
                 if (c && c.data) {
-                    if (c.data.name == "page")
-                        resolve(c.data.options.widgets);
-                    else
-                        resolve(c.data);
+                   resolve(c.data)
                 }
                 else {
                     resolve(null);

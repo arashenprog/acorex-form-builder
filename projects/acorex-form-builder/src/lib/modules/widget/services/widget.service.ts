@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AXPopupService, EventService } from 'acorex-ui';
+import { AXPopupService, EventService, AXHtmlUtil } from 'acorex-ui';
 
 
 export interface AXFWidgetProperty {
@@ -72,6 +72,8 @@ export class AXFWidgetService {
             res.properties = JSON.parse(JSON.stringify(c.properties));
         if (c.options)
             res.options = JSON.parse(JSON.stringify(c.options));
+        else
+            res.options = {};
         return res;
     }
 
@@ -92,9 +94,6 @@ export class AXFWidgetService {
         }
         if (item.options && item.options.widgets) {
             obj.options.widgets = [];
-            obj.options.uid = item.options.uid;
-            obj.options.isSelected = undefined
-            //
             item.options.widgets.forEach(w => {
                 obj.options.widgets.push(this.serializeInternal(w));
             });
@@ -115,10 +114,10 @@ export class AXFWidgetService {
         let item: WidgetConfig = this.resolve(obj.name);
         if (!item.options)
             item.options = {};
+        item.options.uid = AXHtmlUtil.getUID();
         Object.assign(item.options, obj.options);
         if (obj.options.widgets) {
             item.options.widgets = []
-            item.options.uid = obj.options.uid;
             obj.options.widgets.forEach(w => {
                 item.options.widgets.push(this.parseInternal(w));
             });

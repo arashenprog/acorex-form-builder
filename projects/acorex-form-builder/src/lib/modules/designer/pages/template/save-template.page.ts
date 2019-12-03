@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AXBasePageComponent, AXValidationFormComponent, DialogService } from 'acorex-ui';
+import { AXBasePageComponent, AXValidationFormComponent, AXDialogService, AXToastService } from 'acorex-ui';
 import { AXFTemplateService } from '../../../widget/services/template/template.service';
 import { WidgetConfig } from '../../../widget/services/widget.service';
 
@@ -18,7 +18,8 @@ export class AXFSaveTemplatePage extends AXBasePageComponent {
 
     constructor(
         private templateService: AXFTemplateService,
-        private dialogService: DialogService
+        private dialogService: AXDialogService,
+        private toastService: AXToastService,
     ) {
         super()
     }
@@ -37,13 +38,15 @@ export class AXFSaveTemplatePage extends AXBasePageComponent {
                     if (e) {
                         this.dialogService.confirm("Replace", "There is a widget or form with same name,do you want to replace with ?").okay(() => {
                             this.templateService.saveForm(this.name, this.type, this.widget, this.description).then(s => {
-                                this.close();
+                                if (s) this.close();
+                                else this.toastService.error("Something isw wrong!")
                             })
                         })
                     }
                     else {
                         this.templateService.saveForm(this.name, this.type, this.widget, this.description).then(s => {
-                            this.close();
+                            if (s) this.close();
+                            else this.toastService.error("Something isw wrong!")
                         })
                     }
                 })

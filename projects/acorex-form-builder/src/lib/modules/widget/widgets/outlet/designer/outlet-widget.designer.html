@@ -1,6 +1,6 @@
 
 <div *ngIf="widgets.length; else elseTemplate"  >
-    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w"  mode="view" >
+    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this"  mode="view" >
     </div>
 </div>
 <ng-template #elseTemplate>

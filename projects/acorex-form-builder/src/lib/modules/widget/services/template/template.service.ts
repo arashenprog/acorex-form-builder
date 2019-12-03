@@ -24,6 +24,7 @@ export class AXFTemplateService {
                     resolve(c > 0);
                 })
                 .catch((c) => {
+                    console.error(c);
                     resolve(false);
                 })
         })
@@ -31,16 +32,50 @@ export class AXFTemplateService {
 
     public saveForm(name: string, type: "form" | "widget", widget: WidgetConfig, description?: string): PromisResult<boolean> {
         return new PromisResult((resolve) => {
+
             this._db.templates
-                .add({
-                    id: new Date().getTime(),
-                    template: this.widgetService.serialize(widget),
-                    name: name,
-                    type: type
-                })
+                .where({ name: name })
+                .first()
                 .then((c) => {
-                    resolve(true);
-                }).catch((c) => {
+                    if (c) {
+                        this._db.templates.delete(c.id).then(g => {
+                            this._db.templates
+                                .add({
+                                    id: new Date().getTime(),
+                                    template: this.widgetService.serialize(widget),
+                                    name: name,
+                                    type: type
+                                })
+                                .then((c) => {
+                                    resolve(true);
+                                }).catch((c) => {
+                                    console.error(c);
+                                    resolve(false);
+                                })
+                        })
+                            .catch((c) => {
+                                console.error(c);
+                                resolve(false);
+                            })
+                    }
+                    else {
+                        this._db.templates
+                            .put({
+                                id: new Date().getTime(),
+                                template: this.widgetService.serialize(widget),
+                                name: name,
+                                type: type
+                            })
+                            .then((c) => {
+                                resolve(true);
+                            }).catch((c) => {
+                                console.error(c);
+                                resolve(false);
+                            })
+                    }
+                })
+                .catch((c) => {
+                    console.error(c);
                     resolve(false);
                 })
         })

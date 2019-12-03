@@ -13,7 +13,7 @@ export class AXFDatabase extends Dexie {
     constructor() {
         super("AXF");
         this.version(1).stores({
-            templates: "++id, &name, description, template, &type",
+            templates: "++id, &name, description, template, type",
 
         });
     }

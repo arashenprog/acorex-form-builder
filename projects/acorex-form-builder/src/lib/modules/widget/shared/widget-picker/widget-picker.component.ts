@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { WidgetConfig, AXFWidgetService } from '../../services/widget.service';
-import { AXBasePageComponent } from 'acorex-ui';
+import { AXBasePageComponent, AXDialogService } from 'acorex-ui';
 import { AXFTemplateService } from '../../services/template/template.service';
 import { AXFTemplateModel } from '../../services/db/database';
 
@@ -14,7 +14,11 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
     categories: string[] = [];
     templates: AXFTemplateModel[] = [];
 
-    constructor(private templateService: AXFTemplateService,private widgetService: AXFWidgetService) {
+    constructor(
+        private templateService: AXFTemplateService,
+        private widgetService: AXFWidgetService,
+        private dialogService: AXDialogService,
+    ) {
         super();
     }
 
@@ -30,7 +34,7 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
     }
 
     selectWidget(widget: WidgetConfig) {
-        this.close(widget);
+        this.close([widget]);
     }
 
     getList(cat: string): WidgetConfig[] {
@@ -39,11 +43,31 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
 
 
     selectTemplate(tpl: AXFTemplateModel) {
-        this.templateService.get(tpl.id).then(c=>{
-            this.close(this.widgetService.parse(c.template));
+        this.templateService.get(tpl.id).then(c => {
+            debugger;
+            let widget = this.widgetService.parse(c.template);
+            this.dialogService.show(
+                "Add saved widget",
+                "Do you want to add it as a referenced widget?",
+                ...[
+                    { name: "cancel", text: "Cancel", type: "success" },
+                    { name: "no", text: "No", type: "danger" },
+                    { name: "yes", text: "Yes", type: "info" }
+                ]
+            ).then(name => {
+                if (name == "yes") {
+                    let outlet = this.widgetService.resolve("outlet");
+                    outlet.options.widgets = widget.options.widgets;
+                    this.close([outlet]);
+                }
+                else if (name == "no") {
+                    this.close(widget.options.widgets);
+                }
+            });
+
         });
     }
 
-   
+
 
 }
