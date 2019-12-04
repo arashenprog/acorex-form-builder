@@ -2,43 +2,43 @@
 @import "~ag-grid-community/dist/styles/ag-theme-balham.css";
 /* open-sans-regular - latin */
 
-@font-face {
-  font-family: OpenSans;
-  font-style: normal;
-  font-weight: 400;
-  src: url("assets/fonts/opensans/open-sans-v17-latin-regular.eot");
-  /* IE9 Compat Modes */
-  src: local("Open Sans Regular"), local("OpenSans-Regular"),
-    url("assets/fonts/opensans/open-sans-v17-latin-regular.eot?#iefix") format("embedded-opentype"),
-    /* IE6-IE8 */
-    url("assets/fonts/opensans/open-sans-v17-latin-regular.woff2") format("woff2"),
-    /* Super Modern Browsers */
-    url("assets/fonts/opensans/open-sans-v17-latin-regular.woff") format("woff"),
-    /* Modern Browsers */
-    url("assets/fonts/opensans/open-sans-v17-latin-regular.ttf") format("truetype"),
-    /* Safari, Android, iOS */
-    url("assets/fonts/opensans/open-sans-v17-latin-regular.svg#OpenSans") format("svg");
-  /* Legacy iOS */
-}
+// @font-face {
+//   font-family: OpenSans;
+//   font-style: normal;
+//   font-weight: 400;
+//   src: url("assets/fonts/opensans/open-sans-v17-latin-regular.eot");
+//   /* IE9 Compat Modes */
+//   src: local("Open Sans Regular"), local("OpenSans-Regular"),
+//     url("assets/fonts/opensans/open-sans-v17-latin-regular.eot?#iefix") format("embedded-opentype"),
+//     /* IE6-IE8 */
+//     url("assets/fonts/opensans/open-sans-v17-latin-regular.woff2") format("woff2"),
+//     /* Super Modern Browsers */
+//     url("assets/fonts/opensans/open-sans-v17-latin-regular.woff") format("woff"),
+//     /* Modern Browsers */
+//     url("assets/fonts/opensans/open-sans-v17-latin-regular.ttf") format("truetype"),
+//     /* Safari, Android, iOS */
+//     url("assets/fonts/opensans/open-sans-v17-latin-regular.svg#OpenSans") format("svg");
+//   /* Legacy iOS */
+// }
 
-@font-face {
-  font-family: Pacifico;
-  font-style: normal;
-  font-weight: 400;
-  src: url("assets/fonts/pacifico/pacifico-v16-latin-regular.eot");
-  /* IE9 Compat Modes */
-  src: local("Pacifico Regular"), local("Pacifico-Regular"),
-    format("embedded-opentype"),
-    /* IE6-IE8 */
-    url("assets/fonts/pacifico/pacifico-v16-latin-regular.woff2") format("woff2"),
-    /* Super Modern Browsers */
-    url("assets/fonts/pacifico/pacifico-v16-latin-regular.woff") format("woff"),
-    /* Modern Browsers */
-    url("assets/fonts/pacifico/pacifico-v16-latin-regular.ttf") format("truetype"),
-    /* Safari, Android, iOS */
-    url("./assets/fonts/pacifico/pacifico-v16-latin-regular.svg#Pacifico") format("svg");
-  /* Legacy iOS */
-}
+// @font-face {
+//   font-family: Pacifico;
+//   font-style: normal;
+//   font-weight: 400;
+//   src: url("assets/fonts/pacifico/pacifico-v16-latin-regular.eot");
+//   /* IE9 Compat Modes */
+//   src: local("Pacifico Regular"), local("Pacifico-Regular"),
+//     format("embedded-opentype"),
+//     /* IE6-IE8 */
+//     url("assets/fonts/pacifico/pacifico-v16-latin-regular.woff2") format("woff2"),
+//     /* Super Modern Browsers */
+//     url("assets/fonts/pacifico/pacifico-v16-latin-regular.woff") format("woff"),
+//     /* Modern Browsers */
+//     url("assets/fonts/pacifico/pacifico-v16-latin-regular.ttf") format("truetype"),
+//     /* Safari, Android, iOS */
+//     url("./assets/fonts/pacifico/pacifico-v16-latin-regular.svg#Pacifico") format("svg");
+//   /* Legacy iOS */
+// }
 
 .rtl {
   direction: rtl !important;

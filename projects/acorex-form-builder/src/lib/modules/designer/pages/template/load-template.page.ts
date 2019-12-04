@@ -1,18 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { AXBasePageComponent } from 'acorex-ui';
+import { AXBasePageComponent , AXDialogService} from 'acorex-ui';
+import { AXFTemplateModel } from '../../../widget/services/db/database';
+import { AXFTemplateService } from '../../../widget/services/template/template.service';
+import { AXFWidgetService } from '../../../widget/services/widget.service';
 
 @Component({
     templateUrl: './load-template.page.html',
-    styles: [`
-        :host{
-            padding: 20px;
-        }
-    `]
+    styleUrls: ['./load-template.page.scss']
 })
 export class AXFLoadTemplatePage extends AXBasePageComponent {
-    constructor() { 
+
+    templates: AXFTemplateModel[] = [];
+    constructor(
+        private templateService: AXFTemplateService,
+        private widgetService: AXFWidgetService,
+        private dialogService: AXDialogService
+    ) { 
         super()
     }
 
-    ngOnInit(): void { }
+    ngOnInit() {
+        
+        this.templateService.getFormList().then(c => {
+            this.templates.push(...c);
+        });
+    }
+
+    selectTemplate(tpl: AXFTemplateModel) {
+        this.templateService.get(tpl.id).then(c => {
+            debugger;
+            let widget = this.widgetService.parse(c.template);
+            this.close(widget.options.widgets);
+        });
+    }
+
 }
