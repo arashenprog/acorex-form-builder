@@ -1,0 +1,48 @@
+.form-item-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+
+
+    .form-item {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 130px;
+        display: flex;
+        font-size: 12px;
+        background: #ddd;
+        color: var(--dark-color);
+        padding: 10px;
+        border: 1px solid #999;
+        margin: 5px;
+
+        .icon {
+            height: 140px;
+            width: 100%;
+            font-size: 50px;
+            margin-bottom: 5px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background: rgba(78, 22, 147, 0.20)
+        }
+
+        .text {
+            width: 100%;
+
+            .title {
+                white-space: nowrap;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}

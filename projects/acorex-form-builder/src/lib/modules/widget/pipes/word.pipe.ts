@@ -9,13 +9,16 @@ export class AXFWordPipe implements PipeTransform {
     }
 
     transform(value: string): string {
-        console.log("get value");
-        let list = value.match(/\[\S+\]/g).map(c => c);
-        list.forEach(w => {
-            let word = this.dataService.getWord(w.substring(1, w.length - 1));
-            if (word)
-                value = value.replace(w, word);
-        });
+        if (value) {
+            let list = value.match(/\[\S+\]/g);
+            if (list) {
+                list.forEach(w => {
+                    let word = this.dataService.getWord(w.substring(1, w.length - 1));
+                    if (word)
+                        value = value.replace(w, word);
+                });
+            }
+        }
         return value
     }
 }

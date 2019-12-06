@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
-import { AXPopupService } from 'acorex-ui';
 import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
+import { AXFWidgetPickerService } from '../../../services/template/picker.service';
 
 @Component({
     selector: "[axf-widget-col]",
@@ -18,7 +18,9 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     @ViewChild("el", { static: true })
     container: ElementRef<HTMLDivElement>;
 
-    constructor(private hostElement: ElementRef, private popup: AXPopupService) {
+    constructor(
+        private hostElement: ElementRef, 
+        private picker:AXFWidgetPickerService) {
         super()
 
     }
@@ -31,9 +33,12 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     }
 
     addElement() {
-        this.widgetService.showPicker().then(w => {
-            if (w) {
-                this.widgetService.addWidget(w.name, this);
+        this.picker.showPicker().then(widgets => {
+            if (widgets) {
+                widgets.forEach(w => {
+                    this.addChild(w);
+                });
+                
                 this.refresh();
             }
         })

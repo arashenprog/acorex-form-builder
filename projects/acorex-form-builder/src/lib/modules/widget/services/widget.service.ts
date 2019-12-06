@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AXPopupService, PromisResult, AXHtmlUtil, EventService } from 'acorex-ui';
-import { AXFWidgetPickerComponent } from '../shared/widget-picker/widget-picker.component';
-import { AXFWidgetContainer } from '../config/widget';
+import { AXPopupService, EventService, AXHtmlUtil } from 'acorex-ui';
 
 
 export interface AXFWidgetProperty {
@@ -41,40 +39,8 @@ export class AXFWidgetService {
 
     static WIDGET_ITEMS: WidgetConfig[] = [];
 
-    constructor(private popup: AXPopupService, private eventService: EventService) {
+    constructor() {
 
-    }
-
-    showPicker(): PromisResult<WidgetConfig> {
-        return new PromisResult((resolve) => {
-            this.popup.open(AXFWidgetPickerComponent, {
-                title: "Add Element",
-                size: "md",
-                data: {
-                    list: this.getList()
-                }
-            }).closed((c) => {
-                if (c && c.data) {
-                    resolve(this.addWidget((c.data as WidgetConfig).name));
-                }
-                else {
-                    resolve(null);
-                }
-            })
-        })
-    }
-
-    addWidget(name: string, parent?: AXFWidgetContainer, options?: any): WidgetConfig {
-        let w = Object.assign({}, this.resolve(name));
-        if (!w.options)
-            w.options = {};
-        Object.assign(w.options, options);
-        w.options.uid = AXHtmlUtil.getUID();
-        w.options.isSelected = true;
-        w.options.parent = parent;
-        if (parent)
-            parent.widgets.push(w)
-        return w;
     }
 
     getList(category?: string): WidgetConfig[] {
@@ -106,26 +72,27 @@ export class AXFWidgetService {
             res.properties = JSON.parse(JSON.stringify(c.properties));
         if (c.options)
             res.options = JSON.parse(JSON.stringify(c.options));
+        else
+            res.options = {};
         return res;
     }
 
 
-    serialize(items: WidgetConfig[]): string {
-        let obj: any[] = [];
-        items.forEach(i => {
-            obj.push(this.serializeInternal(i))
-        });
-        return JSON.stringify(obj);
+    serialize(item: WidgetConfig): string {
+        return JSON.stringify(this.serializeInternal(item));
     }
 
     private serializeInternal(item: WidgetConfig): any {
         let obj: any = {};
         obj.name = item.name;
         obj.options = {};
-        item.properties.forEach(p => {
-            obj.options[p.name] = item.options[p.name]
-        });
-        if (item.options.widgets) {
+        //
+        if (item.properties) {
+            item.properties.forEach(p => {
+                obj.options[p.name] = item.options[p.name]
+            });
+        }
+        if (item.options && item.options.widgets) {
             obj.options.widgets = [];
             item.options.widgets.forEach(w => {
                 obj.options.widgets.push(this.serializeInternal(w));
@@ -135,19 +102,19 @@ export class AXFWidgetService {
     }
 
 
-    parse(json: string): WidgetConfig[] {
-        let items: WidgetConfig[] = [];
+    parse(json: string): WidgetConfig {
         let obj = JSON.parse(json);
-        obj.forEach(o => {
-            items.push(this.parseInternal(o));
-        });
-        return items;
+        return this.parseInternal(obj);
     }
+
+
+
 
     private parseInternal(obj: any): WidgetConfig {
         let item: WidgetConfig = this.resolve(obj.name);
         if (!item.options)
             item.options = {};
+        item.options.uid = AXHtmlUtil.getUID();
         Object.assign(item.options, obj.options);
         if (obj.options.widgets) {
             item.options.widgets = []

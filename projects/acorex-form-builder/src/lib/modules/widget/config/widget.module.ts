@@ -14,7 +14,7 @@ import { AXFCheckboxInputWidgetModule } from '../widgets/checkbox-input/checkbox
 import { AXFTextInputWidgetModule } from '../widgets/text-input/text-input.module';
 import { AXFPageOutletWidgetModule } from '../widgets/outlet/outlet.module';
 import { AXFListInputWidgetModule } from '../widgets/list-input/list-input.module';
-import { AXFWordPipe } from '../pipes/word.pipe';
+import { AXFTemplateService } from '../services/template/template.service';
 
 
 
@@ -39,7 +39,7 @@ const MODULES = [
     declarations: [],
     imports: [...MODULES],
     exports: [...MODULES],
-    providers: [],
+    providers: [AXFTemplateService],
 })
 export class AXFWidgetModule {
     constructor(injector: Injector) {

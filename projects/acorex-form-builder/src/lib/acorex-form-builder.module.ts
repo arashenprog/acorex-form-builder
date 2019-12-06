@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFDesignerModule } from './modules/designer/config/designer.module';
 import { AXFWidgetModule } from './modules/widget/config/widget.module';
-import { AXFLoadTemplateModule } from './modules/loadtemplate/config/loadtemplate.module';
 import { AXFViewerModule } from './modules/viewer/config/viewer.module';
 import { AXFDataService } from './modules/widget/services/data.service';
 
@@ -18,7 +17,6 @@ const MODULES = [
   FormsModule,
   AXFDesignerModule,
   AXFViewerModule,
-  AXFLoadTemplateModule,
   ACoreXUIModule,
   AXFWidgetModule
 ]

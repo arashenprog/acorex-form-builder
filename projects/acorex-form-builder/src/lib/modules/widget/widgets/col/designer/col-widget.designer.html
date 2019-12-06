@@ -1,7 +1,7 @@
 <div class="widget-designer">
     <div class="widget-container" #el>
         <div *ngIf="widgets.length; else elseTemplate" cdkDropList [cdkDropListData]="widgets">
-            <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" cdkDrag [cdkDragData]="w">
+            <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this"  cdkDrag [cdkDragData]="w">
             </div>
         </div>
         <ng-template #elseTemplate>

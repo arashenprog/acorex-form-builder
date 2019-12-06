@@ -12,18 +12,18 @@ export class ACFViewerFrameComponent {
 
     constructor(
         private widgetService: AXFWidgetService,
-        private sanitizer:DomSanitizer,
+        private sanitizer: DomSanitizer,
         //private sanitizer:Sanitizer,
-        ) {
+    ) {
         this.size = this.sizes[0].width;
-        this.url = sanitizer.bypassSecurityTrustResourceUrl("view?mode=view") ;
+        this.url = sanitizer.bypassSecurityTrustResourceUrl("view?mode=view");
     }
 
     @ViewChild('frame', { static: true })
     frame: ElementRef;
 
     @Input()
-    widgets: WidgetConfig[] = [];
+    page: WidgetConfig;
 
 
 
@@ -70,7 +70,7 @@ export class ACFViewerFrameComponent {
             this.frame.nativeElement.contentWindow.postMessage({
                 action: "load",
                 data: {
-                    widgets: this.widgetService.serialize(this.widgets)
+                    widgets: this.widgetService.serialize(this.page)
                 }
             }, '*');
         }

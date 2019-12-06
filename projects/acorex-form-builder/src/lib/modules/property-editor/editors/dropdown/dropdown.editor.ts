@@ -8,7 +8,7 @@ import { AXFDataService } from '../../../widget/services/data.service';
         </ax-select-box>
     `,
 })
-export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]> implements OnInit {
+export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]>  {
 
     innerValue: any[] = [];
     items: any[] = [];
@@ -22,8 +22,7 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]> implemen
 
 
 
-    ngOnInit(): void {
-        debugger;
+    ngAfterViewInit(): void {
         if (this.dataSource) {
             this.dataService.getList(this.dataSource).then(items => {
                 this.items = items;
@@ -32,6 +31,13 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]> implemen
         }
         else {
             this.innerValue = this.value;
+        }
+    }
+
+    handleValueChange(v: any) {
+        if (JSON.stringify(v)!=JSON.stringify(this.innerValue)) {
+            this.innerValue = v;
+            this.value = v;
         }
     }
 }

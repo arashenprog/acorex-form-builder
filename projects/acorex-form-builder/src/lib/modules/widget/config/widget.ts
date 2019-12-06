@@ -110,7 +110,6 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     onSelect: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
     onDelete: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
     onRefresh: EventEmitter<any> = new EventEmitter<any>();
-    isSelected: boolean = false;
 
     parent: AXFWidgetDesigner;
 
@@ -141,11 +140,16 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
 
     }
 
-    ngAfterViewInit() {
-        if (this.isSelected) {
-            this.edit();
-        }
+    addChild(widget: WidgetConfig, options?: any) {
+        let w = this.widgetService.parse(this.widgetService.serialize(widget));
+        if (!w.options)
+            w.options = {};
+        Object.assign(w.options, options);
+        w.options.uid = AXHtmlUtil.getUID();
+        this.widgets.push(w);
     }
+
+   
 }
 export abstract class AXFWidgetView extends AXFWidget {
     constructor() {

@@ -16,7 +16,7 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
     range: number = 0;
 
 
-    @ViewChild("el",{static:true}) el: ElementRef;
+    @ViewChild("el", { static: true }) el: ElementRef;
 
 
 
@@ -29,7 +29,8 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
 
     addColumn(...cols) {
         cols.forEach(c => {
-            this.widgetService.addWidget("col", this, { size: c * this.minCol });
+            let w = this.widgetService.resolve("col");
+            this.addChild(w, { size: c * this.minCol })
         });
         this.refresh();
     }
@@ -57,7 +58,7 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
             this.range = 0;
     }
 
-    handleAction(action: string, e: MouseEvent,params?:any) {
+    handleAction(action: string, e: MouseEvent, params?: any) {
         e.stopPropagation();
         switch (action) {
             case "edit":

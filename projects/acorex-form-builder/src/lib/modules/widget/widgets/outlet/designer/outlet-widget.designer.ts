@@ -7,10 +7,7 @@ import { AXFWidgetDesigner } from '../../../config/widget';
     styleUrls: ['./outlet-widget.designer.scss']
 })
 export class AXFOutletWidgetDesigner extends AXFWidgetDesigner {
-
-    template:string;
-
-    constructor() { 
+    constructor() {
         super();
     }
 }

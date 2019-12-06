@@ -17,8 +17,8 @@ export abstract class AXFProperyEditor<T>{
     @Output()
     valueChange: EventEmitter<T> = new EventEmitter<T>();
 
-    handleValueChange(value: T) {
-        this.value = value;
+    handleValueChange(v: T) {
+        this.value = v;
     }
 
 }

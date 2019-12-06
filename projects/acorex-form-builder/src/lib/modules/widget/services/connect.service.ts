@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { PromisResult } from 'acorex-ui';
+import { PromisResult, AXMathUtil, AXHtmlUtil } from 'acorex-ui';
 
 @Injectable({ providedIn: "root" })
 export class AXFConnectService {
 
-    private messageQueue: { action: string, callback: Function }[] = [];
+    private messageQueue: { action: string, id: string, callback: Function }[] = [];
 
     constructor() {
         window.addEventListener("message", this.handMessageEvent.bind(this));
@@ -30,11 +30,11 @@ export class AXFConnectService {
                 return PromisResult.resolve({
                     items: [
                         {
-                            value: "tpl1",
+                            value: '1',
                             title: "Template 1"
                         },
                         {
-                            value: "tpl2",
+                            value: "2",
                             title: "Template 2"
                         }
                     ],
@@ -50,7 +50,8 @@ export class AXFConnectService {
             }, '*');
             this.messageQueue.push({
                 action: action,
-                callback: resolve
+                callback: resolve,
+                id: AXHtmlUtil.getUID()
             })
         });
     }
