@@ -12,18 +12,19 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
     contentViewItems: any[]= [{ value: "text", title: "Text" }, { value: "image", title: "Image" }]
     imagable:boolean=false;
     otherable:boolean=false;
+    flgChange:boolean=false;
     constructor() {
         super();
     }
 
     ngOnInit(): void {
-       // this.value = this.value;
+       // this.value = this.value; 
     } 
 
 
     contentViewChange(e)
     {
-        this.value.ContenView=e;
+        //this.value.ContentView=e;
         super.handleValueChange(this.value);
     }
 

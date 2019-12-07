@@ -14,7 +14,7 @@ export class AXFDropdownInputWidgetDesigner extends AXFWidgetDesigner {
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
     value:string[];
-    items:{ContenView:string[],Content:any[],ShowOther:boolean};
+    items:{ContentView:string[],Content:any[],ShowOther:boolean};
     mode:string;
     fillBy:string; 
     allowSearch:boolean;
@@ -24,12 +24,12 @@ export class AXFDropdownInputWidgetDesigner extends AXFWidgetDesigner {
     }
 
     onRender(): void {
+        if(this.el)
         this.applyStyle(this.el.nativeElement);
     }
 
     handleValueChange(e)
     {
-
     } 
 }
 

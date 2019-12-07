@@ -10,16 +10,18 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
     value:string[];
-    items:{ContenView:string[],Content:any[],ShowOther:boolean};
+    items:{ContentView:string[],Content:any[],ShowOther:boolean};
     mode:string;
     fillBy:string; 
     allowSearch:boolean;
 
     constructor() {
         super()
+       
     }
 
     onRender(): void {
+        debugger
         this.applyStyle(this.el.nativeElement);
     }
 

@@ -1,6 +1,6 @@
 export class ItemsStructureEditor
 {
-    ContenView:string[];
+    ContentView:string[];
     Content:any[];
     ShowOther:boolean
      

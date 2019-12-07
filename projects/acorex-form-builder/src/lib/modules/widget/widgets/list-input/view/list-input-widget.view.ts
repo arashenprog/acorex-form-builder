@@ -10,7 +10,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
     value:string[];
-    items:{ContenView:string[],Content:any[],ShowOther:boolean};
+    items:{ContentView:string[],Content:any[],ShowOther:boolean};
     mode:string;
     direction:string;
     fillBy:string;

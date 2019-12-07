@@ -1,15 +1,15 @@
 <div>
     <div class="viewType" *ngIf="imagable">
-        <ax-selection-list direction="horizontal" mode="multiple" [selectedValues]="value.ContenView"
+        <ax-selection-list direction="horizontal" mode="multiple" [selectedValues]="value.ContentView"
             [items]="contentViewItems" (selectedValuesChange)="contentViewChange($event)" textField="title"
             valueField="value">
         </ax-selection-list>
     </div>
     <div *ngFor="let item of value.Content;let i = index" class="parentItem">
         <div class="txtItem">
-            <ax-text-box *ngIf="value.ContenView.includes('text')" [text]="item.text"
+            <ax-text-box *ngIf="value.ContentView.includes('text')" [text]="item.text"
            (textChange)="textItemChange(i,$event)" ></ax-text-box>            
-            <ax-upload-file *ngIf="value.ContenView.includes('image')" type="inline" (onLoad)="uploadItemChange(i,$event)">
+            <ax-upload-file *ngIf="value.ContentView.includes('image')" type="inline" (onLoad)="uploadItemChange(i,$event)">
             </ax-upload-file>
         </div>
         <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">

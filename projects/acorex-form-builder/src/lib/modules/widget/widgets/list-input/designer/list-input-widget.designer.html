@@ -4,8 +4,8 @@
             <img *ngIf="items.ContenView.includes('image') && item.image" [src]="item.image" height="50" width="100"> 
     </div>  --> 
     <label class="radio-container" *ngFor="let item of items.Content">
-        <span *ngIf="items.ContenView.includes('text') && item.text">{{item.text}}</span>
-        <img *ngIf="items.ContenView.includes('image') && item.image" [src]="item.image" height="50" width="100">
+        <span *ngIf="items.ContentView.includes('text') && item.text">{{item.text}}</span>
+        <img *ngIf="items.ContentView.includes('image') && item.image" [src]="item.image" height="50" width="100">
         <input type="radio" [value]="item.value" *ngIf="mode!='unselectable'" />
         <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'"></span>
     </label>

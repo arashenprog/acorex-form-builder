@@ -38,7 +38,7 @@ export class AXFListInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                items:{ ContenView:["text"],
+                items:{ ContentView:["text"],
                         Content:[{ value:1,text: "Item1" }, { value:2,text: "Item2"}, { value:3,text: "Item3"}],
                         ShowOther:false}, 
                 mode:"single",

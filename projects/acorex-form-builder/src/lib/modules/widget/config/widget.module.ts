@@ -15,7 +15,7 @@ import { AXFTextInputWidgetModule } from '../widgets/text-input/text-input.modul
 import { AXFPageOutletWidgetModule } from '../widgets/outlet/outlet.module';
 import { AXFListInputWidgetModule } from '../widgets/list-input/list-input.module';
 import { AXFTemplateService } from '../services/template/template.service';
-
+import { AXFDropdownInputWidgetModule } from '../widgets/dropdown-input/dropdown-input.module';
 
 
 const MODULES = [
@@ -32,7 +32,8 @@ const MODULES = [
     AXFImageInputWidgetModule,
     AXFSignatureInputWidgetModule,
     AXFPageOutletWidgetModule,
-    AXFListInputWidgetModule
+    AXFListInputWidgetModule,
+    AXFDropdownInputWidgetModule
 ];
 
 @NgModule({
