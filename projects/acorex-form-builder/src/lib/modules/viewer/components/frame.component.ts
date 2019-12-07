@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef, Input, Sanitizer } from '@angular/core';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
@@ -65,6 +65,7 @@ export class ACFViewerFrameComponent {
 
     @HostListener('window:message', ['$event'])
     handleMessage(e) {
+        debugger;
         if (e.data && e.data.action == "load") {
             this.frame.nativeElement.contentWindow.postMessage({
                 action: "load",

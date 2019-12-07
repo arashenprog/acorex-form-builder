@@ -8,6 +8,17 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     title: "Text",
     editor: "TextEditor",
     options: {
+        allowHtml: false
+    }
+} 
+
+export const AXF_RICH_TEXT_PROPERTY: AXFWidgetProperty = {
+    name: "text",
+    category: "General",
+    defaultValue: null,
+    title: "Text",
+    editor: "TextEditor",
+    options: {
         allowHtml: true
     }
 } 
@@ -67,24 +78,11 @@ export const AXF_TEXT_STYLE_PROPERTY: AXFWidgetProperty = {
 export const AXF_TEXT_SIZE_PROPERTY: AXFWidgetProperty = {
     name: "fontSize",
     category: "Style",
-    defaultValue:["inherit"],
+    defaultValue:"inherit",
     title: "Font Size",
     editor: "DropdownEditor",
     options: {
         items: [
-            // { value: "8px", title: "8" }, 
-            // { value: "9px", title: "9" }, 
-            // { value: "10px", title: "10" }, 
-            // { value: "11px", title: "11" }, 
-            // { value: "12px", title: "12" }, 
-            // { value: "13px", title: "13" }, 
-            // { value: "14px", title: "14" },
-            // { value: "15px", title: "15" },
-            // { value: "16px", title: "16" },
-            // { value: "17px", title: "17" },
-            // { value: "18px", title: "18" },
-            // { value: "19px", title: "19" },
-            // { value: "20px", title: "20" },
             {value:"inherit",title:"inherit"},
             {value:"xx-small",title:"xx-small"},
             {value:"x-small",title:"x-small"},
@@ -130,7 +128,7 @@ export const AXF_VERTICAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
 export const AXF_DS_PROPERTY: AXFWidgetProperty = {
     name: "ds-name",
     category: "Data",
-    defaultValue: "",
+    defaultValue: null,
     title: "List",
     editor: "DropdownEditor",
     options: {

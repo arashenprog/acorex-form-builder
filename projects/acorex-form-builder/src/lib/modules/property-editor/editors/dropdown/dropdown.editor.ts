@@ -23,21 +23,24 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]>  {
 
 
     ngAfterViewInit(): void {
+        debugger;
         if (this.dataSource) {
             this.dataService.getList(this.dataSource).then(items => {
                 this.items = items;
-                this.innerValue = this.value;
+                this.innerValue = [this.value];
             });
         }
         else {
-            this.innerValue = this.value;
+            this.innerValue = [this.value];
         }
     }
 
     handleValueChange(v: any) {
+        if(!v || !v.length)
+            return;
         if (JSON.stringify(v)!=JSON.stringify(this.innerValue)) {
             this.innerValue = v;
-            this.value = v;
+            this.value = v[0];
         }
     }
 }

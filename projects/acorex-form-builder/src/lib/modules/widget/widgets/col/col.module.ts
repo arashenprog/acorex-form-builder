@@ -9,13 +9,12 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFTextEditorComponent } from '../../../property-editor/editors/text/text.editor';
 import { AXF_STYLE_GENERAL_PROPERTIES, AXF_BG_COLOR_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_HORIZONTAL_ALIGNMENT_PROPERTY, AXF_VERTICAL_ALIGNMENT_PROPERTY } from '../../config/general-properties';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
-import {DragDropModule} from '@angular/cdk/drag-drop'
 
 export const COMPONENTS = [AXFColWidgetDesigner, AXFColWidgetView, AXFColWidgetPrint]
 
 @NgModule({
     declarations: [...COMPONENTS],
-    imports: [CommonModule, ACoreXUIModule, AXFWidgetSharedModule,DragDropModule],
+    imports: [CommonModule, ACoreXUIModule, AXFWidgetSharedModule],
     exports: [...COMPONENTS],
     entryComponents: [...COMPONENTS],
     providers: [],

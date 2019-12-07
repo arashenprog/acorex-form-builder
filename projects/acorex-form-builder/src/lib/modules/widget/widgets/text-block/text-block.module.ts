@@ -44,7 +44,7 @@ export class AXFTextBlockWidgetModule {
                 },
                 text:"Block Text",
                 bgColor:"inherit",
-                fontSize:["small"]
+                fontSize:"small"
             },
             properties: [
                 AXF_TEXT_PROPERTY,
@@ -71,7 +71,7 @@ export class AXFTextBlockWidgetModule {
                 bgColor:"inherit",
                 textStyle:["bold"],
                 text:"Heading Text",
-                fontSize:["medium"]
+                fontSize:"medium"
             },
             properties: [
                 AXF_TEXT_PROPERTY,
@@ -98,7 +98,7 @@ export class AXFTextBlockWidgetModule {
                 bgColor:"inherit",
                 color:"#999999",
                 text:"Hint Text",
-                fontSize:["x-small"]
+                fontSize:"x-small"
             },
             properties: [
                 AXF_TEXT_PROPERTY,

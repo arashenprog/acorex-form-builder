@@ -16,6 +16,7 @@ export interface AXFWidgetToolboxProperty {
     visible?: boolean;
     delete?: boolean;
     edite?: boolean;
+    move?: boolean;
 }
 
 export interface WidgetConfig {

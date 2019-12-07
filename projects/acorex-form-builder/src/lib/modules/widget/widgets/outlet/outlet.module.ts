@@ -9,8 +9,8 @@ import { AXFOutletWidgetView } from './view/outlet-widget.view';
 import { AXF_NAME_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [
-    AXFOutletWidgetDesigner, 
-    AXFOutletWidgetView, 
+    AXFOutletWidgetDesigner,
+    AXFOutletWidgetView,
     AXFOutletWidgetPrint
 ]
 
