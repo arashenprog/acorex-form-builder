@@ -58,7 +58,7 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             el.style.textAlign = this["textAlign"][0];
         }
         if (this["fontSize"]) {
-            el.style.fontSize = this["fontSize"][0];
+            el.style.fontSize = this["fontSize"];
         }
         if (this["verticalAlign"]) {
             el.style.verticalAlign = this["verticalAlign"][0];

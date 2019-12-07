@@ -110,7 +110,7 @@ export class AXFWidgetRendererDirective {
 
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
-       
+
 
         // render widget toolbox on mouseover event in designer mode
         if (!this.widgetConfig.toolbox)
@@ -138,6 +138,7 @@ export class AXFWidgetRendererDirective {
             let toolboxFactory = this.componentFactoryResolver.resolveComponentFactory(AXFWidgetToolboxComponent);
             let toolboxComponent = this.target.createComponent(toolboxFactory);
             let toolboxInstance = toolboxComponent.instance as AXFWidgetToolboxComponent;
+            // toolbox edit
             if (this.widgetConfig.toolbox.edite != false) {
                 toolboxInstance.edit.subscribe(c => {
                     this.widgetInstance.edit();
@@ -146,13 +147,23 @@ export class AXFWidgetRendererDirective {
             else {
                 toolboxInstance.allowEdit = false;
             }
-            // delete
+            // toolbox delete
             if (this.widgetConfig.toolbox.delete != false) {
                 toolboxInstance.delete.subscribe(c => { this.widgetInstance.delete(); });
             }
             else {
                 toolboxInstance.allowDelete = false;
             }
+            //
+            // toolbox move
+            // if (this.widgetConfig.toolbox.move != false) {
+            //     toolboxInstance.move.subscribe(c => {
+            //         this.toolboxElement.style.visibility = "hidden";
+            //     });
+            // }
+            // else {
+            //     toolboxInstance.allowMove = false;
+            // }
             //
             this.toolboxElement = (toolboxComponent.location.nativeElement as HTMLElement);
             this.widgetElement = (widgetComponent.location.nativeElement as HTMLElement);

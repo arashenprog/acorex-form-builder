@@ -2,46 +2,52 @@ $FileName = Read-Host -Prompt 'Input your component name'
 
 New-Item -Path ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\designer\$($FileName)-widget.designer.html",".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\designer\$($FileName)-widget.designer.scss",".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\designer\$($FileName)-widget.designer.ts" -ItemType File -Force
 Add-Content ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\designer\$($FileName)-widget.designer.ts" "import { Component, OnInit } from '@angular/core';
+import { AXFWidgetDesigner } from '../../../config/widget';
 
 @Component({
     selector: '[axf-$($FileName)]',
     templateUrl: './$($FileName)-widget.designer.html',
     styleUrls: ['./$($FileName)-widget.designer.scss']
 })
-export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetDesigner implements OnInit {
-    constructor() { }
+export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetDesigner extends AXFWidgetDesigner {
 
-    ngOnInit(): void { }
+    constructor() { 
+         super();
+    }
 }
 "
 
 New-Item -Path ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\print\$($FileName)-widget.print.html",".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\print\$($FileName)-widget.print.scss",".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\print\$($FileName)-widget.print.ts" -ItemType File -Force
 Add-Content ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\print\$($FileName)-widget.print.ts" "import { Component, OnInit } from '@angular/core';
+import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
     selector: '[axf-$($FileName)]',
     templateUrl: './$($FileName)-widget.print.html',
     styleUrls: ['./$($FileName)-widget.print.scss']
 })
-export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetPrint implements OnInit {
-    constructor() { }
+export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetPrint extends AXFWidgetPrint {
 
-    ngOnInit(): void { }
+    constructor() { 
+         super();
+    }
 }
 "
 
 New-Item -Path ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\view\$($FileName)-widget.view.html",".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\view\$($FileName)-widget.view.scss",".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\view\$($FileName)-widget.view.ts" -ItemType File -Force
 Add-Content ".\projects\acorex-form-builder\src\lib\modules\widget\widgets\$($FileName)\view\$($FileName)-widget.view.ts" "import { Component, OnInit } from '@angular/core';
+import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
     selector: '[axf-$($FileName)]',
     templateUrl: './$($FileName)-widget.view.html',
     styleUrls: ['./$($FileName)-widget.view.scss']
 })
-export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetView implements OnInit {
-    constructor() { }
+export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetView extends AXFWidgetView {
 
-    ngOnInit(): void { }
+    constructor() {
+         super();
+     }
 }
 "
 
@@ -72,7 +78,7 @@ export const COMPONENTS = [
     entryComponents: [...COMPONENTS],
     providers: [],
 })
-export class AXFPage$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetModule {
+export class AXF$($FileName.substring(0,1).toupper()+$FileName.substring(1).tolower())WidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
             title: '',

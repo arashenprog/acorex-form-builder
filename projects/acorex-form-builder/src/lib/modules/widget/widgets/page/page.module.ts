@@ -9,6 +9,7 @@ import { AXFPageWidgetView } from './view/page-widget.view';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 import { AXF_BG_COLOR_PROPERTY, AXF_BOX_STYLE_PROPERTY } from '../../config/general-properties';
 
+
 export const COMPONENTS = [
     AXFPageWidgetDesigner,
     AXFPageWidgetView,

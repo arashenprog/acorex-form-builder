@@ -15,6 +15,7 @@ import { AXFTextInputWidgetModule } from '../widgets/text-input/text-input.modul
 import { AXFPageOutletWidgetModule } from '../widgets/outlet/outlet.module';
 import { AXFListInputWidgetModule } from '../widgets/list-input/list-input.module';
 import { AXFTemplateService } from '../services/template/template.service';
+import { AXFButtonWidgetModule } from '../widgets/button/button.module';
 
 
 
@@ -32,7 +33,8 @@ const MODULES = [
     AXFImageInputWidgetModule,
     AXFSignatureInputWidgetModule,
     AXFPageOutletWidgetModule,
-    AXFListInputWidgetModule
+    AXFListInputWidgetModule,
+    AXFButtonWidgetModule
 ];
 
 @NgModule({

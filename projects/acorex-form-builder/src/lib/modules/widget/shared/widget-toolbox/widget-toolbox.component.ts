@@ -15,6 +15,7 @@ export class AXFWidgetToolboxComponent implements OnInit {
     delete: EventEmitter<void> = new EventEmitter<void>();
     copy: EventEmitter<void> = new EventEmitter<void>();
     edit: EventEmitter<void> = new EventEmitter<void>();
+    move: EventEmitter<void> = new EventEmitter<void>();
 
     allowDelete: boolean = true;
     allowEdit: boolean = true;
@@ -33,6 +34,9 @@ export class AXFWidgetToolboxComponent implements OnInit {
                 break;
             case "copy":
                 this.delete.emit();
+                break;
+            case "move":
+                this.move.emit();
                 break;
         }
         return false;
