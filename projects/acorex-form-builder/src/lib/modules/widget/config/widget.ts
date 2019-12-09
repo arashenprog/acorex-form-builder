@@ -1,7 +1,8 @@
 import { Injector, EventEmitter, Input, Output, Directive } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
-import { AXHtmlUtil } from 'acorex-ui'
+import { AXHtmlUtil, EventService } from 'acorex-ui'
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
+import { AXFFormService, EventData } from '../services/form.service';
 
 export const WidgetInjector: { instance?: Injector } = {};
 
@@ -149,11 +150,63 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         this.widgets.push(w);
     }
 
-   
+
 }
 export abstract class AXFWidgetView extends AXFWidget {
+
+    protected formService: AXFFormService;
+
+    @Output()
+    valueChange: EventEmitter<any> = new EventEmitter();
+
+    private _value: any;
+
+    @Input()
+    public get value(): any {
+        return this._value;
+    }
+    public set value(v: any) {
+        this._value = v;
+        this.valueChange.emit(v);
+        let name: string = this.config.options.name;
+        if (name) {
+            this.formService.emit(new EventData("valueChange", { name: name, value: v }));
+        }
+    }
+
+
+
+    protected invokeEvent(name: string) {
+        if (this[name]) {
+            let action: string = this[name];
+            if (action == "submit()") {
+                this.formService.emit(new EventData("submit"));
+                return;
+            }
+            if (action.match(/\$([a-zA-Z1-9])+\.\w+=.+/)) {
+                let name = action.split('=')[0].split('.')[0].substring(1);
+                let prop = action.split('=')[0].split('.')[1];
+                let value = eval(action.split('=')[1])
+                this.formService.emit(new EventData("props", { name: name, prop: prop, value: value }));
+                return;
+            }
+            eval(action);
+        }
+    }
+
+
+
+
     constructor() {
         super();
+        this.formService = WidgetInjector.instance.get(AXFFormService);
+        //
+        this.formService.on("props", (e) => {
+            let name: string = this.config.options.name;
+            if (e.name == name) {
+                this[e.prop] = e.value;
+            }
+        });
     }
 
 }

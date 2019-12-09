@@ -14,5 +14,11 @@ export class AXFButtonWidgetView extends AXFWidgetView {
     size: string;
 
     constructor() { super()}
+
+
+    handleClickEvent(e:MouseEvent)
+    {
+        this.invokeEvent("onClick");
+    }
 }
 

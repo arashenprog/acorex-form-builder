@@ -21,7 +21,6 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     }
 
     onRender(): void {
-        debugger
         this.applyStyle(this.el.nativeElement);
     }
 

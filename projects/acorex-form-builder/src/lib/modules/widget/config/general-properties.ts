@@ -1,6 +1,28 @@
 import { AXFWidgetProperty } from '../services/widget.service';
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 
+
+export const AXF_VALUE_CHANGE_EVENT: AXFWidgetProperty = {
+    name: "onValueChange",
+    category: "Behavior",
+    defaultValue: null,
+    title: "Value Changed",
+    editor: "EventEditor",
+    options: {
+    }
+}
+
+export const AXF_CLICK_EVENT: AXFWidgetProperty = {
+    name: "onClick",
+    category: "Behavior",
+    defaultValue: null,
+    title: "Click",
+    editor: "EventEditor",
+    options: {
+    }
+}
+
+
 export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     name: "text",
     category: "General",

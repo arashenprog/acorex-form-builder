@@ -44,7 +44,6 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
 
     selectTemplate(tpl: AXFTemplateModel) {
         this.templateService.get(tpl.id).then(c => {
-            debugger;
             let widget = this.widgetService.parse(c.template);
             this.dialogService.show(
                 "Add saved widget",

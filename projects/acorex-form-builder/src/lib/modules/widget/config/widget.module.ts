@@ -17,6 +17,7 @@ import { AXFListInputWidgetModule } from '../widgets/list-input/list-input.modul
 import { AXFTemplateService } from '../services/template/template.service';
 import { AXFDropdownInputWidgetModule } from '../widgets/dropdown-input/dropdown-input.module';
 import { AXFButtonWidgetModule } from '../widgets/button/button.module';
+import { AXFFormService } from '../services/form.service';
 
 
 
@@ -35,7 +36,7 @@ const MODULES = [
     AXFSignatureInputWidgetModule,
     AXFPageOutletWidgetModule,
     AXFListInputWidgetModule,
-    AXFDropdownInputWidgetModule
+    AXFDropdownInputWidgetModule,
     AXFButtonWidgetModule
 ];
 
@@ -43,7 +44,7 @@ const MODULES = [
     declarations: [],
     imports: [...MODULES],
     exports: [...MODULES],
-    providers: [AXFTemplateService],
+    providers: [AXFTemplateService,AXFFormService],
 })
 export class AXFWidgetModule {
     constructor(injector: Injector) {

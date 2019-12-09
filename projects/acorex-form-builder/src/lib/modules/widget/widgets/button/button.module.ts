@@ -6,7 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFButtonWidgetDesigner } from './designer/button-widget.designer';
 import { AXFButtonWidgetPrint } from './print/button-widget.print';
 import { AXFButtonWidgetView } from './view/button-widget.view';
-import { AXF_NAME_PROPERTY, AXF_TEXT_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_TEXT_PROPERTY, AXF_CLICK_EVENT } from '../../config/general-properties';
 
 export const COMPONENTS = [
     AXFButtonWidgetDesigner,
@@ -69,7 +69,8 @@ export class AXFButtonWidgetModule {
                             { value: "xl", title: "x-large" }
                         ],
                     }
-                }
+                },
+                AXF_CLICK_EVENT
             ]
         })
     }
