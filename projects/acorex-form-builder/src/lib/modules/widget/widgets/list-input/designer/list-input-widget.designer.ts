@@ -26,7 +26,7 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
         super()
     }
 
-    onRender(): void {
+    onRender(): void { 
         if(this.el)
         this.applyStyle(this.el.nativeElement);
     }

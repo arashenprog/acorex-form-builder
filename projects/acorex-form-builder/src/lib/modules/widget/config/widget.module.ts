@@ -35,7 +35,7 @@ const MODULES = [
     AXFSignatureInputWidgetModule,
     AXFPageOutletWidgetModule,
     AXFListInputWidgetModule,
-    AXFDropdownInputWidgetModule
+    AXFDropdownInputWidgetModule,
     AXFButtonWidgetModule
 ];
 
