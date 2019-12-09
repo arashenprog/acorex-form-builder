@@ -1,13 +1,12 @@
 .sign{
-    background-image: url('assets/images/manualsignature.jpg');background-repeat: round;
+    background-image: url('./assets/images/manualsignature.jpg');background-repeat: round;
     border: 1px solid gray;
     
 }
 .row{
     margin-bottom: 2px;
 
-     .child{
-        flex-direction: row;
+     .child{  
          display: flex;
         .spanchild{
             padding: 0 10px;
@@ -18,4 +17,7 @@
             margin: 0px 10px 0px 0px; 
         }
     }
+}
+.wdt100{
+    width: 100%;
 }

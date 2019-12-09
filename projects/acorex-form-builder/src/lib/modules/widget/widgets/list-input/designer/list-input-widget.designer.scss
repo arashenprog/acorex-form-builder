@@ -22,7 +22,7 @@
       .radio-container {
         display: inline-block;
         position: relative;
-        padding-left: 20px;
+        
         cursor: pointer;
         font-size: 14px;
         line-height:30px;// 25px;
@@ -32,12 +32,51 @@
         user-select: none;
         margin: 0 var(--sp-md-size) 0 0;
 
-        span{
+        &.left{
+          padding-left: 17px;
+          .checkmark {
+            top: 20%; 
+            left: 0;
+          }
+          span{
             padding-left: 5px;
-        }
-        img{
-            margin-left: 5px;
-        }
+          } 
+         }
+
+        &.right{
+          padding-right: 20px;
+          .checkmark {
+            top: 20%; 
+            right: 0;
+          }
+          span{
+            padding-left: 2px;
+            padding-right: 2px;
+          } 
+         }
+
+         &.top{
+          padding: 2px 5px;
+          .checkmark {
+            left: 25%;}
+          span{ 
+            padding-top: 15px;
+            display: inline-block;
+          }
+          img{
+            padding-top: 15px;
+            display: inline-block;
+          }
+         }
+
+         &.bottom{
+          padding: 0px 5px 28px 5px;
+          .checkmark {
+            //top: 35px;
+            display: flex;
+            left: 30%;} 
+         }
+       
 
         input {
         position: absolute;
@@ -46,14 +85,14 @@
         }
         .checkmark {
             position: absolute;
-            top: 20%;
-            left: 0;
+            
             height: 20px;
             width: 20px;//15px;
            background-color: var(--white-color);
             border: 1px solid;
-            border-color: var(--border-color);
+            border-color: var(--black-color);
            // border-radius: 50% !important;
+           
           }
       }
 }

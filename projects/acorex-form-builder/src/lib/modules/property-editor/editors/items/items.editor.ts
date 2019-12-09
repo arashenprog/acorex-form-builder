@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
-import { ItemsStructureEditor } from './itemstructure.editor';
+import { ItemsStructureEditor } from './itemstructure.editor'; 
 
 @Component({ 
     templateUrl: './items.editor.html',
@@ -8,8 +8,9 @@ import { ItemsStructureEditor } from './itemstructure.editor';
 })
 export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEditor> implements OnInit {
 
+    items:ItemsStructureEditor;
     innerValue: any[] = [];  
-    contentViewItems: any[]= [{ value: "text", title: "Text" }, { value: "image", title: "Image" }]
+    contentViewItems: any[]= [{ value: "text", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }]
     imagable:boolean=false;
     otherable:boolean=false;
     flgChange:boolean=false;
@@ -18,65 +19,72 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
     }
 
     ngOnInit(): void {
-       // this.value = this.value; 
+        this.items = this.value; 
     } 
 
 
     contentViewChange(e)
     {
-        //this.value.ContentView=e;
-        super.handleValueChange(this.value);
+        if(!e || !e.length)
+            return;
+        if (JSON.stringify(e)!=JSON.stringify(this.items.ContentView)) {
+            this.items.ContentView=e;  
+            if((e[0]=="image" || e[0]=="both") && this.items.Content.length>0 && 
+                this.items.Content[0].image==undefined) 
+                this.items.Content= this.items.Content.map(obj=> ({ ...obj, image: './assets/images/noimage.png'}));
+            super.handleValueChange(this.items);
+        }
     }
 
     textItemChange(ind,e)
     { 
-        this.value.Content[ind].text =  e;  
-        super.handleValueChange(this.value);
+        this.items.Content[ind].text =  e;  
+        super.handleValueChange(this.items);
     }
 
     uploadItemChange(ind,evt)
     { 
-        this.value.Content[ind].image =  evt.data;  
-        super.handleValueChange(this.value);
+        this.items.Content[ind].image =  evt.data;  
+        super.handleValueChange(this.items);
     }
 
     deleteClick(ind)
     {        
-        this.value.Content.splice(ind,1); 
-        super.handleValueChange(this.value);
+        this.items.Content.splice(ind,1); 
+        super.handleValueChange(this.items);
     }
 
     upClick(ind,item)
     {  
         if(ind>0)
         {
-            let temp=this.value.Content[ind-1];
-            this.value.Content[ind-1]=item;
-            this.value.Content[ind]=temp;  
-            super.handleValueChange(this.value);
+            let temp=this.items.Content[ind-1];
+            this.items.Content[ind-1]=item;
+            this.items.Content[ind]=temp;  
+            super.handleValueChange(this.items);
         } 
     }
 
     downClick(ind,item)
     {  
-        if(ind<this.value.Content.length-1)
+        if(ind<this.items.Content.length-1)
         {
-            let temp=this.value.Content[ind+1];
-            this.value.Content[ind+1]=item;
-            this.value.Content[ind]=temp;  
-            super.handleValueChange(this.value);
+            let temp=this.items.Content[ind+1];
+            this.items.Content[ind+1]=item;
+            this.items.Content[ind]=temp;  
+            super.handleValueChange(this.items);
         } 
     }
 
     addItemClick()
     {
-        let index=this.value.Content.length+1;
-        this.value.Content.push({value:index,text:"Item"+index.toString()}); 
-        super.handleValueChange(this.value);
+        let index=this.items.Content.length+1;
+        this.items.Content.push({value:index,text:"Item"+index.toString()}); 
+        super.handleValueChange(this.items);
     }
 
     showOtherChange(e)
     {
-        this.value.ShowOther=e.target.checked;
+        this.items.ShowOther=e.target.checked;
     }
 }

@@ -1,13 +1,31 @@
 <div #el>
-    <div class="row" *ngFor="let rw of rows">
-        <div class="child" [ngClass]="getStyles()" *ngFor="let item of columns">
-            <div class="spanchild">{{item.Text}} </div>
-            <div class="valuechild">
-                <ax-text-box *ngIf="item.Type=='String'"></ax-text-box>
-                <ax-date-picker label="" *ngIf="item.Type=='Date'"></ax-date-picker>
-                <div class="sign" [ngStyle]="{'max-width.px': width,'height.px': height}"
-                    *ngIf="item.Type=='Signature'"></div>
+    <div *ngIf="info.ShowType.includes('item')">
+        <div class="row" *ngFor="let rw of rows">
+            <div class="child" [ngStyle]="getStyles()" *ngFor="let item of columns">
+                <div class="spanchild">{{item.Text}} </div>
+                <div class="valuechild">
+                    <ax-text-box *ngIf="item.Type=='String'"></ax-text-box>
+                    <ax-date-picker label="" *ngIf="item.Type=='Date'"></ax-date-picker>
+                    <div class="sign" [ngStyle]="{'max-width.px': width,'height.px': height}"
+                        *ngIf="item.Type=='Signature'"></div>
+
+                </div>
             </div>
         </div>
     </div>
+
+    <table *ngIf="info.ShowType.includes('grid')" class="wdt100">
+        <tr>
+            <th *ngFor="let item of columns">{{item.Text}}</th>
+        </tr>
+        <tr *ngFor="let rw of rows">
+            <td *ngFor="let item of columns">
+                <ax-text-box *ngIf="item.Type=='String'"></ax-text-box>
+                <ax-date-picker label="" *ngIf="item.Type=='Date'"></ax-date-picker>
+                <div class="sign" [ngStyle]="{'max-width.px': width,'height.px': height}"
+                    *ngIf="item.Type=='Signature'">
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>

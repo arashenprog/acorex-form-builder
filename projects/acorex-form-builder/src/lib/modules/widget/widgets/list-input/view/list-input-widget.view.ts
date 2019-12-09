@@ -21,6 +21,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     }
 
     onRender(): void {
+        if(this.el)
         this.applyStyle(this.el.nativeElement);
     }
 

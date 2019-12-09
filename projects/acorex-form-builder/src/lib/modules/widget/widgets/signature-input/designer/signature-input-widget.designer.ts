@@ -26,8 +26,11 @@ export class AXFSignatureInputWidgetDesigner extends AXFWidgetDesigner {
     }
 
     getStyles() {
-        let lengthCol = 12 / this.info.Items.filter(w => w.Visible == true).length;
-        return 'col-md-' + Math.round(lengthCol);
+        let lengthCol = 100.0 / this.info.Items.filter(w => w.Visible == true).length; 
+        const styles = { 
+            'width': lengthCol+"%"
+        };
+        return styles;
     }
 
 }

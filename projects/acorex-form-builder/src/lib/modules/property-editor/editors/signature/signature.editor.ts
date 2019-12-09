@@ -34,8 +34,11 @@ export class AXFSignatureEditorComponent extends AXFProperyEditor<SignatureStruc
     }
 
     showTypeChange(e) {
-        this.value.ShowType = e;
-        super.handleValueChange(this.value);
+        if(e.length>0 && this.value.SignatureType[0] != e[0])
+        { 
+            this.value.ShowType = e;
+            super.handleValueChange(this.value);
+        }
     }
 
 
