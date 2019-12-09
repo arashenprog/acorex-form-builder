@@ -1,0 +1,28 @@
+<div class="widget-designer">
+    <div class="widget-container" #el>
+        <ax-panel-box [caption]="caption" [allowCollapse]="false">
+            <div *ngIf="widgets.length; else elseTemplate">
+                <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
+                </div>
+            </div>
+            <ng-template #elseTemplate>
+                <div class="align-center">
+                    <div class="add-element" (click)="handleAction('add',$event)">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+            </ng-template>
+        </ax-panel-box>
+    </div>
+    <div class="col-tools">
+        <div class="icon" (click)="handleAction('delete',$event)" tooltip="Delete Column" [placement]="'bottom'">
+            <i class="fas fa-trash"></i>
+        </div>
+        <div class="icon" (click)="handleAction('edit',$event)" tooltip="Edit Column" [placement]="'bottom'">
+            <i class="fas fa-pen"></i>
+        </div>
+        <div class="icon" (click)="handleAction('add',$event)" tooltip="Append Element" [placement]="'bottom'">
+            <i class="fas fa-plus"></i>
+        </div>
+    </div>
+</div>

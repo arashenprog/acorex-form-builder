@@ -53,6 +53,17 @@ export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
     editor: "TextEditor"
 }
 
+export const AXF_CAPTION_PROPERTY: AXFWidgetProperty = {
+    name: "caption",
+    category: "General",
+    defaultValue: "Panel",
+    title: "Caption",
+    editor: "TextEditor",
+    options: {
+        allowHtml: false
+    }
+}
+
 
 export const AXF_COLOR_PROPERTY: AXFWidgetProperty = {
     name: "color",

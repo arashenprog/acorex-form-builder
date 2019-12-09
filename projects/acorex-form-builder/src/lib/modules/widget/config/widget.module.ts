@@ -18,6 +18,7 @@ import { AXFTemplateService } from '../services/template/template.service';
 import { AXFDropdownInputWidgetModule } from '../widgets/dropdown-input/dropdown-input.module';
 import { AXFButtonWidgetModule } from '../widgets/button/button.module';
 import { AXFFormService } from '../services/form.service';
+import { AXFPanelWidgetModule } from '../widgets/panel/panel.module';
 
 
 
@@ -37,7 +38,8 @@ const MODULES = [
     AXFPageOutletWidgetModule,
     AXFListInputWidgetModule,
     AXFDropdownInputWidgetModule,
-    AXFButtonWidgetModule
+    AXFButtonWidgetModule,
+    AXFPanelWidgetModule
 ];
 
 @NgModule({
