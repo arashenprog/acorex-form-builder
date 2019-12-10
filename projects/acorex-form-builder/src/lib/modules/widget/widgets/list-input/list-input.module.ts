@@ -38,16 +38,18 @@ export class AXFListInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                items:{ ContentView:["text"],
-                        Content:[{ value:1,text: "Item1" }, { value:2,text: "Item2"}, { value:3,text: "Item3"}],
-                        ShowOther:false}, 
-                mode:"single",
-                direction:"horizontal",
-                fillBy:"manualList", 
-                value:[1],
-                alignCheck:"left"
+                items: {
+                    ContentView: ["text"],
+                    Content: [{ value: 1, text: "Item1" }, { value: 2, text: "Item2" }, { value: 3, text: "Item3" }],
+                    ShowOther: false
+                },
+                mode: "single",
+                direction: "horizontal",
+                fillBy: "manualList",
+                value: [1],
+                alignCheck: "left"
             },
-            properties: [ 
+            properties: [
                 {
                     name: "mode",
                     category: "General",
@@ -56,7 +58,7 @@ export class AXFListInputWidgetModule {
                     editor: "SelectionEditor",
                     options: {
                         items: [{ value: "single", title: "Single" }, { value: "multiple", title: "Multiple" }
-                        , { value: "unselectable", title: "Unselectable" }],
+                            , { value: "unselectable", title: "Unselectable" }],
                         mode: "single",
                         direction: "horizontal"
                     }
@@ -72,18 +74,23 @@ export class AXFListInputWidgetModule {
                         mode: "single",
                         direction: "horizontal"
                     }
-                }, 
+                },
                 {
                     name: "alignCheck",
                     category: "General",
                     defaultValue: [],
-                    title: "CheckBox/RadioButton Align ",
+                    title: "CheckBox/RadioButton Align",
                     editor: "SelectionEditor",
+                    visible: (options: any) => {
+                        debugger;
+                        return options.mode != "unselectable";
+                    },
+                    //visible:false,
                     options: {
                         items: [{ value: "left", title: "Left" }, { value: "top", title: "Top" },
-                                { value: "right", title: "Right" }, { value: "bottom", title: "Bottom" }],
+                        { value: "right", title: "Right" }, { value: "bottom", title: "Bottom" }],
                         mode: "single",
-                        direction: "horizontal" 
+                        direction: "horizontal"
                     }
                 },
                 {
@@ -95,7 +102,7 @@ export class AXFListInputWidgetModule {
                     options: {
                         items: [{ value: "manualList", title: "Manual List" }, { value: "databaseList", title: "Database List" }],
                         mode: "single",
-                        direction: "horizontal" 
+                        direction: "horizontal"
                     }
                 },
                 {
@@ -105,11 +112,11 @@ export class AXFListInputWidgetModule {
                     title: "Items",
                     editor: "ItemsEditor",
                     options: {
-                        imagable:true,
-                        otherable:true
+                        imagable: true,
+                        otherable: true
                     }
                 },
-                
+
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]
