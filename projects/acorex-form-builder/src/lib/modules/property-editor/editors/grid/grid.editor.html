@@ -1,0 +1,43 @@
+<div>
+    <div class="divmrg">
+        <ax-selection-list direction="horizontal" mode="single" [selectedValues]="value.fillby" [items]="fillbyItems"
+            (selectedValuesChange)="fillbyViewChange($event)" textField="title" valueField="value">
+        </ax-selection-list>
+    </div>
+    <div *ngIf="value.fillby.includes('databaseList')" class="divmrg">
+        <ax-select-box [allowSearch]="false" [selectedValues]="value.dsName" [items]="dataSources" textField="text"
+            valueField="id">
+        </ax-select-box>
+    </div>
+    <div *ngFor="let item of value.columns;let i = index" class="parentItem ">
+        <div class="childItem">
+            <div class="titleItem">
+                <ax-select-box allowSearch="false" [selectedValues]="item.type" [items]="columnTypeItems"
+                    textField="title" valueField="value" (selectedValuesChange)="columnTypeChange(i,$event)">
+                </ax-select-box>
+            </div>
+            <div class="titleItem pd5">
+                <ax-check-box label="Fill By User" [value]="item.fillByUser" (change)="checkChange($event)">
+                </ax-check-box>
+            </div>
+        </div>
+        <div class="childItem">
+            <div class="titleItem">
+                <ax-text-box [text]="item.title" (textChange)="titleItemChange(i,$event)"></ax-text-box>
+            </div>
+            <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,item)">
+                <i class="fas fa-arrow-up primary"></i>
+            </ax-button>
+            <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,item)">
+                <i class="fas fa-arrow-down primary"></i>
+            </ax-button>
+            <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
+                <i class="fas fa-trash danger"></i>
+            </ax-button>
+        </div>
+    </div>
+    <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
+        <span>Add New Item</span>&nbsp;
+        <i class="fas fa-plus"></i>
+    </ax-button>
+</div>

@@ -1,0 +1,22 @@
+.divmrg{
+    margin: 10px 0px;
+}
+
+.parentItem
+{
+    margin-bottom: 5px;
+    border: 1px dotted var(--primary-color);
+    padding: 2px;
+
+     
+    .pd5{
+        padding: 5px 5px; 
+    }
+
+    .childItem{     
+        flex-direction: row;
+        margin-bottom: 2px; 
+        display: inline-flex;
+        .titleItem{width: 50%;} 
+    }
+}
