@@ -16,7 +16,8 @@
     .childItem{     
         flex-direction: row;
         margin-bottom: 2px; 
-        display: inline-flex;
-        .titleItem{width: 50%;} 
+        display: inline-flex; 
+        .firstItem{width: 58%;}
+        .lastItem{width: 42%;}
     }
 }

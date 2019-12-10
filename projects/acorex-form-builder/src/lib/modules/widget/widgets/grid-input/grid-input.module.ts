@@ -9,6 +9,7 @@ import { AXFGridInputWidgetDesigner } from './designer/grid-input-widget.designe
 import { AXFGridInputWidgetPrint } from './print/grid-input-widget.print';
 import { AXFGridInputWidgetView } from './view/grid-input-widget.view';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
+import { ColumnStructureEditor } from '../../../property-editor/editors/grid/gridstructure.editor';
 
 export const COMPONENTS = [AXFGridInputWidgetDesigner, AXFGridInputWidgetPrint, AXFGridInputWidgetView]
 
@@ -33,15 +34,15 @@ export class AXFGridInputWidgetModule {
             viewClass: AXFGridInputWidgetView,
             options: {
                 boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("0"),
+                    border: new AXFBoxStyleBoxSizeValue("1"),
                     padding: new AXFBoxStyleBoxSizeValue("0"),
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                data:{ fillby:["manualList"],
-                        columns:[],
+                data:{ fillby:["databaseList"],
+                        columns:[new ColumnStructureEditor(1),new ColumnStructureEditor(2)],
                         dsName:[],
-                        rowCount:0}, 
+                        rowCount:1}, 
                 header:"",
                 footer:""
             },
@@ -64,7 +65,7 @@ export class AXFGridInputWidgetModule {
                     name: "data",
                     category: "General",
                     defaultValue: {},
-                    title: "Grid",
+                    title: "Data Management",
                     editor: "GridEditor" 
                 },
                 

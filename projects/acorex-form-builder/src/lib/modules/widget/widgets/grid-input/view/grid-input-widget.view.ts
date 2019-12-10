@@ -10,11 +10,9 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
     value:string[];
-    items:{ContentView:string[],Content:any[],ShowOther:boolean};
-    mode:string;
-    direction:string;
-    fillBy:string;
-    alignCheck:string;
+    data:{columns:any[],rowCount:number,fillBy:string[],dsName:string[]}; 
+    header:string;
+    footer:string; 
 
     constructor() {
         super()
@@ -29,11 +27,5 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     {
 
     }
-
-    getStyles(mode) { 
-        const styles = { 
-            'border-radius': mode == 'single' ? 100+"%" : 0 
-        };
-        return styles;
-    }
+ 
 }

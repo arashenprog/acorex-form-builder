@@ -1,23 +1,28 @@
-<table  class="wdt100">
-        <tr *ngIf="header!=''" style="background-color: var(--primary-color);
-        color: var(--white-color);">
-                <th attr.colspan="{{data.columns.length}}">{{header}}</th>
+<div #el>
+    <table class="wdt100">
+        <tr *ngIf="header!=''">
+            <th attr.colspan="{{data.columns.length}}">{{header}}</th>
         </tr>
         <tr>
-            <th *ngFor="let item of data.columns">{{item.title}}</th>
-        </tr> 
-        <tr >
+            <th *ngFor="let item of data.columns" style="background-color: var(--primary-color);
+            color: var(--white-color);border: 1px solid white;">{{item.title}}</th>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--primary-color);">
             <td *ngFor="let item of data.columns">
                 <ax-text-box *ngIf="item.type.includes('string')"></ax-text-box>
                 <ax-text-box type="number" *ngIf="item.type.includes('number')"></ax-text-box>
-                <ax-date-picker label="" *ngIf="item.type.includes('date')"></ax-date-picker> 
-                <ax-check-box *ngIf="item.type.includes('boolean')" label="' '" ></ax-check-box>  
-                <ax-upload-file *ngIf="item.type.includes('image')" type="inline" >
-                    </ax-upload-file>
+                <ax-date-picker label="" *ngIf="item.type.includes('date')"></ax-date-picker>
+                <ax-check-box *ngIf="item.type.includes('boolean')" label="' '"></ax-check-box>
+                <ax-upload-file *ngIf="item.type.includes('image')" type="inline">
+                </ax-upload-file>
+                <ax-selection-list direction="horizontal" *ngIf="item.type.includes('selectionList')"
+                    [items]="item.subItems" textField="value" valueField="value"
+                    mode="{{item.mode?'multiple':'single'}}">
+                </ax-selection-list>
             </td>
         </tr>
-        <tr *ngIf="footer!=''" style="background-color: var(--primary-color);
-        color: var(--white-color);">
-                <th attr.colspan="{{data.columns.length}}">{{footer}}</th>
+        <tr *ngIf="footer!=''" >
+            <th attr.colspan="{{data.columns.length}}">{{footer}}</th>
         </tr>
     </table>
+</div>

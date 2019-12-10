@@ -3,6 +3,7 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
 import { AXPopupService } from 'acorex-ui';
 import { WidgetConfig } from '../../../services/widget.service';
+import { retry } from 'rxjs/operators';
 
 @Component({
     selector: "[axf-widget-text]",
@@ -17,8 +18,7 @@ export class AXFGridInputWidgetDesigner extends AXFWidgetDesigner {
     value:string[];
     data:{columns:any[],rowCount:number,fillBy:string[],dsName:string[]}; 
     header:string;
-    footer:string;
-
+    footer:string; 
 
 
     constructor() {
@@ -34,14 +34,7 @@ export class AXFGridInputWidgetDesigner extends AXFWidgetDesigner {
     {
 
     }
-
-
-    getStyles(mode) { 
-        const styles = { 
-            'border-radius': mode == 'single' ? 100+"%" : 0 
-        };
-        return styles;
-    }
+ 
 
 }
 
