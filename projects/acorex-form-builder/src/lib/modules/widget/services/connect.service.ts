@@ -20,13 +20,28 @@ export class AXFConnectService {
             });
         }
         if (action == "getDSList") {
-            let list: any[] = [{ key: "company-name", title: "Staff List" }, { key: "question-list", title: "Questions" }]
+            let list: any[] = [{ key: "staff-name", title: "Staff List" }, { key: "question-list", title: "Questions" }]
             return PromisResult.resolve({
                 items: list
             });
         }
         if (action == "getList" && options && options.name) {
             if (options.name == "template-list") {
+                return PromisResult.resolve({
+                    items: [
+                        {
+                            value: '1',
+                            title: "Template 1"
+                        },
+                        {
+                            value: "2",
+                            title: "Template 2"
+                        }
+                    ],
+                    count: 2
+                });
+            }
+            if (options.name == "staff-list") {
                 return PromisResult.resolve({
                     items: [
                         {

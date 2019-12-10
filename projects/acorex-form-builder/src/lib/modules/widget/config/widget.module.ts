@@ -18,6 +18,9 @@ import { AXFTemplateService } from '../services/template/template.service';
 import { AXFDropdownInputWidgetModule } from '../widgets/dropdown-input/dropdown-input.module';
 import { AXFButtonWidgetModule } from '../widgets/button/button.module';
 import { AXFGridInputWidgetModule } from '../widgets/grid-input/grid-input.module';
+import { AXFFormService } from '../services/form.service';
+import { AXFPanelWidgetModule } from '../widgets/panel/panel.module';
+
 
 
 const MODULES = [
@@ -37,14 +40,15 @@ const MODULES = [
     AXFListInputWidgetModule,
     AXFDropdownInputWidgetModule,
     AXFButtonWidgetModule,
-    AXFGridInputWidgetModule
+    AXFGridInputWidgetModule,
+    AXFPanelWidgetModule
 ];
 
 @NgModule({
     declarations: [],
     imports: [...MODULES],
     exports: [...MODULES],
-    providers: [AXFTemplateService],
+    providers: [AXFTemplateService,AXFFormService],
 })
 export class AXFWidgetModule {
     constructor(injector: Injector) {

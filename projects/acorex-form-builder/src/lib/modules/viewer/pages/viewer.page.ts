@@ -3,6 +3,7 @@ import { AXBasePageComponent } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { ActivatedRoute } from '@angular/router';
 import { AXFConnectService } from '../../widget/services/connect.service';
+import { AXFFormService } from '../../widget/services/form.service';
 
 @Component({
   templateUrl: './viewer.page.html',
@@ -14,11 +15,22 @@ export class ACFViewerPage extends AXBasePageComponent {
     private widgetService: AXFWidgetService,
     private router: ActivatedRoute,
     private connectService: AXFConnectService,
+    private formService: AXFFormService
   ) {
     super();
     this.mode = this.router.snapshot.queryParams.mode;
+
+    formService.on("valueChange", (e) => {
+      this.formData[e.name] = e.value;
+    })
+
+    formService.on("submit", (e) => {
+      console.log("submit", this.formData);
+    })
   }
 
+
+  private formData: any = {};
 
   mode: string = "view";
   widgets: WidgetConfig[] = [];

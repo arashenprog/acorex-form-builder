@@ -65,7 +65,6 @@ export class ACFViewerFrameComponent {
 
     @HostListener('window:message', ['$event'])
     handleMessage(e) {
-        debugger;
         if (e.data && e.data.action == "load") {
             this.frame.nativeElement.contentWindow.postMessage({
                 action: "load",

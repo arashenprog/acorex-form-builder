@@ -8,7 +8,8 @@ import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-
     styleUrls: ['./page-widget.view.scss']
 })
 export class AXFPageWidgetView extends AXFWidgetView {
-    
+
+
     constructor(private hostElement: ElementRef) {
         super();
     }
@@ -21,6 +22,8 @@ export class AXFPageWidgetView extends AXFWidgetView {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         this.applyStyle(el);
     }
+
+
 
 }
 

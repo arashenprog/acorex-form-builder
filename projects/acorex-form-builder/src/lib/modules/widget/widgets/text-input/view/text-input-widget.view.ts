@@ -8,6 +8,7 @@ import { AXFWidgetView } from '../../../config/widget';
 export class AXFTextInputWidgetView extends AXFWidgetView {
 
     text: String;
+    visible: true;
 
     
     constructor(private el: ElementRef<HTMLElement>){
