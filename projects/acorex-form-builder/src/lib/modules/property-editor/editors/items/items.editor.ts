@@ -1,12 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
-<<<<<<< HEAD
 import { ItemsStructureEditor, ContentItemsStructureEditor } from './itemstructure.editor';
-import { BrowserTransferStateModule } from '@angular/platform-browser';
-=======
-import { ItemsStructureEditor } from './itemstructure.editor'; 
+import { BrowserTransferStateModule } from '@angular/platform-browser'; 
 import { AXFDataService } from '../../../widget/services/data.service';
->>>>>>> 9d146ed811848b4b6a02ed1d694453fd5aaadbc1
 
 @Component({
     templateUrl: './items.editor.html',
@@ -14,13 +10,6 @@ import { AXFDataService } from '../../../widget/services/data.service';
 })
 export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEditor> implements OnInit {
 
-<<<<<<< HEAD
-    items: ItemsStructureEditor;
-    innerValue: any[] = [];
-    // contentViewItems: any[] = [{ value: "text", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }]
-    // imagable: boolean = false;
-    constructor() {
-=======
     items:ItemsStructureEditor;
     innerValue: any[] = [];  
     contentViewItems: any[]= [{ value: "text", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }]
@@ -30,7 +19,6 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
    
 
     constructor(protected cdr: ChangeDetectorRef,private dataService: AXFDataService) {
->>>>>>> 9d146ed811848b4b6a02ed1d694453fd5aaadbc1
         super();
     }
 

@@ -112,7 +112,6 @@ export class AXFListInputWidgetModule {
                     category: "Data",
                     defaultValue: {},
                     title: "Items",
-<<<<<<< HEAD
                     editor: "ItemsEditor"
                 }, 
                 {
@@ -122,16 +121,6 @@ export class AXFListInputWidgetModule {
                     title: "Show Other",
                     editor: "CheckboxEditor",
                     options: { label:"Show Other"}
-=======
-                    editor: "ItemsEditor",
-                    visible: (options: any) => {
-                        return options.dsMode == "manual"
-                    },
-                    options: {
-                        imagable: true,
-                        otherable: true
-                    }
->>>>>>> 9d146ed811848b4b6a02ed1d694453fd5aaadbc1
                 },
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,

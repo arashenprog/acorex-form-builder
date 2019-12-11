@@ -75,9 +75,6 @@ export class AXFDropdownInputWidgetModule {
                     category: "Data",
                     defaultValue: {},
                     title: "Items",
-<<<<<<< HEAD
-                    editor: "ItemsEditor" 
-=======
                     editor: "ItemsEditor",
                     visible: (options: any) => {
                         return  options.dsMode == "manual"
@@ -86,7 +83,6 @@ export class AXFDropdownInputWidgetModule {
                         imagable:false,
                         otherable:false
                     }
->>>>>>> 9d146ed811848b4b6a02ed1d694453fd5aaadbc1
                 },
                 
                 AXF_BOX_STYLE_PROPERTY,
