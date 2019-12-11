@@ -24,5 +24,4 @@ export abstract class AXFProperyEditor<T>{
     handleValueChange(v: T) {
         this.value = v;
     }
-
 }
