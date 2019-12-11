@@ -3,6 +3,7 @@ import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
 import { AXHtmlUtil, EventService } from 'acorex-ui'
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 import { AXFFormService, EventData } from '../services/form.service';
+import { EventHandlerVars } from '@angular/compiler/src/compiler_util/expression_converter';
 
 export const WidgetInjector: { instance?: Injector } = {};
 
@@ -15,6 +16,7 @@ export interface AXFWidgetContainer {
 export abstract class AXFWidget implements AXFWidgetContainer {
     uid: string;
     config: WidgetConfig;
+    parent: any;
 
 
     @Output()
@@ -112,7 +114,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     onDelete: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
     onRefresh: EventEmitter<any> = new EventEmitter<any>();
 
-    parent: AXFWidgetDesigner;
+
 
     constructor() {
         super();
@@ -168,10 +170,19 @@ export abstract class AXFWidgetView extends AXFWidget {
     public set value(v: any) {
         this._value = v;
         this.valueChange.emit(v);
-        let name: string = this.config.options.name;
+        let name: string = this.getName();
         if (name) {
             this.formService.emit(new EventData("valueChange", { name: name, value: v }));
+            this.formService.setValue(name, v)
         }
+    }
+
+    ngAfterViewInit() {
+        this.formService.setWidget(this.getName(), this);
+    }
+
+    private getName() {
+        return this.config.options.name;
     }
 
 
@@ -179,21 +190,52 @@ export abstract class AXFWidgetView extends AXFWidget {
     protected invokeEvent(name: string) {
         if (this[name]) {
             let action: string = this[name];
-            if (action == "submit()") {
-                this.formService.emit(new EventData("submit"));
-                return;
+            if (action) {
+                debugger;
+                action.split(';').forEach(act => {
+                    if (act == "submit()") {
+                        this.formService.emit(new EventData("submit"));
+                        return;
+                    }
+                    let allWidgets = act.match(/\#([a-zA-Z1-9])+/g);
+                    let allVars = act.match(/\$([a-zA-Z1-9])+/g);
+                    let execCode = act.replace('#', 'this._').replace('$', 'this.$');
+                    let params = {};
+                    if (allWidgets) {
+                        allWidgets.forEach(w => {
+                            params['_' + w.substring(1)] = this.formService.getWidget(w.substring(1));
+                        });
+                    }
+                    if (allVars) {
+                        allVars.forEach(v => {
+                            params[v] = this.formService.getValue(v.substring(1));
+                        });
+                    }
+                    new Function(execCode).call(params);
+                    // if (act.match(/\#([a-zA-Z1-9])+\.\w+=.+/)) {
+                    //     let name = act.split('=')[0].split('.')[0].substring(1);
+                    //     let prop = act.split('=')[0].split('.')[1];
+                    //     let value = this.extractValue(act.split('=')[1])
+                    //     this.formService.emit(new EventData("props", { name: name, prop: prop, value: value }));
+                    //     return;
+                    // }
+                    // eval(act);
+                })
+
             }
-            if (action.match(/\$([a-zA-Z1-9])+\.\w+=.+/)) {
-                let name = action.split('=')[0].split('.')[0].substring(1);
-                let prop = action.split('=')[0].split('.')[1];
-                let value = eval(action.split('=')[1])
-                this.formService.emit(new EventData("props", { name: name, prop: prop, value: value }));
-                return;
-            }
-            eval(action);
         }
     }
 
+
+    // private extractValue(value: string) {
+    //     if (value.match(/\$([a-zA-Z1-9])+/)) {
+    //         return this.formService.getValue(value)
+    //     }
+    //     else if (value.match(/\#this+\.\w+/)) {
+    //         return this[value.split('.')[1]]
+    //     }
+    //     return eval(value);
+    // }
 
 
 
@@ -202,7 +244,7 @@ export abstract class AXFWidgetView extends AXFWidget {
         this.formService = WidgetInjector.instance.get(AXFFormService);
         //
         this.formService.on("props", (e) => {
-            let name: string = this.config.options.name;
+            let name: string = this.getName();
             if (e.name == name) {
                 this[e.prop] = e.value;
             }
