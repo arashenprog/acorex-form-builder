@@ -1,5 +1,5 @@
 <div #el>
-    <ax-select-box  [allowSearch]="allowSearch" [selectedValues]="value" 
+    <ax-select-box  [allowSearch]="allowSearch" [selectedValues]="value" (selectedValuesChange)="handleValueChnage($event)" 
     [items]="items.Content" textField="text" valueField="value">
     </ax-select-box>
 </div>

@@ -4,7 +4,14 @@ import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({
     template: `
-        <ax-select-box  [allowSearch]="false" [selectedValues]="innerValue" (selectedValuesChange)="handleValueChange($event)" [items]="items" [textField]="textField" [valueField]="valueField">
+        <ax-select-box  
+            [allowSearch]="false" 
+            [items]="items"
+            [selectedValues]="innerValue" 
+            (selectedValuesChange)="handleValueChange($event)"  
+            [textField]="textField" 
+            [valueField]="valueField"
+        >
         </ax-select-box>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -17,9 +24,9 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]>  {
     valueField: string = "value";
     dataSource: string;
 
-    
 
-    constructor(protected cdr: ChangeDetectorRef,private dataService: AXFDataService) {
+
+    constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
         super();
     }
 
@@ -40,11 +47,8 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]>  {
     }
 
     handleValueChange(v: any) {
-        if(!v || !v.length)
-            return;
-        if (JSON.stringify(v)!=JSON.stringify(this.innerValue)) {
-            this.innerValue = v;
-            this.value = v[0];
-        }
+        debugger;
+        this.innerValue = v;
+        this.value = v[0];
     }
 }

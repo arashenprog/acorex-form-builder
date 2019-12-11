@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_LABEL_PROPERTY } from '../../config/general-properties';
+import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_LABEL_PROPERTY, AXF_DS_MODE_PROPERTY, AXF_DS_LIST_PROPERTY } from '../../config/general-properties';
 import { AXFDropdownInputWidgetDesigner } from './designer/dropdown-input-widget.designer';
 import { AXFDropdownInputWidgetPrint } from './print/dropdown-input-widget.print';
 import { AXFDropdownInputWidgetView } from './view/dropdown-input-widget.view';
@@ -66,24 +66,17 @@ export class AXFDropdownInputWidgetModule {
                     editor: "CheckboxEditor",
                     options: { label:"Allow Search"}
                 },
-                {
-                    name: "fillBy",
-                    category: "General",
-                    defaultValue: [],
-                    title: "Fill By",
-                    editor: "SelectionEditor",
-                    options: {
-                        items: [{ value: "manuallist", title: "Manual List" }, { value: "databaselist", title: "Database List" }],
-                        mode: "single",
-                        direction: "horizontal" 
-                    }
-                },
+                AXF_DS_MODE_PROPERTY,
+                AXF_DS_LIST_PROPERTY,
                 {
                     name: "items",
-                    category: "General",
+                    category: "Data",
                     defaultValue: {},
                     title: "Items",
                     editor: "ItemsEditor",
+                    visible: (options: any) => {
+                        return  options.dsMode == "manual"
+                    },
                     options: {
                         imagable:false,
                         otherable:false

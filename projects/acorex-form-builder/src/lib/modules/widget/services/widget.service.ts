@@ -56,7 +56,6 @@ export class AXFWidgetService {
     }
 
     resolve(name: string): WidgetConfig {
-        debugger;
         let c = AXFWidgetService.WIDGET_ITEMS.find(c => c.name == name)
         let res: WidgetConfig = {
             category: c.category,
