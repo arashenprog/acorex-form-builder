@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
-import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({
     template: `
@@ -9,9 +8,12 @@ import { AXFDataService } from '../../../widget/services/data.service';
     `,
 })
 export class AXFEventEditorComponent extends AXFProperyEditor<string>  {
-    constructor(private dataService: AXFDataService) {
+
+    constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
+
+
     handleValueChange(value: any) {
         super.handleValueChange(value);
     }

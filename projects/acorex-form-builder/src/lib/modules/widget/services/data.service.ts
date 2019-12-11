@@ -29,17 +29,17 @@ export class AXFDataService {
                 });
             }
         });
-        let p2 = new Promise((resolve) => {
-            if (!DATASOURCES.length) {
-                this.connectService.send("getDSList").then(c => {
-                    console.log("Load DataSources ...")
-                    DATASOURCES.push(...c.items);
-                    resolve()
-                });
-            }
-        });
+        // let p2 = new Promise((resolve) => {
+        //     if (!DATASOURCES.length) {
+        //         this.connectService.send("getDSList").then(c => {
+        //             console.log("Load DataSources ...")
+        //             DATASOURCES.push(...c.items);
+        //             resolve()
+        //         });
+        //     }
+        // });
 
-        return Promise.all([p1, p2]);
+        return Promise.all([p1]);
     }
 
     getList(dataSourceName: String, params?: any): PromisResult<any[]> {

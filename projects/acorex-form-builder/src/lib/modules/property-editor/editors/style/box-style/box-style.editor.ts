@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../../config/editor';
 import { AXFBoxStyleValue } from './box-style.class';
 
@@ -12,9 +12,8 @@ export class AXFBoxStyleEditorComponent extends AXFProperyEditor<AXFBoxStyleValu
 
     private prevValue = new AXFBoxStyleValue();
 
-    constructor() {
+    constructor(protected cdr: ChangeDetectorRef) {
         super();
-
     }
 
     ngOnInit(): void {

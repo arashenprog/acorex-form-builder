@@ -1,7 +1,12 @@
-import { Output, EventEmitter, Input, Directive } from '@angular/core';
+import { Output, EventEmitter, Input, Directive, ChangeDetectorRef, Injector, Optional } from '@angular/core';
+
+
 
 @Directive()
 export abstract class AXFProperyEditor<T>{
+
+    @Output()
+    valueChange: EventEmitter<T> = new EventEmitter<T>();
 
     private _value: T;
     @Input()
@@ -12,13 +17,11 @@ export abstract class AXFProperyEditor<T>{
         this._value = v;
         this.valueChange.emit(v);
     }
-
-
-    @Output()
-    valueChange: EventEmitter<T> = new EventEmitter<T>();
+    
+    constructor() {
+    }
 
     handleValueChange(v: T) {
         this.value = v;
     }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 
 @Component({
@@ -6,15 +6,16 @@ import { AXFProperyEditor } from '../../config/editor';
         <ax-color-picker  [value]="value" (valueChange)="handleValueChange($event)" >
         </ax-color-picker>
     `,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFColorEditorComponent extends AXFProperyEditor<string> implements OnInit {
 
 
 
-    constructor() {
+    constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
     }
 }

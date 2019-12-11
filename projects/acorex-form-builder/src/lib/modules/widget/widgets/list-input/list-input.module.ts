@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_LABEL_PROPERTY } from '../../config/general-properties';
+import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_LABEL_PROPERTY, AXF_DS_LIST_PROPERTY, AXF_DS_MODE_PROPERTY } from '../../config/general-properties';
 import { AXFListInputWidgetDesigner } from './designer/list-input-widget.designer';
 import { AXFListInputWidgetPrint } from './print/list-input-widget.print';
 import { AXFListInputWidgetView } from './view/list-input-widget.view';
@@ -83,7 +83,6 @@ export class AXFListInputWidgetModule {
                     title: "CheckBox/RadioButton Align",
                     editor: "SelectionEditor",
                     visible: (options: any) => {
-                        debugger;
                         return options.mode != "unselectable";
                     },
                     //visible:false,
@@ -106,11 +105,14 @@ export class AXFListInputWidgetModule {
                         direction: "horizontal"
                     }
                 },
+                AXF_DS_MODE_PROPERTY,
+                AXF_DS_LIST_PROPERTY,
                 {
                     name: "items",
-                    category: "General",
+                    category: "Data",
                     defaultValue: {},
                     title: "Items",
+<<<<<<< HEAD
                     editor: "ItemsEditor"
                 }, 
                 {
@@ -120,6 +122,16 @@ export class AXFListInputWidgetModule {
                     title: "Show Other",
                     editor: "CheckboxEditor",
                     options: { label:"Show Other"}
+=======
+                    editor: "ItemsEditor",
+                    visible: (options: any) => {
+                        return options.dsMode == "manual"
+                    },
+                    options: {
+                        imagable: true,
+                        otherable: true
+                    }
+>>>>>>> 9d146ed811848b4b6a02ed1d694453fd5aaadbc1
                 },
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,

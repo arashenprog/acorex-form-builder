@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
+<<<<<<< HEAD
 import { ItemsStructureEditor, ContentItemsStructureEditor } from './itemstructure.editor';
 import { BrowserTransferStateModule } from '@angular/platform-browser';
+=======
+import { ItemsStructureEditor } from './itemstructure.editor'; 
+import { AXFDataService } from '../../../widget/services/data.service';
+>>>>>>> 9d146ed811848b4b6a02ed1d694453fd5aaadbc1
 
 @Component({
     templateUrl: './items.editor.html',
@@ -9,11 +14,23 @@ import { BrowserTransferStateModule } from '@angular/platform-browser';
 })
 export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEditor> implements OnInit {
 
+<<<<<<< HEAD
     items: ItemsStructureEditor;
     innerValue: any[] = [];
     // contentViewItems: any[] = [{ value: "text", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }]
     // imagable: boolean = false;
     constructor() {
+=======
+    items:ItemsStructureEditor;
+    innerValue: any[] = [];  
+    contentViewItems: any[]= [{ value: "text", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }]
+    imagable:boolean=false;
+    otherable:boolean=false;
+    flgChange:boolean=false;
+   
+
+    constructor(protected cdr: ChangeDetectorRef,private dataService: AXFDataService) {
+>>>>>>> 9d146ed811848b4b6a02ed1d694453fd5aaadbc1
         super();
     }
 

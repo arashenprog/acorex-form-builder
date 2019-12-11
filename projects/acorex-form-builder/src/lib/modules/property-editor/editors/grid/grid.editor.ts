@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 import { GridStructureEditor, ColumnStructureEditor } from './gridstructure.editor';
 import { AXFColumnGridComponent } from './column-grid.component';
@@ -7,6 +7,7 @@ import { AXPopupService } from 'acorex-ui';
 @Component({
     templateUrl: './grid.editor.html',
     styleUrls: ['./grid.editor.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor> implements OnInit {
 

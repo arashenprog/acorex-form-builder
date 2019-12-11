@@ -19,23 +19,24 @@ export class AXFConnectService {
                 items: list
             });
         }
-        if (action == "getDSList") {
-            let list: any[] = [{ key: "staff-name", title: "Staff List" }, { key: "question-list", title: "Questions" }]
-            return PromisResult.resolve({
-                items: list
-            });
-        }
+
         if (action == "getList" && options && options.name) {
-            if (options.name == "template-list") {
+            if (options.name == "ds-list") {
+                let list: any[] = [{ value: "staff-list", title: "Staff List" }, { value: "question-list", title: "Questions" }]
+                return PromisResult.resolve({
+                    items: list
+                });
+            }
+            if (options.name == "question-list") {
                 return PromisResult.resolve({
                     items: [
                         {
                             value: '1',
-                            title: "Template 1"
+                            text: "Template 1"
                         },
                         {
                             value: "2",
-                            title: "Template 2"
+                            text: "Template 2"
                         }
                     ],
                     count: 2
@@ -46,11 +47,11 @@ export class AXFConnectService {
                     items: [
                         {
                             value: '1',
-                            title: "Template 1"
+                            text: "Arash Oshnoudi"
                         },
                         {
                             value: "2",
-                            title: "Template 2"
+                            text: "Ali Safari"
                         }
                     ],
                     count: 2

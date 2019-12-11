@@ -32,7 +32,7 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     options: {
         allowHtml: false
     }
-} 
+}
 
 export const AXF_RICH_TEXT_PROPERTY: AXFWidgetProperty = {
     name: "text",
@@ -43,7 +43,7 @@ export const AXF_RICH_TEXT_PROPERTY: AXFWidgetProperty = {
     options: {
         allowHtml: true
     }
-} 
+}
 
 export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
     name: "name",
@@ -111,21 +111,21 @@ export const AXF_TEXT_STYLE_PROPERTY: AXFWidgetProperty = {
 export const AXF_TEXT_SIZE_PROPERTY: AXFWidgetProperty = {
     name: "fontSize",
     category: "Style",
-    defaultValue:"inherit",
+    defaultValue: "inherit",
     title: "Font Size",
     editor: "DropdownEditor",
     options: {
         items: [
-            {value:"inherit",title:"inherit"},
-            {value:"xx-small",title:"xx-small"},
-            {value:"x-small",title:"x-small"},
-            {value:"smaller",title:"smaller"},
-            {value:"small",title:"small"},
-            {value:"medium",title:"medium"},
-            {value:"large",title:"large"},
-            {value:"larger",title:"larger"},
-            {value:"x-large",title:"x-large"},
-            {value:"xx-large",title:"xx-large"},
+            { value: "inherit", title: "inherit" },
+            { value: "xx-small", title: "xx-small" },
+            { value: "x-small", title: "x-small" },
+            { value: "smaller", title: "smaller" },
+            { value: "small", title: "small" },
+            { value: "medium", title: "medium" },
+            { value: "large", title: "large" },
+            { value: "larger", title: "larger" },
+            { value: "x-large", title: "x-large" },
+            { value: "xx-large", title: "xx-large" },
         ],
     }
 }
@@ -158,14 +158,31 @@ export const AXF_VERTICAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
     }
 }
 
-export const AXF_DS_PROPERTY: AXFWidgetProperty = {
-    name: "ds-name",
+export const AXF_DS_LIST_PROPERTY: AXFWidgetProperty = {
+    name: "dsName",
     category: "Data",
     defaultValue: null,
     title: "List",
     editor: "DropdownEditor",
+    visible: (options: any) => {
+        return options.dsMode == null || options.dsMode == "ds"
+    },
     options: {
-        dataSource:"ds-list"
+        dataSource: "ds-list"
+    }
+}
+
+
+export const AXF_DS_MODE_PROPERTY: AXFWidgetProperty = {
+    name: "dsMode",
+    category: "Data",
+    defaultValue: ["ds"],
+    title: "Date Mode",
+    editor: "SelectionEditor",
+    options: {
+        items: [{ value: "ds", title: "Datasource" }, { value: "manual", title: "Manual" }],
+        mode: "single",
+        direction: "horizontal"
     }
 }
 
