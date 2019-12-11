@@ -9,6 +9,7 @@ import { AXFListInputWidgetDesigner } from './designer/list-input-widget.designe
 import { AXFListInputWidgetPrint } from './print/list-input-widget.print';
 import { AXFListInputWidgetView } from './view/list-input-widget.view';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
+import { ContentItemsStructureEditor } from '../../../property-editor/editors/items/itemstructure.editor';
 
 export const COMPONENTS = [AXFListInputWidgetDesigner, AXFListInputWidgetPrint, AXFListInputWidgetView]
 
@@ -38,16 +39,16 @@ export class AXFListInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                items: {
-                    ContentView: ["text"],
-                    Content: [{ value: 1, text: "Item1" }, { value: 2, text: "Item2" }, { value: 3, text: "Item3" }],
-                    ShowOther: false
-                },
+                items:{ types:[ new ContentItemsStructureEditor({id:"text",title:"Text",type:"string"}),
+                                new ContentItemsStructureEditor({id:"image",title:"Image",type:"image"})],
+                        content:[] 
+                    },
                 mode: "single",
                 direction: "horizontal",
                 fillBy: "manualList",
                 value: [1],
-                alignCheck: "left"
+                alignCheck: "left",
+                showOther: false
             },
             properties: [
                 {
@@ -110,13 +111,16 @@ export class AXFListInputWidgetModule {
                     category: "General",
                     defaultValue: {},
                     title: "Items",
-                    editor: "ItemsEditor",
-                    options: {
-                        imagable: true,
-                        otherable: true
-                    }
+                    editor: "ItemsEditor"
+                }, 
+                {
+                    name: "showOther",
+                    category: "General",
+                    defaultValue:false,
+                    title: "Show Other",
+                    editor: "CheckboxEditor",
+                    options: { label:"Show Other"}
                 },
-
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]

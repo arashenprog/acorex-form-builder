@@ -75,6 +75,7 @@ export class AXFWidgetService {
             res.properties = this.deepCopy(c.properties);
         if (c.options)
             res.options = JSON.parse(JSON.stringify(c.options));
+            //res.options = this.deepCopy(c.options);
         else
             res.options = {};
         return res;

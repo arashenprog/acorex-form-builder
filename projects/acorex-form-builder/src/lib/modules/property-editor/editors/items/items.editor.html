@@ -1,24 +1,29 @@
 <div>
-    <div class="viewType" *ngIf="imagable">
+    <!-- <div class="viewType" *ngIf="imagable">
         <ax-selection-list direction="horizontal" mode="single" [items]="contentViewItems" 
         [selectedValues]="items.ContentView" (selectedValuesChange)="contentViewChange($event)" textField="title"
             valueField="value">
         </ax-selection-list>
-    </div>
-    <div *ngFor="let item of items.Content;let i = index" class="parentItem">
-        <div class="txtItem">
-            <ax-text-box *ngIf="items.ContentView.includes('text') || items.ContentView.includes('both')" [text]="item.text"
-           (textChange)="textItemChange(i,$event)" ></ax-text-box>            
-            <ax-upload-file *ngIf="items.ContentView.includes('image') || items.ContentView.includes('both')" type="inline" (onLoad)="uploadItemChange(i,$event)">
-            </ax-upload-file>
+    </div> -->
+    <div *ngFor="let cnt of items.content;let i = index" class="parentItem">
+        <div class="childItem" *ngFor="let item of items.types">
+            <span>{{item.title}}:</span>
+            <ax-text-box class="nodeItem" [text]="cnt[item.id]" *ngIf="item.type=='string'" (textChange)="itemChange(item,i,$event)"></ax-text-box>
+            <ax-text-box class="nodeItem" [text]="cnt[item.id]" type="number" *ngIf="item.type=='number'" (textChange)="itemChange(item,i,$event)"></ax-text-box>
+            <ax-date-picker class="nodeItem" [value]="cnt[item.id]" label="" *ngIf="item.type=='date'" (valueChange)="itemChange(item,i,$event)"></ax-date-picker>
+            <ax-check-box class="nodeItem" [value]="cnt[item.id]" *ngIf="item.type=='boolean'" label="' '" (change)="itemChange(item,i,$event)"></ax-check-box>
+            <ax-upload-file class="nodeItem" *ngIf="item.type=='image'" type="inline" (onLoad)="itemChange(item,i,$event)"></ax-upload-file>
+            <ax-selection-list class="nodeItem" [selectedValues]="cnt[item.id]" direction="horizontal" *ngIf="item.type=='selectionList'" (selectedValuesChange)="itemChange(item,i,$event)"
+                [items]="item.subItems" textField="value" valueField="value" mode="{{item.mode?'multiple':'single'}}">
+            </ax-selection-list>
         </div>
         <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
             <i class="fas fa-trash danger"></i>
         </ax-button>
-        <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,item)">
+        <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,cnt)">
             <i class="fas fa-arrow-up primary"></i>
         </ax-button>
-        <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,item)">
+        <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,cnt)">
             <i class="fas fa-arrow-down primary"></i>
         </ax-button>
     </div>
@@ -26,7 +31,4 @@
         <span>Add New Item</span>&nbsp;
         <i class="fas fa-plus"></i>
     </ax-button>
-    <div class="showother" *ngIf="otherable">
-        <ax-check-box label="Show Other" [value]="items.ShowOther" (change)="showOtherChange($event)"></ax-check-box>
-    </div>
 </div>

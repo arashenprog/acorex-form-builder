@@ -9,6 +9,7 @@ import { AXFDropdownInputWidgetDesigner } from './designer/dropdown-input-widget
 import { AXFDropdownInputWidgetPrint } from './print/dropdown-input-widget.print';
 import { AXFDropdownInputWidgetView } from './view/dropdown-input-widget.view';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
+import { ContentItemsStructureEditor } from '../../../property-editor/editors/items/itemstructure.editor';
 
 export const COMPONENTS = [AXFDropdownInputWidgetDesigner, AXFDropdownInputWidgetPrint, AXFDropdownInputWidgetView]
 
@@ -38,9 +39,10 @@ export class AXFDropdownInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                items:{ ContentView:["text"],
-                        Content:[{ value:1,text: "Item1" }, { value:2,text: "Item2"}, { value:3,text: "Item3"}],
-                        ShowOther:false}, 
+                items:{ types:[new ContentItemsStructureEditor({id:"value",title:"text",type:"string"})],
+                        content:[],
+                        isDrop:true
+                    }, 
                 mode:"single",
                 fillBy:"manuallist", 
                 value:[1] 
@@ -83,11 +85,7 @@ export class AXFDropdownInputWidgetModule {
                     category: "General",
                     defaultValue: {},
                     title: "Items",
-                    editor: "ItemsEditor",
-                    options: {
-                        imagable:false,
-                        otherable:false
-                    }
+                    editor: "ItemsEditor" 
                 },
                 
                 AXF_BOX_STYLE_PROPERTY,

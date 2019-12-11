@@ -1,16 +1,16 @@
 <div #el [ngClass]="direction" class="allItems">
-    <label class="radio-container" *ngFor="let item of items.Content" [ngClass]="alignCheck" >
-        <span *ngIf="items.ContentView.includes('text') || items.ContentView.includes('both')">{{item.text}}</span>
-        <img *ngIf="items.ContentView.includes('image') || items.ContentView.includes('both')" [src]="item.image" height="40" width="60">
+    <label class="radio-container" *ngFor="let item of items.content" [ngClass]="alignCheck" >
+        <!-- <span *ngIf="items.ContentView.includes('text') || items.ContentView.includes('both')">{{item.text}}</span>
+        <img *ngIf="items.ContentView.includes('image') || items.ContentView.includes('both')" [src]="item.image" height="40" width="60"> -->
         <input type="radio" [value]="item.value" *ngIf="mode!='unselectable'" />
         <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'"></span>
     </label>
-    <label *ngIf="items.ShowOther && mode!='unselectable'" class="radio-container">
+    <label *ngIf="showOther && mode!='unselectable'" class="radio-container" [ngClass]="alignCheck" >
         <span>Others</span>
         <input type="radio" value="0" />
         <span class="checkmark" [ngStyle]="getStyles(mode)"></span>
     </label> 
-    <div *ngIf="items.ShowOther && mode!='unselectable'">   
+    <div *ngIf="showOther && mode!='unselectable'">   
         <ax-text-box></ax-text-box> 
     </div>
 </div>

@@ -3,6 +3,7 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
 import { AXPopupService } from 'acorex-ui';
 import { WidgetConfig } from '../../../services/widget.service';
+import { ContentItemsStructureEditor } from '../../../../property-editor/editors/items/itemstructure.editor';
 
 @Component({
     selector: "[axf-widget-text]",
@@ -14,7 +15,7 @@ export class AXFDropdownInputWidgetDesigner extends AXFWidgetDesigner {
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
     value:string[];
-    items:{ContentView:string[],Content:any[],ShowOther:boolean};
+    items:{content:any[],types: ContentItemsStructureEditor[]};
     mode:string;
     fillBy:string; 
     allowSearch:boolean;

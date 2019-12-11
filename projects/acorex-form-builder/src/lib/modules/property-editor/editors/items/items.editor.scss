@@ -1,20 +1,21 @@
-.txtItem{
-    width: 60%;
-    float: left;
-    margin-right: 5px;
-}
+
 .parentItem
 {
     float: left; 
     margin-bottom: 5px;
     border: 1px dotted var(--primary-color);
-    padding: 2px
+    padding: 2px;
+    width: 100%;
+    .childItem{
+        span{padding-right: 3px;  width: 25%;}
+       .nodeItem{width: 100%;}
+        width: 100%;
+        margin-right: 5px;
+        flex-direction: row;
+        display: flex;
+    }
 }
 
 .viewType{
     margin-bottom: 5px;
-}
-
-.showother{
-    margin-top: 10px;
 }
