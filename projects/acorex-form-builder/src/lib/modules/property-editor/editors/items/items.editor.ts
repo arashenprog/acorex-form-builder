@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 import { ItemsStructureEditor } from './itemstructure.editor'; 
+import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({ 
     templateUrl: './items.editor.html',
@@ -14,7 +15,9 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
     imagable:boolean=false;
     otherable:boolean=false;
     flgChange:boolean=false;
-    constructor() {
+   
+
+    constructor(protected cdr: ChangeDetectorRef,private dataService: AXFDataService) {
         super();
     }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 
 @Component({
@@ -11,15 +11,15 @@ export class AXFUploadEditorComponent extends AXFProperyEditor<string> implement
 
 
 
-    constructor() {
+    constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
 
-    ngOnInit(): void {  
+
+    ngOnInit(): void {
     }
- 
-   handleValueChange(evt)
-    { 
-        this.value =  evt.data;  
+
+    handleValueChange(evt) {
+        this.value = evt.data;
     }
 }

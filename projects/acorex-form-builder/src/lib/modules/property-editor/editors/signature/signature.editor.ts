@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 import { SignatureStructureEditor } from './signaturestructure.editor';
 import { isNumber } from 'util';
+import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({
     templateUrl: './signature.editor.html',
@@ -13,7 +14,7 @@ export class AXFSignatureEditorComponent extends AXFProperyEditor<SignatureStruc
     showItems: any[] = [{ value: "item", title: "Item" }, { value: "grid", title: "Grid" }]
 
 
-    constructor() {
+    constructor(protected cdr: ChangeDetectorRef,private dataService: AXFDataService) {
         super();
     }
 

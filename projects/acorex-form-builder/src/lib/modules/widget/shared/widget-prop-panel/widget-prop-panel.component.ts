@@ -8,7 +8,7 @@ import { EventService } from 'acorex-ui';
     templateUrl: './widget-prop-panel.component.html',
     styleUrls: ['./widget-prop-panel.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    //changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFWidgetPropPanelComponent {
 
@@ -22,6 +22,7 @@ export class AXFWidgetPropPanelComponent {
                         this.tabNames.push(p.category);
                     }
                 });
+                this.cdr.markForCheck();
             }
         });
     }
@@ -35,10 +36,11 @@ export class AXFWidgetPropPanelComponent {
     widget: AXFWidget;
 
     getProps(category: string): AXFWidgetProperty[] {
+
         let list = this.widget.config.properties.filter(c => c.category == category);
+        console.log("getProps", list);
         let hidden = [];
         list.forEach(p => {
-            debugger;
             if (typeof p.visible === "function") {
                 if (!p.visible(this.widget.config.options)) {
                     hidden.push(p.name);
@@ -55,6 +57,6 @@ export class AXFWidgetPropPanelComponent {
             name: name,
             value: value
         });
-        //this.cdr.markForCheck();
+        this.cdr.markForCheck();
     }
 }

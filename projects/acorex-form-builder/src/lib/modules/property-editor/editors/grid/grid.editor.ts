@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 import { GridStructureEditor, ColumnStructureEditor } from './gridstructure.editor';
+import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({
     templateUrl: './grid.editor.html',
     styleUrls: ['./grid.editor.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor> implements OnInit {
 
@@ -16,7 +18,8 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
 
     fillbyItems: any[] = [{ value: "manualList", title: "Manual List" }, { value: "databaseList", title: "Database List" }];
     dataSources: any[] = [{ id: "staffs", text: "Staffs" }]
-    constructor() {
+   
+    constructor(protected cdr: ChangeDetectorRef,private dataService: AXFDataService) {
         super();
     }
 

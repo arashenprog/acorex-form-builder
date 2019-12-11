@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 import { AXPopupService } from 'acorex-ui';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
@@ -10,15 +10,16 @@ import { AXFRichTextComponent } from './rich-text.component';
     templateUrl: './text.editor.html',
     styleUrls: ['./text.editor.scss']
 })
-export class AXFTextEditorComponent extends AXFProperyEditor<string> implements OnInit {
+export class AXFTextEditorComponent extends AXFProperyEditor<string>  {
 
     allowHtml: boolean = false;
 
-    constructor(private popupService: AXPopupService) {
+    
+
+    constructor(protected cdr: ChangeDetectorRef,private popupService: AXPopupService) {
         super();
     }
 
-    ngOnInit(): void { }
 
     handleShowEditor() {
         this.popupService.open(AXFRichTextComponent, {

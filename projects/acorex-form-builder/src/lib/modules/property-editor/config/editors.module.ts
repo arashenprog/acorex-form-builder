@@ -35,4 +35,6 @@ const WDIGET_MODULES = [
     exports: [AXFEditorRendererDirective],
     providers: [AXFEditorService],
 })
-export class AXFEditorsModule { }
+export class AXFEditorsModule {
+
+ }

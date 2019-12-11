@@ -82,7 +82,6 @@ export class AXFListInputWidgetModule {
                     title: "CheckBox/RadioButton Align",
                     editor: "SelectionEditor",
                     visible: (options: any) => {
-                        debugger;
                         return options.mode != "unselectable";
                     },
                     //visible:false,

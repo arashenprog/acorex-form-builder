@@ -1,11 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
+import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({
     template: `
-        <ax-selection-list [direction]="direction" [mode]="mode" [selectedValues]="innerValue" (selectedValuesChange)="handleValueChange($event)" [items]="items" [textField]="textField" [valueField]="valueField">
+        <ax-selection-list 
+            [direction]="direction" 
+            [mode]="mode" 
+            [textField]="textField" 
+            [valueField]="valueField"
+            [items]="items" 
+            [selectedValues]="innerValue" 
+            (selectedValuesChange)="handleValueChange($event)" 
+        >
         </ax-selection-list>
     `,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFSelectionEditorComponent extends AXFProperyEditor<any[]>  {
 
@@ -17,18 +27,19 @@ export class AXFSelectionEditorComponent extends AXFProperyEditor<any[]>  {
     direction: "horizontal" | "vertical" = "horizontal";
     mode: "single" | "multiple" = "single";
 
-    constructor() {
+    constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
         super();
     }
 
     ngAfterViewInit(): void {
-        this.innerValue = this.value;
+        setTimeout(() => {
+            this.innerValue = this.value;
+            this.cdr.markForCheck();
+        });
     }
 
     handleValueChange(v: any) {
-        if (JSON.stringify(v) != JSON.stringify(this.innerValue)) {
-            this.innerValue = v;
-            this.value = v;
-        }
+        this.innerValue = v;
+        this.value = v;
     }
 }
