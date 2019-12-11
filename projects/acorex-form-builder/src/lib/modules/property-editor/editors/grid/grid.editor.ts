@@ -31,12 +31,6 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
         super.handleValueChange(this.value);
     }
 
-    rowCountChange(e)
-    {
-        this.value.rowCount = e;
-        super.handleValueChange(this.value);
-    }
-
     columnTypeChange(ind, e) {
         if (!e || !e.length)
             return;

@@ -41,8 +41,7 @@ export class AXFGridInputWidgetModule {
                 bgColor: "#FFFFFF",
                 data:{ fillby:["databaseList"],
                         columns:[new ColumnStructureEditor(1),new ColumnStructureEditor(2)],
-                        dsName:[],
-                        rowCount:1}, 
+                        dsName:[]}, 
                 header:"",
                 footer:""
             },

@@ -3,7 +3,7 @@ export class GridStructureEditor
     fillby:string[];
     dsName:string[];
     columns:ColumnStructureEditor[];
-    rowCount:number 
+    //rowCount:number 
 }
 
 export class ColumnStructureEditor

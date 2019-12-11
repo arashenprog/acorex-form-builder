@@ -9,9 +9,7 @@
             valueField="id">
         </ax-select-box>
     </div>
-    <div *ngIf="value.fillby.includes('manualList')" class="divmrg"> 
-        <ax-text-box [text]="value.rowCount" type="number" (textChange)="rowCountChange($event)"></ax-text-box>
-    </div>
+    <div class="prop-caption">Columns</div>
     <div *ngFor="let item of value.columns;let i = index" class="parentItem ">
         <div class="childItem">
             <div class="firstItem">
@@ -51,7 +49,7 @@
         </div>
     </div>
     <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
-        <span>Add New Item</span>&nbsp;
+        <span>Add New Column</span>&nbsp;
         <i class="fas fa-plus"></i>
     </ax-button>
 </div>
