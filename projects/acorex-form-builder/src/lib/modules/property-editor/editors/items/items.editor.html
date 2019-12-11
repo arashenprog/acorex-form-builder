@@ -1,7 +1,7 @@
 <div>
     <div class="viewType" *ngIf="imagable">
-        <ax-selection-list direction="horizontal" mode="single" [selectedValues]="items.ContentView"
-            [items]="contentViewItems" (selectedValuesChange)="contentViewChange($event)" textField="title"
+        <ax-selection-list direction="horizontal" mode="single" [items]="contentViewItems" 
+        [selectedValues]="items.ContentView" (selectedValuesChange)="contentViewChange($event)" textField="title"
             valueField="value">
         </ax-selection-list>
     </div>

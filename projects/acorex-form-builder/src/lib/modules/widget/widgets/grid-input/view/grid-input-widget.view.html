@@ -1,6 +1,7 @@
 <div #el>
+    <div class="brd">
         <table class="wdt100">
-            <tr *ngIf="header!=''">
+            <tr *ngIf="header!=''" class="headfoot">
                 <th attr.colspan="{{data.columns.length}}">{{header}}</th>
             </tr>
             <tr>
@@ -21,9 +22,9 @@
                     </ax-selection-list>
                 </td>
             </tr>
-            <tr *ngIf="footer!=''" style="background-color: var(--primary-color);
-            color: var(--white-color);">
+            <tr *ngIf="footer!=''"  class="headfoot">
                 <th attr.colspan="{{data.columns.length}}">{{footer}}</th>
             </tr>
         </table>
     </div>
+</div>

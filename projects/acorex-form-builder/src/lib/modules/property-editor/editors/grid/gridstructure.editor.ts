@@ -1,6 +1,6 @@
 export class GridStructureEditor
 { 
-    fillby:string[];
+    //fillby:string[];
     dsName:string[];
     columns:ColumnStructureEditor[];
     //rowCount:number 

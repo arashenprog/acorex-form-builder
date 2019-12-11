@@ -4,3 +4,9 @@
     background-image: url('./assets/images/noimage.png');background-repeat: round;
     border: 1px solid gray;
 }
+.brd{
+    border:1px solid var(--primary-color)
+}
+.headfoot{
+    background-color: darkgray;color: black;
+}

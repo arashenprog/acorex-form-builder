@@ -43,8 +43,7 @@ export class AXFDropdownInputWidgetModule {
                         ShowOther:false}, 
                 mode:"single",
                 fillBy:"manuallist", 
-                value:[1], 
-                allowSearch:false
+                value:[1] 
             },
             properties: [ 
                 {
@@ -62,7 +61,7 @@ export class AXFDropdownInputWidgetModule {
                 {
                     name: "allowSearch",
                     category: "General",
-                    defaultValue: {},
+                    defaultValue:false,
                     title: "Allow Search",
                     editor: "CheckboxEditor",
                     options: { label:"Allow Search"}

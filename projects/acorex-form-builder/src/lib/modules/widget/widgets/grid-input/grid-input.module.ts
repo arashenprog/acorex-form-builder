@@ -39,9 +39,9 @@ export class AXFGridInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                data:{ fillby:["databaseList"],
-                        columns:[new ColumnStructureEditor(1),new ColumnStructureEditor(2)],
-                        dsName:[]}, 
+                data:{ 
+                        columns:[new ColumnStructureEditor(1)],
+                        dsName:[]},  
                 header:"",
                 footer:""
             },
@@ -61,11 +61,26 @@ export class AXFGridInputWidgetModule {
                     editor: "TextEditor"
                 },
                 {
+                    name: "fillBy",
+                    category: "General",
+                    defaultValue: ["manuallist"],
+                    title: "Fill By",
+                    editor: "SelectionEditor",
+                    options: {
+                        items: [{ value: "manuallist", title: "Manual List" }, { value: "databaselist", title: "Database List" }],
+                        mode: "single",
+                        direction: "horizontal" 
+                    }
+                },
+                {
                     name: "data",
                     category: "General",
                     defaultValue: {},
                     title: "Data Management",
-                    editor: "GridEditor" 
+                    editor: "GridEditor" ,
+                    // visible: (options: any) => { 
+                    //     return options.fillBy == "manuallist";
+                    // },
                 },
                 
                 AXF_BOX_STYLE_PROPERTY,
