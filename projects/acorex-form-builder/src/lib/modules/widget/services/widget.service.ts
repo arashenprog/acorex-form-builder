@@ -8,7 +8,8 @@ export interface AXFWidgetProperty {
     hint?: string;
     defaultValue?: any;
     category: "General" | "Style" | "Behavior" | "Data";
-    editor: any
+    editor: any;
+    visible ?: boolean | Function;
     options?: any
 }
 
@@ -70,7 +71,8 @@ export class AXFWidgetService {
             properties: []
         }
         if (c.properties)
-            res.properties = JSON.parse(JSON.stringify(c.properties));
+            //res.properties = JSON.parse(JSON.stringify(c.properties));
+            res.properties = this.deepCopy(c.properties);
         if (c.options)
             res.options = JSON.parse(JSON.stringify(c.options));
         else
@@ -78,6 +80,35 @@ export class AXFWidgetService {
         return res;
     }
 
+
+    private  deepCopy(obj) {
+        let copy;
+        // Handle the 3 simple types, and null or undefined
+        if (null == obj || "object" != typeof obj) return obj;
+        // Handle Date
+        if (obj instanceof Date) {
+            copy = new Date();
+            copy.setTime(obj.getTime());
+            return copy;
+        }
+        // Handle Array
+        if (obj instanceof Array) {
+            copy = [];
+            for (var i = 0, len = obj.length; i < len; i++) {
+                copy[i] = this.deepCopy(obj[i]);
+            }
+            return copy;
+        }
+        // Handle Object
+        if (obj instanceof Object) {
+            copy = {};
+            for (var attr in obj) {
+                if (obj.hasOwnProperty(attr)) copy[attr] = this.deepCopy(obj[attr]);
+            }
+            return copy;
+        }
+        throw new Error("Unable to copy obj! Its type isn't supported.");
+    }
 
     serialize(item: WidgetConfig): string {
         return JSON.stringify(this.serializeInternal(item));
