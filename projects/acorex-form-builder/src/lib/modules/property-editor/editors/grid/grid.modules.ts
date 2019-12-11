@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { AXFEditorService } from '../../services/editor.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFGridEditorComponent } from './grid.editor';
+import { AXFColumnGridComponent } from './column-grid.component';
+
 
 @NgModule({
-    declarations: [AXFGridEditorComponent],
+    declarations: [AXFGridEditorComponent,AXFColumnGridComponent],
     imports: [CommonModule,ACoreXUIModule],
     exports: [AXFGridEditorComponent],
     entryComponents: [AXFGridEditorComponent],
