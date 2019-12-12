@@ -21,6 +21,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     dsMode: string[];
     dsName: string;
     uid: string = "M" + Math.ceil(Math.random() * 10000);
+    visible: boolean;
 
     constructor(private dataService: AXFDataService) {
         super()
@@ -32,16 +33,12 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     }
 
     ngAfterViewInit() {
-
         if (this.dsMode[0] == "ds" && this.dsName != "") {
             this.dataService.getList(this.dsName).then(items => {
                 this.items.content = items;
+               
             });
         }
-    }
-
-    handleValueChange(e) {
-
     }
 
     getStyles(mode) {
@@ -53,7 +50,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
 
     onCheckValueChange(val, checked) {
         if (this.mode == "single") {
-            this.value = [val];
+            this.value = val;
         }
         else {
             if (!this.value)
@@ -67,5 +64,6 @@ export class AXFListInputWidgetView extends AXFWidgetView {
                 this.value = this.value.filter(c => c != val);
             }
         }
+        
     }
 }

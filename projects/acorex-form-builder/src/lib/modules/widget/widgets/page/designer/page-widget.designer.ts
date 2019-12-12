@@ -13,6 +13,7 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
 
     bgColor: string;
     boxStyle: AXFBoxStyleValue;
+    pageDirection:string;
 
 
 
@@ -41,6 +42,7 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
 
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
+        el.style.direction= this.pageDirection;
         this.applyStyle(el);
     }
 

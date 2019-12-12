@@ -9,6 +9,7 @@ export class AXFTextInputWidgetView extends AXFWidgetView {
 
     text: String;
     visible: true;
+    placeholder: String;
 
     
     constructor(private el: ElementRef<HTMLElement>){

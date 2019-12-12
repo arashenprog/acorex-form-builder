@@ -11,12 +11,13 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
 
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
-    items:{content:any[],types: ContentItemsStructureEditor[]};
+    items: { content: any[], types: ContentItemsStructureEditor[] };
     mode: string;
     fillBy: string;
     allowSearch: boolean;
     dsName: string;
     dsMode: string;
+    visible: boolean;
 
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
@@ -24,7 +25,7 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     }
 
     ngAfterViewInit() {
-     
+
         if (this.dsMode[0] == 'ds' && this.dsName) {
             this.dataService.getList(this.dsName).then(items => {
                 this.items.content = items;

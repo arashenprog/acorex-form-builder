@@ -15,6 +15,7 @@ export class AXFTextInputWidgetDesigner extends AXFWidgetDesigner {
     @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
 
     text: String;
+    placeholder: String;
 
     constructor() {
         super()

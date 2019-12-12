@@ -16,10 +16,12 @@ export class AXFPageWidgetView extends AXFWidgetView {
 
     bgColor: string;
     boxStyle: AXFBoxStyleValue;
+    pageDirection:string;
 
 
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
+        el.style.direction= this.pageDirection;
         this.applyStyle(el);
     }
 

@@ -12,6 +12,16 @@ export const AXF_VALUE_CHANGE_EVENT: AXFWidgetProperty = {
     }
 }
 
+export const AXF_INIT_EVENT: AXFWidgetProperty = {
+    name: "onInit",
+    category: "Behavior",
+    defaultValue: null,
+    title: "Init",
+    editor: "EventEditor",
+    options: {
+    }
+}
+
 export const AXF_CLICK_EVENT: AXFWidgetProperty = {
     name: "onClick",
     category: "Behavior",
@@ -35,6 +45,17 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     }
 }
 
+export const AXF_PLACEHOLDER_PROPERTY: AXFWidgetProperty = {
+    name: "placeholder",
+    category: "General",
+    defaultValue: "",
+    title: "Placeholder",
+    editor: "TextEditor",
+    options: {
+        allowHtml: false
+    }
+}
+
 export const AXF_RICH_TEXT_PROPERTY: AXFWidgetProperty = {
     name: "text",
     category: "General",
@@ -48,7 +69,7 @@ export const AXF_RICH_TEXT_PROPERTY: AXFWidgetProperty = {
 
 export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
     name: "name",
-    category: "Data",
+    category: "Binding",
     defaultValue: "",
     title: "Name",
     editor: "TextEditor"

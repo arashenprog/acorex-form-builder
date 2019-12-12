@@ -19,14 +19,6 @@ export class ACFViewerPage extends AXBasePageComponent {
   ) {
     super();
     this.mode = this.router.snapshot.queryParams.mode;
-
-    formService.on("valueChange", (e) => {
-      this.formData[e.name] = e.value;
-    })
-
-    formService.on("submit", (e) => {
-      console.log("submit", this.formData);
-    })
   }
 
 

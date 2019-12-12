@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_LABEL_PROPERTY, AXF_DS_LIST_PROPERTY, AXF_DS_MODE_PROPERTY } from '../../config/general-properties';
+import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_LABEL_PROPERTY, AXF_DS_LIST_PROPERTY, AXF_DS_MODE_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_INIT_EVENT } from '../../config/general-properties';
 import { AXFListInputWidgetDesigner } from './designer/list-input-widget.designer';
 import { AXFListInputWidgetPrint } from './print/list-input-widget.print';
 import { AXFListInputWidgetView } from './view/list-input-widget.view';
@@ -125,6 +125,8 @@ export class AXFListInputWidgetModule {
                 },
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
+                AXF_INIT_EVENT,
+                AXF_VALUE_CHANGE_EVENT,
             ]
         })
     }

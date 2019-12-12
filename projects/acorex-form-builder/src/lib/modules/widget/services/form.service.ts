@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AXFConnectService } from './connect.service';
-import { Subject, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { Subject, Subscription, Observable } from 'rxjs';
+import { filter, map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 export class EventData {
     name: string;
@@ -18,25 +18,24 @@ export class EventData {
 })
 export class AXFFormService {
 
-    private subject$ = new Subject();
+    //private subject$ = new Subject();
+
+    private widgetRegisterChangeObserver: any;
 
     constructor() {
     }
 
 
-    emit(event: EventData) {
-        this.subject$.next(event);
-    }
+    // emit(event: EventData) {
+    //     this.subject$.next(event);
+    // }
 
-    on(eventName: string, action: any): Subscription {
-        return this.subject$.pipe(
-            filter((e: EventData) => e.name === eventName),
-            map((e: EventData) => e["value"]))
-            .subscribe(action);
-    }
-
-
-
+    // on(eventName: string, action: any): Subscription {
+    //     return this.subject$.pipe(
+    //         filter((e: EventData) => e.name === eventName),
+    //         map((e: EventData) => e["value"]))
+    //         .subscribe(action);
+    // }
 
     private formData: any = {};
 
@@ -50,15 +49,36 @@ export class AXFFormService {
     }
 
 
+    submit()
+    {
+        console.log(this.formData);
+    }
+
+
     private widgets: any = {};
 
     setWidget(name: string, value: any) {
         this.widgets[name] = value;
+        if (!this.widgetRegisterChangeObserver) {
+            Observable.create(observer => {
+                this.widgetRegisterChangeObserver = observer;
+            })
+                .pipe(debounceTime(50))
+                .pipe(distinctUntilChanged())
+                .subscribe(c => {
+                    for (const i in this.widgets) {
+                        if (this.widgets.hasOwnProperty(i)) {
+                            const w = this.widgets[i];
+                            w.invokeEvent("onInit")
+                        }
+                    }
+                });
+        }
+
+        this.widgetRegisterChangeObserver.next(name);
     }
 
     getWidget(name: string) {
         return this.widgets[name];
     }
-
-
 }

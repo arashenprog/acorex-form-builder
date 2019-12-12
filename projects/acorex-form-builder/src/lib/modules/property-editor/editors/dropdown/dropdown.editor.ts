@@ -41,8 +41,10 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]>  {
             });
         }
         else {
-            this.innerValue = [this.value];
-            this.cdr.markForCheck();
+            setTimeout(() => {
+                this.innerValue = [this.value];
+                this.cdr.markForCheck();
+            });
         }
     }
 

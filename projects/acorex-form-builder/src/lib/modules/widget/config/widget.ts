@@ -172,17 +172,24 @@ export abstract class AXFWidgetView extends AXFWidget {
         this.valueChange.emit(v);
         let name: string = this.getName();
         if (name) {
-            this.formService.emit(new EventData("valueChange", { name: name, value: v }));
             this.formService.setValue(name, v)
         }
-    }
-
-    ngAfterViewInit() {
-        this.formService.setWidget(this.getName(), this);
+        this.invokeEvent("onValueChange")
     }
 
     private getName() {
-        return this.config.options.name;
+        return this.config.options.name
+        // if (this.config.options.name == null || this.config.options.name == "")
+        //     return null;
+        // let parts: string[] = [this.config.options.name];
+        // let prt = this.parent;
+        // while (prt != null) {
+        //     if (prt.config.options.name) {
+        //         parts.push(prt.config.options.name)
+        //     }
+        //     prt=prt.parent;
+        // }
+        // return parts.reverse().join('.');
     }
 
 
@@ -194,7 +201,7 @@ export abstract class AXFWidgetView extends AXFWidget {
                 debugger;
                 action.split(';').forEach(act => {
                     if (act == "submit()") {
-                        this.formService.emit(new EventData("submit"));
+                        this.formService.submit();
                         return;
                     }
                     let allWidgets = act.match(/\#([a-zA-Z1-9])+/g);
@@ -212,14 +219,6 @@ export abstract class AXFWidgetView extends AXFWidget {
                         });
                     }
                     new Function(execCode).call(params);
-                    // if (act.match(/\#([a-zA-Z1-9])+\.\w+=.+/)) {
-                    //     let name = act.split('=')[0].split('.')[0].substring(1);
-                    //     let prop = act.split('=')[0].split('.')[1];
-                    //     let value = this.extractValue(act.split('=')[1])
-                    //     this.formService.emit(new EventData("props", { name: name, prop: prop, value: value }));
-                    //     return;
-                    // }
-                    // eval(act);
                 })
 
             }
@@ -227,27 +226,15 @@ export abstract class AXFWidgetView extends AXFWidget {
     }
 
 
-    // private extractValue(value: string) {
-    //     if (value.match(/\$([a-zA-Z1-9])+/)) {
-    //         return this.formService.getValue(value)
-    //     }
-    //     else if (value.match(/\#this+\.\w+/)) {
-    //         return this[value.split('.')[1]]
-    //     }
-    //     return eval(value);
-    // }
+
 
 
 
     constructor() {
         super();
         this.formService = WidgetInjector.instance.get(AXFFormService);
-        //
-        this.formService.on("props", (e) => {
-            let name: string = this.getName();
-            if (e.name == name) {
-                this[e.prop] = e.value;
-            }
+        setTimeout(() => {
+            this.formService.setWidget(this.getName(), this);
         });
     }
 
