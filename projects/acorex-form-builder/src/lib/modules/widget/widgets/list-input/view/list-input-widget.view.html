@@ -1,15 +1,52 @@
 <div #el [ngClass]="direction" class="allItems">
-    <label class="radio-container" *ngFor="let cnt of items.content" [ngClass]="alignCheck">
+    <div *ngIf="!items.content || items.content.length==0" class="noitem">No Item</div>
+    <!-- <label class="radio-container" *ngFor="let cnt of items.content" [ngClass]="alignCheck">
         <ng-container *ngFor="let item of items.types">
             <span *ngIf="item.type=='string'">{{cnt[item.id]}}</span>
             <img *ngIf="item.type=='image'" [src]="cnt[item.id]" height="40" width="60"> 
-            <input type="radio" [value]="cnt.value" *ngIf="mode!='unselectable'" />
+            <input type="radio" [value]="cnt.value" *ngIf="mode!='unselectable'" 
+            [attr.checked]="value && value[0]==cnt.value ? 'checked' : null"/>
             <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'"></span>
         </ng-container>
-    </label>
-    <label *ngIf="showOther && mode!='unselectable'" class="radio-container" [ngClass]="alignCheck">
+    </label> -->
+
+    <!-- <ng-container *ngIf=" mode == 'multiple' "> 
+        <label class="checkbox-container" *ngFor="let cnt of items.content" for="{{ uid }}">
+            <ng-container *ngFor="let item of items.types">
+                <span *ngIf="item.type=='string'">{{cnt[item.id]}}</span>
+                <img *ngIf="item.type=='image'" [src]="cnt[item.id]" height="40" width="60">
+                <input type="checkbox" id="{{ uid }}" [checked]="value && value.indexOf(cnt.value)>-1 ? 'checked' : null"
+                (change)="onCheckValueChange(cnt.value,$event)" />
+                <span class="checkmark"></span>
+            </ng-container>
+        </label>
+    </ng-container> -->
+
+    <ng-container *ngIf=" mode == 'multiple' ">
+            <ng-container  *ngFor="let cnt of items.content">
+                    <ax-check-box label="{{cnt[item.id]}}" *ngFor="let item of items.types"
+                    [value]="value && value.indexOf(cnt.value)>-1 ? 'checked' : null"
+                    (valueChange)="onCheckValueChange(cnt.value,$event)">
+                </ax-check-box>
+            </ng-container>
+            
+        </ng-container>
+    <ng-container *ngIf=" mode == 'single' ">
+        <label class="radio-container" *ngFor="let cnt of items.content" [ngClass]="alignCheck">
+            <ng-container *ngFor="let item of items.types">
+                <span *ngIf="item.type=='string'">{{cnt[item.id]}}</span>
+                <img *ngIf="item.type=='image'" [src]="cnt[item.id]" height="40" width="60">
+                <input type="radio" [value]="cnt.value" [name]="uid" (change)="onCheckValueChange(cnt.value,true)"
+                    [attr.checked]="value && value[0]==cnt.value ? 'checked' : null" />
+                <span class="checkmark"></span>
+            </ng-container>
+        </label>
+    </ng-container>
+
+
+    <!-- <label *ngIf="showOther && mode!='unselectable'" class="radio-container" [ngClass]="alignCheck">
         <span>Others</span>
         <input type="radio" value="0" />
         <span class="checkmark" [ngStyle]="getStyles(mode)"></span>
-    </label>
+    </label> -->
 </div>

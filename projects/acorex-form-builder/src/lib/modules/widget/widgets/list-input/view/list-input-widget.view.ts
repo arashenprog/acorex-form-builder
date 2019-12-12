@@ -1,54 +1,71 @@
-import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 import { ContentItemsStructureEditor } from '../../../../property-editor/editors/items/itemstructure.editor';
 import { AXFDataService } from '../../../services/data.service';
 
 @Component({
     templateUrl: './list-input-widget.view.html',
-    styleUrls: ['./list-input-widget.view.scss']
+    styleUrls: ['./list-input-widget.view.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class AXFListInputWidgetView extends AXFWidgetView {
 
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
-    items:{content:any[],types:ContentItemsStructureEditor[]};
-    mode:string;
-    direction:string;
-    alignCheck:string; 
-    showOther:boolean;
-    viewType:boolean;
-    dsMode:string[];
-    dsName:string;
-
+    items: { content: any[], types: ContentItemsStructureEditor[] };
+    mode: string;
+    direction: string;
+    alignCheck: string;
+    showOther: boolean;
+    viewType: boolean;
+    dsMode: string[];
+    dsName: string;
+    uid: string = "M" + Math.ceil(Math.random() * 10000);
 
     constructor(private dataService: AXFDataService) {
         super()
     }
 
     onRender(): void {
-        if(this.el)
-        this.applyStyle(this.el.nativeElement);
+        if (this.el)
+            this.applyStyle(this.el.nativeElement);
     }
 
     ngAfterViewInit() {
-     
-        if(this.dsMode[0]=="ds" && this.dsName!="")
-        {
+
+        if (this.dsMode[0] == "ds" && this.dsName != "") {
             this.dataService.getList(this.dsName).then(items => {
-                this.items.content = items; 
+                this.items.content = items;
             });
-        }  
+        }
     }
 
-    handleValueChange(e)
-    {
+    handleValueChange(e) {
 
     }
 
-    getStyles(mode) { 
-        const styles = { 
-            'border-radius': mode == 'single' ? 100+"%" : 0 
+    getStyles(mode) {
+        const styles = {
+            'border-radius': mode == 'single' ? 100 + "%" : 0
         };
         return styles;
+    }
+
+    onCheckValueChange(val, checked) {
+        if (this.mode == "single") {
+            this.value = [val];
+        }
+        else {
+            if (!this.value)
+                this.value = [];
+            if (checked) {
+                if (!this.value.includes(val)) {
+                    this.value = [...this.value, ...[val]];
+                }
+            }
+            else {
+                this.value = this.value.filter(c => c != val);
+            }
+        }
     }
 }

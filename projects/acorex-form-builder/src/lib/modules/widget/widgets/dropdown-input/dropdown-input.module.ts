@@ -39,10 +39,10 @@ export class AXFDropdownInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                items:{ types:[new ContentItemsStructureEditor({id:"value",title:"text",type:"string"})],
-                        content:[],
-                        isDrop:true
-                    }, 
+                items:{ types:[ new ContentItemsStructureEditor({id:"text",title:"Text",type:"string"})],
+                        content:[] ,
+                        isDrop:false
+                    },
                 mode:"single"
             },
             properties: [ 
@@ -76,10 +76,6 @@ export class AXFDropdownInputWidgetModule {
                     editor: "ItemsEditor",
                     visible: (options: any) => {
                         return  options.dsMode == "manual"
-                    },
-                    options: {
-                        imagable:false,
-                        otherable:false
                     }
                 },
                 
