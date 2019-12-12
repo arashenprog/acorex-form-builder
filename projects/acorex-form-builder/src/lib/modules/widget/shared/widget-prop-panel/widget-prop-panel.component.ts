@@ -38,7 +38,6 @@ export class AXFWidgetPropPanelComponent {
     getProps(category: string): AXFWidgetProperty[] {
 
         let list = this.widget.config.properties.filter(c => c.category == category);
-        console.log("getProps", list);
         let hidden = [];
         list.forEach(p => {
             if (typeof p.visible === "function") {

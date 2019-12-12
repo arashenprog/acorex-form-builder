@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
@@ -12,5 +12,12 @@ export class AXFOutletWidgetView extends AXFWidgetView {
      }
 
     ngOnInit(): void { }
+
+    @Input()
+    public get value(): any {
+        return "Arash";
+    }
+  
+    
 }
 

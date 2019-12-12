@@ -1,4 +1,4 @@
 <div *ngIf="widgets.length"  >
-    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w"  mode="view" >
+    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w"  mode="view" [parent]="this">
     </div>
 </div>

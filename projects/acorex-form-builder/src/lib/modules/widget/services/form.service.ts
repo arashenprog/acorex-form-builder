@@ -21,7 +21,6 @@ export class AXFFormService {
     private subject$ = new Subject();
 
     constructor() {
-        console.log("Create new one");
     }
 
 
@@ -34,6 +33,31 @@ export class AXFFormService {
             filter((e: EventData) => e.name === eventName),
             map((e: EventData) => e["value"]))
             .subscribe(action);
+    }
+
+
+
+
+    private formData: any = {};
+
+    setValue(name: string, value: any) {
+        this.formData[name] = value;
+        console.log(this.formData);
+    }
+
+    getValue(name: string) {
+        return this.formData[name];
+    }
+
+
+    private widgets: any = {};
+
+    setWidget(name: string, value: any) {
+        this.widgets[name] = value;
+    }
+
+    getWidget(name: string) {
+        return this.widgets[name];
     }
 
 

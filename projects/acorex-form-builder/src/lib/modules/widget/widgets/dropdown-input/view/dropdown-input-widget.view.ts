@@ -40,5 +40,6 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
 
     handleValueChnage(e: any[]) {
         this.value = e;
+        this.invokeEvent("onValueChange");
     }
 }

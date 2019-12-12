@@ -110,16 +110,16 @@ export class AXFWidgetRendererDirective {
 
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
-
+        // add parent
+        if (this.widgetParent) {
+            this.widgetInstance.parent = this.widgetParent;
+        }
 
         // render widget toolbox on mouseover event in designer mode
         if (!this.widgetConfig.toolbox)
             this.widgetConfig.toolbox = {};
         if (this.mode == "designer") {
-            // add parent
-            if (this.widgetParent) {
-                this.widgetInstance.parent = this.widgetParent;
-            }
+           
             //
             this.widgetInstance.onRefresh.subscribe(c => {
                 Object.assign(this.widgetInstance, c);

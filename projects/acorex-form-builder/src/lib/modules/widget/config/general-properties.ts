@@ -23,6 +23,7 @@ export const AXF_CLICK_EVENT: AXFWidgetProperty = {
 }
 
 
+
 export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     name: "text",
     category: "General",
