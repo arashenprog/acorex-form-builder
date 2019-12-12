@@ -43,9 +43,7 @@ export class AXFDropdownInputWidgetModule {
                         content:[],
                         isDrop:true
                     }, 
-                mode:"single",
-                fillBy:"manuallist", 
-                value:[1] 
+                mode:"single"
             },
             properties: [ 
                 {

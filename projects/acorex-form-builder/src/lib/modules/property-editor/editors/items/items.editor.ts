@@ -100,7 +100,8 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
     }
 
     addItemClick() { 
-        let param:any={};
+        let index= this.items.content.length+1;
+        let param:any={value:index};
         this.items.types.forEach((e)=> {
             param[e.id]=e.defaultValue;
         });

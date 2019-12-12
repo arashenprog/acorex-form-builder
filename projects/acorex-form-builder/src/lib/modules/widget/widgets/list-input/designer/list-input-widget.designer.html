@@ -3,7 +3,7 @@
         <ng-container *ngFor="let item of items.types">
             <span *ngIf="item.type=='string'">{{cnt[item.id]}}</span>
             <img *ngIf="item.type=='image'" [src]="cnt[item.id]" height="40" width="60"> 
-            <input type="radio" [value]="cnt[item.id]" *ngIf="mode!='unselectable'" />
+            <input type="radio" [value]="cnt.value" *ngIf="mode!='unselectable'" />
             <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'"></span>
         </ng-container>
     </label>
@@ -12,7 +12,4 @@
         <input type="radio" value="0" />
         <span class="checkmark" [ngStyle]="getStyles(mode)"></span>
     </label>
-    <div *ngIf="showOther && mode!='unselectable'">
-        <ax-text-box></ax-text-box>
-    </div>
 </div>

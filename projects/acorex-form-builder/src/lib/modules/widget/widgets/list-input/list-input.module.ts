@@ -39,16 +39,15 @@ export class AXFListInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                items:{ types:[ new ContentItemsStructureEditor({id:"text",title:"Text",type:"string"}),
-                                new ContentItemsStructureEditor({id:"image",title:"Image",type:"image"})],
-                        content:[] 
+                items:{ types:[ new ContentItemsStructureEditor({id:"text",title:"Text",type:"string"})],
+                        content:[] ,
+                        isDrop:false
                     },
                 mode: "single",
                 direction: "horizontal",
-                fillBy: "manualList",
-                value: [1],
                 alignCheck: "left",
-                showOther: false
+                showOther: false,
+                viewType:"string"
             },
             properties: [
                 {
@@ -85,7 +84,6 @@ export class AXFListInputWidgetModule {
                     visible: (options: any) => {
                         return options.mode != "unselectable";
                     },
-                    //visible:false,
                     options: {
                         items: [{ value: "left", title: "Left" }, { value: "top", title: "Top" },
                         { value: "right", title: "Right" }, { value: "bottom", title: "Bottom" }],
@@ -94,13 +92,13 @@ export class AXFListInputWidgetModule {
                     }
                 },
                 {
-                    name: "fillBy",
+                    name: "viewType",
                     category: "General",
                     defaultValue: [],
-                    title: "Fill By",
+                    title: "View Type",
                     editor: "SelectionEditor",
                     options: {
-                        items: [{ value: "manualList", title: "Manual List" }, { value: "databaseList", title: "Database List" }],
+                        items: [{ value: "string", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }],
                         mode: "single",
                         direction: "horizontal"
                     }
@@ -112,7 +110,10 @@ export class AXFListInputWidgetModule {
                     category: "Data",
                     defaultValue: {},
                     title: "Items",
-                    editor: "ItemsEditor"
+                    editor: "ItemsEditor",
+                    visible: (options: any) => {
+                        return options.dsMode == "manual";
+                    },
                 }, 
                 {
                     name: "showOther",
