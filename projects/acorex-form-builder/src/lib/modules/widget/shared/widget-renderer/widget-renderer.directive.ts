@@ -36,11 +36,6 @@ export class AXFWidgetRendererDirective {
         private componentFactoryResolver: ComponentFactoryResolver,
         private eventService: EventService
     ) {
-        eventService.on("VALUE_CHANGE", v => {
-            if (v.uid == this.widgetInstance.uid) {
-                this.refresh();
-            }
-        });
         this.eventService.on("SELECT", v => {
             this.zone.runOutsideAngular(() => {
                 if (this.widgetElement)
@@ -50,8 +45,6 @@ export class AXFWidgetRendererDirective {
                 }
             });
         });
-
-
     }
 
     ngOnInit(): void {

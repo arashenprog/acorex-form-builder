@@ -48,14 +48,4 @@ export class AXFWidgetPropPanelComponent {
         });
         return list.filter(c => c.visible != false && !hidden.includes(c.name));
     }
-
-    handleValueChange(name: string, value: any) {
-        this.widget.config.options[name] = value;
-        this.eventService.broadcast("VALUE_CHANGE", {
-            uid: this.widget.uid,
-            name: name,
-            value: value
-        });
-        this.cdr.markForCheck();
-    }
 }

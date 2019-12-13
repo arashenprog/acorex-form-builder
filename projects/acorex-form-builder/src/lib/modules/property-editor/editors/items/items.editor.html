@@ -5,6 +5,7 @@
             valueField="value">
         </ax-selection-list>
     </div> -->
+    {{viewType}}
     <div *ngFor="let cnt of items.content;let i = index" class="parentItem">
         <div class="childItem" *ngFor="let item of items.types">
             <span>{{item.title}}:</span>

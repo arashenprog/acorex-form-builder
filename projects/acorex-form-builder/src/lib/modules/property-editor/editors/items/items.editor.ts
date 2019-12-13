@@ -16,6 +16,7 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
     imagable:boolean=false;
     otherable:boolean=false;
     flgChange:boolean=false;
+    viewType:string;
    
 
     constructor(protected cdr: ChangeDetectorRef,private dataService: AXFDataService) {

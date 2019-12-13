@@ -49,7 +49,6 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]>  {
     }
 
     handleValueChange(v: any) {
-        debugger;
         this.innerValue = v;
         this.value = v[0];
     }

@@ -114,6 +114,9 @@ export class AXFListInputWidgetModule {
                     visible: (options: any) => {
                         return options.dsMode == "manual";
                     },
+                    options:{
+                        viewType:"$viewType"
+                    }
                 }, 
                 {
                     name: "showOther",

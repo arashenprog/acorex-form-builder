@@ -59,7 +59,7 @@ export class AXFButtonWidgetModule {
                     title: "Size",
                     defaultValue:"sm",
                     editor: "DropdownEditor",
-                    options: {
+                    options: {                        
                         items: [
                             { value: "xs", title: "x-small" },
                             { value: "sm", title: "small" },

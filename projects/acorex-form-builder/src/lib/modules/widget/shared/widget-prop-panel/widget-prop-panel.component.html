@@ -20,8 +20,8 @@
                 <div class="prop-caption">
                     {{e.title}}
                 </div>
-                <ng-container axf-editor-renderer (valueChange)="handleValueChange(e.name,$event)" [editor]="e.editor"
-                    [options]="e.options" [value]="widget.config.options[e.name]">
+                <ng-container axf-editor-renderer [property]="e"
+                     [widget]="widget">
                 </ng-container>
             </div>
         </ax-panel-box>

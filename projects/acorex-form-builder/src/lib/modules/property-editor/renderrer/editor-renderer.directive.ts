@@ -1,38 +1,47 @@
-import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, EventEmitter, Output } from '@angular/core';
+import { Directive, ViewContainerRef, ComponentFactoryResolver, Input } from '@angular/core';
 import { AXFProperyEditor } from '../config/editor';
 import { AXFEditorService } from '../services/editor.service';
+import { AXFWidgetDesigner } from '../../widget/config/widget';
+import { AXFWidgetProperty } from '../../widget/services/widget.service';
+import { EventService } from 'acorex-ui';
 
 @Directive({
     selector: '[axf-editor-renderer]',
 })
 export class AXFEditorRendererDirective {
 
-    @Input()
-    editor: any;
+    private instance: AXFProperyEditor<any>;
 
     @Input()
-    options: any;
+    widget: AXFWidgetDesigner;
+
 
     @Input()
-    value: any;
-
-    @Output()
-    valueChange: EventEmitter<any> = new EventEmitter<any>();
+    property: AXFWidgetProperty;
 
 
 
     constructor(
         private target: ViewContainerRef,
         private componentFactoryResolver: ComponentFactoryResolver,
-        private editorService: AXFEditorService
-    ) { }
+        private editorService: AXFEditorService,
+        private eventService: EventService
+    ) {
+        
+    }
 
     ngOnInit(): void {
         this.createComponent();
+        this.eventService.on("BIND_RELATED_PROPS", () => {
+            this.assignRelatedProps();
+        });
     }
 
+
+
     createComponent() {
-        const editorClass = this.editorService.resolve(this.editor);
+        debugger;
+        const editorClass = this.editorService.resolve(this.property.editor);
         if (!editorClass)
             return;
         //
@@ -40,13 +49,29 @@ export class AXFEditorRendererDirective {
         let factory = this.componentFactoryResolver.resolveComponentFactory(editorClass);
         //
         let cmpRef = this.target.createComponent(factory)
-        let instance = cmpRef.instance as AXFProperyEditor<any>;
+        this.instance = cmpRef.instance as AXFProperyEditor<any>;
         //
-        instance.valueChange.subscribe(value => {
-            this.valueChange.emit(value);
-        })
-        Object.assign(instance, this.options, { value: this.value });
-
+        this.instance.valueChange.subscribe(value => {
+            this.widget.config.options[this.property.name] = value
+            this.eventService.broadcast("BIND_RELATED_PROPS");
+            this.widget.refresh();
+        });
+        Object.assign(this.instance, this.property.options, { value: this.widget.config.options[this.property.name] });
+        this.assignRelatedProps();
     }
+
+
+    private assignRelatedProps() {
+        for (const p in this.property.options) {
+            if (this.property.options.hasOwnProperty(p)) {
+                const opt = this.property.options[p];
+                if (typeof opt == "string" && opt.startsWith("$")) {
+                    let key = opt.substring(1);
+                    this.instance[key] = this.widget.config.options[key];
+                }
+            }
+        }
+    }
+
 
 }

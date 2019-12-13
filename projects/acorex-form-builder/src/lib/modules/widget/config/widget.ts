@@ -198,7 +198,6 @@ export abstract class AXFWidgetView extends AXFWidget {
         if (this[name]) {
             let action: string = this[name];
             if (action) {
-                debugger;
                 action.split(';').forEach(act => {
                     if (act == "submit()") {
                         this.formService.submit();
