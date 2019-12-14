@@ -10,13 +10,13 @@
             </tr>
             <tr>
                 <td *ngFor="let item of data.columns">
-                    <ax-text-box *ngIf="item.type.includes('string')"></ax-text-box>
-                    <ax-text-box type="number" *ngIf="item.type.includes('number')"></ax-text-box>
-                    <ax-date-picker label="" *ngIf="item.type.includes('date')"></ax-date-picker>
-                    <ax-check-box *ngIf="item.type.includes('boolean')" label="' '"></ax-check-box>
-                    <ax-upload-file *ngIf="item.type.includes('image')" type="inline">
+                    <ax-text-box *ngIf="item.type=='string'"></ax-text-box>
+                    <ax-text-box type="number" *ngIf="item.type=='number'"></ax-text-box>
+                    <ax-date-picker label="" *ngIf="item.type=='date'"></ax-date-picker>
+                    <ax-check-box *ngIf="item.type=='boolean'" label="' '"></ax-check-box>
+                    <ax-upload-file *ngIf="item.type=='image'" type="inline">
                     </ax-upload-file>
-                    <ax-selection-list direction="horizontal" *ngIf="item.type.includes('selectionList')"
+                    <ax-selection-list direction="horizontal" *ngIf="item.type=='selectionList'"
                         [items]="item.subItems" textField="value" valueField="value"
                         mode="{{item.mode?'multiple':'single'}}">
                     </ax-selection-list>

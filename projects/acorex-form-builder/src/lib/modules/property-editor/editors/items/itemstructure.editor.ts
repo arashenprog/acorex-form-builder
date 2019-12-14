@@ -11,7 +11,8 @@ export class ContentItemsStructureEditor {
     fillByUser: boolean = false;
     mode: boolean;
     subItems: string[];
-    defaultValue:any;
+    defaultValue: any;
+    subText: string;
 
     constructor(json) {
         this.id = json.id;
@@ -21,9 +22,11 @@ export class ContentItemsStructureEditor {
             this.fillByUser = json.fillByUser;
         if (json.mode)
             this.mode = json.mode;
+        if (json.subText)
+            this.subText = json.subText;
         if (json.subItems && json.subItems.length > 0)
             this.subItems = json.subItems;
-        this.defaultValue=  this.setDefaultValue(json.type);  
+        this.defaultValue = this.setDefaultValue(json.type);
     }
 
     setDefaultValue(type) {
@@ -38,7 +41,7 @@ export class ContentItemsStructureEditor {
                 return [];
             case "boolean":
                 return false;
-                case "image":
+            case "image":
                 return './assets/images/noimage.png';
         }
     }

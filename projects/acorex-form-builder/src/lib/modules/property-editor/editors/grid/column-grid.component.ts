@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AXBasePageComponent } from 'acorex-ui';
-import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events'; 
-import { ColumnStructureEditor } from './gridstructure.editor';
+import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events';  
+import { ContentItemsStructureEditor } from '../items/itemstructure.editor';
  
 @Component({
     templateUrl: './column-grid.component.html',
@@ -9,7 +9,7 @@ import { ColumnStructureEditor } from './gridstructure.editor';
 })
 export class AXFColumnGridComponent extends AXBasePageComponent {
 
-    public columns: ColumnStructureEditor[];
+    public columns: ContentItemsStructureEditor[];
     columnTypeItems: any[] = [{ value: "string", title: "String" }, { value: "number", title: "Number" },
     { value: "boolean", title: "Boolean" }, { value: "date", title: "Date" }, { value: "time", title: "Time" },
     { value: "image", title: "Image" }, { value: "selectionList", title: "Selection List" }]
@@ -27,11 +27,11 @@ export class AXFColumnGridComponent extends AXBasePageComponent {
     columnTypeChange(ind, e) {
         if (!e || !e.length)
             return;
-        if (this.columns[ind].type[0] != e[0]) {
+        if (this.columns[ind].type != e[0]) {
             this.columns[ind].mode = false;
             this.columns[ind].subText = "";
         }
-        this.columns[ind].type = e; 
+        this.columns[ind].type = e[0]; 
     }
 
     modeChange(ind, e) {
@@ -63,8 +63,8 @@ export class AXFColumnGridComponent extends AXBasePageComponent {
     }
 
     addItemClick() {
-        let index = this.columns.length + 1;
-        let newRow = new ColumnStructureEditor(index);
+        let index = this.columns.length + 1; 
+        let newRow = new ContentItemsStructureEditor({ id: "Field"+index.toString(), title: "Field"+index.toString(), type: "string" });
         this.columns.push(newRow); 
     }
 

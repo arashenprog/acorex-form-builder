@@ -1,8 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
-import { GridStructureEditor, ColumnStructureEditor } from './gridstructure.editor';
+import { GridStructureEditor } from './gridstructure.editor';
 import { AXFColumnGridComponent } from './column-grid.component';
 import { AXPopupService } from 'acorex-ui';
+import { isArray } from 'util';
+import { ContentItemsStructureEditor } from '../items/itemstructure.editor';
 
 @Component({
     templateUrl: './grid.editor.html',
@@ -18,10 +20,31 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
 
     fillbyItems: any[] = [{ value: "manualList", title: "Manual List" }, { value: "databaseList", title: "Database List" }];
     dataSources: any[] = [{ id: "staffs", text: "Staffs" }]
-    constructor(private popupService: AXPopupService) {
+    constructor(protected cdr: ChangeDetectorRef,private popupService: AXPopupService) {
         super();
+    } 
+
+    private dsModeStr: string;
+    get dsMode(): string {
+        return this.dsModeStr;
     }
- 
+    set dsMode(value: string) {
+        if (isArray(value) && this.dsModeStr != value) {
+            this.changeDsMode(value);
+            this.dsModeStr = value;
+            this.cdr.markForCheck();
+        }
+    }
+
+    changeDsMode(newVal) { 
+        if (newVal[0] == "ds") {
+            this.value.columns=[new ContentItemsStructureEditor({value:"text",title:"Text", type: "string"}),
+            new ContentItemsStructureEditor({value:"value",title:"Value", type: "string"})];
+        }
+        else if (newVal[0] == "manual") {
+            this.value.columns=[new ContentItemsStructureEditor({ id: "Field1", title: "Field1", type: "string" })];
+        }
+    }
 
     ngOnInit(): void {
     }
