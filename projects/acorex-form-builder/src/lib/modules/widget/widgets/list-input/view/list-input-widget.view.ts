@@ -39,6 +39,25 @@ export class AXFListInputWidgetView extends AXFWidgetView {
                 this.items.content = items;
             });
         }
+
+        this.refresh(false);
+    }
+
+    refresh(clear: boolean = true) {
+        if (this.dsMode[0] == 'ds' && this.dsName) {
+            this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
+                this.items.content = items;
+                if (clear) {
+                    if (this.mode == "single") {
+                        this.value = null;
+                    }
+                    else {
+                        this.value = [];
+                    }
+                }
+
+            });
+        }
     }
 
     getStyles(mode) {

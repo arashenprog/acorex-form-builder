@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AXFConnectService } from './connect.service';
 import { PromisResult } from 'acorex-ui';
+import { AXFFormService } from './form.service';
 
 export interface VarItem {
     key: string, word: any;
@@ -12,7 +13,7 @@ const VARIABLES: VarItem[] = [];
 @Injectable()
 export class AXFDataService {
 
-    constructor(private connectService: AXFConnectService) {
+    constructor(private connectService: AXFConnectService,private formService:AXFFormService) {
 
     }
 
@@ -34,7 +35,14 @@ export class AXFDataService {
             let keyValObject = {}
             if (params) {
                 params.forEach(p => {
-                    keyValObject[p.name] = p.value;
+                    if(typeof p.value==="string" && p.value.match(/\$([a-zA-Z1-9])+/))
+                    {
+                        keyValObject[p.name] = this.formService.getValue(p.value.substring(1));
+                    }
+                    else
+                    {
+                        keyValObject[p.name] = p.value;
+                    }
                 });
             }
 

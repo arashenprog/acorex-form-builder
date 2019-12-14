@@ -26,17 +26,23 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     }
 
     ngAfterViewInit() {
-
-        if (this.dsMode[0] == 'ds' && this.dsName) {
-            this.dataService.getList(this.dsName.name,this.dsName.params).then(items => {
-                this.items.content = items;
-                this.cdr.markForCheck();
-            });
-        }
+        this.refresh(false);
     }
 
     onRender(): void {
         this.applyStyle(this.el.nativeElement);
+    }
+
+
+    refresh(clear: boolean = true) {
+        if (this.dsMode[0] == 'ds' && this.dsName) {
+            this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
+                this.items.content = items;
+                if (clear)
+                    this.handleValueChnage([]);
+                this.cdr.markForCheck();
+            });
+        }
     }
 
 
