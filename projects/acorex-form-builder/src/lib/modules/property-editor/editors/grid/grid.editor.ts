@@ -1,15 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { AXFProperyEditor } from '../../config/editor';
-import { GridStructureEditor } from './gridstructure.editor';
+import { AXFProperyEditor } from '../../config/editor'; 
 import { AXFColumnGridComponent } from './column-grid.component';
 import { AXPopupService } from 'acorex-ui';
 import { isArray } from 'util';
 import { ContentItemsStructureEditor } from '../items/itemstructure.editor';
+import { GridStructureEditor } from './gridstructure.editor';
 
 @Component({
     templateUrl: './grid.editor.html',
-    styleUrls: ['./grid.editor.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./grid.editor.scss']
 })
 export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor> implements OnInit {
 
@@ -20,7 +19,7 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
 
     fillbyItems: any[] = [{ value: "manualList", title: "Manual List" }, { value: "databaseList", title: "Database List" }];
     dataSources: any[] = [{ id: "staffs", text: "Staffs" }]
-    constructor(protected cdr: ChangeDetectorRef,private popupService: AXPopupService) {
+    constructor(private popupService: AXPopupService) {
         super();
     } 
 
@@ -32,7 +31,6 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
         if (isArray(value) && this.dsModeStr != value) {
             this.changeDsMode(value);
             this.dsModeStr = value;
-            this.cdr.markForCheck();
         }
     }
 

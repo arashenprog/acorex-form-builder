@@ -17,7 +17,7 @@ export const COMPONENTS = [AXFGridInputWidgetDesigner, AXFGridInputWidgetPrint, 
     declarations: [...COMPONENTS],
     imports: [CommonModule, ACoreXUIModule, AXFWidgetSharedModule],
     exports: [...COMPONENTS],
-    entryComponents: [...COMPONENTS],
+    entryComponents: [...COMPONENTS], 
     providers: [],
 })
 export class AXFGridInputWidgetModule {
@@ -39,9 +39,7 @@ export class AXFGridInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                data:{ 
-                        columns:[new ContentItemsStructureEditor({id:1})],
-                        dsName:[]},  
+                data:{columns:[new ContentItemsStructureEditor({ id: "Field1", title: "Field1", type: "string" })]},  
                 header:"",
                 footer:""
             },
@@ -71,7 +69,20 @@ export class AXFGridInputWidgetModule {
                     options:{
                         dsMode:"$dsMode"
                     }
-                },                
+                },  
+                {
+                    name: "items",
+                    category: "Data",
+                    defaultValue: {},
+                    title: "Items",
+                    editor: "ItemsEditor",
+                    visible: (options: any) => {
+                        return options.dsMode == "manual";
+                    },
+                    options:{
+                        columnInstance:"$data"
+                    }
+                },               
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]

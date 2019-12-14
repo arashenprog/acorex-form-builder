@@ -10,7 +10,7 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
     value:string[];
-    data:{columns:any[],rowCount:number,fillBy:string[],dsName:string[]}; 
+    data:{columns:any[]}; 
     header:string;
     footer:string; 
 

@@ -40,8 +40,7 @@ export class AXFListInputWidgetModule {
                 },
                 bgColor: "#FFFFFF",
                 items:{ types:[ new ContentItemsStructureEditor({id:"text",title:"Text",type:"string"})],
-                        content:[] ,
-                        isDrop:false
+                        content:[]  
                     },
                 mode: "single",
                 direction: "horizontal",

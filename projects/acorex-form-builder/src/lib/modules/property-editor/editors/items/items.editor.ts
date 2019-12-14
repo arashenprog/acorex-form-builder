@@ -1,14 +1,16 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 import { ItemsStructureEditor, ContentItemsStructureEditor } from './itemstructure.editor';
 import { BrowserTransferStateModule } from '@angular/platform-browser';
 import { AXFDataService } from '../../../widget/services/data.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { isArray } from 'util';
+import { GridStructureEditor } from '../grid/gridstructure.editor';
 
 @Component({
     templateUrl: './items.editor.html',
     styleUrls: ['./items.editor.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEditor> implements OnInit {
 
@@ -25,8 +27,21 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
         if (isArray(value) && this.viewTypeStr != value) {
             this.changeViewType(value);
             this.viewTypeStr = value;
+            this.cdr.markForCheck();
         }
     }
+
+    set columnInstance(value: GridStructureEditor) {
+        debugger
+        if (value.columns && isArray(value.columns) && value.columns.length > 0) {
+            if (JSON.stringify(value.columns) != JSON.stringify(this.value.types)) {
+                this.value.types =Object.assign([],value.columns);
+                this.manageContent();
+                this.cdr.markForCheck();
+            }
+        }
+    }
+
 
     constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
         super();
@@ -41,28 +56,13 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
             case "number":
             case "date":
             case "selectionList":
-                if (this.value.isDrop) {
-                    this.value.content[ind].value = e;
-                    this.value.content[ind].text = item.title;
-                }
-                else
-                    this.value.content[ind][item.id] = e;
+                this.value.content[ind][item.id] = e;
                 break;
             case "boolean":
-                if (this.value.isDrop) {
-                    this.value.content[ind].value = item.id;
-                    this.value.content[ind].text = item.title;
-                }
-                else
-                    this.value.content[ind][item.id] = e.target.checked;
+                this.value.content[ind][item.id] = e.target.checked;
                 break;
             case "image":
-                if (this.value.isDrop) {
-                    this.value.content[ind].value = item.id;
-                    this.value.content[ind].text = item.title;
-                }
-                else
-                    this.value.content[ind][item.id] = e.data;
+                this.value.content[ind][item.id] = e.data;
                 break;
             default:
                 break;
@@ -96,9 +96,8 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
 
     addItemClick() {
         if (!this.value.content)
-            this.value.content = [];
-        let index = this.value.content.length + 1;
-        let param: any = { value: index };
+            this.value.content = []; 
+        let param: any =  { id: new Date().getTime() };
         this.value.types.forEach((e) => {
             param[e.id] = e.defaultValue;
         });
@@ -123,8 +122,8 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
                     this.value.content = this.value.content.map((m) => { return { ...m, [newType.id]: newType.defaultValue } })
             }
         }
-        if (newVal[0] == "string" || newVal[0] == "both"){
-            newType = new ContentItemsStructureEditor({ id: "text", title: "Text", type: "string" })  
+        if (newVal[0] == "string" || newVal[0] == "both") {
+            newType = new ContentItemsStructureEditor({ id: "text", title: "Text", type: "string" })
             if (newVal[0] == "string" && this.value.types.some(s => s.id == "image")) {
                 this.value.types = this.value.types.filter(s => s.id != "image");
                 if (this.value.content)
@@ -138,7 +137,16 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
                 if (this.value.content)
                     this.value.content = this.value.content.map((m) => { return { ...m, [newType.id]: newType.defaultValue } })
             }
-        } 
+        }
 
+    }
+
+    manageContent() {
+        if (this.value.content && this.value.content.length > 0)
+            this.value.types.forEach((e) => {
+                if (!this.value.content[0][e.id]) {
+                    this.value.content = this.value.content.map((m) => { return { ...m, [e.id]: e.defaultValue } })
+                }
+            });
     }
 }

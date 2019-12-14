@@ -1,7 +1,6 @@
 export class ItemsStructureEditor {
     types: ContentItemsStructureEditor[];
-    content: any[];
-    isDrop: boolean = false;
+    content: any[]; 
 }
 
 export class ContentItemsStructureEditor {
