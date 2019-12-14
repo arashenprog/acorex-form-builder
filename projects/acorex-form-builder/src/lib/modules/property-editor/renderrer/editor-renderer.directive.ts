@@ -67,7 +67,7 @@ export class AXFEditorRendererDirective {
                 const opt = this.property.options[p];
                 if (typeof opt == "string" && opt.startsWith("$")) {
                     let key = opt.substring(1);
-                    this.instance[key] = this.widget.config.options[key];
+                    this.instance[p] = this.widget.config.options[key];
                 }
             }
         }
