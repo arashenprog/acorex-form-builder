@@ -1,13 +1,6 @@
-<div>
-    <!-- <div class="viewType" *ngIf="imagable">
-        <ax-selection-list direction="horizontal" mode="single" [items]="contentViewItems" 
-        [selectedValues]="items.ContentView" (selectedValuesChange)="contentViewChange($event)" textField="title"
-            valueField="value">
-        </ax-selection-list>
-    </div> -->
-    {{viewType}}
-    <div *ngFor="let cnt of items.content;let i = index" class="parentItem">
-        <div class="childItem" *ngFor="let item of items.types">
+<div>    
+    <div *ngFor="let cnt of value.content;let i = index" class="parentItem">
+        <div class="childItem" *ngFor="let item of value.types">
             <span>{{item.title}}:</span>
             <ax-text-box class="nodeItem" [text]="cnt[item.id]" *ngIf="item.type=='string'" (textChange)="itemChange(item,i,$event)"></ax-text-box>
             <ax-text-box class="nodeItem" [text]="cnt[item.id]" type="number" *ngIf="item.type=='number'" (textChange)="itemChange(item,i,$event)"></ax-text-box>

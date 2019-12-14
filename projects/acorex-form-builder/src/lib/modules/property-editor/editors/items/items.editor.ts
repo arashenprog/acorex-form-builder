@@ -1,8 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 import { ItemsStructureEditor, ContentItemsStructureEditor } from './itemstructure.editor';
-import { BrowserTransferStateModule } from '@angular/platform-browser'; 
+import { BrowserTransferStateModule } from '@angular/platform-browser';
 import { AXFDataService } from '../../../widget/services/data.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { isArray } from 'util';
 
 @Component({
     templateUrl: './items.editor.html',
@@ -10,36 +12,28 @@ import { AXFDataService } from '../../../widget/services/data.service';
 })
 export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEditor> implements OnInit {
 
-    items:ItemsStructureEditor;
-    innerValue: any[] = [];  
-    contentViewItems: any[]= [{ value: "text", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }]
-    imagable:boolean=false;
-    otherable:boolean=false;
-    flgChange:boolean=false;
-    viewType:string;
-   
+    innerValue: any[] = [];
+    contentViewItems: any[] = [{ value: "text", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }]
+    imagable: boolean = false;
+    otherable: boolean = false;
+    flgChange: boolean = false;
+    private viewTypeStr: string;
+    get viewType(): string {
+        return this.viewTypeStr;
+    }
+    set viewType(value: string) {
+        if (isArray(value) && this.viewTypeStr != value) {
+            this.changeViewType(value);
+            this.viewTypeStr = value;
+        }
+    }
 
-    constructor(protected cdr: ChangeDetectorRef,private dataService: AXFDataService) {
+    constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
         super();
     }
 
     ngOnInit(): void {
-        this.items = this.value;
     }
-
-
-    //contentViewChange(e)
-    //{
-    //if(!e || !e.length)
-    // return;
-    //if (JSON.stringify(e)!=JSON.stringify(this.items.ContentView)) {
-    // this.items.ContentView=e;  
-    //if((e[0]=="image" || e[0]=="both") && this.items.content.length>0 && 
-    //  this.items.content[0].image==undefined) 
-    // this.items.content= this.items.content.map(obj=> ({ ...obj, image: './assets/images/noimage.png'}));
-    //super.handleValueChange(this.items);
-    // }
-    //}
 
     itemChange(item: any, ind: number, e: any) {
         switch (item.type) {
@@ -47,68 +41,104 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
             case "number":
             case "date":
             case "selectionList":
-                if (this.items.isDrop) {
-                    this.items.content[ind].value = e;
-                    this.items.content[ind].text = item.title;
+                if (this.value.isDrop) {
+                    this.value.content[ind].value = e;
+                    this.value.content[ind].text = item.title;
                 }
                 else
-                    this.items.content[ind][item.id] = e;
+                    this.value.content[ind][item.id] = e;
                 break;
             case "boolean":
-                if (this.items.isDrop) {
-                    this.items.content[ind].value = item.id;
-                    this.items.content[ind].text = item.title;
+                if (this.value.isDrop) {
+                    this.value.content[ind].value = item.id;
+                    this.value.content[ind].text = item.title;
                 }
                 else
-                    this.items.content[ind][item.id] = e.target.checked;
+                    this.value.content[ind][item.id] = e.target.checked;
                 break;
             case "image":
-                    if (this.items.isDrop) {
-                        this.items.content[ind].value = item.id;
-                        this.items.content[ind].text = item.title;
-                    }
-                    else
-                        this.items.content[ind][item.id] = e.data;
+                if (this.value.isDrop) {
+                    this.value.content[ind].value = item.id;
+                    this.value.content[ind].text = item.title;
+                }
+                else
+                    this.value.content[ind][item.id] = e.data;
                 break;
             default:
                 break;
         }
 
-        super.handleValueChange(this.items);
+        super.handleValueChange(this.value);
     }
 
     deleteClick(ind) {
-        this.items.content.splice(ind, 1);
-        super.handleValueChange(this.items);
+        this.value.content.splice(ind, 1);
+        super.handleValueChange(this.value);
     }
 
     upClick(ind, item) {
         if (ind > 0) {
-            let temp = this.items.content[ind - 1];
-            this.items.content[ind - 1] = item;
-            this.items.content[ind] = temp;
-            super.handleValueChange(this.items);
+            let temp = this.value.content[ind - 1];
+            this.value.content[ind - 1] = item;
+            this.value.content[ind] = temp;
+            super.handleValueChange(this.value);
         }
     }
 
     downClick(ind, item) {
-        if (ind < this.items.content.length - 1) {
-            let temp = this.items.content[ind + 1];
-            this.items.content[ind + 1] = item;
-            this.items.content[ind] = temp;
-            super.handleValueChange(this.items);
+        if (ind < this.value.content.length - 1) {
+            let temp = this.value.content[ind + 1];
+            this.value.content[ind + 1] = item;
+            this.value.content[ind] = temp;
+            super.handleValueChange(this.value);
         }
     }
 
-    addItemClick() { 
-        let index= this.items.content.length+1;
-        let param:any={value:index};
-        this.items.types.forEach((e)=> {
-            param[e.id]=e.defaultValue;
+    addItemClick() {
+        if (!this.value.content)
+            this.value.content = [];
+        let index = this.value.content.length + 1;
+        let param: any = { value: index };
+        this.value.types.forEach((e) => {
+            param[e.id] = e.defaultValue;
         });
-        this.items.content.push(param); 
-        super.handleValueChange(this.items);
+        this.value.content.push(param);
+        super.handleValueChange(this.value);
     }
 
-     
+    changeViewType(newVal) {
+        let newType: any;
+        if (newVal[0] == "image" || newVal[0] == "both") {
+            newType = new ContentItemsStructureEditor({ id: "image", title: "Image", type: "image" })
+            if (newVal[0] == "image" && this.value.types.some(s => s.id == "text")) {
+                this.value.types = this.value.types.filter(s => s.id != "text");
+                if (this.value.content)
+                    this.value.content.forEach(f => {
+                        delete f["text"];
+                    })
+            }
+            if (!this.value.types.some(s => s.id == "image")) {
+                this.value.types.push(newType);
+                if (this.value.content)
+                    this.value.content = this.value.content.map((m) => { return { ...m, [newType.id]: newType.defaultValue } })
+            }
+        }
+        if (newVal[0] == "string" || newVal[0] == "both"){
+            newType = new ContentItemsStructureEditor({ id: "text", title: "Text", type: "string" })  
+            if (newVal[0] == "string" && this.value.types.some(s => s.id == "image")) {
+                this.value.types = this.value.types.filter(s => s.id != "image");
+                if (this.value.content)
+                    this.value.content.forEach(f => {
+                        delete f["image"];
+                    })
+            }
+            if (!this.value.types.some(s => s.id == "text")) {
+
+                this.value.types.push(newType);
+                if (this.value.content)
+                    this.value.content = this.value.content.map((m) => { return { ...m, [newType.id]: newType.defaultValue } })
+            }
+        } 
+
+    }
 }
