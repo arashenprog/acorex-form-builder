@@ -13,6 +13,7 @@ import { AXFCheckboxEditorModule } from '../editors/checkbox/checkbox.module';
 import { AXFSignatureEditorModule } from '../editors/signature/signature.module';
 import { AXFGridEditorModule } from '../editors/grid/grid.modules';
 import { AXFEventEditorModule } from '../editors/event/event.module';
+import { AXFDataSourceEditorModule } from '../editors/data-source/data-source.module';
 
 
 const WDIGET_MODULES = [
@@ -26,7 +27,8 @@ const WDIGET_MODULES = [
     AXFCheckboxEditorModule,
     AXFSignatureEditorModule,
     AXFGridEditorModule,
-    AXFEventEditorModule
+    AXFEventEditorModule,
+    AXFDataSourceEditorModule
 ]
 
 @NgModule({

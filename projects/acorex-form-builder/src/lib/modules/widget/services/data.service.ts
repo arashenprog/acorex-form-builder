@@ -6,11 +6,8 @@ export interface VarItem {
     key: string, word: any;
 }
 
-export interface DSItem {
-    key: string, title: any;
-}
+
 const VARIABLES: VarItem[] = [];
-const DATASOURCES: DSItem[] = [];
 
 @Injectable()
 export class AXFDataService {
@@ -29,30 +26,27 @@ export class AXFDataService {
                 });
             }
         });
-        // let p2 = new Promise((resolve) => {
-        //     if (!DATASOURCES.length) {
-        //         this.connectService.send("getDSList").then(c => {
-        //             console.log("Load DataSources ...")
-        //             DATASOURCES.push(...c.items);
-        //             resolve()
-        //         });
-        //     }
-        // });
-
         return Promise.all([p1]);
     }
 
     getList(dataSourceName: String, params?: any): PromisResult<any[]> {
         return new PromisResult<any[]>((resolve) => {
-            this.connectService.send("getList", { name: dataSourceName, params: params }).then(c => {
+            let keyValObject = {}
+            if (params) {
+                params.forEach(p => {
+                    keyValObject[p.name] = p.value;
+                });
+            }
+
+            this.connectService.send("getList", { name: dataSourceName, params: keyValObject }).then(c => {
                 resolve(c.items);
             });
         });
     }
 
 
-    getDSList(): DSItem[] {
-        return DATASOURCES;
+    getDSList(): PromisResult<any[]> {
+        return this.getList("ds-list");
     }
 
     getWord(key: string): string {

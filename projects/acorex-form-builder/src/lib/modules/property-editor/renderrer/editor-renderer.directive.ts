@@ -40,7 +40,6 @@ export class AXFEditorRendererDirective {
 
 
     createComponent() {
-        debugger;
         const editorClass = this.editorService.resolve(this.property.editor);
         if (!editorClass)
             return;

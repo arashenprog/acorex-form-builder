@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, ChangeDete
 import { AXFWidgetView } from '../../../config/widget';
 import { AXFDataService } from '../../../services/data.service';
 import { ContentItemsStructureEditor } from '../../../../property-editor/editors/items/itemstructure.editor';
+import { AXFDataSourceValue } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
     templateUrl: './dropdown-input-widget.view.html',
@@ -15,7 +16,7 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     mode: string;
     fillBy: string;
     allowSearch: boolean;
-    dsName: string;
+    dsName: AXFDataSourceValue;
     dsMode: string;
     visible: boolean;
 
@@ -27,7 +28,7 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     ngAfterViewInit() {
 
         if (this.dsMode[0] == 'ds' && this.dsName) {
-            this.dataService.getList(this.dsName).then(items => {
+            this.dataService.getList(this.dsName.name,this.dsName.params).then(items => {
                 this.items.content = items;
                 this.cdr.markForCheck();
             });

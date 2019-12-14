@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation } from '@an
 import { AXFWidgetView } from '../../../config/widget';
 import { ContentItemsStructureEditor } from '../../../../property-editor/editors/items/itemstructure.editor';
 import { AXFDataService } from '../../../services/data.service';
+import { AXFDataSourceValue } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
     templateUrl: './list-input-widget.view.html',
@@ -19,7 +20,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     showOther: boolean;
     viewType: boolean;
     dsMode: string[];
-    dsName: string;
+    dsName: AXFDataSourceValue;
     uid: string = "M" + Math.ceil(Math.random() * 10000);
     visible: boolean;
 
@@ -33,10 +34,9 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     }
 
     ngAfterViewInit() {
-        if (this.dsMode[0] == "ds" && this.dsName != "") {
-            this.dataService.getList(this.dsName).then(items => {
+        if (this.dsMode[0] == "ds" && this.dsName) {
+            this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
                 this.items.content = items;
-               
             });
         }
     }
@@ -64,6 +64,6 @@ export class AXFListInputWidgetView extends AXFWidgetView {
                 this.value = this.value.filter(c => c != val);
             }
         }
-        
+
     }
 }

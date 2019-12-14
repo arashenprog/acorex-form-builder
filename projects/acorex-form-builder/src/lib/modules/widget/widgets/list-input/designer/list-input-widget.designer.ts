@@ -6,6 +6,7 @@ import { WidgetConfig } from '../../../services/widget.service';
 import { ContentItemsStructureEditor } from '../../../../property-editor/editors/items/itemstructure.editor';
 import { StringifyOptions } from 'querystring';
 import { AXFDataService } from '../../../services/data.service';
+import { AXFDataSourceValue } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
     selector: "[axf-widget-text]",
@@ -24,7 +25,7 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     showOther:boolean;
     viewType:boolean;
     dsMode:string[];
-    dsName:string;
+    dsName:AXFDataSourceValue;
 
 
     constructor(private dataService: AXFDataService) {
@@ -34,9 +35,9 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     onRender(): void { 
         if(this.el)
           this.applyStyle(this.el.nativeElement);
-        if(this.dsMode[0]=="ds" && this.dsName!="")
+        if(this.dsMode[0]=="ds" && this.dsName)
         {
-            this.dataService.getList(this.dsName).then(items => {
+            this.dataService.getList(this.dsName.name,this.dsName.params).then(items => {
                 this.items.content = items; 
             });
         }  

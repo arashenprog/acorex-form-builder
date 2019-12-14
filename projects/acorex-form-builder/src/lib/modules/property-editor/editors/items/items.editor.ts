@@ -32,7 +32,6 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
     }
 
     set columnInstance(value: GridStructureEditor) {
-        debugger
         if (value.columns && isArray(value.columns) && value.columns.length > 0) {
             if (JSON.stringify(value.columns) != JSON.stringify(this.value.types)) {
                 this.value.types =Object.assign([],value.columns);
