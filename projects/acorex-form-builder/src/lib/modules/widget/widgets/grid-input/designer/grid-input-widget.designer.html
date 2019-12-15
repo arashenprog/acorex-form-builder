@@ -10,8 +10,8 @@
             </tr>
             <tr style="border-bottom: 1px solid var(--primary-color);">
                 <td *ngFor="let item of data.columns">
-                    <span *ngIf="!item.fillByUser && !item.isDs">{{item.defaultValue}}</span>
-                    <span *ngIf="!item.fillByUser && item.isDs">[{{item.id}}]</span>
+                    <span *ngIf="!item.fillByUser && item.fieldName==null">{{item.defaultValue}}</span>
+                    <span *ngIf="!item.fillByUser && item.fieldName!=null">[{{item.fieldName}}]</span>
                     <ax-text-box *ngIf="item.fillByUser && item.type=='string'"></ax-text-box>
                     <ax-text-box type="number" *ngIf="item.fillByUser && item.type=='number'"></ax-text-box>
                     <ax-date-picker label="" *ngIf="item.fillByUser && item.type=='date'"></ax-date-picker>

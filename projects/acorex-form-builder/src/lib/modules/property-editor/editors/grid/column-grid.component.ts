@@ -13,7 +13,7 @@ export class AXFColumnGridComponent extends AXBasePageComponent {
     columnTypeItems: any[] = [{ value: "string", title: "String" }, { value: "number", title: "Number" },
     { value: "boolean", title: "Boolean" }, { value: "date", title: "Date" }, { value: "time", title: "Time" },
     { value: "image", title: "Image" }, { value: "selectionList", title: "Selection List" }]
-
+    dsMode:string[];
     constructor() {
         super();
     }
@@ -32,7 +32,7 @@ export class AXFColumnGridComponent extends AXBasePageComponent {
             this.columns[ind].subText = "";
         }
         this.columns[ind].type = e[0];  
-        this.columns[ind].defaultValue= (this.columns[ind] as ContentItemsStructureEditor).setDefaultValue(this.columns[ind].type); 
+        this.columns[ind].defaultValue= this.setDefaultValue(this.columns[ind].type); 
     }
 
     modeChange(ind, e) {
@@ -74,8 +74,31 @@ export class AXFColumnGridComponent extends AXBasePageComponent {
         this.columns[ind].title = e; 
     }
 
+    fieldNameChange(ind, e) {
+        this.columns[ind].fieldName = e; 
+    }
+
     checkChange(ind, e) { 
         this.columns[ind].fillByUser = e.target.checked; 
+    }
+
+    setDefaultValue(type:string) {
+        switch (type) {
+            case "string":
+                return "Item";
+            case "number":
+                return 1;
+            case "date":
+                return new Date().toLocaleDateString();
+            case "selectionList":
+                return "";
+            case "boolean":
+                return "false";
+            case "image":
+                return './assets/images/noimage.png';
+            case "time":
+                return new Date().toLocaleTimeString(); 
+        }
     }
 
 }
