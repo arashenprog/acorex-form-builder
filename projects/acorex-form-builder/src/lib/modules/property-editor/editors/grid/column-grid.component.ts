@@ -32,7 +32,7 @@ export class AXFColumnGridComponent extends AXBasePageComponent {
             this.columns[ind].subText = "";
         }
         this.columns[ind].type = e[0];  
-        this.columns[ind].defaultValue= (<ContentItemsStructureEditor>this.columns[ind]).setDefaultValue(this.columns[ind].type); 
+        this.columns[ind].defaultValue= (this.columns[ind] as ContentItemsStructureEditor).setDefaultValue(this.columns[ind].type); 
     }
 
     modeChange(ind, e) {

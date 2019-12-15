@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 import { AXFDataService } from '../../../services/data.service';
+import { AXFDataSourceValue } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
     templateUrl: './grid-input-widget.view.html',
@@ -14,8 +15,8 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     data:{columns:any[]}; 
     header:string;
     footer:string; 
-    dsMode:string[];
-    dsName:string;
+    dsMode: string[];
+    dsName: AXFDataSourceValue;
     rows:any[]=[];
 
     constructor(private dataService: AXFDataService) {
@@ -27,10 +28,10 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
         this.applyStyle(this.el.nativeElement);
     }
 
-    ngAfterViewInit() {
-        if (this.dsMode[0] == "ds" && this.dsName != "") {
-            this.dataService.getList(this.dsName).then(items => {
-                this.rows = items; 
+    ngAfterViewInit() { 
+        if (this.dsMode[0] == "ds" && this.dsName) {
+            this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
+                this.rows = items;
             });
         }
     }
