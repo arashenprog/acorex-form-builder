@@ -1,6 +1,6 @@
-<div class="view-container">
-    <iframe [src]="url" class="viewer" frameBorder="0" #frame [style.width.px]="size">
-    </iframe>
+<div class="view-container" [style.width.px]="size">
+    <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w"   [mode]="mode">
+    </ng-container>
 </div>
 <div class="device-size-container">
     <div class="btn-group" role="group" aria-label="Basic example">

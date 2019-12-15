@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AXBasePageComponent , AXDialogService} from 'acorex-ui';
 import { AXFTemplateModel } from '../../../widget/services/db/database';
-import { AXFTemplateService } from '../../../widget/services/template/template.service';
 import { AXFWidgetService } from '../../../widget/services/widget.service';
+import { AXFTemplateService } from '../../../widget/services/template/template.service';
 
 @Component({
     templateUrl: './load-template.page.html',

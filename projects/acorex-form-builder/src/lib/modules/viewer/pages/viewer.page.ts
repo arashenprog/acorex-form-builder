@@ -14,15 +14,11 @@ export class ACFViewerPage extends AXBasePageComponent {
   constructor(
     private widgetService: AXFWidgetService,
     private router: ActivatedRoute,
-    private connectService: AXFConnectService,
-    private formService: AXFFormService
+    private connectService: AXFConnectService
   ) {
     super();
     this.mode = this.router.snapshot.queryParams.mode;
   }
-
-
-  private formData: any = {};
 
   mode: string = "view";
   widgets: WidgetConfig[] = [];

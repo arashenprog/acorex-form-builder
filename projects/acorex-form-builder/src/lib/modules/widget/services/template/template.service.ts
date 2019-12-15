@@ -7,115 +7,16 @@ import { AXFDatabase, AXFTemplateModel } from '../db/database';
 
 
 
-@Injectable()
-export class AXFTemplateService {
-    private _db: AXFDatabase;
-    constructor(private connectService: AXFConnectService, private widgetService: AXFWidgetService) {
-        this._db = new AXFDatabase();
-    }
+export abstract class AXFTemplateService {
 
+    abstract checkExists(name: string): PromisResult<boolean>;
 
-    public checkExists(name: string): PromisResult<boolean> {
-        return new PromisResult((resolve) => {
-            this._db.templates
-                .where({ name: name })
-                .count()
-                .then((c) => {
-                    resolve(c > 0);
-                })
-                .catch((c) => {
-                    console.error(c);
-                    resolve(false);
-                })
-        })
-    }
+    abstract saveForm(name: string, type: "form" | "widget", widget: WidgetConfig, description?: string): PromisResult<boolean>;
 
-    public saveForm(name: string, type: "form" | "widget", widget: WidgetConfig, description?: string): PromisResult<boolean> {
-        return new PromisResult((resolve) => {
+    abstract get(id: number): PromisResult<AXFTemplateModel>;
 
-            this._db.templates
-                .where({ name: name })
-                .first()
-                .then((c) => {
-                    if (c) {
-                        this._db.templates.delete(c.id).then(g => {
-                            this._db.templates
-                                .add({
-                                    id: new Date().getTime(),
-                                    template: this.widgetService.serialize(widget),
-                                    name: name,
-                                    type: type
-                                })
-                                .then((c) => {
-                                    resolve(true);
-                                }).catch((c) => {
-                                    console.error(c);
-                                    resolve(false);
-                                })
-                        })
-                            .catch((c) => {
-                                console.error(c);
-                                resolve(false);
-                            })
-                    }
-                    else {
-                        this._db.templates
-                            .put({
-                                id: new Date().getTime(),
-                                template: this.widgetService.serialize(widget),
-                                name: name,
-                                type: type
-                            })
-                            .then((c) => {
-                                resolve(true);
-                            }).catch((c) => {
-                                console.error(c);
-                                resolve(false);
-                            })
-                    }
-                })
-                .catch((c) => {
-                    console.error(c);
-                    resolve(false);
-                })
-        })
-    }
+    abstract getFormList(): PromisResult<AXFTemplateModel[]>;
 
-    public get(id: number): PromisResult<AXFTemplateModel> {
-        return new PromisResult((resolve) => {
-            this._db.templates
-                .get(id)
-                .then((c) => {
-                    resolve(c);
-                });
-        })
-    }
-
-
-
-    public getFormList(): PromisResult<AXFTemplateModel[]> {
-        return new PromisResult((resolve) => {
-            this._db.templates
-                .where({ type: "form" })
-                .toArray()
-                .then((result) => {
-                    resolve(result);
-                });
-        })
-    }
-
-    public getWidgetList(): PromisResult<AXFTemplateModel[]> {
-
-        return new PromisResult((resolve) => {
-            this._db.templates
-                .where({ type: "widget" })
-                .toArray()
-                .then((result) => {
-                    resolve(result);
-                });
-        })
-    }
-
-
+    abstract getWidgetList(): PromisResult<AXFTemplateModel[]>;
 
 }

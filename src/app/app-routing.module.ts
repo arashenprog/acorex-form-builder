@@ -10,12 +10,17 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        component: ACFDesignerPage
+        redirectTo: '/designer',
+        pathMatch: 'full'
       },
       {
         path: "view",
         component: ACFViewerPage
-      }
+      },
+      {
+        path: "designer",
+        component: ACFDesignerPage
+      },
     ]
   }
 ];

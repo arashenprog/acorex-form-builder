@@ -4,7 +4,7 @@ import { PromisResult } from 'acorex-ui';
 import { AXFFormService } from './form.service';
 
 export interface VarItem {
-    key: string, word: any;
+    value: string, text: any;
 }
 
 
@@ -13,7 +13,7 @@ const VARIABLES: VarItem[] = [];
 @Injectable()
 export class AXFDataService {
 
-    constructor(private connectService: AXFConnectService,private formService:AXFFormService) {
+    constructor(private connectService: AXFConnectService, private formService: AXFFormService) {
 
     }
 
@@ -22,7 +22,8 @@ export class AXFDataService {
             if (!VARIABLES.length) {
                 this.connectService.send("getVarList").then(c => {
                     console.log("Load Variables ...")
-                    VARIABLES.push(...c.items);
+                    if (c && c.items)
+                        VARIABLES.push(...c.items);
                     resolve()
                 });
             }
@@ -35,12 +36,10 @@ export class AXFDataService {
             let keyValObject = {}
             if (params) {
                 params.forEach(p => {
-                    if(typeof p.value==="string" && p.value.match(/\$([a-zA-Z1-9])+/))
-                    {
+                    if (typeof p.value === "string" && p.value.match(/\$([a-zA-Z1-9])+/)) {
                         keyValObject[p.name] = this.formService.getValue(p.value.substring(1));
                     }
-                    else
-                    {
+                    else {
                         keyValObject[p.name] = p.value;
                     }
                 });
@@ -58,9 +57,9 @@ export class AXFDataService {
     }
 
     getWord(key: string): string {
-        let item = VARIABLES.find(c => c.key == key)
+        let item = VARIABLES.find(c => c.value == key)
         if (item)
-            return item.word;
+            return item.text;
         return null;
     }
 }

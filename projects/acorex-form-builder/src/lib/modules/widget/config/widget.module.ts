@@ -14,12 +14,13 @@ import { AXFCheckboxInputWidgetModule } from '../widgets/checkbox-input/checkbox
 import { AXFTextInputWidgetModule } from '../widgets/text-input/text-input.module';
 import { AXFPageOutletWidgetModule } from '../widgets/outlet/outlet.module';
 import { AXFListInputWidgetModule } from '../widgets/list-input/list-input.module';
-import { AXFTemplateService } from '../services/template/template.service';
 import { AXFDropdownInputWidgetModule } from '../widgets/dropdown-input/dropdown-input.module';
 import { AXFButtonWidgetModule } from '../widgets/button/button.module';
 import { AXFGridInputWidgetModule } from '../widgets/grid-input/grid-input.module';
 import { AXFFormService } from '../services/form.service';
 import { AXFPanelWidgetModule } from '../widgets/panel/panel.module';
+import { AXFAPITemplateService } from '../services/template/template-api.service';
+import { AXFTemplateService } from '../services/template/template.service';
 
 
 
@@ -48,7 +49,10 @@ const MODULES = [
     declarations: [],
     imports: [...MODULES],
     exports: [...MODULES],
-    providers: [AXFTemplateService,AXFFormService],
+    providers: [{
+        provide: AXFTemplateService,
+        useClass :AXFAPITemplateService
+    },AXFFormService],
 })
 export class AXFWidgetModule {
     constructor(injector: Injector) {

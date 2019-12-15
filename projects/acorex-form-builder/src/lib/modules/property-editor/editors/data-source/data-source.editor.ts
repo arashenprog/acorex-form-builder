@@ -11,7 +11,7 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
 
     innerValue: any[] = [];
     items: any[] = [];
-    textField: string = "title";
+    textField: string = "text";
     valueField: string = "value";
 
     constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
@@ -20,7 +20,6 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
 
     ngAfterViewInit(): void {
         this.dataService.getDSList().then(items => {
-            debugger;
             this.items = items;
             this.innerValue = this.value ? [this.value.name] : [];
             this.cdr.markForCheck();

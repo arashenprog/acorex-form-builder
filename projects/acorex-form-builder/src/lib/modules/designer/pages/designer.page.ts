@@ -5,6 +5,7 @@ import { AXFWidgetPickerComponent } from '../../widget/shared/widget-picker/widg
 import { AXFWidget, AXFWidgetContainer, AXFWidgetDesigner } from '../../widget/config/widget';
 import { AXFLoadTemplatePage } from './template/load-template.page';
 import { AXFSaveTemplatePage } from './template/save-template.page';
+import { AXFConnectService } from '../../widget/services/connect.service';
 
 @Component({
     templateUrl: './designer.page.html',
@@ -16,7 +17,8 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         private popup: AXPopupService,
         private widgetService: AXFWidgetService,
         private toastService: AXToastService,
-        private eventService: EventService
+        private eventService: EventService,
+        private connectService: AXFConnectService
 
 
     ) {
@@ -166,5 +168,13 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
 
     handleBreadcrumbClick(item: AXFWidgetDesigner) {
         this.eventService.broadcast("SELECT", item);
+    }
+
+    ngAfterViewInit() {
+        this.connectService.send("load").then(data => {
+            if (data && data.widgets) {
+                this.widgets = [this.widgetService.parse(data.widgets)];
+            }
+        })
     }
 }

@@ -13,19 +13,14 @@ export class ACFViewerFrameComponent {
     constructor(
         private widgetService: AXFWidgetService,
         private sanitizer: DomSanitizer,
-        //private sanitizer:Sanitizer,
     ) {
         this.size = this.sizes[0].width;
-        this.url = sanitizer.bypassSecurityTrustResourceUrl("view?mode=view");
     }
-
-    @ViewChild('frame', { static: true })
-    frame: ElementRef;
 
     @Input()
     page: WidgetConfig;
 
-
+    widgets: WidgetConfig[] = [];
 
 
     sizes: any[] = [
@@ -60,19 +55,11 @@ export class ACFViewerFrameComponent {
     ];
 
     size: number;
-    url: SafeUrl;
+    mode: string = "view";
 
-
-    @HostListener('window:message', ['$event'])
-    handleMessage(e) {
-        if (e.data && e.data.action == "load") {
-            this.frame.nativeElement.contentWindow.postMessage({
-                action: "load",
-                data: {
-                    widgets: this.widgetService.serialize(this.page)
-                }
-            }, '*');
-        }
+    ngOnInit()
+    {
+        this.widgets.push(this.widgetService.parse(this.widgetService.serialize(this.page)));
     }
 
     handleSetSize(e) {
@@ -80,7 +67,7 @@ export class ACFViewerFrameComponent {
             c.active = false;
         })
         this.size = e.width;
-        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(`view?mode=${e.mode}`);
+        this.mode = e.mode;
         e.active = true;
     }
 }
