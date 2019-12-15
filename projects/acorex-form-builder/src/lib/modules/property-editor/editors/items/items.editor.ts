@@ -16,7 +16,7 @@ import { AXFItemComponent } from './items.component';
 })
 export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEditor> implements OnInit {
 
-    innerValue: any[] = []; 
+    innerValue: any[] = [];
 
     private viewTypeStr: string;
     get viewType(): string {
@@ -33,7 +33,7 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
     set columnInstance(value: GridStructureEditor) {
         if (value.columns && isArray(value.columns) && value.columns.length > 0) {
             if (JSON.stringify(value.columns) != JSON.stringify(this.value.types)) {
-                this.value.types =Object.assign([],value.columns);
+                this.value.types = Object.assign([], value.columns);
                 this.manageContent();
                 this.cdr.markForCheck();
             }
@@ -41,27 +41,27 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
     }
 
 
-    constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService,private popupService: AXPopupService) {
+    constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService, private popupService: AXPopupService) {
         super();
     }
 
     ngOnInit(): void {
     }
 
-    itemManage() { 
+    itemManage() {
         this.popupService.open(AXFItemComponent, {
             title: "Item Management",
-            size:this.value.types.length>3 ? "lg":"md",
+            size: this.value.types.length > 3 ? "lg" : "md",
             data: {
-                item: this.value
+                item: { types: this.value.types.filter(f => !f.fillByUser), content: this.value.content }
             }
         }).closed(c => {
-            this.value=c.data;
+            this.value.content = c.data;
             this.handleValueChange(this.value);
         })
     }
 
-    
+
     changeViewType(newVal) {
         let newType: any;
         if (newVal[0] == "image" || newVal[0] == "both") {
@@ -99,11 +99,23 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
     }
 
     manageContent() {
-        if (this.value.content && this.value.content.length > 0)
-            this.value.types.forEach((e) => {
+        if (this.value.content && this.value.content.length > 0) {
+            //add new columns
+            this.value.types.filter(f => !f.fillByUser).forEach((e) => {
                 if (!this.value.content[0][e.id]) {
                     this.value.content = this.value.content.map((m) => { return { ...m, [e.id]: e.defaultValue } })
                 }
             });
+            //remove data related to deleted columns
+            let params= Object.getOwnPropertyNames(this.value.content[0]);
+            let existedid= this.value.types.map((m)=>{return m.id});
+            let deletedTypes= params.filter(f=> f!="id" && !existedid.includes(f)) ;
+            deletedTypes.forEach(t=>{
+                this.value.content.forEach(f => {
+                    delete f[t];
+                })
+
+            })
+        }
     }
 }

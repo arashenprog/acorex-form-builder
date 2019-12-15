@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AXBasePageComponent } from 'acorex-ui';
-import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events';  
-import {  ItemsStructureEditor } from '../items/itemstructure.editor';
- 
+import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events';
+import { ItemsStructureEditor } from '../items/itemstructure.editor';
+
 @Component({
     templateUrl: './items.component.html',
     styleUrls: ['./items.component.scss'],
@@ -19,17 +19,19 @@ export class AXFItemComponent extends AXBasePageComponent {
     }
 
     onClosing(e: ClosingAction) {
-        e.data = this.item;
+        e.data = this.item.content;
         e.resolve();
-    } 
+    }
 
     itemChange(item: any, ind: number, e: any) {
         switch (item.type) {
             case "string":
             case "number":
-            case "date":
             case "selectionList":
                 this.item.content[ind][item.id] = e;
+                break;
+            case "date":
+                this.item.content[ind][item.id] = e.date.toISOString().split('T')[0];
                 break;
             case "boolean":
                 this.item.content[ind][item.id] = e.target.checked;
@@ -39,18 +41,18 @@ export class AXFItemComponent extends AXBasePageComponent {
                 break;
             default:
                 break;
-        } 
+        }
     }
 
     deleteClick(ind) {
-        this.item.content.splice(ind, 1); 
+        this.item.content.splice(ind, 1);
     }
 
     upClick(ind, item) {
         if (ind > 0) {
             let temp = this.item.content[ind - 1];
             this.item.content[ind - 1] = item;
-            this.item.content[ind] = temp; 
+            this.item.content[ind] = temp;
         }
     }
 
@@ -58,18 +60,18 @@ export class AXFItemComponent extends AXBasePageComponent {
         if (ind < this.item.content.length - 1) {
             let temp = this.item.content[ind + 1];
             this.item.content[ind + 1] = item;
-            this.item.content[ind] = temp; 
+            this.item.content[ind] = temp;
         }
     }
 
     addItemClick() {
         if (!this.item.content)
-            this.item.content = []; 
-        let param: any =  { id: new Date().getTime() };
+            this.item.content = [];
+        let param: any = { id: new Date().getTime() };
         this.item.types.forEach((e) => {
             param[e.id] = e.defaultValue;
         });
-        this.item.content.push(param); 
+        this.item.content.push(param);
     }
 
 }

@@ -38,7 +38,7 @@ export class ContentItemsStructureEditor {
             case "number":
                 return 1;
             case "date":
-                return new Date().toLocaleDateString();
+                return new Date().toISOString().split('T')[0];
             case "selectionList":
                 return [];
             case "boolean":

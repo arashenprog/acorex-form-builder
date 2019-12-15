@@ -18,6 +18,7 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     dsMode: string[];
     dsName: AXFDataSourceValue;
     rows:any[]=[];
+    items:{content:any[]}
 
     constructor(private dataService: AXFDataService) {
         super()
@@ -29,19 +30,34 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     }
 
     ngAfterViewInit() { 
-        if (this.dsMode[0] == "ds" && this.dsName) {
-            this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
-                this.rows = items;
-            });
+        if (this.dsMode[0] == "ds") {
+            if(this.dsName)
+                this.dataService.getList(this.dsName.name, this.dsName.params).then(it => {
+                    this.rows = it;
+                });
+        }
+        else
+        {
+            this.rows = this.items.content;
         }
     }
 
-    getRowData(row,field)
+    getRowData(row,item)
     {
-        if (row.hasOwnProperty(field)) { 
-            return row[field]; 
+        if(item.fieldName!=null)
+        {
+            if (row.hasOwnProperty(item.fieldName)) { 
+                return row[item.fieldName]; 
+            }
+            return "";
         }
-        return "";
+        else
+        { 
+            if (row.hasOwnProperty(item.id)) { 
+                return row[item.id]; 
+            }
+            return item.defaultValue;
+        } 
     }
 
     handleValueChange(e)

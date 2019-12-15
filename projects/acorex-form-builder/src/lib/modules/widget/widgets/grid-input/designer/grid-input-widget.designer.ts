@@ -19,7 +19,8 @@ export class AXFGridInputWidgetDesigner extends AXFWidgetDesigner {
     data:{columns:any[]}; 
     header:string;
     footer:string; 
-
+    dsMode: string[];
+    items:{content:any[]}
 
     constructor() {
         super()
@@ -35,7 +36,13 @@ export class AXFGridInputWidgetDesigner extends AXFWidgetDesigner {
 
     }
  
-
+    getRowData(row,item)
+    {
+        if (row.hasOwnProperty(item.id)) { 
+            return row[item.id]; 
+        }
+        return item.defaultValue;
+    }
 }
 
 

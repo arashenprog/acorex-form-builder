@@ -2,12 +2,13 @@
 {
     flex-direction: row;
     display: flex;
-    margin-bottom: 5px;
-    border: 1px dotted var(--primary-color);
-    padding: 2px;
+    margin: 0px 0px 5px 0px;
+    padding: 4px;
+    border-bottom: 2px dotted var(--primary-color);
     width: 100%;
     .childItem{
-        span{padding-right: 3px;  width: 25%; text-align: right;}
+        span{padding-right: 3px;  white-space: nowrap;text-align: right;color: var(--primary-color);
+            font-weight: bold;} 
        .nodeItem{width: 100%;}
         width: 100%;
         margin-right: 5px;
