@@ -22,39 +22,80 @@ export class AXFConnectService {
 
         if (action == "getList" && options && options.name) {
             if (options.name == "ds-list") {
-                let list: any[] = [{ value: "staff-list", title: "Staff List" }, { value: "question-list", title: "Questions" }]
+                let list: any[] = [
+                    { value: "countries", title: "Countries" },
+                    { value: "cities", title: "Cities", params: ["countryId"] }
+                ]
                 return PromisResult.resolve({
                     items: list
                 });
             }
-            if (options.name == "question-list") {
+            if (options.name == "countries") {
                 return PromisResult.resolve({
                     items: [
                         {
                             value: '1',
-                            text: "Template 1"
+                            text: "Iran"
                         },
                         {
                             value: "2",
-                            text: "Template 2"
+                            text: "Iraq"
+                        },
+                        {
+                            value: "3",
+                            text: "Turkey"
                         }
                     ],
-                    count: 2
+                    count: 3
                 });
             }
-            if (options.name == "staff-list") {
+            if (options.name == "cities") {
+                let list = [
+                    {
+                        value: '1',
+                        text: "Isfahan",
+                        countryId: "1"
+                    },
+                    {
+                        value: "2",
+                        text: "Tehran",
+                        countryId: "1"
+                    },
+                    {
+                        value: "3",
+                        text: "Shiraz",
+                        countryId: "1"
+                    },
+                    {
+                        value: "4",
+                        text: "Baghdad",
+                        countryId: "2"
+                    },
+                    {
+                        value: "5",
+                        text: "Karbala",
+                        countryId: "2"
+                    },
+                    {
+                        value: "6",
+                        text: "Antaliya",
+                        countryId: "3"
+                    },
+                    {
+                        value: "7",
+                        text: "Analiya",
+                        countryId: "3"
+                    },
+                    {
+                        value: "8",
+                        text: "Istanbul",
+                        countryId: "3"
+                    },
+                ]
+                debugger;
                 return PromisResult.resolve({
-                    items: [
-                        {
-                            value: '1',
-                            text: "Arash Oshnoudi"
-                        },
-                        {
-                            value: "2",
-                            text: "Ali Safari"
-                        }
-                    ],
-                    count: 2
+                    items: list.filter(c => options.params == null || options.params.countryId == c.countryId),
+                    count: 8
                 });
             }
         }

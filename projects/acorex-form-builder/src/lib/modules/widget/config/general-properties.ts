@@ -185,12 +185,9 @@ export const AXF_DS_LIST_PROPERTY: AXFWidgetProperty = {
     category: "Data",
     defaultValue: null,
     title: "List",
-    editor: "DropdownEditor",
+    editor: "DataSourceEditor",
     visible: (options: any) => {
         return options.dsMode == null || options.dsMode == "ds"
-    },
-    options: {
-        dataSource: "ds-list"
     }
 }
 

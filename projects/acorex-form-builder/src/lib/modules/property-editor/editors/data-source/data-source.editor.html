@@ -1,0 +1,10 @@
+<ax-select-box [allowSearch]="false" [items]="items" [selectedValues]="innerValue"
+    (selectedItemsChange)="handleValueChange($event)" [textField]="textField" [valueField]="valueField">
+</ax-select-box>
+<div *ngIf="value && value.params &&  value.params.length>0">
+    <span class="prop-caption">Parameters</span>
+    <div  *ngFor="let item of value.params" style="display: flex;">
+        <ax-text-box [(text)]="item.value" (textChange)="handleParamChange($event)" [label]="item.name">
+        </ax-text-box>
+    </div>
+</div>
