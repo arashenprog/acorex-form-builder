@@ -10,13 +10,15 @@
             </tr>
             <tr style="border-bottom: 1px solid var(--primary-color);">
                 <td *ngFor="let item of data.columns">
-                    <ax-text-box *ngIf="item.type=='string'"></ax-text-box>
-                    <ax-text-box type="number" *ngIf="item.type=='number'"></ax-text-box>
-                    <ax-date-picker label="" *ngIf="item.type=='date'"></ax-date-picker>
-                    <ax-check-box *ngIf="item.type=='boolean'" label="' '"></ax-check-box>
-                    <ax-upload-file *ngIf="item.type=='image'" type="inline">
+                    <span *ngIf="!item.fillByUser && !item.isDs">{{item.defaultValue}}</span>
+                    <span *ngIf="!item.fillByUser && item.isDs">[{{item.id}}]</span>
+                    <ax-text-box *ngIf="item.fillByUser && item.type=='string'"></ax-text-box>
+                    <ax-text-box type="number" *ngIf="item.fillByUser && item.type=='number'"></ax-text-box>
+                    <ax-date-picker label="" *ngIf="item.fillByUser && item.type=='date'"></ax-date-picker>
+                    <ax-check-box *ngIf="item.fillByUser && item.type=='boolean'" label="' '"></ax-check-box>
+                    <ax-upload-file *ngIf="item.fillByUser && item.type=='image'" type="inline">
                     </ax-upload-file>
-                    <ax-selection-list direction="horizontal" *ngIf="item.type=='selectionList'"
+                    <ax-selection-list direction="horizontal" *ngIf="item.fillByUser && item.type=='selectionList'"
                         [items]="item.subItems" textField="value" valueField="value"
                         mode="{{item.mode?'multiple':'single'}}">
                     </ax-selection-list>

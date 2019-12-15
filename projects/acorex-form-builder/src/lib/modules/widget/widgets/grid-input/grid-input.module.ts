@@ -39,9 +39,10 @@ export class AXFGridInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                data:{columns:[new ContentItemsStructureEditor({ id: "Field1", title: "Field1", type: "string" })]},  
+                data:{columns:[new ContentItemsStructureEditor({id:"text",title:"Text", type: "string",isDs:true})]},  
                 header:"",
-                footer:""
+                footer:"",
+                items:{content:[]}
             },
             properties: [  
                 {

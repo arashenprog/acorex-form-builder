@@ -31,7 +31,8 @@ export class AXFColumnGridComponent extends AXBasePageComponent {
             this.columns[ind].mode = false;
             this.columns[ind].subText = "";
         }
-        this.columns[ind].type = e[0]; 
+        this.columns[ind].type = e[0];  
+        this.columns[ind].defaultValue= (<ContentItemsStructureEditor>this.columns[ind]).setDefaultValue(this.columns[ind].type); 
     }
 
     modeChange(ind, e) {
@@ -64,7 +65,8 @@ export class AXFColumnGridComponent extends AXBasePageComponent {
 
     addItemClick() {
         let index = this.columns.length + 1; 
-        let newRow = new ContentItemsStructureEditor({ id: "Field"+index.toString(), title: "Field"+index.toString(), type: "string" });
+        let newRow = new ContentItemsStructureEditor({ id: "Field"+index.toString(), title: "Field"+index.toString(),
+         type: "string" ,fillByUser:true});
         this.columns.push(newRow); 
     }
 
@@ -72,8 +74,8 @@ export class AXFColumnGridComponent extends AXBasePageComponent {
         this.columns[ind].title = e; 
     }
 
-    checkChange(e) {
-
+    checkChange(ind, e) { 
+        this.columns[ind].fillByUser = e.target.checked; 
     }
 
 }

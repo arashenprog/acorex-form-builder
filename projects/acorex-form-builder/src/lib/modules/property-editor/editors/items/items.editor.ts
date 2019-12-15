@@ -6,6 +6,8 @@ import { AXFDataService } from '../../../widget/services/data.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { isArray } from 'util';
 import { GridStructureEditor } from '../grid/gridstructure.editor';
+import { AXPopupService } from 'acorex-ui';
+import { AXFItemComponent } from './items.component';
 
 @Component({
     templateUrl: './items.editor.html',
@@ -14,11 +16,8 @@ import { GridStructureEditor } from '../grid/gridstructure.editor';
 })
 export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEditor> implements OnInit {
 
-    innerValue: any[] = [];
-    contentViewItems: any[] = [{ value: "text", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }]
-    imagable: boolean = false;
-    otherable: boolean = false;
-    flgChange: boolean = false;
+    innerValue: any[] = []; 
+
     private viewTypeStr: string;
     get viewType(): string {
         return this.viewTypeStr;
@@ -43,68 +42,27 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
     }
 
 
-    constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
+    constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService,private popupService: AXPopupService) {
         super();
     }
 
     ngOnInit(): void {
     }
 
-    itemChange(item: any, ind: number, e: any) {
-        switch (item.type) {
-            case "string":
-            case "number":
-            case "date":
-            case "selectionList":
-                this.value.content[ind][item.id] = e;
-                break;
-            case "boolean":
-                this.value.content[ind][item.id] = e.target.checked;
-                break;
-            case "image":
-                this.value.content[ind][item.id] = e.data;
-                break;
-            default:
-                break;
-        }
-
-        super.handleValueChange(this.value);
+    itemManage() { 
+        this.popupService.open(AXFItemComponent, {
+            title: "Item Management",
+            size:this.value.types.length>3 ? "lg":"md",
+            data: {
+                item: this.value
+            }
+        }).closed(c => {
+            this.value=c.data;
+            this.handleValueChange(this.value);
+        })
     }
 
-    deleteClick(ind) {
-        this.value.content.splice(ind, 1);
-        super.handleValueChange(this.value);
-    }
-
-    upClick(ind, item) {
-        if (ind > 0) {
-            let temp = this.value.content[ind - 1];
-            this.value.content[ind - 1] = item;
-            this.value.content[ind] = temp;
-            super.handleValueChange(this.value);
-        }
-    }
-
-    downClick(ind, item) {
-        if (ind < this.value.content.length - 1) {
-            let temp = this.value.content[ind + 1];
-            this.value.content[ind + 1] = item;
-            this.value.content[ind] = temp;
-            super.handleValueChange(this.value);
-        }
-    }
-
-    addItemClick() {
-        if (!this.value.content)
-            this.value.content = []; 
-        let param: any =  { id: new Date().getTime() };
-        this.value.types.forEach((e) => {
-            param[e.id] = e.defaultValue;
-        });
-        this.value.content.push(param);
-        super.handleValueChange(this.value);
-    }
-
+    
     changeViewType(newVal) {
         let newType: any;
         if (newVal[0] == "image" || newVal[0] == "both") {

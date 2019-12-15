@@ -12,6 +12,7 @@ export class ContentItemsStructureEditor {
     subItems: string[];
     defaultValue: any;
     subText: string;
+    isDs:boolean=false;
 
     constructor(json) {
         this.id = json.id;
@@ -25,23 +26,27 @@ export class ContentItemsStructureEditor {
             this.subText = json.subText;
         if (json.subItems && json.subItems.length > 0)
             this.subItems = json.subItems;
+        if (json.isDs)
+            this.isDs = json.isDs;
         this.defaultValue = this.setDefaultValue(json.type);
     }
 
-    setDefaultValue(type) {
+    setDefaultValue(type:string) {
         switch (type) {
             case "string":
                 return "Item";
             case "number":
                 return 1;
             case "date":
-                return Date.now;
+                return new Date().toLocaleDateString();
             case "selectionList":
                 return [];
             case "boolean":
                 return false;
             case "image":
                 return './assets/images/noimage.png';
+            case "time":
+                return new Date().toLocaleTimeString(); 
         }
     }
 } 

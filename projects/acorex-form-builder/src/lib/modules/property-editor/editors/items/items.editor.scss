@@ -1,21 +1,21 @@
 
-.parentItem
-{
-    float: left; 
-    margin-bottom: 5px;
-    border: 1px dotted var(--primary-color);
-    padding: 2px;
-    width: 100%;
-    .childItem{
-        span{padding-right: 3px;  width: 25%;}
-       .nodeItem{width: 100%;}
-        width: 100%;
-        margin-right: 5px;
-        flex-direction: row;
-        display: flex;
-    }
+.pnlCol{
+    padding: 5px;
 }
 
-.viewType{
-    margin-bottom: 5px;
+.pd0{
+    padding-left: 0; 
+    padding-top: 5px;
+    padding-right: 0; 
+}
+.parentItem
+{
+    margin-bottom: 5px; 
+    padding: 2px; 
+
+    .selectionCls
+    {
+        flex-direction: row;
+    display: flex;
+    }
 }

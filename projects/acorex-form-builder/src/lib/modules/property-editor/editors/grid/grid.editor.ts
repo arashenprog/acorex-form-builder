@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { AXFProperyEditor } from '../../config/editor'; 
+import { AXFProperyEditor } from '../../config/editor';
 import { AXFColumnGridComponent } from './column-grid.component';
 import { AXPopupService } from 'acorex-ui';
 import { isArray } from 'util';
@@ -21,26 +21,26 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
     dataSources: any[] = [{ id: "staffs", text: "Staffs" }]
     constructor(private popupService: AXPopupService) {
         super();
-    } 
+    }
 
     private dsModeStr: string;
     get dsMode(): string {
         return this.dsModeStr;
     }
     set dsMode(value: string) {
-        if (isArray(value) && this.dsModeStr != value) {
-            this.changeDsMode(value);
+        if (isArray(value)) {
+            if (this.dsModeStr && this.dsModeStr[0] != value[0])
+                this.changeDsMode(value);
             this.dsModeStr = value;
         }
     }
 
-    changeDsMode(newVal) { 
+    changeDsMode(newVal) {
         if (newVal[0] == "ds") {
-            this.value.columns=[new ContentItemsStructureEditor({value:"text",title:"Text", type: "string"}),
-            new ContentItemsStructureEditor({value:"value",title:"Value", type: "string"})];
+            this.value.columns = [new ContentItemsStructureEditor({ id: "text", title: "Text", type: "string", isDs: true })];
         }
         else if (newVal[0] == "manual") {
-            this.value.columns=[new ContentItemsStructureEditor({ id: "Field1", title: "Field1", type: "string" })];
+            this.value.columns = [new ContentItemsStructureEditor({ id: "Field1", title: "Field1", type: "string" })];
         }
     }
 
@@ -56,7 +56,7 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
                 columns: this.value.columns
             }
         }).closed(c => {
-            this.value.columns=c.data;
+            this.value.columns = c.data;
             this.handleValueChange(this.value);
         })
     }

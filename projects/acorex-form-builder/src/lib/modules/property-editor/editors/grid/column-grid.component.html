@@ -6,7 +6,7 @@
             </ax-select-box>
         </div>
         <div class="col-md-1 pd0">
-            <ax-check-box label="Fill By User" [value]="item.fillByUser" (change)="checkChange($event)">
+            <ax-check-box label="Fill By User" [value]="item.fillByUser" (change)="checkChange(i,$event)">
             </ax-check-box>
         </div>
         <div [ngClass]="item.type.includes('selectionList')?'col-md-3':'col-md-7'">

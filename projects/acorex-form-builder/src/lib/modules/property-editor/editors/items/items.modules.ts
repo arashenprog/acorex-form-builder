@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { AXFEditorService } from '../../services/editor.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFItemsEditorComponent } from './items.editor';
+import { AXFItemComponent } from './items.component';
 
 @NgModule({
-    declarations: [AXFItemsEditorComponent],
+    declarations: [AXFItemsEditorComponent,AXFItemComponent],
     imports: [CommonModule,ACoreXUIModule],
     exports: [AXFItemsEditorComponent],
     entryComponents: [AXFItemsEditorComponent],
