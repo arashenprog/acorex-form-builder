@@ -4,7 +4,7 @@ import { PromisResult, AXMathUtil, AXHtmlUtil } from 'acorex-ui';
 @Injectable({ providedIn: "root" })
 export class AXFConnectService {
 
-    private messageQueue: { action: string, id: string, callback: Function }[] = [];
+    private messageQueue: { action: string, reqId: string, callback: Function }[] = [];
 
     constructor() {
         window.addEventListener("message", this.handMessageEvent.bind(this));
@@ -13,24 +13,27 @@ export class AXFConnectService {
 
     public send(action: string, options?: any): PromisResult<any> {
         return new PromisResult((resolve) => {
+            let reqId = AXHtmlUtil.getUID();
             window.top.postMessage({
                 action: action,
-                data: options
+                data: options,
+                reqId: reqId
             }, '*');
             this.messageQueue.push({
                 action: action,
                 callback: resolve,
-                id: AXHtmlUtil.getUID()
+                reqId: reqId
             })
         });
     }
 
     private handMessageEvent(e: MessageEvent) {
-        if (e.data && e.data.action) {
-            let msg = this.messageQueue.find(c => c.action == e.data.action);
+        if (e.data && e.data.action && e.data.reqId) {
+            debugger;
+            let msg = this.messageQueue.find(c => c.reqId == e.data.reqId && c.action == e.data.action);
             if (msg) {
                 msg.callback(e.data ? e.data.data : null);
-                this.messageQueue = this.messageQueue.filter(c => c.action != e.data.action);
+                this.messageQueue = this.messageQueue.filter(c => !(c.reqId == e.data.reqId && c.action == e.data.action));
             }
         };
     }
