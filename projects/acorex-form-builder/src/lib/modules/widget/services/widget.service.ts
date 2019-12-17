@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AXPopupService, EventService, AXHtmlUtil } from 'acorex-ui';
+import { AXPopupService, EventService, AXHtmlUtil, AXToastService } from 'acorex-ui';
 
 
 export interface AXFWidgetProperty {
@@ -41,7 +41,7 @@ export class AXFWidgetService {
 
     static WIDGET_ITEMS: WidgetConfig[] = [];
 
-    constructor() {
+    constructor(private toastService:AXToastService) {
 
     }
 
@@ -136,8 +136,13 @@ export class AXFWidgetService {
 
 
     parse(json: string): WidgetConfig {
-        let obj = JSON.parse(json);
-        return this.parseInternal(obj);
+        try {
+            let obj = JSON.parse(json);
+            return this.parseInternal(obj);    
+        } catch (error) {
+            return null;
+        }
+        
     }
 
 

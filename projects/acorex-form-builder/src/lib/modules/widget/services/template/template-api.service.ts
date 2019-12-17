@@ -34,26 +34,36 @@ export class AXFAPITemplateService extends AXFTemplateService {
         })
     }
 
-    public get(id: number): PromisResult<AXFTemplateModel> {
+    public get(id: string): PromisResult<AXFTemplateModel> {
         return new PromisResult((resolve) => {
             this.connectService.send("load", {
                 id: id,
-            }).then(() => {
-                resolve();
+            }).then((c) => {
+                resolve({
+                    id: id,
+                    name: c.name,
+                    template: c.widgets,
+                    type: "form"
+                });
             })
         })
     }
 
     public getFormList(): PromisResult<AXFTemplateModel[]> {
         return new PromisResult((resolve) => {
-            resolve([]);
+            this.connectService.send("getFormList", {
+            }).then((c) => {
+                resolve(c.items);
+            })
         })
     }
 
     public getWidgetList(): PromisResult<AXFTemplateModel[]> {
-
         return new PromisResult((resolve) => {
-            resolve([]);
+            this.connectService.send("getWidgetList", {
+            }).then((c) => {
+                resolve(c.items);
+            })
         })
     }
 

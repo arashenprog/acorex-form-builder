@@ -1,10 +1,11 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
     selector: "[axf-widget-text]",
     templateUrl: './text-block-widget.view.html',
-    styleUrls: ['./text-block-widget.view.scss']
+    styleUrls: ['./text-block-widget.view.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTextBlockWidgetView extends AXFWidgetView {
 

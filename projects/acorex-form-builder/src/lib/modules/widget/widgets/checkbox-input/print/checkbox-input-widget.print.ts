@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
     templateUrl: './checkbox-input-widget.print.html',
-    styleUrls: ['./checkbox-input-widget.print.scss']
+    styleUrls: ['./checkbox-input-widget.print.scss'],
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
 

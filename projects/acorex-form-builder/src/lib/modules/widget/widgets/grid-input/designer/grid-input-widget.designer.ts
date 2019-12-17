@@ -1,15 +1,13 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
-import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
-import { AXPopupService } from 'acorex-ui';
-import { WidgetConfig } from '../../../services/widget.service';
-import { retry } from 'rxjs/operators';
+
 
 @Component({
     selector: "[axf-widget-text]",
     templateUrl: './grid-input-widget.designer.html',
     styleUrls: ['./grid-input-widget.designer.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFGridInputWidgetDesigner extends AXFWidgetDesigner {
 
@@ -22,13 +20,14 @@ export class AXFGridInputWidgetDesigner extends AXFWidgetDesigner {
     dsMode: string[];
     items:{content:any[]}
 
-    constructor() {
+    constructor(private cdr:ChangeDetectorRef) {
         super()
     }
 
     onRender(): void { 
         if(this.el)
         this.applyStyle(this.el.nativeElement);
+        this.cdr.markForCheck();
     }
 
     handleValueChange(e)

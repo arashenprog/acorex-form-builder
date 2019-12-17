@@ -1,4 +1,4 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, Injector } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -33,4 +33,7 @@ const MODULES = [
   exports: [AXFViewerModule, AXFDesignerModule],
 
 })
-export class ACoreXFormBuilderModule { }
+export class ACoreXFormBuilderModule {
+  constructor(injector: Injector) {
+  }
+}

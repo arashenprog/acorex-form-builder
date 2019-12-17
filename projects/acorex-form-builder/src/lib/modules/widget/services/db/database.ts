@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 
 export interface AXFTemplateModel {
-    id: number;
+    id: string;
     name: string,
     description?: string,
     template?: string,
@@ -9,7 +9,7 @@ export interface AXFTemplateModel {
 }
 
 export class AXFDatabase extends Dexie {
-    templates: Dexie.Table<AXFTemplateModel, number>;
+    templates: Dexie.Table<AXFTemplateModel, string>;
     constructor() {
         super("AXF");
         this.version(1).stores({

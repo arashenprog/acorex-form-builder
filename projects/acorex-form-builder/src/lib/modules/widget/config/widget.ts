@@ -1,9 +1,10 @@
 import { Injector, EventEmitter, Input, Output, Directive } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
-import { AXHtmlUtil, EventService } from 'acorex-ui'
+import { AXHtmlUtil } from 'acorex-ui'
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 import { AXFFormService, EventData } from '../services/form.service';
-import { EventHandlerVars } from '@angular/compiler/src/compiler_util/expression_converter';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 export const WidgetInjector: { instance?: Injector } = {};
 
@@ -18,9 +19,9 @@ export abstract class AXFWidget implements AXFWidgetContainer {
     config: WidgetConfig;
     parent: any;
 
-
     @Output()
     widgetsChange: EventEmitter<WidgetConfig[]> = new EventEmitter<WidgetConfig[]>();
+
 
     @Input()
     public get widgets(): WidgetConfig[] {
@@ -41,6 +42,9 @@ export abstract class AXFWidget implements AXFWidgetContainer {
     constructor() {
         this.widgetService = WidgetInjector.instance.get(AXFWidgetService);
     }
+
+
+
 
 
 
@@ -103,6 +107,22 @@ export abstract class AXFWidget implements AXFWidgetContainer {
         }
     }
 
+    private renderChangeObserver: any;
+
+    refresh() {
+        if (!this.renderChangeObserver) {
+            Observable.create(observer => {
+                this.renderChangeObserver = observer;
+            })
+                .pipe(debounceTime(100))
+                .pipe(distinctUntilChanged())
+                .subscribe(c => {
+                    Object.assign(this, this.config.options);
+                    this.onRender();
+                });
+        }
+        this.renderChangeObserver.next(new Date().getTime());
+    }
     onRender(): void {
 
     }
@@ -112,8 +132,6 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
 
     onSelect: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
     onDelete: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
-    onRefresh: EventEmitter<any> = new EventEmitter<any>();
-
 
 
     constructor() {
@@ -121,10 +139,6 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
 
-    refresh() {
-        this.onRefresh.emit(this.config.options);
-        this.onRender();
-    }
 
     delete() {
         if (this.parent && this.parent.widgets) {
@@ -150,6 +164,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         Object.assign(w.options, options);
         w.options.uid = AXHtmlUtil.getUID();
         this.widgets.push(w);
+        this.refresh();
     }
 
 
@@ -237,10 +252,12 @@ export abstract class AXFWidgetView extends AXFWidget {
         });
     }
 
+
 }
 export abstract class AXFWidgetPrint extends AXFWidget {
     constructor() {
         super();
     }
+
 
 }

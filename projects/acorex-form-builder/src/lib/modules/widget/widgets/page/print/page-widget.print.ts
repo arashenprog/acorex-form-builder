@@ -1,11 +1,12 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
 
 @Component({
     selector: '[axf-page]',
     templateUrl: './page-widget.print.html',
-    styleUrls: ['./page-widget.print.scss']
+    styleUrls: ['./page-widget.print.scss'],
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFPageWidgetPrint extends AXFWidgetPrint {
 

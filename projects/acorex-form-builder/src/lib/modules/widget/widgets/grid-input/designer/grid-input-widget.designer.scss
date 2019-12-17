@@ -1,14 +1,20 @@
-.wdt100{width: 100%;} 
 
-.img{
-    background-image: url('./assets/images/noimage.png');background-repeat: round;
+
+.img {
+    background-image: url('./assets/images/noimage.png');
+    background-repeat: round;
     border: 1px solid gray;
 }
 
-.brd{
-    border:1px solid var(--primary-color)
+.brd {
+    border: 1px solid var(--primary-color);
+    overflow-x: auto;
+    table{
+        table-layout: fixed;
+    }
 }
 
-.headfoot{
-    background-color: darkgray;color: black;
+.headfoot {
+    background-color: darkgray;
+    color: black;
 }

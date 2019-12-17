@@ -1,13 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
     selector: '[axf-button]',
     templateUrl: './button-widget.print.html',
-    styleUrls: ['./button-widget.print.scss']
+    styleUrls: ['./button-widget.print.scss'],
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFButtonWidgetPrint extends AXFWidgetPrint {
 
-    constructor() { super()}
+    type: string;
+    text: string;
+    size:string;
+
+    constructor() {
+        super();
+    }
 }
 

@@ -1,11 +1,12 @@
-import { Component, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 
 @Component({
     selector: "[axf-widget-image]",
     templateUrl: './image-input-widget.designer.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFImageInputWidgetDesigner extends AXFWidgetDesigner {
 

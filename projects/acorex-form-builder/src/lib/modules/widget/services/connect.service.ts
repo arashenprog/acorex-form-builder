@@ -29,7 +29,6 @@ export class AXFConnectService {
 
     private handMessageEvent(e: MessageEvent) {
         if (e.data && e.data.action && e.data.reqId) {
-            debugger;
             let msg = this.messageQueue.find(c => c.reqId == e.data.reqId && c.action == e.data.action);
             if (msg) {
                 msg.callback(e.data ? e.data.data : null);

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 
@@ -6,22 +6,20 @@ import { AXFWidgetDesigner } from '../../../config/widget';
     selector: "[axf-widget-text]",
     templateUrl: './text-block-widget.designer.html',
     styleUrls: ['./text-block-widget.designer.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTextBlockWidgetDesigner extends AXFWidgetDesigner {
-   
-    
-
     text: String;
-
-    constructor(private hostElement: ElementRef) {
+    constructor(
+        private hostElement: ElementRef,
+        private cdr: ChangeDetectorRef
+    ) {
         super()
     }
-
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         this.applyStyle(el);
+        this.cdr.markForCheck();
     }
-
-   
 }

@@ -20,7 +20,7 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     dsMode: string;
     visible: boolean;
 
-    constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
+    constructor(private dataService: AXFDataService) {
         super()
 
     }
@@ -40,7 +40,8 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
                 this.items.content = items;
                 if (clear)
                     this.handleValueChnage([]);
-                this.cdr.markForCheck();
+                super.refresh();
+
             });
         }
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 import { ContentItemsStructureEditor } from '../../../../property-editor/editors/items/itemstructure.editor';
 import { AXFDataService } from '../../../services/data.service';
@@ -7,7 +7,8 @@ import { AXFDataSourceValue } from '../../../../property-editor/editors/data-sou
 @Component({
     templateUrl: './list-input-widget.view.html',
     styleUrls: ['./list-input-widget.view.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFListInputWidgetView extends AXFWidgetView {
 
@@ -55,7 +56,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
                         this.value = [];
                     }
                 }
-
+                super.refresh();
             });
         }
     }

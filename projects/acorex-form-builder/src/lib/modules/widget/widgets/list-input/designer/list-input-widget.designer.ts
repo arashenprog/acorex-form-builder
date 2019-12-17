@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
 import { AXPopupService } from 'acorex-ui';
@@ -12,7 +12,8 @@ import { AXFDataSourceValue } from '../../../../property-editor/editors/data-sou
     selector: "[axf-widget-text]",
     templateUrl: './list-input-widget.designer.html',
     styleUrls: ['./list-input-widget.designer.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
 

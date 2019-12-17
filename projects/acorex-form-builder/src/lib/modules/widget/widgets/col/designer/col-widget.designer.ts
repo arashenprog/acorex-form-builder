@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
 import { AXFWidgetPickerService } from '../../../services/template/picker.service';
@@ -7,6 +7,7 @@ import { AXFWidgetPickerService } from '../../../services/template/picker.servic
     selector: "[axf-widget-col]",
     templateUrl: './col-widget.designer.html',
     styleUrls: ['./col-widget.designer.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFColWidgetDesigner extends AXFWidgetDesigner {
 
@@ -19,8 +20,9 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     container: ElementRef<HTMLDivElement>;
 
     constructor(
-        private hostElement: ElementRef, 
-        private picker:AXFWidgetPickerService) {
+        private hostElement: ElementRef,
+        private picker: AXFWidgetPickerService,
+        private cdr: ChangeDetectorRef) {
         super()
 
     }
@@ -30,6 +32,7 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
         el.classList.add("col-sm-12", `col-md-${this.size}`);
         // apply background color
         this.applyStyle(this.container.nativeElement);
+        this.cdr.markForCheck();
     }
 
     addElement() {
@@ -38,8 +41,6 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
                 widgets.forEach(w => {
                     this.addChild(w);
                 });
-                
-                this.refresh();
             }
         })
     }

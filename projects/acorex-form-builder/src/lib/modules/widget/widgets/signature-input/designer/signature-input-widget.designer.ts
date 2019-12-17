@@ -1,11 +1,12 @@
-import { Component, ViewEncapsulation, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 @Component({
     selector: "[axf-widget-signature]",
     templateUrl: './signature-input-widget.designer.html',
     styleUrls: ['./signature-input-widget.designer.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFSignatureInputWidgetDesigner extends AXFWidgetDesigner {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 
@@ -6,7 +6,8 @@ import { AXFWidgetDesigner } from '../../../config/widget';
     selector: "[axf-widget-checkbox]",
     templateUrl: './checkbox-input-widget.designer.html',
     styleUrls: ['./checkbox-input-widget.designer.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
 

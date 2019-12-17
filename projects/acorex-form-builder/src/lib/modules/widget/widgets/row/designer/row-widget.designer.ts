@@ -1,11 +1,12 @@
-import { Component, ViewEncapsulation, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 @Component({
     selector: "[axf-widget-row]",
     templateUrl: './row-widget.designer.html',
     styleUrls: ['./row-widget.designer.scss'],
-    providers: [{ provide: AXFWidgetDesigner, useExisting: AXFRowWidgetDesigner }]
+    providers: [{ provide: AXFWidgetDesigner, useExisting: AXFRowWidgetDesigner }],
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
 
@@ -20,7 +21,7 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
 
 
 
-    constructor(private hostElement: ElementRef) {
+    constructor(private hostElement: ElementRef, private cdr: ChangeDetectorRef) {
         super()
         this.calcLeftCols();
     }
@@ -32,7 +33,6 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
             let w = this.widgetService.resolve("col");
             this.addChild(w, { size: c * this.minCol })
         });
-        this.refresh();
     }
 
     private calcLeftCols() {
@@ -47,6 +47,7 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
     onRender() {
         this.applyStyle(this.el.nativeElement);
         this.calcLeftCols();
+        this.cdr.markForCheck();
     }
 
     handlePickerMouseHover(range: number) {

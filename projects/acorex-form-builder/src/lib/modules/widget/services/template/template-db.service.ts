@@ -83,10 +83,10 @@ export class AXFDBTemplateService extends AXFTemplateService {
         })
     }
 
-    public get(id: number): PromisResult<AXFTemplateModel> {
+    public get(id: string): PromisResult<AXFTemplateModel> {
         return new PromisResult((resolve) => {
             this._db.templates
-                .get(id)
+                .get(Number(id))
                 .then((c) => {
                     resolve(c);
                 });

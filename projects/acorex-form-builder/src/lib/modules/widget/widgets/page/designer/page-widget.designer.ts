@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 import { AXPopupService, EventService } from 'acorex-ui';
 import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
@@ -7,19 +7,21 @@ import { AXFWidgetPickerService } from '../../../services/template/picker.servic
 @Component({
     selector: '[axf-page]',
     templateUrl: './page-widget.designer.html',
-    styleUrls: ['./page-widget.designer.scss']
+    styleUrls: ['./page-widget.designer.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
 
     bgColor: string;
     boxStyle: AXFBoxStyleValue;
-    pageDirection:string;
+    pageDirection: string;
 
 
 
     constructor(
-        private eventService: EventService,
+        eventService: EventService,
         private picker: AXFWidgetPickerService,
+        private cdr: ChangeDetectorRef,
         private hostElement: ElementRef) {
         super();
         eventService.on("SELECT", c => {
@@ -42,8 +44,9 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
 
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
-        el.style.direction= this.pageDirection;
+        el.style.direction = this.pageDirection;
         this.applyStyle(el);
+        this.cdr.markForCheck();
     }
 
 

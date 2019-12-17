@@ -1,29 +1,32 @@
-import { Component, OnInit, ElementRef, HostBinding } from '@angular/core';
+import { Component, OnInit, ElementRef, HostBinding, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
 
 @Component({
     selector: "[axf-widget-col]",
     templateUrl: './col-widget.view.html',
-    styleUrls: ['./col-widget.view.scss']
+    styleUrls: ['./col-widget.view.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFColWidgetView extends AXFWidgetView {
 
 
-    size: number;
+    size: number = 1;
     color: string;
     bgColor: string;
     boxStyle: AXFBoxStyleValue;
 
 
-    constructor(private hostElement: ElementRef) {
+    constructor(
+        private hostElement: ElementRef) {
         super()
+
     }
 
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         el.classList.add("col-sm-12", `col-md-${this.size}`);
-        el.style.display="table-cell";
+        el.style.display = "table-cell";
         // apply background color
         this.applyStyle(el);
     }

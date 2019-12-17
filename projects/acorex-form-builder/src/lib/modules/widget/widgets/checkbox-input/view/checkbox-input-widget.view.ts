@@ -1,9 +1,10 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
     templateUrl: './checkbox-input-widget.view.html',
-    styleUrls: ['./checkbox-input-widget.view.scss']
+    styleUrls: ['./checkbox-input-widget.view.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFCheckboxInputWidgetView extends AXFWidgetView {
 
@@ -11,7 +12,7 @@ export class AXFCheckboxInputWidgetView extends AXFWidgetView {
     label: string;
 
     constructor(private el: ElementRef<HTMLElement>) {
-        super()
+        super();
     }
 
 

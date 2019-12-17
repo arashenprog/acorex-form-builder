@@ -172,7 +172,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
 
     ngAfterViewInit() {
         this.connectService.send("load").then(data => {
-            if (data && data.widgets) {
+            if (data && data.widgets && data.widgets.length > 0) {
                 this.widgets = [this.widgetService.parse(data.widgets)];
             }
         })
