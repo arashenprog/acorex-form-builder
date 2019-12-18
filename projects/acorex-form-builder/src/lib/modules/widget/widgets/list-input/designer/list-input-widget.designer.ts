@@ -42,7 +42,8 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
                 this.items.content = items;
                 this.cdr.markForCheck(); 
             });
-        }   
+        }  
+        this.cdr.markForCheck();  
     }
 
     handleValueChange(e)

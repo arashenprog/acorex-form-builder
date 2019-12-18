@@ -25,7 +25,7 @@ export class AXFDropdownInputWidgetModule {
         service.register({
             title: "Dropdown Input",
             hint: "Dropdown input element",
-            icon: "fas fa-list",
+            icon: "fas fa-caret-square-down",
             category: "Editors",
             visible: true,
             name: "dropdown",
