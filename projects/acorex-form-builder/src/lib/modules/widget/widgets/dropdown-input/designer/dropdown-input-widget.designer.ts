@@ -4,32 +4,32 @@ import { ContentItemsStructureEditor } from '../../../../property-editor/editors
 
 @Component({
     selector: "[axf-widget-text]",
-    templateUrl: './dropdown-input-widget.designer.html', 
+    templateUrl: './dropdown-input-widget.designer.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFDropdownInputWidgetDesigner extends AXFWidgetDesigner {
 
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
-    value:string[];
-    items:{content:any[],types: ContentItemsStructureEditor[]};
-    mode:string;
-    fillBy:string; 
-    allowSearch:boolean;
+    value: string[];
+    items: { content: any[], types: ContentItemsStructureEditor[] };
+    mode: string;
+    fillBy: string;
+    allowSearch: boolean;
 
-    constructor() {
+    constructor(private cdr: ChangeDetectorRef) {
         super()
     }
 
     onRender(): void {
-        if(this.el)
-        this.applyStyle(this.el.nativeElement);
+        if (this.el)
+            this.applyStyle(this.el.nativeElement);
+        this.cdr.markForCheck();
     }
 
-    handleValueChange(e)
-    {
-    } 
+    handleValueChange(e) {
+    }
 }
 
 

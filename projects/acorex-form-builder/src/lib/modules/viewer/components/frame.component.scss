@@ -11,21 +11,22 @@
     border-radius: 4px;
     overflow-y: scroll;
     overflow-x: hidden;
+
     .viewer {
-       
+
         height: 100%;
     }
-   
+
 }
 
-.view-container[app-dev]
-{
+.view-container[width="320px"] {
     .col-sm-12 {
         -webkit-box-flex: 0 !important;
         flex: 0 0 100% !important;
         max-width: 100% !important;
     }
 }
+
 .device-size-container {
     position: absolute;
     position: absolute;
@@ -33,7 +34,10 @@
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     bottom: 10px;
-    .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+
+    .btn-primary:not(:disabled):not(.disabled).active,
+    .btn-primary:not(:disabled):not(.disabled):active,
+    .show>.btn-primary.dropdown-toggle {
         background-color: var(--secondary-color) !important;
         border-color: var(--secondary-color) !important;
     }

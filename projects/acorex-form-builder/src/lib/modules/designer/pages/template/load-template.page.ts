@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AXBasePageComponent , AXDialogService} from 'acorex-ui';
+import { AXBasePageComponent } from 'acorex-ui';
 import { AXFTemplateModel } from '../../../widget/services/db/database';
 import { AXFWidgetService } from '../../../widget/services/widget.service';
 import { AXFTemplateService } from '../../../widget/services/template/template.service';
@@ -13,23 +13,24 @@ export class AXFLoadTemplatePage extends AXBasePageComponent {
     templates: AXFTemplateModel[] = [];
     constructor(
         private templateService: AXFTemplateService,
-        private widgetService: AXFWidgetService,
-        private dialogService: AXDialogService
-    ) { 
+        private widgetService: AXFWidgetService
+    ) {
         super()
     }
 
     ngOnInit() {
-        
         this.templateService.getFormList().then(c => {
-            this.templates.push(...c);
+            if (c && Array.isArray(c)) {
+                this.templates.push(...c);
+            }
         });
     }
 
     selectTemplate(tpl: AXFTemplateModel) {
         this.templateService.get(tpl.id).then(c => {
+            debugger;
             let widget = this.widgetService.parse(c.template);
-            this.close(widget.options.widgets);
+            this.close(widget);
         });
     }
 

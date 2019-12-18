@@ -159,9 +159,9 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     handleLoadClick() {
         this.popup.open(AXFLoadTemplatePage, "Load Template").closed(c => {
             if (c.data) {
-                let page = this.widgetService.resolve("page");
-                Object.assign(page.options, { uid: AXHtmlUtil.getUID(), widgets: c.data });
-                this.widgets.push(page);
+                // let page = this.widgetService.resolve("page");
+                // Object.assign(page.options, { uid: AXHtmlUtil.getUID(), widgets: c.data });
+                this.widgets.push(c.data);
             }
         });
     }

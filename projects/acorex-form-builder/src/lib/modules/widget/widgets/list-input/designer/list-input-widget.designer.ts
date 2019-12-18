@@ -13,48 +13,47 @@ import { AXFDataSourceValue } from '../../../../property-editor/editors/data-sou
     templateUrl: './list-input-widget.designer.html',
     styleUrls: ['./list-input-widget.designer.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
 
     @ViewChild("el") el: ElementRef<HTMLElement>;
- 
-    items:{content:any[],types:ContentItemsStructureEditor[]};
-    mode:string;
-    direction:string;
-    alignCheck:string; 
-    showOther:boolean;
-    viewType:boolean;
-    dsMode:string[];
-    dsName:AXFDataSourceValue;
+
+    items: { content: any[], types: ContentItemsStructureEditor[] };
+    mode: string;
+    direction: string;
+    alignCheck: string;
+    showOther: boolean;
+    viewType: boolean;
+    dsMode: string[];
+    dsName: AXFDataSourceValue;
 
 
-    constructor(private dataService: AXFDataService,private cdr: ChangeDetectorRef) {
+    constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
     }
 
-    onRender(): void { 
-        if(this.el)
-          this.applyStyle(this.el.nativeElement);
-        if(this.dsMode[0]=="ds" && this.dsName)
-        {
-            this.dataService.getList(this.dsName.name,this.dsName.params).then(items => {
+    onRender(): void {
+        if (this.el)
+            this.applyStyle(this.el.nativeElement);
+        if (this.dsMode[0] == "ds" && this.dsName) {
+            this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
                 this.items.content = items;
-                this.cdr.markForCheck(); 
+                this.cdr.markForCheck();
             });
-        }  
-        this.cdr.markForCheck();  
+        }
+        else
+            this.cdr.markForCheck();
     }
 
-    handleValueChange(e)
-    {
+    handleValueChange(e) {
 
     }
 
 
-    getStyles(mode) { 
-        const styles = { 
-            'border-radius': mode == 'single' ? 100+"%" : 0 
+    getStyles(mode) {
+        const styles = {
+            'border-radius': mode == 'single' ? 100 + "%" : 0
         };
         return styles;
     }
