@@ -1,28 +1,43 @@
-<div class="pnlCol">    
-    <div *ngFor="let cnt of item.content;let i = index" class="parentItem">
-        <div class="childItem" *ngFor="let item of item.types">
-            <span>{{item.title}}:</span>
-            <ax-text-box class="nodeItem" [text]="cnt[item.id]" *ngIf="item.type=='string'" (textChange)="itemChange(item,i,$event)"></ax-text-box>
-            <ax-text-box class="nodeItem" [text]="cnt[item.id]" type="number" *ngIf="item.type=='number'" (textChange)="itemChange(item,i,$event)"></ax-text-box>
-            <ax-date-picker class="nodeItem" [value]="cnt[item.id]" label="" *ngIf="item.type=='date'" (valueChange)="itemChange(item,i,$event)"></ax-date-picker>
-            <ax-check-box class="nodeItem" [value]="cnt[item.id]" *ngIf="item.type=='boolean'" label="' '" (change)="itemChange(item,i,$event)"></ax-check-box>
-            <ax-upload-file class="nodeItem" *ngIf="item.type=='image'" type="inline" (onLoad)="itemChange(item,i,$event)"></ax-upload-file>
-            <ax-selection-list class="nodeItem" [selectedValues]="cnt[item.id]" direction="horizontal" *ngIf="item.type=='selectionList'" (selectedValuesChange)="itemChange(item,i,$event)"
-                [items]="item.subItems" textField="value" valueField="value" mode="{{item.mode?'multiple':'single'}}">
-            </ax-selection-list>
-        </div>
-        <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
-            <i class="fas fa-trash danger"></i>
-        </ax-button>
-        <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,cnt)">
-            <i class="fas fa-arrow-up primary"></i>
-        </ax-button>
-        <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,cnt)">
-            <i class="fas fa-arrow-down primary"></i>
-        </ax-button>
-    </div>
-    <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
+<div class="pnlCol">  
+    <table>
+        <tr>
+            <th *ngFor="let item of item.types">{{item.title}}
+            </th>
+            <th>Actions</th>
+        </tr>
+        <tr *ngFor="let cnt of item.content;let i = index">
+            <td *ngFor="let item of item.types">
+                <ax-text-box class="nodeItem" [text]="cnt[item.id]" *ngIf="item.type=='string'"
+                    (textChange)="itemChange(item,i,$event)"></ax-text-box>
+                <ax-text-box class="nodeItem" [text]="cnt[item.id]" type="number" *ngIf="item.type=='number'"
+                    (textChange)="itemChange(item,i,$event)"></ax-text-box>
+                <ax-date-picker class="nodeItem" [value]="cnt[item.id]" label="" *ngIf="item.type=='date'"
+                    (valueChange)="itemChange(item,i,$event)"></ax-date-picker>
+                <ax-check-box class="nodeItem" [value]="cnt[item.id]" *ngIf="item.type=='boolean'" label="' '"
+                    (change)="itemChange(item,i,$event)"></ax-check-box>
+                <ax-upload-file class="nodeItem" *ngIf="item.type=='image'" type="inline"
+                    (onLoad)="itemChange(item,i,$event)"></ax-upload-file>
+                <ax-selection-list class="nodeItem" [selectedValues]="cnt[item.id]" direction="horizontal"
+                    *ngIf="item.type=='selectionList'" (selectedValuesChange)="itemChange(item,i,$event)"
+                    [items]="item.subItems" textField="value" valueField="value"
+                    mode="{{item.mode?'multiple':'single'}}">
+                </ax-selection-list>
+            </td>
+            <td>
+                <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
+                    <i class="fas fa-trash danger"></i>
+                </ax-button>
+                <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,cnt)">
+                    <i class="fas fa-arrow-up primary"></i>
+                </ax-button>
+                <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,cnt)">
+                    <i class="fas fa-arrow-down primary"></i>
+                </ax-button>
+            </td>
+        </tr>
+     </table> 
+     <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
         <span>Add New Item</span>&nbsp;
         <i class="fas fa-plus"></i>
-    </ax-button>
+        </ax-button>
 </div>

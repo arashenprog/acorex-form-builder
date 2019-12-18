@@ -2,30 +2,34 @@
     padding: 5px;
 }
 
-.pd0{
-    padding-left: 0; 
-    padding-top: 20px;
-    padding-right: 0; 
-}
-.parentItem
-{
-    margin: 0px 0px 5px 0px;
-    padding: 4px;
-    border-bottom: 2px dotted var(--primary-color);
+// .pd0{
+//     padding-left: 0; 
+//     padding-top: 20px;
+//     padding-right: 0; 
+// }
+// .parentItem
+// {
+//     margin: 0px 0px 5px 0px;
+//     padding: 4px;
+//     border-bottom: 2px dotted var(--primary-color);
 
-    span{
-        color: var(--primary-color);
-        font-weight: bold;
-    };
+//     span{
+//         color: var(--primary-color);
+//         font-weight: bold;
+//     };
 
-    .selectionCls
-    {
-        flex-direction: row;
-    display: flex;
-    }
-}
+//     .selectionCls
+//     {
+//         flex-direction: row;
+//     display: flex;
+//     }
+// }
 table{
     width: 100%;
     margin-bottom: 5px;
     tr:not(:first-child){border-bottom: 2px dotted var(--primary-color);}
+
+    th{
+        background-color: var(--primary-color); color: var(--white-color);border: 1px solid white;font-weight: initial;
+    }
 } 

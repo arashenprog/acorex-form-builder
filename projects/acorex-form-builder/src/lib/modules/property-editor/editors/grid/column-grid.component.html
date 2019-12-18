@@ -50,26 +50,18 @@
 <div class="pnlCol"> 
     <table>
         <tr>
-            <th style="background-color: var(--primary-color); color: var(--white-color);border: 1px solid white;">Type
-            </th>
-            <th style="background-color: var(--primary-color); color: var(--white-color);border: 1px solid white;"
-                *ngIf="dsMode.includes('ds')">Field Name</th>
-            <th style="background-color: var(--primary-color); color: var(--white-color);border: 1px solid white;">Fill
-                by
-                User</th>
-            <th style="background-color: var(--primary-color); color: var(--white-color);border: 1px solid white;">Title
-            </th>
-            <th style="background-color: var(--primary-color); color: var(--white-color);border: 1px solid white;">Sub
-                Items
-            </th>
-            <th style="background-color: var(--primary-color); color: var(--white-color);border: 1px solid white;">
-                Multiple
-            </th>
-            <th style="background-color: var(--primary-color); color: var(--white-color);border: 1px solid white;">
-                Actions
-            </th>
+            <th>Title</th>
+            <th>Type </th>
+            <th *ngIf="dsMode.includes('ds')">Field Name</th>
+            <th>Fill by User</th>  
+            <th>Sub Items</th>
+            <th>Multiple</th>
+            <th>Actions</th>
         </tr>
         <tr *ngFor="let item of columns;let i = index">
+            <td>
+                <ax-text-box [text]="item.title" (textChange)="titleItemChange(i,$event)"></ax-text-box>
+            </td>
             <td>
                 <ax-select-box allowSearch="false" [items]="columnTypeItems" [selectedValues]="item.type"
                     textField="title" valueField="value" (selectedValuesChange)="columnTypeChange(i,$event)">
@@ -82,9 +74,7 @@
                 <ax-check-box label="Fill By User" [value]="item.fillByUser" (change)="checkChange(i,$event)">
                 </ax-check-box>
             </td>
-            <td>
-                <ax-text-box [text]="item.title" (textChange)="titleItemChange(i,$event)"></ax-text-box>
-            </td>
+            
             <td>
                 <ax-text-box [text]="item.subText" placeholder="declare items using ','"
                     (textChange)="subTextChange(i,$event)" *ngIf="item.type.includes('selectionList')">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AXBasePageComponent } from 'acorex-ui';
 import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events';
 import { ItemsStructureEditor } from '../items/itemstructure.editor';
+import { retry } from 'rxjs/operators';
 
 @Component({
     templateUrl: './items.component.html',
@@ -72,6 +73,14 @@ export class AXFItemComponent extends AXBasePageComponent {
             param[e.id] = e.defaultValue;
         });
         this.item.content.push(param);
+    }
+
+    GetDate(val)
+    {debugger
+        if(!val || val==null)
+        return "";
+
+        return new Date(val);
     }
 
 }
