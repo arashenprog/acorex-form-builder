@@ -22,6 +22,7 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
         this.dataService.getDSList().then(items => {
             this.items = items;
             this.innerValue = this.value ? [this.value.name] : [];
+            this.cdr.markForCheck();
         });
     }
 
