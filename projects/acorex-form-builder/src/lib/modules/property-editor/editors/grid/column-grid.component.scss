@@ -24,4 +24,8 @@
     display: flex;
     }
 }
- 
+table{
+    width: 100%;
+    margin-bottom: 5px;
+    tr:not(:first-child){border-bottom: 2px dotted var(--primary-color);}
+} 

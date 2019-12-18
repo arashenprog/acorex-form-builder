@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
 import { AXPopupService } from 'acorex-ui';
@@ -29,7 +29,7 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     dsName:AXFDataSourceValue;
 
 
-    constructor(private dataService: AXFDataService) {
+    constructor(private dataService: AXFDataService,private cdr: ChangeDetectorRef) {
         super()
     }
 
@@ -39,9 +39,10 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
         if(this.dsMode[0]=="ds" && this.dsName)
         {
             this.dataService.getList(this.dsName.name,this.dsName.params).then(items => {
-                this.items.content = items; 
+                this.items.content = items;
+                this.cdr.markForCheck(); 
             });
-        }  
+        }   
     }
 
     handleValueChange(e)

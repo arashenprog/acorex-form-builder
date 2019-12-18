@@ -19,7 +19,7 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
 
     fillbyItems: any[] = [{ value: "manualList", title: "Manual List" }, { value: "databaseList", title: "Database List" }];
     dataSources: any[] = [{ id: "staffs", text: "Staffs" }]
-    constructor(private popupService: AXPopupService) {
+    constructor(private popupService: AXPopupService,private cdr:ChangeDetectorRef) {
         super();
     }
 
@@ -59,6 +59,7 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
         }).closed(c => {
             this.value.columns = c.data;
             this.handleValueChange(this.value);
+            this.cdr.markForCheck();
         })
     }
 
