@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 
@@ -15,12 +15,13 @@ export class AXFImageInputWidgetDesigner extends AXFWidgetDesigner {
     height:number;
     width:number;
     alt:string;
-    constructor(private el: ElementRef<HTMLElement>) {
+    constructor(private el: ElementRef<HTMLElement>,private cdr: ChangeDetectorRef) {
         super()
     }
 
     onRender(): void {
         this.applyStyle(this.el.nativeElement.querySelector("img"));
+        this.cdr.markForCheck();
     }
 
 }

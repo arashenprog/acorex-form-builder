@@ -8,15 +8,16 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFCheckboxInputWidgetView extends AXFWidgetView {
 
-    value: boolean = true;
+    value: boolean ;
     label: string;
 
-    constructor(private el: ElementRef<HTMLElement>) {
+    constructor(private el: ElementRef<HTMLElement>,private cdr: ChangeDetectorRef) {
         super();
     }
 
 
     onRender(): void {
         this.applyStyle(this.el.nativeElement.querySelector("label"));
+        this.cdr.markForCheck();
     }
 }

@@ -17,7 +17,7 @@ export const COMPONENTS = [AXFDateInputWidgetDesigner, AXFDateInputWidgetView, A
     imports: [CommonModule, ACoreXUIModule, AXFWidgetSharedModule],
     exports: [...COMPONENTS],
     entryComponents: [...COMPONENTS],
-    providers: [],
+    providers: [], 
 })
 export class AXFDateInputWidgetModule {
     constructor(service: AXFWidgetService) {
@@ -37,10 +37,9 @@ export class AXFDateInputWidgetModule {
                     padding: new AXFBoxStyleBoxSizeValue("2"),
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
-                bgColor: "#FFFFFF"
+                bgColor: "#FFFFFF" 
             },
-            properties: [
-                AXF_TEXT_PROPERTY,
+            properties: [ 
                 ...AXF_STYLE_GENERAL_PROPERTIES,
                 AXF_NAME_PROPERTY,
             ]

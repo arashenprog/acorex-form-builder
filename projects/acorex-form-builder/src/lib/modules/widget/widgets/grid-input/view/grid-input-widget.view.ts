@@ -21,24 +21,30 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     rows: any[] = [];
     items: { content: any[] }
 
-    constructor(private dataService: AXFDataService) {
+    constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
     }
 
     onRender(): void {
-        if (this.el)
+        if (this.el) {
             this.applyStyle(this.el.nativeElement);
+            this.cdr.markForCheck();
+            this.cdr.detectChanges();
+        }
     }
 
     ngAfterViewInit() {
+        debugger;
         if (this.dsMode[0] == "ds") {
             if (this.dsName)
                 this.dataService.getList(this.dsName.name, this.dsName.params).then(it => {
                     this.rows = it;
+                    this.refresh();
                 });
         }
         else {
             this.rows = this.items.content;
+            this.refresh();
         }
     }
 

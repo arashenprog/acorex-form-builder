@@ -48,7 +48,7 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
 export const AXF_PLACEHOLDER_PROPERTY: AXFWidgetProperty = {
     name: "placeholder",
     category: "General",
-    defaultValue: "",
+    defaultValue: "Placeholder",
     title: "Placeholder",
     editor: "TextEditor",
     options: {

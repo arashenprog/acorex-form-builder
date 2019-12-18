@@ -58,6 +58,7 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
         }).closed(c => {
             this.value.content = c.data;
             this.handleValueChange(this.value);
+            this.cdr.markForCheck();
         })
     }
 

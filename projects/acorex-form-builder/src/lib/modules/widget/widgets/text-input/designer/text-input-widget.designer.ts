@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, Input, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 import { AXFWidgetPickerComponent } from '../../../shared/widget-picker/widget-picker.component';
 import { AXPopupService } from 'acorex-ui';
@@ -18,7 +18,7 @@ export class AXFTextInputWidgetDesigner extends AXFWidgetDesigner {
     text: String;
     placeholder: String;
 
-    constructor() {
+    constructor(private cdr: ChangeDetectorRef) {
         super()
     }
 
@@ -27,6 +27,7 @@ export class AXFTextInputWidgetDesigner extends AXFWidgetDesigner {
         s.style.visibility = "hidden";
         s.style.display = "none";
         this.applyStyle(this.el.nativeElement.querySelector("input"));
+        this.cdr.markForCheck();
     }
 
 }

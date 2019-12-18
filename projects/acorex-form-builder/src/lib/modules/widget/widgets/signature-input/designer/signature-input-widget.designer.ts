@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 @Component({
@@ -16,7 +16,7 @@ export class AXFSignatureInputWidgetDesigner extends AXFWidgetDesigner {
     info: { SignatureType: string[], StaffNumber: number, ShowType: string[], Items: any[] };
     columns: any[] = [];
     rows: any[] = [];
-    constructor() {
+    constructor(private cdr: ChangeDetectorRef) {
         super()
     }
 
@@ -24,6 +24,7 @@ export class AXFSignatureInputWidgetDesigner extends AXFWidgetDesigner {
         this.columns = this.info.Items.filter(w => w.Visible == true);
         this.rows = new Array(this.info.StaffNumber);
         this.applyStyle(this.el.nativeElement);
+        this.cdr.markForCheck();
     }
 
     getStyles() {
