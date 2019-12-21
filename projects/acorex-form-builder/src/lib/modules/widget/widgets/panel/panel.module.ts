@@ -39,7 +39,21 @@ export class AXFPanelWidgetModule {
             },
             properties: [
                 AXF_CAPTION_PROPERTY,
-                AXF_NAME_PROPERTY
+                AXF_NAME_PROPERTY,
+                {
+                    category: "General",
+                    name: "allowCollapse",
+                    title: "Collapsable",
+                    defaultValue: true,
+                    editor: "CheckboxEditor"
+                },
+                {
+                    category: "General",
+                    name: "collapsed",
+                    title: "Collapsed",
+                    defaultValue: false,
+                    editor: "CheckboxEditor"
+                }
             ]
         })
     }

@@ -1,5 +1,3 @@
-
-
 .img {
     background-image: url('./assets/images/noimage.png');
     background-repeat: round;
@@ -7,12 +5,12 @@
 }
 
 .brd {
-    border: 1px solid var(--primary-color);
+    
     overflow-x: auto;
-    table{
+
+    table {
         width: 100%;
         table-layout: fixed;
-        width: 100%;
     }
 }
 

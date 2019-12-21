@@ -12,6 +12,8 @@ import { AXFWidgetPickerService } from '../../../services/template/picker.servic
 export class AXFPanelWidgetDesigner extends AXFWidgetDesigner {
 
     caption: string;
+    allowCollapse:boolean;
+    collapsed:boolean;
 
     constructor(private picker: AXFWidgetPickerService, private cdr: ChangeDetectorRef) {
         super();

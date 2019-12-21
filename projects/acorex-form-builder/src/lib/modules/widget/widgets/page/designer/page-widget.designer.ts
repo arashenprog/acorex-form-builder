@@ -44,7 +44,8 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
 
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
-        el.style.direction = this.pageDirection;
+        el.classList.remove("rtl", "ltr");
+        el.classList.add(this.pageDirection);
         this.applyStyle(el);
         this.cdr.markForCheck();
     }

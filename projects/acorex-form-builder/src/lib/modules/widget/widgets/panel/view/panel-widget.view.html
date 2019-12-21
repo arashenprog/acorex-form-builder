@@ -1,4 +1,4 @@
-<ax-panel-box [caption]="caption">
+<ax-panel-box [caption]="caption" [allowCollapse]="allowCollapse"  [collapsed]="collapsed">
     <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" mode='view' [parent]="this">
     </ng-container>
 </ax-panel-box>

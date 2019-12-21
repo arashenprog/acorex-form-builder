@@ -1,102 +1,57 @@
-<!-- <div class="pnlCol">
-    <div *ngFor="let item of columns;let i = index" class="row parentItem">
-        <div [ngClass]="dsMode.includes('ds')?'col-md-2':'col-md-4'">
-            <span>Type</span>
-            <ax-select-box allowSearch="false" [items]="columnTypeItems" [selectedValues]="item.type" textField="title"
-                valueField="value" (selectedValuesChange)="columnTypeChange(i,$event)">
-            </ax-select-box>
-        </div>
-        <div class="col-md-2" *ngIf="dsMode.includes('ds')">
-            <span>Field Name</span>
-            <ax-text-box [text]="item.fieldName" (textChange)="fieldNameChange(i,$event)"></ax-text-box>
-        </div>
-        <div class="col-md-1 pd0">
-            <ax-check-box label="Fill By User" [value]="item.fillByUser" (change)="checkChange(i,$event)">
-            </ax-check-box>
-        </div>
-        <div [ngClass]="item.type.includes('selectionList')?'col-md-2':'col-md-6'">
-            <span>Title</span>
-            <ax-text-box [text]="item.title" (textChange)="titleItemChange(i,$event)"></ax-text-box>
-        </div>
-        <div class="col-md-4 selectionCls" *ngIf="item.type.includes('selectionList')">
-            <div class="col-md-9">
-                <span>sub Items</span>
-                <ax-text-box [text]="item.subText" placeholder="declare items using ','"
-                    (textChange)="subTextChange(i,$event)">
-                </ax-text-box>
-            </div>
-            <div class="col-md-3 pd0">
-                <ax-check-box label="Multiple" [value]="item.mode" (change)="modeChange(i,$event)">
-                </ax-check-box>
-            </div>
-        </div>
-        <div class="col-md-1 pd0">
-            <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,item)">
-                <i class="fas fa-arrow-up primary"></i>
-            </ax-button>
-            <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,item)">
-                <i class="fas fa-arrow-down primary"></i>
-            </ax-button>
-            <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
-                <i class="fas fa-trash danger"></i>
-            </ax-button>
-        </div>
-    </div>
-    <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
-        <span>Add New Column</span>&nbsp;
-        <i class="fas fa-plus"></i>
-    </ax-button>
-</div> -->
-<div class="pnlCol"> 
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Type </th>
-            <th *ngIf="dsMode.includes('ds')">Field Name</th>
-            <th>Fill by User</th>  
-            <th>Sub Items</th>
-            <th>Multiple</th>
-            <th>Actions</th>
-        </tr>
-        <tr *ngFor="let item of columns;let i = index">
-            <td>
-                <ax-text-box [text]="item.title" (textChange)="titleItemChange(i,$event)"></ax-text-box>
-            </td>
-            <td>
-                <ax-select-box allowSearch="false" [items]="columnTypeItems" [selectedValues]="item.type"
-                    textField="title" valueField="value" (selectedValuesChange)="columnTypeChange(i,$event)">
-                </ax-select-box>
-            </td>
-            <td *ngIf="dsMode.includes('ds')">
-                <ax-text-box [text]="item.fieldName" (textChange)="fieldNameChange(i,$event)"></ax-text-box>
-            </td>
-            <td>
-                <ax-check-box label="Fill By User" [value]="item.fillByUser" (change)="checkChange(i,$event)">
-                </ax-check-box>
-            </td>
-            
-            <td>
-                <ax-text-box [text]="item.subText" placeholder="declare items using ','"
-                    (textChange)="subTextChange(i,$event)" *ngIf="item.type.includes('selectionList')">
-                </ax-text-box>
-            </td>
-            <td>
-                <ax-check-box label="Multiple" [value]="item.mode" (change)="modeChange(i,$event)"
-                    *ngIf="item.type.includes('selectionList')">
-                </ax-check-box>
-            </td>
-            <td>
-                <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,item)">
-                    <i class="fas fa-arrow-up primary"></i>
-                </ax-button>
-                <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,item)">
-                    <i class="fas fa-arrow-down primary"></i>
-                </ax-button>
-                <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
-                    <i class="fas fa-trash danger"></i>
-                </ax-button>
-            </td>
-        </tr>
+<div class="pnlCol">
+    <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Type </th>
+                <th *ngIf="dsMode.includes('ds')">Field Name</th>
+                <th>Fill by User</th>
+                <th>Sub Items</th>
+                <th>Multiple</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of columns;let i = index">
+                <td>
+                    <ax-text-box [text]="item.title" (textChange)="titleItemChange(i,$event)"></ax-text-box>
+                </td>
+                <td>
+                    <ax-select-box allowSearch="false" [items]="columnTypeItems" [selectedValues]="item.type"
+                        textField="title" valueField="value" (selectedValuesChange)="columnTypeChange(i,$event)">
+                    </ax-select-box>
+                </td>
+                <td *ngIf="dsMode.includes('ds')">
+                    <ax-text-box [text]="item.fieldName" (textChange)="fieldNameChange(i,$event)"></ax-text-box>
+                </td>
+                <td>
+                    <ax-check-box label="Fill By User" [value]="item.fillByUser" (change)="checkChange(i,$event)">
+                    </ax-check-box>
+                </td>
+
+                <td>
+                    <ax-text-box [text]="item.subText" placeholder="declare items using ','"
+                        (textChange)="subTextChange(i,$event)" *ngIf="item.type.includes('selectionList')">
+                    </ax-text-box>
+                </td>
+                <td>
+                    <ax-check-box label="Multiple" [value]="item.mode" (change)="modeChange(i,$event)"
+                        *ngIf="item.type.includes('selectionList')">
+                    </ax-check-box>
+                </td>
+                <td>
+                    <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,item)">
+                        <i class="fas fa-arrow-up primary"></i>
+                    </ax-button>
+                    <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,item)">
+                        <i class="fas fa-arrow-down primary"></i>
+                    </ax-button>
+                    <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
+                        <i class="fas fa-trash danger"></i>
+                    </ax-button>
+                </td>
+            </tr>
+        </tbody>
     </table>
     <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
         <span>Add New Column</span>&nbsp;

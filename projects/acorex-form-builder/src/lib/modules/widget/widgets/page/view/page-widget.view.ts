@@ -6,23 +6,24 @@ import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-
     selector: '[axf-page]',
     templateUrl: './page-widget.view.html',
     styleUrls: ['./page-widget.view.scss'],
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFPageWidgetView extends AXFWidgetView {
 
 
-    constructor(private hostElement: ElementRef,private cdr:ChangeDetectorRef) {
+    constructor(private hostElement: ElementRef, private cdr: ChangeDetectorRef) {
         super();
     }
 
     bgColor: string;
     boxStyle: AXFBoxStyleValue;
-    pageDirection:string;
+    pageDirection: string;
 
 
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
-        el.style.direction= this.pageDirection;
+        el.classList.remove("rtl", "ltr");
+        el.classList.add(this.pageDirection);
         this.applyStyle(el);
     }
 

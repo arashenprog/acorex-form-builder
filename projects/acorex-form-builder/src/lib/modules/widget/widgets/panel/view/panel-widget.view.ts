@@ -10,6 +10,8 @@ import { AXFWidgetView } from '../../../config/widget';
 export class AXFPanelWidgetView extends AXFWidgetView {
 
     caption: string;
+    allowCollapse:boolean;
+    collapsed:boolean;
 
     constructor() {
         super();

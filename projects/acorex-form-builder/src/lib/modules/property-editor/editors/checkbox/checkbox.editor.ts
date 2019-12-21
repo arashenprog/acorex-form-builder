@@ -2,25 +2,18 @@ import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@
 import { AXFProperyEditor } from '../../config/editor';
 
 @Component({
-    template: `
-    <ax-check-box [label]="label" [value]="value"  (change)="checkChange($event)"></ax-check-box>
-    `,
+    templateUrl: "./checkbox.editor.html",
+    styleUrls: ["./checkbox.editor.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFCheckboxEditorComponent extends AXFProperyEditor<boolean> implements OnInit {
- 
-    label:string;
+export class AXFCheckboxEditorComponent extends AXFProperyEditor<boolean> {
+
     constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
 
-    ngOnInit(): void { 
-    }
-
-
-    checkChange(e)
-    {
-        this.handleValueChange(e.target.checked);
-    }
+    // handleCheckChange(e) {
+    //     this.handleValueChange(e.target.checked);
+    // }
 
 }

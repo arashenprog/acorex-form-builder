@@ -34,7 +34,7 @@ export class AXFGridInputWidgetModule {
             viewClass: AXFGridInputWidgetView,
             options: {
                 boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("1"),
+                    border: new AXFBoxStyleBoxSizeValue("0"),
                     padding: new AXFBoxStyleBoxSizeValue("0"),
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },

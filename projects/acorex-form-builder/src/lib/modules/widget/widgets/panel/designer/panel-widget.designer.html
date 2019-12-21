@@ -1,6 +1,6 @@
 <div class="widget-designer">
     <div class="widget-container" #el>
-        <ax-panel-box [caption]="caption" [allowCollapse]="false">
+        <ax-panel-box [caption]="caption" [allowCollapse]="false"  [collapsed]="collapsed">
             <div *ngIf="widgets.length; else elseTemplate">
                 <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
                 </div>

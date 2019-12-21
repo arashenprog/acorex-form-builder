@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { AXFEditorService } from '../../services/editor.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFCheckboxEditorComponent } from './checkbox.editor';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [AXFCheckboxEditorComponent],
-    imports: [CommonModule,ACoreXUIModule],
+    imports: [CommonModule,ACoreXUIModule,FormsModule],
     exports: [AXFCheckboxEditorComponent],
     entryComponents: [AXFCheckboxEditorComponent],
     providers: [],
