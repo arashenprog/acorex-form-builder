@@ -3,15 +3,17 @@ import { AXFConnectService } from './connect.service';
 import { PromisResult } from 'acorex-ui';
 import { AXFFormService } from './form.service';
 
-export interface VarItem {
-    value: string, text: any;
-}
+// export interface VarItem {
+//     value: string, text: any;
+// }
 
 
-const VARIABLES: VarItem[] = [];
+// const VARIABLES: VarItem[] = [];
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class AXFDataService {
+
+    private vars: any = {};
 
     constructor(private connectService: AXFConnectService, private formService: AXFFormService) {
 
@@ -19,14 +21,11 @@ export class AXFDataService {
 
     init(): Promise<any> {
         let p1 = new Promise((resolve) => {
-            if (!VARIABLES.length) {
-                this.connectService.send("getVarList").then(c => {
-                    console.log("Load Variables ...")
-                    if (c && c.items)
-                        VARIABLES.push(...c.items);
-                    resolve()
-                });
-            }
+            this.connectService.send("getVarList").then(c => {
+                console.log("Load Variables ...", c)
+                this.vars = c;
+                resolve()
+            });
         });
         return Promise.all([p1]);
     }
@@ -58,9 +57,11 @@ export class AXFDataService {
     }
 
     getWord(key: string): string {
-        let item = VARIABLES.find(c => c.value == key)
-        if (item)
-            return item.text;
-        return null;
+        return this.resolvePropName(key, this.vars)
+    }
+
+    private resolvePropName(path, obj = self, separator = '.'): any {
+        let properties = Array.isArray(path) ? path : path.split(separator)
+        return properties.reduce((prev, curr) => prev && prev[curr], obj)
     }
 }
