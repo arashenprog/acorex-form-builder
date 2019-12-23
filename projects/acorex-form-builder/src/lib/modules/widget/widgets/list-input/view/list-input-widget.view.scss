@@ -1,204 +1,125 @@
-// .allItems
-// {
-//     display: flex;
-//     .noitem{
-//       height: 27px;
-//       border: 1px solid var(--primary-color);
-//       font-weight: 700;
-//       width: 100%;
-//     }
+.allItems
+{
+  .noitem{
+    height: 27px;
+    border: 1px solid var(--primary-color);
+    font-weight: 700;
+    width: 100%;
+  }
 
-//     &.vertical {
-//         flex-direction: column;
-//       }
+  &.vertical {
+    display: grid;
+  }
     
-//     &.horizontal {
-//         flex-direction: row;
-//       } 
+  // &.horizontal {
+  //     //flex-direction: row;
+  //} 
 
-//       .checkbox-container{
-//         font-size: 14px;
+  .checkbox-container{
+    font-size: 14px;
 
-//         .checkmark { 
-//             top: 20%; 
-//             height: 20px;
-//             width: 20px;
-//           }
-//       }
+    .checkmark { 
+      top: 20%; 
+      height: 20px;
+      width: 20px;
+     }
+  }
 
-//       .radio-container {
-//         display: inline-block;
-//         position: relative;
-        
-//         cursor: pointer;
-//         font-size: 14px;
-//         line-height:30px;// 25px;
-//         -webkit-user-select: none;
-//         -moz-user-select: none;
-//         -ms-user-select: none;
-//         user-select: none;
-//         margin: 0 var(--sp-md-size) 0 0;
-
-//         &.left{
-//           padding-left: 17px;
-//           .checkmark {
-//             top: 20%; 
-//             left: 0;
-//           }
-//           span{
-//             padding-left: 5px;
-//           } 
-//          }
-
-//         &.right{
-//           padding-right: 20px;
-//           .checkmark {
-//             top: 20%; 
-//             right: 0;
-//           }
-//           span{
-//             padding-left: 2px;
-//             padding-right: 2px;
-//           } 
-//          }
-
-//          &.top{
-//           padding: 2px 5px;
-//           .checkmark {
-//             left: 25%;}
-//           span{ 
-//             padding-top: 15px;
-//             display: inline-block;
-//           }
-//           img{
-//             padding-top: 15px;
-//             display: inline-block;
-//           }
-//          }
-
-//          &.bottom{
-//           padding: 0px 5px 28px 5px;
-//           .checkmark {
-//             //top: 35px;
-//             display: flex;
-//             left: 30%;} 
-//          }
-       
-
-//         input {
-//         position: absolute;
-//         opacity: 0;
-//         cursor: pointer;
- 
-//         } 
-
-//         .checkmark {
-//             position: absolute;
-            
-//             height: 20px;
-//             width: 20px;//15px;
-//            background-color: var(--white-color);
-//             border: 1px solid;
-//             border-color: var(--black-color);
-//            // border-radius: 50% !important;
-           
-//           }
-//       }
-//       .radio-container input:checked~.checkmark {
-//         background-color: var(--white-color);
-//         border-color: var(--primary-color);
-//       }
-    
-//       /* Create the indicator (the dot/circle - hidden when not checked) */
-//       .checkmark:after {
-//         content: "";
-//         position: absolute;
-//         display: none;
-//       }
-    
-//       /* Show the indicator (dot/circle) when checked */
-//       .radio-container input:checked~.checkmark:after {
-//         display: block;
-//       }
-    
-//       /* Style the indicator (dot/circle) */ 
-//       .radio-container .checkmark:after {
-//         top: 4px;
-//         left: 5px;
-//         width: 9px;
-//         height: 9px;
-//         border-radius: 50%;
-//         background: var(--primary-color);
-//       }
-// }
-
-
-.radio-container {
-  display: inline-block;
-  position: relative;
-  padding-inline-start: 20px;
-  cursor: pointer;
-  font-size: 14px;
-  line-height: 20px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  margin: 0 var(--sp-md-size) 0 0;
-
-  input {
-    position: absolute;
-    opacity: 0;
+  .radio-container {
+    display: inline-block;
+    position: relative;    
     cursor: pointer;
-  }
+    font-size: 14px;
+    line-height:30px;// 25px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0 var(--sp-md-size) 0 0;
 
-  .checkmark {
-    position: absolute;
-    top: 3px;
-    left: 0;
-    height: 15px;
-    width: 15px;
-    background-color: var(--white-color);
-    border: 1px solid;
-    border-color: var(--border-color);
-    border-radius: 50%;
-  }
-}
+    &.left{
+      padding-left: 17px;
+      .checkmark {
+        top: 20%; 
+        left: 0;
+      }
+      span{
+        padding-left: 5px;
+      } 
+      img{
+        margin-left: 3px;
+      }
+    }
 
-/* On mouse-over, add a grey background color */
-.radio-container:hover input~.checkmark {
-  background-color: var(--border-color);
-}
+    &.right{
+      padding-right: 20px;
+      .checkmark {
+        top: 20%;  
+      }
+      span{
+        padding-left: 2px;
+        padding-right: 4px;
+      } 
+    }
 
-/* When the radio button is checked, add a blue background */
-.radio-container input:checked~.checkmark {
-  background-color: var(--white-color);
-  border-color: var(--primary-color);
-}
+    &.top{
+      padding: 2px 5px;
+      .checkmark {
+        left: 5px;
+      }
+      span{ 
+        padding-top: 15px;
+        display: inline-block;
+      }
+      img{
+        padding-top: 15px;
+        display: inline-block;
+      }
+    }
 
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
+    &.bottom{
+      padding: 0px 5px 28px 5px;
+      .checkmark { 
+        display: flex;
+      } 
+      }
+    
 
-/* Show the indicator (dot/circle) when checked */
-.radio-container {
-  input{
-    &:checked~.checkmark:after {
-      display: block;
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .checkmark {
+      position: absolute;            
+      height: 20px;
+      width: 20px;
+      background-color: var(--white-color);
+      border: 1px solid;
+      border-color: var(--black-color);
+
+      &.multiple:after{
+        border-radius: 0 !important;
+      }
+    }
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      top: 4px;
+      left: 5px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      
+    } 
+     
+
+    input{
+      &:checked~.checkmark:after {
+        display: block;
+      }
     }
   }
 }
-
-
-/* Style the indicator (dot/circle) */
-.radio-container .checkmark:after {
-  top: 4px;
-  left: 4px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--primary-color);
-} 

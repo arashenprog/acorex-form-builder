@@ -1,7 +1,5 @@
 .allItems
 {
-    display: flex;
-
     .noitem{
       height: 27px;
       border: 1px solid var(--primary-color);
@@ -9,12 +7,12 @@
       width: 100%;
     }
     &.vertical {
-        flex-direction: column;
+      display: grid;
       }
     
-    &.horizontal {
-        flex-direction: row;
-      } 
+    // &.horizontal {
+    //     //flex-direction: row;
+    //   } 
 
       .checkbox-container{
         font-size: 14px;
@@ -57,19 +55,18 @@
         &.right{
           padding-right: 20px;
           .checkmark {
-            top: 20%; 
-            right: 0;
+            top: 20%;  
           }
           span{
             padding-left: 2px;
-            padding-right: 2px;
+            padding-right: 4px;
           } 
          }
 
          &.top{
           padding: 2px 5px;
           .checkmark {
-            left: 25%;}
+            left: 5px;}
           span{ 
             padding-top: 15px;
             display: inline-block;
@@ -82,10 +79,9 @@
 
          &.bottom{
           padding: 0px 5px 28px 5px;
-          .checkmark {
-            //top: 35px;
+          .checkmark { 
             display: flex;
-            left: 30%;} 
+             } 
          }
        
 
@@ -98,12 +94,10 @@
             position: absolute;
             
             height: 20px;
-            width: 20px;//15px;
+            width: 20px;
            background-color: var(--white-color);
             border: 1px solid;
             border-color: var(--black-color);
-           // border-radius: 50% !important;
-           
           }
       }
 }

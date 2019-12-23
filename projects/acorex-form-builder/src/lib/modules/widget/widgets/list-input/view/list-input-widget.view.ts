@@ -8,7 +8,7 @@ import { AXFDataSourceValue } from '../../../../property-editor/editors/data-sou
     templateUrl: './list-input-widget.view.html',
     styleUrls: ['./list-input-widget.view.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFListInputWidgetView extends AXFWidgetView {
 
@@ -63,23 +63,22 @@ export class AXFListInputWidgetView extends AXFWidgetView {
 
     getStyles(mode) {
         const styles = {
-            'border-radius': mode == 'single' ? 100 + "%" : 0
+            'border-radius': mode.includes('single') ? 100 + "%" : 0
         };
         return styles;
     }
 
     onCheckValueChange(val, checked) {
-        if (this.mode == "single") {
-            this.value = val;
+        if (this.mode.includes("single")) {
+            this.value = [val];
         }
         else {
             if (!this.value)
                 this.value = [];
-            if (checked) {
-                if (!this.value.includes(val)) {
-                    this.value = [...this.value, ...[val]];
-                }
-            }
+
+            if (!this.value.includes(val)) {
+                this.value = [...this.value, ...[val]];
+            } 
             else {
                 this.value = this.value.filter(c => c != val);
             }
