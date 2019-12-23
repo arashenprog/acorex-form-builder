@@ -13,6 +13,7 @@ import { AXFWidgetPickerService } from '../../../services/template/picker.servic
 export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
 
     bgColor: string;
+    themeColor: string;
     boxStyle: AXFBoxStyleValue;
     pageDirection: string;
 
@@ -46,6 +47,7 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         el.classList.remove("rtl", "ltr");
         el.classList.add(this.pageDirection);
+        el.style.setProperty("--primary-color",this.themeColor);
         this.applyStyle(el);
         this.cdr.markForCheck();
     }

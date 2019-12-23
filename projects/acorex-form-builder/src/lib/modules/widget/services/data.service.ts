@@ -44,20 +44,58 @@ export class AXFDataService {
                     }
                 });
             }
-
-            this.connectService.send("getList", { name: dataSourceName, params: keyValObject }).then(c => {
-                resolve(c.items);
-            });
+            if(dataSourceName && dataSourceName.match(/\[\S+\]/))
+            {
+                debugger;
+                resolve(this.resolvePropName(dataSourceName.substring(1, dataSourceName.length - 1),this.vars));
+            }
+            else{
+                this.connectService.send("getList", { name: dataSourceName, params: keyValObject }).then(c => {
+                    resolve(c.items);
+                });
+            }
+           
         });
     }
 
 
     getDSList(): PromisResult<any[]> {
-        return this.getList("ds-list");
+        let result = this.findModelList();
+        return new PromisResult<any[]>((resolve) => {
+            this.getList("ds-list").then(items => {
+                result.push(...items);
+                resolve(result);
+            })
+        });;
     }
 
     getWord(key: string): string {
         return this.resolvePropName(key, this.vars)
+    }
+
+
+    private findModelList(): any[] {
+        let result: string[] = [];
+        this.findObjectList(this.vars, result);
+        return result.map(c => ({ value:  `[${c}]`, text: `[${c}]` }));
+    }
+
+
+    private findObjectList(obj: any, result: any[], parent?: string) {
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                const o = obj[key];
+                if (Array.isArray(o)) {
+                    if (parent)
+                        result.push(parent + "." + key);
+                    else
+                        result.push(key)
+                }
+                else if (typeof o === "object") {
+                    this.findObjectList(o, result, parent ? parent + "." + key : key);
+                }
+            }
+        }
     }
 
     private resolvePropName(path, obj = self, separator = '.'): any {

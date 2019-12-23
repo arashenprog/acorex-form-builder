@@ -11,7 +11,7 @@ import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/
 import { AXFWordPipe } from '../../pipes/word.pipe';
 
 export const COMPONENTS = [
-    AXFWordPipe,
+   
     AXFTextBlockWidgetDesigner, 
     AXFTextBlockWidgetView, 
     AXFTextBlockWidgetPrint

@@ -60,6 +60,13 @@ export class AXFPagePageWidgetModule {
                     }
                 },
                 AXF_BG_COLOR_PROPERTY,
+                {
+                    name: "themeColor",
+                    category: "Style",
+                    defaultValue: "#673AB7",
+                    title: "Theme Color",
+                    editor: "ColorEditor"
+                },
                 AXF_BOX_STYLE_PROPERTY,
             ]
         })

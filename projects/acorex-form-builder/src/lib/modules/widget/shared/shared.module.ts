@@ -6,12 +6,13 @@ import { AXFWidgetRendererDirective } from './widget-renderer/widget-renderer.di
 import { AXFEditorsModule } from '../../property-editor/config/editors.module';
 import { AXFWidgetToolboxComponent } from './widget-toolbox/widget-toolbox.component';
 import { AXFWidgetPropPanelComponent } from './widget-prop-panel/widget-prop-panel.component';
+import { AXFWordPipe } from '../pipes/word.pipe';
 
 @NgModule({
-    declarations: [AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetToolboxComponent,AXFWidgetPropPanelComponent],
+    declarations: [AXFWordPipe, AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetToolboxComponent, AXFWidgetPropPanelComponent],
     imports: [CommonModule, ACoreXUIModule, AXFEditorsModule],
-    exports: [AXFWidgetPickerComponent, AXFWidgetRendererDirective,AXFWidgetToolboxComponent,AXFWidgetPropPanelComponent, AXFEditorsModule],
-    entryComponents: [AXFWidgetPickerComponent,AXFWidgetToolboxComponent],
+    exports: [AXFWordPipe, AXFWidgetPickerComponent, AXFWidgetRendererDirective, AXFWidgetToolboxComponent, AXFWidgetPropPanelComponent, AXFEditorsModule],
+    entryComponents: [AXFWidgetPickerComponent, AXFWidgetToolboxComponent],
     providers: [],
 })
 export class AXFWidgetSharedModule { }

@@ -16,6 +16,7 @@ export class AXFPageWidgetView extends AXFWidgetView {
     }
 
     bgColor: string;
+    themeColor: string;
     boxStyle: AXFBoxStyleValue;
     pageDirection: string;
 
@@ -23,6 +24,7 @@ export class AXFPageWidgetView extends AXFWidgetView {
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         el.classList.remove("rtl", "ltr");
+        el.style.setProperty("--primary-color",this.themeColor);
         el.classList.add(this.pageDirection);
         this.applyStyle(el);
     }

@@ -8,7 +8,7 @@ import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE
 import { AXFGridInputWidgetDesigner } from './designer/grid-input-widget.designer';
 import { AXFGridInputWidgetPrint } from './print/grid-input-widget.print';
 import { AXFGridInputWidgetView } from './view/grid-input-widget.view';
-import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class'; 
+import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 import { ContentItemsStructureEditor } from '../../../property-editor/editors/items/itemstructure.editor';
 
 export const COMPONENTS = [AXFGridInputWidgetDesigner, AXFGridInputWidgetPrint, AXFGridInputWidgetView]
@@ -17,7 +17,7 @@ export const COMPONENTS = [AXFGridInputWidgetDesigner, AXFGridInputWidgetPrint, 
     declarations: [...COMPONENTS],
     imports: [CommonModule, ACoreXUIModule, AXFWidgetSharedModule],
     exports: [...COMPONENTS],
-    entryComponents: [...COMPONENTS], 
+    entryComponents: [...COMPONENTS],
     providers: [],
 })
 export class AXFGridInputWidgetModule {
@@ -39,12 +39,12 @@ export class AXFGridInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                data:{columns:[new ContentItemsStructureEditor({id:"text",title:"Text", type: "string",fieldName:"text"})]},  
-                header:"",
-                footer:"",
-                items:{content:[]}
+                data: { columns: [new ContentItemsStructureEditor({ id: "text", title: "Text", type: "string", fieldName: "text" })] },
+                header: "",
+                footer: "",
+                items: { content: [] }
             },
-            properties: [  
+            properties: [
                 {
                     name: "header",
                     category: "General",
@@ -58,19 +58,9 @@ export class AXFGridInputWidgetModule {
                     defaultValue: "",
                     title: "Footer Text",
                     editor: "TextEditor"
-                },                 
+                },
                 AXF_DS_MODE_PROPERTY,
                 AXF_DS_LIST_PROPERTY,
-                {
-                    name: "data",
-                    category: "Data",
-                    defaultValue: {},
-                    title: "Column Management",
-                    editor: "GridEditor" , 
-                    options:{
-                        dsMode:"$dsMode"
-                    }
-                },  
                 {
                     name: "items",
                     category: "Data",
@@ -80,10 +70,20 @@ export class AXFGridInputWidgetModule {
                     visible: (options: any) => {
                         return options.dsMode == "manual";
                     },
-                    options:{
-                        columnInstance:"$data"
+                    options: {
+                        columnInstance: "$data"
                     }
-                },               
+                },
+                {
+                    name: "data",
+                    category: "Data",
+                    defaultValue: {},
+                    title: "Column Management",
+                    editor: "GridEditor",
+                    options: {
+                        dsMode: "$dsMode"
+                    }
+                },
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]

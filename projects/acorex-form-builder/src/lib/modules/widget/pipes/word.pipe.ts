@@ -9,7 +9,7 @@ export class AXFWordPipe implements PipeTransform {
     }
 
     transform(value: string): string {
-        if (value) {
+        if (value && typeof value == "string") {
             let list = value.match(/\[\S+\]/g);
             if (list) {
                 list.forEach(w => {
