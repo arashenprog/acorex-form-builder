@@ -105,6 +105,36 @@ export class AXFListInputWidgetModule {
                 AXF_DS_MODE_PROPERTY,
                 AXF_DS_LIST_PROPERTY,
                 {
+                    name: "keyField",
+                    category: "Data",
+                    defaultValue: "value",
+                    title: "Key Field",
+                    editor: "TextEditor",
+                    visible: (options: any) => {
+                        return options.dsMode == "ds";
+                    }
+                },
+                {
+                    name: "textField",
+                    category: "Data",
+                    defaultValue: "text",
+                    title: "Text Field",
+                    editor: "TextEditor",
+                    visible: (options: any) => {
+                        return options.dsMode == "ds";
+                    }
+                },
+                {
+                    name: "imageField",
+                    category: "Data",
+                    defaultValue: "image",
+                    title: "Image Field",
+                    editor: "TextEditor",
+                    visible: (options: any) => {
+                        return options.dsMode == "ds" && !options.viewType.includes("string");
+                    }
+                },
+                {
                     name: "items",
                     category: "Data",
                     defaultValue: {},

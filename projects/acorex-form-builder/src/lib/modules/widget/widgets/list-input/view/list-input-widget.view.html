@@ -4,10 +4,10 @@
         <ng-container *ngFor="let item of items.types">
             <span *ngIf="item.type=='string'">{{cnt[item.id]}}</span>
             <img *ngIf="item.type=='image'" [src]="cnt[item.id]" height="40" width="60"> 
-            <input type="radio" [value]="cnt.value" *ngIf="mode!='unselectable'"   
-            [attr.checked]="value && value.indexOf(cnt.value)>-1 ? 'checked' : null" />
+            <input type="radio" [value]="cnt[keyField]" *ngIf="mode!='unselectable'"   
+            [attr.checked]="value && value.indexOf(cnt[keyField])>-1 ? 'checked' : null" />
             <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'" [ngClass]="{multiple: mode.includes('multiple')}"
-            (click)="onCheckValueChange(cnt.value,true)"></span>
+            (click)="onCheckValueChange(cnt[keyField],true)"></span>
         </ng-container>
     </label>
 

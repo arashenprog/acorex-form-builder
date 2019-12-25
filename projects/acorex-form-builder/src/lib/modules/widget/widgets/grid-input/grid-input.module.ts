@@ -81,7 +81,8 @@ export class AXFGridInputWidgetModule {
                     title: "Column Management",
                     editor: "GridEditor",
                     options: {
-                        dsMode: "$dsMode"
+                        dsMode: "$dsMode",
+                        dsName:"$dsName"
                     }
                 },
                 AXF_BOX_STYLE_PROPERTY,

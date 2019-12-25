@@ -27,7 +27,9 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     viewType: boolean;
     dsMode: string[];
     dsName: AXFDataSourceValue;
-
+    keyField: string;
+    textField: string;
+    imageField: string; 
 
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
@@ -36,9 +38,12 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     onRender(): void {
         if (this.el)
             this.applyStyle(this.el.nativeElement);
-        if (this.dsMode[0] == "ds" && this.dsName) {
+        if(this.items.types[0].id!=this.textField)
+            this.items.types[0].id=this.textField; 
+        if (this.dsMode[0] == "ds" && this.dsName) { 
             this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
                 this.items.content = items;
+                
                 this.cdr.markForCheck();
             });
         }
@@ -46,8 +51,7 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
             this.cdr.markForCheck();
     }
 
-    handleValueChange(e) {
-
+    handleValueChange(e) {  
     }
 
 

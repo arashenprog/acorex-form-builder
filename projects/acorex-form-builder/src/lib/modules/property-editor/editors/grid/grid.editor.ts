@@ -5,6 +5,7 @@ import { AXPopupService } from 'acorex-ui';
 import { isArray } from 'util';
 import { ContentItemsStructureEditor } from '../items/itemstructure.editor';
 import { GridStructureEditor } from './gridstructure.editor';
+import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({
     templateUrl: './grid.editor.html',
@@ -19,7 +20,7 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
 
     fillbyItems: any[] = [{ value: "manualList", title: "Manual List" }, { value: "databaseList", title: "Database List" }];
     dataSources: any[] = [{ id: "staffs", text: "Staffs" }]
-    constructor(private popupService: AXPopupService,private cdr:ChangeDetectorRef) {
+    constructor(private popupService: AXPopupService, private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super();
     }
 
@@ -34,6 +35,30 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
             this.dsModeStr = value;
         }
     }
+
+    private dsNameStr: string;
+    get dsName(): any {
+        return this.dsNameStr;
+    }
+    set dsName(value: any) {
+        if (value && value.name && this.dsNameStr != value.name) {
+            this.dataService.getList(value.name, value.params).then(items => {
+                let obj = items[0];
+                let clmns = [];
+                for (var key in obj) {
+                    if (obj.hasOwnProperty(key) && typeof obj[key] !== 'function') {
+                        clmns.push(new ContentItemsStructureEditor({ id: key, title: key, fieldName:key, type: typeof obj[key] }))
+                    }
+                }
+                this.value.columns=clmns;
+                this.cdr.markForCheck();
+                this.handleValueChange(this.value);
+            });
+            this.dsNameStr = value.name;
+        }
+    }
+
+
 
     changeDsMode(newVal) {
         if (newVal[0] == "ds") {
@@ -54,7 +79,7 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
             size: "lg",
             data: {
                 columns: this.value.columns,
-                dsMode:this.dsMode
+                dsMode: this.dsMode
             }
         }).closed(c => {
             this.value.columns = c.data;

@@ -24,6 +24,9 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     dsName: AXFDataSourceValue;
     uid: string = "M" + Math.ceil(Math.random() * 10000);
     visible: boolean;
+    keyField: string;
+    textField: string;
+    imageField: string
 
     constructor(private dataService: AXFDataService) {
         super()
