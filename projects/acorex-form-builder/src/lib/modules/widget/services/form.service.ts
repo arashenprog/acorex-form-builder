@@ -22,7 +22,7 @@ export class AXFFormService {
 
     private widgetRegisterChangeObserver: any;
 
-    constructor() {
+    constructor(private connectService: AXFConnectService) {
     }
 
     private formData: any = {};
@@ -37,9 +37,11 @@ export class AXFFormService {
     }
 
 
-    submit()
-    {
-        console.log(this.formData);
+    submit() {
+        console.log("start submit", this.formData);
+        this.connectService.send("submit", { data: this.formData }).then(() => {
+            console.log("submitted");
+        });
     }
 
 

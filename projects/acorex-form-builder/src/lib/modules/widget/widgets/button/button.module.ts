@@ -27,7 +27,7 @@ export class AXFButtonWidgetModule {
             title: 'Button',
             hint: 'A clickable Button',
             icon: 'fas fa-play',
-            category: 'Editor',
+            category: 'Buttons',
             visible: true,
             name: 'button',
             designerClass: AXFButtonWidgetDesigner,

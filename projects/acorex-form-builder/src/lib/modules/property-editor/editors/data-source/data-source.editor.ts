@@ -5,6 +5,7 @@ import { AXFDataSourceValue } from './data-source.class';
 
 @Component({
     templateUrl: `data-source.editor.html`,
+    styleUrls: [`data-source.editor.scss`],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSourceValue>  {
