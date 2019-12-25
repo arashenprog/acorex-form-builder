@@ -7,8 +7,7 @@
 .brd {
     overflow-x: auto;
     table{
-        width: 100%;
-        table-layout: fixed;
+        table-layout: unset !important;
     }
 }
 

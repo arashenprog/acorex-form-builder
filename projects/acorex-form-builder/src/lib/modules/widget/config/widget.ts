@@ -233,6 +233,11 @@ export abstract class AXFWidgetView extends AXFWidget {
                         });
                     }
                     new Function(execCode).call(params);
+                    if (allWidgets) {
+                        allWidgets.forEach(w => {
+                            params['_' + w.substring(1)].refresh();
+                        });
+                    }
                 })
 
             }
