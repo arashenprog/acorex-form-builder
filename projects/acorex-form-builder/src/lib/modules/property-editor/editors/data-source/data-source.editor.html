@@ -1,18 +1,37 @@
-<ax-select-box [allowSearch]="false" [items]="items" [selectedValues]="innerValue"
-    (selectedItemsChange)="handleValueChange($event)" [textField]="textField" [valueField]="valueField">
-</ax-select-box>
-<div *ngIf="value && value.params &&  value.params.length>0" class="mt-1">
-    <span class="prop-caption ">Parameters</span>
-    <div class="input-group">
-        <ng-container *ngFor="let item of value.params" class="params">
-            <div class="input-group mt-1 input-group-sm">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="font-size: x-small;" [attr.id]="item.name">{{item.name}}</span>
+<div>
+    <ax-selection-list #modeSelection direction="horizontal" mode="single" [items]="modeItems"
+        (selectedItemsChange)="handleModeChange($event)" textField="text" valueField="value">
+    </ax-selection-list>
+</div>
+<div *ngIf="value.mode=='remote'" class="mt-2">
+    <ax-select-box #remoteSelection [allowSearch]="false" [items]="remoteItems"
+        (selectedItemsChange)="handleRemoteChange($event)" textField="text" valueField="value">
+    </ax-select-box>
+    <div *ngIf="value.dataSource && value.dataSource.params &&  value.dataSource.params.length>0" class="mt-1">
+        <span class="prop-caption ">Parameters</span>
+        <div class="input-group">
+            <ng-container *ngFor="let item of value.dataSource.params" class="params">
+                <div class="input-group mt-1 input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="font-size: x-small;"
+                            [attr.id]="item.name">{{item.name}}</span>
+                    </div>
+                    <input type="text" [(ngModel)]="item.value" (ngModelChange)="handleParamChange($event)"
+                        class="form-control" [attr.aria-describedby]="item.name">
                 </div>
-                <input type="text" [(ngModel)]="item.value" (ngModelChange)="handleParamChange($event)"
-                    class="form-control" [attr.aria-describedby]="item.name">
-            </div>
-        </ng-container>
+            </ng-container>
+        </div>
     </div>
-
+</div>
+<div class="mt-2">
+    <ax-button type="primary" size="sm">
+        <span>Column Count: {{value.columns.length}}</span>&nbsp;
+        <i class="fas fa-columns"></i>
+    </ax-button>
+</div>
+<div *ngIf="value.mode=='manual'" class="mt-2">
+    <ax-button type="primary" size="sm" (onClick)="handleItemEditor()">
+        <span>Item Count: {{value.dataItems.length}}</span>&nbsp;
+        <i class="fas fa-th-list"></i>
+    </ax-button>
 </div>

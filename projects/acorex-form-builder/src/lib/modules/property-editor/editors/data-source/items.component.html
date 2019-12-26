@@ -1,0 +1,47 @@
+<div class="pnlCol">
+    <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th *ngFor="let col of columns">{{col.title}}
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items;let i = index">
+                <td *ngFor="let col of columns">
+                    <ax-text-box class="nodeItem" [text]="item[col.fieldName]" *ngIf="col.type=='string'"
+                        (textChange)="itemChange(item,col.fieldName,$event)"></ax-text-box>
+                    <ax-text-box class="nodeItem" [text]="item[col.fieldName]" type="number" *ngIf="col.type=='number'"
+                        (textChange)="itemChange(item,col.fieldName,$event)"></ax-text-box>
+                    <ax-date-picker class="nodeItem" [value]="item[col.fieldName]" *ngIf="col.type=='date'"
+                        (valueChange)="itemChange(item,col.fieldName,$event)"></ax-date-picker>
+                    <!-- <ax-check-box class="nodeItem" [value]="item[col.fieldName]" *ngIf="col.type=='boolean'" label="' '"
+                        (change)="itemChange(item,i,$event)"></ax-check-box>
+                    <ax-upload-file class="nodeItem" *ngIf="col.type=='image'" type="inline"
+                        (onLoad)="itemChange(item,i,$event)"></ax-upload-file> -->
+                    <!-- <ax-selection-list class="nodeItem" [selectedValues]="[item[col.fieldName]]" direction="horizontal"
+                        *ngIf="col.type=='selectionList'" (selectedValuesChange)="itemChange(item,i,$event)"
+                        [items]="item.subItems" textField="value" valueField="value"
+                        mode="{{item.mode?'multiple':'single'}}">
+                    </ax-selection-list> -->
+                </td>
+                <td>
+                    <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
+                        <i class="fas fa-trash danger"></i>
+                    </ax-button>
+                    <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,item)">
+                        <i class="fas fa-arrow-up primary"></i>
+                    </ax-button>
+                    <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,item)">
+                        <i class="fas fa-arrow-down primary"></i>
+                    </ax-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
+        <span>Add New Item</span>&nbsp;
+        <i class="fas fa-plus"></i>
+    </ax-button>
+</div>
