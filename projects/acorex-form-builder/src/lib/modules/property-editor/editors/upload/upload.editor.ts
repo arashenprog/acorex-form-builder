@@ -9,7 +9,7 @@ import { AXFProperyEditor } from '../../config/editor';
 })
 export class AXFUploadEditorComponent extends AXFProperyEditor<string> implements OnInit {
 
-
+    dimension:any; 
 
     constructor(protected cdr: ChangeDetectorRef) {
         super();
@@ -20,6 +20,17 @@ export class AXFUploadEditorComponent extends AXFProperyEditor<string> implement
     }
 
     handleValueChange(evt) {
+        this.dimension= this.getImageDimensions(evt.data);
         this.value = evt.data;
     }
+
+    getImageDimensions(file) {
+        return new Promise (function (resolved, rejected) {
+          var i = new Image()
+          i.onload = function(){
+            resolved({w: i.width, h: i.height})
+          };
+          i.src = file
+        })
+      }
 }

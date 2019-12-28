@@ -11,6 +11,7 @@ export class AXFImageInputWidgetPrint extends AXFWidgetPrint {
     height:number;
     width:number;
     alt:string;
+    boxStyle:any;
     constructor() {
         super()
     }
