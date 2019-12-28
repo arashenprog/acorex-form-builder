@@ -7,7 +7,7 @@ import { AXFDataSourceColumnValue } from './data-source.class';
     templateUrl: './items.component.html',
     styleUrls: ['./items.component.scss'],
 })
-export class AXFItemComponent extends AXBasePageComponent {
+export class AXIDataItemEditorComponent extends AXBasePageComponent {
 
     public columns: AXFDataSourceColumnValue;
     public items: any = [];
@@ -26,6 +26,7 @@ export class AXFItemComponent extends AXBasePageComponent {
     }
 
     onClosing(e: ClosingAction) {
+        debugger;
         e.data = {
             items: this.items,
             columns: this.columns
@@ -33,8 +34,8 @@ export class AXFItemComponent extends AXBasePageComponent {
         e.resolve();
     }
 
-    itemChange(item: any,fieldName:string,value:any) {
-        this.items[fieldName] = value;
+    itemChange(item: any, fieldName: string, value: any) {
+        item[fieldName] = value;
         // switch (item.type) {
         //     case "string":
         //     case "number":

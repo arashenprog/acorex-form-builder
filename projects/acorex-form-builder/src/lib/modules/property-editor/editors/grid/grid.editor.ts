@@ -40,7 +40,7 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
     }
     set dsMode(value: string) {
         if (isArray(value)) {
-            if (this._dsMode && this._dsMode[0] != value[0])
+            if (this._dsMode && this._dsMode != value)
                 this.changeDsMode(value);
             this._dsMode = value;
         }
@@ -71,10 +71,10 @@ export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor
 
 
     changeDsMode(newVal) {
-        if (newVal[0] == "ds") {
+        if (newVal == "ds") {
             this.value.columns = [new ContentItemsStructureEditor({ id: "text", title: "Text", type: "string", fieldName: "text" })];
         }
-        else if (newVal[0] == "manual") {
+        else if (newVal == "manual") {
             this.value.columns = [new ContentItemsStructureEditor({ id: "Field1", title: "Field1", type: "string" })];
         }
     }

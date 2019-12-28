@@ -32,7 +32,6 @@ export class AXFDataService {
 
     getList(dataSourceName: String, params?: any): PromisResult<any[]> {
         return new PromisResult<any[]>((resolve) => {
-            debugger;
             let keyValObject = {}
             if (params) {
                 params.forEach(p => {
@@ -46,7 +45,6 @@ export class AXFDataService {
             }
             if(dataSourceName && dataSourceName.match(/\[\S+\]/))
             {
-                debugger;
                 resolve(this.resolvePropName(dataSourceName.substring(1, dataSourceName.length - 1),this.vars));
             }
             else{

@@ -23,7 +23,7 @@ export class AXFSignatureEditorComponent extends AXFProperyEditor<SignatureStruc
 
 
     signatureTypeChange(e) {
-        if(this.value.SignatureType[0] != e[0])
+        if(this.value.SignatureType[0] != e)
         {
             this.value.SignatureType = e;
             if (this.value.SignatureType.includes('supervisor')) {
@@ -35,7 +35,7 @@ export class AXFSignatureEditorComponent extends AXFProperyEditor<SignatureStruc
     }
 
     showTypeChange(e) {
-        if(e.length>0 && this.value.SignatureType[0] != e[0])
+        if(e.length>0 && this.value.SignatureType[0] !=e)
         { 
             this.value.ShowType = e;
             super.handleValueChange(this.value);

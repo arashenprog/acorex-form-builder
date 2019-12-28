@@ -16,7 +16,7 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     data: { columns: any[] };
     header: string;
     footer: string;
-    dsMode: string[];
+    dsMode: string;
     dsName: AXFDataSourceValue;
     rows: any[] = [];
     items: { content: any[] }
@@ -35,8 +35,7 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     }
 
     ngAfterViewInit() {
-        debugger;
-        if (this.dsMode[0] == "ds") {
+        if (this.dsMode == "ds") {
             // if (this.dsName)
             //     this.dataService.getList(this.dsName.name, this.dsName.params).then(it => {
             //         this.rows = it;

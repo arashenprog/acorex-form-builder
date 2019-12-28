@@ -20,7 +20,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     alignCheck: string;
     showOther: boolean;
     viewType: boolean;
-    dsMode: string[];
+    dsMode: string;
     dsName: AXFDataSourceValue;
     uid: string = "M" + Math.ceil(Math.random() * 10000);
     visible: boolean;
@@ -38,7 +38,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     }
 
     ngAfterViewInit() {
-        if (this.dsMode[0] == "ds" && this.dsName) {
+        if (this.dsMode == "ds" && this.dsName) {
             // this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
             //     this.items.content = items;
             // });
@@ -48,7 +48,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     }
 
     refresh(clear: boolean = true) {
-        if (this.dsMode[0] == 'ds' && this.dsName) {
+        if (this.dsMode == 'ds' && this.dsName) {
             // this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
             //     this.items.content = items;
             //     if (clear) {

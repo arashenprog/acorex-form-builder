@@ -27,11 +27,11 @@ export class AXFColumnGridComponent extends AXBasePageComponent {
     columnTypeChange(ind, e) {
         if (!e || !e.length)
             return;
-        if (this.columns[ind].type != e[0]) {
+        if (this.columns[ind].type != e) {
             this.columns[ind].mode = false;
             this.columns[ind].subText = "";
         }
-        this.columns[ind].type = e[0];  
+        this.columns[ind].type = e;  
         this.columns[ind].defaultValue= this.setDefaultValue(this.columns[ind].type); 
     }
 

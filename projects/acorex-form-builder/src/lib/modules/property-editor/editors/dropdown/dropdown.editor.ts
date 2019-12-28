@@ -7,49 +7,38 @@ import { AXFDataService } from '../../../widget/services/data.service';
         <ax-select-box  
             [allowSearch]="false" 
             [items]="items"
-            [selectedValues]="innerValue" 
-            (selectedValuesChange)="handleValueChange($event)"  
+            [mode]="mode"
             [textField]="textField" 
             [valueField]="valueField"
+            [selectedValues]="value" 
+            (selectedValuesChange)="handleValueChange($event)"  
         >
         </ax-select-box>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFDropdownEditorComponent extends AXFProperyEditor<any[]>  {
+export class AXFDropdownEditorComponent extends AXFProperyEditor<any>  {
 
-    innerValue: any[] = [];
     items: any[] = [];
     textField: string = "title";
     valueField: string = "value";
     dataSource: string;
-
-
+    mode: "single" | "multiple" = "single";
 
     constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
         super();
     }
 
-
-
     ngAfterViewInit(): void {
         if (this.dataSource) {
             this.dataService.getList(this.dataSource).then(items => {
                 this.items = items;
-                this.innerValue = [this.value];
-                this.cdr.markForCheck();
-            });
-        }
-        else {
-            setTimeout(() => {
-                this.innerValue = [this.value];
                 this.cdr.markForCheck();
             });
         }
     }
 
     handleValueChange(v: any) {
-        this.innerValue = v;
-        this.value = v[0];
+        this.value = v;
     }
 }

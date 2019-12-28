@@ -65,9 +65,9 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
 
     changeViewType(newVal) {
         let newType: any;
-        if (newVal[0] == "image" || newVal[0] == "both") {
+        if (newVal == "image" || newVal == "both") {
             newType = new ContentItemsStructureEditor({ id: "image", title: "Image", type: "image" })
-            if (newVal[0] == "image" && this.value.types.some(s => s.id == "text")) {
+            if (newVal == "image" && this.value.types.some(s => s.id == "text")) {
                 this.value.types = this.value.types.filter(s => s.id != "text");
                 if (this.value.content)
                     this.value.content.forEach(f => {
@@ -80,9 +80,9 @@ export class AXFItemsEditorComponent extends AXFProperyEditor<ItemsStructureEdit
                     this.value.content = this.value.content.map((m) => { return { ...m, [newType.id]: newType.defaultValue } })
             }
         }
-        if (newVal[0] == "string" || newVal[0] == "both") {
+        if (newVal == "string" || newVal == "both") {
             newType = new ContentItemsStructureEditor({ id: "text", title: "Text", type: "string" })
-            if (newVal[0] == "string" && this.value.types.some(s => s.id == "image")) {
+            if (newVal == "string" && this.value.types.some(s => s.id == "image")) {
                 this.value.types = this.value.types.filter(s => s.id != "image");
                 if (this.value.content)
                     this.value.content.forEach(f => {

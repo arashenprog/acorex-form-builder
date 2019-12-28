@@ -62,16 +62,16 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             el.style.color = this["color"];
         }
         if (this["textAlign"]) {
-            el.style.textAlign = this["textAlign"][0];
+            el.style.textAlign = this["textAlign"];
         }
         if (this["fontSize"]) {
             el.style.fontSize = this["fontSize"];
         }
         if (this["verticalAlign"]) {
-            el.style.verticalAlign = this["verticalAlign"][0];
+            el.style.verticalAlign = this["verticalAlign"];
         }
         if (this["textDirection"]) {
-            el.style.writingMode = this["textDirection"][0];
+            el.style.writingMode = this["textDirection"];
         }
         if (this["textStyle"]) {
             el.style.fontWeight = this["textStyle"].includes('bold') ? "bold" : "inherit";
