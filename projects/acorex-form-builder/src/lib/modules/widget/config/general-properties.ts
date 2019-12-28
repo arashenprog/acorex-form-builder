@@ -181,14 +181,11 @@ export const AXF_VERTICAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
 }
 
 export const AXF_DS_LIST_PROPERTY: AXFWidgetProperty = {
-    name: "dsName",
+    name: "dataSource",
     category: "Data",
     defaultValue: null,
-    title: "List",
-    editor: "DataSourceEditor",
-    visible: (options: any) => {
-        return options.dsMode == null || options.dsMode == "ds"
-    }
+    title: "Data Source",
+    editor: "DataSourceEditor"
 }
 
 

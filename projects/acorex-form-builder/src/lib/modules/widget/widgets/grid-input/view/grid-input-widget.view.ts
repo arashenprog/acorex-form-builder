@@ -20,6 +20,7 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     dsName: AXFDataSourceValue;
     rows: any[] = [];
     items: { content: any[] }
+    visible:boolean = true;
 
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
@@ -36,11 +37,11 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     ngAfterViewInit() {
         debugger;
         if (this.dsMode[0] == "ds") {
-            if (this.dsName)
-                this.dataService.getList(this.dsName.name, this.dsName.params).then(it => {
-                    this.rows = it;
-                    this.refresh();
-                });
+            // if (this.dsName)
+            //     this.dataService.getList(this.dsName.name, this.dsName.params).then(it => {
+            //         this.rows = it;
+            //         this.refresh();
+            //     });
         }
         else {
             this.rows = this.items.content;

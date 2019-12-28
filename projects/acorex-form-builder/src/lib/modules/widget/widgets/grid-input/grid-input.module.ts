@@ -23,8 +23,8 @@ export const COMPONENTS = [AXFGridInputWidgetDesigner, AXFGridInputWidgetPrint, 
 export class AXFGridInputWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: "Grid Input",
-            hint: "Grid input element",
+            title: "Data Table",
+            hint: "Grid table element",
             icon: "fas fa-table",
             category: "Editors",
             visible: true,
@@ -59,32 +59,7 @@ export class AXFGridInputWidgetModule {
                     title: "Footer Text",
                     editor: "TextEditor"
                 },
-                AXF_DS_MODE_PROPERTY,
                 AXF_DS_LIST_PROPERTY,
-                {
-                    name: "items",
-                    category: "Data",
-                    defaultValue: {},
-                    title: "Items",
-                    editor: "ItemsEditor",
-                    visible: (options: any) => {
-                        return options.dsMode == "manual";
-                    },
-                    options: {
-                        columnInstance: "$data"
-                    }
-                },
-                {
-                    name: "data",
-                    category: "Data",
-                    defaultValue: {},
-                    title: "Column Management",
-                    editor: "GridEditor",
-                    options: {
-                        dsMode: "$dsMode",
-                        dsName:"$dsName"
-                    }
-                },
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]

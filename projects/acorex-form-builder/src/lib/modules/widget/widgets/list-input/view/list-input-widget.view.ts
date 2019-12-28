@@ -39,9 +39,9 @@ export class AXFListInputWidgetView extends AXFWidgetView {
 
     ngAfterViewInit() {
         if (this.dsMode[0] == "ds" && this.dsName) {
-            this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
-                this.items.content = items;
-            });
+            // this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
+            //     this.items.content = items;
+            // });
         }
 
         this.refresh(false);
@@ -49,18 +49,18 @@ export class AXFListInputWidgetView extends AXFWidgetView {
 
     refresh(clear: boolean = true) {
         if (this.dsMode[0] == 'ds' && this.dsName) {
-            this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
-                this.items.content = items;
-                if (clear) {
-                    if (this.mode == "single") {
-                        this.value = null;
-                    }
-                    else {
-                        this.value = [];
-                    }
-                }
-                super.refresh();
-            });
+            // this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
+            //     this.items.content = items;
+            //     if (clear) {
+            //         if (this.mode == "single") {
+            //             this.value = null;
+            //         }
+            //         else {
+            //             this.value = [];
+            //         }
+            //     }
+            //     super.refresh();
+            // });
         }
     }
 

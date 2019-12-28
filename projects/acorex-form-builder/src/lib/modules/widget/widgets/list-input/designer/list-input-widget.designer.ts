@@ -41,11 +41,11 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
         if(this.items.types[0].id!=this.textField)
             this.items.types[0].id=this.textField; 
         if (this.dsMode[0] == "ds" && this.dsName) { 
-            this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
-                this.items.content = items;
+            // this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
+            //     this.items.content = items;
                 
-                this.cdr.markForCheck();
-            });
+            //     this.cdr.markForCheck();
+            // });
         }
         else
             this.cdr.markForCheck();

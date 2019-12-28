@@ -14,47 +14,57 @@ import { AXFDataService } from '../../../widget/services/data.service';
 export class AXFGridEditorComponent extends AXFProperyEditor<GridStructureEditor> implements OnInit {
 
     innerValue: any[] = [];
-    columnTypeItems: any[] = [{ value: "string", title: "String" }, { value: "number", title: "Number" },
-    { value: "boolean", title: "Boolean" }, { value: "date", title: "Date" }, { value: "time", title: "Time" },
-    { value: "image", title: "Image" }, { value: "selectionList", title: "Selection List" }]
+    columnTypeItems: any[] = [
+        { value: "string", title: "String" },
+        { value: "number", title: "Number" },
+        { value: "boolean", title: "Boolean" },
+        { value: "date", title: "Date" },
+        { value: "time", title: "Time" },
+        { value: "image", title: "Image" },
+        { value: "selectionList", title: "Selection List" }
+    ]
 
-    fillbyItems: any[] = [{ value: "manualList", title: "Manual List" }, { value: "databaseList", title: "Database List" }];
-    dataSources: any[] = [{ id: "staffs", text: "Staffs" }]
+    fillbyItems: any[] = [
+        { value: "manualList", title: "Manual List" },
+        { value: "databaseList", title: "Database List" }
+    ];
+
+
     constructor(private popupService: AXPopupService, private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super();
     }
 
-    private dsModeStr: string;
+    private _dsMode: string;
     get dsMode(): string {
-        return this.dsModeStr;
+        return this._dsMode;
     }
     set dsMode(value: string) {
         if (isArray(value)) {
-            if (this.dsModeStr && this.dsModeStr[0] != value[0])
+            if (this._dsMode && this._dsMode[0] != value[0])
                 this.changeDsMode(value);
-            this.dsModeStr = value;
+            this._dsMode = value;
         }
     }
 
-    private dsNameStr: string;
+    private _dsName: string;
     get dsName(): any {
-        return this.dsNameStr;
+        return this._dsName;
     }
     set dsName(value: any) {
-        if (value && value.name && this.dsNameStr != value.name) {
+        if (value && value.name && this._dsName != value.name) {
             this.dataService.getList(value.name, value.params).then(items => {
                 let obj = items[0];
                 let clmns = [];
                 for (var key in obj) {
                     if (obj.hasOwnProperty(key) && typeof obj[key] !== 'function') {
-                        clmns.push(new ContentItemsStructureEditor({ id: key, title: key, fieldName:key, type: typeof obj[key] }))
+                        clmns.push(new ContentItemsStructureEditor({ id: key, title: key, fieldName: key, type: typeof obj[key] }))
                     }
                 }
-                this.value.columns=clmns;
+                this.value.columns = clmns;
                 this.cdr.markForCheck();
                 this.handleValueChange(this.value);
             });
-            this.dsNameStr = value.name;
+            this._dsName = value.name;
         }
     }
 
