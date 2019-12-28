@@ -4,7 +4,7 @@
 'fontWeight':textStyle.includes('bold') ? 'bold' : 'inherit',
 'fontStyle':textStyle.includes('italic') ? 'italic' : 'inherit',
 'textDecoration':textStyle.includes('underline') ? 'underline' : 'inherit',
-'textAlign':textAlign[0], 
+'textAlign':textAlign, 
 'padding-top':(boxStyle.padding && boxStyle.padding.top) ? boxStyle.padding.top+'px' : '0px',
 'padding-bottom':(boxStyle.padding && boxStyle.padding.bottom) ? boxStyle.padding.bottom+'px' : '0px',
 'padding-right':(boxStyle.padding && boxStyle.padding.right) ? boxStyle.padding.right+'px' : '0px',
@@ -17,5 +17,5 @@
 'margin-bottom':(boxStyle.margin && boxStyle.margin.bottom) ? boxStyle.margin.bottom+'px' : '0px',
 'margin-right':(boxStyle.margin && boxStyle.margin.right) ? boxStyle.margin.right+'px' : '0px',
 'margin-left':(boxStyle.margin && boxStyle.margin.left) ? boxStyle.margin.left+'px' : '0px',
-'writing-mode':textDirection[0]
+'writing-mode':textDirection
 }" style="border-style: solid;border-color: var(--border-color);"  [innerHTML]="text"></div    >

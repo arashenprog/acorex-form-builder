@@ -107,7 +107,7 @@ export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
 export const AXF_TEXT_DIRECTION_PROPERTY: AXFWidgetProperty = {
     name: "textDirection",
     category: "Style",
-    defaultValue: ["inherit"],
+    defaultValue: "inherit",
     title: "Text Direction",
     editor: "SelectionEditor",
     options: {
@@ -120,7 +120,6 @@ export const AXF_TEXT_DIRECTION_PROPERTY: AXFWidgetProperty = {
 export const AXF_TEXT_STYLE_PROPERTY: AXFWidgetProperty = {
     name: "textStyle",
     category: "Style",
-    defaultValue: [],
     title: "Text Style",
     editor: "SelectionEditor",
     options: {
@@ -157,7 +156,7 @@ export const AXF_TEXT_SIZE_PROPERTY: AXFWidgetProperty = {
 export const AXF_HORIZONTAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
     name: "textAlign",
     category: "Style",
-    defaultValue: ["left"],
+    defaultValue: "left",
     title: "Horizontal Alignment",
     editor: "SelectionEditor",
     options: {
@@ -170,7 +169,7 @@ export const AXF_HORIZONTAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
 export const AXF_VERTICAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
     name: "verticalAlign",
     category: "Style",
-    defaultValue: ["top"],
+    defaultValue: "top",
     title: "Vertical Alignment",
     editor: "SelectionEditor",
     options: {
@@ -192,7 +191,7 @@ export const AXF_DS_LIST_PROPERTY: AXFWidgetProperty = {
 export const AXF_DS_MODE_PROPERTY: AXFWidgetProperty = {
     name: "dsMode",
     category: "Data",
-    defaultValue: ["ds"],
+    defaultValue: "ds",
     title: "Date Mode",
     editor: "SelectionEditor",
     options: {

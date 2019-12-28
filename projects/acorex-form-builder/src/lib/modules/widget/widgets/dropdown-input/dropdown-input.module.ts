@@ -48,7 +48,6 @@ export class AXFDropdownInputWidgetModule {
                 {
                     name: "mode",
                     category: "General",
-                    defaultValue: [],
                     title: "Mode",
                     editor: "SelectionEditor",
                     options: {

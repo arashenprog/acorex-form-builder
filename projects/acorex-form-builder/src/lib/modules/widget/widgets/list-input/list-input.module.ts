@@ -52,7 +52,6 @@ export class AXFListInputWidgetModule {
                 {
                     name: "mode",
                     category: "General",
-                    defaultValue: [],
                     title: "Mode",
                     editor: "SelectionEditor",
                     options: {
@@ -65,7 +64,6 @@ export class AXFListInputWidgetModule {
                 {
                     name: "direction",
                     category: "General",
-                    defaultValue: [],
                     title: "Direction",
                     editor: "SelectionEditor",
                     options: {
@@ -77,7 +75,6 @@ export class AXFListInputWidgetModule {
                 {
                     name: "alignCheck",
                     category: "General",
-                    defaultValue: [],
                     title: "CheckBox/RadioButton Align",
                     editor: "SelectionEditor",
                     visible: (options: any) => {
@@ -93,7 +90,6 @@ export class AXFListInputWidgetModule {
                 {
                     name: "viewType",
                     category: "General",
-                    defaultValue: [],
                     title: "View Type",
                     editor: "SelectionEditor",
                     options: {

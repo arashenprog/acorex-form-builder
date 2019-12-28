@@ -28,7 +28,6 @@ export class AXFLoadTemplatePage extends AXBasePageComponent {
 
     selectTemplate(tpl: AXFTemplateModel) {
         this.templateService.get(tpl.id).then(c => {
-            debugger;
             let widget = this.widgetService.parse(c.template);
             this.close(widget);
         });

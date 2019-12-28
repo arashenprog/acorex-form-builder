@@ -1,10 +1,10 @@
 <div>
-    <ax-selection-list #modeSelection direction="horizontal" mode="single" [items]="modeItems"
+    <ax-selection-list #modeSelection direction="horizontal" [mode]="'single'" [items]="modeItems"
         (selectedItemsChange)="handleModeChange($event)" textField="text" valueField="value">
     </ax-selection-list>
 </div>
 <div *ngIf="value.mode=='remote'" class="mt-2">
-    <ax-select-box #remoteSelection [allowSearch]="false" [items]="remoteItems"
+    <ax-select-box #remoteSelection [allowSearch]="false" [items]="remoteItems" [mode]="'single'"
         (selectedItemsChange)="handleRemoteChange($event)" textField="text" valueField="value">
     </ax-select-box>
     <div *ngIf="value.dataSource && value.dataSource.params &&  value.dataSource.params.length>0" class="mt-1">
@@ -24,14 +24,12 @@
     </div>
 </div>
 <div class="mt-2">
-    <ax-button type="primary" size="sm">
-        <span>Column Count: {{value.columns.length}}</span>&nbsp;
-        <i class="fas fa-columns"></i>
+    <ax-button type="primary" size="sm" block="true" (onClick)="handleColumnEditor()">
+        <i class="fas fa-columns"></i>&nbsp;<span>Columns: {{value.columns.length}}</span>
     </ax-button>
 </div>
 <div *ngIf="value.mode=='manual'" class="mt-2">
-    <ax-button type="primary" size="sm" (onClick)="handleItemEditor()">
-        <span>Item Count: {{value.dataItems.length}}</span>&nbsp;
-        <i class="fas fa-th-list"></i>
+    <ax-button type="primary" size="sm" (onClick)="handleItemEditor()" block="true">
+        <i class="fas fa-list"></i>&nbsp;<span>Items: {{value.dataItems.length}}</span>
     </ax-button>
 </div>

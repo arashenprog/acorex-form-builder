@@ -10,16 +10,14 @@ import { AXFDataService } from '../../../widget/services/data.service';
             [textField]="textField" 
             [valueField]="valueField"
             [items]="items" 
-            [selectedValues]="innerValue" 
+            [selectedValues]="value" 
             (selectedValuesChange)="handleValueChange($event)" 
         >
         </ax-selection-list>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFSelectionEditorComponent extends AXFProperyEditor<any[]>  {
-
-    innerValue: any[] = [];
+export class AXFSelectionEditorComponent extends AXFProperyEditor<any>  {
 
     items: any[] = [];
     textField: string = "title";
@@ -31,15 +29,7 @@ export class AXFSelectionEditorComponent extends AXFProperyEditor<any[]>  {
         super();
     }
 
-    ngAfterViewInit(): void {
-        setTimeout(() => {
-            this.innerValue = this.value;
-            this.cdr.markForCheck();
-        });
-    }
-
     handleValueChange(v: any) {
-        this.innerValue = v;
         this.value = v;
     }
 }

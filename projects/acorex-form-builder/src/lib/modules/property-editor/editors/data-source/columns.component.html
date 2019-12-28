@@ -1,0 +1,59 @@
+<div class="pnlCol">
+    <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Field Name</th>
+                <th>Type </th>
+                <th>Title</th>
+                <th>Fill by User</th>
+                <!-- <th>Sub Items</th>
+                <th>Multiple</th> -->
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let col of columns;let i = index">
+                <td>
+                    <ax-text-box [(text)]="col.fieldName"></ax-text-box>
+                </td>
+                <td>
+                    <ax-select-box allowSearch="false" [items]="columnTypeItems" [selectedValues]="col.type"
+                        textField="title" valueField="value" (selectedValuesChange)="columnTypeChange(col,$event)">
+                    </ax-select-box>
+                </td>
+                <td>
+                    <ax-text-box [(text)]="col.title"></ax-text-box>
+                </td>
+                <td>
+                    <ax-check-box label="Fill By User" [(value)]="col.fillByUser">
+                    </ax-check-box>
+                </td>
+                <!-- <td>
+                    <ax-text-box [text]="item.subText" placeholder="declare items using ','"
+                        (textChange)="subTextChange(i,$event)" *ngIf="item.type.includes('selectionList')">
+                    </ax-text-box>
+                </td>
+                <td>
+                    <ax-check-box label="Multiple" [value]="item.mode" (change)="modeChange(i,$event)"
+                        *ngIf="item.type.includes('selectionList')">
+                    </ax-check-box>
+                </td> -->
+                <td>
+                    <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,col)">
+                        <i class="fas fa-arrow-up primary"></i>
+                    </ax-button>
+                    <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,col)">
+                        <i class="fas fa-arrow-down primary"></i>
+                    </ax-button>
+                    <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
+                        <i class="fas fa-trash danger"></i>
+                    </ax-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
+        <i class="fas fa-plus"></i>&nbsp;
+        <span>Add New Column</span>
+    </ax-button>
+</div>

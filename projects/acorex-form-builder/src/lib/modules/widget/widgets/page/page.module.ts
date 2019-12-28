@@ -50,7 +50,7 @@ export class AXFPagePageWidgetModule {
                 {
                     name: "pageDirection",
                     category: "Style",
-                    defaultValue: ["ltr"],
+                    defaultValue: "ltr",
                     title: "Page Direction",
                     editor: "SelectionEditor",
                     options: {

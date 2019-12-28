@@ -37,7 +37,7 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
 
 
     refresh(clear: boolean = true) {
-        // if (this.dsMode[0] == 'ds' && this.dsName) {
+        // if (this.dsMode == 'ds' && this.dsName) {
         //     this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
         //         this.items.content = items;
         //         if (clear)

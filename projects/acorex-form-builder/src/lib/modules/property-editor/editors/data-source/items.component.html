@@ -16,9 +16,9 @@
                         (textChange)="itemChange(item,col.fieldName,$event)"></ax-text-box>
                     <ax-date-picker class="nodeItem" [value]="item[col.fieldName]" *ngIf="col.type=='date'"
                         (valueChange)="itemChange(item,col.fieldName,$event)"></ax-date-picker>
-                    <!-- <ax-check-box class="nodeItem" [value]="item[col.fieldName]" *ngIf="col.type=='boolean'" label="' '"
-                        (change)="itemChange(item,i,$event)"></ax-check-box>
-                    <ax-upload-file class="nodeItem" *ngIf="col.type=='image'" type="inline"
+                    <ax-check-box class="nodeItem" [value]="item[col.fieldName]" *ngIf="col.type=='boolean'" label="' '"
+                        (valueChange)="itemChange(item,col.fieldName,$event)"></ax-check-box>
+                    <!-- <ax-upload-file class="nodeItem" *ngIf="col.type=='image'" type="inline"
                         (onLoad)="itemChange(item,i,$event)"></ax-upload-file> -->
                     <!-- <ax-selection-list class="nodeItem" [selectedValues]="[item[col.fieldName]]" direction="horizontal"
                         *ngIf="col.type=='selectionList'" (selectedValuesChange)="itemChange(item,i,$event)"
@@ -41,7 +41,7 @@
         </tbody>
     </table>
     <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
-        <span>Add New Item</span>&nbsp;
-        <i class="fas fa-plus"></i>
+        <i class="fas fa-plus"></i>&nbsp;
+        <span>Add New Item</span>
     </ax-button>
 </div>

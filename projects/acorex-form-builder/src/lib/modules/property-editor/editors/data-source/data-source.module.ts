@@ -4,13 +4,14 @@ import { AXFEditorService } from '../../services/editor.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFDataSourceEditorComponent } from './data-source.editor';
 import { FormsModule } from '@angular/forms';
-import { AXFItemComponent } from './items.component';
+import { AXIDataItemEditorComponent } from './items.component';
+import { AXFDataColumnEditorComponent } from './columns.component';
 
 @NgModule({
-    declarations: [AXFDataSourceEditorComponent, AXFItemComponent],
+    declarations: [AXFDataSourceEditorComponent, AXFDataColumnEditorComponent, AXIDataItemEditorComponent],
     imports: [CommonModule, ACoreXUIModule, FormsModule],
     exports: [AXFDataSourceEditorComponent],
-    entryComponents: [AXFDataSourceEditorComponent, AXFItemComponent],
+    entryComponents: [AXFDataSourceEditorComponent, AXFDataColumnEditorComponent, AXIDataItemEditorComponent],
     providers: [],
 })
 export class AXFDataSourceEditorModule {
