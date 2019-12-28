@@ -14,8 +14,7 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
     color:String;
     bgColor:String;
     fontSize:string;
-    textStyle:string[];
-    textAlign:string[]; 
+    textStyle:string[]; 
     boxStyle:any;
     constructor() {
         super()

@@ -42,7 +42,7 @@ export class AXFSignatureInputWidgetModule {
                 height:100,
                 width:150 ,
                 info:{ 
-                    SignatureType:["supervisor"],
+                    SignatureType:"supervisor",
                     StaffNumber:1,
                     ShowType:["item"],
                     Items:[{ Value:1,Text: "Name",Type:"String",Visible:true }, 

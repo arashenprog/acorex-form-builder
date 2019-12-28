@@ -4,12 +4,12 @@
         (selectedValuesChange)="signatureTypeChange($event)" textField="title" valueField="value">
     </ax-selection-list></div>
 </div>
-<div class="sigdiv" *ngIf="value.SignatureType.includes('staff')">
+<div class="sigdiv" *ngIf="value.SignatureType=='staff'">
     <div class="spandiv">Staff Number:</div>
     <div class="valdiv"><ax-text-box [(text)]="value.StaffNumber" (textChange)="staffNumberChange($event)"> 
     </ax-text-box></div>
 </div>
-<div class="sigdiv" *ngIf="value.SignatureType.includes('staff')">
+<div class="sigdiv" *ngIf="value.SignatureType=='staff'">
         <div class="spandiv">Show as:</div>
         <div><ax-selection-list direction="horizontal" mode="single" [selectedValues]="value.ShowType" [items]="showItems"
         (selectedValuesChange)="showTypeChange($event)" textField="title" valueField="value">

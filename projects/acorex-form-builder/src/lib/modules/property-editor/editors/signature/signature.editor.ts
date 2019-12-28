@@ -23,10 +23,10 @@ export class AXFSignatureEditorComponent extends AXFProperyEditor<SignatureStruc
 
 
     signatureTypeChange(e) {
-        if(this.value.SignatureType[0] != e)
+        if(this.value.SignatureType != e)
         {
             this.value.SignatureType = e;
-            if (this.value.SignatureType.includes('supervisor')) {
+            if (this.value.SignatureType=='supervisor') {
                 this.value.StaffNumber = 1;
                 this.value.ShowType = ["item"];
             }
@@ -35,7 +35,7 @@ export class AXFSignatureEditorComponent extends AXFProperyEditor<SignatureStruc
     }
 
     showTypeChange(e) {
-        if(e.length>0 && this.value.SignatureType[0] !=e)
+        if(e.length>0 && this.value.SignatureType !=e)
         { 
             this.value.ShowType = e;
             super.handleValueChange(this.value);
@@ -55,7 +55,7 @@ export class AXFSignatureEditorComponent extends AXFProperyEditor<SignatureStruc
         super.handleValueChange(this.value);
     }
 
-    deleteClick(val) {
+    deleteClick(val) { 
         let ind=this.value.Items.findIndex(w=>w.Value==val);
         this.value.Items.splice(ind, 1);
         super.handleValueChange(this.value);

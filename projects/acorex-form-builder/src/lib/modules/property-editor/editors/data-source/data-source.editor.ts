@@ -36,7 +36,7 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
             this.remoteItems = items;
             setTimeout(() => {
                 if (this.remoteSelection && this.value.dataSource && this.value.dataSource.name) {
-                    this.remoteSelection.selectedValues = this.value.dataSource.name
+                 //   this.remoteSelection.selectedValues = this.value.dataSource.name
                 }
             });
             this.cdr.markForCheck();

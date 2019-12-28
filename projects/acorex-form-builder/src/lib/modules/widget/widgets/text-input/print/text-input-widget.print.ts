@@ -14,7 +14,7 @@ export class AXFTextInputWidgetPrint extends AXFWidgetPrint {
     bgColor:String;
     fontSize:string;
     textStyle:string[];
-    textAlign:string[]; 
+    textAlign:string; 
     boxStyle:any;
 
     constructor() {

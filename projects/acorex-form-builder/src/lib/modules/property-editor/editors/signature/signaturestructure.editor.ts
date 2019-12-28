@@ -1,7 +1,7 @@
 
 export class SignatureStructureEditor
 {
-    SignatureType:string[];
+    SignatureType:string;
     StaffNumber:number;
     ShowType:string[];
     Items:SignatureStructureItem[];

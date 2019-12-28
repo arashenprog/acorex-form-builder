@@ -13,7 +13,7 @@ export class AXFTextBlockWidgetPrint extends AXFWidgetPrint {
     bgColor:String;
     fontSize:string;
     textStyle:string[];
-    textAlign:string[]; 
+    textAlign:string; 
     boxStyle:any;
     textDirection:string[];
 
