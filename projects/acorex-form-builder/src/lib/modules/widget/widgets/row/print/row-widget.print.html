@@ -1,3 +1,34 @@
-<div class="axf-row">
-    DESIGN
+<div style="min-height: 40px;flex-direction: row;display: flex;border-style:solid;border-color: var(--border-color);"
+    [ngStyle]="{'background-color':bgColor,
+'padding-top':(boxStyle.padding && boxStyle.padding.top) ? boxStyle.padding.top+'px' : '0px',
+'padding-bottom':(boxStyle.padding && boxStyle.padding.bottom) ? boxStyle.padding.bottom+'px' : '0px',
+'padding-right':(boxStyle.padding && boxStyle.padding.right) ? boxStyle.padding.right+'px' : '0px',
+'padding-left':(boxStyle.padding && boxStyle.padding.left) ? boxStyle.padding.left+'px' : '0px',
+'border-top-width':(boxStyle.border && boxStyle.border.top) ? boxStyle.border.top+'px' : '0px',
+'border-bottom-width':(boxStyle.border && boxStyle.border.bottom) ? boxStyle.border.bottom+'px' : '0px',
+'border-right-width':(boxStyle.border && boxStyle.border.right) ? boxStyle.border.right+'px' : '0px',
+'border-left-width':(boxStyle.border && boxStyle.border.left) ? boxStyle.border.left+'px' : '0px',
+'margin-top':(boxStyle.margin && boxStyle.margin.top) ? boxStyle.margin.top+'px' : '0px',
+'margin-bottom':(boxStyle.margin && boxStyle.margin.bottom) ? boxStyle.margin.bottom+'px' : '0px',
+'margin-right':(boxStyle.margin && boxStyle.margin.right) ? boxStyle.margin.right+'px' : '0px',
+'margin-left':(boxStyle.margin && boxStyle.margin.left) ? boxStyle.margin.left+'px' : '0px'}">
+    <div *ngFor="let w of widgets" style="border-color: var(--border-color);border-style:solid;
+    box-shadow:inset -6px -6px 5px -7px"
+     [ngStyle]="{'background-color':w.options.bgColor,    
+    'padding-top':(w.options.boxStyle.padding && w.options.boxStyle.padding.top) ? w.options.boxStyle.padding.top+'px' : '0px',
+    'padding-bottom':(w.options.boxStyle.padding && w.options.boxStyle.padding.bottom) ? w.options.boxStyle.padding.bottom+'px' : '0px',
+    'padding-right':(w.options.boxStyle.padding && w.options.boxStyle.padding.right) ? w.options.boxStyle.padding.right+'px' : '0px',
+    'padding-left':(w.options.boxStyle.padding && w.options.boxStyle.padding.left) ? w.options.boxStyle.padding.left+'px' : '0px',
+    'border-top-width':(w.options.boxStyle.border && w.options.boxStyle.border.top) ? w.options.boxStyle.border.top+'px' : '0px',
+    'border-bottom-width':(w.options.boxStyle.border && w.options.boxStyle.border.bottom) ? w.options.boxStyle.border.bottom+'px' : '0px',
+    'border-right-width':(w.options.boxStyle.border && w.options.boxStyle.border.right) ? w.options.boxStyle.border.right+'px' : '0px',
+    'border-left-width':(w.options.boxStyle.border && w.options.boxStyle.border.left) ? w.options.boxStyle.border.left+'px' : '0px',
+    'margin-top':(w.options.boxStyle.margin && w.options.boxStyle.margin.top) ? w.options.boxStyle.margin.top+'px' : '0px',
+    'margin-bottom':(w.options.boxStyle.margin && w.options.boxStyle.margin.bottom) ? w.options.boxStyle.margin.bottom+'px' : '0px',
+    'margin-right':(w.options.boxStyle.margin && w.options.boxStyle.margin.right) ? w.options.boxStyle.margin.right+'px' : '0px',
+    'margin-left':(w.options.boxStyle.margin && w.options.boxStyle.margin.left) ? w.options.boxStyle.margin.left+'px' : '0px',
+    'width':((w.options.size/12.0)*100)+'%' }">
+        <ng-container *ngFor="let s of w.options.widgets" axf-widget-renderer [widget]="s" [mode]="'print'">
+        </ng-container>
+    </div>
 </div>

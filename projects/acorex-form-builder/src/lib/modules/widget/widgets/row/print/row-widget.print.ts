@@ -8,7 +8,12 @@ import { AXFWidgetPrint } from '../../../config/widget';
     changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFRowWidgetPrint extends AXFWidgetPrint {
+
+    bgColor:String;
+    boxStyle:any; 
+
     constructor() {
         super()
      }
+ 
 }
