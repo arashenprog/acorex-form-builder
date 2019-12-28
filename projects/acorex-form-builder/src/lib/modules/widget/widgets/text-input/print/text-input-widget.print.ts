@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
@@ -9,8 +9,16 @@ import { AXFWidgetPrint } from '../../../config/widget';
 export class AXFTextInputWidgetPrint extends AXFWidgetPrint {
 
     text: String;
+    placeholder: String;
+    color:String;
+    bgColor:String;
+    fontSize:string;
+    textStyle:string[];
+    textAlign:string[]; 
+    boxStyle:any;
 
     constructor() {
-        super()
+        super() 
     }
+     
 }

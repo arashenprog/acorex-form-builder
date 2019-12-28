@@ -9,13 +9,20 @@ import { AXFWidgetPrint } from '../../../config/widget';
 export class AXFTextBlockWidgetPrint extends AXFWidgetPrint {
 
     text: String;
+    color:String;
+    bgColor:String;
+    fontSize:string;
+    textStyle:string[];
+    textAlign:string[]; 
+    boxStyle:any;
+    textDirection:string[];
 
     constructor(private hostElement: ElementRef) {
         super();
     }
 
     onRender(): void {
-        let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
-        this.applyStyle(el);
+        // let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
+        // this.applyStyle(el); 
     }
 }
