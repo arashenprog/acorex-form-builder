@@ -21,8 +21,8 @@ export const COMPONENTS = [AXFCheckboxInputWidgetDesigner, AXFCheckboxInputWidge
 export class AXFCheckboxInputWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: "Checkbox Input",
-            hint: "Checkbox input element",
+            title: "Checkbox",
+            hint: "Checkbox element",
             icon: "far fa-check-square",
             category: "Editors",
             visible: true,

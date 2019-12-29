@@ -22,8 +22,8 @@ export const COMPONENTS = [AXFListInputWidgetDesigner, AXFListInputWidgetPrint, 
 export class AXFListInputWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: "List Input",
-            hint: "List input element",
+            title: "Data List",
+            hint: "Data list element",
             icon: "fas fa-list",
             category: "Editors",
             visible: true,

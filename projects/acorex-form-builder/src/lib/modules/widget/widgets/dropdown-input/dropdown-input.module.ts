@@ -22,8 +22,8 @@ export const COMPONENTS = [AXFDropdownInputWidgetDesigner, AXFDropdownInputWidge
 export class AXFDropdownInputWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: "Dropdown Input",
-            hint: "Dropdown input element",
+            title: "Dropdown",
+            hint: "Dropdown element",
             icon: "fas fa-caret-square-down",
             category: "Editors",
             visible: true,
