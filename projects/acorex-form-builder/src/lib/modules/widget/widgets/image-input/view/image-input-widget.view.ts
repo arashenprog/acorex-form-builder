@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
+import { UploadStructure } from '../../../../property-editor/editors/upload/upload.structure';
 
 @Component({
     templateUrl: './image-input-widget.view.html',
@@ -7,9 +8,7 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFImageInputWidgetView extends AXFWidgetView {
 
-    value: string;
-    height: number;
-    width: number;
+    value: UploadStructure; 
     alt: string;
 
     constructor(private el: ElementRef<HTMLElement>) {

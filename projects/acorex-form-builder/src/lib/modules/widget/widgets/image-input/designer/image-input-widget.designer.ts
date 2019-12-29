@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
+import { UploadStructure } from '../../../../property-editor/editors/upload/upload.structure';
 
 
 @Component({
@@ -11,9 +12,7 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 export class AXFImageInputWidgetDesigner extends AXFWidgetDesigner {
 
 
-    value: string;
-    height:number;
-    width:number;
+    value: UploadStructure;
     alt:string;
     constructor(private el: ElementRef<HTMLElement>,private cdr: ChangeDetectorRef) {
         super()

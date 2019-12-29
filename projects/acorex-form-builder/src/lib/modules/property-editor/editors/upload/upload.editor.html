@@ -1,0 +1,21 @@
+<div class="edit-row ng-star-inserted"><div class="prop-caption"> Mode Size </div>
+<ax-selection-list direction="horizontal" mode="single" [items]="modeItems" [selectedValues]="value.modeSize"
+        (selectedValuesChange)="modeSizeChange($event)" textField="title" valueField="value">
+    </ax-selection-list>
+</div>
+<div *ngIf="value.modeSize=='custom'" class="mrgbtn"> 
+    <ax-check-box label="Aspect Ratio" [value]="value.isAspectRatio" (valueChange)="aspectRatioChange($event)">
+    </ax-check-box>
+</div> 
+<div class="edit-row ng-star-inserted"><div class="prop-caption"> Width (px) </div> 
+   <ax-text-box [text]="value.width" [type]="'number'" (textChange)="widthChange($event)" [disabled]="value.modeSize=='auto'"> 
+    </ax-text-box> 
+</div>
+<div class="edit-row ng-star-inserted"><div class="prop-caption"> Height (px) </div> 
+    <ax-text-box [text]="value.height" [type]="'number'" (textChange)="heightChange($event)" [disabled]="value.modeSize=='auto'"> 
+    </ax-text-box>
+</div>
+<div class="edit-row ng-star-inserted"><div class="prop-caption"> Upload </div>
+<ax-upload-file type ="inline" (onLoad)="handleValueChange($event)" >
+</ax-upload-file>
+</div> 

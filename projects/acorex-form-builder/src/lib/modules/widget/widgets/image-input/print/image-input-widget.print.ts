@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
+import { UploadStructure } from '../../../../property-editor/editors/upload/upload.structure';
 
 @Component({
     templateUrl: './image-input-widget.print.html' ,
@@ -7,9 +8,7 @@ import { AXFWidgetPrint } from '../../../config/widget';
 })
 export class AXFImageInputWidgetPrint extends AXFWidgetPrint {
 
-    value: string;
-    height:number;
-    width:number;
+    value: UploadStructure; 
     alt:string;
     boxStyle:any;
     constructor() {
