@@ -9,6 +9,13 @@ import { AXFWidgetPrint } from '../../../config/widget';
 export class AXFDateInputWidgetPrint extends AXFWidgetPrint {
 
     text: String;
+    placeholder: String;
+    color:String;
+    bgColor:String;
+    fontSize:string;
+    textStyle:string[];
+    textAlign:string; 
+    boxStyle:any;
 
     constructor() {
         super();

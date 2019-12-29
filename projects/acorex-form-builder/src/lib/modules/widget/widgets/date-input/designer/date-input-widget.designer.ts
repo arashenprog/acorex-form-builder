@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { AXFWidgetDesigner } from '../../../config/widget';
-import { ThrowStmt } from '@angular/compiler';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { AXFWidgetDesigner } from '../../../config/widget'; 
 
 @Component({
     selector: "[axf-widget-date]",
@@ -11,12 +10,15 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class AXFDateInputWidgetDesigner extends AXFWidgetDesigner {
 
+    @ViewChild("el1", { static: true }) el1: ElementRef<HTMLElement>;
+
     constructor() {
         super();
     } 
 
-    onRender(): void {
-        
+    onRender(): void { 
+        if(this.el1.nativeElement.querySelector("input")!=null)
+        this.applyStyle(this.el1.nativeElement.querySelector("input")); 
     }
 
 }
