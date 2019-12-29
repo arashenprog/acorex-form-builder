@@ -1,8 +1,7 @@
-import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
-import { ContentItemsStructureEditor } from '../../../../property-editor/editors/items/itemstructure.editor';
 import { AXFDataService } from '../../../services/data.service';
-import { AXFDataSourceValue } from '../../../../property-editor/editors/data-source/data-source.class';
+import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
     templateUrl: './list-input-widget.view.html',
@@ -14,21 +13,14 @@ export class AXFListInputWidgetView extends AXFWidgetView {
 
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
-    items: { content: any[], types: ContentItemsStructureEditor[] };
+    dataSource: AXFDataSourceOption;
     mode: string;
     direction: string;
     alignCheck: string;
-    showOther: boolean;
-    viewType: boolean;
-    dsMode: string;
-    dsName: AXFDataSourceValue;
-    uid: string = "M" + Math.ceil(Math.random() * 10000);
-    visible: boolean;
-    keyField: string;
-    textField: string;
-    imageField: string
+    viewType: string;
+    visible: boolean = true;
 
-    constructor(private dataService: AXFDataService) {
+    constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
     }
 
@@ -38,29 +30,18 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     }
 
     ngAfterViewInit() {
-        if (this.dsMode == "ds" && this.dsName) {
-            // this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
-            //     this.items.content = items;
-            // });
-        }
-
-        this.refresh(false);
+        this.refresh();
     }
 
-    refresh(clear: boolean = true) {
-        if (this.dsMode == 'ds' && this.dsName) {
-            // this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
-            //     this.items.content = items;
-            //     if (clear) {
-            //         if (this.mode == "single") {
-            //             this.value = null;
-            //         }
-            //         else {
-            //             this.value = [];
-            //         }
-            //     }
-            //     super.refresh();
-            // });
+    refresh() {
+        if (this.dataSource.mode == "remote") {
+            this.dataService.getList(
+                this.dataSource.dataSource.name,
+                this.dataSource.dataSource.params
+            ).then(c => {
+                this.dataSource.dataItems = c;
+                this.cdr.markForCheck();
+            })
         }
     }
 
@@ -81,7 +62,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
 
             if (!this.value.includes(val)) {
                 this.value = [...this.value, ...[val]];
-            } 
+            }
             else {
                 this.value = this.value.filter(c => c != val);
             }

@@ -1,5 +1,7 @@
 <div #el [hidden]="visible==false">
-    <ax-select-box  [allowSearch]="allowSearch" [selectedValues]="value" (selectedValuesChange)="handleValueChnage($event)" 
-        [items]="items.content" textField="text" valueField="value">
-    </ax-select-box>
+    <ng-container *ngIf="dataSource">
+        <ax-select-box [textField]="dataSource.columns[1].fieldName" [valueField]="dataSource.columns[0].fieldName"
+            [allowSearch]="allowSearch" [selectedValues]="value" (selectedValuesChange)="handleValueChange($event)" [items]="dataSource.dataItems">
+        </ax-select-box>
+    </ng-container>
 </div>

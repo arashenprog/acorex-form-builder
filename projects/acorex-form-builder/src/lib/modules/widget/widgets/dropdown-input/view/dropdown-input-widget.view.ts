@@ -1,8 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 import { AXFDataService } from '../../../services/data.service';
-import { ContentItemsStructureEditor } from '../../../../property-editor/editors/items/itemstructure.editor';
-import { AXFDataSourceValue } from '../../../../property-editor/editors/data-source/data-source.class';
+import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
     templateUrl: './dropdown-input-widget.view.html',
@@ -12,12 +11,10 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
 
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
-    items: { content: any[], types: ContentItemsStructureEditor[] };
     mode: string;
-    fillBy: string;
+
     allowSearch: boolean;
-    dsName: AXFDataSourceValue;
-    dsMode: string;
+    dataSource: AXFDataSourceOption;
     visible: boolean;
 
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
@@ -26,7 +23,7 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     }
 
     ngAfterViewInit() {
-        this.refresh(false);
+        this.refresh();
     }
 
     onRender(): void {
@@ -36,19 +33,20 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     }
 
 
-    refresh(clear: boolean = true) {
-        // if (this.dsMode == 'ds' && this.dsName) {
-        //     this.dataService.getList(this.dsName.name, this.dsName.params).then(items => {
-        //         this.items.content = items;
-        //         if (clear)
-        //             this.handleValueChnage([]);
-        //         super.refresh();
-        //     });
-        // }
+    refresh() {
+        if (this.dataSource.mode == "remote") {
+            this.dataService.getList(
+                this.dataSource.dataSource.name,
+                this.dataSource.dataSource.params
+            ).then(c => {
+                this.dataSource.dataItems = c;
+                this.cdr.markForCheck();
+            })
+        }
     }
 
 
-    handleValueChnage(e: any[]) {
+    handleValueChange(e: any) {
         this.value = e;
         this.invokeEvent("onValueChange");
     }

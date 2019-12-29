@@ -4,12 +4,11 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_LABEL_PROPERTY, AXF_DS_LIST_PROPERTY, AXF_DS_MODE_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_INIT_EVENT } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_INIT_EVENT, AXF_ITEM_DATASOURCE_PROPERTY } from '../../config/general-properties';
 import { AXFListInputWidgetDesigner } from './designer/list-input-widget.designer';
 import { AXFListInputWidgetPrint } from './print/list-input-widget.print';
 import { AXFListInputWidgetView } from './view/list-input-widget.view';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
-import { ContentItemsStructureEditor } from '../../../property-editor/editors/items/itemstructure.editor';
 
 export const COMPONENTS = [AXFListInputWidgetDesigner, AXFListInputWidgetPrint, AXFListInputWidgetView]
 
@@ -39,14 +38,10 @@ export class AXFListInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                items:{ types:[ new ContentItemsStructureEditor({id:"text",title:"Text",type:"string"})],
-                        content:[]  
-                    },
                 mode: "single",
                 direction: "horizontal",
                 alignCheck: "left",
-                showOther: false,
-                viewType:"string"
+                viewType: "text",
             },
             properties: [
                 {
@@ -93,64 +88,12 @@ export class AXFListInputWidgetModule {
                     title: "View Type",
                     editor: "SelectionEditor",
                     options: {
-                        items: [{ value: "string", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }],
+                        items: [{ value: "text", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }],
                         mode: "single",
-                        direction: "horizontal"
+                        direction: "horizontal",
                     }
                 },
-                AXF_DS_MODE_PROPERTY,
-                AXF_DS_LIST_PROPERTY,
-                {
-                    name: "keyField",
-                    category: "Data",
-                    defaultValue: "value",
-                    title: "Key Field",
-                    editor: "TextEditor",
-                    visible: (options: any) => {
-                        return options.dsMode == "ds";
-                    }
-                },
-                {
-                    name: "textField",
-                    category: "Data",
-                    defaultValue: "text",
-                    title: "Text Field",
-                    editor: "TextEditor",
-                    visible: (options: any) => {
-                        return options.dsMode == "ds";
-                    }
-                },
-                {
-                    name: "imageField",
-                    category: "Data",
-                    defaultValue: "image",
-                    title: "Image Field",
-                    editor: "TextEditor",
-                    visible: (options: any) => {
-                        return options.dsMode == "ds" && !options.viewType.includes("string");
-                    }
-                },
-                {
-                    name: "items",
-                    category: "Data",
-                    defaultValue: {},
-                    title: "Items",
-                    editor: "ItemsEditor",
-                    visible: (options: any) => {
-                        return options.dsMode == "manual";
-                    },
-                    options:{
-                        viewType:"$viewType"
-                    }
-                }, 
-                {
-                    name: "showOther",
-                    category: "General",
-                    defaultValue:false,
-                    title: "Show Other",
-                    editor: "CheckboxEditor",
-                    options: { label:"Show Other"}
-                },
+                AXF_ITEM_DATASOURCE_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
                 AXF_INIT_EVENT,

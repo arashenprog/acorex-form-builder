@@ -2,29 +2,30 @@
     <table class="table table-bordered table-sm">
         <thead class="thead-dark">
             <tr>
-                <th>Field Name</th>
-                <th>Type </th>
                 <th>Title</th>
-                <th>Fill by User</th>
+                <th>Field Name</th>
+                <th *ngIf="allowColumns">Type </th>
+                <th *ngIf="allowColumns">Fill by User</th>
                 <!-- <th>Sub Items</th>
                 <th>Multiple</th> -->
-                <th>Actions</th>
+                <th *ngIf="allowColumns">Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let col of columns;let i = index">
                 <td>
+                    <ax-text-box [(text)]="col.title" [disabled]="!allowColumns"></ax-text-box>
+                </td>
+                <td>
                     <ax-text-box [(text)]="col.fieldName"></ax-text-box>
                 </td>
-                <td>
-                    <ax-select-box allowSearch="false" [items]="columnTypeItems" [selectedValues]="col.type"
-                        textField="title" valueField="value" (selectedValuesChange)="columnTypeChange(col,$event)">
+                <td *ngIf="allowColumns">
+                    <ax-select-box [items]="columnTypeItems" valueField="value" textField="title"
+                        [(selectedValues)]="col.type">
                     </ax-select-box>
                 </td>
-                <td>
-                    <ax-text-box [(text)]="col.title"></ax-text-box>
-                </td>
-                <td>
+               
+                <td *ngIf="allowColumns">
                     <ax-check-box label="Fill By User" [(value)]="col.fillByUser">
                     </ax-check-box>
                 </td>
@@ -38,7 +39,7 @@
                         *ngIf="item.type.includes('selectionList')">
                     </ax-check-box>
                 </td> -->
-                <td>
+                <td *ngIf="allowColumns">
                     <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,col)">
                         <i class="fas fa-arrow-up primary"></i>
                     </ax-button>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AXBasePageComponent } from 'acorex-ui';
 import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events';
-import { AXFDataSourceColumnValue } from './data-source.class';
+import { AXFDataSourceColumnOption } from './data-source.class';
 
 @Component({
     templateUrl: './columns.component.html',
@@ -9,7 +9,8 @@ import { AXFDataSourceColumnValue } from './data-source.class';
 })
 export class AXFDataColumnEditorComponent extends AXBasePageComponent {
 
-    public columns: AXFDataSourceColumnValue[];
+    public columns: AXFDataSourceColumnOption[];
+    allowColumns:boolean=true;
     columnTypeItems: any[] = [
         { value: "string", title: "String" },
         { value: "number", title: "Number" },
@@ -28,26 +29,6 @@ export class AXFDataColumnEditorComponent extends AXBasePageComponent {
             columns: this.columns
         };
         e.resolve();
-    }
-
-
-    columnTypeChange(ind, e) {
-        // if (!e || !e.length)
-        //     return;
-        // if (this.columns[ind].type != e) {
-        //     this.columns[ind].mode = false;
-        //     this.columns[ind].subText = "";
-        // }
-        // this.columns[ind].type = e;
-        // this.columns[ind].defaultValue = this.setDefaultValue(this.columns[ind].type);
-    }
-
-    modeChange(ind, e) {
-        //this.columns[ind].mode = e.target.checked;
-    }
-    subTextChange(ind, e) {
-        // this.columns[ind].subText = e;
-        // this.columns[ind].subItems = e == "" ? [] : e.split(',').map((m) => { return { value: m } }).filter(f => f.value != "");
     }
 
     deleteClick(ind) {
@@ -72,7 +53,7 @@ export class AXFDataColumnEditorComponent extends AXBasePageComponent {
 
     addItemClick() {
         let index = this.columns.length + 1;
-        let newRow: AXFDataSourceColumnValue = {
+        let newRow: AXFDataSourceColumnOption = {
             fieldName: "field" + index.toString(),
             title: "Field " + index.toString(),
             type: "string",
@@ -81,25 +62,6 @@ export class AXFDataColumnEditorComponent extends AXBasePageComponent {
         this.columns.push(newRow);
     }
 
-   
 
-    setDefaultValue(type: string) {
-        switch (type) {
-            case "string":
-                return "Item";
-            case "number":
-                return 1;
-            case "date":
-                return new Date().toISOString().split('T')[0];
-            case "selectionList":
-                return "";
-            case "boolean":
-                return "false";
-            case "image":
-                return './assets/images/noimage.png';
-            case "time":
-                return new Date().toLocaleTimeString();
-        }
-    }
 
 }

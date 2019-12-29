@@ -8,10 +8,8 @@ import { AXFSelectionEditorModule } from '../editors/selection/selection.module'
 import { AXFDropdownEditorModule } from '../editors/dropdown/dropdown.module';
 import { AXFColorEditorModule } from '../editors/color/color.module';
 import { AXFUploadEditorModule } from '../editors/upload/upload.module';
-import { AXFItemsEditorModule } from '../editors/items/items.modules';
 import { AXFCheckboxEditorModule } from '../editors/checkbox/checkbox.module'; 
 import { AXFSignatureEditorModule } from '../editors/signature/signature.module';
-import { AXFGridEditorModule } from '../editors/grid/grid.modules';
 import { AXFEventEditorModule } from '../editors/event/event.module';
 import { AXFDataSourceEditorModule } from '../editors/data-source/data-source.module';
 
@@ -23,10 +21,8 @@ const WDIGET_MODULES = [
     AXFDropdownEditorModule,
     AXFColorEditorModule,
     AXFUploadEditorModule,
-    AXFItemsEditorModule,
     AXFCheckboxEditorModule,
     AXFSignatureEditorModule,
-    AXFGridEditorModule,
     AXFEventEditorModule,
     AXFDataSourceEditorModule
 ]

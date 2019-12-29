@@ -9,7 +9,6 @@ import { AXFGridInputWidgetDesigner } from './designer/grid-input-widget.designe
 import { AXFGridInputWidgetPrint } from './print/grid-input-widget.print';
 import { AXFGridInputWidgetView } from './view/grid-input-widget.view';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
-import { ContentItemsStructureEditor } from '../../../property-editor/editors/items/itemstructure.editor';
 
 export const COMPONENTS = [AXFGridInputWidgetDesigner, AXFGridInputWidgetPrint, AXFGridInputWidgetView]
 
@@ -39,26 +38,10 @@ export class AXFGridInputWidgetModule {
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
                 bgColor: "#FFFFFF",
-                data: { columns: [new ContentItemsStructureEditor({ id: "text", title: "Text", type: "string", fieldName: "text" })] },
-                header: "",
-                footer: "",
-                items: { content: [] }
+              
+
             },
             properties: [
-                {
-                    name: "header",
-                    category: "General",
-                    defaultValue: "",
-                    title: "Header Text",
-                    editor: "TextEditor"
-                },
-                {
-                    name: "footer",
-                    category: "General",
-                    defaultValue: "",
-                    title: "Footer Text",
-                    editor: "TextEditor"
-                },
                 AXF_DS_LIST_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
