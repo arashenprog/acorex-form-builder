@@ -21,7 +21,7 @@ import { AXFFormService } from '../services/form.service';
 import { AXFPanelWidgetModule } from '../widgets/panel/panel.module';
 import { AXFAPITemplateService } from '../services/template/template-api.service';
 import { AXFTemplateService } from '../services/template/template.service';
-
+import { AXFTimeInputWidgetModule } from '../widgets/time-input/time-input.module';
 
 
 const MODULES = [
@@ -32,6 +32,7 @@ const MODULES = [
     AXFTextBlockWidgetModule,
     AXFPageBreakWidgetModule,
     AXFDateInputWidgetModule,
+    AXFTimeInputWidgetModule,
     AXFPagePageWidgetModule,
     AXFTextInputWidgetModule,
     AXFCheckboxInputWidgetModule,
