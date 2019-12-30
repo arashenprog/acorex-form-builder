@@ -23,13 +23,14 @@
         </div>
     </div>
 </div>
-<div class="mt-2">
+<div class="mt-2" >
     <ax-button type="primary" size="sm" block="true" (onClick)="handleColumnEditor()">
         <i class="fas fa-columns"></i>&nbsp;<span>Columns: {{value.columns.length}}</span>
     </ax-button>
 </div>
 <div *ngIf="value.mode=='manual'" class="mt-2">
     <ax-button type="primary" size="sm" (onClick)="handleItemEditor()" block="true">
-        <i class="fas fa-list"></i>&nbsp;<span>Items: {{value.dataItems.length}}</span>
+        <i class="fas fa-list"></i>&nbsp;<span>Items:
+            {{  value &&  value.dataItems ? value.dataItems.length : 0}}</span>
     </ax-button>
 </div>

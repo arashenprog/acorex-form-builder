@@ -10,21 +10,25 @@
         <tbody>
             <tr *ngFor="let item of items;let i = index">
                 <td *ngFor="let col of columns">
-                    <ax-text-box class="nodeItem" [text]="item[col.fieldName]" *ngIf="col.type=='string'"
-                        (textChange)="itemChange(item,col.fieldName,$event)"></ax-text-box>
-                    <ax-text-box class="nodeItem" [text]="item[col.fieldName]" type="number" *ngIf="col.type=='number'"
-                        (textChange)="itemChange(item,col.fieldName,$event)"></ax-text-box>
-                    <ax-date-picker class="nodeItem" [value]="item[col.fieldName]" *ngIf="col.type=='date'"
-                        (valueChange)="itemChange(item,col.fieldName,$event)"></ax-date-picker>
-                    <ax-check-box class="nodeItem" [value]="item[col.fieldName]" *ngIf="col.type=='boolean'" label="' '"
-                        (valueChange)="itemChange(item,col.fieldName,$event)"></ax-check-box>
-                    <!-- <ax-upload-file class="nodeItem" *ngIf="col.type=='image'" type="inline"
-                        (onLoad)="itemChange(item,i,$event)"></ax-upload-file> -->
-                    <!-- <ax-selection-list class="nodeItem" [selectedValues]="[item[col.fieldName]]" direction="horizontal"
-                        *ngIf="col.type=='selectionList'" (selectedValuesChange)="itemChange(item,i,$event)"
-                        [items]="item.subItems" textField="value" valueField="value"
-                        mode="{{item.mode?'multiple':'single'}}">
-                    </ax-selection-list> -->
+
+                    <ng-container [ngSwitch]="col.type">
+                        <ax-text-box class="nodeItem" [(text)]="item[col.fieldName]" *ngSwitchCase="'string'">
+                        </ax-text-box>
+                        <ax-text-box class="nodeItem" [(text)]="item[col.fieldName]" type="number"
+                            *ngSwitchCase="'number'"></ax-text-box>
+                        <ax-date-picker class="nodeItem" [(value)]="item[col.fieldName]" *ngSwitchCase="'date'">
+                        </ax-date-picker>
+                        <ax-check-box class="nodeItem" [(value)]="item[col.fieldName]" *ngSwitchCase="'boolean'"
+                            label=" ">
+                        </ax-check-box>
+                        <ax-upload-file class="nodeItem" *ngSwitchCase="'image'" type="inline"
+                            (onLoad)="handleUpload(item,col,$event)"></ax-upload-file>
+                        <ax-selection-list class="nodeItem" [(selectedValues)]="item[col.fieldName]"
+                            direction="horizontal" *ngSwitchCase="'selectionList'"
+                            mode="{{item.mode?'multiple':'single'}}">
+                        </ax-selection-list>
+                    </ng-container>
+
                 </td>
                 <td>
                     <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">

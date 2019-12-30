@@ -2,37 +2,33 @@
     <div class="brd" [hidden]="visible==false">
         <table class="table table-bordered table-sm">
             <thead class="thead-dark">
-                <tr *ngIf="header!=''" class="headfoot">
-                    <th attr.colspan="{{data.columns.length}}">{{header}}</th>
-                </tr>
-                <tr>
-                    <th *ngFor="let item of data.columns">{{item.title}}</th>
+                <tr *ngIf="dataSource">
+                    <th *ngFor="let col of dataSource.columns">{{col.title}}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let rw of rows">
-                    <td *ngFor="let item of data.columns">
-                        <span *ngIf="!item.fillByUser && item.type!='image'">{{getRowData(rw,item)}}</span>
-                        <img *ngIf="!item.fillByUser && item.type=='image'" [src]="getRowData(rw,item)" height="40"
-                            width="60">
-                        <ax-text-box *ngIf="item.fillByUser && item.type=='string'"></ax-text-box>
-                        <ax-text-box type="number" *ngIf="item.fillByUser && item.type=='number'"></ax-text-box>
-                        <ax-date-picker label="" *ngIf="item.fillByUser && item.type=='date'"></ax-date-picker>
-                        <ax-check-box *ngIf="item.fillByUser && item.type=='boolean'" label="' '"></ax-check-box>
-                        <ax-upload-file *ngIf="item.fillByUser && item.type=='image'" type="inline">
-                        </ax-upload-file>
-                        <ax-selection-list direction="horizontal" *ngIf="item.fillByUser && item.type=='selectionList'"
-                            [items]="item.subItems" textField="value" valueField="value"
-                            mode="{{item.mode?'multiple':'single'}}">
-                        </ax-selection-list>
-                    </td>
-                </tr>
+                <ng-container *ngIf="dataSource">
+                    <tr style="border-bottom: 1px solid var(--primary-color);"  *ngFor="let item of dataSource.dataItems">
+                        <td *ngFor="let col of dataSource.columns">
+                            <span
+                                *ngIf="!col.fillByUser && col.fieldName==null && col.type!='image'">{{item[col.fieldName]}}</span>
+                            <span *ngIf="!col.fillByUser && col.fieldName!=null">{{item[col.fieldName]}}</span>
+                            <img *ngIf="!col.fillByUser && col.fieldName==null && col.type=='image'"
+                                [src]="col.defaultValue" height="40" width="60">
+                            <ax-text-box *ngIf="col.fillByUser && col.type=='string'"></ax-text-box>
+                            <ax-text-box type="number" *ngIf="col.fillByUser && col.type=='number'"></ax-text-box>
+                            <ax-date-picker label="" *ngIf="col.fillByUser && col.type=='date'"></ax-date-picker>
+                            <ax-check-box *ngIf="col.fillByUser && col.type=='boolean'" label="' '">
+                            </ax-check-box>
+                            <ax-upload-file *ngIf="col.fillByUser && col.type=='image'" type="inline">
+                            </ax-upload-file>
+                            <ax-selection-list direction="horizontal"
+                                *ngIf="col.fillByUser && col.type=='selectionList'">
+                            </ax-selection-list>
+                        </td>
+                    </tr>
+                </ng-container>
             </tbody>
-            <tfoot>
-                <tr *ngIf="footer!=''" class="headfoot">
-                    <th attr.colspan="{{data.columns.length}}">{{footer}}</th>
-                </tr>
-            </tfoot>
         </table>
     </div>
 </div>

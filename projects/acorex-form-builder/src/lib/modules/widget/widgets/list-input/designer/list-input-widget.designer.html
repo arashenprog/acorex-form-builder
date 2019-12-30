@@ -1,16 +1,12 @@
 <div #el [ngClass]="direction" class="allItems">
-    <div *ngIf="!items.content || items.content.length==0" class="noitem" >No Item</div>
-    <label class="radio-container" *ngFor="let cnt of items.content" [ngClass]="alignCheck">
-        <ng-container *ngFor="let item of items.types">
-            <span *ngIf="item.type=='string'">{{cnt[item.id]}}</span>
-            <img *ngIf="item.type=='image'" [src]="cnt[item.id]" height="40" width="60"> 
-            <input type="radio" [value]="cnt[keyField]" *ngIf="mode!='unselectable'" /> 
+    <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0" class="noitem">No Item</div>
+    <ng-container *ngIf="dataSource">
+        <label class="radio-container" *ngFor="let item of dataSource.dataItems" [ngClass]="alignCheck">
+            <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'">{{item[dataSource.columns[1].fieldName]}}</span>
+            <img *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'"
+                [src]="item[dataSource.columns[2].fieldName]" height="40" width="60">
+            <input type="radio" [value]="item[dataSource.columns[0].fieldName]" *ngIf="mode!='unselectable'" />
             <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'"></span>
-        </ng-container>
-    </label>
-    <label *ngIf="showOther" class="radio-container" [ngClass]="alignCheck">
-        <span>Others</span>
-        <input type="radio" value="0" *ngIf="mode!='unselectable'"/>
-        <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'"></span>
-    </label>
+        </label>
+    </ng-container>
 </div>

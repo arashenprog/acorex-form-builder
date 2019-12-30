@@ -24,8 +24,8 @@ export const COMPONENTS = [AXFSignatureInputWidgetDesigner, AXFSignatureInputWid
 export class AXFSignatureInputWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: "Signature Input",
-            hint: "Signature input element",
+            title: "Signature Box",
+            hint: "Signature box element",
             icon: "fas fa-file-signature", 
             category: "Editors",
             visible: true,

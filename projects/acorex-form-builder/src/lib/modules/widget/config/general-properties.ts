@@ -186,6 +186,57 @@ export const AXF_DS_LIST_PROPERTY: AXFWidgetProperty = {
     title: "Data Source",
     editor: "DataSourceEditor"
 }
+export const AXF_ITEM_DATASOURCE_PROPERTY: AXFWidgetProperty = {
+    name: "dataSource",
+    category: "Data",
+    title: "Data Source",
+    editor: "DataSourceEditor",
+    defaultValue: {
+
+        mode: "manual",
+        dataSource: {},
+        columns: [
+            {
+                fieldName: "value",
+                title: "Value Field",
+                type: "string",
+                fillByUser: false,
+            },
+            {
+                fieldName: "text",
+                title: "Text Field",
+                type: "string",
+                fillByUser: false,
+            },
+            {
+                fieldName: "image",
+                title: "Image Field",
+                type: "image",
+                fillByUser: false,
+            }
+        ],
+        dataItems: [
+            {
+                value: "1",
+                text: "Item 1",
+            },
+            {
+                value: "2",
+                text: "Item 2",
+            },
+            {
+                value: "3",
+                text: "Item 3",
+            }
+        ]
+    },
+    options: {
+        allowColumns: false
+    }
+}
+
+
+
 
 
 export const AXF_DS_MODE_PROPERTY: AXFWidgetProperty = {

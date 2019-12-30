@@ -76,6 +76,7 @@ export class AXFWidgetRendererDirective {
             }
         });
         //
+  
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
         // add parent
