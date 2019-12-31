@@ -45,15 +45,15 @@ export class AXFListInputWidgetView extends AXFWidgetView {
         }
     }
 
-    getStyles(mode) {
+    getStyles(mode) { 
         const styles = {
-            'border-radius': mode.includes('single') ? 100 + "%" : 0
+            'border-radius': mode=='single' ? 100 + "%" : 0
         };
         return styles;
     }
 
-    onCheckValueChange(val, checked) {
-        if (this.mode.includes("single")) {
+    onCheckValueChange(val) {
+        if (this.mode=="single") {
             this.value = [val];
         }
         else {

@@ -111,15 +111,15 @@
       width: 9px;
       height: 9px;
       border-radius: 50%;
-      background: var(--primary-color);
-      
-    } 
-     
+      background: var(--primary-color);      
+    }      
 
-    input{
-      &:checked~.checkmark:after {
+     
+      input.checked~.checkmark:after {
         display: block;
       }
-    }
+      
+    
   }
+
 }
