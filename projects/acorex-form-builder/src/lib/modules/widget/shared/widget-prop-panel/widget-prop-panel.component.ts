@@ -17,7 +17,7 @@ export class AXFWidgetPropPanelComponent {
             this.tabNames = [];
             this.widget = c;
             if (this.widget) {
-                this.widget.config.properties.forEach(p => {
+                this.widget.config.properties.filter(c => c.visible != false).forEach(p => {
                     if (!this.tabNames.includes(p.category)) {
                         this.tabNames.push(p.category);
                     }

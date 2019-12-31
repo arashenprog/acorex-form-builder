@@ -15,7 +15,7 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
 
     allowSearch: boolean;
     dataSource: AXFDataSourceOption;
-    visible: boolean;
+    
 
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
@@ -43,6 +43,8 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
                 this.cdr.markForCheck();
             })
         }
+        else
+            this.cdr.markForCheck();
     }
 
 

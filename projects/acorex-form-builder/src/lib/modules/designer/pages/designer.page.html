@@ -14,7 +14,7 @@
     </header>
     <article *ngIf="this.view=='designer'">
         <div class="designer-container">
-            <ng-container *ngIf="widgets.length>0">
+            <ng-container>
                 <div class="property-panel">
                     <axf-widget-prop-panel></axf-widget-prop-panel>
                 </div>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </ng-container>
-            <ng-container *ngIf="widgets.length==0">
+            <!-- <ng-container *ngIf="widgets.length==0">
                 <div class="empty-stage-container">
                     <div class="empty-stage">
                         <h1>Let's get started</h1>
@@ -54,8 +54,7 @@
                         </div>
                     </div>
                 </div>
-            </ng-container>
-
+            </ng-container> -->
         </div>
     </article>
 

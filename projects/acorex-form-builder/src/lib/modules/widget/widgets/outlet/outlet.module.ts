@@ -34,6 +34,13 @@ export class AXFPageOutletWidgetModule {
             printClass: AXFOutletWidgetPrint,
             viewClass: AXFOutletWidgetView,
             properties: [
+                {
+                    editor: "TextEditor",
+                    category: "Data",
+                    name: "widgetId",
+                    title: "",
+                    visible: false
+                },
                 AXF_NAME_PROPERTY,
             ]
         })

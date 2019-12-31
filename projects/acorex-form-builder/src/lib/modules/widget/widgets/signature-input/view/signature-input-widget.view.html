@@ -1,18 +1,19 @@
-<div #el> 
-<div *ngIf="info.ShowType.includes('item')">
+<div #el *ngIf="visible">
+    <div *ngIf="info.ShowType.includes('item')">
         <div class="row" *ngFor="let rw of rows;let i = index">
             <div class="child" [ngStyle]="getStyles()" *ngFor="let item of columns">
                 <div class="spanchild">{{item.Text}} </div>
                 <div class="valuechild">
-                        <ax-text-box *ngIf="item.Type=='String'"></ax-text-box>
-                        <ax-date-picker label="" *ngIf="item.Type=='Date'"></ax-date-picker>
-                        <div class="signature" *ngIf="item.Type=='Signature'" [ngStyle]="{'width.px': width,'height.px': height}">
-                            <signature-pad [options]="signaturePadOptions" (onEndEvent)="drawComplete(i)"></signature-pad>
-                            <div class="clear-box">
-                                <button (click)="onClearClick(i)" class="btn btn-outline-danger"><i
-                                        class="fa fa-trash"></i></button>
-                            </div>
+                    <ax-text-box *ngIf="item.Type=='String'"></ax-text-box>
+                    <ax-date-picker label="" *ngIf="item.Type=='Date'"></ax-date-picker>
+                    <div class="signature" *ngIf="item.Type=='Signature'"
+                        [ngStyle]="{'width.px': width,'height.px': height}">
+                        <signature-pad [options]="signaturePadOptions" (onEndEvent)="drawComplete(i)"></signature-pad>
+                        <div class="clear-box">
+                            <button (click)="onClearClick(i)" class="btn btn-outline-danger"><i
+                                    class="fa fa-trash"></i></button>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -24,15 +25,16 @@
         </tr>
         <tr *ngFor="let rw of rows;let i = index">
             <td *ngFor="let item of columns">
-                    <ax-text-box *ngIf="item.Type=='String'"></ax-text-box>
-                    <ax-date-picker label="" *ngIf="item.Type=='Date'"></ax-date-picker>
-                    <div class="signature" *ngIf="item.Type=='Signature'" [ngStyle]="{'width.px': width,'height.px': height}">
-                        <signature-pad [options]="signaturePadOptions" (onEndEvent)="drawComplete(i)"></signature-pad>
-                        <div class="clear-box">
-                            <button (click)="onClearClick(i)" class="btn btn-outline-danger"><i
-                                    class="fa fa-trash"></i></button>
-                        </div>
+                <ax-text-box *ngIf="item.Type=='String'"></ax-text-box>
+                <ax-date-picker label="" *ngIf="item.Type=='Date'"></ax-date-picker>
+                <div class="signature" *ngIf="item.Type=='Signature'"
+                    [ngStyle]="{'width.px': width,'height.px': height}">
+                    <signature-pad [options]="signaturePadOptions" (onEndEvent)="drawComplete(i)"></signature-pad>
+                    <div class="clear-box">
+                        <button (click)="onClearClick(i)" class="btn btn-outline-danger"><i
+                                class="fa fa-trash"></i></button>
                     </div>
+                </div>
             </td>
         </tr>
     </table>

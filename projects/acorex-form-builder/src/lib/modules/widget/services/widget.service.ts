@@ -9,7 +9,7 @@ export interface AXFWidgetProperty {
     defaultValue?: any;
     category: "General" | "Style" | "Behavior" | "Data" | "Binding";
     editor: any;
-    visible ?: boolean | Function;
+    visible?: boolean | Function;
     options?: any
 }
 
@@ -41,7 +41,7 @@ export class AXFWidgetService {
 
     static WIDGET_ITEMS: WidgetConfig[] = [];
 
-    constructor(private toastService:AXToastService) {
+    constructor(private toastService: AXToastService) {
 
     }
 
@@ -75,14 +75,14 @@ export class AXFWidgetService {
             res.properties = this.deepCopy(c.properties);
         if (c.options)
             res.options = JSON.parse(JSON.stringify(c.options));
-            //res.options = this.deepCopy(c.options);
+        //res.options = this.deepCopy(c.options);
         else
             res.options = {};
         return res;
     }
 
 
-    private  deepCopy(obj) {
+    private deepCopy(obj) {
         let copy;
         // Handle the 3 simple types, and null or undefined
         if (null == obj || "object" != typeof obj) return obj;
@@ -135,14 +135,20 @@ export class AXFWidgetService {
     }
 
 
-    parse(json: string): WidgetConfig {
-        try {
-            let obj = JSON.parse(json);
-            return this.parseInternal(obj);    
-        } catch (error) {
-            return null;
+    parse(json: string | any): WidgetConfig {
+        if (typeof json == "string") {
+            try {
+                let obj = JSON.parse(json);
+                return this.parseInternal(obj);
+            } catch (error) {
+                console.log("Invalid widget's json to parse: ", json)
+                return null;
+            }
         }
-        
+        else
+        {
+            return this.parseInternal(json);
+        }
     }
 
 

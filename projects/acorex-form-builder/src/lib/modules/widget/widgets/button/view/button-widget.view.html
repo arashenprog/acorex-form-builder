@@ -1,3 +1,3 @@
-<button class="btn btn-{{size}} btn-{{type}}" type="button" (click)="handleClickEvent($event)">
+<button class="btn btn-{{size}} btn-{{type}}" type="button" (click)="handleClickEvent($event)" *ngIf="visible">
     {{text | word}}
 </button>

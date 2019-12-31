@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { AXPopupService, AXBasePageComponent, AXHtmlUtil, MenuItem, EventService, AXToastService } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
-import { AXFWidgetPickerComponent } from '../../widget/shared/widget-picker/widget-picker.component';
-import { AXFWidget, AXFWidgetContainer, AXFWidgetDesigner } from '../../widget/config/widget';
+import { AXFWidgetContainer, AXFWidgetDesigner } from '../../widget/config/widget';
 import { AXFLoadTemplatePage } from './template/load-template.page';
 import { AXFSaveTemplatePage } from './template/save-template.page';
 import { AXFConnectService } from '../../widget/services/connect.service';
+import { AXFTemplateService } from '../../widget/services/template/template.service';
 
 @Component({
     templateUrl: './designer.page.html',
@@ -18,6 +18,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         private widgetService: AXFWidgetService,
         private toastService: AXToastService,
         private eventService: EventService,
+        private templateService: AXFTemplateService,
         private connectService: AXFConnectService
 
 
@@ -66,36 +67,17 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     actionItems: MenuItem[] = [
         {
             startIcon: "fas fa-save",
+            name: "save",
             text: "Save",
-            style: "ax-primary",
-            items: [
-                {
-                    name: "save",
-                    text: "Save",
-                    visible: false
-                },
-                {
-                    name: "saveAsForm",
-                    text: "Save as Form...",
-                },
-                {
-                    name: "saveAsWidget",
-                    text: "Save as Widget...",
-                }
-            ]
+            style: "ax-success",
         },
-        {
-            startIcon: "fas fa-check-circle",
-            name: "publish",
-            text: "Publish",
-            style: "ax-secondary",
-        },
-
     ]
 
+
+
     handleViewModeClick(e: MenuItem) {
-        if (this.widgets == null || this.widgets.length == 0) {
-            this.toastService.error("The form is blank!")
+        if (e.name == "form" && (this.widgets == null || this.widgets.length == 0)) {
+            this.toastService.error("The form is blank!");
             return;
         }
         this.view = e.name;
@@ -108,42 +90,11 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             return;
         }
         switch (e.name) {
-            case "publish": {
-                console.log(this.widgetService.serialize(this.widgets[0]));
-                break;
-            }
             case "save":
                 {
-                    // this.popup.open(AXFSaveTemplatePage, {
-                    //     size: "sm",
-                    //     title: "Save",
-                    //     data: {
-                    //         widget: this.widgets[0]
-                    //     }
-                    // })
-                    break;
-                }
-            case "saveAsForm":
-                {
-                    this.popup.open(AXFSaveTemplatePage, {
-                        size: "sm",
-                        title: "Save as Form ...",
-                        data: {
-                            type: "form",
-                            widget: this.widgets[0]
-                        }
-                    })
-                    break;
-                }
-            case "saveAsWidget":
-                {
-                    this.popup.open(AXFSaveTemplatePage, {
-                        size: "sm",
-                        title: "Save as Widget ...",
-                        data: {
-                            type: "widget",
-                            widget: this.widgets[0]
-                        }
+                    console.log(this.widgetService.serialize(this.widgets[0]));
+                    this.templateService.saveForm("", "form", this.widgets[0]).then(s => {
+                        this.toastService.success("Saved successfuly!")
                     })
                     break;
                 }
@@ -172,6 +123,12 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         this.connectService.send("load").then(data => {
             if (data && data.widgets && data.widgets.length > 0) {
                 this.widgets = [this.widgetService.parse(data.widgets)];
+            }
+            else
+            {
+                let page = this.widgetService.resolve("page");
+                Object.assign(page.options, { uid: AXHtmlUtil.getUID() });
+                this.widgets.push(page);
             }
         })
     }

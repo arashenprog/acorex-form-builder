@@ -171,6 +171,8 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
 }
 export abstract class AXFWidgetView extends AXFWidget {
 
+    visible: boolean = true;
+
     protected formService: AXFFormService;
 
     @Output()

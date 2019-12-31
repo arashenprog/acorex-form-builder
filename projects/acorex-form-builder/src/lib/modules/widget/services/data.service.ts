@@ -13,7 +13,7 @@ import { AXFFormService } from './form.service';
 @Injectable({ providedIn: "root" })
 export class AXFDataService {
 
-    private vars: any = {};
+    private dataModel: any = {};
 
     constructor(private connectService: AXFConnectService, private formService: AXFFormService) {
 
@@ -21,9 +21,9 @@ export class AXFDataService {
 
     init(): Promise<any> {
         let p1 = new Promise((resolve) => {
-            this.connectService.send("getVarList").then(c => {
-                console.log("Load Variables ...", c)
-                this.vars = c;
+            this.connectService.send("getModel").then(c => {
+                console.log("Load model ...", c)
+                this.dataModel = c;
                 resolve()
             });
         });
@@ -46,7 +46,7 @@ export class AXFDataService {
             }
             if(dataSourceName && dataSourceName.match(/\[\S+\]/))
             {
-                resolve(this.resolvePropName(dataSourceName.substring(1, dataSourceName.length - 1),this.vars));
+                resolve(this.resolvePropName(dataSourceName.substring(1, dataSourceName.length - 1),this.dataModel));
             }
             else{
                 this.connectService.send("getList", { name: dataSourceName, params: keyValObject }).then(c => {
@@ -69,13 +69,13 @@ export class AXFDataService {
     }
 
     getWord(key: string): string {
-        return this.resolvePropName(key, this.vars)
+        return this.resolvePropName(key, this.dataModel)
     }
 
 
     private findModelList(): any[] {
         let result: string[] = [];
-        this.findObjectList(this.vars, result);
+        this.findObjectList(this.dataModel, result);
         return result.map(c => ({ value:  `[${c}]`, text: `[${c}]` }));
     }
 

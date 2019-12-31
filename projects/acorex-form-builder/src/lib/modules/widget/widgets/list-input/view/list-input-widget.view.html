@@ -13,7 +13,7 @@
 
 </div> -->
 
-<div #el [ngClass]="direction" class="allItems" [hidden]="visible==false">
+<div #el [ngClass]="direction" class="allItems" *ngIf="visible">
     <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0" class="noitem">No Item</div>
     <ng-container *ngIf="dataSource">
         <label class="radio-container" *ngFor="let item of dataSource.dataItems" [ngClass]="alignCheck">

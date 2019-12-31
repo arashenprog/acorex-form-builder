@@ -29,7 +29,8 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
             }
         });
         this.templateService.getWidgetList().then(c => {
-            this.templates.push(...c);
+            if (c && c.length)
+                this.templates.push(...c);
         });
     }
 
@@ -56,7 +57,7 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
             ).then(name => {
                 if (name == "yes") {
                     let outlet = this.widgetService.resolve("outlet");
-                    outlet.options.widgets = widget.options.widgets;
+                    outlet.options.widgetId = c.id;
                     this.close([outlet]);
                 }
                 else if (name == "no") {
