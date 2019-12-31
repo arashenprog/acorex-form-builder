@@ -31,8 +31,7 @@ export class AXFDataService {
     }
 
     getList(dataSourceName: String, params?: any): PromisResult<any[]> {
-        return new PromisResult<any[]>((resolve) => {
-            debugger;
+        return new PromisResult<any[]>((resolve) => { 
             let keyValObject = {}
             if (params) {
                 params.forEach(p => {
