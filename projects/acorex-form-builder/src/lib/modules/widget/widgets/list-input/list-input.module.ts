@@ -42,6 +42,7 @@ export class AXFListInputWidgetModule {
                 direction: "horizontal",
                 alignCheck: "left",
                 viewType: "text",
+                printMode:"allItems"
             },
             properties: [
                 {
@@ -89,6 +90,17 @@ export class AXFListInputWidgetModule {
                     editor: "SelectionEditor",
                     options: {
                         items: [{ value: "text", title: "Text" }, { value: "image", title: "Image" }, { value: "both", title: "Both" }],
+                        mode: "single",
+                        direction: "horizontal",
+                    }
+                },
+                {
+                    name: "printMode",
+                    category: "General",
+                    title: "Print Mode",
+                    editor: "SelectionEditor",
+                    options: {
+                        items: [ { value: "allItems", title: "All Items" },{ value: "onlySelected", title: "OnlySelected" }],
                         mode: "single",
                         direction: "horizontal",
                     }

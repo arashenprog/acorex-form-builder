@@ -7,7 +7,7 @@
                 [src]="item[dataSource.columns[2].fieldName]" height="40" width="60">
             <input type="radio" [value]="item[dataSource.columns[0].fieldName]" *ngIf="mode!='unselectable'" 
             [ngClass]="(value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checked' : null"/> 
-            <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'"  [ngClass]="{multiple: mode=='multiple'}"
+            <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'" [ngClass]="{multiple: mode=='multiple'}"
             (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"></span>
         </label>
     </ng-container>

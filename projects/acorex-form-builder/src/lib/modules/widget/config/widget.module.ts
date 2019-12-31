@@ -12,6 +12,7 @@ import { AXFSignatureInputWidgetModule } from '../widgets/signature-input/signat
 import { AXFImageInputWidgetModule } from '../widgets/image-input/image-input.module';
 import { AXFCheckboxInputWidgetModule } from '../widgets/checkbox-input/checkbox-input.module';
 import { AXFTextInputWidgetModule } from '../widgets/text-input/text-input.module';
+import { AXFTextAreaWidgetModule } from '../widgets/text-area/text-area.module';
 import { AXFPageOutletWidgetModule } from '../widgets/outlet/outlet.module';
 import { AXFListInputWidgetModule } from '../widgets/list-input/list-input.module';
 import { AXFDropdownInputWidgetModule } from '../widgets/dropdown-input/dropdown-input.module';
@@ -22,6 +23,7 @@ import { AXFPanelWidgetModule } from '../widgets/panel/panel.module';
 import { AXFAPITemplateService } from '../services/template/template-api.service';
 import { AXFTemplateService } from '../services/template/template.service';
 import { AXFTimeInputWidgetModule } from '../widgets/time-input/time-input.module';
+import { from } from 'rxjs';
 
 
 const MODULES = [
@@ -35,6 +37,7 @@ const MODULES = [
     AXFTimeInputWidgetModule,
     AXFPagePageWidgetModule,
     AXFTextInputWidgetModule,
+    AXFTextAreaWidgetModule,
     AXFCheckboxInputWidgetModule,
     AXFImageInputWidgetModule,
     AXFSignatureInputWidgetModule,
