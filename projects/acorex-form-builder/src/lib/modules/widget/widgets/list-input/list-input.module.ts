@@ -96,7 +96,7 @@ export class AXFListInputWidgetModule {
                 },
                 {
                     name: "printMode",
-                    category: "Printing Option",
+                    category: "General",
                     title: "Print Mode",
                     editor: "SelectionEditor",
                     options: {
