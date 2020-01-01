@@ -96,11 +96,11 @@ export class AXFListInputWidgetModule {
                 },
                 {
                     name: "printMode",
-                    category: "General",
+                    category: "Printing Option",
                     title: "Print Mode",
                     editor: "SelectionEditor",
                     options: {
-                        items: [ { value: "allItems", title: "All Items" },{ value: "onlySelected", title: "OnlySelected" }],
+                        items: [ { value: "allItems", title: "All Items" },{ value: "onlySelected", title: "Only Selected" }],
                         mode: "single",
                         direction: "horizontal",
                     }
