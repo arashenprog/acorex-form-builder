@@ -14,7 +14,6 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
 
     value: string[];
     dataSource: AXFDataSourceOption;
-    visible: boolean = true;
 
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()

@@ -13,6 +13,7 @@ export class AXFButtonWidgetView extends AXFWidgetView {
     type: string;
     text: string;
     size: string;
+    
 
     constructor() {
         super();

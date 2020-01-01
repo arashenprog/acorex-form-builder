@@ -8,6 +8,7 @@ export const AXF_VALUE_CHANGE_EVENT: AXFWidgetProperty = {
     defaultValue: null,
     title: "Value Changed",
     editor: "EventEditor",
+    order: 10,
     options: {
     }
 }
@@ -19,7 +20,8 @@ export const AXF_INIT_EVENT: AXFWidgetProperty = {
     title: "Init",
     editor: "EventEditor",
     options: {
-    }
+    },
+    order: 1,
 }
 
 export const AXF_CLICK_EVENT: AXFWidgetProperty = {
@@ -29,7 +31,8 @@ export const AXF_CLICK_EVENT: AXFWidgetProperty = {
     title: "Click",
     editor: "EventEditor",
     options: {
-    }
+    },
+    order: 9,
 }
 
 
@@ -40,9 +43,11 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
     defaultValue: null,
     title: "Text",
     editor: "TextEditor",
+    order: 21,
     options: {
         allowHtml: false
-    }
+    },
+
 }
 
 export const AXF_PLACEHOLDER_PROPERTY: AXFWidgetProperty = {
@@ -51,6 +56,7 @@ export const AXF_PLACEHOLDER_PROPERTY: AXFWidgetProperty = {
     defaultValue: "Placeholder",
     title: "Placeholder",
     editor: "TextEditor",
+    order: 22,
     options: {
         allowHtml: false
     }
@@ -62,6 +68,7 @@ export const AXF_RICH_TEXT_PROPERTY: AXFWidgetProperty = {
     defaultValue: null,
     title: "Text",
     editor: "TextEditor",
+    order: 21,
     options: {
         allowHtml: true
     }
@@ -72,7 +79,34 @@ export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
     category: "Binding",
     defaultValue: "",
     title: "Name",
+    order: 11,
     editor: "TextEditor"
+}
+
+export const AXF_VISIBLE_PROPERTY: AXFWidgetProperty = {
+    name: "visible",
+    category: "General",
+    defaultValue: true,
+    title: "Visible",
+    order: 81,
+    editor: "CheckboxEditor"
+}
+
+export const AXF_ENABLED_PROPERTY: AXFWidgetProperty = {
+    name: "visible",
+    category: "General",
+    defaultValue: true,
+    title: "Visible",
+    order: 82,
+    editor: "CheckboxEditor"
+}
+export const AXF_READONLY_PROPERTY: AXFWidgetProperty = {
+    name: "visible",
+    category: "General",
+    defaultValue: false,
+    title: "Visible",
+    order: 83,
+    editor: "CheckboxEditor"
 }
 
 export const AXF_CAPTION_PROPERTY: AXFWidgetProperty = {
@@ -81,6 +115,7 @@ export const AXF_CAPTION_PROPERTY: AXFWidgetProperty = {
     defaultValue: "Panel",
     title: "Caption",
     editor: "TextEditor",
+    order: 11,
     options: {
         allowHtml: false
     }
@@ -92,6 +127,7 @@ export const AXF_COLOR_PROPERTY: AXFWidgetProperty = {
     category: "Style",
     defaultValue: "#000000",
     title: "Color",
+    order: 31,
     editor: "ColorEditor"
 }
 
@@ -100,6 +136,7 @@ export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
     category: "Style",
     defaultValue: "#ffffff",
     title: "Background Color",
+    order: 32,
     editor: "ColorEditor"
 }
 
@@ -110,6 +147,7 @@ export const AXF_TEXT_DIRECTION_PROPERTY: AXFWidgetProperty = {
     defaultValue: "inherit",
     title: "Text Direction",
     editor: "SelectionEditor",
+    order: 33,
     options: {
         items: [{ value: "inherit", title: "Horizontal" }, { value: "tb", title: "Vertical" }],
         mode: "single",
@@ -122,6 +160,7 @@ export const AXF_TEXT_STYLE_PROPERTY: AXFWidgetProperty = {
     category: "Style",
     title: "Text Style",
     editor: "SelectionEditor",
+    order: 34,
     options: {
         items: [{ value: "bold", title: "Bold" }, { value: "italic", title: "Italic" }, { value: "underline", title: "Underline" }],
         mode: "multiple",
@@ -135,6 +174,7 @@ export const AXF_TEXT_SIZE_PROPERTY: AXFWidgetProperty = {
     defaultValue: "inherit",
     title: "Font Size",
     editor: "DropdownEditor",
+    order: 35,
     options: {
         items: [
             { value: "inherit", title: "inherit" },
@@ -159,6 +199,7 @@ export const AXF_HORIZONTAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
     defaultValue: "left",
     title: "Horizontal Alignment",
     editor: "SelectionEditor",
+    order: 36,
     options: {
         items: [{ value: "left", title: "Left" }, { value: "center", title: "Center" }, { value: "right", title: "Right" }],
         mode: "single",
@@ -172,12 +213,23 @@ export const AXF_VERTICAL_ALIGNMENT_PROPERTY: AXFWidgetProperty = {
     defaultValue: "top",
     title: "Vertical Alignment",
     editor: "SelectionEditor",
+    order: 37,
     options: {
         items: [{ value: "top", title: "Top" }, { value: "middle", title: "Middle" }, { value: "bottom", title: "Bottom" }],
         mode: "single",
         direction: "horizontal"
     }
 }
+
+export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
+    name: "boxStyle",
+    category: "Style",
+    defaultValue: new AXFBoxStyleValue(),
+    title: "Box Style",
+    order: 39,
+    editor: "BoxStyleEditor"
+}
+
 
 export const AXF_DS_LIST_PROPERTY: AXFWidgetProperty = {
     name: "dataSource",
@@ -237,38 +289,11 @@ export const AXF_ITEM_DATASOURCE_PROPERTY: AXFWidgetProperty = {
 
 
 
-
-
-export const AXF_DS_MODE_PROPERTY: AXFWidgetProperty = {
-    name: "dsMode",
-    category: "Data",
-    defaultValue: "ds",
-    title: "Date Mode",
-    editor: "SelectionEditor",
-    options: {
-        items: [{ value: "ds", title: "Datasource" }, { value: "manual", title: "Manual" }],
-        mode: "single",
-        direction: "horizontal"
-    }
-}
-
-
-
-
-
-
-export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
-    name: "boxStyle",
-    category: "Style",
-    defaultValue: new AXFBoxStyleValue(),
-    title: "Box Style",
-    editor: "BoxStyleEditor"
-}
-
 export const AXF_LABEL_PROPERTY: AXFWidgetProperty = {
     name: "label",
     category: "General",
     defaultValue: "",
+    order: 11,
     title: "Label",
     editor: "TextEditor"
 }

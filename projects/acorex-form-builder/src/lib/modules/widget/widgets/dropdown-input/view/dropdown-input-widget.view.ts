@@ -11,7 +11,7 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
 
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
-    mode: string;
+    mode: string="single";
 
     allowSearch: boolean;
     dataSource: AXFDataSourceOption;

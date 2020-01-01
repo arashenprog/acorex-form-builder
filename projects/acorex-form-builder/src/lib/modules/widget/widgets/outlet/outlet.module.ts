@@ -6,7 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFOutletWidgetDesigner } from './designer/outlet-widget.designer';
 import { AXFOutletWidgetPrint } from './print/outlet-widget.print';
 import { AXFOutletWidgetView } from './view/outlet-widget.view';
-import { AXF_NAME_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [
     AXFOutletWidgetDesigner,
@@ -41,6 +41,7 @@ export class AXFPageOutletWidgetModule {
                     title: "",
                     visible: false
                 },
+                AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]
         })

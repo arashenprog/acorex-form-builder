@@ -70,7 +70,7 @@ export class AXFWidgetRendererDirective {
         Object.assign(this.widgetInstance, { config: this.widgetConfig });
         let pp: any = {};
         this.widgetConfig.properties.forEach(p => {
-            if (!this.widgetInstance[p.name] && p.defaultValue && !this.widgetConfig.options[p.name]) {
+            if (this.widgetInstance[p.name]==null && p.defaultValue!=null && this.widgetConfig.options[p.name]==null) {
                 pp[p.name] = p.defaultValue;
                 this.widgetConfig.options[p.name] = p.defaultValue;
             }

@@ -171,7 +171,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
 }
 export abstract class AXFWidgetView extends AXFWidget {
 
-    visible: boolean = true;
+    visible: boolean;
 
     protected formService: AXFFormService;
 
@@ -195,9 +195,9 @@ export abstract class AXFWidgetView extends AXFWidget {
     }
 
     private getName() {
+        if (this.config.options.name == null || this.config.options.name == "")
+            return null;
         return this.config.options.name
-        // if (this.config.options.name == null || this.config.options.name == "")
-        //     return null;
         // let parts: string[] = [this.config.options.name];
         // let prt = this.parent;
         // while (prt != null) {
@@ -212,6 +212,7 @@ export abstract class AXFWidgetView extends AXFWidget {
 
 
     protected invokeEvent(name: string) {
+        debugger;
         if (this[name]) {
             let action: string = this[name];
             if (action) {
@@ -255,7 +256,8 @@ export abstract class AXFWidgetView extends AXFWidget {
         super();
         this.formService = WidgetInjector.instance.get(AXFFormService);
         setTimeout(() => {
-            this.formService.setWidget(this.getName(), this);
+            if (this.getName())
+                this.formService.setWidget(this.getName(), this);
         });
     }
 

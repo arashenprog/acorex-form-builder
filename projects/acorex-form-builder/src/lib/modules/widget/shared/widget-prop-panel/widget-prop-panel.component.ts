@@ -46,6 +46,6 @@ export class AXFWidgetPropPanelComponent {
                 }
             }
         });
-        return list.filter(c => c.visible != false && !hidden.includes(c.name));
+        return list.filter(c => c.visible != false && !hidden.includes(c.name)).sort(c => c.order);
     }
 }

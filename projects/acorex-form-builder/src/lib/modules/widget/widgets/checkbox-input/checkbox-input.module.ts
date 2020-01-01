@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_BOX_STYLE_PROPERTY, AXF_LABEL_PROPERTY, AXF_COLOR_PROPERTY, AXF_TEXT_SIZE_PROPERTY, AXF_TEXT_STYLE_PROPERTY, AXF_BG_COLOR_PROPERTY, AXF_NAME_PROPERTY } from '../../config/general-properties';
+import { AXF_BOX_STYLE_PROPERTY, AXF_LABEL_PROPERTY, AXF_COLOR_PROPERTY, AXF_TEXT_SIZE_PROPERTY, AXF_TEXT_STYLE_PROPERTY, AXF_BG_COLOR_PROPERTY, AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 import { AXFCheckboxInputWidgetDesigner } from './designer/checkbox-input-widget.designer';
 import { AXFCheckboxInputWidgetPrint } from './print/checkbox-input-widget.print';
@@ -45,6 +45,7 @@ export class AXFCheckboxInputWidgetModule {
                 AXF_TEXT_SIZE_PROPERTY,
                 AXF_TEXT_STYLE_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
+                AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY
             ]
         })

@@ -11,6 +11,7 @@ export interface AXFWidgetProperty {
     editor: any;
     visible?: boolean | Function;
     options?: any
+    order?: number;
 }
 
 export interface AXFWidgetToolboxProperty {
@@ -145,8 +146,7 @@ export class AXFWidgetService {
                 return null;
             }
         }
-        else
-        {
+        else {
             return this.parseInternal(json);
         }
     }

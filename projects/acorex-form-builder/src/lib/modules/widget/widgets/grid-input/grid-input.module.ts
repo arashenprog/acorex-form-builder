@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_LABEL_PROPERTY, AXF_DS_MODE_PROPERTY, AXF_DS_LIST_PROPERTY } from '../../config/general-properties';
+import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY,AXF_DS_LIST_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
 import { AXFGridInputWidgetDesigner } from './designer/grid-input-widget.designer';
 import { AXFGridInputWidgetPrint } from './print/grid-input-widget.print';
 import { AXFGridInputWidgetView } from './view/grid-input-widget.view';
@@ -44,6 +44,7 @@ export class AXFGridInputWidgetModule {
             properties: [
                 AXF_DS_LIST_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
+                AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]
         })

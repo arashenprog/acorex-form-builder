@@ -13,7 +13,6 @@ export class AXFOutletWidgetView extends AXFWidgetView {
         super();
 
     }
-    visible: boolean = true;
     widgetId: string;
 
     ngOnInit() {
@@ -31,7 +30,5 @@ export class AXFOutletWidgetView extends AXFWidgetView {
     public get value(): any {
         return "Arash";
     }
-
-
 }
 

@@ -18,7 +18,6 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     direction: string;
     alignCheck: string;
     viewType: string;
-    visible: boolean = true;
 
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
