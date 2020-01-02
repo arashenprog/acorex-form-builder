@@ -4,7 +4,6 @@ import { AXFDataSourceOption } from '../../../../property-editor/editors/data-so
 
 @Component({
     templateUrl: './dropdown-input-widget.print.html',
-    styleUrls: ['./dropdown-input-widget.print.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFDropdownInputWidgetPrint extends AXFWidgetPrint {
