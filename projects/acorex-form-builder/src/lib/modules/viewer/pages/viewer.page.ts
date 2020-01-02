@@ -11,6 +11,9 @@ import { AXFFormService } from '../../widget/services/form.service';
 })
 export class ACFViewerPage extends AXBasePageComponent {
 
+  mode: string = "view";
+  widgets: WidgetConfig[] = [];
+
   constructor(
     private widgetService: AXFWidgetService,
     private router: ActivatedRoute,
@@ -20,8 +23,8 @@ export class ACFViewerPage extends AXBasePageComponent {
     this.mode = this.router.snapshot.queryParams.mode;
   }
 
-  mode: string = "view";
-  widgets: WidgetConfig[] = [];
+  
+
 
   ngAfterViewInit() {
     this.connectService.send("load").then(data => {

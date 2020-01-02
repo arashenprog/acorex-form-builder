@@ -42,7 +42,7 @@ export class AXFButtonWidgetModule {
                     name: "type",
                     category: "Style",
                     title: "Type",
-                    defaultValue:"success",
+                    defaultValue: "primary",
                     editor: "DropdownEditor",
                     options: {
                         items: [
@@ -57,9 +57,9 @@ export class AXFButtonWidgetModule {
                     name: "size",
                     category: "Style",
                     title: "Size",
-                    defaultValue:"sm",
+                    defaultValue: "sm",
                     editor: "DropdownEditor",
-                    options: {                        
+                    options: {
                         items: [
                             { value: "xs", title: "x-small" },
                             { value: "sm", title: "small" },
@@ -73,6 +73,67 @@ export class AXFButtonWidgetModule {
                 AXF_NAME_PROPERTY,
                 AXF_INIT_EVENT,
                 AXF_CLICK_EVENT,
+            ]
+        })
+        //
+        service.register({
+            title: 'Submit Button',
+            hint: 'Submit the form',
+            icon: 'fas fa-check',
+            category: 'Buttons',
+            visible: true,
+            name: 'submitButton',
+            designerClass: AXFButtonWidgetDesigner,
+            printClass: AXFButtonWidgetPrint,
+            viewClass: AXFButtonWidgetView,
+            options: {
+                text: "Submit",
+            },
+            properties: [
+                AXF_TEXT_PROPERTY,
+                {
+                    name: "type",
+                    category: "Style",
+                    title: "Type",
+                    defaultValue: "success",
+                    editor: "DropdownEditor",
+                    options: {
+                        items: [
+                            { value: "primary", title: "primary" },
+                            { value: "success", title: "success" },
+                            { value: "warning", title: "warning" },
+                            { value: "info", title: "info" }
+                        ],
+                    }
+                },
+                {
+                    name: "size",
+                    category: "Style",
+                    title: "Size",
+                    defaultValue: "sm",
+                    editor: "DropdownEditor",
+                    options: {
+                        items: [
+                            { value: "xs", title: "x-small" },
+                            { value: "sm", title: "small" },
+                            { value: "md", title: "medium" },
+                            { value: "lg", title: "large" },
+                            { value: "xl", title: "x-large" }
+                        ],
+                    }
+                },
+                AXF_VISIBLE_PROPERTY,
+                {
+                    name: "onClick",
+                    category: "Behavior",
+                    defaultValue: "submit()",
+                    title: "Click",
+                    editor: "EventEditor",
+                    options: {
+                    },
+                    order: 9,
+                    visible: false
+                }
             ]
         })
     }

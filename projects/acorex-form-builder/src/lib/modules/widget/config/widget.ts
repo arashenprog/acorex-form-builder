@@ -212,7 +212,6 @@ export abstract class AXFWidgetView extends AXFWidget {
 
 
     protected invokeEvent(name: string) {
-        debugger;
         if (this[name]) {
             let action: string = this[name];
             if (action) {

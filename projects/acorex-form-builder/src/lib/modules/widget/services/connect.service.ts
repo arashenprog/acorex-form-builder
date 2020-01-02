@@ -12,9 +12,12 @@ export class AXFConnectService {
 
 
     public send(action: string, options?: any): PromisResult<any> {
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get('uid');
         return new PromisResult((resolve) => {
             let reqId = AXHtmlUtil.getUID();
-            window.top.postMessage({
+            window.parent.postMessage({
+                uid: uid,
                 action: action,
                 data: options,
                 reqId: reqId

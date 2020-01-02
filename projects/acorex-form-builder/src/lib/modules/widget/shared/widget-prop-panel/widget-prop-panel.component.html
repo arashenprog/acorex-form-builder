@@ -15,8 +15,8 @@
         </div>
     </div>
     <div class="panel">
-        <ax-panel-box *ngFor="let t of tabNames" [caption]="t">
-            <div class="edit-row" *ngFor="let e of getProps(t)">
+        <ax-panel-box *ngFor="let t of tabNames" [caption]="t.title" [(collapsed)]="t.collapsed" >
+            <div class="edit-row" *ngFor="let e of getProps(t.name)">
                 <div class="prop-caption">
                     {{e.title}}
                 </div>

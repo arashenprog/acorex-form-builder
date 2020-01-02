@@ -12,22 +12,60 @@ import { EventService } from 'acorex-ui';
 })
 export class AXFWidgetPropPanelComponent {
 
+
+    private tabs: any[] = [
+        {
+            name: "general",
+            title: "General",
+            order: 1,
+            collapsed: false
+        },
+        {
+            name: "style",
+            title: "Style",
+            order: 2,
+            collapsed: false
+        },
+        {
+            name: "data",
+            title: "Data",
+            order: 3,
+            collapsed: false
+        },
+        {
+            name: "binding",
+            title: "Binding",
+            order: 4,
+            collapsed: false
+        },
+        {
+            name: "behavior",
+            title: "Behavior",
+            order: 5,
+            collapsed: false
+        }
+    ]
+
+    tabNames: any[] = [];
+
     constructor(private cdr: ChangeDetectorRef, private eventService: EventService) {
         eventService.on("SELECT", c => {
             this.tabNames = [];
             this.widget = c;
             if (this.widget) {
                 this.widget.config.properties.filter(c => c.visible != false).forEach(p => {
-                    if (!this.tabNames.includes(p.category)) {
-                        this.tabNames.push(p.category);
+                    let tab = this.tabs.find(c => c.name.toLowerCase() == p.category.toLowerCase());
+                    if (tab && !this.tabNames.some(c => c.name == tab.name)) {
+                        this.tabNames.push(tab);
                     }
                 });
+                this.tabNames = this.tabNames.sort(c => c.order);
                 this.cdr.markForCheck();
             }
         });
     }
 
-    tabNames: string[] = [];
+
 
 
     @Output()
@@ -37,7 +75,7 @@ export class AXFWidgetPropPanelComponent {
 
     getProps(category: string): AXFWidgetProperty[] {
 
-        let list = this.widget.config.properties.filter(c => c.category == category);
+        let list = this.widget.config.properties.filter(c => c.category.toLowerCase() == category.toLowerCase());
         let hidden = [];
         list.forEach(p => {
             if (typeof p.visible === "function") {
@@ -48,4 +86,6 @@ export class AXFWidgetPropPanelComponent {
         });
         return list.filter(c => c.visible != false && !hidden.includes(c.name)).sort(c => c.order);
     }
+
+  
 }

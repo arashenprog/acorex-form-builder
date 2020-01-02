@@ -6,23 +6,24 @@ import { AXFWidgetView } from '../../../config/widget';
     styleUrls: ['./date-input-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFDateInputWidgetView extends AXFWidgetView { 
+export class AXFDateInputWidgetView extends AXFWidgetView {
     @ViewChild("el1", { static: true }) el1: ElementRef<HTMLElement>;
-   
-    constructor(private el: ElementRef<HTMLElement>) {
+
+    constructor(private el: ElementRef<HTMLElement>, private cdr: ChangeDetectorRef) {
         super();
     }
-    
-    ngAfterViewInit(){
-        if(this.el1.nativeElement.querySelector("input")!=null)
-        this.applyStyle(this.el1.nativeElement.querySelector("input"));
+
+    ngAfterViewInit() {
+
     }
 
     onRender(): void {
-   }
+        if (this.el1 && this.el1.nativeElement.querySelector("input") != null)
+            this.applyStyle(this.el1.nativeElement.querySelector("input"));
+        this.cdr.markForCheck();
+    }
 
-    dataChange(e)
-    {
-         
+    dataChange(e) {
+
     }
 }

@@ -19,10 +19,11 @@ export class AXFDataService {
 
     }
 
+    
+
     init(): Promise<any> {
         let p1 = new Promise((resolve) => {
             this.connectService.send("getModel").then(c => {
-                console.log("Load model ...", c)
                 this.dataModel = c;
                 resolve()
             });
@@ -31,7 +32,7 @@ export class AXFDataService {
     }
 
     getList(dataSourceName: String, params?: any): PromisResult<any[]> {
-        return new PromisResult<any[]>((resolve) => { 
+        return new PromisResult<any[]>((resolve) => {
             let keyValObject = {}
             if (params) {
                 params.forEach(p => {
@@ -43,16 +44,15 @@ export class AXFDataService {
                     }
                 });
             }
-            if(dataSourceName && dataSourceName.match(/\[\S+\]/))
-            {
-                resolve(this.resolvePropName(dataSourceName.substring(1, dataSourceName.length - 1),this.dataModel));
+            if (dataSourceName && dataSourceName.match(/\[\S+\]/)) {
+                resolve(this.resolvePropName(dataSourceName.substring(1, dataSourceName.length - 1), this.dataModel));
             }
-            else{
+            else {
                 this.connectService.send("getList", { name: dataSourceName, params: keyValObject }).then(c => {
                     resolve(c.items);
                 });
             }
-           
+
         });
     }
 
@@ -71,11 +71,15 @@ export class AXFDataService {
         return this.resolvePropName(key, this.dataModel)
     }
 
+    getModel(): any {
+        return this.dataModel;
+    }
+
 
     private findModelList(): any[] {
         let result: string[] = [];
         this.findObjectList(this.dataModel, result);
-        return result.map(c => ({ value:  `[${c}]`, text: `[${c}]` }));
+        return result.map(c => ({ value: `[${c}]`, text: `[${c}]` }));
     }
 
 
