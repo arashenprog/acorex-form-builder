@@ -31,10 +31,10 @@ export class AXFDataService {
         return Promise.all([p1]);
     }
 
-    getList(dataSourceName: String, params?: any): PromisResult<any[]> {
-        return new PromisResult<any[]>((resolve) => {
+    getList(dataSourceName: String, params?: any): Promise<any[]> {
+        return new Promise<any[]>((resolve,reject) => {
             let keyValObject = {}
-            if (params) {
+            if (Array.isArray(params)) {
                 params.forEach(p => {
                     if (typeof p.value === "string" && p.value.match(/\$([a-zA-Z1-9])+/)) {
                         keyValObject[p.name] = this.formService.getValue(p.value.substring(1));
@@ -43,6 +43,10 @@ export class AXFDataService {
                         keyValObject[p.name] = p.value;
                     }
                 });
+            }
+            else
+            {
+                Object.assign(keyValObject,params)
             }
             if (dataSourceName && dataSourceName.match(/\[\S+\]/)) {
                 resolve(this.resolvePropName(dataSourceName.substring(1, dataSourceName.length - 1), this.dataModel));

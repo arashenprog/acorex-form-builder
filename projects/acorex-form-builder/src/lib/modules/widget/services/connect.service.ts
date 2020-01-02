@@ -19,7 +19,7 @@ export class AXFConnectService {
             window.parent.postMessage({
                 uid: uid,
                 action: action,
-                data: options,
+                data: options ? JSON.stringify(options) : null,
                 reqId: reqId
             }, '*');
             this.messageQueue.push({
@@ -34,7 +34,7 @@ export class AXFConnectService {
         if (e.data && e.data.action && e.data.reqId) {
             let msg = this.messageQueue.find(c => c.reqId == e.data.reqId && c.action == e.data.action);
             if (msg) {
-                msg.callback(e.data ? e.data.data : null);
+                msg.callback((e.data && e.data.data) ? JSON.parse(e.data.data)  : null);
                 this.messageQueue = this.messageQueue.filter(c => !(c.reqId == e.data.reqId && c.action == e.data.action));
             }
         };

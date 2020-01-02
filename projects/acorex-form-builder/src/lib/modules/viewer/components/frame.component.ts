@@ -79,7 +79,7 @@ export class ACFViewerFrameComponent {
             return;
         let action = e.data.action;
         let reqId = e.data.reqId;
-        let options = e.data.data || {};
+        let options = e.data.data ? JSON.parse(e.data.data) : {};
         switch (action) {
             case "load":
                 if (options.id == null) {
@@ -98,6 +98,15 @@ export class ACFViewerFrameComponent {
             case "getModel":
                 this.postMessage(action, reqId, this.dataService.getModel())
                 break;
+            case "getList":
+                debugger;
+                this.dataService.getList(options.name, options.params).then(items => {
+                    debugger;
+                    this.postMessage(action, reqId, {
+                        items: items
+                    })
+                })
+                break;
         }
 
     }
@@ -107,7 +116,7 @@ export class ACFViewerFrameComponent {
             uid: this.uid,
             action: action,
             reqId: reqId,
-            data: data
+            data: data ? JSON.stringify(data) : null
         }, '*');
     }
 
@@ -127,8 +136,7 @@ export class ACFViewerFrameComponent {
     }
 
 
-    private loadFrame():void
-    {
+    private loadFrame(): void {
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(`view?mode=${this.mode}&uid=${this.uid}&rnd=${AXHtmlUtil.getUID()}`);
     }
 }

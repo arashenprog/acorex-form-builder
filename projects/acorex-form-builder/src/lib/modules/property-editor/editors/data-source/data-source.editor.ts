@@ -52,6 +52,7 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
 
     handleRemoteChange(v: any[]) {
         if (v && (this.value.dataSource == null || this.value.dataSource.name != v[0].value)) {
+            this.value.dataItems=[];
             this.value.dataSource.name = v[0].value;
             if (v[0].params)
                 this.value.dataSource.params = v[0].params.map(c => ({ name: c, value: null }));
@@ -99,6 +100,7 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
             this.value.mode = v[0].value;
             if (this.value.mode == "manual") {
                 this.initColumns();
+                this.value.dataItems = [];
             }
             super.handleValueChange(this.value);
             this.cdr.markForCheck();
