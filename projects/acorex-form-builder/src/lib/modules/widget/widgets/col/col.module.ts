@@ -49,6 +49,7 @@ export class AXFColWidgetModule {
                     defaultValue: 1,
                     title: "Size",
                     editor: "TextEditor",
+                    order:0,
                 },
                 AXF_BG_COLOR_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,

@@ -29,7 +29,7 @@
                             </ax-button>
                         </div>
                     </div>
-                    <div class="paper">
+                    <div class="paper" #paper>
                         <ng-container *ngFor="let w of widgets" axf-widget-renderer [parent]="this" [widget]="w">
                         </ng-container>
                     </div>

@@ -49,6 +49,7 @@ export class AXFTextBlockWidgetModule {
             properties: [
                 AXF_RICH_TEXT_PROPERTY,
                 AXF_NAME_PROPERTY,
+                AXF_VISIBLE_PROPERTY,
                 ...AXF_STYLE_GENERAL_PROPERTIES
             ]
         })//

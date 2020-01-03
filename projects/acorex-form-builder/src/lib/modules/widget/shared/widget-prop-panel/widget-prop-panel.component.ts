@@ -36,13 +36,13 @@ export class AXFWidgetPropPanelComponent {
             name: "binding",
             title: "Binding",
             order: 4,
-            collapsed: false
+            collapsed: true
         },
         {
             name: "behavior",
             title: "Behavior",
             order: 5,
-            collapsed: false
+            collapsed: true
         }
     ]
 
@@ -59,7 +59,7 @@ export class AXFWidgetPropPanelComponent {
                         this.tabNames.push(tab);
                     }
                 });
-                this.tabNames = this.tabNames.sort(c => c.order);
+                this.tabNames = this.tabNames.sort(this.sortByOrder);
                 this.cdr.markForCheck();
             }
         });
@@ -84,8 +84,12 @@ export class AXFWidgetPropPanelComponent {
                 }
             }
         });
-        return list.filter(c => c.visible != false && !hidden.includes(c.name)).sort(c => c.order);
+        return list.filter(c => c.visible != false && !hidden.includes(c.name)).sort(this.sortByOrder);
     }
 
-  
+
+    private sortByOrder(a, b) {
+        return a.order == b.order ? 0 : (a.order > b.order ? 1 : -1);
+    }
+
 }
