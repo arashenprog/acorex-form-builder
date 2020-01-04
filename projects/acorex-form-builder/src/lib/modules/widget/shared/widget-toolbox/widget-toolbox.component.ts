@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 
 @Component({
     selector: '[axf-widget-toolbox]',
@@ -11,6 +11,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class AXFWidgetToolboxComponent implements OnInit {
     constructor() { }
     ngOnInit(): void { }
+
 
     delete: EventEmitter<void> = new EventEmitter<void>();
     copy: EventEmitter<void> = new EventEmitter<void>();

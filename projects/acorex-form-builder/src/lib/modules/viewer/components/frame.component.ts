@@ -16,7 +16,7 @@ export class ACFViewerFrameComponent {
 
     url: SafeResourceUrl;
     @ViewChild('frame', { static: true })
-    frame: ElementRef;
+    frame: ElementRef<HTMLIFrameElement>;
 
     private uid: string = AXHtmlUtil.getUID();
 
@@ -34,6 +34,8 @@ export class ACFViewerFrameComponent {
     page: WidgetConfig;
 
     widgets: WidgetConfig[] = [];
+
+    private intervalId: number
 
 
 
@@ -123,6 +125,15 @@ export class ACFViewerFrameComponent {
 
     ngOnInit() {
         this.widgets.push(this.widgetService.parse(this.widgetService.serialize(this.page)));
+        this.frame.nativeElement.addEventListener("load", () => {
+            this.frame.nativeElement.scrollTop = 0;
+            window.clearInterval(this.intervalId);
+            this.intervalId = window.setInterval(() => {
+                if (this.frame.nativeElement && this.frame.nativeElement.contentWindow) {
+                    this.frame.nativeElement.style.height = this.frame.nativeElement.contentWindow.document.documentElement.scrollHeight + 'px';
+                }
+            }, 300);
+        });
     }
 
     handleSetSize(e) {
@@ -138,5 +149,9 @@ export class ACFViewerFrameComponent {
 
     private loadFrame(): void {
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(`view?mode=${this.mode}&uid=${this.uid}&rnd=${AXHtmlUtil.getUID()}`);
+        
+
     }
+
+
 }

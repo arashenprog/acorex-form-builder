@@ -12,7 +12,6 @@ import { AXFDataSourceOption } from '../../../../property-editor/editors/data-so
 })
 export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
 
-    @ViewChild("el") el: ElementRef<HTMLElement>;
 
     dataSource: AXFDataSourceOption;
     mode: string;

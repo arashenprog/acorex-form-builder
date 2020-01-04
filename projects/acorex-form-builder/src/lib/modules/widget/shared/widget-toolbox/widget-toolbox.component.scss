@@ -1,7 +1,6 @@
 :host {
     &.widget-toolbox-container {
-        position: fixed;
-        visibility: hidden;
+        display: none;
         background-color: rgba(78, 22, 147, 0.1);
         cursor: pointer;
         z-index: 1500;

@@ -3,20 +3,21 @@ import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
     selector: "[axf-widget-text]",
-    templateUrl: './text-area-widget.view.html', 
+    templateUrl: './text-area-widget.view.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTextAreaWidgetView extends AXFWidgetView {
 
     text: string;
+    placeholder: String;
+    rows: number;
 
-    
-    constructor(private hostElement: ElementRef) {
+
+    constructor(private cdk: ChangeDetectorRef) {
         super()
     }
 
     onRender(): void {
-        // let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
-        // this.applyStyle(el);
+        this.cdk.markForCheck();
     }
 }

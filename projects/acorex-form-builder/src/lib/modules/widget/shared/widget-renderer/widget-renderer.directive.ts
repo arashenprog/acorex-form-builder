@@ -70,13 +70,13 @@ export class AXFWidgetRendererDirective {
         Object.assign(this.widgetInstance, { config: this.widgetConfig });
         let pp: any = {};
         this.widgetConfig.properties.forEach(p => {
-            if (this.widgetInstance[p.name]==null && p.defaultValue!=null && this.widgetConfig.options[p.name]==null) {
+            if (this.widgetInstance[p.name] == null && p.defaultValue != null && this.widgetConfig.options[p.name] == null) {
                 pp[p.name] = p.defaultValue;
                 this.widgetConfig.options[p.name] = p.defaultValue;
             }
         });
         //
-  
+
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
         // add parent
@@ -127,18 +127,22 @@ export class AXFWidgetRendererDirective {
             //
             this.toolboxElement = (toolboxComponent.location.nativeElement as HTMLElement);
             this.widgetElement = (widgetComponent.location.nativeElement as HTMLElement);
-
+            
             //
             if (this.widgetConfig.toolbox.visible != false) {
                 this.zone.runOutsideAngular(() => {
+                    this.widgetElement.style.position = "relative";
+                    this.widgetElement.appendChild(this.toolboxElement)
+                    this.toolboxElement.style.position = "absolute";
+                    //
                     this.toolboxElement.addEventListener("click", this.handleSelectElement.bind(this));
                     //
                     this.widgetElement.addEventListener("mouseover", (c) => {
                         c.stopPropagation();
-                        this.toolboxElement.style.visibility = "unset";
+                        this.toolboxElement.style.display = "unset";
                         const bound = this.widgetElement.getBoundingClientRect();
-                        this.toolboxElement.style.top = `${bound.top}px`;
-                        this.toolboxElement.style.left = `${bound.left}px`
+                        this.toolboxElement.style.top = `0px`;
+                        this.toolboxElement.style.left = `0px`
                         this.toolboxElement.style.width = `${bound.width}px`
                         this.toolboxElement.style.height = `${bound.height}px`;
                     });
@@ -153,7 +157,7 @@ export class AXFWidgetRendererDirective {
                             height: targetBound.height
                         });
                         if (!inTarget) {
-                            this.toolboxElement.style.visibility = "hidden";
+                            this.toolboxElement.style.display = "none";
                         }
                     });
                 });

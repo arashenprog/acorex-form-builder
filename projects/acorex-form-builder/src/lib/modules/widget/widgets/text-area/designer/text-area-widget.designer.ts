@@ -9,20 +9,16 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 })
 export class AXFTextAreaWidgetDesigner extends AXFWidgetDesigner {
 
-    @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
-
     text: String;
     placeholder: String;
+    rows: number;
 
     constructor(private cdr: ChangeDetectorRef) {
         super()
     }
 
     onRender(): void {
-        // let s = this.el.nativeElement.querySelector<HTMLFieldSetElement>("fieldset");
-        // s.style.visibility = "hidden";
-        // s.style.display = "none";
-        // this.applyStyle(this.el.nativeElement.querySelector("input"));
+  
          this.cdr.markForCheck();
     }
 

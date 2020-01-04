@@ -36,13 +36,13 @@ export class AXFWidgetPropPanelComponent {
             name: "binding",
             title: "Binding",
             order: 4,
-            collapsed: true
+            collapsed: false
         },
         {
             name: "behavior",
             title: "Behavior",
             order: 5,
-            collapsed: true
+            collapsed: false
         }
     ]
 

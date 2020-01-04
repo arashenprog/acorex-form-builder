@@ -136,7 +136,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         })
     }
 
-    @HostListener("mousewheel", ["$event"])
+    @HostListener("window:mousewheel", ["$event"])
     onWindowScroll(e: MouseWheelEvent) {
         if (AXHtmlUtil.isInRecPoint({
             x: e.clientX,
@@ -148,7 +148,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             top: this.paper.nativeElement.getBoundingClientRect().top,
         })) {
             this.paper.nativeElement.scrollBy({
-                top: e.deltaY,
+                top: e.deltaY / 1.5,
                 left: 0
             })
         }

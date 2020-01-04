@@ -11,21 +11,18 @@ import { AXFDataSourceOption } from '../../../../property-editor/editors/data-so
 })
 export class AXFListInputWidgetView extends AXFWidgetView {
 
-    @ViewChild("el") el: ElementRef<HTMLElement>;
-
     dataSource: AXFDataSourceOption;
     mode: string;
     direction: string;
     alignCheck: string;
     viewType: string;
-    columns:number;
+    columns: number;
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
     }
 
     onRender(): void {
-        if (this.el)
-            this.applyStyle(this.el.nativeElement);
+        this.cdr.markForCheck();
     }
 
     ngAfterViewInit() {
@@ -39,20 +36,23 @@ export class AXFListInputWidgetView extends AXFWidgetView {
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
-                this.cdr.markForCheck();
+                super.refresh();
             })
+        }
+        else {
+            super.refresh();
         }
     }
 
-    getStyles(mode) { 
+    getStyles(mode) {
         const styles = {
-            'border-radius': mode=='single' ? 100 + "%" : 0
+            'border-radius': mode == 'single' ? 100 + "%" : 0
         };
         return styles;
     }
 
     onCheckValueChange(val) {
-        if (this.mode=="single") {
+        if (this.mode == "single") {
             this.value = [val];
         }
         else {
