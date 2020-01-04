@@ -20,10 +20,6 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     }
 
     onRender(): void {
-        if (this.el) {
-            this.applyStyle(this.el.nativeElement);
-            this.cdr.markForCheck();
-            this.cdr.detectChanges();
-        }
+        this.cdr.markForCheck();
     }
 }

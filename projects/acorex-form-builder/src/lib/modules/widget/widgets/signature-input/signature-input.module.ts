@@ -33,12 +33,7 @@ export class AXFSignatureInputWidgetModule {
             designerClass: AXFSignatureInputWidgetDesigner,
             printClass: AXFSignatureInputWidgetPrint,
             viewClass: AXFSignatureInputWidgetView,
-            options: {
-                boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("1"),
-                    padding: new AXFBoxStyleBoxSizeValue("5"),
-                    margin: new AXFBoxStyleBoxSizeValue("1")
-                },                
+            options: {                              
                 height:100,
                 width:150 ,
                 info:{ 
@@ -71,8 +66,7 @@ export class AXFSignatureInputWidgetModule {
                     defaultValue: {},
                     title: "Info",
                     editor: "SignatureEditor" 
-                },      
-                AXF_BOX_STYLE_PROPERTY 
+                }
             ]
         })
     }

@@ -1,18 +1,3 @@
-<!-- <div #el [ngClass]="direction" class="allItems" [hidden]="visible==false">
-    <div *ngIf="!items.content || items.content.length==0" class="noitem">No Item</div>
-    <label class="radio-container" *ngFor="let cnt of items.content" [ngClass]="alignCheck" for="{{ uid }}">
-        <ng-container *ngFor="let item of items.types">
-            <span *ngIf="item.type=='string'">{{cnt[item.id]}}</span>
-            <img *ngIf="item.type=='image'" [src]="cnt[item.id]" height="40" width="60"> 
-            <input type="radio" [value]="cnt[keyField]" *ngIf="mode!='unselectable'"   
-            [attr.checked]="value && value.indexOf(cnt[keyField])>-1 ? 'checked' : null" />
-            <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'" [ngClass]="{multiple: mode.includes('multiple')}"
-            (click)="onCheckValueChange(cnt[keyField],true)"></span>
-        </ng-container>
-    </label>
-
-</div> -->
-
 <div #el [ngClass]="direction" class="allItems" *ngIf="visible">
     <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0" class="noitem">No Item</div>
     <ng-container *ngIf="dataSource">

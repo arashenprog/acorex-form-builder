@@ -11,11 +11,11 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
     value: boolean;
     label:string;
 
-    color:String;
-    bgColor:String;
-    fontSize:string;
-    textStyle:string[]; 
-    boxStyle:any;
+    // color:String;
+    // bgColor:String;
+    // fontSize:string;
+    // textStyle:string[]; 
+    // boxStyle:any;
     constructor() {
         super()
     }

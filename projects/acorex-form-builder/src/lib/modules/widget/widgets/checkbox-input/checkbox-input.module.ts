@@ -30,21 +30,11 @@ export class AXFCheckboxInputWidgetModule {
             designerClass: AXFCheckboxInputWidgetDesigner,
             printClass: AXFCheckboxInputWidgetPrint,
             viewClass: AXFCheckboxInputWidgetView,
-            options: {
-                boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("0"),
-                    padding: new AXFBoxStyleBoxSizeValue("0","20","0","20"),
-                    margin: new AXFBoxStyleBoxSizeValue("1")
-                },
+            options: {                
                 label:"Checkbox"
             },
             properties: [
                 AXF_LABEL_PROPERTY,
-                AXF_COLOR_PROPERTY,
-                AXF_BG_COLOR_PROPERTY,
-                AXF_TEXT_SIZE_PROPERTY,
-                AXF_TEXT_STYLE_PROPERTY,
-                AXF_BOX_STYLE_PROPERTY,
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY
             ]

@@ -32,18 +32,17 @@ export class AXFGridInputWidgetModule {
             printClass: AXFGridInputWidgetPrint,
             viewClass: AXFGridInputWidgetView,
             options: {
-                boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("0"),
-                    padding: new AXFBoxStyleBoxSizeValue("0"),
-                    margin: new AXFBoxStyleBoxSizeValue("1")
-                },
-                bgColor: "#FFFFFF",
-              
+                // boxStyle: {
+                //     border: new AXFBoxStyleBoxSizeValue("0"),
+                //     padding: new AXFBoxStyleBoxSizeValue("0"),
+                //     margin: new AXFBoxStyleBoxSizeValue("1")
+                // },
+                // bgColor: "#FFFFFF",             
 
             },
             properties: [
                 AXF_DS_LIST_PROPERTY,
-                AXF_BOX_STYLE_PROPERTY,
+                //AXF_BOX_STYLE_PROPERTY,
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]

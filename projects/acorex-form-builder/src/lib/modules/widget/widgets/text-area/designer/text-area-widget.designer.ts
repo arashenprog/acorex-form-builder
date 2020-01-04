@@ -19,11 +19,11 @@ export class AXFTextAreaWidgetDesigner extends AXFWidgetDesigner {
     }
 
     onRender(): void {
-        let s = this.el.nativeElement.querySelector<HTMLFieldSetElement>("fieldset");
-        s.style.visibility = "hidden";
-        s.style.display = "none";
-        this.applyStyle(this.el.nativeElement.querySelector("input"));
-        this.cdr.markForCheck();
+        // let s = this.el.nativeElement.querySelector<HTMLFieldSetElement>("fieldset");
+        // s.style.visibility = "hidden";
+        // s.style.display = "none";
+        // this.applyStyle(this.el.nativeElement.querySelector("input"));
+         this.cdr.markForCheck();
     }
 
 }

@@ -32,20 +32,8 @@ export class AXFDateInputWidgetModule {
             printClass: AXFDateInputWidgetPrint,
             viewClass: AXFDateInputWidgetView,
             options: {
-                boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("1"),
-                    padding: new AXFBoxStyleBoxSizeValue("2"),
-                    margin: new AXFBoxStyleBoxSizeValue("1")
-                },
-                bgColor: "#FFFFFF" 
             },
             properties: [  
-                AXF_COLOR_PROPERTY,
-                AXF_BG_COLOR_PROPERTY,
-                AXF_TEXT_SIZE_PROPERTY,
-                AXF_TEXT_STYLE_PROPERTY,
-                AXF_HORIZONTAL_ALIGNMENT_PROPERTY, 
-                AXF_BOX_STYLE_PROPERTY,
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]

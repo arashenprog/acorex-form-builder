@@ -17,8 +17,6 @@ export class AXFDateInputWidgetDesigner extends AXFWidgetDesigner {
     } 
 
     onRender(): void { 
-        if(this.el1.nativeElement.querySelector("input")!=null)
-        this.applyStyle(this.el1.nativeElement.querySelector("input")); 
     }
 
 }

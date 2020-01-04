@@ -17,6 +17,6 @@ export class AXFImageInputWidgetView extends AXFWidgetView {
 
  
     onRender(): void {
-        this.applyStyle(this.el.nativeElement.querySelector("img"));
+        //this.applyStyle(this.el.nativeElement.querySelector("img"));
     }
 }

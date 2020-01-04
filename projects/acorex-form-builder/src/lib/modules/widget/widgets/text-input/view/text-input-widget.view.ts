@@ -9,7 +9,6 @@ import { AXFWidgetView } from '../../../config/widget';
 export class AXFTextInputWidgetView extends AXFWidgetView {
 
     text: String;
-    visible: true;
     placeholder: String;
 
 
@@ -19,9 +18,9 @@ export class AXFTextInputWidgetView extends AXFWidgetView {
 
 
     onRender(): void {
-        let s = this.el.nativeElement.querySelector<HTMLFieldSetElement>("fieldset");
-        s.style.visibility = "hidden";
-        s.style.display = "none";
-        this.applyStyle(this.el.nativeElement.querySelector("input"));
+        // let s = this.el.nativeElement.querySelector<HTMLFieldSetElement>("fieldset");
+        // s.style.visibility = "hidden";
+        // s.style.display = "none";
+        // this.applyStyle(this.el.nativeElement.querySelector("input"));
     }
 }

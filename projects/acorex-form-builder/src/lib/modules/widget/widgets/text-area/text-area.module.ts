@@ -42,12 +42,12 @@ export class AXFTextAreaWidgetModule {
             properties: [
                 AXF_TEXT_PROPERTY,
                 AXF_PLACEHOLDER_PROPERTY, 
-                AXF_COLOR_PROPERTY,
-                AXF_BG_COLOR_PROPERTY,
-                AXF_TEXT_SIZE_PROPERTY,
-                AXF_TEXT_STYLE_PROPERTY, 
-                AXF_HORIZONTAL_ALIGNMENT_PROPERTY, 
-                AXF_BOX_STYLE_PROPERTY,
+                // AXF_COLOR_PROPERTY,
+                // AXF_BG_COLOR_PROPERTY,
+                // AXF_TEXT_SIZE_PROPERTY,
+                // AXF_TEXT_STYLE_PROPERTY, 
+                // AXF_HORIZONTAL_ALIGNMENT_PROPERTY, 
+                // AXF_BOX_STYLE_PROPERTY,
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]

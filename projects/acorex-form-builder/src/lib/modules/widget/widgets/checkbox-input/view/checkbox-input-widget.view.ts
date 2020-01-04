@@ -17,7 +17,7 @@ export class AXFCheckboxInputWidgetView extends AXFWidgetView {
 
 
     onRender(): void {
-        this.applyStyle(this.el.nativeElement.querySelector("label"));
-        this.cdr.markForCheck();
+        // this.applyStyle(this.el.nativeElement.querySelector("label"));
+        // this.cdr.markForCheck();
     }
 }

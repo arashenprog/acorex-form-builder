@@ -31,13 +31,7 @@ export class AXFDropdownInputWidgetModule {
             designerClass: AXFDropdownInputWidgetDesigner,
             printClass: AXFDropdownInputWidgetPrint,
             viewClass: AXFDropdownInputWidgetView,
-            options: {
-                boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("0"),
-                    padding: new AXFBoxStyleBoxSizeValue("0"),
-                    margin: new AXFBoxStyleBoxSizeValue("1")
-                },
-                bgColor: "#FFFFFF",
+            options: {                
                 mode:"single"
             },
             properties: [ 
@@ -61,7 +55,6 @@ export class AXFDropdownInputWidgetModule {
                     options: { label:"Allow Search"}
                 },
                 AXF_ITEM_DATASOURCE_PROPERTY,
-                AXF_BOX_STYLE_PROPERTY,
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
                 AXF_INIT_EVENT,

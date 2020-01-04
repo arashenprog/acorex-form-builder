@@ -51,10 +51,11 @@ export class AXFColWidgetModule {
                     editor: "TextEditor",
                     order:0,
                 },
-                AXF_BG_COLOR_PROPERTY,
-                AXF_BOX_STYLE_PROPERTY,
-                AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
-                AXF_VERTICAL_ALIGNMENT_PROPERTY
+                // AXF_BG_COLOR_PROPERTY,
+                // AXF_BOX_STYLE_PROPERTY,
+                // AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
+                // AXF_VERTICAL_ALIGNMENT_PROPERTY
+               ...AXF_STYLE_GENERAL_PROPERTIES
             ]
         })
     }

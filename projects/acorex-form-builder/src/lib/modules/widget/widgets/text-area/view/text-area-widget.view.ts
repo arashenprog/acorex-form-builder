@@ -16,7 +16,7 @@ export class AXFTextAreaWidgetView extends AXFWidgetView {
     }
 
     onRender(): void {
-        let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
-        this.applyStyle(el);
+        // let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
+        // this.applyStyle(el);
     }
 }

@@ -9,14 +9,7 @@ import { AXFWidgetPrint } from '../../../config/widget';
 export class AXFTextInputWidgetPrint extends AXFWidgetPrint {
 
     text: String;
-    placeholder: String;
-    color:String;
-    bgColor:String;
-    fontSize:string;
-    textStyle:string[];
-    textAlign:string; 
-    boxStyle:any;
-
+    placeholder:string;
     constructor() {
         super() 
     }

@@ -53,8 +53,9 @@ export class AXFPagePageWidgetModule {
                     defaultValue: "ltr",
                     title: "Page Direction",
                     editor: "SelectionEditor",
+                    order: 0,
                     options: {
-                        items: [{ value: "ltr", title: "Left-To-Right" },{ value: "rtl", title: "Right-To-Left" }],
+                        items: [{ value: "ltr", title: "Left-To-Right" }, { value: "rtl", title: "Right-To-Left" }],
                         mode: "single",
                         direction: "horizontal"
                     }
@@ -65,7 +66,8 @@ export class AXFPagePageWidgetModule {
                     category: "Style",
                     defaultValue: "#673AB7",
                     title: "Theme Color",
-                    editor: "ColorEditor"
+                    editor: "ColorEditor",
+                    order: 33,
                 },
                 AXF_BOX_STYLE_PROPERTY,
             ]

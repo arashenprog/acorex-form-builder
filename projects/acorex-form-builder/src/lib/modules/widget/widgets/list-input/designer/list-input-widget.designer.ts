@@ -26,8 +26,6 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     }
 
     onRender(): void {
-        if (this.el)
-            this.applyStyle(this.el.nativeElement);
         this.cdr.markForCheck();
     }
 

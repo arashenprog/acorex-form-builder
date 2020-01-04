@@ -1,4 +1,4 @@
-<div style="min-height: 40px;flex-direction: row;display: flex;border-style:solid;border-color: var(--border-color);"
+<!-- <div style="min-height: 40px;flex-direction: row;display: flex;border-style:solid;border-color: var(--border-color);"
     [ngStyle]="{'background-color':bgColor,
 'padding-top':(boxStyle.padding && boxStyle.padding.top) ? boxStyle.padding.top+'px' : '0px',
 'padding-bottom':(boxStyle.padding && boxStyle.padding.bottom) ? boxStyle.padding.bottom+'px' : '0px',
@@ -31,4 +31,13 @@
         <ng-container *ngFor="let s of w.options.widgets" axf-widget-renderer [widget]="s" [mode]="'print'">
         </ng-container>
     </div>
-</div>
+</div> -->
+
+<table [style.background-color]="bgColor" style="width: 100%;table-layout: fixed;">
+    <tbody>
+        <tr>
+            <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [mode]="'print'">
+            </ng-container>
+        </tr>
+    </tbody>
+</table>

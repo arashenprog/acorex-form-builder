@@ -18,9 +18,9 @@ export class AXFDropdownInputWidgetDesigner extends AXFWidgetDesigner {
     
 
     onRender(): void {
-        if (this.el)
-            this.applyStyle(this.el.nativeElement);
-        this.cdr.markForCheck();
+        // if (this.el)
+        //     this.applyStyle(this.el.nativeElement);
+        // this.cdr.markForCheck();
     }
 
    

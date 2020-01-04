@@ -5,8 +5,7 @@ import { AXFDataService } from '../../../services/data.service';
 
 @Component({
     templateUrl: './list-input-widget.print.html',
-    changeDetection:ChangeDetectionStrategy.OnPush,
-    //styleUrls: ['./list-input-widget.print.scss']
+    changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     @ViewChild("el") el: ElementRef<HTMLElement>;

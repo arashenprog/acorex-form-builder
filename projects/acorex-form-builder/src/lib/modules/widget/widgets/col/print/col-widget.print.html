@@ -1,3 +1,2 @@
-<div class="axf-row">
-    PRINT MODE
-</div>
+<ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [mode]="'print'">
+</ng-container>

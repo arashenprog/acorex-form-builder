@@ -91,10 +91,10 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             }
             // apply border size
             if (boxStyle.border != null) {
-                el.style.borderTop = `${boxStyle.border.top}px solid var(--border-color)`;
-                el.style.borderBottom = `${boxStyle.border.bottom}px solid var(--border-color)`;
-                el.style.borderLeft = `${boxStyle.border.left}px solid var(--border-color)`;
-                el.style.borderRight = `${boxStyle.border.right}px solid var(--border-color)`;
+                el.style.borderTop = `${boxStyle.border.top}px solid #333`;
+                el.style.borderBottom = `${boxStyle.border.bottom}px solid #333`;
+                el.style.borderLeft = `${boxStyle.border.left}px solid #333`;
+                el.style.borderRight = `${boxStyle.border.right}px solid #333`;
             }
             // apply margin size
             if (boxStyle.margin != null) {

@@ -10,12 +10,7 @@ export class AXFTextAreaWidgetPrint extends AXFWidgetPrint {
 
     text: String;
     placeholder: String;
-    color:String;
-    bgColor:String;
-    fontSize:string;
-    textStyle:string[];
-    textAlign:string; 
-    boxStyle:any;
+   
 
     constructor() {
         super() 

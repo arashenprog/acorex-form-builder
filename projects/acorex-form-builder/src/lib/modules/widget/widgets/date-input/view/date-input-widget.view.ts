@@ -18,8 +18,8 @@ export class AXFDateInputWidgetView extends AXFWidgetView {
     }
 
     onRender(): void {
-        if (this.el1 && this.el1.nativeElement.querySelector("input") != null)
-            this.applyStyle(this.el1.nativeElement.querySelector("input"));
+        // if (this.el1 && this.el1.nativeElement.querySelector("input") != null)
+        //     this.applyStyle(this.el1.nativeElement.querySelector("input"));
         this.cdr.markForCheck();
     }
 
