@@ -63,6 +63,16 @@ export class AXFListInputWidgetModule {
                     }
                 },
                 {
+                    name: "columns",
+                    category: "General",
+                    title: "Columns",
+                    editor: "TextEditor",
+                    defaultValue:1,
+                    visible: (options: any) => {
+                        return options.direction == "horizontal";
+                    }
+                },
+                {
                     name: "alignCheck",
                     category: "General",
                     title: "CheckBox/RadioButton Align",

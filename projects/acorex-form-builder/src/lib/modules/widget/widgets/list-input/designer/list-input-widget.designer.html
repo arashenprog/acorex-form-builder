@@ -1,7 +1,8 @@
 <div #el [ngClass]="direction" class="allItems">
     <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0" class="noitem">No Item</div>
     <ng-container *ngIf="dataSource">
-        <label class="radio-container" *ngFor="let item of dataSource.dataItems" [ngClass]="alignCheck">
+        <label class="radio-container" *ngFor="let item of dataSource.dataItems" [ngClass]="alignCheck" 
+        [ngStyle]="{'width':columns==1?'inherit':(100.0/columns)+'%'}">
             <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'">{{item[dataSource.columns[1].fieldName]}}</span>
             <img *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'"
                 [src]="item[dataSource.columns[2].fieldName]" height="40" width="60">

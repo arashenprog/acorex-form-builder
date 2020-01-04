@@ -17,7 +17,7 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     viewType: string;
     visible: boolean = true;
     printMode:string;
-
+    columns:number;
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
     }

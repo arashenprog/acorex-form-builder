@@ -18,7 +18,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     direction: string;
     alignCheck: string;
     viewType: string;
-
+    columns:number;
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
     }

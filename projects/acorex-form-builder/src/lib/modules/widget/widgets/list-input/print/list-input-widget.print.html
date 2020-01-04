@@ -9,10 +9,11 @@
 
     <ng-container *ngIf="dataSource && printMode=='allItems'">
         <label class="radio-container" *ngFor="let item of dataSource.dataItems; let i=index;" [ngClass]="alignCheck"
-        style="display: inline-block; position: relative; cursor: pointer; font-size: 14px; line-height:30px; 
-        user-select: none;margin: 0 var(--sp-md-size) 0 0;"
-        [ngStyle]="{'padding':alignCheck=='left'? '0px 0px 0px 17px' : (alignCheck=='top'? '2px 5px' : (alignCheck=='bottom'? '0px 5px 28px 5px' : '0px 20px 0px 0px'))}"
-        > 
+        style="display:inline-flex; position: relative; cursor: pointer; font-size: 14px; line-height:30px; 
+        user-select: none;"
+        [ngStyle]="{'padding':alignCheck=='left'? '0px 10px 0px 17px' : (alignCheck=='top'? '2px 8px' : (alignCheck=='bottom'? '0px 8px 28px 8px' : '0px 30px 0px 0px')),
+        'width':columns==1?'inherit':(100.0/columns)+'%'}" 
+        >  
             <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'"
             [ngStyle]="{'padding-left':alignCheck=='left'?'5px': (alignCheck=='right'?'2px': null),
                        'padding-right':alignCheck=='right'?'4px': null,
@@ -32,16 +33,17 @@
             <span class="checkmark"  *ngIf="mode!='unselectable'" 
             [ngClass]="{multiple: mode=='multiple'}"
             style="padding: 2px;position: absolute;height: 20px; width: 20px; background-color: var(--white-color); border: 1px solid;border-color: var(--black-color);"
-            [ngStyle]="{'top':(alignCheck=='left' || alignCheck=='right')?'20%':null,
+            [ngStyle]="{'top':(alignCheck=='left' || alignCheck=='right')?'5px':null,
                        'left':alignCheck=='left'?'0px':(alignCheck=='top'?'5px': null),
+                       'right': alignCheck=='right'?'10px':null,
                        'display':alignCheck=='bottom'?'flex':null,
                        'border-radius': mode=='single' ? '100%' : '0'}" >
-           <i *ngIf="i==0"  style="display: block;
+           <!-- <i *ngIf="i==0"  style="display: block;
             left: 0;
             color: var(--primary-color);
             border: 7px solid;
-            font-size: 1px; " [ngStyle]="{'border-radius': mode=='single' ? '50%' : '0'}" > </i>
-            <!-- <p>&#10003;</p> -->
+            font-size: 1px; " [ngStyle]="{'border-radius': mode=='single' ? '50%' : '0'}" > </i> -->
+            <!-- <p>&#10003;</p> --> 
         </span>
         </label>
     </ng-container>
