@@ -97,6 +97,24 @@
            background-color: var(--white-color);
             border: 1px solid;
             border-color: var(--black-color);
+            &.multiple:after{
+              border-radius: 0 !important;
+            }
           }
+
+          .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 4px;
+            left: 5px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--primary-color);      
+          }  
+      }
+      input.checked~.checkmark:after {
+        display: block;
       }
 }
