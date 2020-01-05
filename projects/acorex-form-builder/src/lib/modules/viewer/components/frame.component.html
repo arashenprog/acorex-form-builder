@@ -1,9 +1,10 @@
-<div class="view-container" [style.width.px]="size" >
-    <iframe [src]="url" frameBorder="0" #frame class="viewer"  scrolling="no">	   
+<div class="view-container" [style.width.px]="size">
+    <iframe [src]="url" frameBorder="0" #frame class="viewer" scrolling="no">
     </iframe>
 </div>
 <div class="device-size-container">
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button  *ngFor="let i of sizes" type="button" class="btn btn-sm btn-primary" [class.active]="i.active" (click)="handleSetSize(i)" ><i class="{{i.icon}}"></i> {{i.title}}</button>
+        <button *ngFor="let i of sizes" type="button" class="btn btn-sm btn-primary" [class.active]="i.active"
+            (click)="handleSetSize(i)"><i class="{{i.icon}}"></i> {{i.title}}</button>
     </div>
 </div>

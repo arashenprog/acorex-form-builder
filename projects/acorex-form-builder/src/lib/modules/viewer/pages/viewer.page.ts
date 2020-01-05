@@ -32,9 +32,9 @@ export class ACFViewerPage extends AXBasePageComponent {
     this.connectService.send("load").then(data => {
       this.widgets = [this.widgetService.parse(data.widgets)];
       this.intervalId = window.setInterval(() => {
-        this.connectService.send("sync", { height: document.documentElement.scrollHeight }).then(data => {
+        this.connectService.send("sync", { height: document.documentElement.offsetHeight }).then(data => {
         })
-      }, 1000)
+      }, 300)
     })
   }
 

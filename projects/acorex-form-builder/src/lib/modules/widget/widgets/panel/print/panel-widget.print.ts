@@ -3,8 +3,7 @@ import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
     selector: '[axf-panel]',
-    templateUrl: './panel-widget.print.html',
-    styleUrls: ['./panel-widget.print.scss'],
+    templateUrl: './panel-widget.print.html', 
     changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFPanelWidgetPrint extends AXFWidgetPrint {

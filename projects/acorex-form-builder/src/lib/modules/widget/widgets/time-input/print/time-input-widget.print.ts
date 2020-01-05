@@ -2,8 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
-    templateUrl: './time-input-widget.print.html',
-    // styleUrls: ['./time-input-widget.print.scss'],
+    templateUrl: './time-input-widget.print.html', 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTimeInputWidgetPrint extends AXFWidgetPrint {

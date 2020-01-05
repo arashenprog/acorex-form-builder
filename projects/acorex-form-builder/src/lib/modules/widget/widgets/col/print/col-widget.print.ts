@@ -5,7 +5,6 @@ import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-
 @Component({
     selector: "td",
     templateUrl: './col-widget.print.html',
-    styleUrls: ['./col-widget.print.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFColWidgetPrint extends AXFWidgetPrint {
@@ -23,9 +22,6 @@ export class AXFColWidgetPrint extends AXFWidgetPrint {
     ngOnInit() {
         let el = this.hostElement.nativeElement;
         el.style.width = ((this.size / 12) * 100) + '%';
-        // el.style.backgroundColor = this.bgColor;
-        // el.style.color = this.color;
-        // el.style.padding.
         this.applyStyle(el);
 
     }

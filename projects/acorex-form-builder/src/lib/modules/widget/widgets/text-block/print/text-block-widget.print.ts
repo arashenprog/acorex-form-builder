@@ -2,8 +2,7 @@ import { Component, OnInit, ElementRef, ChangeDetectionStrategy } from '@angular
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
-    templateUrl: './text-block-widget.print.html',
-    styleUrls: ['./text-block-widget.print.scss'],
+    templateUrl: './text-block-widget.print.html', 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTextBlockWidgetPrint extends AXFWidgetPrint {

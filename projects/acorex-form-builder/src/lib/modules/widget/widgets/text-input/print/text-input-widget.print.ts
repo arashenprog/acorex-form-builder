@@ -2,8 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
-    templateUrl: './text-input-widget.print.html',
-    styleUrls: ['./text-input-widget.print.scss'],
+    templateUrl: './text-input-widget.print.html', 
     changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFTextInputWidgetPrint extends AXFWidgetPrint {

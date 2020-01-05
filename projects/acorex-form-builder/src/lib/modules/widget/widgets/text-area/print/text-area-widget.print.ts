@@ -2,8 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
-    templateUrl: './text-area-widget.print.html',
-    //styleUrls: ['./text-area-widget.print.scss'],
+    templateUrl: './text-area-widget.print.html', 
     changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFTextAreaWidgetPrint extends AXFWidgetPrint {

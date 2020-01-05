@@ -4,7 +4,6 @@ import { AXFWidgetPrint } from '../../../config/widget';
 @Component({
     selector: '[axf-button]',
     templateUrl: './button-widget.print.html',
-    styleUrls: ['./button-widget.print.scss'],
     changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFButtonWidgetPrint extends AXFWidgetPrint {

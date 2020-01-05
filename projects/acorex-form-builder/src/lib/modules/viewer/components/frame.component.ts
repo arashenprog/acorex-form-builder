@@ -35,7 +35,6 @@ export class ACFViewerFrameComponent {
 
     widgets: WidgetConfig[] = [];
 
-    private intervalId: number
 
 
 
@@ -102,12 +101,18 @@ export class ACFViewerFrameComponent {
                 break;
             case "getList":
                 debugger;
-                this.dataService.getList(options.name, options.params).then(items => {
-                    debugger;
-                    this.postMessage(action, reqId, {
-                        items: items
+                if (options.name) {
+                    this.dataService.getList(options.name, options.params).then(items => {
+                        this.postMessage(action, reqId, {
+                            items: items
+                        })
                     })
-                })
+                }
+                break;
+            case "sync":
+                if (options.height && this.frame) {
+                    this.frame.nativeElement.style.height = options.height + "px";
+                }
                 break;
         }
 
@@ -125,15 +130,9 @@ export class ACFViewerFrameComponent {
 
     ngOnInit() {
         this.widgets.push(this.widgetService.parse(this.widgetService.serialize(this.page)));
-        this.frame.nativeElement.addEventListener("load", () => {
-            this.frame.nativeElement.scrollTop = 0;
-            window.clearInterval(this.intervalId);
-            this.intervalId = window.setInterval(() => {
-                if (this.frame.nativeElement && this.frame.nativeElement.contentWindow) {
-                    this.frame.nativeElement.style.height = this.frame.nativeElement.contentWindow.document.documentElement.scrollHeight + 'px';
-                }
-            }, 300);
-        });
+        // this.frame.nativeElement.addEventListener("load", () => {
+        //     this.frame.nativeElement.scrollTop = 0;
+        // });
     }
 
     handleSetSize(e) {
@@ -143,14 +142,14 @@ export class ACFViewerFrameComponent {
         this.size = e.width;
         this.mode = e.mode;
         e.active = true;
+        debugger;
+        this.frame.nativeElement.parentElement.scrollTo({ left: 0, top: 0 });
         this.loadFrame();
     }
 
 
     private loadFrame(): void {
         this.url = this.sanitizer.bypassSecurityTrustResourceUrl(`view?mode=${this.mode}&uid=${this.uid}&rnd=${AXHtmlUtil.getUID()}`);
-        
-
     }
 
 
