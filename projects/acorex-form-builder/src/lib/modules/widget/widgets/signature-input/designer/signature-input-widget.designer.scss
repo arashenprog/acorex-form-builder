@@ -1,23 +1,45 @@
 .sign{
     background-image: url('./assets/images/manualsignature.jpg');background-repeat: round;
     border: 1px solid gray;
-    
+    height: 50px;
+    width: 45%;
 }
-.row{
-    margin-bottom: 2px;
+// .row{
+//     margin-bottom: 2px;
 
-     .child{  
-         display: flex;
-        .spanchild{
-            padding: 0 10px;
-            font-size: 14px;
-        }
-        .valuechild{
-            width: 100%;
-            margin: 0px 10px 0px 0px; 
-        }
+//      .child{  
+//          display: flex;
+//         .spanchild{
+//             padding: 0 10px;
+//             font-size: 14px;
+//         }
+//         .valuechild{
+//             width: 100%;
+//             margin: 0px 10px 0px 0px; 
+//         }
+//     }
+// }
+// .wdt100{
+//     width: 100%;
+// }
+
+.img {
+    background-image: url('./assets/images/noimage.png');
+    background-repeat: round;
+    border: 1px solid gray;
+}
+
+.brd {
+    
+    overflow-x: auto;
+
+    table {
+        width: 100%;
+        table-layout: fixed;
     }
 }
-.wdt100{
-    width: 100%;
+
+.headfoot {
+    background-color: darkgray;
+    color: black;
 }

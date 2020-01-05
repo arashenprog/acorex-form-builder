@@ -1,4 +1,4 @@
-<div #el>
+ <!--<div #el>
     <div *ngIf="info.ShowType.includes('item')">
         <div class="row" *ngFor="let rw of rows">
             <div class="child" [ngStyle]="getStyles()" *ngFor="let item of columns">
@@ -27,5 +27,43 @@
                 </div>
             </td>
         </tr>
-    </table>
+    </table> 
+</div>-->
+<div #el>
+    <div class="brd">
+        <table class="table table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr *ngIf="dataSource">
+                    <th *ngFor="let item of dataSource.columns">{{item.title}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="dataSource">
+                    <tr style="border-bottom: 1px solid var(--primary-color);">
+                        <td *ngFor="let item of dataSource.columns">
+                            <span
+                                *ngIf="!item.fillByUser && item.fieldName==null && item.type!='image'">{{item.defaultValue}}</span>
+                            <span *ngIf="!item.fillByUser && item.fieldName!=null">[{{item.fieldName}}]</span>
+                            <img *ngIf="!item.fillByUser && item.fieldName==null && item.type=='image'"
+                                [src]="item.defaultValue" height="40" width="60">
+                            <div class="sign" *ngIf="item.type=='signature'"></div>
+                            <ax-text-box *ngIf="item.fillByUser && item.type=='string'"></ax-text-box>
+                            <ax-text-box type="number" *ngIf="item.fillByUser && item.type=='number'"></ax-text-box>
+                            <ax-date-picker label="" *ngIf="item.fillByUser && item.type=='date'"></ax-date-picker>
+                            <ax-check-box *ngIf="item.fillByUser && item.type=='boolean'" label="' '">
+                            </ax-check-box>
+                            <ax-upload-file *ngIf="item.fillByUser && item.type=='image'" type="inline">
+                            </ax-upload-file>
+                            <ax-selection-list direction="horizontal"
+                                *ngIf="item.fillByUser && item.type=='selectionList'">
+                            </ax-selection-list>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <ax-button type="primary" size="sm" *ngIf="status=='multiple'" tooltip="Add New">
+            <i class="fas fa-plus"></i>&nbsp;<span>Add Signature</span>
+        </ax-button>
+    </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
+import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
     templateUrl: './signature-input-widget.print.html' ,
@@ -7,9 +8,7 @@ import { AXFWidgetPrint } from '../../../config/widget';
 })
 export class AXFSignatureInputWidgetPrint extends AXFWidgetPrint {
 
-    value: string;
-    height:number;
-    width:number; 
+    dataSource: AXFDataSourceOption; 
     constructor() {
         super()
     }

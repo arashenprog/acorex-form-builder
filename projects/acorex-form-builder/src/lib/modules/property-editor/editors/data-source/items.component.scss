@@ -2,3 +2,20 @@
     padding: 5px;
 }
 
+.signature {
+    border: 1px #007bff dashed;
+    position: relative;
+    width: 150px;
+    height: 100px;
+    signature-pad {
+       // width: 100% !important;
+        display: flex;
+        
+    } 
+    .clear-box {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+    }
+    
+}
