@@ -1,5 +1,5 @@
-<div #el *ngIf="visible">
-    <div *ngIf="info.ShowType.includes('item')">
+<!-- <div #el *ngIf="visible">
+   <div *ngIf="info.ShowType.includes('item')">
         <div class="row" *ngFor="let rw of rows;let i = index">
             <div class="child" [ngStyle]="getStyles()" *ngFor="let item of columns">
                 <div class="spanchild">{{item.Text}} </div>
@@ -38,4 +38,51 @@
             </td>
         </tr>
     </table>
+</div> -->
+<div #el>
+    <div class="brd">
+        <table class="table table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr *ngIf="dataSource">
+                    <th *ngFor="let item of dataSource.columns">{{item.title}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="dataSource">
+                    <tr style="border-bottom: 1px solid var(--primary-color);">
+                        <td *ngFor="let item of dataSource.columns">
+                            <span *ngIf="!item.fillByUser && item.fieldName==null && item.type!='image'">{{item.defaultValue}}</span>
+                            <ax-select-box *ngIf="!item.fillByUser && item.fieldName!=null" [textField]="item.fieldName"
+                                mode="single" [valueField]="item.fieldName" [items]="dataSource.dataItems">
+                            </ax-select-box>
+                            <img *ngIf="!item.fillByUser && item.fieldName==null && item.type=='image'"
+                                [src]="item.defaultValue" class="img">
+                            <div class="sign" *ngIf="!item.fillByUser && item.type=='signature'"></div>
+                            <ax-text-box *ngIf="item.fillByUser && item.type=='string'"></ax-text-box>
+                            <ax-text-box type="number" *ngIf="item.fillByUser && item.type=='number'"></ax-text-box>
+                            <ax-date-picker label="" *ngIf="item.fillByUser && item.type=='date'"></ax-date-picker>
+                            <ax-check-box *ngIf="item.fillByUser && item.type=='boolean'" label="' '">
+                            </ax-check-box>
+                            <ax-upload-file *ngIf="item.fillByUser && item.type=='image'" type="inline">
+                            </ax-upload-file>
+                            <ax-selection-list direction="horizontal"
+                                *ngIf="item.fillByUser && item.type=='selectionList'">
+                            </ax-selection-list>
+                            <div class="signature" *ngIf="item.fillByUser && item.type=='signature'">
+                                <signature-pad [options]="signaturePadOptions">
+                                </signature-pad>
+                                <div class="clear-box">
+                                    <button class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <ax-button type="primary" size="sm" *ngIf="status=='multiple'" (onClick)="addSignatureClick()"
+            tooltip="Add New">
+            <i class="fas fa-plus"></i>&nbsp;<span>Add Signature</span>
+        </ax-button>
+    </div>
 </div>

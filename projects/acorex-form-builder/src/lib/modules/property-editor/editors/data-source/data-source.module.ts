@@ -6,10 +6,11 @@ import { AXFDataSourceEditorComponent } from './data-source.editor';
 import { FormsModule } from '@angular/forms';
 import { AXIDataItemEditorComponent } from './items.component';
 import { AXFDataColumnEditorComponent } from './columns.component';
+import { SignaturePadModule } from 'angular2-signaturepad';
 
 @NgModule({
     declarations: [AXFDataSourceEditorComponent, AXFDataColumnEditorComponent, AXIDataItemEditorComponent],
-    imports: [CommonModule, ACoreXUIModule, FormsModule],
+    imports: [CommonModule, ACoreXUIModule, FormsModule,SignaturePadModule],
     exports: [AXFDataSourceEditorComponent],
     entryComponents: [AXFDataSourceEditorComponent, AXFDataColumnEditorComponent, AXIDataItemEditorComponent],
     providers: [],

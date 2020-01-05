@@ -27,6 +27,14 @@
                             direction="horizontal" *ngSwitchCase="'selectionList'"
                             mode="{{item.mode?'multiple':'single'}}">
                         </ax-selection-list>
+                        <div class="signature" *ngSwitchCase="'signature'">
+                            <signature-pad attr.id="signature{{i}}" [options]="signaturePadOptions" (onEndEvent)="drawComplete(i)">
+                            </signature-pad>
+                            <div class="clear-box">
+                                <button (click)="onClearClick(i)" class="btn btn-outline-danger"><i
+                                        class="fa fa-trash"></i></button>
+                            </div>
+                        </div>
                     </ng-container>
 
                 </td>

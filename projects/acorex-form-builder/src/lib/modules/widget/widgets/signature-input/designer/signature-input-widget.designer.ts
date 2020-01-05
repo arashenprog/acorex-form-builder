@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
+import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
     selector: "[axf-widget-signature]",
@@ -10,29 +11,16 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 })
 export class AXFSignatureInputWidgetDesigner extends AXFWidgetDesigner {
 
-    @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
-    height: number;
-    width: number;
-    info: { SignatureType: string[], StaffNumber: number, ShowType: string[], Items: any[] };
-    columns: any[] = [];
-    rows: any[] = [];
-    constructor(private cdr: ChangeDetectorRef) {
+    @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;   
+    dataSource: AXFDataSourceOption;
+    status:string;
+    constructor(private cdr: ChangeDetectorRef) { 
         super()
     }
 
     onRender(): void {
-        this.columns = this.info.Items.filter(w => w.Visible == true);
-        this.rows = new Array(this.info.StaffNumber);
-        this.applyStyle(this.el.nativeElement);
         this.cdr.markForCheck();
     }
 
-    getStyles() {
-        let lengthCol = 100.0 / this.info.Items.filter(w => w.Visible == true).length; 
-        const styles = { 
-            'width': lengthCol+"%"
-        };
-        return styles;
-    }
 
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { typeWithParameters } from '@angular/compiler/src/render3/util';
+import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
     templateUrl: './signature-input-widget.view.html',
@@ -11,27 +12,30 @@ import { typeWithParameters } from '@angular/compiler/src/render3/util';
 export class AXFSignatureInputWidgetView extends AXFWidgetView {
 
     @ViewChild(SignaturePad, { static: true }) signaturePad: SignaturePad;
-
+    dataSource: AXFDataSourceOption;
     value: string;
-    height: number;
-    width: number;
-    info: { SignatureType: string[], StaffNumber: number, ShowType: string[], Items: any[] };
-    columns: any[] = [];
-    rows: any[] = [];
-
     signaturePadOptions: any;
-
-    constructor() {
+    status:string;
+    constructor(protected cdr: ChangeDetectorRef) {
         super()
     }
 
     ngOnInit(): void {
-        this.columns = this.info.Items.filter(w => w.Visible == true);
-        this.rows = new Array(this.info.StaffNumber);
         this.signaturePadOptions = {
-            canvasWidth: this.width,
-            canvasHeight: this.height
+             canvasHeight: 70
         }
+    } 
+
+    addSignatureClick() {
+        if (!this.dataSource.dataItems)
+        this.dataSource.dataItems = [];
+        let param: any = {
+            date: new Date().getTime(),
+            name: "Item 1",
+            signature: ""
+        }
+        this.dataSource.dataItems.push(param);
+        this.cdr.markForCheck();
     }
 
     drawComplete(ind) {
@@ -41,18 +45,9 @@ export class AXFSignatureInputWidgetView extends AXFWidgetView {
 
     onClearClick(ind) {
         let dfssf = document.querySelectorAll("signature-pad");
-
         ///dfssf[ind].clear();
         //this.signaturePad.clear();
         //this.info.Items[ind].Value = null;
-    }
-
-    getStyles() {
-        let lengthCol = 100.0 / this.info.Items.filter(w => w.Visible == true).length;
-        const styles = {
-            'width': lengthCol + "%"
-        };
-        return styles;
     }
 
 }

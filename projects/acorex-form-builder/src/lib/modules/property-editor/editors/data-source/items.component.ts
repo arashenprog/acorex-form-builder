@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AXBasePageComponent, AXUploadFileLoadEvent } from 'acorex-ui';
 import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events';
 import { AXFDataSourceColumnOption } from './data-source.class';
+import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
 @Component({
     templateUrl: './items.component.html',
@@ -9,11 +10,21 @@ import { AXFDataSourceColumnOption } from './data-source.class';
 })
 export class AXIDataItemEditorComponent extends AXBasePageComponent {
 
+    //@ViewChild(SignaturePad, { static: true }) signaturePad: SignaturePad;
     public columns: AXFDataSourceColumnOption;
     public items: any = [];
+    signaturePadOptions: any;
 
     constructor() {
         super();
+    }
+
+    ngOnInit()
+    {
+        this.signaturePadOptions = {
+            canvasWidth: 150,
+            canvasHeight:100
+        }
     }
 
     onClosing(e: ClosingAction) {
@@ -55,5 +66,18 @@ export class AXIDataItemEditorComponent extends AXBasePageComponent {
             this.items = [];
         let param: any = { id: new Date().getTime() };
         this.items.push(param);
+    }
+
+    drawComplete(ind) {
+        //this.items[ind].Value = this.signaturePad.toDataURL();
+    }
+
+
+    onClearClick(ind) {  
+        // var canvas =document.querySelector("#signature"+ind+"  canvas");  
+        // var fdf= new ElementRef(canvas);
+        // var sig = new SignaturePad(fdf);
+        // sig.clear();
+        // this.items[ind].Value = null;
     }
 }
