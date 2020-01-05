@@ -138,6 +138,8 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
 
     @HostListener("window:mousewheel", ["$event"])
     onWindowScroll(e: MouseWheelEvent) {
+        if (!this.paper)
+            return;
         if (AXHtmlUtil.isInRecPoint({
             x: e.clientX,
             y: e.clientY

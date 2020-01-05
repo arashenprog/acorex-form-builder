@@ -5,6 +5,7 @@ import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/
 import { AXFFormService, EventData } from '../services/form.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { AXFDataService } from '../services/data.service';
 
 export const WidgetInjector: { instance?: Injector } = {};
 
@@ -254,9 +255,14 @@ export abstract class AXFWidgetView extends AXFWidget {
     constructor() {
         super();
         this.formService = WidgetInjector.instance.get(AXFFormService);
+        let dataService = WidgetInjector.instance.get(AXFDataService);
         setTimeout(() => {
-            if (this.getName())
+            if (this.getName()) {
                 this.formService.setWidget(this.getName(), this);
+                debugger;
+                this.value = dataService.getModel()[this.getName()];
+                this.refresh();
+            }
         });
     }
 
@@ -267,5 +273,5 @@ export abstract class AXFWidgetPrint extends AXFWidget {
         super();
     }
 
-
+    value: any;
 }

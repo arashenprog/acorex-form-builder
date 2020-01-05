@@ -50,6 +50,20 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
 
 }
 
+export const AXF_VALUE_PROPERTY: AXFWidgetProperty = {
+    name: "value",
+    category: "General",
+    defaultValue: null,
+    title: "Value",
+    editor: "TextEditor",
+    order: 21,
+    options: {
+        allowHtml: false
+    },
+    visible: false
+
+}
+
 export const AXF_PLACEHOLDER_PROPERTY: AXFWidgetProperty = {
     name: "placeholder",
     category: "General",

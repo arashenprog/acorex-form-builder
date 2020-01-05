@@ -8,7 +8,6 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFTextAreaWidgetView extends AXFWidgetView {
 
-    text: string;
     placeholder: String;
     rows: number;
 

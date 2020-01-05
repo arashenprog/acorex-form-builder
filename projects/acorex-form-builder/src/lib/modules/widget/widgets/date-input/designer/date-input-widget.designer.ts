@@ -10,7 +10,6 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 })
 export class AXFDateInputWidgetDesigner extends AXFWidgetDesigner {
 
-    @ViewChild("el1", { static: true }) el1: ElementRef<HTMLElement>;
 
     constructor() {
         super();

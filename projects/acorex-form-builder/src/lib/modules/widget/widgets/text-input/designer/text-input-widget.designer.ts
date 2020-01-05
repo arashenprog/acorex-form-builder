@@ -10,9 +10,6 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 })
 export class AXFTextInputWidgetDesigner extends AXFWidgetDesigner {
 
-    @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
-
-    text: String;
     placeholder: String;
 
     constructor(private cdr: ChangeDetectorRef) {
@@ -20,10 +17,6 @@ export class AXFTextInputWidgetDesigner extends AXFWidgetDesigner {
     }
 
     onRender(): void {
-        let s = this.el.nativeElement.querySelector<HTMLFieldSetElement>("fieldset");
-        s.style.visibility = "hidden";
-        s.style.display = "none";
-        this.applyStyle(this.el.nativeElement.querySelector("input"));
         this.cdr.markForCheck();
     }
 

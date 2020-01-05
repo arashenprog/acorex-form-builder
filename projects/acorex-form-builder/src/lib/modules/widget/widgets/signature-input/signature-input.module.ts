@@ -4,9 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_LABEL_PROPERTY, AXF_COLOR_PROPERTY, AXF_TEXT_SIZE_PROPERTY, AXF_TEXT_STYLE_PROPERTY } from '../../config/general-properties';
-
-import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 import { AXFSignatureInputWidgetDesigner } from './designer/signature-input-widget.designer';
 import { AXFSignatureInputWidgetPrint } from './print/signature-input-widget.print';
 import { AXFSignatureInputWidgetView } from './view/signature-input-widget.view';

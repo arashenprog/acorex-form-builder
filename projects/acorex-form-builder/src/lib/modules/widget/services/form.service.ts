@@ -38,9 +38,7 @@ export class AXFFormService {
 
 
     submit() {
-        console.log("start submit", this.formData);
         this.connectService.send("submit", { data: this.formData }).then(() => {
-            console.log("submitted");
         });
     }
 

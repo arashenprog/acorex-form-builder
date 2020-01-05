@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
@@ -8,19 +8,15 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFTextInputWidgetView extends AXFWidgetView {
 
-    text: String;
     placeholder: String;
 
 
-    constructor(private el: ElementRef<HTMLElement>) {
+    constructor(private cdr: ChangeDetectorRef) {
         super()
     }
 
 
     onRender(): void {
-        // let s = this.el.nativeElement.querySelector<HTMLFieldSetElement>("fieldset");
-        // s.style.visibility = "hidden";
-        // s.style.display = "none";
-        // this.applyStyle(this.el.nativeElement.querySelector("input"));
+        this.cdr.markForCheck();
     }
 }

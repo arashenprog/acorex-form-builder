@@ -6,7 +6,7 @@ import { AXFTextBlockWidgetPrint } from './print/text-block-widget.print';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_TEXT_PROPERTY, AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_RICH_TEXT_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_STYLE_GENERAL_PROPERTIES, AXF_RICH_TEXT_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 import { AXFWordPipe } from '../../pipes/word.pipe';
 

@@ -15,15 +15,19 @@ export class AXFDataService {
 
     private dataModel: any = {};
 
-    constructor(private connectService: AXFConnectService, private formService: AXFFormService) {
+    constructor(
+        private connectService: AXFConnectService, 
+        private formService: AXFFormService
+       ) {
 
     }
 
-    
+
 
     init(): Promise<any> {
         let p1 = new Promise((resolve) => {
             this.connectService.send("getModel").then(c => {
+                console.log("load model", c);
                 this.dataModel = c;
                 resolve()
             });
@@ -32,7 +36,7 @@ export class AXFDataService {
     }
 
     getList(dataSourceName: String, params?: any): Promise<any[]> {
-        return new Promise<any[]>((resolve,reject) => {
+        return new Promise<any[]>((resolve, reject) => {
             let keyValObject = {}
             if (Array.isArray(params)) {
                 params.forEach(p => {
@@ -44,9 +48,8 @@ export class AXFDataService {
                     }
                 });
             }
-            else
-            {
-                Object.assign(keyValObject,params)
+            else {
+                Object.assign(keyValObject, params)
             }
             if (dataSourceName && dataSourceName.match(/\[\S+\]/)) {
                 resolve(this.resolvePropName(dataSourceName.substring(1, dataSourceName.length - 1), this.dataModel));
