@@ -1,4 +1,4 @@
-<div #el [hidden]="visible==false" [ngStyle]="{'display': direction=='vertical'?'grid':null}">
+<!-- <div #el [hidden]="visible==false" [ngStyle]="{'display': direction=='vertical'?'grid':null}">
     <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0"
         style="height: 27px; border: 1px solid var(--primary-color); font-weight: 700;width: 100%;">No Item</div>
 
@@ -29,14 +29,41 @@
                        'left':alignCheck=='left'?'0px':(alignCheck=='top'?'5px': null),
                        'right': alignCheck=='right'?'10px':null,
                        'display':alignCheck=='bottom'?'flex':null,
-                       'border-radius': mode=='single' ? '100%' : '0'}">
-                <!-- <i *ngIf="i==0"  style="display: block;
-            left: 0;
-            color: var(--primary-color);
-            border: 7px solid;
-            font-size: 1px; " [ngStyle]="{'border-radius': mode=='single' ? '50%' : '0'}" > </i> -->
-                <!-- <p>&#10003;</p> -->
+                       'border-radius': mode=='single' ? '100%' : '0'}"> 
             </span>
+        </label>
+    </ng-container>
+</div> -->
+<div #el [hidden]="visible==false" style="float: left;">
+    <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0"
+        style="height: 27px; border: 1px solid var(--primary-color); font-weight: 700;width: 100%;">No Item</div>
+
+    <span *ngIf="dataSource && printMode=='onlySelected'"
+        style="display: block;height: 36px;border-radius:4px;border:1px solid var(--border-color); padding: 5px 0px 0px 5px;">
+        {{dataSource.dataItems.length>0? dataSource.dataItems[0][dataSource.columns[1]["fieldName"]] : 'Item Selected'}}
+    </span>    
+    <ng-container *ngIf="dataSource && printMode=='allItems'">
+        <label *ngFor="let item of dataSource.dataItems; let i=index;"
+            style="box-sizing: border-box;cursor: pointer; font-size: 14px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: .5rem;    display: inline-block; "
+            [ngStyle]="{'padding':alignCheck=='left'? '0px 10px 0px 0px' : (alignCheck=='top'? '2px 8px' : (alignCheck=='bottom'? '0px 8px' : '0px 10px 0px 0px')),
+        'width':columns==1?'inherit':(100.0/columns)+'%'}">
+           
+            <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'"
+                [ngStyle]="{'padding-left':alignCheck=='left'?'5px': (alignCheck=='right'?'2px': null),
+                       'padding-right':alignCheck=='right'?'4px': null,
+                       'display':alignCheck=='top'?'inline-block': null}">{{item[dataSource.columns[1].fieldName]}}</span>
+
+            <img *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'"
+                [src]="item[dataSource.columns[2].fieldName]" height="40" width="60" [ngStyle]="{'margin-left':alignCheck=='left'?'3px':null,
+                'padding-top':alignCheck=='top'?'15px':null,
+                'display':alignCheck=='top'?'inline-block':null}">
+                <span *ngIf="mode!='unselectable'"
+                style="padding: 2px;position: relative;display: inherit; height: 20px; width: 20px; background-color: white; border: 1px solid;border-color: black;    box-sizing: border-box;"
+                [ngStyle]="{'top':(alignCheck=='left' || alignCheck=='right')?'5px':null,
+                       'left':alignCheck=='left'?'0px':(alignCheck=='top'?'5px': null),
+                       'float': alignCheck=='right'?'right':(alignCheck=='left'?'inherit': null), 
+                       'border-radius': mode=='single' ? '100%' : '0'}">
+            </span>    
         </label>
     </ng-container>
 </div>
