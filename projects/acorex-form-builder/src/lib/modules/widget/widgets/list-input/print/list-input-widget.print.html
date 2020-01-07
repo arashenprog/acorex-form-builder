@@ -44,14 +44,17 @@
     </span>    
     <ng-container *ngIf="dataSource && printMode=='allItems'">
         <label *ngFor="let item of dataSource.dataItems; let i=index;"
-            style="box-sizing: border-box;cursor: pointer; font-size: 14px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: .5rem;    display: inline-block; "
+            style="box-sizing: border-box;cursor: pointer; font-size: 14px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: .5rem; "
             [ngStyle]="{'padding':alignCheck=='left'? '0px 10px 0px 0px' : (alignCheck=='top'? '2px 8px' : (alignCheck=='bottom'? '0px 8px' : '0px 10px 0px 0px')),
         'width':columns==1?'inherit':(100.0/columns)+'%'}">
            
-            <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'"
+            <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'" 
                 [ngStyle]="{'padding-left':alignCheck=='left'?'5px': (alignCheck=='right'?'2px': null),
                        'padding-right':alignCheck=='right'?'4px': null,
-                       'display':alignCheck=='top'?'inline-block': null}">{{item[dataSource.columns[1].fieldName]}}</span>
+                       'display':alignCheck=='top'?'inline-block': null,
+                        'float':alignCheck=='top'?'inherit':null,
+                        'margin-top':alignCheck=='top'?'20px':null
+                    }">{{item[dataSource.columns[1].fieldName]}}</span>
 
             <img *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'"
                 [src]="item[dataSource.columns[2].fieldName]" height="40" width="60" [ngStyle]="{'margin-left':alignCheck=='left'?'3px':null,
