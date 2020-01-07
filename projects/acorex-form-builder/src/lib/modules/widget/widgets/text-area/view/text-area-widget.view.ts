@@ -12,11 +12,11 @@ export class AXFTextAreaWidgetView extends AXFWidgetView {
     rows: number;
 
 
-    constructor(private cdk: ChangeDetectorRef) {
+    constructor(private cdr: ChangeDetectorRef) {
         super()
     }
 
     onRender(): void {
-        this.cdk.markForCheck();
+        this.cdr.markForCheck();
     }
 }

@@ -1,5 +1,7 @@
-<ng-container *ngFor="let w of widgets" axf-widget-renderer [parent]="this" [widget]="w">
-</ng-container>
+<div>
+    <ng-container *ngFor="let w of widgets" axf-widget-renderer [parent]="this" [widget]="w" >
+    </ng-container>
+</div>
 <div class="add-element-container">
     <div class="add-element" (click)="handleStartClick()" tooltip="Append Element" [placement]="'bottom'">
         <i class="fas fa-plus"></i>
