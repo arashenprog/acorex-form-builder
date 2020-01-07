@@ -30,6 +30,7 @@ export class AXFColWidgetModule {
             name: "col",
             designerClass: AXFColWidgetDesigner,
             printClass: AXFColWidgetPrint,
+            container: true,
             viewClass: AXFColWidgetView,
             toolbox: {
                 visible: false
@@ -49,13 +50,13 @@ export class AXFColWidgetModule {
                     defaultValue: 1,
                     title: "Size",
                     editor: "TextEditor",
-                    order:0,
+                    order: 0,
                 },
                 // AXF_BG_COLOR_PROPERTY,
                 // AXF_BOX_STYLE_PROPERTY,
                 // AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
                 // AXF_VERTICAL_ALIGNMENT_PROPERTY
-               ...AXF_STYLE_GENERAL_PROPERTIES
+                ...AXF_STYLE_GENERAL_PROPERTIES
             ]
         })
     }

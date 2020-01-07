@@ -1,10 +1,9 @@
 import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { WidgetConfig } from '../../services/widget.service';
 import { AXFWidget, AXFWidgetDesigner } from '../../config/widget';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AXFWidgetToolboxComponent } from '../widget-toolbox/widget-toolbox.component';
 import { AXHtmlUtil, EventService } from 'acorex-ui';
+import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Directive({
     selector: '[axf-widget-renderer]',
@@ -114,23 +113,87 @@ export class AXFWidgetRendererDirective {
             else {
                 toolboxInstance.allowDelete = false;
             }
-            //
-            // toolbox move
-            // if (this.widgetConfig.toolbox.move != false) {
-            //     toolboxInstance.move.subscribe(c => {
-            //         this.toolboxElement.style.visibility = "hidden";
-            //     });
-            // }
-            // else {
-            //     toolboxInstance.allowMove = false;
-            // }
-            //
             this.toolboxElement = (toolboxComponent.location.nativeElement as HTMLElement);
             this.widgetElement = (widgetComponent.location.nativeElement as HTMLElement);
-            
+
+            this.zone.runOutsideAngular(() => {
+                if (this.widgetConfig.container) {
+                    this.widgetElement.addEventListener("dragover", (e: DragEvent) => {
+                        let dragged = window["dragged"].element
+                        if (!dragged.contains(this.widgetElement)) {
+                            this.widgetElement.style.backgroundColor = "#ffcccc";
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    });
+                    this.widgetElement.addEventListener("dragleave", (e: DragEvent) => {
+                        this.widgetElement.style.backgroundColor = this.widgetInstance.bgColor;
+                    });
+                    this.widgetElement.addEventListener("drop", (e: DragEvent) => {
+                        let dragged = window["dragged"].element
+                        let dropZone = this.widgetElement;
+                        if (!dragged.contains(dropZone)) {
+                            dropZone.style.backgroundColor = this.widgetInstance.bgColor;
+                            let draggedWidget = <AXFWidgetDesigner>window["dragged"].widget
+
+                            // if (event.previousContainer === event.container) {
+                            //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+                            //   } else {
+                            //     transferArrayItem(event.previousContainer.data,
+                            //                       event.container.data,
+                            //                       event.previousIndex,
+                            //                       event.currentIndex);
+                            //   }
+                            let previousIndex = Array.prototype.indexOf.call(dragged.parentNode.childNodes, dragged);
+                            let currentIndex = Array.prototype.indexOf.call(dragged.parentNode.childNodes, dragged);
+
+                            transferArrayItem(draggedWidget.parent.widgets,
+                                this.widgetInstance.widgets,
+                                previousIndex,
+                                currentIndex);
+                            this.zone.run(() => {
+                                draggedWidget.parent.refresh();
+                                this.widgetInstance.refresh();
+                                draggedWidget.parent = this.widgetInstance;
+                            })
+
+                            window["dragged"] = null;
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    });
+                }
+
+
+                //setTimeout(() => {
+                let handler = this.widgetElement.querySelector('.axf-widget-move-handler');
+                if (handler) {
+                    this.widgetElement.setAttribute("draggable", "true");
+                    this.widgetElement.onmousedown = (e) => {
+                        this.widgetInstance.dragTarget = e.target;
+                        this.zone.run(() => {
+                            this.widgetInstance.edit();
+                        });
+                        e.stopPropagation();
+                    }
+                    this.widgetElement.ondragstart = (e) => {
+                        if (handler.contains(this.widgetInstance.dragTarget)) {
+                            window["dragged"] = {
+                                widget: this.widgetInstance,
+                                element: this.widgetElement
+                            }
+                        } else {
+                            e.preventDefault();
+                        }
+                    }
+                }
+                //}, 1000);
+            });
+
             //
             if (this.widgetConfig.toolbox.visible != false) {
                 this.zone.runOutsideAngular(() => {
+
                     this.widgetElement.style.position = "relative";
                     this.widgetElement.appendChild(this.toolboxElement)
                     this.toolboxElement.style.position = "absolute";
@@ -179,7 +242,6 @@ export class AXFWidgetRendererDirective {
         e.stopPropagation();
         e.preventDefault();
         e.stopImmediatePropagation();
-        e.cancelBubble = true;
         return false;
     }
 

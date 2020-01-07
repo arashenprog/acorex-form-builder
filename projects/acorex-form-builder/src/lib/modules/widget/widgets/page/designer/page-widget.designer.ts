@@ -52,6 +52,8 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         this.cdr.markForCheck();
     }
 
+    
+
 
 }
 

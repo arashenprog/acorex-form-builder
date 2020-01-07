@@ -30,6 +30,7 @@ export class AXFPanelWidgetModule {
             category: 'Layout',
             visible: true,
             name: 'panel',
+            container:true,
             designerClass: AXFPanelWidgetDesigner,
             printClass: AXFPanelWidgetPrint,
             viewClass: AXFPanelWidgetView,

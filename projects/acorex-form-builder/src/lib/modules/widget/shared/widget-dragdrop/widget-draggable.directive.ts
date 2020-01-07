@@ -1,4 +1,5 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, ViewContainerRef } from '@angular/core';
+import { AXFWidgetDesigner } from 'acorex-form-builder/lib/modules/widget/config/widget';
 
 
 @Directive({
@@ -6,21 +7,30 @@ import { Directive, ElementRef } from '@angular/core';
 })
 export class AXFWidgetDraggableDirective {
 
+    private handler: HTMLDivElement
+
     constructor(
-        private el: ElementRef<HTMLDivElement>
+        private el: ElementRef<HTMLDivElement>,
+        private _view: ViewContainerRef
     ) {
-        //el.nativeElement.setAttribute("allow")
-        el.nativeElement.addEventListener("dragstart", this.handleDragStart.bind(this));
+
     }
 
-    ngOnInit()
-    {
+    ngOnInit() {
         console.log("hello directive");
     }
 
-    handleDragStart(): void {
-        console.log();
+    ngAfterViewInit() {
+        debugger;
+        let component = (<any>this._view)._element.component
+        this.handler = this.el.nativeElement.querySelector('.axf-widget-move-handler');
+        if (this.handler) {
+            this.handler.addEventListener("dragstart", this.handleDragStart.bind(this));
+        }
+    }
 
+    handleDragStart(): void {
+        console.log("start drag");
     }
 
 
