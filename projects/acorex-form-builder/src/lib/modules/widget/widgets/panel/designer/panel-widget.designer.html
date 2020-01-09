@@ -1,17 +1,19 @@
 <div class="widget-designer">
     <div class="widget-container" #el>
-        <ax-panel-box [caption]="caption" [allowCollapse]="false"  [collapsed]="collapsed">
-            <div *ngIf="widgets.length; else elseTemplate">
-                <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
-                </div>
-            </div>
-            <ng-template #elseTemplate>
-                <div class="align-center">
-                    <div class="add-element" (click)="handleAction('add',$event)">
-                        <i class="fas fa-plus"></i>
+        <ax-panel-box [caption]="caption" [allowCollapse]="false" [collapsed]="collapsed">
+            <div class="axf-drop-zone">
+                <div *ngIf="widgets.length; else elseTemplate">
+                    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
                     </div>
                 </div>
-            </ng-template>
+                <ng-template #elseTemplate>
+                    <div class="align-center">
+                        <div class="add-element" (click)="handleAction('add',$event)">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
         </ax-panel-box>
     </div>
     <div class="col-tools">

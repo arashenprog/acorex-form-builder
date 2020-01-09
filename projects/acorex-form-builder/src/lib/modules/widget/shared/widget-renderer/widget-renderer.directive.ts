@@ -115,10 +115,50 @@ export class AXFWidgetRendererDirective {
             }
             this.toolboxElement = (toolboxComponent.location.nativeElement as HTMLElement);
             this.widgetElement = (widgetComponent.location.nativeElement as HTMLElement);
+            this.widgetElement.id = this.widgetConfig.options.uid;
 
             this.zone.runOutsideAngular(() => {
+                this.widgetElement.addEventListener("click", this.handleSelectElement.bind(this));
+                // add toolbox 
+                if (this.widgetConfig.toolbox.visible != false) {
+                    this.widgetElement.style.position = "relative";
+                    this.widgetElement.appendChild(this.toolboxElement)
+                    this.toolboxElement.style.position = "absolute";
+                    this.widgetElement.addEventListener("mouseover", (c) => {
+                        c.stopPropagation();
+                        this.toolboxElement.style.display = "unset";
+                        const bound = this.widgetElement.getBoundingClientRect();
+                        this.toolboxElement.style.top = `0px`;
+                        this.toolboxElement.style.left = `0px`
+                        this.toolboxElement.style.width = `${bound.width}px`
+                        this.toolboxElement.style.height = `${bound.height}px`;
+                    });
+                    this.widgetElement.addEventListener("mouseleave", (c) => {
+                        this.toolboxElement.style.display = "none";
+                    });
+                }
+
+                // add drag and drop functionality
+                if (this.widgetConfig.name != "page")
+                    this.widgetElement.classList.add("axf-draggable-widget");
+                //
+                let handler = <HTMLElement>Array.from(this.widgetElement.querySelectorAll(`.axf-widget-move-handler`)).reverse()[0];
+                if (handler && this.widgetConfig.name != "page") {
+                    this.widgetElement.setAttribute("draggable", "true");
+                    this.widgetElement.ondragstart = (e) => {
+                        window["dragged"] = {
+                            widget: this.widgetInstance,
+                            element: this.widgetElement
+                        }
+                        e.stopPropagation();
+                    }
+                }
+                //
                 if (this.widgetConfig.container) {
+                    //this.widgetElement.classList.add("axf-drop-zone");
                     this.widgetElement.addEventListener("dragover", (e: DragEvent) => {
+                        if (window["dragged"] == null)
+                            return;
                         let dragged = window["dragged"].element
                         if (!dragged.contains(this.widgetElement)) {
                             this.widgetElement.style.backgroundColor = "#ffcccc";
@@ -130,106 +170,69 @@ export class AXFWidgetRendererDirective {
                         this.widgetElement.style.backgroundColor = this.widgetInstance.bgColor;
                     });
                     this.widgetElement.addEventListener("drop", (e: DragEvent) => {
-                        let dragged = window["dragged"].element
-                        let dropZone = this.widgetElement;
-                        if (!dragged.contains(dropZone)) {
-                            dropZone.style.backgroundColor = this.widgetInstance.bgColor;
-                            let draggedWidget = <AXFWidgetDesigner>window["dragged"].widget
+                        if (window["dragged"] == null)
+                            return;
+                        let droppedElement: HTMLDivElement = window["dragged"].element
+                        let droppedParent = <HTMLDivElement>droppedElement.closest('.axf-drop-zone');
+                        droppedParent.id = AXHtmlUtil.getUID();
+                        //
+                        let containerElement: HTMLElement;
+                        if (this.widgetElement.classList.contains('axf-drop-zone'))
+                            containerElement = this.widgetElement;
+                        else
+                            containerElement = this.widgetElement.querySelector('.axf-drop-zone');
+                        containerElement.id = AXHtmlUtil.getUID();
+                        //
+                        let droppedWidget = <AXFWidgetDesigner>window["dragged"].widget
+                        //
+                        if (!droppedElement.contains(containerElement)) {
+                            this.widgetElement.style.backgroundColor = this.widgetInstance.bgColor;
 
-                            // if (event.previousContainer === event.container) {
-                            //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-                            //   } else {
-                            //     transferArrayItem(event.previousContainer.data,
-                            //                       event.container.data,
-                            //                       event.previousIndex,
-                            //                       event.currentIndex);
-                            //   }
-                            let previousIndex = Array.prototype.indexOf.call(dragged.parentNode.childNodes, dragged);
-                            let currentIndex = Array.prototype.indexOf.call(dragged.parentNode.childNodes, dragged);
+                            let previousIndex = Array.prototype.indexOf.call(document.querySelectorAll(`#${droppedParent.id} > .axf-draggable-widget`), droppedElement);
+                            let currentIndex = 0;
 
-                            transferArrayItem(draggedWidget.parent.widgets,
-                                this.widgetInstance.widgets,
-                                previousIndex,
-                                currentIndex);
+                            let allDropZoneElement = document.querySelectorAll(`#${containerElement.id} > .axf-draggable-widget`);
+                            for (let i = 0; i < allDropZoneElement.length; i++) {
+                                const element = allDropZoneElement[i];
+                                let bound = element.getBoundingClientRect();
+                                if (e.clientY >= bound.top && e.clientY <= bound.bottom) {
+                                    currentIndex = i;
+                                    break;
+                                }
+                            }
+                            for (let i = allDropZoneElement.length - 1; i > 0 && currentIndex == 0; i--) {
+                                const element = allDropZoneElement[i];
+                                let bound = element.getBoundingClientRect();
+                                if (e.clientY >= bound.bottom) {
+                                    currentIndex = i;
+                                    break;
+                                }
+                            }
+
+
+                            if (droppedElement.parentNode === this.widgetElement) {
+                                moveItemInArray(droppedWidget.parent.widgets, previousIndex, currentIndex);
+                            } else {
+                                transferArrayItem(droppedWidget.parent.widgets,
+                                    this.widgetInstance.widgets,
+                                    previousIndex,
+                                    currentIndex + 1);
+                            }
+
                             this.zone.run(() => {
-                                draggedWidget.parent.refresh();
+                                droppedWidget.parent.refresh();
                                 this.widgetInstance.refresh();
-                                draggedWidget.parent = this.widgetInstance;
+                                droppedWidget.parent = this.widgetInstance;
                             })
 
                             window["dragged"] = null;
                             e.preventDefault();
                             e.stopPropagation();
                         }
+
                     });
                 }
-
-
-                //setTimeout(() => {
-                let handler = this.widgetElement.querySelector('.axf-widget-move-handler');
-                if (handler) {
-                    this.widgetElement.setAttribute("draggable", "true");
-                    this.widgetElement.onmousedown = (e) => {
-                        this.widgetInstance.dragTarget = e.target;
-                        this.zone.run(() => {
-                            this.widgetInstance.edit();
-                        });
-                        e.stopPropagation();
-                    }
-                    this.widgetElement.ondragstart = (e) => {
-                        if (handler.contains(this.widgetInstance.dragTarget)) {
-                            window["dragged"] = {
-                                widget: this.widgetInstance,
-                                element: this.widgetElement
-                            }
-                        } else {
-                            e.preventDefault();
-                        }
-                    }
-                }
-                //}, 1000);
             });
-
-            //
-            if (this.widgetConfig.toolbox.visible != false) {
-                this.zone.runOutsideAngular(() => {
-
-                    this.widgetElement.style.position = "relative";
-                    this.widgetElement.appendChild(this.toolboxElement)
-                    this.toolboxElement.style.position = "absolute";
-                    //
-                    this.toolboxElement.addEventListener("click", this.handleSelectElement.bind(this));
-                    //
-                    this.widgetElement.addEventListener("mouseover", (c) => {
-                        c.stopPropagation();
-                        this.toolboxElement.style.display = "unset";
-                        const bound = this.widgetElement.getBoundingClientRect();
-                        this.toolboxElement.style.top = `0px`;
-                        this.toolboxElement.style.left = `0px`
-                        this.toolboxElement.style.width = `${bound.width}px`
-                        this.toolboxElement.style.height = `${bound.height}px`;
-                    });
-
-                    document.addEventListener("mousemove", (c) => {
-                        let targetBound = this.widgetElement.getBoundingClientRect();
-                        let pos = { x: c.clientX, y: c.clientY };
-                        let inTarget = AXHtmlUtil.isInRecPoint(pos, {
-                            left: targetBound.left,
-                            width: targetBound.width,
-                            top: targetBound.top,
-                            height: targetBound.height
-                        });
-                        if (!inTarget) {
-                            this.toolboxElement.style.display = "none";
-                        }
-                    });
-                });
-            }
-            else {
-                this.zone.runOutsideAngular(() => {
-                    this.widgetElement.addEventListener("click", this.handleSelectElement.bind(this));
-                });
-            }
             // select after added to container
             this.widgetInstance.edit();
         }
