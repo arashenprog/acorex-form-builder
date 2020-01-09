@@ -258,8 +258,7 @@ export abstract class AXFWidgetView extends AXFWidget {
         let dataService = WidgetInjector.instance.get(AXFDataService);
         setTimeout(() => {
             if (this.getName()) {
-                this.formService.setWidget(this.getName(), this);
-                debugger;
+                this.formService.setWidget(this.getName(), this); 
                 this.value = dataService.getModel()[this.getName()];
                 this.refresh();
             }

@@ -34,7 +34,7 @@
         </label>
     </ng-container>
 </div> -->
-<div #el [hidden]="visible==false" style="float: left;">
+<div #el [hidden]="visible==false" style="float: left;padding-left: 5px;">
     <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0"
         style="height: 27px; border: 1px solid var(--primary-color); font-weight: 700;width: 100%;">No Item</div>
 
@@ -46,7 +46,7 @@
         <label *ngFor="let item of dataSource.dataItems; let i=index;"
             style="box-sizing: border-box;cursor: pointer; font-size: 14px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: .5rem; "
             [ngStyle]="{'padding':alignCheck=='left'? '0px 10px 0px 0px' : (alignCheck=='top'? '2px 8px' : (alignCheck=='bottom'? '0px 8px' : '0px 10px 0px 0px')),
-        'width':columns==1?'inherit':(100.0/columns)+'%'}">
+        'width':(direction=='horizontal' && columns==1)?'inherit':(100.0/columns)+'%'}">
            
             <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'" 
                 [ngStyle]="{'padding-left':alignCheck=='left'?'5px': (alignCheck=='right'?'2px': null),
@@ -54,7 +54,7 @@
                        'display':alignCheck=='top'?'inline-block': null,
                         'float':alignCheck=='top'?'inherit':null,
                         'margin-top':alignCheck=='top'?'20px':null
-                    }">{{item[dataSource.columns[1].fieldName]}}</span>
+                    }">{{item[dataSource.columns[1].fieldName]  | word}}</span>
 
             <img *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'"
                 [src]="item[dataSource.columns[2].fieldName]" height="40" width="60" [ngStyle]="{'margin-left':alignCheck=='left'?'3px':null,

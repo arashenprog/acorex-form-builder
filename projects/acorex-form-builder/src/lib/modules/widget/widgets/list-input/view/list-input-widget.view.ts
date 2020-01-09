@@ -66,6 +66,5 @@ export class AXFListInputWidgetView extends AXFWidgetView {
                 this.value = this.value.filter(c => c != val);
             }
         }
-
     }
 }

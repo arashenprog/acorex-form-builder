@@ -99,8 +99,7 @@ export class ACFViewerFrameComponent {
             case "getModel":
                 this.postMessage(action, reqId, this.dataService.getModel())
                 break;
-            case "getList":
-                debugger;
+            case "getList": 
                 if (options.name) {
                     this.dataService.getList(options.name, options.params).then(items => {
                         this.postMessage(action, reqId, {
@@ -141,8 +140,7 @@ export class ACFViewerFrameComponent {
         })
         this.size = e.width;
         this.mode = e.mode;
-        e.active = true;
-        debugger;
+        e.active = true; 
         this.frame.nativeElement.parentElement.scrollTo({ left: 0, top: 0 });
         this.loadFrame();
     }

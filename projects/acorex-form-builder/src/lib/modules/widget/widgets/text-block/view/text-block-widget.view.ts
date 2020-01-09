@@ -16,8 +16,9 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
         super()
     }
 
-    onRender(): void {
+    onRender(): void { 
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         this.applyStyle(el);
+        
     }
 }
