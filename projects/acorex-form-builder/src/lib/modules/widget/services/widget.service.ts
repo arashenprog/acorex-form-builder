@@ -28,12 +28,14 @@ export interface WidgetConfig {
     name: string;
     category: string;
     visible: boolean;
+    container?: boolean;
     designerClass: any;
     viewClass: any;
     printClass: any;
     options?: any;
     properties: AXFWidgetProperty[];
     toolbox?: AXFWidgetToolboxProperty;
+    
 }
 
 
@@ -68,6 +70,7 @@ export class AXFWidgetService {
             printClass: c.printClass,
             viewClass: c.viewClass,
             visible: c.visible,
+            container: c.container,
             toolbox: c.toolbox,
             properties: []
         }

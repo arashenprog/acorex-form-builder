@@ -8,7 +8,10 @@ import { AXFWidgetPickerService } from '../../../services/template/picker.servic
     selector: '[axf-page]',
     templateUrl: './page-widget.designer.html',
     styleUrls: ['./page-widget.designer.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: "axf-drop-zone"
+    }
 })
 export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
 
@@ -47,10 +50,12 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         el.classList.remove("rtl", "ltr");
         el.classList.add(this.pageDirection);
-        el.style.setProperty("--primary-color",this.themeColor);
+        el.style.setProperty("--primary-color", this.themeColor);
         this.applyStyle(el);
         this.cdr.markForCheck();
     }
+
+
 
 
 }

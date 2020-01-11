@@ -31,6 +31,7 @@ export class AXFPagePageWidgetModule {
             icon: 'fas fa-file',
             category: 'Layout',
             visible: false,
+            container: true,
             name: 'page',
             designerClass: AXFPageWidgetDesigner,
             printClass: AXFPageWidgetPrint,
