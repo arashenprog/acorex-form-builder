@@ -105,12 +105,13 @@
 
           .checkmark:after {
             content: "";
+            //content: '■';
             position: absolute;
             display: none;
             top: 4px;
             left: 4px;
-            width: 9px;
-            height: 9px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: var(--primary-color);      
           }  
