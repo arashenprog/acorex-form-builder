@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AXFConnectService } from './connect.service';
 import { Subject, Subscription, Observable } from 'rxjs';
 import { filter, map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { EventService } from 'acorex-ui';
 
 export class EventData {
     name: string;
@@ -22,7 +23,10 @@ export class AXFFormService {
 
     private widgetRegisterChangeObserver: any;
 
-    constructor(private connectService: AXFConnectService) {
+    constructor(private connectService: AXFConnectService, private eventService: EventService) {
+        eventService.on("__submit", (data) => {
+            this.submit();
+        })
     }
 
     private formData: any = {};
@@ -38,6 +42,7 @@ export class AXFFormService {
 
 
     submit() {
+        debugger;
         this.connectService.send("submit", { data: this.formData }).then(() => {
         });
     }
