@@ -18,7 +18,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     viewType: string;
     columns: number;
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
-        super()
+        super() 
     }
 
     onRender(): void {
@@ -52,6 +52,9 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     }
 
     onCheckValueChange(val) {
+        if(this.readOnly)
+        return;
+
         if (this.mode == "single") {
             this.value = [val];
         }

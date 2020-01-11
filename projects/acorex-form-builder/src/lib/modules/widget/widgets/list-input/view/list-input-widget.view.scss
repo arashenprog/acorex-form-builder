@@ -103,20 +103,25 @@
             }
           }
 
-          .checkmark:after {
-            content: "";
-            //content: '■';
-            position: absolute;
-            display: none;
-            top: 4px;
-            left: 4px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--primary-color);      
-          }  
+          // .checkmark:after {
+          //   content: "";
+          //   //content: '■';
+          //   position: absolute;
+          //   display: none;
+          //   top: 4px;
+          //   left: 4px;
+          //   width: 10px;
+          //   height: 10px;
+          //   border-radius: 50%;
+          //   background: var(--primary-color);      
+          // }  
       }
-      input.checked~.checkmark:after {
-        display: block;
+      // input.checked~.checkmark:after {
+      //   display: block;
+      // }
+      input.checked~.checkmark{
+        background-clip: content-box;
+        background-color: var(--primary-color);
+        padding: 4px;
       }
 }
