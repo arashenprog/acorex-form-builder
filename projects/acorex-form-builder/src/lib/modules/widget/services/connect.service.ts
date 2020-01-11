@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { PromisResult, AXMathUtil, AXHtmlUtil } from 'acorex-ui';
+import { PromisResult, AXMathUtil, AXHtmlUtil, EventService } from 'acorex-ui';
 
 @Injectable({ providedIn: "root" })
 export class AXFConnectService {
 
     private messageQueue: { action: string, reqId: string, callback: Function }[] = [];
 
-    constructor() {
+    constructor(private eventService: EventService) {
         window.addEventListener("message", this.handMessageEvent.bind(this));
+
     }
 
 
@@ -34,10 +35,13 @@ export class AXFConnectService {
         if (e.data && e.data.action && e.data.reqId) {
             let msg = this.messageQueue.find(c => c.reqId == e.data.reqId && c.action == e.data.action);
             if (msg) {
-                msg.callback((e.data && e.data.data) ? JSON.parse(e.data.data)  : null);
+                msg.callback((e.data && e.data.data) ? JSON.parse(e.data.data) : null);
                 this.messageQueue = this.messageQueue.filter(c => !(c.reqId == e.data.reqId && c.action == e.data.action));
             }
-        };
+        }
+        else if (e.data && e.data.action) {
+            this.eventService.broadcast(`__${e.data.action}`, e.data.data);
+        }
     }
 
     ngOnDestroy(): void {
