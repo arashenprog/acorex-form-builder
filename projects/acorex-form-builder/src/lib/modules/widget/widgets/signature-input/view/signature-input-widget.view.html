@@ -69,11 +69,7 @@
                                 *ngIf="item.fillByUser && item.type=='selectionList'">
                             </ax-selection-list>
                             <div class="signature" *ngIf="item.fillByUser && item.type=='signature'">
-                                <signature-pad [options]="signaturePadOptions">
-                                </signature-pad>
-                                <div class="clear-box">
-                                    <button class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
-                                </div>
+                                <ax-signature (valueChange)="signChange($event)"></ax-signature>
                             </div>
                         </td>
                     </tr>

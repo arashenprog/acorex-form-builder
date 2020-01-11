@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AXFWidgetView } from '../../../config/widget';
-import { SignaturePad } from 'angular2-signaturepad/signature-pad';
-import { typeWithParameters } from '@angular/compiler/src/render3/util';
+import { AXFWidgetView } from '../../../config/widget';  
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
@@ -10,20 +8,15 @@ import { AXFDataSourceOption } from '../../../../property-editor/editors/data-so
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFSignatureInputWidgetView extends AXFWidgetView {
-
-    @ViewChild(SignaturePad, { static: true }) signaturePad: SignaturePad;
+ 
     dataSource: AXFDataSourceOption;
-    value: string;
-    signaturePadOptions: any;
+    value: string; 
     status:string;
     constructor(protected cdr: ChangeDetectorRef) {
         super()
     }
 
-    ngOnInit(): void {
-        this.signaturePadOptions = {
-             canvasHeight: 70
-        }
+    ngOnInit(): void { 
     } 
 
     addSignatureClick() {
@@ -38,16 +31,9 @@ export class AXFSignatureInputWidgetView extends AXFWidgetView {
         this.cdr.markForCheck();
     }
 
-    drawComplete(ind) {
-        //this.info.Items[ind].Value = this.signaturePad.toDataURL();
+
+    signChange(e)
+    {  
+        this.dataSource.dataItems[0]["signature"]=e;
     }
-
-
-    onClearClick(ind) {
-        let dfssf = document.querySelectorAll("signature-pad");
-        ///dfssf[ind].clear();
-        //this.signaturePad.clear();
-        //this.info.Items[ind].Value = null;
-    }
-
 }

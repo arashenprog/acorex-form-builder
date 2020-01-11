@@ -1,0 +1,14 @@
+.signature {
+    border: 1px #007bff dashed;
+    position: relative;
+    signature-pad {
+        display: flex;
+        
+    } 
+    .clear-box {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+    }
+    
+}

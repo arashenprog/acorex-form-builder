@@ -1,44 +1,10 @@
-.signature {
-    border: 1px #007bff dashed;
-    position: relative;
-    signature-pad {
-       // width: 100% !important;
-        display: flex;
-        
-    } 
-    .clear-box {
-        position: absolute;
-        right: 5px;
-        bottom: 5px;
-    }
-    
-}
+
 .sign{
     background-image: url('./assets/images/manualsignature.jpg');background-repeat: round;
     border: 1px solid gray;
     height: 50px;
     width: 90px;
 }
-// .row{
-//     margin-bottom: 2px;
-
-//      .child{
-//         flex-direction: row;
-//          display: flex;
-//         .spanchild{
-//             padding: 0 10px;
-//             font-size: 14px;
-//         }
-//         .valuechild{
-//             width: 100%;
-//             margin: 0px 10px 0px 0px; 
-//         }
-//     }
-// }
-
-// .wdt100{
-//     width: 100%;
-// }
 .img {
     background-image: url('./assets/images/noimage.png');
     background-repeat: round;
