@@ -7,8 +7,7 @@ import { AXFWidgetView } from '../../../config/widget';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFCheckboxInputWidgetView extends AXFWidgetView {
-
-    value: boolean ;
+ 
     label: string;
 
     constructor(private el: ElementRef<HTMLElement>,private cdr: ChangeDetectorRef) {
