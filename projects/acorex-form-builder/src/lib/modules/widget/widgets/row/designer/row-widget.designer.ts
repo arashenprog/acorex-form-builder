@@ -6,7 +6,8 @@ import { AXFWidgetDesigner } from '../../../config/widget';
     templateUrl: './row-widget.designer.html',
     styleUrls: ['./row-widget.designer.scss'],
     providers: [{ provide: AXFWidgetDesigner, useExisting: AXFRowWidgetDesigner }],
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: { class: "row" }
 })
 export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
 
@@ -15,9 +16,6 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
     countCol: number = 12;
     colLeft: number[] = [];
     range: number = 0;
-
-
-    @ViewChild("el", { static: true }) el: ElementRef;
 
 
 
@@ -45,7 +43,7 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
 
 
     onRender() {
-        this.applyStyle(this.el.nativeElement);
+        this.applyStyle(this.hostElement.nativeElement);
         this.calcLeftCols();
         this.cdr.markForCheck();
     }

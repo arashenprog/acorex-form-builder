@@ -1,4 +1,4 @@
-<div class="axf-row" >
+<!-- <div class="axf-row" >
     <div class="widget-container">
         <div class="row" #el>
             <ng-container *ngFor="let w of widgets" axf-widget-renderer [parent]="this" [widget]="w">
@@ -12,17 +12,14 @@
             </ng-container>
         </div>
     </div>
-    <div class="row-tools">
-        <div class="icon axf-widget-move-handler" >
-            <i class="fas fa-arrows-alt"></i>
-        </div>
-        <div class="icon" (click)="handleAction('edit',$event)">
-            <i class="fas fa-pen"></i>
-        </div>
-        <div class="icon" (click)="handleAction('delete',$event)">
-            <i class="fas fa-trash"></i>
-        </div>
+</div> -->
+
+<ng-container *ngFor="let w of widgets" axf-widget-renderer [parent]="this" [widget]="w">
+</ng-container>
+<ng-container *ngFor="let c of colLeft;let i = index">
+    <div class="add-column col-md-{{minCol}}" [class.selected]="(i+1) <= range"
+        (click)="handleAction('add',$event,(i+1))" (mouseenter)="handlePickerMouseHover(i+1)"
+        (mouseleave)="handlePickerMouseOut(i+1)">
+        &nbsp;
     </div>
-
-
-</div>
+</ng-container>

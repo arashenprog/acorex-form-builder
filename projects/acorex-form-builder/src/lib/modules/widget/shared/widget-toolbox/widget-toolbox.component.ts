@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { AXMenuComponent, MenuItem, AXHtmlUtil } from 'acorex-ui';
 
 @Component({
     selector: '[axf-widget-toolbox]',
@@ -9,8 +10,42 @@ import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRe
     }
 })
 export class AXFWidgetToolboxComponent implements OnInit {
-    constructor() { }
-    ngOnInit(): void { }
+
+    uid: string = AXHtmlUtil.getUID();
+
+    constructor(private el: ElementRef<HTMLDivElement>) {
+
+    }
+
+    ngOnInit(): void {
+        this.el.nativeElement.id = this.uid;
+    }
+
+
+    @ViewChild("menu", { static: true }) menu: AXMenuComponent;
+
+    contextMenuItems: MenuItem[] = [
+        {
+            name: "Copy",
+            icon: "fas fa-plus",
+            text: "Copy Widget"
+        },
+        {
+            name: "delete",
+            icon: "fas fa-trash",
+            text: "Delete Widget"
+        }
+    ]
+
+    onContextItemClick(e: MenuItem) {
+
+        if (e.name == "add") {
+            //this.addElement();
+        }
+        if (e.name == "delete") {
+            this.delete.emit();
+        }
+    }
 
 
     delete: EventEmitter<void> = new EventEmitter<void>();

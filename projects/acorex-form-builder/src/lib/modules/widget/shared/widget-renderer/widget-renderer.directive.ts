@@ -9,10 +9,10 @@ import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
     selector: '[axf-widget-renderer]',
 })
 export class AXFWidgetRendererDirective {
-    private renderChangeObserver: any;
     private widgetInstance: any;
     private widgetElement: HTMLElement;
-    private toolboxElement: HTMLElement;
+    //private toolboxElement: HTMLElement;
+    private toolboxInstance: AXFWidgetToolboxComponent;
 
     @Input("widget")
     widgetConfig: WidgetConfig;
@@ -85,6 +85,7 @@ export class AXFWidgetRendererDirective {
         // render widget toolbox on mouseover event in designer mode
         if (!this.widgetConfig.toolbox)
             this.widgetConfig.toolbox = {};
+        //
         if (this.mode == "designer") {
             this.widgetInstance.onSelect.subscribe(c => {
                 this.eventService.broadcast("SELECT", c);
@@ -93,57 +94,95 @@ export class AXFWidgetRendererDirective {
             this.widgetInstance.onDelete.subscribe(c => {
                 this.eventService.broadcast("SELECT", null);
             });
-
-            let toolboxFactory = this.componentFactoryResolver.resolveComponentFactory(AXFWidgetToolboxComponent);
-            let toolboxComponent = this.target.createComponent(toolboxFactory);
-            let toolboxInstance = toolboxComponent.instance as AXFWidgetToolboxComponent;
-            // toolbox edit
-            if (this.widgetConfig.toolbox.edite != false) {
-                toolboxInstance.edit.subscribe(c => {
-                    this.widgetInstance.edit();
-                });
-            }
-            else {
-                toolboxInstance.allowEdit = false;
-            }
-            // toolbox delete
-            if (this.widgetConfig.toolbox.delete != false) {
-                toolboxInstance.delete.subscribe(c => { this.widgetInstance.delete(); });
-            }
-            else {
-                toolboxInstance.allowDelete = false;
-            }
-            this.toolboxElement = (toolboxComponent.location.nativeElement as HTMLElement);
+            // if (this.widgetConfig.toolbox.visible != false) {
+            //     let toolboxFactory = this.componentFactoryResolver.resolveComponentFactory(AXFWidgetToolboxComponent);
+            //     let toolboxComponent = this.target.createComponent(toolboxFactory);
+            //     this.toolboxInstance = toolboxComponent.instance as AXFWidgetToolboxComponent;
+            //     // toolbox edit
+            //     if (this.widgetConfig.toolbox.edite != false) {
+            //         this.toolboxInstance.edit.subscribe(c => {
+            //             this.widgetInstance.edit();
+            //         });
+            //     }
+            //     else {
+            //         this.toolboxInstance.allowEdit = false;
+            //     }
+            //     // toolbox delete
+            //     if (this.widgetConfig.toolbox.delete != false) {
+            //         this.toolboxInstance.delete.subscribe(c => { this.widgetInstance.delete(); });
+            //     }
+            //     else {
+            //         this.toolboxInstance.allowDelete = false;
+            //     }
+            //     this.toolboxElement = (toolboxComponent.location.nativeElement as HTMLElement);
+            // }
             this.widgetElement = (widgetComponent.location.nativeElement as HTMLElement);
             this.widgetElement.id = this.widgetConfig.options.uid;
 
             this.zone.runOutsideAngular(() => {
+                this.widgetElement.style.position = "relative";
+                this.widgetElement.addEventListener("contextmenu", this.handleContextMenu.bind(this));
                 this.widgetElement.addEventListener("click", this.handleSelectElement.bind(this));
-                // add toolbox 
-                if (this.widgetConfig.toolbox.visible != false) {
-                    this.widgetElement.style.position = "relative";
-                    this.widgetElement.appendChild(this.toolboxElement)
-                    this.toolboxElement.style.position = "absolute";
-                    this.widgetElement.addEventListener("mouseover", (c) => {
-                        c.stopPropagation();
-                        this.toolboxElement.style.display = "unset";
+                this.widgetElement.addEventListener("mouseover", (c) => {
+                    c.stopPropagation();
+                    c.stopImmediatePropagation();
+                    if (!this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`) && this.widgetConfig.container != true) {
+                        this.widgetElement.style.pointerEvents = "all";
+                        const hoverDiv = document.createElement("div");
+                        hoverDiv.id = `bb-${this.widgetElement.id}`;
+                        hoverDiv.style.zIndex = "1500";
+                        hoverDiv.style.position = "absolute";
+                        hoverDiv.style.backgroundColor = "rgba(78, 22, 147, 0.1)";
                         const bound = this.widgetElement.getBoundingClientRect();
-                        this.toolboxElement.style.top = `0px`;
-                        this.toolboxElement.style.left = `0px`
-                        this.toolboxElement.style.width = `${bound.width}px`
-                        this.toolboxElement.style.height = `${bound.height}px`;
-                    });
-                    this.widgetElement.addEventListener("mouseleave", (c) => {
-                        this.toolboxElement.style.display = "none";
-                    });
-                }
+                        hoverDiv.style.top = `0px`;
+                        hoverDiv.style.left = `0px`
+                        hoverDiv.style.width = `${bound.width}px`
+                        hoverDiv.style.height = `${bound.height}px`;
+                        hoverDiv.onclick = (z) => {
+                            z.preventDefault();
+                            z.stopPropagation();
+                            this.zone.run(() => {
+                                this.widgetInstance.edit();
+                            });
+                        }
+                        this.widgetElement.appendChild(hoverDiv);
+                    }
+                });
+                this.widgetElement.addEventListener("mouseleave", (c) => {
+                    const bb = this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`);
+                    if (bb) {
+                        this.widgetElement.removeChild(bb);
+                    }
+                });
+
+                // add toolbox 
+                // if (this.widgetConfig.toolbox.visible != false) {
+                //     this.widgetElement.style.position = "relative";
+                //     this.widgetElement.appendChild(this.toolboxElement)
+                //     this.toolboxElement.style.position = "absolute";
+                //     this.widgetElement.addEventListener("mouseover", (c) => {
+                //         c.stopPropagation();
+                //         this.toolboxElement.style.display = "unset";
+                //         const bound = this.widgetElement.getBoundingClientRect();
+                //         this.toolboxElement.style.top = `0px`;
+                //         this.toolboxElement.style.left = `0px`
+                //         this.toolboxElement.style.width = `${bound.width}px`
+                //         this.toolboxElement.style.height = `${bound.height}px`;
+                //     });
+                //     this.widgetElement.addEventListener("mouseleave", (c) => {
+                //         this.toolboxElement.style.display = "none";
+                //         if (this.toolboxInstance && this.toolboxInstance.menu) {
+                //             this.toolboxInstance.menu.close();
+                //         }
+                //     });
+                // }
 
                 // add drag and drop functionality
                 if (this.widgetConfig.name != "page")
                     this.widgetElement.classList.add("axf-draggable-widget");
                 //
-                let handler = <HTMLElement>Array.from(this.widgetElement.querySelectorAll(`.axf-widget-move-handler`)).reverse()[0];
-                if (handler && this.widgetConfig.name != "page") {
+                //let handler = <HTMLElement>Array.from(this.widgetElement.querySelectorAll(`.axf-widget-move-handler`)).reverse()[0];
+                if (this.widgetConfig.name != "page") {
                     this.widgetElement.setAttribute("draggable", "true");
                     this.widgetElement.ondragstart = (e) => {
                         window["dragged"] = {
@@ -248,12 +287,26 @@ export class AXFWidgetRendererDirective {
         return false;
     }
 
+    private handleContextMenu(e: MouseEvent) {
+        this.zone.run(() => {
+            this.widgetInstance.edit();
+            if (this.toolboxInstance && this.toolboxInstance.menu) {
+                this.toolboxInstance.menu.show({ x: e.clientX, y: e.clientY });
+            }
+        });
+        e.stopPropagation();
+        e.preventDefault();
+        e.stopImmediatePropagation();
+    }
+
     ngOnDestroy(): void {
         this.zone.runOutsideAngular(() => {
-            if (this.widgetElement)
+            if (this.widgetElement) {
                 this.widgetElement.removeEventListener("click", this.handleSelectElement);
-            if (this.toolboxElement)
-                this.toolboxElement.removeEventListener("click", this.handleSelectElement);
+            }
+            // if (this.toolboxElement) {
+            //     this.toolboxElement.removeEventListener("click", this.handleSelectElement);
+            // }
         });
     }
 

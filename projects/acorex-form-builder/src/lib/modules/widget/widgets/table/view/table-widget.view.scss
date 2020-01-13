@@ -1,0 +1,15 @@
+:host {
+    overflow-x: auto;
+    table {
+        width: fit-content;
+        table-layout: fixed;
+        border-collapse: collapse;
+
+        td {
+            &:after {
+                content: '';
+                display: block;
+            }
+        }
+    }
+}

@@ -35,7 +35,7 @@ export interface WidgetConfig {
     options?: any;
     properties: AXFWidgetProperty[];
     toolbox?: AXFWidgetToolboxProperty;
-    
+
 }
 
 
@@ -82,6 +82,7 @@ export class AXFWidgetService {
         //res.options = this.deepCopy(c.options);
         else
             res.options = {};
+        res.options.uid = AXHtmlUtil.getUID();
         return res;
     }
 

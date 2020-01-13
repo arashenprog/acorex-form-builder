@@ -1,0 +1,15 @@
+:host {
+  
+    table {
+      
+        table-layout: fixed;
+        border-collapse: collapse;
+
+        td {
+            &:after {
+                content: '';
+                display: block;
+            }
+        }
+    }
+}

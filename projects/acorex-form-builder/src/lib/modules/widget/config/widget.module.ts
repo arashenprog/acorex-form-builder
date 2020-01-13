@@ -23,7 +23,9 @@ import { AXFPanelWidgetModule } from '../widgets/panel/panel.module';
 import { AXFAPITemplateService } from '../services/template/template-api.service';
 import { AXFTemplateService } from '../services/template/template.service';
 import { AXFTimeInputWidgetModule } from '../widgets/time-input/time-input.module';
-import { from } from 'rxjs';
+import { AXFTableWidgetModule } from '../widgets/table/table.module';
+import { AXFTableRowWidgetModule } from '../widgets/table-row/table-row.module';
+import { AXFTableCellWidgetModule } from '../widgets/table-cell/table-cel.module';
 
 
 const MODULES = [
@@ -46,7 +48,10 @@ const MODULES = [
     AXFDropdownInputWidgetModule,
     AXFButtonWidgetModule,
     AXFGridInputWidgetModule,
-    AXFPanelWidgetModule
+    AXFPanelWidgetModule,
+    AXFTableWidgetModule,
+    AXFTableRowWidgetModule,
+    AXFTableCellWidgetModule
 ];
 
 @NgModule({

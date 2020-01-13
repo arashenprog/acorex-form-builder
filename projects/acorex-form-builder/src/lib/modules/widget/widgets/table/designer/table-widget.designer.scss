@@ -1,0 +1,36 @@
+:host {
+    overflow-x: auto;
+    table {
+        width: fit-content;
+        table-layout: fixed;
+
+        &.table-picker {
+            border-collapse: collapse;
+
+            td {
+                border: 1px solid var(--border-color);
+                width: 20px;
+                height: 20px;
+
+                &:after {
+                    content: '';
+                    display: block;
+                }
+
+                &.picked {
+                    background-color: var(--primary-lighter-color);
+                    border: 1px solid var(--primary-trans-color);
+                }
+            }
+        }
+
+        border-collapse: collapse;
+
+        td {
+            &:after {
+                content: '';
+                display: block;
+            }
+        }
+    }
+}

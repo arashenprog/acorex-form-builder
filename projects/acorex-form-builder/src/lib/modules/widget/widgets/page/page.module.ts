@@ -45,7 +45,8 @@ export class AXFPagePageWidgetModule {
                 bgColor: "inherit"
             },
             toolbox: {
-                visible: false
+                visible: false,
+                delete: false
             },
             properties: [
                 {

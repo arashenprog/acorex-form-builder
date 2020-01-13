@@ -79,6 +79,13 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             el.style.fontStyle = this["textStyle"].includes('italic') ? "italic" : "inherit";
             el.style.textDecoration = this["textStyle"].includes('underline') ? "underline" : "inherit";
         }
+        if (this["width"]) {
+            el.style.width = this["width"];
+        }
+        if (this["height"]) {
+            el.style.height = this["height"];
+        }
+        
 
         // apply padding
         if (this["boxStyle"]) {
@@ -163,7 +170,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         if (!w.options)
             w.options = {};
         Object.assign(w.options, options);
-        w.options.uid = AXHtmlUtil.getUID();
+        //w.options.uid = AXHtmlUtil.getUID();
         this.widgets.push(w);
         this.refresh();
     }

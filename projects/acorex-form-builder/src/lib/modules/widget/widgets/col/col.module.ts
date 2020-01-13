@@ -41,7 +41,7 @@ export class AXFColWidgetModule {
                     padding: new AXFBoxStyleBoxSizeValue("5"),
                     margin: new AXFBoxStyleBoxSizeValue("0")
                 },
-                bgColor: "inherit"
+                verticalAlign: "middle"
             },
             properties: [
                 {
@@ -52,10 +52,9 @@ export class AXFColWidgetModule {
                     editor: "TextEditor",
                     order: 0,
                 },
-                // AXF_BG_COLOR_PROPERTY,
-                // AXF_BOX_STYLE_PROPERTY,
-                // AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
-                // AXF_VERTICAL_ALIGNMENT_PROPERTY
+
+                AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
+                AXF_VERTICAL_ALIGNMENT_PROPERTY,
                 ...AXF_STYLE_GENERAL_PROPERTIES
             ]
         })

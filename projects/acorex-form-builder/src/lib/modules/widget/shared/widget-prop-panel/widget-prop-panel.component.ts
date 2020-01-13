@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, Output, ViewEncapsulation } from '@angular/core';
 import { WidgetConfig, AXFWidgetProperty } from '../../services/widget.service';
-import { AXFWidget } from '../../config/widget';
+import { AXFWidget, AXFWidgetDesigner } from '../../config/widget';
 import { EventService } from 'acorex-ui';
 
 @Component({
@@ -71,7 +71,7 @@ export class AXFWidgetPropPanelComponent {
     @Output()
     widgetChange: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
 
-    widget: AXFWidget;
+    widget: AXFWidgetDesigner;
 
     getProps(category: string): AXFWidgetProperty[] {
 
@@ -90,6 +90,11 @@ export class AXFWidgetPropPanelComponent {
 
     private sortByOrder(a, b) {
         return a.order == b.order ? 0 : (a.order > b.order ? 1 : -1);
+    }
+
+    handleDeleteClick()
+    {
+        this.widget.delete();
     }
 
 }

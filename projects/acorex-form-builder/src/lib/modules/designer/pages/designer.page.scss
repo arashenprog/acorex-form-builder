@@ -74,13 +74,10 @@
 
     .board {
         height: 100%;
-        // border: 1px solid;
         flex: 9;
         position: relative;
+        overflow-x: hidden;
 
-        //margin-top: var(--sp-md-size);
-        //border-color: var(--border-color);
-        //box-shadow: 0px 0px 10px #dadada;
         .toolbar {
             height: 50px;
             border-bottom: 1px solid var(--gray-color);
@@ -265,5 +262,5 @@ ax-tab-view {
 }
 
 .axf-widget-move-handler{
-    cursor: move;
+    
 }

@@ -139,7 +139,7 @@ export const AXF_CAPTION_PROPERTY: AXFWidgetProperty = {
 export const AXF_COLOR_PROPERTY: AXFWidgetProperty = {
     name: "color",
     category: "Style",
-    defaultValue: "#000000",
+    defaultValue: "inherit",
     title: "Color",
     order: 31,
     editor: "ColorEditor"
@@ -148,7 +148,7 @@ export const AXF_COLOR_PROPERTY: AXFWidgetProperty = {
 export const AXF_BG_COLOR_PROPERTY: AXFWidgetProperty = {
     name: "bgColor",
     category: "Style",
-    defaultValue: "#ffffff",
+    defaultValue: "inherit",
     title: "Background Color",
     order: 32,
     editor: "ColorEditor"
@@ -320,8 +320,6 @@ export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [
     AXF_BG_COLOR_PROPERTY,
     AXF_TEXT_SIZE_PROPERTY,
     AXF_TEXT_STYLE_PROPERTY,
-    AXF_TEXT_DIRECTION_PROPERTY,
-    AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
-    AXF_VERTICAL_ALIGNMENT_PROPERTY,
+
     AXF_BOX_STYLE_PROPERTY,
 ]

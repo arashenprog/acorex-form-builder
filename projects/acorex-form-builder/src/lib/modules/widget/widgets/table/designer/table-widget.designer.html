@@ -1,0 +1,17 @@
+<table #table class="axf-widget-move-handler">
+    <tbody *ngIf="widgets && widgets.length">
+        <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
+        </ng-container>
+    </tbody>
+    <tbody *ngIf="!(widgets && widgets.length)">
+        <tr *ngFor="let r of range">
+            <td *ngFor="let c of range" (mouseenter)="onPickerMouseHover(r,c)" [class.picked]="c<=rangeC && r<=rangeR"
+                (click)="create(r,c)"></td>
+        </tr>
+        <tr>
+            <td [attr.colspan]="15" class="text-center">
+                <small class="form-text text-muted">{{rangeR}}*{{rangeC}}</small>
+            </td>
+        </tr>
+    </tbody>
+</table>

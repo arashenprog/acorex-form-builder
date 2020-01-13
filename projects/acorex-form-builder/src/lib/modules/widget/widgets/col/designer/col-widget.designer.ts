@@ -16,8 +16,7 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     bgColor: string;
     boxStyle: AXFBoxStyleValue;
 
-    @ViewChild("el", { static: true })
-    container: ElementRef<HTMLDivElement>;
+  
 
     constructor(
         private hostElement: ElementRef,
@@ -31,7 +30,7 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         el.classList.add("col-sm-12", `col-md-${this.size}`);
         // apply background color
-        this.applyStyle(this.container.nativeElement);
+        this.applyStyle(this.hostElement.nativeElement);
         this.cdr.markForCheck();
     }
 

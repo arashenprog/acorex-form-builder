@@ -1,0 +1,4 @@
+<ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
+</ng-container>
+<ax-menu #menu [items]="contextMenuItems" (itemClick)="onContextItemClick($event)"   target="#{{uid}}"  direction="vertical">
+</ax-menu>

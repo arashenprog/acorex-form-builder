@@ -30,14 +30,15 @@ export class AXFRowWidgetModule {
             designerClass: AXFRowWidgetDesigner,
             printClass: AXFRowWidgetPrint,
             viewClass: AXFRowWidgetView,
+            container: true,
             toolbox: {
                 visible: false
             },
             options: {
                 boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("0"),
+                    border: new AXFBoxStyleBoxSizeValue("1"),
                     padding: new AXFBoxStyleBoxSizeValue("0"),
-                    margin: new AXFBoxStyleBoxSizeValue("0")
+                    margin: new AXFBoxStyleBoxSizeValue("5", "0", "5", "0")
                 },
                 bgColor: "inherit"
             },
