@@ -7,7 +7,8 @@ import { AXFWidgetPickerService } from '../../../services/template/picker.servic
     selector: "[axf-widget-col]",
     templateUrl: './col-widget.designer.html',
     styleUrls: ['./col-widget.designer.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: { class: "axf-drop-zone" }
 })
 export class AXFColWidgetDesigner extends AXFWidgetDesigner {
 
@@ -16,7 +17,7 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     bgColor: string;
     boxStyle: AXFBoxStyleValue;
 
-  
+
 
     constructor(
         private hostElement: ElementRef,

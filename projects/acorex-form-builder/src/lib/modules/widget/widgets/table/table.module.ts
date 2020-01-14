@@ -35,6 +35,7 @@ export class AXFTableWidgetModule {
             printClass: AXFTableWidgetPrint,
             viewClass: AXFTableWidgetView,
             container:true,
+            droppable:false,
             toolbox: {
                 visible: false
             },
