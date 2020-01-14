@@ -31,6 +31,7 @@ export class AXFColWidgetModule {
             designerClass: AXFColWidgetDesigner,
             printClass: AXFColWidgetPrint,
             container: true,
+            draggable:false,
             viewClass: AXFColWidgetView,
             toolbox: {
                 visible: false

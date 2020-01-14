@@ -27,10 +27,12 @@ export class AXFRowWidgetModule {
             name: "row",
             category: "Layout",
             visible: true,
+            container: true,
+            droppable:false,
             designerClass: AXFRowWidgetDesigner,
             printClass: AXFRowWidgetPrint,
             viewClass: AXFRowWidgetView,
-            container: true,
+            
             toolbox: {
                 visible: false
             },

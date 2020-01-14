@@ -35,6 +35,7 @@ export class AXFTableCellWidgetModule {
             printClass: AXFTableCellWidgetPrint,
             viewClass: AXFTableCellWidgetView,
             container: true,
+            draggable:false,
             options: {
                 boxStyle: {
                     border: new AXFBoxStyleBoxSizeValue("1"),

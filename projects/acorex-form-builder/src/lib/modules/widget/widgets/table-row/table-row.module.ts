@@ -29,6 +29,8 @@ export class AXFTableRowWidgetModule {
             icon: "fas fa-align-justify",
             category: 'Layout',
             visible: false,
+            droppable:false,
+            draggable:false,
             name: 'table-row',
             designerClass: AXFTableRowWidgetDesigner,
             printClass: AXFTableRowWidgetPrint,

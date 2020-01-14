@@ -14,9 +14,6 @@ import { AXMenuComponent, MenuItem } from 'acorex-ui';
 })
 export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
 
-
-    @ViewChild(AXMenuComponent, { static: true }) menu: AXMenuComponent;
-
     constructor(
         private el: ElementRef<HTMLTableCellElement>,
         private picker: AXFWidgetPickerService,
@@ -45,27 +42,5 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
         })
     }
 
-    contextMenuItems: MenuItem[] = [
-        {
-            name: "add",
-            icon: "fas fa-plus",
-            text: "Add Widget"
-        },
-        {
-            name: "delete",
-            icon: "fas fa-trash",
-            text: "Delete Widget"
-        }
-    ]
-
-    onContextItemClick(e: MenuItem) {
-
-        if (e.name == "add") {
-            this.addElement();
-        }
-        if (e.name == "delete") {
-            this.delete();
-        }
-    }
 }
 
