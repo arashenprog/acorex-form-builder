@@ -1,8 +1,9 @@
 :host {
     overflow-x: auto;
-    table {
-        width: fit-content;
-        table-layout: fixed;
+    table {  
+        // width: fit-content;
+        // table-layout: fixed;
+        width: 100%;
         border-collapse: collapse;
 
         td {

@@ -13,7 +13,7 @@ export class AXFDateInputWidgetPrint extends AXFWidgetPrint {
     // color: String;
     // bgColor: String;
     // fontSize: string;
-    // textStyle: string[];
+    textStyle: string[];
     // textAlign: string;
     // boxStyle: any;
 

@@ -44,8 +44,8 @@
     </span>    
     <ng-container *ngIf="dataSource && printMode=='allItems'">
         <label *ngFor="let item of dataSource.dataItems; let i=index;"
-            style="box-sizing: border-box;cursor: pointer; font-size: 14px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: .5rem; "
-            [ngStyle]="{'padding':alignCheck=='left'? '0px 10px 0px 0px' : (alignCheck=='top'? '2px 8px' : (alignCheck=='bottom'? '0px 8px' : '0px 10px 0px 0px')),
+            style="box-sizing: border-box;cursor: pointer; font-size: 13px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: 0px; "
+            [ngStyle]="{'padding':alignCheck=='left'? '0px 10px 0px 0px' : (alignCheck=='top'? '2px 8px' : (alignCheck=='bottom'? '0px 7px' : '0px 10px 0px 0px')),
         'width':(direction=='horizontal' && columns==1)?'inherit':(100.0/columns)+'%'}">
            
             <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'" 
@@ -57,7 +57,7 @@
                     }">{{item[dataSource.columns[1].fieldName]  | word}}</span>
 
             <img *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'"
-                [src]="item[dataSource.columns[2].fieldName]" height="40" width="60" [ngStyle]="{'margin-left':alignCheck=='left'?'3px':null,
+                [src]="item[dataSource.columns[2].fieldName]" height="80" width="60" [ngStyle]="{'margin-left':alignCheck=='left'?'3px':null,
                 'padding-top':alignCheck=='top'?'15px':null,
                 'display':alignCheck=='top'?'inline-block':null}">
                 <span *ngIf="mode!='unselectable'"

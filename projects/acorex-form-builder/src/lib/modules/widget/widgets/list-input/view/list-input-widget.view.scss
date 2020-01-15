@@ -25,9 +25,9 @@
       .radio-container {
         display: inline-table !important;
         position: relative;
-        
+        margin-bottom: 0px !important;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 13px;
         line-height:30px;// 25px;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -78,7 +78,7 @@
          }
 
          &.bottom{
-          padding: 0px 8px 20px 8px;
+          padding: 0px 7px 28px 7px;
           .checkmark { 
             display: flex;
              } 

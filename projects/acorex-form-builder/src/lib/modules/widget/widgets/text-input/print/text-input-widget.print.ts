@@ -9,6 +9,7 @@ export class AXFTextInputWidgetPrint extends AXFWidgetPrint {
 
     text: String;
     placeholder:string;
+    textStyle:string[];
     constructor() {
         super() 
     }

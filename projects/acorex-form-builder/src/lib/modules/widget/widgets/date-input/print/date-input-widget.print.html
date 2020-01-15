@@ -1,1 +1,3 @@
-<span>{{value | dt:"YYYY/MM/DD"}}</span>
+<span  [ngStyle]="{'fontWeight':(textStyle && textStyle.includes('bold')) ? 'bold' : 'inherit',
+'fontStyle':(textStyle && textStyle.includes('italic')) ? 'italic' : 'inherit',
+'textDecoration':(textStyle && textStyle.includes('underline')) ? 'underline' : 'inherit'}">{{value | dt:"YYYY/MM/DD"}}</span>

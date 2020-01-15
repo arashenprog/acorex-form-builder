@@ -45,7 +45,7 @@ export class ACFViewerFrameComponent {
         {
             title: "Desktop",
             icon: "fas fa-desktop",
-            width: 1024,
+            width: 1224,
             active: true,
             mode: "view"
         },
@@ -66,7 +66,7 @@ export class ACFViewerFrameComponent {
         {
             title: "Print",
             icon: "fas fa-print",
-            width: 1024,
+            width: 1224,
             active: false,
             mode: "print"
         }
