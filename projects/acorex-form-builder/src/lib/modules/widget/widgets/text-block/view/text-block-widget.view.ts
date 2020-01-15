@@ -17,7 +17,7 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
 
     onRender(): void {
         this.hostElement.nativeElement.innerHTML = this.text;
-        this.hostElement.nativeElement.style.display = "inline";
+        //this.hostElement.nativeElement.style.display = "inline";
         this.applyStyle(this.hostElement.nativeElement);
         this.cdr.markForCheck();
     }
