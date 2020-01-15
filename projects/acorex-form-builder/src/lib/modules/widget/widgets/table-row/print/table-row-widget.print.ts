@@ -9,6 +9,15 @@ import { AXFWidgetPrint } from '../../../config/widget';
 })
 export class AXFTableRowWidgetPrint extends AXFWidgetPrint {
 
-   
+    constructor(
+        private el: ElementRef,
+        private cdr: ChangeDetectorRef) {
+        super();
+    }
+
+    onRender() {
+        this.applyStyle(this.el.nativeElement);
+        this.cdr.markForCheck();
+    }
 }
 

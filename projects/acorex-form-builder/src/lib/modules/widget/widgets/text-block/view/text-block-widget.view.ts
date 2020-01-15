@@ -1,24 +1,24 @@
-import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
+    template: '',
     selector: "[axf-widget-text]",
-    templateUrl: './text-block-widget.view.html',
-    styleUrls: ['./text-block-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTextBlockWidgetView extends AXFWidgetView {
 
     text: string;
 
-    
-    constructor(private hostElement: ElementRef) {
-        super()
+
+    constructor(private hostElement: ElementRef<HTMLDivElement>, private cdr: ChangeDetectorRef) {
+        super();
     }
 
-    onRender(): void { 
-        let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
-        this.applyStyle(el);
-        
+    onRender(): void {
+        this.hostElement.nativeElement.innerHTML = this.text;
+        this.hostElement.nativeElement.style.display = "inline";
+        this.applyStyle(this.hostElement.nativeElement);
+        this.cdr.markForCheck();
     }
 }

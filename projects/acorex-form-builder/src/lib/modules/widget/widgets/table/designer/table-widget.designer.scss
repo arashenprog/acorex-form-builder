@@ -2,15 +2,13 @@
     overflow-x: auto;
     table {
         width: fit-content;
-        table-layout: fixed;
-
         &.table-picker {
             border-collapse: collapse;
 
             td {
                 border: 1px solid var(--border-color);
-                width: 20px;
-                height: 20px;
+                width: 25px;
+                height: 25px;
 
                 &:after {
                     content: '';

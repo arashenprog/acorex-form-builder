@@ -42,7 +42,7 @@ export class AXFTextBlockWidgetModule {
                     padding: new AXFBoxStyleBoxSizeValue("2"),
                     margin: new AXFBoxStyleBoxSizeValue("2")
                 },
-                text:"Block Text",
+                text:"Sample Text",
                 bgColor:"inherit",
                 fontSize:"small"
             },

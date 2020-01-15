@@ -1,27 +1,23 @@
-import { Component, OnInit, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
-    templateUrl: './text-block-widget.print.html', 
+    template:'',
+    selector: '[axf-text-block]',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTextBlockWidgetPrint extends AXFWidgetPrint {
 
     text: String;
-    color:String;
-    bgColor:String;
-    fontSize:string;
-    textStyle:string[];
-    textAlign:string; 
-    boxStyle:any;
-    textDirection:string[];
 
-    constructor(private hostElement: ElementRef) {
+    constructor(private hostElement: ElementRef,private cdr:ChangeDetectorRef) {
         super();
     }
 
     onRender(): void {
-        // let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
-        // this.applyStyle(el); 
+        this.hostElement.nativeElement.innerHTML = this.text;
+        this.hostElement.nativeElement.style.display="inline";
+        this.applyStyle(this.hostElement.nativeElement);
+        this.cdr.markForCheck();
     }
 }

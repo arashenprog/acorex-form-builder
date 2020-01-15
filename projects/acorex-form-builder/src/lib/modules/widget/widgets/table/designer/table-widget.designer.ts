@@ -16,7 +16,7 @@ export class AXFTableWidgetDesigner extends AXFWidgetDesigner {
 
     constructor(private cdr: ChangeDetectorRef) {
         super();
-        for (let i = 1; i <= 15; i++) {
+        for (let i = 1; i <= 10; i++) {
             this.range.push(i);
         }
     }
