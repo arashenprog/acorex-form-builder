@@ -5,7 +5,7 @@
         [ngStyle]="{'width':columns==1?'inherit':(100.0/columns)+'%'}">
             <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'">{{item[dataSource.columns[1].fieldName]}}</span>
             <img *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'"
-                [src]="item[dataSource.columns[2].fieldName]" height="40" width="60">
+                [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80" width="60">
             <input type="radio" [value]="item[dataSource.columns[0].fieldName]" *ngIf="mode!='unselectable'" />
             <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'"></span>
         </label>

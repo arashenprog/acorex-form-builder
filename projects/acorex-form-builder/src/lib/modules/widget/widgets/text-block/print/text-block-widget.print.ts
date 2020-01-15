@@ -3,7 +3,7 @@ import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
     templateUrl: './text-block-widget.print.html', 
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush 
 })
 export class AXFTextBlockWidgetPrint extends AXFWidgetPrint {
 

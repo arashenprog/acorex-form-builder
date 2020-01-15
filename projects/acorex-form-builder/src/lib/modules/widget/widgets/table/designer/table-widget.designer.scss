@@ -1,9 +1,9 @@
 :host {
     overflow-x: auto;
     table {
-        width: fit-content;
-        table-layout: fixed;
-
+        // width: fit-content;
+        // table-layout: fixed;
+        width: 100%;
         &.table-picker {
             border-collapse: collapse;
 

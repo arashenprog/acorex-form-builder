@@ -1,1 +1,3 @@
-<span >{{value?value:placeholder}}</span>  
+<span [ngStyle]="{'fontWeight':(textStyle && textStyle.includes('bold')) ? 'bold' : 'inherit',
+'fontStyle':(textStyle && textStyle.includes('italic')) ? 'italic' : 'inherit',
+'textDecoration':(textStyle && textStyle.includes('underline')) ? 'underline' : 'inherit'}">{{value?value:placeholder}}</span>  
