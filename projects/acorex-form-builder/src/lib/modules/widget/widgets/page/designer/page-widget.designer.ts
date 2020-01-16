@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AXFWidgetDesigner } from '../../../config/widget';
+import { AXFWidgetDesigner, AXFContextMenuItem } from '../../../config/widget';
 import { AXPopupService, EventService } from 'acorex-ui';
 import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
 import { AXFWidgetPickerService } from '../../../services/template/picker.service';
@@ -35,7 +35,7 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         });
     }
 
-    handleStartClick() {
+    addElement() {
         this.picker.showPicker().then(widgets => {
             if (widgets) {
                 widgets.forEach(w => {
@@ -53,6 +53,11 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         el.style.setProperty("--primary-color", this.themeColor);
         this.applyStyle(el);
         this.cdr.markForCheck();
+    }
+
+    onContextMenu(items: AXFContextMenuItem[]): AXFContextMenuItem[] {
+        items = items.filter(c => c.action != "copy" && c.action != "delete");
+        return items;
     }
 
 

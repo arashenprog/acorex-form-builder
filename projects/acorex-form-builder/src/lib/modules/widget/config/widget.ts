@@ -13,6 +13,15 @@ export interface AXFWidgetContainer {
     widgets: WidgetConfig[];
 }
 
+export interface AXFContextMenuItem {
+    text: string;
+    icon?: string;
+    action?: string;
+    separator?: boolean,
+    items?: AXFContextMenuItem[]
+    widget?: AXFWidgetDesigner
+}
+
 
 @Directive()
 export abstract class AXFWidget implements AXFWidgetContainer {
@@ -137,7 +146,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     copy() {
-        WidgetInjector.instance.get(AXToastService).info("Widget copied!");
+        WidgetInjector.instance.get(AXToastService).success("Widget copied!");
     }
 
     addChild(widget: WidgetConfig, options?: any) {
@@ -150,31 +159,49 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
 
-    getContextMenu() {
-        let items: any[] = [];
-        if (this.config.container) {
+    getContextMenu(parents: boolean = true): AXFContextMenuItem[] {
+        let items: AXFContextMenuItem[] = [];
+        if (this.config.container && this.config.droppable != false) {
             items.push({
                 text: "Add Widget",
                 icon: "fas fa-plus",
                 action: "addElement",
-                separator: true
+                separator: true,
+                widget:this,
             })
         }
         items.push(...[
             {
                 text: "Remove",
                 icon: "fas fa-trash",
-                action: "delete"
+                action: "delete",
+                widget:this
             },
             {
                 text: "Copy",
                 icon: "fas fa-copy",
                 action: "copy",
-                separator: true
+                separator: true,
+                widget:this,
             }
         ])
-        if (this["onContextMenu"])
-            this["onContextMenu"]();
+        let p = this.parent;
+        while (p != null && parents) {
+            if (p.config && p.config.name != "page") {
+                items.push({
+                    text: p.config.title,
+                    icon: p.config.icon,
+                    action: "edit",
+                    separator: true,
+                    items: p.getContextMenu(false),
+                    widget: p
+                })
+            }
+            p = p.parent;
+        }
+        if (this["onContextMenu"]) {
+            items = this["onContextMenu"](items);
+        }
         return items;
     }
 

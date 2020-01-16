@@ -1,6 +1,6 @@
 import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { WidgetConfig } from '../../services/widget.service';
-import { AXFWidget, AXFWidgetDesigner } from '../../config/widget';
+import { AXFWidget, AXFWidgetDesigner, AXFContextMenuItem } from '../../config/widget';
 import { AXHtmlUtil, EventService, AXPoint } from 'acorex-ui';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
@@ -269,20 +269,39 @@ export class AXFWidgetRendererDirective {
             menu.style.left = pos.x + "px";
             document.body.appendChild(menu);
             let ul = document.createElement("ul")
-            menu.appendChild(ul);
-            this.widgetInstance.getContextMenu().forEach(m => {
+            this.widgetInstance.getContextMenu().forEach((m: AXFContextMenuItem) => {
                 let li = document.createElement("li");
                 li.innerHTML = `<i class="${m.icon}"></i>&nbsp;${m.text}`;
-                if(m.separator)
-                {
+                if (m.separator) {
                     li.classList.add("separator");
                 }
                 ul.appendChild(li);
-                li.onclick = () => {
-                    if (this.widgetInstance[m.action])
-                        this.widgetInstance[m.action]();
+                li.onclick = (e) => {
+                    e.stopPropagation();
+                    if (m.action && m.widget[m.action])
+                        m.widget[m.action]();
                 };
+                if (m.items && m.items.length) {
+                    li.classList.add("subitem");
+                    let ul2 = document.createElement("ul")
+                    ul2.classList.add("axf-widget-context-menu");
+                    m.items.forEach(m2 => {
+                        let li2 = document.createElement("li");
+                        li2.innerHTML = `<i class="${m2.icon}"></i>&nbsp;${m2.text}`;
+                        if (m2.separator) {
+                            li2.classList.add("separator");
+                        }
+                        ul2.appendChild(li2);
+                        li2.onclick = (e) => {
+                            e.stopPropagation();
+                            if (m2.action && m.widget && m.widget[m2.action])
+                                m.widget[m2.action]();
+                        };
+                    });
+                    li.appendChild(ul2);
+                }
             });
+            menu.appendChild(ul);
         }
         this.clearDocumentEvents();
         document.addEventListener("click", this.closeContextMenu.bind(this), true);

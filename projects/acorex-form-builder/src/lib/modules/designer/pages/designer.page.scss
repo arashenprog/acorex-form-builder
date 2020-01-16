@@ -300,31 +300,25 @@ ax-tab-view {
 .axf-widget-context-menu {
     position: fixed;
     z-index: 2500;
-    background: var(--white-color);
-    border: 1px solid;
-    border-color: var(--border-color);
-    margin: 0;
-    padding: 0;
-    border-radius: 5px;
-    box-shadow: 0 15px 35px rgba(50, 50, 90, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
-    overflow: hidden;
-    -webkit-transform: translate(0, 15px) scale(.95);
-    transform: translate(0, 15px) scale(.95);
-    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 
     ul {
         list-style: none;
         margin: 0;
         padding: 0;
+        background: var(--white-color);
+        border: 1px solid;
+        border-color: var(--border-color);
+        border-radius: 5px;
+        box-shadow: 0 15px 35px rgba(50, 50, 90, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
 
         li {
             border-left: 3px solid transparent;
-            transition: ease .2s;
             padding: 5px;
             cursor: pointer;
             text-decoration: none;
-            transition: ease .2s;
             min-width: 120px;
+            position: relative;
+
             &:hover {
                 background: #CE93D8;
                 border-left: 3px solid var(--primary-color);
@@ -333,6 +327,26 @@ ax-tab-view {
 
             &.separator {
                 border-bottom: 1px solid var(--border-color)
+            }
+
+            &.subitem {
+                ul {
+                    z-index: 2510;
+                    position: absolute;
+                    padding: 0;
+                    left: 115px;
+                    top: 0px;
+                    display: none;
+                    li {
+                        color: #212529;
+                    }
+                }
+
+                &:hover {
+                    ul {
+                        display: block;
+                    }
+                }
             }
         }
     }
