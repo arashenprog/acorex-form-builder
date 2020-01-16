@@ -39,13 +39,10 @@ export class AXFTableCellWidgetModule {
             options: {
                 boxStyle: {
                     border: new AXFBoxStyleBoxSizeValue("1"),
-                    padding: new AXFBoxStyleBoxSizeValue("2"),
+                    padding: new AXFBoxStyleBoxSizeValue("5"),
                     margin: new AXFBoxStyleBoxSizeValue("0")
                 },
                 verticalAlign:"middle"
-            },
-            toolbox: {
-                visible: false
             },
             properties: [
                 AXF_BG_COLOR_PROPERTY,
@@ -58,15 +55,6 @@ export class AXFTableCellWidgetModule {
                     name: "width",
                     title: "Width",
                     order: 0,
-                    defaultValue: "100px"
-                },
-                {
-                    category: "Style",
-                    editor: "TextEditor",
-                    name: "height",
-                    title: "Height",
-                    defaultValue: "50px",
-                    order: 1,
                 },
                 {
                     category: "Style",

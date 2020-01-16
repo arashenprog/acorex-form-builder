@@ -30,7 +30,6 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         el.classList.add("col-sm-12", `col-md-${this.size}`);
-        // apply background color
         this.applyStyle(this.hostElement.nativeElement);
         this.cdr.markForCheck();
     }
@@ -43,21 +42,5 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
                 });
             }
         })
-    }
-
-    handleAction(action: string, e: MouseEvent) {
-        e.stopPropagation();
-        switch (action) {
-            case "edit":
-                this.edit();
-                break;
-            case "delete":
-                this.delete();
-                break;
-            case "add":
-                this.addElement();
-                break;
-        }
-        return false;
     }
 }

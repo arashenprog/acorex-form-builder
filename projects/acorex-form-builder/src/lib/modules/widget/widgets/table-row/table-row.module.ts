@@ -36,12 +36,24 @@ export class AXFTableRowWidgetModule {
             printClass: AXFTableRowWidgetPrint,
             viewClass: AXFTableRowWidgetView,
             container: true,
-            toolbox: {
-                visible: false
-            },
             properties: [
                 AXF_BG_COLOR_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
+                {
+                    category: "Style",
+                    editor: "TextEditor",
+                    name: "height",
+                    title: "Height",
+                    order: 1,
+                },
+                {
+                    name: "isHeader",
+                    category: "General",
+                    defaultValue: false,
+                    title: "Header",
+                    order: 0,
+                    editor: "CheckboxEditor"
+                }
             ]
         })
     }

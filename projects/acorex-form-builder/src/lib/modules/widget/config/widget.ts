@@ -1,6 +1,6 @@
 import { Injector, EventEmitter, Input, Output, Directive } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
-import { AXHtmlUtil } from 'acorex-ui'
+import { AXHtmlUtil, AXToastService } from 'acorex-ui'
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 import { AXFFormService, EventData } from '../services/form.service';
 import { Observable } from 'rxjs';
@@ -44,49 +44,24 @@ export abstract class AXFWidget implements AXFWidgetContainer {
         this.widgetService = WidgetInjector.instance.get(AXFWidgetService);
     }
 
-
-
-
-
-
     ngOnInit(): void {
         this.onRender();
     }
 
     applyStyle(el: HTMLElement): void {
-        // apply background color
-        if (this["bgColor"]) {
-            el.style.backgroundColor = this["bgColor"];
-        }
-        // apply text color
-        if (this["color"]) {
-            el.style.color = this["color"];
-        }
-        if (this["textAlign"]) {
-            el.style.textAlign = this["textAlign"];
-        }
-        if (this["fontSize"]) {
-            el.style.fontSize = this["fontSize"];
-        }
-        if (this["verticalAlign"]) {
-            el.style.verticalAlign = this["verticalAlign"];
-        }
-        if (this["textDirection"]) {
-            el.style.writingMode = this["textDirection"];
-        }
+        el.style.backgroundColor = this["bgColor"];
+        el.style.color = this["color"];
+        el.style.textAlign = this["textAlign"];
+        el.style.fontSize = this["fontSize"];
+        el.style.verticalAlign = this["verticalAlign"];
+        el.style.writingMode = this["textDirection"];
         if (this["textStyle"]) {
             el.style.fontWeight = this["textStyle"].includes('bold') ? "bold" : "inherit";
             el.style.fontStyle = this["textStyle"].includes('italic') ? "italic" : "inherit";
             el.style.textDecoration = this["textStyle"].includes('underline') ? "underline" : "inherit";
         }
-        if (this["width"]) {
-            el.style.width = this["width"];
-        }
-        if (this["height"]) {
-            el.style.height = this["height"];
-        }
-        
-
+        el.style.width = this["width"];
+        el.style.height = this["height"];
         // apply padding
         if (this["boxStyle"]) {
             let boxStyle = this["boxStyle"] as AXFBoxStyleValue;
@@ -162,7 +137,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     copy() {
-
+        WidgetInjector.instance.get(AXToastService).info("Widget copied!");
     }
 
     addChild(widget: WidgetConfig, options?: any) {
@@ -170,9 +145,37 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         if (!w.options)
             w.options = {};
         Object.assign(w.options, options);
-        //w.options.uid = AXHtmlUtil.getUID();
         this.widgets.push(w);
         this.refresh();
+    }
+
+
+    getContextMenu() {
+        let items: any[] = [];
+        if (this.config.container) {
+            items.push({
+                text: "Add Widget",
+                icon: "fas fa-plus",
+                action: "addElement",
+                separator: true
+            })
+        }
+        items.push(...[
+            {
+                text: "Remove",
+                icon: "fas fa-trash",
+                action: "delete"
+            },
+            {
+                text: "Copy",
+                icon: "fas fa-copy",
+                action: "copy",
+                separator: true
+            }
+        ])
+        if (this["onContextMenu"])
+            this["onContextMenu"]();
+        return items;
     }
 
 
@@ -180,7 +183,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
 export abstract class AXFWidgetView extends AXFWidget {
 
     visible: boolean;
-    readOnly:boolean;
+    readOnly: boolean;
 
     protected formService: AXFFormService;
 
@@ -266,7 +269,7 @@ export abstract class AXFWidgetView extends AXFWidget {
         let dataService = WidgetInjector.instance.get(AXFDataService);
         setTimeout(() => {
             if (this.getName()) {
-                this.formService.setWidget(this.getName(), this); 
+                this.formService.setWidget(this.getName(), this);
                 this.value = dataService.getModel()[this.getName()];
                 this.refresh();
             }

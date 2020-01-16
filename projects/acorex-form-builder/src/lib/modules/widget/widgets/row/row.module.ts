@@ -32,10 +32,6 @@ export class AXFRowWidgetModule {
             designerClass: AXFRowWidgetDesigner,
             printClass: AXFRowWidgetPrint,
             viewClass: AXFRowWidgetView,
-            
-            toolbox: {
-                visible: false
-            },
             options: {
                 boxStyle: {
                     border: new AXFBoxStyleBoxSizeValue("1"),

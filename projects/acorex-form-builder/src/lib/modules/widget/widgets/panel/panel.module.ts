@@ -35,9 +35,6 @@ export class AXFPanelWidgetModule {
             printClass: AXFPanelWidgetPrint,
             viewClass: AXFPanelWidgetView,
             options: [],
-            toolbox: {
-                visible: false
-            },
             properties: [
                 AXF_CAPTION_PROPERTY,
                 {

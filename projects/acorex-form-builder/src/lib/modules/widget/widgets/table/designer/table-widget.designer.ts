@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 @Component({
@@ -23,10 +23,11 @@ export class AXFTableWidgetDesigner extends AXFWidgetDesigner {
 
     onRender() {
         this.applyStyle(this.table.nativeElement);
-        if (!this.widgets.length) {
+        this.table.nativeElement.classList.remove('table-picker');
+        if (this.widgets.length == 0) {
             this.table.nativeElement.classList.add('table-picker');
-
         }
+
         this.cdr.markForCheck();
     }
 
@@ -43,8 +44,13 @@ export class AXFTableWidgetDesigner extends AXFWidgetDesigner {
     }
 
     create(r, c) {
+        let header: boolean = false;
         for (let ri = 0; ri < r; ri++) {
             let row = this.widgetService.resolve("table-row");
+            if (header==false) {
+                row.options.isHeader = true;
+                header = true;
+            }
             let opt = { widgets: [] };
             for (let ci = 0; ci < c; ci++) {
                 let cell = this.widgetService.resolve("table-cell");
@@ -53,6 +59,5 @@ export class AXFTableWidgetDesigner extends AXFWidgetDesigner {
             this.addChild(row, opt)
         }
     }
-
 }
 

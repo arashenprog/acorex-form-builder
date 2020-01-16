@@ -1,2 +1,5 @@
 <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
 </ng-container>
+<ng-container *ngIf="!widgets || widgets.length==0">
+    &nbsp;
+</ng-container>

@@ -123,6 +123,7 @@
             width: 100%;
             border-top: 1px solid #dbdbdb;
             color: #8e8e8e;
+
             ul {
                 display: flex;
                 list-style: none;
@@ -135,7 +136,8 @@
                     margin-inline-start: 5px;
                     color: #343434;
                     cursor: pointer;
-                    &:hover{
+
+                    &:hover {
                         text-decoration: underline;
                     }
 
@@ -151,7 +153,7 @@
                     &:last-child::after {
                         content: "" !important;
                     }
-                   
+
                 }
             }
         }
@@ -257,10 +259,84 @@ ax-tab-view {
 
 }
 
-.axf-drag-over{
+.axf-drag-over {
     background-color: #343434;
 }
 
-.axf-widget-move-handler{
-    
+.axf-widget-move-handler {}
+
+.axf-widget-hover {
+    z-index: 1500;
+    position: absolute;
+    cursor: pointer;
+    background-color: rgba(78, 22, 147, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.axf-blank-container {
+        animation: blinking 1s infinite;
+
+        .axf-add-widget-button {
+            color: var(--white-color);
+        }
+    }
+
+    @keyframes blinking {
+        0% {
+            background-color: rgba(78, 22, 147, 0.1);
+        }
+
+        50% {
+            background-color: rgba(78, 22, 147, 0.3);
+        }
+
+        100% {
+            background-color: rgba(78, 22, 147, 0.1);
+        }
+    }
+}
+
+.axf-widget-context-menu {
+    position: fixed;
+    z-index: 2500;
+    background: var(--white-color);
+    border: 1px solid;
+    border-color: var(--border-color);
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    box-shadow: 0 15px 35px rgba(50, 50, 90, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    -webkit-transform: translate(0, 15px) scale(.95);
+    transform: translate(0, 15px) scale(.95);
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            border-left: 3px solid transparent;
+            transition: ease .2s;
+            padding: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: ease .2s;
+            min-width: 120px;
+            &:hover {
+                background: #CE93D8;
+                border-left: 3px solid var(--primary-color);
+                color: #FFFFFF;
+            }
+
+            &.separator {
+                border-bottom: 1px solid var(--border-color)
+            }
+        }
+    }
+
+
+
 }

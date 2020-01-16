@@ -33,9 +33,6 @@ export class AXFColWidgetModule {
             container: true,
             draggable:false,
             viewClass: AXFColWidgetView,
-            toolbox: {
-                visible: false
-            },
             options: {
                 boxStyle: {
                     border: new AXFBoxStyleBoxSizeValue("0"),

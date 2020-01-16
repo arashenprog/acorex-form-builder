@@ -1,7 +1,7 @@
 import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { WidgetConfig } from '../../services/widget.service';
 import { AXFWidget, AXFWidgetDesigner } from '../../config/widget';
-import { AXHtmlUtil, EventService } from 'acorex-ui';
+import { AXHtmlUtil, EventService, AXPoint } from 'acorex-ui';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Directive({
@@ -97,23 +97,41 @@ export class AXFWidgetRendererDirective {
                 this.widgetElement.addEventListener("mouseover", (c) => {
                     c.stopPropagation();
                     c.stopImmediatePropagation();
-                    if (!this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`) && this.widgetConfig.container != true) {
-                        this.widgetElement.style.pointerEvents = "all";
-                        const hoverDiv = document.createElement("div");
-                        hoverDiv.id = `bb-${this.widgetElement.id}`;
-                        hoverDiv.style.zIndex = "1500";
-                        hoverDiv.style.position = "absolute";
-                        hoverDiv.style.backgroundColor = "rgba(78, 22, 147, 0.1)";
-                        const bound = this.widgetElement.getBoundingClientRect();
-                        hoverDiv.style.top = `0px`;
-                        hoverDiv.style.left = `0px`
-                        hoverDiv.style.width = `${bound.width}px`
-                        hoverDiv.style.height = `${bound.height}px`;
+                    this.widgetElement.style.pointerEvents = "all";
+                    const hoverDiv = document.createElement("div");
+                    hoverDiv.id = `bb-${this.widgetElement.id}`;
+                    hoverDiv.classList.add("axf-widget-hover");
+                    const bound = this.widgetElement.getBoundingClientRect();
+                    hoverDiv.style.top = `0px`;
+                    hoverDiv.style.left = `0px`
+                    hoverDiv.style.width = `${bound.width}px`
+                    hoverDiv.style.height = `${bound.height}px`;
+                    if (!this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`) &&
+                        this.widgetConfig.container != true &&
+                        this.widgetConfig.droppable != false
+                    ) {
+
                         hoverDiv.onclick = (z) => {
                             z.preventDefault();
                             z.stopPropagation();
                             this.zone.run(() => {
                                 this.widgetInstance.edit();
+                            });
+                        }
+                        this.widgetElement.appendChild(hoverDiv);
+                    }
+                    else if (
+                        this.widgetConfig.droppable != false &&
+                        this.widgetConfig.container != false &&
+                        !this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`) &&
+                        (!this.widgetConfig.options.widgets || this.widgetConfig.options.widgets.length == 0)) {
+                        hoverDiv.classList.add("axf-blank-container");
+                        hoverDiv.innerHTML = "<div class='axf-add-widget-button'><i class='fas fa-plus'></i></div>";
+                        hoverDiv.onclick = (z) => {
+                            z.preventDefault();
+                            z.stopPropagation();
+                            this.zone.run(() => {
+                                this.widgetInstance.addElement();
                             });
                         }
                         this.widgetElement.appendChild(hoverDiv);
@@ -235,18 +253,63 @@ export class AXFWidgetRendererDirective {
     private handleContextMenu(e: MouseEvent) {
         this.zone.run(() => {
             this.widgetInstance.edit();
+            this.showContextMenu({ x: e.clientX, y: e.clientY });
         });
         e.stopPropagation();
         e.preventDefault();
         e.stopImmediatePropagation();
     }
 
+    private showContextMenu(pos: AXPoint) {
+        this.closeContextMenu();
+        if (this.widgetInstance["getContextMenu"]) {
+            const menu = document.createElement("div");
+            menu.classList.add("axf-widget-context-menu");
+            menu.style.top = pos.y + "px";
+            menu.style.left = pos.x + "px";
+            document.body.appendChild(menu);
+            let ul = document.createElement("ul")
+            menu.appendChild(ul);
+            this.widgetInstance.getContextMenu().forEach(m => {
+                let li = document.createElement("li");
+                li.innerHTML = `<i class="${m.icon}"></i>&nbsp;${m.text}`;
+                if(m.separator)
+                {
+                    li.classList.add("separator");
+                }
+                ul.appendChild(li);
+                li.onclick = () => {
+                    if (this.widgetInstance[m.action])
+                        this.widgetInstance[m.action]();
+                };
+            });
+        }
+        this.clearDocumentEvents();
+        document.addEventListener("click", this.closeContextMenu.bind(this), true);
+        document.addEventListener("contextmenu", this.closeContextMenu.bind(this), true);
+    }
+
+    private closeContextMenu() {
+        document.querySelectorAll(".axf-widget-context-menu").forEach(element => {
+            document.body.removeChild(element);
+        });
+        this.clearDocumentEvents();
+    }
+
     ngOnDestroy(): void {
         this.zone.runOutsideAngular(() => {
             if (this.widgetElement) {
-                this.widgetElement.removeEventListener("click", this.handleSelectElement);
+                this.widgetElement.removeEventListener("click", this.handleSelectElement.bind(this));
             }
         });
+        this.clearDocumentEvents();
     }
+
+    private clearDocumentEvents() {
+        document.removeEventListener("click", this.closeContextMenu.bind(this));
+        document.removeEventListener("contextmenu", this.closeContextMenu.bind(this));
+    }
+
+
 
 }

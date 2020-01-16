@@ -28,9 +28,6 @@ export class AXFPageBreakWidgetModule {
             designerClass: AXFPageBreakWidgetDesigner,
             printClass: AXFPageBreakWidgetPrint,
             viewClass: AXFPageBreakWidgetView,
-            toolbox: {
-                edite: false
-            },
             properties: [
             ]
         })

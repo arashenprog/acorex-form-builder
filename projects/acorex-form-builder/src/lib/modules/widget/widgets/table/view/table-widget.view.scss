@@ -1,14 +1,14 @@
 :host {
     overflow-x: auto;
-    table {  
+
+    table {
         min-width: 100%;
         border-collapse: collapse;
 
-        td {
-            &:after {
-                content: '';
-                display: block;
-            }
+        td,th {
+            height: 50px;
+            min-width: 50px;
         }
+
     }
 }

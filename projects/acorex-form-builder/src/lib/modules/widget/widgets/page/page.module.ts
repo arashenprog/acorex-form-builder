@@ -45,10 +45,6 @@ export class AXFPagePageWidgetModule {
                 },
                 bgColor: "inherit"
             },
-            toolbox: {
-                visible: false,
-                delete: false
-            },
             properties: [
                 {
                     name: "pageDirection",

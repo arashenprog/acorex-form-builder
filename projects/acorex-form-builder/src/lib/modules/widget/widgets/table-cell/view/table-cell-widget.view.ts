@@ -1,11 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, ViewEncapsulation } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
     selector: 'td',
     templateUrl: './table-cell-widget.view.html',
     styleUrls: ['./table-cell-widget.view.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation:ViewEncapsulation.None
 })
 export class AXFTableCellWidgetView extends AXFWidgetView {
 

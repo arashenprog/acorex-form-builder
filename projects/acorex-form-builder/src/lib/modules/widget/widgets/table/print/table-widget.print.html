@@ -1,6 +1,12 @@
-<table style="width:100%;border-spacing: 0px;">
+<table #table>
+    <thead>
+        <ng-container *ngFor="let w of getHeader()" axf-widget-renderer [widget]="w"
+            [parent]="this" [mode]="'print'">
+        </ng-container>
+    </thead>
     <tbody>
-        <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this"  [mode]="'print'">
+        <ng-container *ngFor="let w of getBody()" axf-widget-renderer [widget]="w"
+            [parent]="this" [mode]="'print'">
         </ng-container>
     </tbody>
 </table>

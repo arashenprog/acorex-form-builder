@@ -1,11 +1,7 @@
-<div *ngIf="widgets.length; else elseTemplate" >
-    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
-    </div>
-</div>
+<ng-container *ngIf="widgets.length; else elseTemplate" >
+    <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
+    </ng-container>
+</ng-container>
 <ng-template #elseTemplate>
-    <div class="align-center">
-        <div class="add-element" (click)="handleAction('add',$event)" tooltip="Add Element" [placement]="'top'">
-            <i class="fas fa-plus"></i>
-        </div>
-    </div>
+    &nbsp;
 </ng-template>

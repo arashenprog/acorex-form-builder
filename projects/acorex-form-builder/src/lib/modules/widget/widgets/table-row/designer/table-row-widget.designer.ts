@@ -1,11 +1,12 @@
-import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 @Component({
     selector: 'tr',
     templateUrl: './table-row-widget.designer.html',
     styleUrls: ['./table-row-widget.designer.scss'],
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection:ChangeDetectionStrategy.OnPush,
+    encapsulation:ViewEncapsulation.None
 })
 export class AXFTableRowWidgetDesigner extends AXFWidgetDesigner {
 

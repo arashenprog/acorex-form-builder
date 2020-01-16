@@ -31,21 +31,6 @@ export class AXFPanelWidgetDesigner extends AXFWidgetDesigner {
         })
     }
 
-    handleAction(action: string, e: MouseEvent) {
-        e.stopPropagation();
-        switch (action) {
-            case "edit":
-                this.edit();
-                break;
-            case "delete":
-                this.delete();
-                break;
-            case "add":
-                this.addElement();
-                break;
-        }
-        return false;
-    }
 
     onRender() {
         this.cdr.markForCheck();

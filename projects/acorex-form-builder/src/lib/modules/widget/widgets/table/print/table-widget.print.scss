@@ -1,14 +1,13 @@
 :host {
-
     table {
         min-width: 100%;
         border-collapse: collapse;
 
-        td {
-            &:after {
-                content: '';
-                display: block;
-            }
+        border-spacing: 0px;
+
+        td,th {
+            height: 50px;
+            min-width: 50px;
         }
     }
 }

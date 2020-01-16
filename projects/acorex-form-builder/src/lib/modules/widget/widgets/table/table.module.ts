@@ -36,9 +36,6 @@ export class AXFTableWidgetModule {
             viewClass: AXFTableWidgetView,
             container:true,
             droppable:false,
-            toolbox: {
-                visible: false
-            },
             options: {
                 boxStyle: {
                     border: new AXFBoxStyleBoxSizeValue("0"),

@@ -1,11 +1,12 @@
-import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
     selector: 'td',
     templateUrl: './table-cell-widget.print.html',
     styleUrls: ['./table-cell-widget.print.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation:ViewEncapsulation.None
 })
 export class AXFTableCellWidgetPrint extends AXFWidgetPrint {
 

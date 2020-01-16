@@ -9,7 +9,8 @@
             </ng-container>
         </div>
         <div class="end">
-            <ax-button type="light" size="sm" *ngIf="!widget.config.toolbox || widget.config.toolbox.delete!=false" (onClick)="handleDeleteClick()">
+            <!-- *ngIf="!widget.config.toolbox || widget.config.toolbox.delete!=false"  -->
+            <ax-button type="light" size="sm" (onClick)="handleDeleteClick()">
                 <i class="fas fa-trash danger"></i>
             </ax-button>
         </div>
