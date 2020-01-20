@@ -300,6 +300,18 @@ ax-tab-view {
 .axf-widget-context-menu {
     position: fixed;
     z-index: 2500;
+    opacity: 0;
+    -webkit-transform: translate(0, 15px) scale(.95);
+    transform: translate(0, 15px) scale(.95);
+    transition: transform 0.05s ease-out, opacity 0.05s ease-out;
+    pointer-events: none;
+
+    &.show {
+        opacity: 1;
+        -webkit-transform: translate(0, 0) scale(1);
+        transform: translate(0, 0) scale(1);
+        pointer-events: auto;
+    }
 
     ul {
         list-style: none;
@@ -316,8 +328,9 @@ ax-tab-view {
             padding: 5px;
             cursor: pointer;
             text-decoration: none;
-            min-width: 120px;
+            min-width: 150px;
             position: relative;
+            font-size: 14px;
 
             &:hover {
                 background: #CE93D8;
@@ -330,21 +343,43 @@ ax-tab-view {
             }
 
             &.subitem {
+                &::after {
+                    content: "";
+                    position: absolute;
+                    right: 5px;
+                    top: 50%;
+                    -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    border: 5px solid transparent;
+                    border-left-color: var(--black-color);
+                }
+
                 ul {
                     z-index: 2510;
                     position: absolute;
                     padding: 0;
-                    left: 115px;
+                    left: 145px;
                     top: 0px;
-                    display: none;
+
                     li {
                         color: #212529;
+
+                        &:hover {
+                            color: #FFFFFF;
+                           
+                        }
                     }
                 }
 
                 &:hover {
-                    ul {
-                        display: block;
+                    &::after {
+                        border-left-color: #FFFFFF;
+                    }
+                    &>.axf-widget-context-menu {
+                        opacity: 1;
+                        -webkit-transform: translate(0, 0) scale(1);
+                        transform: translate(0, 0) scale(1);
+                        pointer-events: auto;
                     }
                 }
             }

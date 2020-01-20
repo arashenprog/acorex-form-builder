@@ -282,6 +282,7 @@ export class AXFWidgetRendererDirective {
                         m.widget[m.action]();
                 };
                 if (m.items && m.items.length) {
+
                     li.classList.add("subitem");
                     let ul2 = document.createElement("ul")
                     ul2.classList.add("axf-widget-context-menu");
@@ -301,16 +302,20 @@ export class AXFWidgetRendererDirective {
                     li.appendChild(ul2);
                 }
             });
+            setTimeout(() => {
+                menu.classList.add("show");
+            }, 50);
             menu.appendChild(ul);
         }
         this.clearDocumentEvents();
         document.addEventListener("click", this.closeContextMenu.bind(this), true);
         document.addEventListener("contextmenu", this.closeContextMenu.bind(this), true);
+        document.addEventListener("wheel", this.closeContextMenu.bind(this), true);
     }
 
     private closeContextMenu() {
         document.querySelectorAll(".axf-widget-context-menu").forEach(element => {
-            document.body.removeChild(element);
+            element.parentElement.removeChild(element);
         });
         this.clearDocumentEvents();
     }
@@ -327,6 +332,7 @@ export class AXFWidgetRendererDirective {
     private clearDocumentEvents() {
         document.removeEventListener("click", this.closeContextMenu.bind(this));
         document.removeEventListener("contextmenu", this.closeContextMenu.bind(this));
+        document.removeEventListener("wheel", this.closeContextMenu.bind(this), true);
     }
 
 
