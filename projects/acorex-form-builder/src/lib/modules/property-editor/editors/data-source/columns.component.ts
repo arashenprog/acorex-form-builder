@@ -18,7 +18,8 @@ export class AXFDataColumnEditorComponent extends AXBasePageComponent {
         { value: "date", title: "Date" },
         { value: "time", title: "Time" },
         { value: "image", title: "Image" },
-        { value: "selectionList", title: "Selection List" }
+        { value: "selectionList", title: "Selection List" },
+        { value: "signature", title: "Signature" }
     ]
     constructor() {
         super();

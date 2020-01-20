@@ -30,7 +30,27 @@
     </table> 
 </div>-->
 <div #el>
-    <div class="brd">
+    <div *ngIf="showType=='item'" class="itemShow" > 
+            <div  [ngStyle]="{'width':dataSource.columns.length==1?'inherit':(100.0/dataSource.columns.length)+'%'}"  
+            *ngFor="let item of dataSource.columns"> 
+                <table >
+                    <tbody>
+                        <tr>
+                            <td class="firstTd" >{{item.title}}</td>
+                            <td >
+                                <ax-text-box *ngIf="item.type=='string' || item.type=='number'"></ax-text-box>
+                                <ax-date-picker label="" *ngIf="item.type=='date'"></ax-date-picker>
+                                <div class="sign" style="height: 50px;width: 160px;"  *ngIf="item.type=='signature' || item.type=='image'"  ></div> 
+                                <ax-check-box  *ngIf="item.type=='boolean'" label="' '"></ax-check-box>
+                                <ax-time-picker label=""  *ngIf="item.type=='time'" ></ax-time-picker> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+         
+    </div>
+    <div class="brd" *ngIf="showType=='table'">
         <table class="table table-bordered table-sm">
             <thead class="thead-dark">
                 <tr *ngIf="dataSource">

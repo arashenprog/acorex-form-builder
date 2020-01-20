@@ -14,6 +14,7 @@ export class AXFSignatureInputWidgetDesigner extends AXFWidgetDesigner {
     @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;   
     dataSource: AXFDataSourceOption;
     status:string;
+    showType:string;
     constructor(private cdr: ChangeDetectorRef) { 
         super()
     }

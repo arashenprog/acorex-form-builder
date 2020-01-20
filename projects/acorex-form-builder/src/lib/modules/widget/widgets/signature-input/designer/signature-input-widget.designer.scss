@@ -4,24 +4,16 @@
     height: 50px;
     width: 45%;
 }
-// .row{
-//     margin-bottom: 2px;
-
-//      .child{  
-//          display: flex;
-//         .spanchild{
-//             padding: 0 10px;
-//             font-size: 14px;
-//         }
-//         .valuechild{
-//             width: 100%;
-//             margin: 0px 10px 0px 0px; 
-//         }
-//     }
-// }
-// .wdt100{
-//     width: 100%;
-// }
+.first {
+    width: fit-content;
+    float:left;  
+    border: 1px solid red;
+}
+.second {
+    border: 1px solid green;
+    float: left;  
+}
+ 
 
 .img {
     background-image: url('./assets/images/noimage.png');
@@ -42,4 +34,19 @@
 .headfoot {
     background-color: darkgray;
     color: black;
+}
+
+.itemShow{
+      display: inline-block; width: 100%;
+    div{
+        float: left;
+        table{
+            width: 100%;
+            .firstTd{
+                vertical-align: top;text-align: center;
+                color: var(--primary-color);
+                font-weight: bold;
+            }
+        }
+    }
 }
