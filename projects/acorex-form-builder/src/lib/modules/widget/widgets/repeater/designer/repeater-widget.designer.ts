@@ -11,19 +11,27 @@ import { AXFWidgetPickerService } from '../../../services/template/picker.servic
 })
 export class AXFRepeaterWidgetDesigner extends AXFWidgetDesigner {
 
-    //@ViewChild("el") el: ElementRef<HTMLElement>;
+    @ViewChild("table", { static: true }) table: ElementRef<HTMLTableElement>;
+    range: Array<number> = [];
+    rangeR = 0;
+    rangeC = 0; 
+    
     constructor(
         private hostElement: ElementRef,
         private picker: AXFWidgetPickerService,
         private cdr: ChangeDetectorRef) {
         super()
-
+        for (let i = 1; i <= 10; i++) {
+            this.range.push(i);
+        }
     }
 
     onRender(): void {
-        // if (this.el)
-        //     this.applyStyle(this.el.nativeElement);
-        this.applyStyle(this.hostElement.nativeElement);
+        this.applyStyle(this.table.nativeElement);
+        this.table.nativeElement.classList.remove('table-picker');
+        if (this.widgets.length == 0) {
+            this.table.nativeElement.classList.add('table-picker');
+        }
         this.cdr.markForCheck();
     }
 
@@ -35,5 +43,34 @@ export class AXFRepeaterWidgetDesigner extends AXFWidgetDesigner {
                 });
             }
         })
+    }
+
+    onPickerMouseHover(r, c) {
+        this.rangeR = r;
+        this.rangeC = c;
+    }
+
+    onPickeMouseLeave() {
+        if (this.rangeR == 1 || this.rangeC == 1) {
+            this.rangeR = 0;
+            this.rangeC = 0;
+        }
+    }
+
+    create(r, c) {
+        let header: boolean = false;
+        for (let ri = 0; ri < r; ri++) {
+            let row = this.widgetService.resolve("table-row");
+            if (header==false) {
+                row.options.isHeader = true;
+                header = true;
+            }
+            let opt = { widgets: [] };
+            for (let ci = 0; ci < c; ci++) {
+                let cell = this.widgetService.resolve("table-cell");
+                opt.widgets.push(cell)
+            }
+            this.addChild(row, opt)
+        }
     }
 }

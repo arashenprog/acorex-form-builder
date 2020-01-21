@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
-import { AXFWidgetDesigner, AXFContextMenuItem } from '../../../config/widget';
-import { WidgetConfig } from 'acorex-form-builder/lib/modules/widget/services/widget.service';
+import { AXFWidgetDesigner, AXFContextMenuItem } from '../../../config/widget'; 
+import { WidgetConfig } from '../../../services/widget.service';
 
 @Component({
     selector: 'tr',
