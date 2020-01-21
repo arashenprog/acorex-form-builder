@@ -1,0 +1,12 @@
+<!-- <div style="min-height: 40px;width: 100%;background: lightgray;" #el>
+    <ng-container *ngFor="let w of widgets;let i=index" axf-widget-renderer [widget]="w" [parent]="this">
+    </ng-container>
+</div> -->
+
+<ng-container *ngIf="widgets.length; else elseTemplate" style="background: lightgray;">
+    <ng-container *ngFor="let w of widgets;let i=index" axf-widget-renderer [widget]="w" [parent]="this">
+    </ng-container>
+</ng-container>
+<ng-template #elseTemplate>
+    &nbsp;
+</ng-template>

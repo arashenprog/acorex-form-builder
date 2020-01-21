@@ -1,0 +1,11 @@
+<div> 
+    <div *ngFor="let item of items;let r=index">
+        <ng-container *ngFor="let w of widgets;let i=index" axf-widget-renderer [widget]="w" [parent]="this" [mode]="'view'"
+        [repIndex]="r">
+        </ng-container>
+    </div>  
+    <ax-button type="primary" size="sm" *ngIf="dataSource.mode=='manual'" (onClick)="addItemClick()"
+        tooltip="Add New">
+        <i class="fas fa-plus"></i>&nbsp;<span>Add New Item</span>
+    </ax-button>
+</div>
