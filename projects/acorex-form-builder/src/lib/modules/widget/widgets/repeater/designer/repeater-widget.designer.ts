@@ -20,20 +20,22 @@ export class AXFRepeaterWidgetDesigner extends AXFWidgetDesigner {
         if (v != this._showHeader) {
             this._showHeader = v;
             if (v == true) {
-                let head = this.widgetService.resolve("table-row");
-                head.options.isHeader = true;
-                let opthead = { widgets: [] }; 
-                let cell = this.widgetService.resolve("table-cell");
+                if (!this.widgets.some(c => c.options.isHeader == true)) {
+                    let head = this.widgetService.resolve("table-row");
+                    head.options.isHeader = true;
+                    let opthead = { widgets: [] };
+                    let cell = this.widgetService.resolve("table-cell");
 
-                let optheadCell = { widgets: [] };
-                let txtblock = this.widgetService.resolve("text");
-                optheadCell.widgets.push(txtblock); 
-                Object.assign(cell.options,optheadCell);
-                //this.addChild(cell, optheadCell); 
+                    let optheadCell = { widgets: [] };
+                    let txtblock = this.widgetService.resolve("text");
+                    optheadCell.widgets.push(txtblock);
+                    Object.assign(cell.options, optheadCell);
+                    //this.addChild(cell, optheadCell); 
 
-                opthead.widgets.push(cell);  
-                this.addChild(head, opthead);
-                this.cdr.markForCheck();
+                    opthead.widgets.push(cell);
+                    this.addChild(head, opthead);
+                    this.cdr.markForCheck();
+                }
             }
             else {
                 let headindex = this.widgets.findIndex(d => d.options.isHeader == true);
@@ -58,15 +60,17 @@ export class AXFRepeaterWidgetDesigner extends AXFWidgetDesigner {
     }
 
     ngOnInit() {
-        let row = this.widgetService.resolve("table-row");
-        row.options.isHeader = false;
-        let opt = { widgets: [] };
-        for (let ci = 0; ci < 1; ci++) {
-            let cell = this.widgetService.resolve("table-cell");
-            opt.widgets.push(cell)
+        if (this.widgets.length == 0) {
+            let row = this.widgetService.resolve("table-row");
+            row.options.isHeader = false;
+            let opt = { widgets: [] };
+            for (let ci = 0; ci < 1; ci++) {
+                let cell = this.widgetService.resolve("table-cell");
+                opt.widgets.push(cell)
+            }
+            this.addChild(row, opt);
+            this.cdr.markForCheck();
         }
-        this.addChild(row, opt);
-        this.cdr.markForCheck();
     }
 
     getHeader() {
