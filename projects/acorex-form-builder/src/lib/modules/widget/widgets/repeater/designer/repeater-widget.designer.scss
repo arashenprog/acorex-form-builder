@@ -1,0 +1,38 @@
+:host {
+    table {
+        min-width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0px;
+
+        thead{
+            background: lightgray;
+        }
+
+        td,th {
+            height: 50px;
+            min-width: 50px;
+        }
+
+        &.table-picker {
+            min-width: unset;
+            background-color: #FFF;
+
+            td {
+                border: 1px solid var(--border-color);
+                min-width: 25px;
+                width: 25px;
+                height: 25px;
+
+                &:after {
+                    content: '';
+                    display: block;
+                }
+
+                &.picked {
+                    background-color: var(--primary-lighter-color);
+                    border: 1px solid var(--primary-trans-color);
+                }
+            }
+        }
+    }
+}

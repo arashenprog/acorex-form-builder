@@ -24,7 +24,7 @@ export class AXFRepeaterlWidgetModule {
         service.register({
             title: "Repeater",
             hint: "Repeater container element",
-            icon: "fa fa-refresh",
+            icon: "fas fa-repeat", 
             category: "Layout",
             visible: true,
             name: "repeater",
@@ -48,6 +48,14 @@ export class AXFRepeaterlWidgetModule {
                 },
             },
             properties: [
+                {
+                    name: "showHeader",
+                    category: "General",
+                    defaultValue:false,
+                    title: "Show Header",
+                    editor: "CheckboxEditor",
+                    options: { label:"Show Header"}
+                },
                 AXF_BG_COLOR_PROPERTY,
                 AXF_DS_LIST_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY, 
