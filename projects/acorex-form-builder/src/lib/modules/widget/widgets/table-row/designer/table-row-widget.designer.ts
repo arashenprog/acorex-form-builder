@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { AXFWidgetDesigner, AXFContextMenuItem } from '../../../config/widget';
-import { WidgetConfig } from 'acorex-form-builder/lib/modules/widget/services/widget.service';
+import { WidgetConfig } from '../../../services/widget.service';
 
 @Component({
     selector: 'tr',
@@ -25,39 +25,37 @@ export class AXFTableRowWidgetDesigner extends AXFWidgetDesigner {
     getContextMenu() {
         const items: AXFContextMenuItem[] = [];
         items.push({
-            text: "Insert row before",
+            text: "Insert row above",
             icon: "fas fa-chevron-up",
-            action: "addRowBefore"
+            action: "insertRowBefore"
         });
         items.push({
-            text: "Insert row after",
+            text: "Insert row below",
             icon: "fas fa-chevron-down",
-            action: "addRowAfter"
+            action: "insertRowAfter"
         });
         items.push({
-            text: "Delete row",
+            text: "Delete",
             separator: true,
             action: "delete",
             icon: "fas fa-trash"
         });
-        items.push({
-            text: "Insert row before",
-        });
+   
         return items;
     }
 
-    addRowBefore() {
+    insertRowBefore() {
         this.insertRow(0);
     }
 
 
 
-    addRowAfter() {
+    insertRowAfter() {
         this.insertRow(1);
     }
 
     private insertRow(i: number) {
-        const index = this.parent.widgets.findIndex(c => c.options.uid == this.config.options.uid);
+        const index = this.findIndex();
         let row = this.widgetService.resolve("table-row");
         row.options = { widgets: [] };
         this.getColumns(index).forEach(col => {

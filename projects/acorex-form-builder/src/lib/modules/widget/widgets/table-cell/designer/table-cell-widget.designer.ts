@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ViewEncapsulation } from '@angular/core';
-import { AXFWidgetDesigner } from '../../../config/widget';
+import { AXFWidgetDesigner, AXFContextMenuItem } from '../../../config/widget';
 import { AXFWidgetPickerService } from '../../../services/template/picker.service';
 import { AXMenuComponent, MenuItem } from 'acorex-ui';
 
@@ -8,7 +8,7 @@ import { AXMenuComponent, MenuItem } from 'acorex-ui';
     templateUrl: './table-cell-widget.designer.html',
     styleUrls: ['./table-cell-widget.designer.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation:ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None,
     host: {
         class: "axf-drop-zone"
     }
@@ -41,6 +41,30 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
                 });
             }
         })
+    }
+
+    getContextMenu() {
+        const items: AXFContextMenuItem[] = super.getContextMenu().filter(c => c.action != "copy");
+        items.splice(1, 0, ...[
+            {
+                text: "Insert column before",
+                icon: "fas fa-chevron-up",
+                action: "insertColumnBefore"
+            },
+            {
+                text: "Insert column after",
+                icon: "fas fa-chevron-down",
+                action: "insertColumnAfter"
+            }
+        ])
+        return items;
+    }
+
+    insertColumnBefore() {
+        this.parent.insertColumn(this.findIndex())
+    }
+    insertColumnAfter() {
+        this.parent.insertColumn(this.findIndex() + 1);
     }
 
 }
