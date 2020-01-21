@@ -159,6 +159,11 @@ export class AXFWidgetService {
         }
     }
 
+    clone(widget:WidgetConfig)
+    {
+        return this.parseInternal(this.serializeInternal(widget));
+    }
+
 
 
 

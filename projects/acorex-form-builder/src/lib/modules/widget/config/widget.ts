@@ -146,7 +146,19 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     copy() {
+        sessionStorage.setItem("clipboard", this.widgetService.serialize(this.config));
         WidgetInjector.instance.get(AXToastService).success("Widget copied!");
+    }
+    paste() {
+        const cp = sessionStorage.getItem("clipboard");
+        if (cp) {
+            const config = this.widgetService.parse(cp);
+            if (config && this.config.container) {
+                this.addChild(config)
+                WidgetInjector.instance.get(AXToastService).success("Widget pasted!");
+                sessionStorage.removeItem("clipboard");
+            }
+        }
     }
 
     addChild(widget: WidgetConfig, options?: any) {
@@ -162,12 +174,21 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     getContextMenu(parents: boolean = true): AXFContextMenuItem[] {
         let items: AXFContextMenuItem[] = [];
         if (this.config.container && this.config.droppable != false) {
+            const cp = sessionStorage.getItem("clipboard");
+            if (cp) {
+                items.push({
+                    text: "Paste",
+                    icon: "fas fa-paste",
+                    action: "paste",
+                    widget: this,
+                })
+            }
             items.push({
                 text: "Add Widget",
                 icon: "fas fa-plus",
                 action: "addElement",
                 separator: true,
-                widget:this,
+                widget: this,
             })
         }
         items.push(...[
@@ -175,14 +196,14 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 text: "Remove",
                 icon: "fas fa-trash",
                 action: "delete",
-                widget:this
+                widget: this
             },
             {
                 text: "Copy",
                 icon: "fas fa-copy",
                 action: "copy",
                 separator: true,
-                widget:this,
+                widget: this,
             }
         ])
         let p = this.parent;
@@ -191,9 +212,16 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 items.push({
                     text: p.config.title,
                     icon: p.config.icon,
-                    action: "edit",
                     separator: true,
-                    items: p.getContextMenu(false),
+                    items: [
+                        {
+                            text: "Select",
+                            icon: "fas fa-mouse-pointer",
+                            action: "edit",
+                            widget: p
+                        },
+                        ...p.getContextMenu(false)
+                    ],
                     widget: p
                 })
             }
