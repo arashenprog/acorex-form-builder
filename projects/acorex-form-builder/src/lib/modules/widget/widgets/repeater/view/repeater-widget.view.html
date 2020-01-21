@@ -1,0 +1,66 @@
+<!-- <table  #table>
+    <thead>
+        <ng-container *ngFor="let w of getHeader()" axf-widget-renderer [widget]="w"
+            [parent]="this" [mode]="'view'">
+        </ng-container>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let w of getBody()" axf-widget-renderer [widget]="w"
+            [parent]="this" [mode]="'view'">
+        </ng-container>
+    </tbody>
+</table> -->
+<table class="table" #table>
+    <thead>
+      <tr>
+        <th scope="col">iPhone 6</th>
+        <th scope="col">iPhone 6 Plus</th>
+        <th scope="col">Galaxy Note 4</th>
+        <th scope="col">HTC One (M8)</th>
+        <th scope="col">Samsung Galaxy S5</th>
+        <th scope="col">Nokia Lumia 830</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-header="iPhone 6"><p>4.7 in</p></td>
+        <td data-header="iPhone 6 Plus"><p>5.5 in</p></td>
+        <td data-header="Galaxy Note 4"><p>5.7 in</p></td>
+        <td data-header="HTC One (M8)"><p>5 in</p></td>
+        <td data-header="Samsung Galaxy S5"><p>5.1 in</p></td>
+        <td data-header="Nokia Lumia 830"><p>5 in</p></td>
+      </tr>
+      <tr>
+        <td data-header="iPhone 6"><p>6.9 mm</p></td>
+        <td data-header="iPhone 6 Plus"><p>7.1 mm</p></td>
+        <td data-header="Galaxy Note 4"><p>8.5 mm</p></td>
+        <td data-header="HTC One (M8)"><p>9.4 mm</p></td>
+        <td data-header="Samsung Galaxy S5"><p>8.1 mm</p></td>
+        <td data-header="Nokia Lumia 830"><p>8.5 mm</p></td>
+      </tr>
+      <tr>
+        <td data-header="iPhone 6"><p>129 g</p></td>
+        <td data-header="iPhone 6 Plus"><p>172 g</p></td>
+        <td data-header="Galaxy Note 4"><p>176 g</p></td>
+        <td data-header="HTC One (M8)"><p>160 g</p></td>
+        <td data-header="Samsung Galaxy S5"><p>145 g</p></td>
+        <td data-header="Nokia Lumia 830"><p>150 g</p></td>
+      </tr>
+      <tr>
+        <td data-header="iPhone 6"><p>16/64/128 GB internal</p></td>
+        <td data-header="iPhone 6 Plus"><p>16/64/128 GB internal</p></td>
+        <td data-header="Galaxy Note 4"><p>32 GB  </p></td>
+        <td data-header="HTC One (M8)"><p>16/32 GB </p></td>
+        <td data-header="Samsung Galaxy S5"><p>16/32 </p></td>
+        <td data-header="Nokia Lumia 830"><p>16/32 </p></td>
+      </tr>
+      <tr>
+        <td data-header="iPhone 6"><p>Up to 14 hours  </p></td>
+        <td data-header="iPhone 6 Plus"><p>Up to 24 hours </p></td>
+        <td data-header="Galaxy Note 4"><p>Up to 20 hours </p></td>
+        <td data-header="HTC One (M8)"><p>Up to 20 hours talk on 3G</p></td>
+        <td data-header="Samsung Galaxy S5"><p>Up to 21 hours  </p></td>
+        <td data-header="Nokia Lumia 830"><p>Up to 14 hours  </p></td>
+      </tr>
+    </tbody>
+  </table>

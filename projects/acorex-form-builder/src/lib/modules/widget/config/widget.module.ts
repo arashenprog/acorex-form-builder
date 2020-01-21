@@ -26,6 +26,7 @@ import { AXFTimeInputWidgetModule } from '../widgets/time-input/time-input.modul
 import { AXFTableWidgetModule } from '../widgets/table/table.module';
 import { AXFTableRowWidgetModule } from '../widgets/table-row/table-row.module';
 import { AXFTableCellWidgetModule } from '../widgets/table-cell/table-cel.module';
+import { AXFRepeaterlWidgetModule } from '../widgets/repeater/repeater.module';
 
 
 const MODULES = [
@@ -51,7 +52,8 @@ const MODULES = [
     AXFPanelWidgetModule,
     AXFTableWidgetModule,
     AXFTableRowWidgetModule,
-    AXFTableCellWidgetModule
+    AXFTableCellWidgetModule,
+    AXFRepeaterlWidgetModule
 ];
 
 @NgModule({
