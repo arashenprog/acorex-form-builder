@@ -51,9 +51,11 @@ export abstract class AXFWidget implements AXFWidgetContainer {
 
     constructor() {
         this.widgetService = WidgetInjector.instance.get(AXFWidgetService);
+
     }
 
     ngOnInit(): void {
+        (<any>this.config).$owner = this;
         this.onRender();
     }
 
@@ -233,8 +235,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         return items;
     }
 
-    findIndex():number
-    {
+    findIndex(): number {
         const index = this.parent.widgets.findIndex(c => c.options.uid == this.config.options.uid);
         return index;
     }

@@ -49,22 +49,33 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
             {
                 text: "Insert column before",
                 icon: "fas fa-chevron-up",
-                action: "insertColumnBefore"
+                action: "insertColumnBefore",
+                widget: this
             },
             {
                 text: "Insert column after",
                 icon: "fas fa-chevron-down",
-                action: "insertColumnAfter"
+                action: "insertColumnAfter",
+                widget: this
             }
         ])
         return items;
     }
 
     insertColumnBefore() {
-        this.parent.insertColumn(this.findIndex())
+        this.insertColumn(0)
     }
     insertColumnAfter() {
-        this.parent.insertColumn(this.findIndex() + 1);
+        this.insertColumn(1);
+    }
+
+    private insertColumn(index: number) {
+        const table = this.parent.parent;
+        table.widgets.forEach(row => {
+            const col = this.widgetService.resolve("table-cell");
+            row.options.widgets.splice(this.findIndex() + index, 0, col);
+            row.$owner.refresh();
+        });
     }
 
 }

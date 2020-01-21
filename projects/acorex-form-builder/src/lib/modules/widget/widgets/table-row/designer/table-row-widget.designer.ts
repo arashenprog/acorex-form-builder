@@ -62,7 +62,7 @@ export class AXFTableRowWidgetDesigner extends AXFWidgetDesigner {
             row.options.widgets.push(col);
         });
         this.parent.widgets.splice(index + i, 0, row);
-        this.refresh();
+        this.parent.refresh();
     }
 
     private getColumns(index: number): WidgetConfig[] {
@@ -74,5 +74,7 @@ export class AXFTableRowWidgetDesigner extends AXFWidgetDesigner {
         return result;
 
     }
+
+  
 }
 
