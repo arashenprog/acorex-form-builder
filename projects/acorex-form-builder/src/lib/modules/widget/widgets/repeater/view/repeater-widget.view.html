@@ -5,11 +5,12 @@
         </ng-container>
     </thead>
     <tbody>
-        <ng-container *ngFor="let w of getBody()" axf-widget-renderer [widget]="w"
+        <ng-container *ngFor="let w of getBody();let r=index" axf-widget-renderer [widget]="w"
             [parent]="this" [mode]="'view'">
         </ng-container>
     </tbody>
 </table>
+<button type="button" class="btn btn-sm btn-primary" (click)="addItemClick()" *ngIf="dataSource.mode=='manual'">Add Item</button> 
 <!-- <table class="table" #table>
     <thead>
       <tr>

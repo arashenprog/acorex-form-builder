@@ -21,7 +21,11 @@ export class AXFSignatureInputWidgetView extends AXFWidgetView {
     ngOnInit(): void {  
     } 
  
-    
+    calculate(val)
+    {
+        return parseInt(val)+2;
+    }
+
     setSignatureClick() { 
         this.popupService.open(SignaturePadPage, {
             title: "Signature",

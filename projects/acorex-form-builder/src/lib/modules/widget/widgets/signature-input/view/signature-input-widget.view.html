@@ -43,7 +43,7 @@
 </div> 
 [style.background-image]="getSrc()"-->
 
-<div  class="signature" [style.width.px]="width+2" [style.height.px]="height+2" >
+<div  class="signature" [style.width.px]="calculate(width)" [style.height.px]="calculate(height)" >
 <img  [src]="value ? value : './assets/images/No-Signature.jpg'"
  [style.width.px]="width" [style.height.px]="height">
     <div class="clear-box"><button class="btn btn-outline-danger" (click)="setSignatureClick()"><i class="fas fa-plus"></i></button></div>

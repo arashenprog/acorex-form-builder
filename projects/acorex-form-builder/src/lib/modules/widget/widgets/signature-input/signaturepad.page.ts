@@ -13,7 +13,8 @@ export class SignaturePadPage{
   @ViewChild('sigpad1') signaturePad: SignaturePad;
 
   signaturePadOptions: Object = { 
-    'canvasHeight': 100
+    'canvasHeight': 300,
+    'canvasWidth': 300
   };
 
   constructor() {
