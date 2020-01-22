@@ -51,9 +51,11 @@ export abstract class AXFWidget implements AXFWidgetContainer {
 
     constructor() {
         this.widgetService = WidgetInjector.instance.get(AXFWidgetService);
+
     }
 
     ngOnInit(): void {
+        (<any>this.config).$owner = this;
         this.onRender();
     }
 
@@ -193,7 +195,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         }
         items.push(...[
             {
-                text: "Remove",
+                text: "Delete",
                 icon: "fas fa-trash",
                 action: "delete",
                 widget: this
@@ -231,6 +233,11 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
             items = this["onContextMenu"](items);
         }
         return items;
+    }
+
+    findIndex(): number {
+        const index = this.parent.widgets.findIndex(c => c.options.uid == this.config.options.uid);
+        return index;
     }
 
 
