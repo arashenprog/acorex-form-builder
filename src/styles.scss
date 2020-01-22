@@ -9,6 +9,7 @@
   }
 }
 
+
 :root {
   --primary-color: #4e1693 !important;
   --primary-fore-color: #fff !important;
@@ -49,4 +50,8 @@ label {
 .table .thead-dark th {
   background-color: var(--primary-color);
   border-color: #454d55;
+}
+
+p { 
+  margin-bottom: 0.4rem !important;
 }

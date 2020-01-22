@@ -1,13 +1,11 @@
-:host {
-    table {
-        min-width: 100%;
-        border-collapse: collapse;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    table-layout: fixed;
 
-        border-spacing: 0px;
-
-        td,th {
-            height: 50px;
-            min-width: 50px;
-        }
+    td,th {
+        height: 50px;
+        min-width: 50px;
     }
 }
