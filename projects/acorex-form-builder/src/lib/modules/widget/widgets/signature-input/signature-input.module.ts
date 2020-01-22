@@ -35,70 +35,30 @@ export class AXFSignatureInputWidgetModule {
             options: {
                 height: 100,
                 width: 150,
-                dataSource: {
-                    mode: "manual",
-                    dataSource: {},
-                    columns: [
-                        {
-                            fieldName: "name",
-                            title: "Name",
-                            type: "string",
-                            fillByUser: false,
-                        },
-                        {
-                            fieldName: "date",
-                            title: "Date",
-                            type: "date",
-                            fillByUser: true,
-                        },
-                        {
-                            fieldName: "signature",
-                            title: "Signature",
-                            type: "signature",
-                            fillByUser: true,
-                        }
-                    ],
-                    dataItems: [
-                        {
-                            date: new Date().getTime(),
-                            name: "Item 1",
-                            signature: ""
-                        }
-                    ] 
-                },
-                status:"single",
-                showType:"table"
-                 //     SignatureType:"supervisor",
-                    //     StaffNumber:1,
-                    //     ShowType:["item"],
-                    //     Items:[{ value:1,text: "Name",signature:"" }, 
-                    //            { value:2,Text: "Date",Type:"Date",Visible:true},
-                    //            { Value:3,Text: "Signature",Type:"Signature",Visible:true}],
             },
             properties: [
                 {
-                    name: "status",
+                    name: "width",
                     category: "General",
-                    title: "Status",
-                    editor: "SelectionEditor",
-                    options: {
-                        items: [{ value: "single", title: "Single" }, { value: "multiple", title: "Multiple" }],
-                        mode: "single",
-                        direction: "horizontal"
-                    }
+                    defaultValue: "",
+                    title: "Width (px)",
+                    editor: "TextEditor"
                 },
                 {
-                    name: "showType",
+                    name: "height",
                     category: "General",
-                    title: "Show Type",
-                    editor: "SelectionEditor",
-                    options: {
-                        items: [{ value: "table", title: "Table" }, { value: "item", title: "Item" }],
-                        mode: "single",
-                        direction: "horizontal"
-                    }
+                    defaultValue: "",
+                    title: "Height (px)",
+                    editor: "TextEditor"
                 },
-                AXF_DS_LIST_PROPERTY
+                {
+                    name: "supervisior",
+                    category: "General",
+                    defaultValue:false,
+                    title: "Supervisior",
+                    editor: "CheckboxEditor",
+                    options: { label:"Supervisior"}
+                }
             ]
         })
     }

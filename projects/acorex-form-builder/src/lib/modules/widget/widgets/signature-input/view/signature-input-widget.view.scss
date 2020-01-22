@@ -1,29 +1,41 @@
 
-.sign{
-    background-image: url('./assets/images/manualsignature.jpg');background-repeat: round;
-    border: 1px solid gray;
-    height: 50px;
-    width: 90px;
-}
-.img {
-    background-image: url('./assets/images/noimage.png');
-    background-repeat: round;
-    border: 1px solid gray;
-    height: 50px;
-    width: 90px;
-}
+// .sign{
+//     background-image: url('./assets/images/manualsignature.jpg');background-repeat: round;
+//     border: 1px solid gray;
+//     height: 50px;
+//     width: 90px;
+// }
+// .img {
+//     background-image: url('./assets/images/noimage.png');
+//     background-repeat: round;
+//     border: 1px solid gray;
+//     height: 50px;
+//     width: 90px;
+// }
 
-.brd {
+// .brd {
     
-    overflow-x: auto;
+//     overflow-x: auto;
 
-    table {
-        width: 100%;
-        table-layout: fixed;
+//     table {
+//         width: 100%;
+//         table-layout: fixed;
+//     }
+// }
+
+// .headfoot {
+//     background-color: darkgray;
+//     color: black;
+// }
+
+.signature {
+    border: 1px black solid;
+    position: relative; 
+    .clear-box {
+        background-color: white;
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
     }
-}
-
-.headfoot {
-    background-color: darkgray;
-    color: black;
+    
 }

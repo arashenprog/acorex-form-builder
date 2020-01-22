@@ -1,10 +1,11 @@
 import { Component, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events';
 
 @Component({
     selector:'ax-signature',
     styleUrls: ['./signaturepad.page.scss'],
-    template:' <div class="signature"><signature-pad #sigpad1 [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad><div class="clear-box"><button class="btn btn-outline-danger" (click)="clearClick()"><i class="fa fa-trash"></i></button></div>'
+    template:' <div class="signature"><signature-pad #sigpad1 [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad><div class="clear-box"><button class="btn btn-outline-danger" (click)="clearClick()"><i class="fa fa-trash"></i></button></div></div>'
 })
 
 export class SignaturePadPage{
@@ -12,7 +13,7 @@ export class SignaturePadPage{
   @ViewChild('sigpad1') signaturePad: SignaturePad;
 
   signaturePadOptions: Object = { 
-    'canvasHeight': 70
+    'canvasHeight': 100
   };
 
   constructor() {
@@ -50,4 +51,9 @@ export class SignaturePadPage{
   {
     this.signaturePad.clear();
   }
+
+  onClosing(e: ClosingAction) {
+    e.data = this.value;
+    e.resolve();
+}
 }

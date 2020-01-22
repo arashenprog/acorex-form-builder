@@ -55,23 +55,7 @@ export class AXFRepeaterWidgetView extends AXFWidgetView {
 
 
     ngOnInit()
-    { 
-        // if(this.dataSource.mode=="remote")
-        // {
-        //     let row=this.widgets.filter(c => c.options.isHeader == false);
-        //     this.dataSource.dataItems.forEach(f => {
-        //         this.widgets.push()
-        //     });
-        //      this.dataSource.dataItems;
-        // }
-        // else
-        // {
-        //     if(this.dataSource.dataItems.length==0)
-        //         this.items=[{}];
-        //     else
-        //         this.items=this.dataSource.dataItems;
-        // }
-        // this.cdr.markForCheck();
+    {  
     }
 
     // addItemClick()

@@ -8,7 +8,7 @@ import { AXFDataSourceOption } from '../../../../property-editor/editors/data-so
 })
 export class AXFSignatureInputWidgetPrint extends AXFWidgetPrint {
 
-    dataSource: AXFDataSourceOption; 
+    //dataSource: AXFDataSourceOption; 
     constructor() {
         super()
     }

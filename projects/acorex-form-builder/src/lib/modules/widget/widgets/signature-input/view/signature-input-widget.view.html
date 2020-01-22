@@ -1,45 +1,4 @@
-<!-- <div #el *ngIf="visible">
-   <div *ngIf="info.ShowType.includes('item')">
-        <div class="row" *ngFor="let rw of rows;let i = index">
-            <div class="child" [ngStyle]="getStyles()" *ngFor="let item of columns">
-                <div class="spanchild">{{item.Text}} </div>
-                <div class="valuechild">
-                    <ax-text-box *ngIf="item.Type=='String'"></ax-text-box>
-                    <ax-date-picker label="" *ngIf="item.Type=='Date'"></ax-date-picker>
-                    <div class="signature" *ngIf="item.Type=='Signature'"
-                        [ngStyle]="{'width.px': width,'height.px': height}">
-                        <signature-pad [options]="signaturePadOptions" (onEndEvent)="drawComplete(i)"></signature-pad>
-                        <div class="clear-box">
-                            <button (click)="onClearClick(i)" class="btn btn-outline-danger"><i
-                                    class="fa fa-trash"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <table *ngIf="info.ShowType.includes('grid')" class="wdt100">
-        <tr>
-            <th *ngFor="let item of columns">{{item.Text}}</th>
-        </tr>
-        <tr *ngFor="let rw of rows;let i = index">
-            <td *ngFor="let item of columns">
-                <ax-text-box *ngIf="item.Type=='String'"></ax-text-box>
-                <ax-date-picker label="" *ngIf="item.Type=='Date'"></ax-date-picker>
-                <div class="signature" *ngIf="item.Type=='Signature'"
-                    [ngStyle]="{'width.px': width,'height.px': height}">
-                    <signature-pad [options]="signaturePadOptions" (onEndEvent)="drawComplete(i)"></signature-pad>
-                    <div class="clear-box">
-                        <button (click)="onClearClick(i)" class="btn btn-outline-danger"><i
-                                class="fa fa-trash"></i></button>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
-</div> -->
-<div #el>
+<!-- <div #el>
     <div class="brd">
         <table class="table table-bordered table-sm">
             <thead class="thead-dark">
@@ -81,4 +40,12 @@
             <i class="fas fa-plus"></i>&nbsp;<span>Add Signature</span>
         </ax-button>
     </div>
-</div>
+</div> 
+[style.background-image]="getSrc()"-->
+
+<div  class="signature" [style.width.px]="width+2" [style.height.px]="height+2" >
+<img  [src]="value ? value : './assets/images/No-Signature.jpg'"
+ [style.width.px]="width" [style.height.px]="height">
+    <div class="clear-box"><button class="btn btn-outline-danger" (click)="setSignatureClick()"><i class="fas fa-plus"></i></button></div>
+</div>  
+
