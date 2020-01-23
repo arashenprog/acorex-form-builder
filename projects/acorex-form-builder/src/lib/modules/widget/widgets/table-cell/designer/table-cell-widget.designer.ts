@@ -49,14 +49,23 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
                 icon: "fas fa-columns",
                 widget: this,
                 items: [
+                   
                     {
                         text: "Insert column before",
                         action: "insertColumnBefore",
+                        icon: "fas fa-chevron-left",
                         widget: this
                     },
                     {
                         text: "Insert column after",
                         action: "insertColumnAfter",
+                        icon: "fas fa-chevron-right",
+                        widget: this
+                    },
+                    {
+                        text: "Delete column",
+                        icon: "fas fa-trash",
+                        action: "deleteColumn",
                         widget: this
                     },
                 ]
@@ -68,10 +77,12 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
                 items: [
                     {
                         text: "Merge with next",
+                        icon: "fas fa-chevron-right",
                         action: "mergeAfter",
                     },
                     {
                         text: "Merge with blow",
+                        icon: "fas fa-chevron-down",
                         action: "mergeBelow",
                     },
                 ],
@@ -93,6 +104,15 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
         table.widgets.forEach(row => {
             const col = this.widgetService.resolve("table-cell");
             row.options.widgets.splice(this.findIndex() + index, 0, col);
+            row.$owner.refresh();
+        });
+    }
+
+    private deleteColumn()
+    {
+        const table = this.parent.parent;
+        table.widgets.forEach(row => {
+            row.options.widgets.splice(this.findIndex(), 1);
             row.$owner.refresh();
         });
     }

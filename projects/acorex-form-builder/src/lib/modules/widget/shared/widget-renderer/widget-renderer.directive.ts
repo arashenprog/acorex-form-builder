@@ -352,7 +352,6 @@ export class AXFWidgetRendererDirective {
                         m.widget[m.action]();
                 };
                 if (m.items && m.items.length) {
-
                     li.classList.add("subitem");
                     let ul2 = document.createElement("ul")
                     ul2.classList.add("axf-widget-context-menu");
@@ -370,12 +369,33 @@ export class AXFWidgetRendererDirective {
                         };
                     });
                     li.appendChild(ul2);
+                    li.onmouseover = (e) => {
+                        ul2.classList.add("show");
+                        const liBound = li.getBoundingClientRect();
+                        const bound = ul2.getBoundingClientRect();
+                        if (bound.left + bound.width > window.innerWidth) {
+                            ul2.style.left = -(liBound.width + 5) + "px";
+                        }
+                        if (bound.top + bound.height > window.innerHeight) {
+                            ul2.style.top = -(bound.height - liBound.height) + "px";
+                        }
+                    }
+                    li.onmouseout = (e) => {
+                        ul2.classList.remove("show");
+                    }
                 }
             });
+            menu.appendChild(ul);
             setTimeout(() => {
                 menu.classList.add("show");
+                const bound = menu.getBoundingClientRect();
+                if (bound.left + bound.width > window.innerWidth) {
+                    menu.style.left = window.innerWidth - bound.width - 20 + "px";
+                }
+                if (bound.top + bound.height > window.innerHeight) {
+                    menu.style.top = window.innerHeight - bound.height - 20 + "px";
+                }
             }, 50);
-            menu.appendChild(ul);
         }
         this.clearDocumentEvents();
         document.addEventListener("click", this.closeContextMenu.bind(this), true);

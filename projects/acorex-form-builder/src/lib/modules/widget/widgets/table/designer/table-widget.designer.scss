@@ -4,10 +4,7 @@
         border-collapse: collapse;
         border-spacing: 0px;
 
-        td,th {
-            height: 50px;
-            min-width: 50px;
-        }
+    
 
         &.table-picker {
             min-width: unset;

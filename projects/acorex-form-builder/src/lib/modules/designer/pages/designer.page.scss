@@ -333,7 +333,7 @@ ax-tab-view {
             padding: 5px;
             cursor: pointer;
             text-decoration: none;
-            min-width: 150px;
+            min-width: 180px;
             position: relative;
             font-size: 14px;
 
@@ -363,7 +363,7 @@ ax-tab-view {
                     z-index: 2510;
                     position: absolute;
                     padding: 0;
-                    left: 145px;
+                    left: 175px;
                     top: 0px;
 
                     li {
@@ -371,7 +371,6 @@ ax-tab-view {
 
                         &:hover {
                             color: #FFFFFF;
-
                         }
                     }
                 }
@@ -379,13 +378,6 @@ ax-tab-view {
                 &:hover {
                     &::after {
                         border-left-color: #FFFFFF;
-                    }
-
-                    &>.axf-widget-context-menu {
-                        opacity: 1;
-                        -webkit-transform: translate(0, 0) scale(1);
-                        transform: translate(0, 0) scale(1);
-                        pointer-events: auto;
                     }
                 }
             }

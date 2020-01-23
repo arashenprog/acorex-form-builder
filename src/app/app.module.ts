@@ -9,11 +9,13 @@ import { ACoreXUIModule } from "acorex-ui";
 import { SharedModule } from "./shared/shared.module";
 import { BuilderModule } from './modules/form-builder/builder/config/dashboard.module';
 import { MasterLayout } from './shared/layouts/master.layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [AppComponent, MasterLayout],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
     BuilderModule,
