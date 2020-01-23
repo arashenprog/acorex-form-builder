@@ -1,5 +1,9 @@
-<ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
-</ng-container>
-<ng-container *ngIf="!widgets || widgets.length==0">
-    &nbsp;
-</ng-container>
+<div class="axf-drop-zone">
+    <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
+    </ng-container>
+    <ng-container *ngIf="!widgets || widgets.length==0">
+        &nbsp;
+    </ng-container>
+</div>
+<span class="resize-td" data-target="table" *ngIf="parent.findIndex()==0"></span>
+<span class="resize-tr" data-target="table" *ngIf="findIndex()==0"></span>

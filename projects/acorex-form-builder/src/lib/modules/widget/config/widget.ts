@@ -175,6 +175,14 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
 
     getContextMenu(parents: boolean = true): AXFContextMenuItem[] {
         let items: AXFContextMenuItem[] = [];
+        items.push(
+            {
+                text: 'Select',
+                icon: "fas fa-mouse-pointer",
+                action: "edit",
+                separator: true,
+                widget: this
+            })
         if (this.config.container && this.config.droppable != false) {
             const cp = sessionStorage.getItem("clipboard");
             if (cp) {
@@ -216,12 +224,6 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                     icon: p.config.icon,
                     separator: true,
                     items: [
-                        {
-                            text: "Select",
-                            icon: "fas fa-mouse-pointer",
-                            action: "edit",
-                            widget: p
-                        },
                         ...p.getContextMenu(false)
                     ],
                     widget: p

@@ -1,6 +1,5 @@
-<div class="view-container" [style.width.px]="size">
-
-    <iframe [src]="url" frameBorder="0" #frame class="viewer" scrolling="no">
+<div class="view-container {{size}}"  >
+    <iframe [src]="url" frameBorder="0" #frame class="viewer" >
     </iframe>
 </div>
 <div class="device-size-container">

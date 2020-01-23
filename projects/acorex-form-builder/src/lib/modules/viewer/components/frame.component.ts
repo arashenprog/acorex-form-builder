@@ -45,28 +45,28 @@ export class ACFViewerFrameComponent {
         {
             title: "Desktop",
             icon: "fas fa-desktop",
-            width: 1224,
+            width: "desktop",
             active: true,
             mode: "view"
         },
         {
             title: "Tablet",
             icon: "fas fa-tablet-alt",
-            width: 768,
+            width: "tablet",
             active: false,
             mode: "view"
         },
         {
             title: "Mobile",
             icon: "fas fa-mobile-alt",
-            width: 425,
+            width: "mobile",
             active: false,
             mode: "view"
         },
         {
             title: "Print",
             icon: "fas fa-print",
-            width: 1224,
+            width: "desktop",
             active: false,
             mode: "print"
         }
@@ -111,9 +111,9 @@ export class ACFViewerFrameComponent {
                 }
                 break;
             case "sync":
-                if (options.height && this.frame) {
-                    this.frame.nativeElement.style.height = options.height + "px";
-                }
+                // if (options.height && this.frame) {
+                //     this.frame.nativeElement.style.height = options.height + "px";
+                // }
                 break;
         }
 

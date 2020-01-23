@@ -297,6 +297,11 @@ ax-tab-view {
     }
 }
 
+.axf-drop-zone {
+    height: 100%;
+    position: relative;
+}
+
 .axf-widget-context-menu {
     position: fixed;
     z-index: 2500;
@@ -366,7 +371,7 @@ ax-tab-view {
 
                         &:hover {
                             color: #FFFFFF;
-                           
+
                         }
                     }
                 }
@@ -375,6 +380,7 @@ ax-tab-view {
                     &::after {
                         border-left-color: #FFFFFF;
                     }
+
                     &>.axf-widget-context-menu {
                         opacity: 1;
                         -webkit-transform: translate(0, 0) scale(1);

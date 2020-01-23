@@ -23,6 +23,10 @@ export class AXFWidgetRendererDirective {
     @Output()
     onSelect: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
 
+
+    private resizeMov: number = 0;
+    private isInResizng: boolean = false;
+
     constructor(
         private target: ViewContainerRef,
         private zone: NgZone,
@@ -91,21 +95,30 @@ export class AXFWidgetRendererDirective {
             this.widgetElement.id = this.widgetConfig.options.uid;
 
             this.zone.runOutsideAngular(() => {
+                const dropZone = this.widgetElement.querySelector(".axf-drop-zone");
                 this.widgetElement.style.position = "relative";
                 this.widgetElement.addEventListener("contextmenu", this.handleContextMenu.bind(this));
                 this.widgetElement.addEventListener("click", this.handleSelectElement.bind(this));
                 this.widgetElement.addEventListener("mouseover", (c) => {
                     c.stopPropagation();
                     c.stopImmediatePropagation();
+                    if (this.isInResizng)
+                        return;
                     this.widgetElement.style.pointerEvents = "all";
                     const hoverDiv = document.createElement("div");
                     hoverDiv.id = `bb-${this.widgetElement.id}`;
                     hoverDiv.classList.add("axf-widget-hover");
                     const bound = this.widgetElement.getBoundingClientRect();
                     hoverDiv.style.top = `0px`;
-                    hoverDiv.style.left = `0px`
-                    hoverDiv.style.width = `${bound.width}px`
-                    hoverDiv.style.height = `${bound.height}px`;
+                    hoverDiv.style.left = `0px`;
+                    if (dropZone) {
+                        hoverDiv.style.width = `${dropZone.getBoundingClientRect().width}px`
+                        hoverDiv.style.height = `${dropZone.getBoundingClientRect().height}px`;
+                    } else {
+                        hoverDiv.style.width = `${bound.width}px`
+                        hoverDiv.style.height = `${bound.height}px`;
+                    }
+
                     if (!this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`) &&
                         this.widgetConfig.container != true &&
                         this.widgetConfig.droppable != false
@@ -134,42 +147,98 @@ export class AXFWidgetRendererDirective {
                                 this.widgetInstance.addElement();
                             });
                         }
-                        this.widgetElement.appendChild(hoverDiv);
+
+                        if (dropZone)
+                            dropZone.appendChild(hoverDiv);
+                        else
+                            this.widgetElement.appendChild(hoverDiv);
                     }
                 });
+
                 this.widgetElement.addEventListener("mouseleave", (c) => {
                     const bb = this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`);
                     if (bb) {
-                        this.widgetElement.removeChild(bb);
+                        bb.parentNode.removeChild(bb);
                     }
                 });
+                // add rezie functionality
+                setTimeout(() => {
+                    const resizeHorHandler = this.widgetElement.querySelector<HTMLSpanElement>(".resize-td");
+                    if (resizeHorHandler) {
+                        resizeHorHandler.onmousedown = (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            this.isInResizng = true;
+                            this.resizeMov = e.pageX;
+                        };
+
+                        const target = resizeHorHandler.getAttribute("data-target");
+                        resizeHorHandler.style.height = resizeHorHandler.closest<HTMLElement>(target).offsetHeight + "px";
+                        window.addEventListener("mouseup", (e) => {
+                            if (this.isInResizng) {
+                                e.stopPropagation();
+                                this.isInResizng = false;
+                                this.resizeMov = 0;
+                                this.zone.run(() => {
+                                    this.widgetInstance.edit();
+                                });
+                            }
+                        })
+                        window.addEventListener("mousemove", (e) => {
+                            if (this.isInResizng) {
+                                const bb = this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`);
+                                if (bb) {
+                                    bb.parentNode.removeChild(bb);
+                                }
+                                const movX = e.pageX - this.resizeMov;
+                                let width = this.widgetConfig.options.width;
+                                if (!width)
+                                    width = this.widgetElement.offsetWidth;
+                                width += movX;
+                                console.log(movX, width);
+                                this.widgetConfig.options.width = width;
+                                this.widgetElement.style.width = `${width}px`
+                            }
+                        })
+                    }
+                }, 500);
+
                 // add drag and drop functionality
                 if (this.widgetConfig.draggable != false) {
                     this.widgetElement.classList.add("axf-draggable-widget");
                     this.widgetElement.setAttribute("draggable", "true");
                     this.widgetElement.ondragstart = (e) => {
+                        e.stopPropagation();
                         window["dragged"] = {
                             widget: this.widgetInstance,
                             element: this.widgetElement
                         }
-                        e.stopPropagation();
                     }
                 }
                 //
                 if (this.widgetConfig.droppable != false && this.widgetConfig.container) {
-                    //this.widgetElement.classList.add("axf-drop-zone");
                     this.widgetElement.addEventListener("dragover", (e: DragEvent) => {
                         if (window["dragged"] == null)
                             return;
                         let dragged = window["dragged"].element
                         if (!dragged.contains(this.widgetElement)) {
-                            this.widgetElement.style.backgroundColor = "#ffcccc";
+                            let containerElement: HTMLElement;
+                            if (this.widgetElement.classList.contains('axf-drop-zone'))
+                                containerElement = this.widgetElement;
+                            else
+                                containerElement = this.widgetElement.querySelector('.axf-drop-zone');
+                            containerElement.style.backgroundColor = "#ffcccc";
                             e.preventDefault();
                             e.stopPropagation();
                         }
                     });
                     this.widgetElement.addEventListener("dragleave", (e: DragEvent) => {
-                        this.widgetElement.style.backgroundColor = this.widgetInstance.bgColor;
+                        let containerElement: HTMLElement;
+                        if (this.widgetElement.classList.contains('axf-drop-zone'))
+                            containerElement = this.widgetElement;
+                        else
+                            containerElement = this.widgetElement.querySelector('.axf-drop-zone');
+                        containerElement.style.backgroundColor = this.widgetInstance.bgColor || "";
                     });
                     this.widgetElement.addEventListener("drop", (e: DragEvent) => {
                         if (window["dragged"] == null)
@@ -184,6 +253,7 @@ export class AXFWidgetRendererDirective {
                         else
                             containerElement = this.widgetElement.querySelector('.axf-drop-zone');
                         containerElement.id = AXHtmlUtil.getUID();
+                        containerElement.style.backgroundColor = this.widgetInstance.bgColor || "";
                         //
                         let droppedWidget = <AXFWidgetDesigner>window["dragged"].widget
                         //
