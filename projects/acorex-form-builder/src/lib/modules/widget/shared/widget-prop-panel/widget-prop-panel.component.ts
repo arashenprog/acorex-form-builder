@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, Output, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, Output, ViewEncapsulation, HostListener } from '@angular/core';
 import { WidgetConfig, AXFWidgetProperty } from '../../services/widget.service';
 import { AXFWidget, AXFWidgetDesigner } from '../../config/widget';
 import { EventService } from 'acorex-ui';
@@ -11,6 +11,15 @@ import { EventService } from 'acorex-ui';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFWidgetPropPanelComponent {
+
+    @HostListener('document:keyup', ['$event'])
+    handleDeleteKeyboardEvent(event: KeyboardEvent) {
+
+        if (event.key === 'Delete' && event.target == document.body) {
+            if (this.widget)
+                this.widget.delete();
+        }
+    }
 
 
     private tabs: any[] = [
@@ -92,8 +101,7 @@ export class AXFWidgetPropPanelComponent {
         return a.order == b.order ? 0 : (a.order > b.order ? 1 : -1);
     }
 
-    handleDeleteClick()
-    {
+    handleDeleteClick() {
         this.widget.delete();
     }
 

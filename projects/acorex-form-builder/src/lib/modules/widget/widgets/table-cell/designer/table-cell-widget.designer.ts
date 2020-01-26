@@ -49,7 +49,7 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
                 icon: "fas fa-columns",
                 widget: this,
                 items: [
-                   
+
                     {
                         text: "Insert column before",
                         action: "insertColumnBefore",
@@ -108,13 +108,39 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
         });
     }
 
-    private deleteColumn()
-    {
+    private deleteColumn() {
         const table = this.parent.parent;
         table.widgets.forEach(row => {
             row.options.widgets.splice(this.findIndex(), 1);
             row.$owner.refresh();
         });
+    }
+
+    private mergeAfter() {
+        let colspan = Number(this.config.options.colspan);
+        if (!colspan)
+            colspan = 1;
+
+        const nextCol = this.parent.widgets[this.findIndex() + 1];
+        if (nextCol) {
+            this.config.options.colspan = ++colspan;
+            this.config.options.widgets.push(...nextCol.options.widgets);
+            this.parent.config.options.widgets.splice(this.findIndex() + 1, 1);
+            this.refresh();
+        }
+    }
+
+    private mergeBelow() {
+        let rowspan = Number(this.config.options.rowspan);
+        if (!rowspan)
+            rowspan = 1;
+        const nextRow = this.parent.parent.widgets[this.parent.findIndex() + 1];
+        if (nextRow) {
+            this.config.options.rowspan = ++rowspan;
+            //this.config.options.widgets.push(...nextCol.options.widgets);
+            //this.parent.config.options.widgets.splice(this.findIndex() + 1, 1);
+            this.refresh();
+        }
     }
 
     // private dragMode: number = 0;

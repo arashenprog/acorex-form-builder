@@ -62,6 +62,7 @@ export class AXFTableCellWidgetModule {
                     name: "colspan",
                     title: "Colspan",
                     defaultValue: "1",
+                    visible:false,
                     order: 1,
                 },
                 {
@@ -70,6 +71,7 @@ export class AXFTableCellWidgetModule {
                     name: "rowspan",
                     title: "Rowspan",
                     defaultValue: "1",
+                    visible:false,
                     order: 1,
                 }
             ]

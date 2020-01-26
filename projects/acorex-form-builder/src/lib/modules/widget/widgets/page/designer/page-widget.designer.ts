@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetDesigner, AXFContextMenuItem } from '../../../config/widget';
-import { AXPopupService, EventService } from 'acorex-ui';
+import { AXPopupService, EventService,AXToastService } from 'acorex-ui';
 import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
 import { AXFWidgetPickerService } from '../../../services/template/picker.service';
 
@@ -60,8 +60,10 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         return items;
     }
 
-
-
+    delete()
+    {
+        return false;
+    }
 
 }
 

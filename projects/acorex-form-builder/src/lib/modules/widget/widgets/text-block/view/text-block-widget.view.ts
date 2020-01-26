@@ -2,7 +2,7 @@ import { Component, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } fro
 import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
-    template: '',
+    template: '{{ text | word }}',
     selector: "[axf-widget-text]",
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -16,8 +16,6 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
     }
 
     onRender(): void {
-        this.hostElement.nativeElement.innerHTML = this.text;
-        //this.hostElement.nativeElement.style.display = "inline";
         this.applyStyle(this.hostElement.nativeElement);
         this.cdr.markForCheck();
     }
