@@ -1,0 +1,7 @@
+<div *ngIf="widgets.length > 0; else elseTemplate">
+    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
+    </div>
+</div>
+<ng-template #elseTemplate>
+    This is page footer
+</ng-template>

@@ -27,6 +27,8 @@ import { AXFTableWidgetModule } from '../widgets/table/table.module';
 import { AXFTableRowWidgetModule } from '../widgets/table-row/table-row.module';
 import { AXFTableCellWidgetModule } from '../widgets/table-cell/table-cel.module';
 import { AXFRepeaterlWidgetModule } from '../widgets/repeater/repeater.module';
+import { AXFPageHeaderWidgetModule } from '../widgets/page-header/page-header.module';
+import { AXFPageFooterWidgetModule } from '../widgets/page-footer/page-footer.module';
 
 
 const MODULES = [
@@ -53,7 +55,9 @@ const MODULES = [
     AXFTableWidgetModule,
     AXFTableRowWidgetModule,
     AXFTableCellWidgetModule,
-    AXFRepeaterlWidgetModule
+    AXFRepeaterlWidgetModule,
+    AXFPageHeaderWidgetModule,
+    AXFPageFooterWidgetModule
 ];
 
 @NgModule({

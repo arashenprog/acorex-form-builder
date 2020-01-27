@@ -32,27 +32,34 @@ export class AXFWidgetPropPanelComponent {
         {
             name: "style",
             title: "Style",
-            order: 2,
+            order: 3,
             collapsed: false
         },
         {
             name: "data",
             title: "Data",
-            order: 3,
+            order: 4,
+            collapsed: false
+        },
+        {
+            name: "print",
+            title: "Print",
+            order: 2,
             collapsed: false
         },
         {
             name: "binding",
             title: "Binding",
-            order: 4,
+            order: 10,
             collapsed: false
         },
         {
             name: "behavior",
             title: "Behavior",
-            order: 5,
+            order: 11,
             collapsed: false
-        }
+        },
+       
     ]
 
     tabNames: any[] = [];

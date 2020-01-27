@@ -69,6 +69,22 @@ export class AXFPagePageWidgetModule {
                     order: 33,
                 },
                 AXF_BOX_STYLE_PROPERTY,
+                {
+                    name: "showHeader",
+                    category: "Print",
+                    defaultValue:false,
+                    title: "Show Header",
+                    editor: "CheckboxEditor",
+                    options: { label:"Show Header"}
+                },
+                {
+                    name: "showFooter",
+                    category: "Print",
+                    defaultValue:false,
+                    title: "Show Footer",
+                    editor: "CheckboxEditor",
+                    options: { label:"Show Footer"}
+                }
             ]
         })
     }

@@ -25,6 +25,6 @@ import { SafeUrlPipe } from '../pipes/safeurl.pipe';
         AXFEditorsModule
     ],
     entryComponents: [AXFWidgetPickerComponent],
-    providers: [],
+    providers: [AXFWordPipe],
 })
 export class AXFWidgetSharedModule { }
