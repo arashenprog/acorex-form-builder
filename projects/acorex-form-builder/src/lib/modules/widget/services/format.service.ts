@@ -30,7 +30,6 @@ export class AXFFormatService {
 
     public format(value: any, useModel: boolean = true): string {
         if (value && typeof value == "string") {
-
             const list = value.match(/\[.+\]/g);
             if (list) {
                 list.forEach(w => {

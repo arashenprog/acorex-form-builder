@@ -9,7 +9,6 @@ export class AXFDataItemPipe implements PipeTransform {
     }
 
     transform(dataItem: string, fieldName: string): string {
-        debugger;
         const field = this.formatService.decompose(fieldName);
         if (field.word) {
             let val = dataItem[field.word];
