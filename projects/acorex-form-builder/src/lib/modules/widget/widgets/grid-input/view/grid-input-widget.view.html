@@ -11,8 +11,8 @@
                     <tr style="border-bottom: 1px solid var(--primary-color);"  *ngFor="let item of dataSource.dataItems">
                         <td *ngFor="let col of dataSource.columns">
                             <span
-                                *ngIf="!col.fillByUser && col.fieldName==null && col.type!='image'">{{item[col.fieldName] | word}}</span>
-                            <span *ngIf="!col.fillByUser && col.fieldName!=null">{{item[col.fieldName] | word}}</span>
+                                *ngIf="!col.fillByUser && col.fieldName==null && col.type!='image'">{{item | di:col.fieldName}}</span>
+                            <span *ngIf="!col.fillByUser && col.fieldName!=null">{{item | di:col.fieldName}}</span>
                             <img *ngIf="!col.fillByUser && col.fieldName==null && col.type=='image'"
                                 [src]="col.defaultValue" height="40" width="60">
                             <ax-text-box *ngIf="col.fillByUser && col.type=='string'"></ax-text-box>

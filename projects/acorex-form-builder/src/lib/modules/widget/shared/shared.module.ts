@@ -7,11 +7,13 @@ import { AXFEditorsModule } from '../../property-editor/config/editors.module';
 import { AXFWidgetPropPanelComponent } from './widget-prop-panel/widget-prop-panel.component';
 import { AXFWordPipe } from '../pipes/word.pipe';
 import { SafeUrlPipe } from '../pipes/safeurl.pipe';
+import { AXFDataItemPipe } from '../pipes/data-item.pipe';
 
 @NgModule({
     declarations: [
         AXFWordPipe, 
         SafeUrlPipe,
+        AXFDataItemPipe,
         AXFWidgetPickerComponent, 
         AXFWidgetRendererDirective, 
         AXFWidgetPropPanelComponent,
@@ -19,6 +21,7 @@ import { SafeUrlPipe } from '../pipes/safeurl.pipe';
     imports: [CommonModule, ACoreXUIModule, AXFEditorsModule],
     exports: [AXFWordPipe, 
         SafeUrlPipe,
+        AXFDataItemPipe,
         AXFWidgetPickerComponent, 
         AXFWidgetRendererDirective, 
         AXFWidgetPropPanelComponent, 
