@@ -2,7 +2,7 @@ import { Component, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } fro
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
-    template:'{{ text | word }}',
+    template:'',
     selector: '[axf-text-block]',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -15,6 +15,7 @@ export class AXFTextBlockWidgetPrint extends AXFWidgetPrint {
     }
 
     onRender(): void {
+        this.hostElement.nativeElement.innerHTML = this.text; 
         this.applyStyle(this.hostElement.nativeElement);
         this.cdr.markForCheck();
     }

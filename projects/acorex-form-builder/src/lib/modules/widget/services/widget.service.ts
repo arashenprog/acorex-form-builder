@@ -7,7 +7,7 @@ export interface AXFWidgetProperty {
     title: string
     hint?: string;
     defaultValue?: any;
-    category: "General" | "Style" | "Behavior" | "Data" | "Binding";
+    category: "General" | "Style" | "Behavior" | "Data" | "Binding" | "Print";
     editor: any;
     visible?: boolean | Function;
     options?: any

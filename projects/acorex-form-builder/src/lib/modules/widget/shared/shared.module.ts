@@ -28,6 +28,6 @@ import { AXFDataItemPipe } from '../pipes/data-item.pipe';
         AXFEditorsModule
     ],
     entryComponents: [AXFWidgetPickerComponent],
-    providers: [],
+    providers: [AXFWordPipe],
 })
 export class AXFWidgetSharedModule { }
