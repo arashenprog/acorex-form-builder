@@ -4,7 +4,8 @@ import { AXFWidgetPrint } from '../../../config/widget';
 @Component({
     selector: '[axf-page-footer]',
     templateUrl: './page-footer-widget.print.html', 
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection:ChangeDetectionStrategy.OnPush,
+    host: { role: "page-footer" }
 })
 export class AXFPageFooterWidgetPrint extends AXFWidgetPrint {
 
