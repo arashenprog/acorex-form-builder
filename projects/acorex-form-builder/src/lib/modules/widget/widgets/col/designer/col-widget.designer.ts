@@ -23,15 +23,20 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
         private hostElement: ElementRef,
         private picker: AXFWidgetPickerService,
         private cdr: ChangeDetectorRef) {
-        super()
-
+        super();
     }
 
     onRender(): void {
-        let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
-        el.classList.add("col-sm-12", `col-md-${this.size}`);
+        const el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
+        el.classList.forEach(c => {
+            if (c.startsWith('col-md')) {
+                el.classList.remove(c);
+            }
+        });
+        el.classList.add('col-sm-12', `col-md-${this.size}`);
         this.applyStyle(this.hostElement.nativeElement);
         this.cdr.markForCheck();
+        this.parent.refresh();
     }
 
     addElement() {
@@ -41,6 +46,6 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
                     this.addChild(w);
                 });
             }
-        })
+        });
     }
 }

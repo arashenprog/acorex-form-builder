@@ -1,6 +1,6 @@
 import { Injector, EventEmitter, Input, Output, Directive } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
-import { AXHtmlUtil, AXToastService } from 'acorex-ui'
+import { AXHtmlUtil, AXToastService, IValidationRuleResult } from 'acorex-ui'
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 import { AXFFormService, EventData } from '../services/form.service';
 import { Observable } from 'rxjs';
@@ -20,6 +20,12 @@ export interface AXFContextMenuItem {
     separator?: boolean,
     items?: AXFContextMenuItem[]
     widget?: AXFWidgetDesigner
+}
+
+
+export interface AXFValidatableWidget
+{
+    validate():Promise<IValidationRuleResult>;
 }
 
 

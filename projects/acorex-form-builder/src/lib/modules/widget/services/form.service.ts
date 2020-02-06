@@ -42,7 +42,21 @@ export class AXFFormService {
 
 
     submit() {
-        debugger;
+        ;
+
+        // Promise.all(this.widgets.map(c => { return (<any>c).validate(); })).then(rules => {
+        //     // const failed = rules.filter(c => !c.result);
+        //     // if (failed.length) {
+        //     //   resolve({
+        //     //     result: false,
+        //     //     items: failed
+        //     //   });
+        //     // }
+        //     // else {
+        //     //   resolve({ result: true });
+        //     // }
+        //   });
+
         this.connectService.send("submit", { data: this.formData }).then(() => {
         });
     }

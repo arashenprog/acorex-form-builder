@@ -18,7 +18,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     viewType: string;
     columns: number;
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
-        super() 
+        super();
     }
 
     onRender(): void {
@@ -30,43 +30,42 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     }
 
     refresh() {
-        if (this.dataSource.mode == "remote") {
+        if (this.dataSource.mode === 'remote') {
             this.dataService.getList(
                 this.dataSource.dataSource.name,
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
                 super.refresh();
-            })
-        }
-        else {
+            });
+        } else {
             super.refresh();
         }
     }
 
     getStyles(mode) {
         const styles = {
-            'border-radius': mode == 'single' ? 100 + "%" : 0
+            'border-radius': mode === 'single' ? 100 + '%' : 0
         };
         return styles;
     }
 
     onCheckValueChange(val) {
-        if(this.readOnly)
-        return;
-
-        if (this.mode == "single") {
-            this.value = [val];
+        if (this.readOnly) {
+            return;
         }
-        else {
-            if (!this.value)
+
+        if (this.mode == 'single') {
+            this.value = [val];
+        } else {
+            if (!this.value) {
                 this.value = [];
+            }
 
             if (!this.value.includes(val)) {
                 this.value = [...this.value, ...[val]];
-            }
-            else {
-                this.value = this.value.filter(c => c != val);
+            } else {
+                this.value = this.value.filter(c => c !== val);
             }
         }
     }

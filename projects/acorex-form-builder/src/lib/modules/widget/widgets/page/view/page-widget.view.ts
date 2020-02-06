@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, QueryList, ContentChildren, ViewChildren } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
 
@@ -9,7 +9,6 @@ import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFPageWidgetView extends AXFWidgetView {
-
 
     constructor(private hostElement: ElementRef, private cdr: ChangeDetectorRef) {
         super();
@@ -24,12 +23,9 @@ export class AXFPageWidgetView extends AXFWidgetView {
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         el.classList.remove("rtl", "ltr");
-        el.style.setProperty("--primary-color",this.themeColor);
+        el.style.setProperty("--primary-color", this.themeColor);
         el.classList.add(this.pageDirection);
         this.applyStyle(el);
     }
-
-
-
 }
 

@@ -16,22 +16,26 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
     @ViewChild('modeSelection') modeSelection: AXSelectionListComponent;
     @ViewChild('remoteSelection') remoteSelection: AXSelectBoxComponent;
 
-    modeItems: any[] = [{ value: "manual", text: "Manual" }, { value: "remote", text: "Remote" }];
+    modeItems: any[] = [{ value: 'manual', text: 'Manual' }, { value: 'remote', text: 'Remote' }];
     remoteItems: any[] = [];
     allowColumns: boolean = true;
 
 
     constructor(protected cdr: ChangeDetectorRef,
-        private dataService: AXFDataService,
-        private popupService: AXPopupService) {
+                private dataService: AXFDataService,
+                private popupService: AXPopupService) {
         super();
     }
 
     ngOnInit() {
         if (this.value == null) {
             this.value = new AXFDataSourceOption();
-            this.value.mode = "manual";
+            this.value.mode = 'manual';
             this.initColumns();
+        } else {
+            const v: AXFDataSourceOption = new AXFDataSourceOption();
+            Object.assign(v, this.value);
+            this.value = v;
         }
     }
 
@@ -52,36 +56,35 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
 
     handleRemoteChange(v: any[]) {
         if (v && (this.value.dataSource == null || this.value.dataSource.name != v[0].value)) {
-            this.value.dataItems=[];
+            this.value.dataItems = [];
             this.value.dataSource.name = v[0].value;
-            if (v[0].params)
+            if (v[0].params) {
                 this.value.dataSource.params = v[0].params.map(c => ({ name: c, value: null }));
-            else
+            } else {
                 this.value.dataSource.params = [];
+            }
             //
             this.dataService.getList(this.value.dataSource.name, this.value.dataSource.params).then(items => {
                 if (items && items.length) {
                     this.value.dataItems = items;
                     if (this.allowColumns) {
-                        let obj = items[0];
-                        let cols: AXFDataSourceColumnOption[] = [];
-                        for (var key in obj) {
+                        const obj = items[0];
+                        const cols: AXFDataSourceColumnOption[] = [];
+                        for (const key in obj) {
                             if (obj.hasOwnProperty(key) && typeof obj[key] !== 'function') {
                                 cols.push({
                                     fieldName: key,
                                     fillByUser: false,
                                     title: key,
                                     type: typeof obj[key]
-                                })
-
+                                });
                             }
                         }
                         this.value.columns = cols;
                     }
                     super.handleValueChange(this.value);
                     this.cdr.markForCheck();
-                }
-                else {
+                } else {
                     this.initColumns();
                 }
             });
@@ -96,9 +99,9 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
     }
 
     handleModeChange(v: any[]) {
-        if (v && v[0].value != this.value.mode) {
+        if (v && v[0].value !== this.value.mode) {
             this.value.mode = v[0].value;
-            if (this.value.mode == "manual") {
+            if (this.value.mode === 'manual') {
                 this.initColumns();
                 this.value.dataItems = [];
             }
@@ -109,8 +112,8 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
 
     handleItemEditor() {
         this.popupService.open(AXIDataItemEditorComponent, {
-            title: "Items Editor",
-            size: this.value.columns.length > 3 ? "lg" : "md",
+            title: 'Items Editor',
+            size: this.value.columns.length > 3 ? 'lg' : 'md',
             data: {
                 columns: this.value.columns,
                 items: this.value.dataItems
@@ -120,13 +123,13 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
             this.value.dataItems = c.data.items;
             this.handleValueChange(this.value);
             this.cdr.markForCheck();
-        })
+        });
     }
 
     handleColumnEditor() {
         this.popupService.open(AXFDataColumnEditorComponent, {
-            title: "Columns Editor",
-            size: "lg",
+            title: 'Columns Editor',
+            size: 'lg',
             data: {
                 columns: this.value.columns,
                 allowColumns: this.allowColumns
@@ -135,15 +138,15 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
             this.value.columns = c.data.columns;
             this.handleValueChange(this.value);
             this.cdr.markForCheck();
-        })
+        });
     }
 
     private initColumns() {
         if (this.allowColumns) {
             this.value.columns = [];
-            this.value.columns.push({ fieldName: "column1", title: "Column 1", fillByUser: false, type: "string" });
-            this.value.columns.push({ fieldName: "column2", title: "Column 2", fillByUser: false, type: "string" });
-            this.value.columns.push({ fieldName: "column3", title: "Column 3", fillByUser: false, type: "string" });
+            this.value.columns.push({ fieldName: 'column1', title: 'Column 1', fillByUser: false, type: 'string' });
+            this.value.columns.push({ fieldName: 'column2', title: 'Column 2', fillByUser: false, type: 'string' });
+            this.value.columns.push({ fieldName: 'column3', title: 'Column 3', fillByUser: false, type: 'string' });
         }
     }
 

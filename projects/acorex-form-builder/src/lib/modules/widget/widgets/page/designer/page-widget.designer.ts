@@ -25,7 +25,7 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         return this._showHeader;
     }
     public set showHeader(v: boolean) {
-        debugger
+        
         if (v != this._showHeader) {
             if (v) {
                 if (!this.widgets.some(w => w.name == "page-header")) {
@@ -34,7 +34,7 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
                 }
             }
             else {
-                debugger
+                
                 let headerindex = this.widgets.findIndex(w => w.name == "page-header");
                 if (headerindex > -1)
                     this.widgets.splice(headerindex, 1);
@@ -49,7 +49,7 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         return this._showFooter;
     }
     public set showFooter(v: boolean) {
-        debugger
+        
         if (v != this._showFooter) {
             if (v) {
                 if (!this.widgets.some(w => w.name == "page-footer")) {
@@ -58,7 +58,7 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
                 }
             }
             else {
-                debugger
+                
                 let footerIndex = this.widgets.findIndex(w => w.name == "page-footer");
                 if (footerIndex > -1)
                     this.widgets.splice(footerIndex, 1);

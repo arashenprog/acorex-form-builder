@@ -35,7 +35,7 @@ export class AXFRowWidgetDesigner extends AXFWidgetDesigner {
 
     private calcLeftCols() {
         this.countCol = this.maxCol / this.minCol;
-        const sum = this.widgets.map(c => c.options.size).reduce((a, b) => a + b, 0);
+        const sum = this.widgets.map(c => c.options.size).reduce((a, b) => Number(a) + Number(b), 0);
         this.range = 0;
         this.colLeft = Array(this.countCol - (sum / this.minCol)).fill(1);
     }

@@ -13,6 +13,19 @@ export const AXF_VALUE_CHANGE_EVENT: AXFWidgetProperty = {
     }
 }
 
+
+export const AXF_DATA_BOUND_EVENT: AXFWidgetProperty = {
+    name: "onDataBound",
+    category: "Behavior",
+    defaultValue: null,
+    title: "Data Bound",
+    editor: "EventEditor",
+    order: 5,
+    options: {
+    }
+}
+
+
 export const AXF_INIT_EVENT: AXFWidgetProperty = {
     name: "onInit",
     category: "Behavior",

@@ -9,13 +9,12 @@ import { AXFDataSourceOption } from '../../../../property-editor/editors/data-so
 })
 export class AXFDropdownInputWidgetView extends AXFWidgetView {
 
-    @ViewChild("el") el: ElementRef<HTMLElement>;
+    @ViewChild('el') el: ElementRef<HTMLElement>;
 
-    mode: string="single";
+    mode: string = 'single';
 
     allowSearch: boolean;
     dataSource: AXFDataSourceOption;
-    
 
     constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
         super()
@@ -27,29 +26,37 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     }
 
     onRender(): void {
-        if (this.el)
+        if (this.el) {
             this.applyStyle(this.el.nativeElement);
+        }
         this.cdr.markForCheck();
     }
 
 
     refresh() {
-        if (this.dataSource.mode == "remote") {
+        if (this.dataSource.mode === 'remote') {
             this.dataService.getList(
                 this.dataSource.dataSource.name,
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
                 this.cdr.markForCheck();
-            })
-        }
-        else
+                this.invokeEvent('onDataBound');
+            });
+        } else {
             this.cdr.markForCheck();
+            this.invokeEvent('onDataBound');
+        }
     }
 
 
     handleValueChange(e: any) {
         this.value = e;
-        this.invokeEvent("onValueChange");
+        this.invokeEvent('onValueChange');
+    }
+
+    reload() {
+        this.value = this.mode === 'single' ? null : [];
+        this.refresh();
     }
 }

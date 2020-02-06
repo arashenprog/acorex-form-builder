@@ -30,7 +30,7 @@ export interface WidgetConfig {
     visible: boolean;
     container?: boolean;
     draggable?: boolean;
-    droppable?:boolean,
+    droppable?: boolean,
     designerClass: any;
     viewClass: any;
     printClass: any;
@@ -125,16 +125,21 @@ export class AXFWidgetService {
     }
 
     private serializeInternal(item: WidgetConfig): any {
-        let obj: any = {};
+        const obj: any = {};
         obj.name = item.name;
         obj.options = {};
-        //
+        //        
         if (item.properties) {
             item.properties.forEach(p => {
-                obj.options[p.name] = item.options[p.name]
+                if (item.options[p.name] && item.options[p.name].clone) {
+
+                    obj.options[p.name] = item.options[p.name].clone();
+                } else {
+                    obj.options[p.name] = item.options[p.name];
+                }
             });
         }
-        if (item.options && item.options.widgets) {
+        if (item.options && item.options.widgets && item.name !== 'outlet') {
             obj.options.widgets = [];
             item.options.widgets.forEach(w => {
                 obj.options.widgets.push(this.serializeInternal(w));
@@ -159,8 +164,7 @@ export class AXFWidgetService {
         }
     }
 
-    clone(widget:WidgetConfig)
-    {
+    clone(widget: WidgetConfig) {
         return this.parseInternal(this.serializeInternal(widget));
     }
 

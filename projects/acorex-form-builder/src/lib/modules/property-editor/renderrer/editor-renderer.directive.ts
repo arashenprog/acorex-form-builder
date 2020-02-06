@@ -51,7 +51,7 @@ export class AXFEditorRendererDirective {
         this.instance = cmpRef.instance as AXFProperyEditor<any>;
         //
         this.instance.valueChange.subscribe(value => {
-            this.widget.config.options[this.property.name] = value
+            this.widget.config.options[this.property.name] = value;
             this.eventService.broadcast("BIND_RELATED_PROPS");
             this.widget.refresh();
         });
