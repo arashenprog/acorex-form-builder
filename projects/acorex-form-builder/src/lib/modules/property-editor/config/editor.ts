@@ -1,4 +1,4 @@
-import { Output, EventEmitter, Input, Directive, ChangeDetectorRef, Injector, Optional } from '@angular/core';
+import { Output, EventEmitter, Input, Directive} from '@angular/core';
 
 
 
@@ -17,7 +17,7 @@ export abstract class AXFProperyEditor<T>{
         this._value = v;
         this.valueChange.emit(v);
     }
-    
+
     constructor() {
     }
 

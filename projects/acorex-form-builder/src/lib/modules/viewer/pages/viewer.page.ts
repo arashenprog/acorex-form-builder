@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef } from '@angular/core';
+import { Component, HostListener, ElementRef, ViewEncapsulation } from '@angular/core';
 import { AXBasePageComponent } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { ActivatedRoute } from '@angular/router';
@@ -7,11 +7,12 @@ import { AXFFormService } from '../../widget/services/form.service';
 
 @Component({
   templateUrl: './viewer.page.html',
-  styleUrls: ['./viewer.page.scss']
+  styleUrls: ['./viewer.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ACFViewerPage extends AXBasePageComponent {
 
-  mode: string = "view";
+  mode: string = 'view';
   widgets: WidgetConfig[] = [];
 
   constructor(
@@ -31,11 +32,11 @@ export class ACFViewerPage extends AXBasePageComponent {
   ngAfterViewInit() {
     this.connectService.send("load").then(data => {
       this.widgets = [this.widgetService.parse(data.widgets)];
-      this.intervalId = window.setInterval(() => {
-        this.connectService.send("sync", { height: document.documentElement.offsetHeight }).then(data => {
-        })
-      }, 300)
-    })
+      // this.intervalId = window.setInterval(() => {
+      //   this.connectService.send("sync", { height: document.documentElement.offsetHeight }).then(data => {
+      //   })
+      // }, 300)
+    });
   }
 
   ngOnDestroy() {

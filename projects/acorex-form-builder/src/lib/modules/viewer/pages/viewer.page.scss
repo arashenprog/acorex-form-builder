@@ -1,0 +1,15 @@
+.axf-validation-error {
+
+    fieldset {
+        border-color: var(--danger-color) !important;
+    }
+
+    .error-text {
+        color: var(--danger-color) !important;
+        display: inline-block;
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}

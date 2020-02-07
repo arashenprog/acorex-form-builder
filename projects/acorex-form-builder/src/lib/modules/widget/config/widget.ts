@@ -23,9 +23,8 @@ export interface AXFContextMenuItem {
 }
 
 
-export interface AXFValidatableWidget
-{
-    validate():Promise<IValidationRuleResult>;
+export interface AXFValidatableWidget {
+    validate(): Promise<IValidationRuleResult>;
 }
 
 
@@ -41,10 +40,12 @@ export abstract class AXFWidget implements AXFWidgetContainer {
 
     @Input()
     public get widgets(): WidgetConfig[] {
-        if (!this.config || !this.config.options)
+        if (!this.config || !this.config.options) {
             return []
-        if (!this.config.options.widgets)
+        }
+        if (!this.config.options.widgets) {
             this.config.options.widgets = [];
+        }
         return this.config.options.widgets;
     }
     public set widgets(v: WidgetConfig[]) {
@@ -66,22 +67,22 @@ export abstract class AXFWidget implements AXFWidgetContainer {
     }
 
     applyStyle(el: HTMLElement): void {
-        el.style.backgroundColor = this["bgColor"];
-        el.style.color = this["color"];
-        el.style.textAlign = this["textAlign"];
-        el.style.fontSize = this["fontSize"];
-        el.style.verticalAlign = this["verticalAlign"];
-        el.style.writingMode = this["textDirection"];
-        if (this["textStyle"]) {
-            el.style.fontWeight = this["textStyle"].includes('bold') ? "bold" : "inherit";
-            el.style.fontStyle = this["textStyle"].includes('italic') ? "italic" : "inherit";
-            el.style.textDecoration = this["textStyle"].includes('underline') ? "underline" : "inherit";
+        el.style.backgroundColor = this['bgColor'];
+        el.style.color = this['color'];
+        el.style.textAlign = this['textAlign'];
+        el.style.fontSize = this['fontSize'];
+        el.style.verticalAlign = this['verticalAlign'];
+        el.style.writingMode = this['textDirection'];
+        if (this['textStyle']) {
+            el.style.fontWeight = this['textStyle'].includes('bold') ? 'bold' : 'inherit';
+            el.style.fontStyle = this['textStyle'].includes('italic') ? 'italic' : 'inherit';
+            el.style.textDecoration = this['textStyle'].includes('underline') ? 'underline' : 'inherit';
         }
-        el.style.width = this["width"];
-        el.style.height = this["height"];
+        el.style.width = this['width'];
+        el.style.height = this['height'];
         // apply padding
-        if (this["boxStyle"]) {
-            let boxStyle = this["boxStyle"] as AXFBoxStyleValue;
+        if (this['boxStyle']) {
+            const boxStyle = this['boxStyle'] as AXFBoxStyleValue;
             // apply padding size
             if (boxStyle.padding != null) {
                 el.style.paddingTop = `${boxStyle.padding.top}px`;
@@ -143,8 +144,9 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     delete() {
         if (this.parent && this.parent.widgets) {
             this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
-            if (this.parent.refresh)
+            if (this.parent.refresh) {
                 this.parent.refresh();
+            }
         }
         this.onDelete.emit(this);
     }
@@ -154,25 +156,26 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     copy() {
-        sessionStorage.setItem("clipboard", this.widgetService.serialize(this.config));
-        WidgetInjector.instance.get(AXToastService).success("Widget copied!");
+        sessionStorage.setItem('clipboard', this.widgetService.serialize(this.config));
+        WidgetInjector.instance.get(AXToastService).success('Widget copied!');
     }
     paste() {
-        const cp = sessionStorage.getItem("clipboard");
+        const cp = sessionStorage.getItem('clipboard');
         if (cp) {
             const config = this.widgetService.parse(cp);
             if (config && this.config.container) {
                 this.addChild(config)
-                WidgetInjector.instance.get(AXToastService).success("Widget pasted!");
-                sessionStorage.removeItem("clipboard");
+                WidgetInjector.instance.get(AXToastService).success('Widget pasted!');
+                sessionStorage.removeItem('clipboard');
             }
         }
     }
 
     addChild(widget: WidgetConfig, options?: any) {
-        let w = this.widgetService.parse(this.widgetService.serialize(widget));
-        if (!w.options)
+        const w = this.widgetService.parse(this.widgetService.serialize(widget));
+        if (!w.options) {
             w.options = {};
+        }
         Object.assign(w.options, options);
         this.widgets.push(w);
         this.refresh();
@@ -184,47 +187,47 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         items.push(
             {
                 text: 'Select',
-                icon: "fas fa-mouse-pointer",
-                action: "edit",
+                icon: 'fas fa-mouse-pointer',
+                action: 'edit',
                 separator: true,
                 widget: this
             })
         if (this.config.container && this.config.droppable != false) {
-            const cp = sessionStorage.getItem("clipboard");
+            const cp = sessionStorage.getItem('clipboard');
             if (cp) {
                 items.push({
-                    text: "Paste",
-                    icon: "fas fa-paste",
-                    action: "paste",
+                    text: 'Paste',
+                    icon: 'fas fa-paste',
+                    action: 'paste',
                     widget: this,
                 })
             }
             items.push({
-                text: "Add Widget",
-                icon: "fas fa-plus",
-                action: "addElement",
+                text: 'Add Widget',
+                icon: 'fas fa-plus',
+                action: 'addElement',
                 separator: true,
                 widget: this,
             })
         }
         items.push(...[
             {
-                text: "Delete",
-                icon: "fas fa-trash",
-                action: "delete",
+                text: 'Delete',
+                icon: 'fas fa-trash',
+                action: 'delete',
                 widget: this
             },
             {
-                text: "Copy",
-                icon: "fas fa-copy",
-                action: "copy",
+                text: 'Copy',
+                icon: 'fas fa-copy',
+                action: 'copy',
                 separator: true,
                 widget: this,
             }
         ])
         let p = this.parent;
         while (p != null && parents) {
-            if (p.config && p.config.name != "page") {
+            if (p.config && p.config.name !== 'page') {
                 items.push({
                     text: p.config.title,
                     icon: p.config.icon,
@@ -233,12 +236,12 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                         ...p.getContextMenu(false)
                     ],
                     widget: p
-                })
+                });
             }
             p = p.parent;
         }
-        if (this["onContextMenu"]) {
-            items = this["onContextMenu"](items);
+        if (this['onContextMenu']) {
+            items = this['onContextMenu'](items);
         }
         return items;
     }
@@ -269,16 +272,17 @@ export abstract class AXFWidgetView extends AXFWidget {
     public set value(v: any) {
         this._value = v;
         this.valueChange.emit(v);
-        let name: string = this.getName();
+        const name: string = this.getName();
         if (name) {
             this.formService.setValue(name, v)
         }
-        this.invokeEvent("onValueChange")
+        this.invokeEvent('onValueChange')
     }
 
     private getName() {
-        if (this.config.options.name == null || this.config.options.name == "")
+        if (this.config.options.name == null || this.config.options.name == '') {
             return null;
+        }
         return this.config.options.name
         // let parts: string[] = [this.config.options.name];
         // let prt = this.parent;
@@ -295,17 +299,17 @@ export abstract class AXFWidgetView extends AXFWidget {
 
     protected invokeEvent(name: string) {
         if (this[name]) {
-            let action: string = this[name];
+            const action: string = this[name];
             if (action) {
                 action.split(';').forEach(act => {
-                    if (act == "submit()") {
+                    if (act == 'submit()') {
                         this.formService.submit();
                         return;
                     }
-                    let allWidgets = act.match(/\#([a-zA-Z1-9])+/g);
-                    let allVars = act.match(/\$([a-zA-Z1-9])+/g);
-                    let execCode = act.replace('#', 'this._').replace('$', 'this.$');
-                    let params = {};
+                    const allWidgets = act.match(/\#([a-zA-Z1-9])+/g);
+                    const allVars = act.match(/\$([a-zA-Z1-9])+/g);
+                    const execCode = act.replace('#', 'this._').replace('$', 'this.$');
+                    const params = {};
                     if (allWidgets) {
                         allWidgets.forEach(w => {
                             params['_' + w.substring(1)] = this.formService.getWidget(w.substring(1));
@@ -322,7 +326,7 @@ export abstract class AXFWidgetView extends AXFWidget {
                             params['_' + w.substring(1)].refresh();
                         });
                     }
-                })
+                });
 
             }
         }
@@ -336,7 +340,7 @@ export abstract class AXFWidgetView extends AXFWidget {
     constructor() {
         super();
         this.formService = WidgetInjector.instance.get(AXFFormService);
-        let dataService = WidgetInjector.instance.get(AXFDataService);
+        const dataService = WidgetInjector.instance.get(AXFDataService);
         setTimeout(() => {
             if (this.getName()) {
                 this.formService.setWidget(this.getName(), this);

@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AXFWidgetView, AXFValidatableWidget } from '../../../config/widget';
-import { IValidationRuleResult } from 'acorex-ui';
+import { AXFWidgetView } from '../../../config/widget';
+import { AXFValidatorProp } from '../../../../property-editor/editors/validation/validation.class';
 
 @Component({
     templateUrl: './text-input-widget.view.html',
@@ -8,23 +8,20 @@ import { IValidationRuleResult } from 'acorex-ui';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTextInputWidgetView extends AXFWidgetView {
-    
 
-    placeholder: String;
 
-    // validate(): Promise<IValidationRuleResult> {
-        
-    // }
+    validator: AXFValidatorProp;
+    placeholder: string;
+
+
 
 
     constructor(private cdr: ChangeDetectorRef) {
-        super()
+        super();
     }
 
 
     onRender(): void {
         this.cdr.markForCheck();
     }
-
-  
 }
