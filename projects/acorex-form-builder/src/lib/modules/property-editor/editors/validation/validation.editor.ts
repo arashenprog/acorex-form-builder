@@ -11,6 +11,8 @@ import { AXValidationRule } from 'acorex-ui';
 export class AXFValidationEditorComponent extends AXFProperyEditor<AXFValidatorProp> implements OnInit {
 
 
+    required: boolean = false;
+
     constructor(protected cdr: ChangeDetectorRef) {
         super();
         this.value = new AXFValidatorProp();
@@ -24,20 +26,21 @@ export class AXFValidationEditorComponent extends AXFProperyEditor<AXFValidatorP
             Object.assign(v, this.value);
             this.value = v;
         }
+        this.required = this.value.items.some(c => c.type === 'required');
     }
 
-
-
-
-    add() {
-        const rule1 = new AXValidationRule();
-        rule1.type = 'required';
-        rule1.message = 'Required';
-        this.value.items.push(rule1);
+    handleRequiredChange(e) {
+        if (e) {
+            const rule1 = new AXValidationRule();
+            rule1.type = 'required';
+            rule1.message = 'Required';
+            this.value.items.push(rule1);
+        } else {
+            this.value.items = this.value.items.filter(c => c.type !== 'required');
+        }
         super.handleValueChange(this.value);
-        // const rule2 = new AXValidationRule();
-        // rule2.type = 'email';
-        // rule2.message = 'Invalid email address!';
-        // this.validator.items.push(rule2);
+
     }
+
+
 }

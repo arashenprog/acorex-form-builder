@@ -9,8 +9,8 @@ import { AXFConnectService } from '../../widget/services/connect.service';
 
 @Component({
     selector: "axf-viewer-frame",
-    templateUrl: "./frame.component.html",
-    styleUrls: ["./frame.component.scss"],
+    templateUrl: './frame.component.html',
+    styleUrls: ['./frame.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ACFViewerFrameComponent {
@@ -43,77 +43,77 @@ export class ACFViewerFrameComponent {
 
     sizes: any[] = [
         {
-            title: "Desktop",
-            icon: "fas fa-desktop",
-            width: "desktop",
+            title: 'Desktop',
+            icon: 'fas fa-desktop',
+            width: 'desktop',
             active: true,
-            mode: "view"
+            mode: 'view'
         },
         {
-            title: "Tablet",
-            icon: "fas fa-tablet-alt",
-            width: "tablet",
+            title: 'Tablet',
+            icon: 'fas fa-tablet-alt',
+            width: 'tablet',
             active: false,
-            mode: "view"
+            mode: 'view'
         },
         {
-            title: "Mobile",
-            icon: "fas fa-mobile-alt",
-            width: "mobile",
+            title: 'Mobile',
+            icon: 'fas fa-mobile-alt',
+            width: 'mobile',
             active: false,
-            mode: "view"
+            mode: 'view'
         },
         {
-            title: "Print",
-            icon: "fas fa-print",
-            width: "desktop",
+            title: 'Print',
+            icon: 'fas fa-print',
+            width: 'desktop',
             active: false,
-            mode: "print"
+            mode: 'print'
         }
     ];
 
     size: number;
-    mode: string = "view";
+    mode = 'view';
 
 
     @HostListener('window:message', ['$event'])
     handleMessage(e) {
-        if (!e.data || !e.data.action && e.data.uid != this.uid)
+        if (!e.data || !e.data.action && e.data.uid != this.uid) {
             return;
-        let action = e.data.action;
-        let reqId = e.data.reqId;
-        let options = e.data.data ? JSON.parse(e.data.data) : {};
+        }
+        const action = e.data.action;
+        const reqId = e.data.reqId;
+        const options = e.data.data ? JSON.parse(e.data.data) : {};
         switch (action) {
-            case "load":
+            case 'load':
                 if (options.id == null) {
                     this.postMessage(action, reqId, {
                         widgets: this.widgetService.serialize(this.page)
-                    })
-                }
-                else {
+                    });
+                } else {
                     this.templateService.get(options.id).then(c => {
                         this.postMessage(action, reqId, {
                             widgets: c.template
-                        })
+                        });
                     });
                 }
                 break;
-            case "getModel":
-                this.postMessage(action, reqId, this.dataService.getModel())
+            case 'getModel':
+                this.postMessage(action, reqId, this.dataService.getModel());
                 break;
-            case "getList":
+            case 'getList':
                 if (options.name) {
                     this.dataService.getList(options.name, options.params).then(items => {
                         this.postMessage(action, reqId, {
-                            items: items
-                        })
-                    })
+                            items
+                        });
+                    });
                 }
                 break;
-            case "sync":
-                // if (options.height && this.frame) {
-                //     this.frame.nativeElement.style.height = options.height + "px";
-                // }
+            // case 'sync':
+            //     if (options.height && this.frame) {
+            //         this.frame.nativeElement.style.height = options.height + 'px';
+            //     }
                 break;
         }
 
@@ -122,8 +122,8 @@ export class ACFViewerFrameComponent {
     private postMessage(action: string, reqId: number, data: any) {
         this.frame.nativeElement.contentWindow.postMessage({
             uid: this.uid,
-            action: action,
-            reqId: reqId,
+            action,
+            reqId,
             data: data ? JSON.stringify(data) : null
         }, '*');
     }
@@ -139,7 +139,7 @@ export class ACFViewerFrameComponent {
     handleSetSize(e) {
         this.sizes.forEach(c => {
             c.active = false;
-        })
+        });
         this.size = e.width;
         this.mode = e.mode;
         e.active = true;
@@ -153,10 +153,10 @@ export class ACFViewerFrameComponent {
     }
 
     pdfGenerate() {
-        let printbody = this.frame.nativeElement.contentDocument.querySelector(".theme-wrapper> ng-component >ng-component>div ").innerHTML;
-        var result = '<html><head><title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
-        result = result + printbody + "</body></html>";
-        this.connectService.send("print", { data: result }).then(() => {
+        const printbody = this.frame.nativeElement.contentDocument.querySelector('.theme-wrapper> ng-component >ng-component>div ').innerHTML;
+        let result = '<html><head><title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
+        result = result + printbody + '</body></html>';
+        this.connectService.send('print', { data: result }).then(() => {
         });
     }
 

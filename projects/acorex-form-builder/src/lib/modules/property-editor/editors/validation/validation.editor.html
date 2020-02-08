@@ -1,1 +1,5 @@
-<button (click)="add()">Add</button>
+<div class="prop-caption-sub">Required</div>
+<label class="switch">
+    <input type="checkbox"  [(ngModel)]="required" (ngModelChange)="handleRequiredChange($event)" [ngModelOptions]="{standalone: true}">
+    <span class="slider round"></span>
+</label>
