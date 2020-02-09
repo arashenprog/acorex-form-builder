@@ -1,8 +1,7 @@
 import { Injector, EventEmitter, Input, Output, Directive } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
-import { AXHtmlUtil, AXToastService, IValidationRuleResult } from 'acorex-ui'
+import { AXHtmlUtil, AXToastService, IValidationRuleResult } from 'acorex-ui';
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
-import { AXFFormService, EventData } from '../services/form.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AXFDataService } from '../services/data.service';
@@ -17,9 +16,9 @@ export interface AXFContextMenuItem {
     text: string;
     icon?: string;
     action?: string;
-    separator?: boolean,
-    items?: AXFContextMenuItem[]
-    widget?: AXFWidgetDesigner
+    separator?: boolean;
+    items?: AXFContextMenuItem[];
+    widget?: AXFWidgetDesigner;
 }
 
 
@@ -41,7 +40,7 @@ export abstract class AXFWidget implements AXFWidgetContainer {
     @Input()
     public get widgets(): WidgetConfig[] {
         if (!this.config || !this.config.options) {
-            return []
+            return [];
         }
         if (!this.config.options.widgets) {
             this.config.options.widgets = [];
@@ -164,7 +163,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         if (cp) {
             const config = this.widgetService.parse(cp);
             if (config && this.config.container) {
-                this.addChild(config)
+                this.addChild(config);
                 WidgetInjector.instance.get(AXToastService).success('Widget pasted!');
                 sessionStorage.removeItem('clipboard');
             }
@@ -191,7 +190,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 action: 'edit',
                 separator: true,
                 widget: this
-            })
+            });
         if (this.config.container && this.config.droppable != false) {
             const cp = sessionStorage.getItem('clipboard');
             if (cp) {
@@ -200,7 +199,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                     icon: 'fas fa-paste',
                     action: 'paste',
                     widget: this,
-                })
+                });
             }
             items.push({
                 text: 'Add Widget',
@@ -208,7 +207,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 action: 'addElement',
                 separator: true,
                 widget: this,
-            })
+            });
         }
         items.push(...[
             {
@@ -224,7 +223,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 separator: true,
                 widget: this,
             }
-        ])
+        ]);
         let p = this.parent;
         while (p != null && parents) {
             if (p.config && p.config.name !== 'page') {
@@ -258,7 +257,7 @@ export abstract class AXFWidgetView extends AXFWidget {
     visible: boolean;
     readOnly: boolean;
 
-    protected formService: AXFFormService;
+    protected dataService: AXFDataService;
 
     @Output()
     valueChange: EventEmitter<any> = new EventEmitter();
@@ -274,16 +273,16 @@ export abstract class AXFWidgetView extends AXFWidget {
         this.valueChange.emit(v);
         const name: string = this.getName();
         if (name) {
-            this.formService.setValue(name, v)
+            this.dataService.setValue(name, v);
         }
-        this.invokeEvent('onValueChange')
+        this.invokeEvent('onValueChange');
     }
 
     private getName() {
         if (this.config.options.name == null || this.config.options.name == '') {
             return null;
         }
-        return this.config.options.name
+        return this.config.options.name;
         // let parts: string[] = [this.config.options.name];
         // let prt = this.parent;
         // while (prt != null) {
@@ -302,8 +301,8 @@ export abstract class AXFWidgetView extends AXFWidget {
             const action: string = this[name];
             if (action) {
                 action.split(';').forEach(act => {
-                    if (act == 'submit()') {
-                        this.formService.submit();
+                    if (act === 'submit()') {
+                        this.dataService.submit();
                         return;
                     }
                     const allWidgets = act.match(/\#([a-zA-Z1-9])+/g);
@@ -312,12 +311,12 @@ export abstract class AXFWidgetView extends AXFWidget {
                     const params = {};
                     if (allWidgets) {
                         allWidgets.forEach(w => {
-                            params['_' + w.substring(1)] = this.formService.getWidget(w.substring(1));
+                            params['_' + w.substring(1)] = this.dataService.getWidget(w.substring(1));
                         });
                     }
                     if (allVars) {
                         allVars.forEach(v => {
-                            params[v] = this.formService.getValue(v.substring(1));
+                            params[v] = this.dataService.getValue(v.substring(1));
                         });
                     }
                     new Function(execCode).call(params);
@@ -339,13 +338,16 @@ export abstract class AXFWidgetView extends AXFWidget {
 
     constructor() {
         super();
-        this.formService = WidgetInjector.instance.get(AXFFormService);
-        const dataService = WidgetInjector.instance.get(AXFDataService);
+        this.dataService = WidgetInjector.instance.get(AXFDataService);
         setTimeout(() => {
             if (this.getName()) {
-                this.formService.setWidget(this.getName(), this);
-                this.value = dataService.getModel()[this.getName()];
-                this.refresh();
+                this.dataService.setWidget(this.getName(), this);
+                setTimeout(() => {
+                    const v = this.dataService.getModel()[this.getName()];
+                    if (v) {
+                        this.value = v;
+                    }
+                }, 50);
             }
         });
     }

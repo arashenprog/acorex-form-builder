@@ -15,7 +15,7 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
     value: string[];
     dataSource: AXFDataSourceOption;
 
-    constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
+    constructor(private cdr: ChangeDetectorRef) {
         super()
     }
 

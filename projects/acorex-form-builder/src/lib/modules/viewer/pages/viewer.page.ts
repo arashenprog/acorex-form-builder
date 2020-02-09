@@ -3,7 +3,6 @@ import { AXBasePageComponent } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { ActivatedRoute } from '@angular/router';
 import { AXFConnectService } from '../../widget/services/connect.service';
-import { AXFFormService } from '../../widget/services/form.service';
 
 @Component({
   templateUrl: './viewer.page.html',

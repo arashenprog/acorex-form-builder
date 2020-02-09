@@ -17,7 +17,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     alignCheck: string;
     viewType: string;
     columns: number;
-    constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
+    constructor(private cdr: ChangeDetectorRef) {
         super();
     }
 

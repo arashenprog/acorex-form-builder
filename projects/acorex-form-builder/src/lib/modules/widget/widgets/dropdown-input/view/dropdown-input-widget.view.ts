@@ -16,9 +16,16 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
     allowSearch: boolean;
     dataSource: AXFDataSourceOption;
 
-    constructor(private dataService: AXFDataService, private cdr: ChangeDetectorRef) {
-        super()
+    private isDataBound: boolean = false;
+    selectedItems: any = [];
 
+    constructor(private cdr: ChangeDetectorRef) {
+        super();
+        this.valueChange.subscribe(() => {
+            if (this.isDataBound) {
+                this.invokeEvent('onValueChange');
+            }
+        });
     }
 
     ngAfterViewInit() {
@@ -34,25 +41,30 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
 
 
     refresh() {
+        this.isDataBound = false;
         if (this.dataSource.mode === 'remote') {
             this.dataService.getList(
                 this.dataSource.dataSource.name,
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
-                this.cdr.markForCheck();
-                this.invokeEvent('onDataBound');
+                this.dataBound();
             });
         } else {
-            this.cdr.markForCheck();
-            this.invokeEvent('onDataBound');
+            this.dataBound();
         }
+    }
+
+    private dataBound() {
+        this.isDataBound = true;
+        this.selectedItems = this.value ? (Array.isArray(this.value) ? this.value : [this.value]) : [];
+        this.invokeEvent('onDataBound');
+        this.cdr.markForCheck();
     }
 
 
     handleValueChange(e: any) {
         this.value = e;
-        this.invokeEvent('onValueChange');
     }
 
     reload() {
