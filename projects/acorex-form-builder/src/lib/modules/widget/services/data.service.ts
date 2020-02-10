@@ -43,7 +43,7 @@ export class AXFDataService {
     }
 
     getValue(name: string) {
-        return this.dataModel[name];
+        return this.resolvePropName(name, this.dataModel);
     }
 
 

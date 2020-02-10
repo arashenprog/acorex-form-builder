@@ -29,12 +29,6 @@ export interface AXFValidatableWidget {
 
 @Directive()
 export abstract class AXFWidget implements AXFWidgetContainer {
-    uid: string;
-    config: WidgetConfig;
-    parent: any;
-
-    @Output()
-    widgetsChange: EventEmitter<WidgetConfig[]> = new EventEmitter<WidgetConfig[]>();
 
 
     @Input()
@@ -52,13 +46,21 @@ export abstract class AXFWidget implements AXFWidgetContainer {
         this.widgetsChange.emit(this.config.options.widgets);
     }
 
-    protected widgetService: AXFWidgetService;
-
 
     constructor() {
         this.widgetService = WidgetInjector.instance.get(AXFWidgetService);
 
     }
+    uid: string;
+    config: WidgetConfig;
+    parent: any;
+
+    @Output()
+    widgetsChange: EventEmitter<WidgetConfig[]> = new EventEmitter<WidgetConfig[]>();
+
+    protected widgetService: AXFWidgetService;
+
+    private renderChangeObserver: any;
 
     ngOnInit(): void {
         (<any>this.config).$owner = this;
@@ -106,8 +108,6 @@ export abstract class AXFWidget implements AXFWidgetContainer {
 
         }
     }
-
-    private renderChangeObserver: any;
 
     refresh() {
         if (!this.renderChangeObserver) {
@@ -269,23 +269,24 @@ export abstract class AXFWidgetView extends AXFWidget {
         return this._value;
     }
     public set value(v: any) {
-        this._value = v;
-        this.valueChange.emit(v);
-
-        let prt = this.parent;
-        while (prt != null) {
-            if (prt.rIndex!=undefined) {
-                debugger
-                prt.parent.value[prt.rIndex][this.config.options.uid]=v;
+        if (JSON.stringify(v) !== JSON.stringify(this._value)) {
+            this._value = v;
+            this.valueChange.emit(v);
+            const name: string = this.getName();
+            if (name) {
+                this.dataService.setValue(name, v);
             }
-            prt=prt.parent;
+            this.invokeEvent('onValueChange');
         }
 
-        const name: string = this.getName();
-        if (name) {
-            this.dataService.setValue(name, v);
-        }
-        this.invokeEvent('onValueChange');
+        // let prt = this.parent;
+        // while (prt != null) {
+        //     if (prt.rIndex!=undefined) {
+        //         debugger
+        //         prt.parent.value[prt.rIndex][this.config.options.uid]=v;
+        //     }
+        //     prt=prt.parent;
+        // }
     }
 
     private getName() {
@@ -320,10 +321,12 @@ export abstract class AXFWidgetView extends AXFWidget {
                             params[v] = this.dataService.getValue(v.substring(1));
                         });
                     }
-                    new Function(execCode).call(params);
+                    new Function(`try {${execCode}} catch(e){ console.log(e) }`).call(params);
                     if (allWidgets) {
                         allWidgets.forEach(w => {
-                            params['_' + w.substring(1)].refresh();
+                            if (params['_' + w.substring(1)]) {
+                                params['_' + w.substring(1)].refresh();
+                            }
                         });
                     }
                 });
@@ -340,17 +343,35 @@ export abstract class AXFWidgetView extends AXFWidget {
     constructor() {
         super();
         this.dataService = WidgetInjector.instance.get(AXFDataService);
-        setTimeout(() => {
-            if (this.getName()) {
-                this.dataService.setWidget(this.getName(), this);
-                setTimeout(() => {
-                    const v = this.dataService.getModel()[this.getName()];
-                    if (v) {
-                        this.value = v;
-                    }
-                }, 50);
-            }
-        });
+        // setTimeout(() => {
+        //     if (this.getName()) {
+        //         this.dataService.setWidget(this.getName(), this);
+        //         setTimeout(() => {
+        //             const v = this.dataService.getModel()[this.getName()];
+        //             if (v) {
+        //                 this.value = v;
+        //             }
+        //         }, 50);
+        //     }
+        // });
+    }
+
+    ngAfterViewInit() {
+        this.register();
+        this.value = this.extractValue();
+    }
+
+    protected register() {
+        if (this.getName()) {
+            this.dataService.setWidget(this.getName(), this);
+        }
+    }
+
+    protected extractValue(): any {
+        if (this.getName()) {
+            return this.dataService.getModel()[this.getName()];
+        }
+        return null;
     }
 
 
