@@ -158,6 +158,10 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         sessionStorage.setItem('clipboard', this.widgetService.serialize(this.config));
         WidgetInjector.instance.get(AXToastService).success('Widget copied!');
     }
+    cut() {
+        this.copy();
+        this.delete();
+    }
     paste() {
         const cp = sessionStorage.getItem('clipboard');
         if (cp) {
@@ -220,6 +224,12 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 text: 'Copy',
                 icon: 'fas fa-copy',
                 action: 'copy',
+                widget: this,
+            },
+            {
+                text: 'Cut',
+                icon: 'fas fa-cut',
+                action: 'cut',
                 separator: true,
                 widget: this,
             }
@@ -284,16 +294,16 @@ export abstract class AXFWidgetView extends AXFWidget {
         if (this.config.options.name == null || this.config.options.name == '') {
             return null;
         }
-        return this.config.options.name;
-        // let parts: string[] = [this.config.options.name];
-        // let prt = this.parent;
-        // while (prt != null) {
-        //     if (prt.config.options.name) {
-        //         parts.push(prt.config.options.name)
-        //     }
-        //     prt=prt.parent;
-        // }
-        // return parts.reverse().join('.');
+        //return this.config.options.name;
+        const parts: string[] = [this.config.options.name];
+        let prt = this.parent;
+        while (prt != null) {
+            if (prt.config.options.name) {
+                parts.push(prt.config.options.name)
+            }
+            prt = prt.parent;
+        }
+        return parts.reverse().join('.');
     }
 
 
