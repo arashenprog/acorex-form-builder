@@ -12,6 +12,7 @@ export class AXFTimeInputWidgetDesigner extends AXFWidgetDesigner {
 
     @ViewChild("el1", { static: true }) el1: ElementRef<HTMLElement>;
 
+    value:string="00:00";
     constructor() {
         super();
     } 

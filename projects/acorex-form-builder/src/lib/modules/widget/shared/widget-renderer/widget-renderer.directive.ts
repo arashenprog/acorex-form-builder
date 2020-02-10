@@ -20,6 +20,16 @@ export class AXFWidgetRendererDirective {
     @Input()
     mode: 'designer' | 'view' | 'print' = 'designer';
 
+     
+    private _rIndex: number;
+    @Input()
+    public get rIndex(): number {
+        return this._rIndex;
+    }
+    public set rIndex(v: number) {
+        this._rIndex = v;
+    }
+
     @Output()
     onSelect: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
 
@@ -47,7 +57,7 @@ export class AXFWidgetRendererDirective {
 
     ngOnInit(): void {
         this.createComponent();
-    }
+    }  
 
     createComponent() {
         if (!this.widgetConfig) {
@@ -65,6 +75,9 @@ export class AXFWidgetRendererDirective {
             default:
                 widgetFactory = this.componentFactoryResolver.resolveComponentFactory(this.widgetConfig.printClass);
         }
+        if(this.rIndex!=undefined)
+            this.widgetConfig.options.rIndex=this.rIndex;
+
         // assign widgets value and options
         const widgetComponent = this.target.createComponent(widgetFactory);
 

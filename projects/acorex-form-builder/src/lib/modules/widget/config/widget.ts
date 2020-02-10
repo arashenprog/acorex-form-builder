@@ -288,6 +288,15 @@ export abstract class AXFWidgetView extends AXFWidget {
             }
             this.invokeEvent('onValueChange');
         }
+
+        // let prt = this.parent;
+        // while (prt != null) {
+        //     if (prt.rIndex!=undefined) {
+        //         debugger
+        //         prt.parent.value[prt.rIndex][this.config.options.uid]=v;
+        //     }
+        //     prt=prt.parent;
+        // }
     }
 
     private getName() {
