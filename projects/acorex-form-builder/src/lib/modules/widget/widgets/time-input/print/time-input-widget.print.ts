@@ -7,10 +7,13 @@ import { AXFWidgetPrint } from '../../../config/widget';
 })
 export class AXFTimeInputWidgetPrint extends AXFWidgetPrint {
 
-    text: String;
-    placeholder: String;
-
-    constructor() {
+    constructor(private cdr:ChangeDetectorRef) {
         super();
+    }
+
+    onRender(): void {
+        if(!this.value)
+            this.value="00:00";
+        this.cdr.markForCheck();
     }
 }

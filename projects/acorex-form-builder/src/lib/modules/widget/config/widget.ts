@@ -271,6 +271,16 @@ export abstract class AXFWidgetView extends AXFWidget {
     public set value(v: any) {
         this._value = v;
         this.valueChange.emit(v);
+
+        let prt = this.parent;
+        while (prt != null) {
+            if (prt.rIndex!=undefined) {
+                debugger
+                prt.parent.value[prt.rIndex][this.config.options.uid]=v;
+            }
+            prt=prt.parent;
+        }
+
         const name: string = this.getName();
         if (name) {
             this.dataService.setValue(name, v);
@@ -283,15 +293,6 @@ export abstract class AXFWidgetView extends AXFWidget {
             return null;
         }
         return this.config.options.name;
-        // let parts: string[] = [this.config.options.name];
-        // let prt = this.parent;
-        // while (prt != null) {
-        //     if (prt.config.options.name) {
-        //         parts.push(prt.config.options.name)
-        //     }
-        //     prt=prt.parent;
-        // }
-        // return parts.reverse().join('.');
     }
 
 
