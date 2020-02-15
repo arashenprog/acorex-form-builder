@@ -1,19 +1,19 @@
 import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { AXFWidgetView } from '../../../config/widget';
+import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 
 @Component({
-    selector: "[axf-widget-text]",
+    selector: '[axf-widget-text]',
     templateUrl: './text-area-widget.view.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFTextAreaWidgetView extends AXFWidgetView {
+export class AXFTextAreaWidgetView extends AXFValueWidgetView {
 
-    placeholder: String;
+    placeholder: string;
     rows: number;
 
 
-    constructor(private cdr: ChangeDetectorRef) {
-        super()
+    constructor(protected cdr: ChangeDetectorRef) {
+        super(cdr);
     }
 
     onRender(): void {

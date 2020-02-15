@@ -25,10 +25,5 @@ export class AXFOutletWidgetView extends AXFWidgetView {
     refresh(): void {
         this.cdr.markForCheck();
     }
-
-    @Input()
-    public get value(): any {
-        return "Arash";
-    }
 }
 

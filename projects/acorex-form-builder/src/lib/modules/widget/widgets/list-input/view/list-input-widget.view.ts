@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AXFWidgetView } from '../../../config/widget';
-import { AXFDataService } from '../../../services/data.service';
+import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
@@ -9,7 +8,7 @@ import { AXFDataSourceOption } from '../../../../property-editor/editors/data-so
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFListInputWidgetView extends AXFWidgetView {
+export class AXFListInputWidgetView extends AXFValueWidgetView {
 
     dataSource: AXFDataSourceOption;
     mode: string;
@@ -17,8 +16,8 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     alignCheck: string;
     viewType: string;
     columns: number;
-    constructor(private cdr: ChangeDetectorRef) {
-        super();
+    constructor(protected cdr: ChangeDetectorRef) {
+        super(cdr);
     }
 
     onRender(): void {
@@ -26,6 +25,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
     }
 
     ngAfterViewInit() {
+        super.ngAfterViewInit();
         this.refresh();
     }
 
@@ -55,7 +55,7 @@ export class AXFListInputWidgetView extends AXFWidgetView {
             return;
         }
 
-        if (this.mode == 'single') {
+        if (this.mode === 'single') {
             this.value = [val];
         } else {
             if (!this.value) {

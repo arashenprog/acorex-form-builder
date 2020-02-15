@@ -1,2 +1,1 @@
-<span 
->{{dataSource.dataItems.length>0? dataSource.dataItems[0][dataSource.columns[1]["fieldName"]] : 'Item Selected'}}</span>  
+<span>{{dataSource && value ?   value[dataSource.columns[1]["fieldName"]] : "" }}</span>

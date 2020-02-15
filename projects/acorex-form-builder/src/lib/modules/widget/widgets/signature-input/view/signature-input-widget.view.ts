@@ -1,42 +1,38 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AXFWidgetView } from '../../../config/widget';  
+import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 import { AXPopupService } from 'acorex-ui';
-import { SignaturePadPage } from '../signaturepad.page'; 
+import { SignaturePadPage } from '../signaturepad.page';
 import { Observable, Observer } from 'rxjs';
 
 @Component({
     templateUrl: './signature-input-widget.view.html',
     styleUrls: ['./signature-input-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
-}) 
-export class AXFSignatureInputWidgetView extends AXFWidgetView {
- 
-    height:number;
+})
+export class AXFSignatureInputWidgetView extends AXFValueWidgetView {
+
+    height: number;
     width: number;
-    constructor(protected cdr: ChangeDetectorRef,private popupService: AXPopupService) {
-        super()
+    constructor(protected cdr: ChangeDetectorRef, private popupService: AXPopupService) {
+        super(cdr);
     }
 
-    ngOnInit(): void {  
-    } 
- 
-    calculate(val)
-    {
-        return parseInt(val)+2;
+
+    calculate(val) {
+        return parseInt(val) + 2;
     }
 
-    setSignatureClick() { 
+    setSignatureClick() {
         this.popupService.open(SignaturePadPage, {
-            title: "Signature",
-            size: "md",
+            title: 'Signature',
+            size: 'md',
             data: {
                 data: this.value
             }
         }).closed(c => {
-            this.value=c.data;
+            this.value = c.data;
             this.cdr.markForCheck();
-        })
-         
-    }    
+        });
+    }
 }

@@ -1,17 +1,17 @@
 import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AXFWidgetView } from '../../../config/widget';
+import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 
 @Component({
     templateUrl: './checkbox-input-widget.view.html',
     styleUrls: ['./checkbox-input-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFCheckboxInputWidgetView extends AXFWidgetView {
+export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
  
     label: string;
 
-    constructor(private el: ElementRef<HTMLElement>,private cdr: ChangeDetectorRef) {
-        super();
+    constructor(private el: ElementRef<HTMLElement>,protected cdr: ChangeDetectorRef) {
+        super(cdr);
     }
 
 

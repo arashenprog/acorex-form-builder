@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AXFWidgetView } from '../../../config/widget';
+import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 import { AXFValidatorProp } from '../../../../property-editor/editors/validation/validation.class';
 
 @Component({
@@ -7,17 +7,14 @@ import { AXFValidatorProp } from '../../../../property-editor/editors/validation
     styleUrls: ['./text-input-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFTextInputWidgetView extends AXFWidgetView {
+export class AXFTextInputWidgetView extends AXFValueWidgetView {
 
 
     validator: AXFValidatorProp;
     placeholder: string;
 
-
-
-
-    constructor(private cdr: ChangeDetectorRef) {
-        super();
+    constructor(protected cdr: ChangeDetectorRef) {
+        super(cdr);
     }
 
 

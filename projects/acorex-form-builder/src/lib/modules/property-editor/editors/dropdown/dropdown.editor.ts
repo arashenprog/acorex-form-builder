@@ -4,14 +4,14 @@ import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({
     template: `
-        <ax-select-box  
-            [allowSearch]="false" 
+        <ax-select-box
+            [allowSearch]="false"
             [items]="items"
             [mode]="mode"
-            [textField]="textField" 
+            [textField]="textField"
             [valueField]="valueField"
-            [selectedValues]="value" 
-            (selectedValuesChange)="handleValueChange($event)"  
+            [selectedValues]="value"
+            (selectedValuesChange)="handleValueChange($event)"
         >
         </ax-select-box>
     `,
@@ -20,10 +20,10 @@ import { AXFDataService } from '../../../widget/services/data.service';
 export class AXFDropdownEditorComponent extends AXFProperyEditor<any>  {
 
     items: any[] = [];
-    textField: string = "title";
-    valueField: string = "value";
+    textField: string = 'title';
+    valueField: string = 'value';
     dataSource: string;
-    mode: "single" | "multiple" = "single";
+    mode: 'single' | 'multiple' = 'single';
 
     constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
         super();

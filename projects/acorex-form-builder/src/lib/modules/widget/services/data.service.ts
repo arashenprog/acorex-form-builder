@@ -5,10 +5,6 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AXFValidatorProp } from '../../property-editor/editors/validation/validation.class';
 
-// export interface VarItem {
-//     value: string, text: any;
-// }
-
 export class EventData {
     name: string;
     value?: any;
@@ -18,9 +14,6 @@ export class EventData {
     }
 }
 
-
-
-// const VARIABLES: VarItem[] = [];
 
 @Injectable({ providedIn: 'root' })
 export class AXFDataService {
@@ -38,27 +31,26 @@ export class AXFDataService {
         });
     }
 
-    setValue(name: string, value: any) {
-        this.dataModel[name] = value;
+    setValue(path: string, value: any) {
+        this.setPropByPath(this.dataModel, path, value);
     }
 
     getValue(name: string) {
-        return this.resolvePropName(name, this.dataModel);
+        return this.getPropByPath(this.dataModel, name);
     }
 
 
     init(): Promise<any> {
         const p1 = new Promise((resolve) => {
             this.connectService.send('getModel').then(c => {
-                console.log('load model', c);
-                this.dataModel = c;
+                this.dataModel = c || {};
                 resolve();
             });
         });
         return Promise.all([p1]);
     }
 
-    getList(dataSourceName: String, params?: any): Promise<any[]> {
+    getList(dataSourceName: string, params?: any): Promise<any[]> {
         return new Promise<any[]>((resolve, reject) => {
             const keyValObject = {};
             if (Array.isArray(params)) {
@@ -73,7 +65,7 @@ export class AXFDataService {
                 Object.assign(keyValObject, params);
             }
             if (dataSourceName && dataSourceName.match(/\[\S+\]/)) {
-                resolve(this.resolvePropName(dataSourceName.substring(1, dataSourceName.length - 1), this.dataModel));
+                resolve(this.getPropByPath(this.dataModel, dataSourceName.substring(1, dataSourceName.length - 1)));
             } else {
                 this.connectService.send('getList', { name: dataSourceName, params: keyValObject }).then(c => {
                     resolve(c.items);
@@ -90,16 +82,17 @@ export class AXFDataService {
                 result.push(...items);
                 resolve(result);
             });
-        });;
+        });
     }
 
     getWord(key: string): string {
-        return this.resolvePropName(key, this.dataModel);
+        return this.getPropByPath(this.dataModel, key);
     }
 
     getModel(): any {
         return this.dataModel;
     }
+
 
 
     private findModelList(): any[] {
@@ -117,7 +110,7 @@ export class AXFDataService {
                     if (parent) {
                         result.push(parent + '.' + key);
                     } else {
-                        result.push(key)
+                        result.push(key);
                     }
                 } else if (typeof o === 'object') {
                     this.findObjectList(o, result, parent ? parent + '.' + key : key);
@@ -126,9 +119,40 @@ export class AXFDataService {
         }
     }
 
-    private resolvePropName(path, obj = self, separator = '.'): any {
-        const properties = Array.isArray(path) ? path : path.split(separator);
-        return properties.reduce((prev, curr) => prev && prev[curr], obj);
+
+
+    private getPropByPath(obj, path, defaultVal?) {
+        path = path
+            .replace(/\[/g, '.')
+            .replace(/]/g, '')
+            .split('.');
+
+        path.forEach((level) => {
+            if (obj) {
+                obj = obj[level];
+            }
+        });
+
+        if (obj === undefined) {
+            return defaultVal;
+        }
+        return obj;
+    }
+
+    private setPropByPath(obj, path, value) {
+        if (Object(obj) !== obj) { return obj; } // When obj is not an object
+        // If not yet an array, get the keys from the string-path
+        if (!Array.isArray(path)) { path = path.toString().match(/[^.[\]]+/g) || []; }
+        path.slice(0, -1).reduce((a, c, i) => // Iterate all of them except the last one
+            Object(a[c]) === a[c] // Does the key exist and is its value an object?
+                // Yes: then follow that path
+                ? a[c]
+                // No: create the key. Is the next key a potential array-index?
+                : a[c] = Math.abs(path[i + 1]) >> 0 === +path[i + 1]
+                    ? [] // Yes: assign a new array object
+                    : {}, // No: assign a new plain object
+            obj)[path[path.length - 1]] = value; // Finally assign the value to the last key
+        return obj; // Return the top-level object to allow chaining
     }
 
 

@@ -36,30 +36,13 @@
                     <div class="breadcrumb">
                         <ul>
                             <li *ngFor="let item of docTreeItems" (click)="handleBreadcrumbClick(item)">{{item.config.title}}</li>
-                            
                         </ul>
                     </div>
                 </div>
             </ng-container>
-            <!-- <ng-container *ngIf="widgets.length==0">
-                <div class="empty-stage-container">
-                    <div class="empty-stage">
-                        <h1>Let's get started</h1>
-                        <br>
-                        <br>
-                        <div>
-                            <ax-button type="primary" text="Start Design" (onClick)="handleStartClick()"></ax-button>
-                            &nbsp;
-                            <ax-button type="dark" text="Load Template" (onClick)="handleLoadClick()"></ax-button>
-                        </div>
-                    </div>
-                </div>
-            </ng-container> -->
         </div>
     </article>
-
     <article *ngIf="this.view=='form'" class="preview-container">
         <axf-viewer-frame [page]="widgets[0]"></axf-viewer-frame>
     </article>
-
 </div>

@@ -10,6 +10,8 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFTableCellWidgetView extends AXFWidgetView {
 
+    rIndex:number;
+
     constructor(
         private el: ElementRef<HTMLTableCellElement>,
         private cdr: ChangeDetectorRef) {

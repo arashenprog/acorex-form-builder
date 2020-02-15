@@ -1,6 +1,6 @@
 <tbody>
     <tr>
-        <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [mode]="'print'">
+        <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [mode]="'print'" [parent]="this">
         </ng-container>
     </tr>
 </tbody>

@@ -39,7 +39,6 @@ export class AXFDataSourceOption {
         }
         return obj;
     }
-
 }
 
 export class AXFDataSourceRemoteOption {
@@ -60,4 +59,4 @@ export class AXFDataSourceColumnOption {
     title: string;
     type: string;
     fillByUser: boolean = false;
-} 
+}

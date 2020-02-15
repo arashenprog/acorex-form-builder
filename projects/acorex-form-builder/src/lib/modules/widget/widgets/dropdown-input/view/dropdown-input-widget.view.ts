@@ -1,12 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy, NgZone } from '@angular/core';
-import { AXFWidgetView } from '../../../config/widget';
+import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
     templateUrl: './dropdown-input-widget.view.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFDropdownInputWidgetView extends AXFWidgetView {
+export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
 
     @ViewChild('el') el: ElementRef<HTMLElement>;
 
@@ -18,8 +18,8 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
 
     selectedItems: any = [];
 
-    constructor(private cdr: ChangeDetectorRef) {
-        super();
+    constructor(protected cdr: ChangeDetectorRef) {
+        super(cdr);
         this.valueChange.subscribe(() => {
             this.selectedItems = this.value ? (Array.isArray(this.value) ? this.value : [this.value]) : [];
             this.cdr.markForCheck();
@@ -65,6 +65,11 @@ export class AXFDropdownInputWidgetView extends AXFWidgetView {
 
     onOpen() {
         if (this.dataSource.mode === 'remote' && (this.dataSource.dataItems == null || this.dataSource.dataItems.length === 0)) {
+            this.dataSource.dataSource.params.forEach(p => {
+                if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
+                    p.value = this.resolveProperty(p.value);
+                }
+            });
             this.dataService.getList(
                 this.dataSource.dataSource.name,
                 this.dataSource.dataSource.params

@@ -8,6 +8,7 @@ import { AXFWidgetPrint } from '../../../config/widget';
 })
 export class AXFPanelWidgetPrint extends AXFWidgetPrint {
 
+    caption: string;
     constructor() { 
          super();
     }

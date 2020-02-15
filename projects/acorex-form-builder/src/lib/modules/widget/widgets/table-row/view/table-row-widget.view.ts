@@ -10,6 +10,8 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFTableRowWidgetView extends AXFWidgetView {
 
+    rIndex:number;
+
     constructor(
         private el: ElementRef,
         private cdr: ChangeDetectorRef) {

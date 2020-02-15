@@ -20,7 +20,7 @@ export class AXFWidgetRendererDirective {
     @Input()
     mode: 'designer' | 'view' | 'print' = 'designer';
 
-     
+
     private _rIndex: number;
     @Input()
     public get rIndex(): number {
@@ -57,7 +57,7 @@ export class AXFWidgetRendererDirective {
 
     ngOnInit(): void {
         this.createComponent();
-    }  
+    }
 
     createComponent() {
         if (!this.widgetConfig) {
@@ -75,8 +75,7 @@ export class AXFWidgetRendererDirective {
             default:
                 widgetFactory = this.componentFactoryResolver.resolveComponentFactory(this.widgetConfig.printClass);
         }
-        if(this.rIndex!=undefined)
-            this.widgetConfig.options.rIndex=this.rIndex;
+
 
         // assign widgets value and options
         const widgetComponent = this.target.createComponent(widgetFactory);
@@ -91,6 +90,9 @@ export class AXFWidgetRendererDirective {
                 this.widgetConfig.options[p.name] = p.defaultValue;
             }
         });
+        if (this.rIndex !== undefined) {
+            this.widgetInstance.rIndex = this.rIndex;
+        }
         //
 
         Object.assign(this.widgetInstance, pp);
@@ -99,7 +101,7 @@ export class AXFWidgetRendererDirective {
         if (this.widgetParent) {
             this.widgetInstance.parent = this.widgetParent;
         }
-        if (this.mode == 'designer') {
+        if (this.mode === 'designer') {
             this.widgetInstance.onSelect.subscribe(c => {
                 this.eventService.broadcast('SELECT', c);
             });
@@ -136,8 +138,8 @@ export class AXFWidgetRendererDirective {
                     }
 
                     if (!this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`) &&
-                        this.widgetConfig.container != true &&
-                        this.widgetConfig.droppable != false
+                        this.widgetConfig.container !== true &&
+                        this.widgetConfig.droppable !== false
                     ) {
 
                         hoverDiv.onclick = (z) => {
@@ -149,8 +151,8 @@ export class AXFWidgetRendererDirective {
                         };
                         this.widgetElement.appendChild(hoverDiv);
                     } else if (
-                        this.widgetConfig.droppable != false &&
-                        this.widgetConfig.container != false &&
+                        this.widgetConfig.droppable !== false &&
+                        this.widgetConfig.container !== false &&
                         !this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`) &&
                         (!this.widgetConfig.options.widgets || this.widgetConfig.options.widgets.length == 0)) {
                         hoverDiv.classList.add('axf-blank-container');

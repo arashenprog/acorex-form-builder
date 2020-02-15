@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild, HostListener, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { AXPopupService, AXBasePageComponent, AXHtmlUtil, MenuItem, EventService, AXToastService } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { AXFWidgetContainer, AXFWidgetDesigner } from '../../widget/config/widget';
@@ -19,6 +19,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
 
     constructor(
         private popup: AXPopupService,
+        private cdr: ChangeDetectorRef,
         private widgetService: AXFWidgetService,
         private toastService: AXToastService,
         private eventService: EventService,
@@ -29,16 +30,18 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     ) {
         super();
         eventService.on("SELECT", (c: AXFWidgetDesigner) => {
-            if (c) {
-                this.docTreeItems = [];
-                this.docTreeItems.push(c);
-                let parent: AXFWidgetDesigner = c.parent;
-                while (parent != null && parent.config) {
-                    this.docTreeItems.push(parent);
-                    parent = parent.parent;
+            setTimeout(() => {
+                if (c) {
+                    this.docTreeItems = [];
+                    this.docTreeItems.push(c);
+                    let parent: AXFWidgetDesigner = c.parent;
+                    while (parent != null && parent.config) {
+                        this.docTreeItems.push(parent);
+                        parent = parent.parent;
+                    }
+                    this.docTreeItems.reverse();
                 }
-                this.docTreeItems = this.docTreeItems.reverse();
-            }
+            }, 10);
         });
     }
 
