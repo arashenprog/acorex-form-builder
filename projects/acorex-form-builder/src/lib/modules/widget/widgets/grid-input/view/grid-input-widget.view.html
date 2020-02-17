@@ -4,11 +4,16 @@
             <thead class="thead-dark">
                 <tr *ngIf="dataSource">
                     <th *ngFor="let col of dataSource.columns">{{col.title}}</th>
+                    <th *ngIf="allowAddDelete">
+                        <ax-button type="primary" size="sm" tooltip="Add" (onClick)="addRowClick()"> 
+                            <i class="fas fa-plus"></i> Add Row
+                        </ax-button>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <ng-container *ngIf="dataSource">
-                    <tr style="border-bottom: 1px solid var(--primary-color);"  *ngFor="let item of dataSource.dataItems">
+                    <tr style="border-bottom: 1px solid var(--primary-color);"  *ngFor="let item of value;let i=index">
                         <td *ngFor="let col of dataSource.columns">
                             <span
                                 *ngIf="!col.fillByUser && col.fieldName==null && col.type!='image'">{{item | di:col.fieldName}}</span>
@@ -25,6 +30,11 @@
                             <ax-selection-list direction="horizontal"
                                 *ngIf="col.fillByUser && col.type=='selectionList'">
                             </ax-selection-list>
+                        </td>
+                        <td *ngIf="allowAddDelete">                             
+                            <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)"> 
+                                <i class="fas fa-trash danger"></i>
+                            </ax-button> 
                         </td>
                     </tr>
                 </ng-container>
