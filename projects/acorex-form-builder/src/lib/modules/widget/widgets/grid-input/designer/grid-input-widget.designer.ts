@@ -17,6 +17,17 @@ export class AXFGridInputWidgetDesigner extends AXFWidgetDesigner {
     value: string[];
     dataSource: AXFDataSourceOption;
 
+    allowAddDelete: boolean;
+    // private _allowAddDelete: boolean;
+    // public get allowAddDelete():boolean {
+    //     return this._allowAddDelete;
+    // }
+    // public set allowAddDelete(v: boolean) {
+    //     if (v !== this._allowAddDelete) {
+    //         this._allowAddDelete = v;
+    //     }
+    // }
+
     constructor(private cdr: ChangeDetectorRef) {
         super()
     }

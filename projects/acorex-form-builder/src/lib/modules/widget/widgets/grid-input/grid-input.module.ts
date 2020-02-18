@@ -43,6 +43,20 @@ export class AXFGridInputWidgetModule {
             properties: [
                 AXF_DS_LIST_PROPERTY,
                 //AXF_BOX_STYLE_PROPERTY,
+                {
+                    name: 'allowAddDelete',
+                    category: 'Data',
+                    defaultValue: false,
+                    title: 'Allow Add/Delete',
+                    editor: 'CheckboxEditor',
+                    options: { label: 'Allow Add/Delete' },
+                    visible: (options: any) => {
+                        if(options.dataSource && options.dataSource.mode == "manual")
+                            return true;
+                        else
+                            return false;
+                    }
+                },
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
             ]
