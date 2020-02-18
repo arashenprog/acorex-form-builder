@@ -14,10 +14,23 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     constructor(
         protected cdr: ChangeDetectorRef) {
         super(cdr);
+        this.valueChange.subscribe(() => {
+            this.cdr.markForCheck();
+            this.cdr.detectChanges();
+        });
     }
 
     onRender() {
         this.cdr.markForCheck();
+    }
+
+    getHeader() {
+        if (!this.value) {
+            return [];
+        }
+        const row = this.widgets.find(c => c.options.isHeader === true);
+        const items = Array.apply(null, new Array(this.value.length)).map(function () { return row; });
+        return items;
     }
 
     getBody() {
@@ -28,25 +41,6 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         const items = Array.apply(null, new Array(this.value.length)).map(function () { return row; });
         return items;
     }
-
-    ngAfterViewInit() {
-        super.ngAfterViewInit();
-        this.refresh();
-    }
-
-    // refresh() {
-    //     if (this.dataSource.mode === 'remote') {
-    //         // this.dataService.getList(
-    //         //     this.dataSource.dataSource.name,
-    //         //     this.dataSource.dataSource.params
-    //         // ).then(c => {
-    //         //     this.dataSource.dataItems = c;
-    //         //     super.refresh();
-    //         // });
-    //     } else {
-    //         super.refresh();
-    //     }
-    // }
 
     addItemClick() {
         if (!this.value) {
