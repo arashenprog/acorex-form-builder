@@ -1,4 +1,9 @@
 <table  #table>
+    <thead>
+        <ng-container *ngFor="let w of getHeader();let r=index" axf-widget-renderer [rIndex]="r" [widget]="w"
+            [parent]="this" [mode]="'view'">
+        </ng-container>
+    </thead>
     <tbody>
         <ng-container *ngFor="let w of getBody();let r=index" axf-widget-renderer [rIndex]="r" [widget]="w"
             [parent]="this" [mode]="'view'">
