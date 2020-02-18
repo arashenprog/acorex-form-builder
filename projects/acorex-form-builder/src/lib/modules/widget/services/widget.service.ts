@@ -37,7 +37,7 @@ export interface WidgetConfig {
     options?: any;
     properties: AXFWidgetProperty[];
     toolbox?: AXFWidgetToolboxProperty;
-
+    dataContext?: any;
 }
 
 

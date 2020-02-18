@@ -90,17 +90,22 @@ export class AXFWidgetRendererDirective {
                 this.widgetConfig.options[p.name] = p.defaultValue;
             }
         });
+        // add 
         if (this.rIndex !== undefined) {
             this.widgetInstance.rIndex = this.rIndex;
         }
-        //
-
-        Object.assign(this.widgetInstance, pp);
-        Object.assign(this.widgetInstance, this.widgetConfig.options);
+        // add data context
+        if (this.widgetConfig.dataContext) {
+            this.widgetInstance.dataContext = this.widgetConfig.dataContext;
+        }
         // add parent
         if (this.widgetParent) {
             this.widgetInstance.parent = this.widgetParent;
         }
+        //
+        Object.assign(this.widgetInstance, pp);
+        Object.assign(this.widgetInstance, this.widgetConfig.options);
+
         if (this.mode === 'designer') {
             this.widgetInstance.onSelect.subscribe(c => {
                 this.eventService.broadcast('SELECT', c);
