@@ -30,6 +30,12 @@
                             <ax-selection-list direction="horizontal"
                                 *ngIf="col.fillByUser && col.type=='selectionList'">
                             </ax-selection-list>
+                            <div  class="signature" *ngIf="col.fillByUser && col.type=='signature'"
+                            style="width: 51%; height: 52px;"  >
+                                <img  [src]="'./assets/images/No-Signature.jpg'"
+                                style="width: 50%; height: 50px;" >
+                                    <div class="clear-box"><button class="btn btn-outline-danger" (click)="setSignatureClick(i)"><i class="fas fa-plus"></i></button></div>
+                           </div>  
                         </td>
                         <td *ngIf="allowAddDelete">                             
                             <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)"> 
