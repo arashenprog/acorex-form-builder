@@ -15,3 +15,15 @@
     background-color: darkgray;
     color: black;
 }
+
+.signature {
+    border: 1px black solid;
+    position: relative; 
+    .clear-box {
+        background-color: white;
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+    }
+    
+}

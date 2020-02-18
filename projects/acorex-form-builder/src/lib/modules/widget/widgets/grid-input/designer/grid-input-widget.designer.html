@@ -30,6 +30,8 @@
                             <ax-selection-list direction="horizontal"
                                 *ngIf="item.fillByUser && item.type=='selectionList'">
                             </ax-selection-list>
+                            <div class="sign" *ngIf="item.fillByUser && item.type=='signature'"
+                            style="width: 50%; height: 50px;"></div> 
                         </td>
                         <td *ngIf="allowAddDelete">                             
                             <ax-button type="light" size="sm" tooltip="Delete"><!--  (onClick)="deleteClick(i)" -->
