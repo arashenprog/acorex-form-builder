@@ -28,7 +28,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     }
 
     onRender() {
-        if (!this.showHeader) {
+        if (this.showHeader) {
             this.headerRow = this.widgets.find(c => c.options.isHeader === true);
         }
         this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
