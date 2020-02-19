@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, HostBinding, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
+import { WidgetConfig } from '../../../services/widget.service';
 
 @Component({
     selector: "[axf-repeater]",
@@ -12,6 +13,10 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
 
     dataSource: AXFDataSourceOption;
     showHeader: boolean;
+    headerRow: WidgetConfig;
+    bodyRows: WidgetConfig[];
+    rowTemplate: WidgetConfig;
+
 
     constructor(
         protected cdr: ChangeDetectorRef) {
@@ -23,34 +28,23 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     }
 
     onRender() {
-        this.cdr.markForCheck();
-    }
-
-    getHeader() {
-
         if (!this.showHeader) {
-            return [];
+            this.headerRow = this.widgets.find(c => c.options.isHeader === true);
         }
-        const row = this.widgets.find(c => c.options.isHeader === true);
-        const items = Array.apply(null, new Array(1)).map(c => row);
-        return items;
-    }
-
-    getBody() {
-
-        const row = this.widgets.find(c => c.options.isHeader === false);
-        const items = Array.apply(null, new Array(this.allItems().length)).map(c => row);
-        return items;
+        this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
+        this.bodyRows = this.allItems().map(c => {
+            const cloned = this.widgetService.clone(this.rowTemplate);
+            cloned.dataContext = c;
+            return cloned;
+        });
+        this.cdr.markForCheck();
     }
 
     addItemClick() {
-        if (!this.value) {
-            this.value = [];
+        if (this.rowTemplate) {
+            this.bodyRows.push(this.widgetService.clone(this.rowTemplate));
         }
-        this.value.push({});
-        this.cdr.markForCheck();
     }
-
 
     ngOnInit() {
         if (this.dataSource.mode === 'remote') {
@@ -62,11 +56,11 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             this.dataService.getList(this.dataSource.dataSource.name, this.dataSource.dataSource.params).then(items => {
                 if (items && items.length) {
                     this.dataSource.dataItems = items;
-                    this.cdr.markForCheck();
+                    this.refresh();
                 }
             });
         } else {
-            this.cdr.markForCheck();
+            this.refresh();
         }
     }
 
@@ -76,9 +70,20 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             result.push(...this.value);
         }
         if (Array.isArray(this.dataSource.dataItems)) {
-            result.push(...this.dataSource.dataItems);
+            for (let i = 0; i < this.dataSource.dataItems.length; i++) {
+                const item = this.dataSource.dataItems[i];
+                if (result[i]) {
+                    Object.assign(result[i], item);
+                } else {
+                    result[i] = item;
+                }
+            }
+            return result;
         }
-        return result;
+    }
+
+    trackbyFunc(index: number, item: WidgetConfig) {
+        return index;
     }
 
 

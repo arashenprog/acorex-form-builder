@@ -1,13 +1,13 @@
-<table  #table>
+<table #table>
     <thead>
-        <ng-container *ngFor="let w of getHeader();let r=index" axf-widget-renderer [rIndex]="r" [widget]="w"
-            [parent]="this" [mode]="'view'">
+        <ng-container *ngIf="headerRow" axf-widget-renderer [widget]="headerRow" [parent]="this" [mode]="'view'">
         </ng-container>
     </thead>
     <tbody>
-        <ng-container *ngFor="let w of getBody();let r=index" axf-widget-renderer [rIndex]="r" [widget]="w"
+        <ng-container *ngFor="let w of bodyRows;let r=index;trackby: trackbyFunc" axf-widget-renderer [rIndex]="r" [widget]="w"
             [parent]="this" [mode]="'view'">
         </ng-container>
     </tbody>
 </table>
-<button type="button" class="btn btn-sm btn-primary" (click)="addItemClick()" *ngIf="dataSource.mode=='manual'">Add Item</button> 
+<button type="button" class="btn btn-sm btn-primary" (click)="addItemClick()" *ngIf="dataSource.mode=='manual'">Add
+    Item</button>
