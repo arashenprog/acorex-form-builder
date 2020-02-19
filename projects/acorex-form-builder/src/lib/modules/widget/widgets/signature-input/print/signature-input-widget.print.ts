@@ -4,11 +4,14 @@ import { AXFDataSourceOption } from '../../../../property-editor/editors/data-so
 
 @Component({
     templateUrl: './signature-input-widget.print.html' ,
+    styleUrls: ['./signature-input-widget.print.scss'],
     changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class AXFSignatureInputWidgetPrint extends AXFWidgetPrint {
 
     //dataSource: AXFDataSourceOption; 
+    height:number;
+    width: number;
     constructor() {
         super()
     }

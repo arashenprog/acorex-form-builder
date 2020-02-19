@@ -77,7 +77,7 @@ export class AXFGridInputWidgetView extends AXFWidgetView {
         this.value.splice(i, 1);
     }
 
-    setSignatureClick() {
+    setSignatureClick(i) {
         this.popupService.open(SignaturePadPage, {
             title: 'Signature',
             size: 'md',

@@ -5,7 +5,7 @@
                 <tr *ngIf="dataSource">
                     <th *ngFor="let col of dataSource.columns">{{col.title}}</th>
                     <th *ngIf="allowAddDelete">
-                        <ax-button type="primary" size="sm" tooltip="Add" (onClick)="addRowClick()"> 
+                        <ax-button type="primary" size="sm" tooltip="Add" (onClick)="addRowClick()">
                             <i class="fas fa-plus"></i> Add Row
                         </ax-button>
                     </th>
@@ -13,7 +13,7 @@
             </thead>
             <tbody>
                 <ng-container *ngIf="dataSource">
-                    <tr style="border-bottom: 1px solid var(--primary-color);"  *ngFor="let item of value;let i=index">
+                    <tr style="border-bottom: 1px solid var(--primary-color);" *ngFor="let item of value;let i=index">
                         <td *ngFor="let col of dataSource.columns">
                             <span
                                 *ngIf="!col.fillByUser && col.fieldName==null && col.type!='image'">{{item | di:col.fieldName}}</span>
@@ -30,17 +30,20 @@
                             <ax-selection-list direction="horizontal"
                                 *ngIf="col.fillByUser && col.type=='selectionList'">
                             </ax-selection-list>
-                            <div  class="signature" *ngIf="col.fillByUser && col.type=='signature'"
-                            style="width: 51%; height: 52px;"  >
-                                <img  [src]="'./assets/images/No-Signature.jpg'"
-                                style="width: 50%; height: 50px;" >
-                                    <div class="clear-box"><button class="btn btn-outline-danger" (click)="setSignatureClick(i)"><i class="fas fa-plus"></i></button></div>
-                           </div>  
+                            <div class="signature" *ngIf="col.fillByUser && col.type=='signature'"
+                                style="width: 51%; height: 52px;">
+                                <img [src]="'./assets/images/No-Signature.jpg'" style="width: 50%; height: 50px;">
+                                <div class="clear-box">
+                                    <button class="btn btn-outline-danger" (click)="setSignatureClick(i)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </td>
-                        <td *ngIf="allowAddDelete">                             
-                            <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)"> 
+                        <td *ngIf="allowAddDelete">
+                            <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
                                 <i class="fas fa-trash danger"></i>
-                            </ax-button> 
+                            </ax-button>
                         </td>
                     </tr>
                 </ng-container>
