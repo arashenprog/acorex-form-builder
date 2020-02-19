@@ -6,7 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFTableRowWidgetDesigner } from './designer/table-row-widget.designer';
 import { AXFTableRowWidgetPrint } from './print/table-row-widget.print';
 import { AXFTableRowWidgetView } from './view/table-row-widget.view';
-import { AXF_STYLE_GENERAL_PROPERTIES, AXF_BG_COLOR_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_BOX_STYLE_PROPERTY } from '../../config/general-properties';
+import { AXF_BG_COLOR_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_NAME_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [
     AXFTableRowWidgetDesigner,

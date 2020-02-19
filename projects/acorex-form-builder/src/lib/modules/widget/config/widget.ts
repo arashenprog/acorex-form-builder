@@ -272,6 +272,11 @@ export abstract class AXFWidgetView extends AXFWidget {
         if (this.config.options.name == null || this.config.options.name === '') {
             return null;
         }
+        if (this['rIndex'] >= 0) {
+            return this.getParentPath() ?
+                `${this.getParentPath()}[${this['rIndex']}].${this.config.options.name}`
+                : `${this.config.options.name}[${this['rIndex']}]`;
+        }
         return this.getParentPath() ?
             `${this.getParentPath()}.${this.config.options.name}`
             : this.config.options.name;
@@ -394,6 +399,8 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
                 this.dataService.setValue(name, v);
             }
             this.invokeEvent('onValueChange');
+            this.cdr.markForCheck();
+            this.cdr.detectChanges();
         }
     }
 
@@ -406,7 +413,6 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
 
     ngAfterViewInit() {
         this.value = this.extractValue();
-        console.log(this.config.name, this.getPath(), this.value);
         super.ngAfterViewInit();
     }
 }
@@ -417,6 +423,5 @@ export abstract class AXFWidgetPrint extends AXFWidget {
     constructor() {
         super();
     }
-
     value: any;
 }

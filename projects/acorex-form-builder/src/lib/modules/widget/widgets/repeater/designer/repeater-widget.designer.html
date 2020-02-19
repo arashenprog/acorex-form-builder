@@ -1,11 +1,3 @@
-<!-- 
-<ng-container *ngIf="widgets.length; else elseTemplate" style="background: lightgray;">
-    <ng-container *ngFor="let w of widgets;let i=index" axf-widget-renderer [widget]="w" [parent]="this">
-    </ng-container>
-</ng-container>
-<ng-template #elseTemplate>
-    &nbsp;
-</ng-template> -->
 <table  #table class="axf-widget-move-handler">
     <thead *ngIf="showHeader" >
         <ng-container *ngFor="let w of getHeader()" axf-widget-renderer [widget]="w"

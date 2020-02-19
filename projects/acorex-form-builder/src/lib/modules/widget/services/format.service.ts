@@ -15,7 +15,7 @@ export class AXFFormatService {
 
     public decompose(value: string): AXFWordWithPipe {
         const result: AXFWordWithPipe = { word: value ? value.toString() : null, formetters: [] };
-        if (value && typeof value == "string") {
+        if (value && typeof value == 'string') {
             const parts = value.split('|');
             result.word = parts[0].trim();
             for (let i = 1; i < parts.length; i++) {
@@ -28,15 +28,18 @@ export class AXFFormatService {
     }
 
 
-    public format(value: any, useModel: boolean = true): string {
-        if (value && typeof value == "string") {
+    public format(value: any, useModel: boolean = true, dataContext?: any): string {
+        if (value && typeof value === 'string') {
             const list = value.match(/\[.+\]/g);
             if (list) {
                 list.forEach(w => {
                     const ww: AXFWordWithPipe = this.decompose(w.substring(1, w.length - 1));
                     let word = ww.word;
-                    if (useModel)
+                    if (dataContext && typeof dataContext === 'object') {
+                        word = dataContext[ww.word];
+                    } else if (useModel) {
                         word = this.dataService.getWord(ww.word);
+                    }
                     if (word) {
                         for (let i = 0; i < ww.formetters.length; i++) {
                             const pipe = ww.formetters[i];
@@ -52,7 +55,7 @@ export class AXFFormatService {
 
     private JDT(value: string) {
         try {
-            const val = new AXDateTime(value, "jalali");
+            const val = new AXDateTime(value, 'jalali');
             return val.toString();
         } catch (error) {
             return value;
@@ -60,6 +63,6 @@ export class AXFFormatService {
     }
 
     private number(value: string) {
-        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 }
