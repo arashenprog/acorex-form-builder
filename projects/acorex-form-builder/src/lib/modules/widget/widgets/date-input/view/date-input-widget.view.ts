@@ -1,26 +1,33 @@
-import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild } from '@angular/core';
-import { AXFWidgetView } from '../../../config/widget';
+import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, Input, EventEmitter } from '@angular/core';
+import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
+import { AXDateTime } from 'acorex-ui';
 
 @Component({
     templateUrl: './date-input-widget.view.html',
     styleUrls: ['./date-input-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFDateInputWidgetView extends AXFWidgetView {
+export class AXFDateInputWidgetView extends AXFValueWidgetView {
 
-    constructor(private cdr: ChangeDetectorRef) {
-        super();
-    }
+    calendarType: any;
+    displayFormat: string;
 
-    ngAfterViewInit() {
-
+    constructor(protected cdr: ChangeDetectorRef) {
+        super(cdr);
     }
 
     onRender(): void {
         this.cdr.markForCheck();
     }
 
-    dataChange(e) {
 
+
+
+    @Input()
+    public get date(): AXDateTime {
+        return this.value ? new AXDateTime(this.value, this.calendarType) : null;
+    }
+    public set date(v: AXDateTime) {
+        this.value = v ? v.date.toJSON() : null;
     }
 }

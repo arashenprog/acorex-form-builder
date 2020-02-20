@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
-import { AXFWidgetDesigner } from '../../../config/widget'; 
+import { AXFWidgetDesigner } from '../../../config/widget';
 
 @Component({
     selector: "[axf-widget-time]",
@@ -9,17 +9,8 @@ import { AXFWidgetDesigner } from '../../../config/widget';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTimeInputWidgetDesigner extends AXFWidgetDesigner {
-
-    @ViewChild("el1", { static: true }) el1: ElementRef<HTMLElement>;
-
-    value:string="00:00";
+    value: string = '00:00';
     constructor() {
         super();
-    } 
-
-    onRender(): void { 
-        // if(this.el1.nativeElement.querySelector("input")!=null)
-        // this.applyStyle(this.el1.nativeElement.querySelector("input")); 
     }
-
 }
