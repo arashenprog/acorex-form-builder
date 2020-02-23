@@ -1,24 +1,5 @@
-<div #el1 *ngIf="visible" [attr.id]="_uid">
-    <!-- <ax-time-picker label=""></ax-time-picker> (textChange)="handleValueChange($event)" -->
-    <ax-text-box [text]="value">
-        <ax-button (onClick)="handleShowEditor()">
-            <i class="far fa-clock"></i>
-        </ax-button>
-    </ax-text-box>
-    <ax-popover [fitParent]="fitParent" distance="5" height="'auto'" placement="bottom-start" alignment="top-start"
-        #popSelectBox target="#{{ _uid }}">
-        <div >
-            <div style="width: 70px;float: left;" >
-                <ax-select-box textField="value" valueField="value" mode="single" [selectedItems]="selectedHour"
-                    (selectedItemsChange)="hourChange($event)" [items]="hours">
-                </ax-select-box>
-            </div>
-            <div style="width: 20px;float: left;text-align: center;"> : </div>
-            <div style="width: 70px;float: left;">
-                <ax-select-box textField="value" valueField="value" [selectedItems]="selectedMinute"
-                    (selectedItemsChange)="minuteChange($event)" [items]="minutes">
-                </ax-select-box>
-            </div>
-        </div>
-    </ax-popover>
-</div>
+<ax-text-box [mask]="timeMask" [(text)]="value" *ngIf="visible">
+    <ax-button (onClick)="handleSetCurrent()">
+        <i class="far fa-clock"></i>
+    </ax-button>
+</ax-text-box>
