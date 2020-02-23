@@ -1,7 +1,7 @@
 <table #table style=" width: 100%;
 border-collapse: collapse;
 border-spacing: 0px;
-table-layout: fixed;">
+table-layout: inherit;">
     <thead>
         <ng-container *ngFor="let w of getHeader()" axf-widget-renderer [widget]="w"
             [parent]="this" [mode]="'print'">

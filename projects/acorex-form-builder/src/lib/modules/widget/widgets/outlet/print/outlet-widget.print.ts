@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AXFTemplateService } from '../../../services/template/template.service';
 import { AXFWidgetPrint } from '../../../config/widget';
 
@@ -9,7 +9,7 @@ import { AXFWidgetPrint } from '../../../config/widget';
 export class AXFOutletWidgetPrint extends AXFWidgetPrint implements OnInit {
     widgetId: string;
     
-    constructor( private templateService: AXFTemplateService) { 
+    constructor( private cdr: ChangeDetectorRef,private templateService: AXFTemplateService) { 
         super();
     }
    
@@ -19,6 +19,10 @@ export class AXFOutletWidgetPrint extends AXFWidgetPrint implements OnInit {
             this.widgets = this.widgetService.parse(c.template).options.widgets;
             this.refresh();
         });
+    }
+
+    refresh(): void {
+        this.cdr.markForCheck();
     }
 }
 

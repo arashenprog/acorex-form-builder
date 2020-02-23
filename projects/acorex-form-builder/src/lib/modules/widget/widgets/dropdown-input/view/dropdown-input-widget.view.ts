@@ -64,19 +64,25 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     }
 
     onOpen() {
-        if (this.dataSource.mode === 'remote' && (this.dataSource.dataItems == null || this.dataSource.dataItems.length === 0)) {
-            this.dataSource.dataSource.params.forEach(p => {
-                if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
-                    p.value = this.resolveProperty(p.value);
-                }
-            });
-            this.dataService.getList(
-                this.dataSource.dataSource.name,
-                this.dataSource.dataSource.params
-            ).then(c => {
-                this.dataSource.dataItems = c;
+        if (this.dataSource.mode === 'remote' ) {
+            if(this.dataSource.dataItems == null || this.dataSource.dataItems.length === 0)
+            {
+                this.dataSource.dataSource.params.forEach(p => {
+                    if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
+                        p.value = this.resolveProperty(p.value);
+                    }
+                });
+                this.dataService.getList(
+                    this.dataSource.dataSource.name,
+                    this.dataSource.dataSource.params
+                ).then(c => {
+                    this.dataSource.dataItems = c;
+                    this.dataBound();
+                });
+            }
+            else
                 this.dataBound();
-            });
         }
+        
     }
 }

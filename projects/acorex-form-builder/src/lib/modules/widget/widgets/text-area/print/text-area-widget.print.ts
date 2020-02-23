@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
@@ -11,8 +11,18 @@ export class AXFTextAreaWidgetPrint extends AXFWidgetPrint {
     placeholder: String;
     rows:number;
 
-    constructor() {
+    constructor(protected cdr: ChangeDetectorRef) {
         super() 
+    }
+
+    onRender()
+    {
+        if(this.value==undefined && this['dataContext']!=undefined && 
+        this['dataContext'].hasOwnProperty(this['name']))
+        {
+            this.value=this['dataContext'][this['name']];
+        }
+        this.cdr.markForCheck();
     }
      
 }

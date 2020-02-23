@@ -1,19 +1,18 @@
 import { Component, OnInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild } from '@angular/core';
-import { AXFWidgetView } from '../../../config/widget';
+import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 
 @Component({
     templateUrl: './date-input-widget.view.html',
     styleUrls: ['./date-input-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFDateInputWidgetView extends AXFWidgetView {
+export class AXFDateInputWidgetView extends AXFValueWidgetView {
 
-    constructor(private cdr: ChangeDetectorRef) {
-        super();
+    constructor(protected cdr: ChangeDetectorRef) {
+        super(cdr);
     }
 
-    ngAfterViewInit() {
-
+    ngAfterViewInit() { 
     }
 
     onRender(): void {

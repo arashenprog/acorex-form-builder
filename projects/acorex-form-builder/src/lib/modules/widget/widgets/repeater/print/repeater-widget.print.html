@@ -1,0 +1,14 @@
+<table #table  style=" width: 100%;
+border-collapse: collapse;
+border-spacing: 0px;
+table-layout: fixed;">
+    <thead>
+        <ng-container *ngIf="headerRow" axf-widget-renderer [widget]="headerRow" [parent]="this" [mode]="'print'">
+        </ng-container>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let w of bodyRows;let r=index;trackby: trackbyFunc" axf-widget-renderer [rIndex]="r" [widget]="w"
+            [parent]="this" [mode]="'print'">
+        </ng-container>
+    </tbody>
+</table>
