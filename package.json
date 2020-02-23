@@ -27,7 +27,7 @@
     "@fortawesome/fontawesome-free": "^5.11.2",
     "acorex-editor": "file:C:/acorex/acorex-editor-0.0.1.tgz",
     "acorex-spa": "file:C:/acorex/acorex-spa-0.0.1.tgz",
-    "acorex-ui": "file:C:/ACoreX/acorex-ui-0.0.1.tgz",
+    "acorex-ui": "file:C:/acorex/acorex-ui-0.0.1.tgz",
     "ag-grid-community": "^21.2.2",
     "angular2-signaturepad": "^2.9.0",
     "bootstrap": "^4.3.1",
