@@ -44,7 +44,7 @@
     </span>    
     <ng-container *ngIf="dataSource && printMode=='allItems'">
         <label *ngFor="let item of dataSource.dataItems; let i=index;"
-            style="box-sizing: border-box;cursor: pointer; font-size: 13px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: 0px; "
+            style="box-sizing: border-box;cursor: pointer; font-size: 14px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: 0px; "
             [ngStyle]="{'padding':alignCheck=='left'? '0px 10px 0px 0px' : (alignCheck=='top'? '2px 8px' : (alignCheck=='bottom'? '0px 6px' : '0px 10px 0px 0px')),
         'width':(direction=='horizontal' && columns==1)?'inherit':(100.0/columns)+'%'}">
            
