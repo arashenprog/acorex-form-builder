@@ -154,7 +154,9 @@ export class ACFViewerFrameComponent {
 
     pdfGenerate() {
         const printbody = this.frame.nativeElement.contentDocument.querySelector('.theme-wrapper> ng-component >ng-component>div ').innerHTML;
-        let result = '<html><head><title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
+        let result = '<html><head>'+
+        '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+        +'<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
         result = result + printbody + '</body></html>';
         this.connectService.send('print', { data: result }).then(() => {
         });
