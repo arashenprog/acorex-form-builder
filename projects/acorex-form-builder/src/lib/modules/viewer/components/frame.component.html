@@ -1,5 +1,5 @@
-<div class="view-container {{size}}"  >
-    <iframe [src]="url" frameBorder="0" #frame class="viewer" >
+<div class="view-container {{size}}">
+    <iframe [src]="url" frameBorder="0" #frame class="viewer">
     </iframe>
 </div>
 <div class="device-size-container">
@@ -9,7 +9,14 @@
     </div>
     &nbsp;
     &nbsp;
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-sm btn-primary" (click)="pdfGenerate()" *ngIf="mode=='print'">Generate PDF</button>
+    <div class="btn-group" role="group" aria-label="Basic example" *ngIf="mode=='print'">
+        <ng-container *ngIf="isLoading">
+            <button type="button" class="btn btn-sm btn-primary fa-2x">
+                <i class="fas fa-spinner fa-pulse"></i>  Generating</button>
+        </ng-container>
+        <ng-container *ngIf="!isLoading">
+            <button type="button" class="btn btn-sm btn-primary" (click)="pdfGenerate()">Generate
+                PDF</button>
+        </ng-container>
     </div>
 </div>
