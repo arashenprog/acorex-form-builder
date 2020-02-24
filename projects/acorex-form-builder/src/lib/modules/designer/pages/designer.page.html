@@ -8,7 +8,7 @@
             <h1>SmartForms</h1>
         </div>
         <div class="controlls end-controlls">
-            <ax-toolbar-menu [items]="actionItems"  (itemClick)="handleActionClick($event)">
+            <ax-toolbar-menu #actionToolbar [items]="actionItems"  (itemClick)="handleActionClick($event)">
             </ax-toolbar-menu>
         </div>
     </header>

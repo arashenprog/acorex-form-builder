@@ -4,6 +4,8 @@
     table {
         min-width: 100%;
         border-collapse: collapse;
+        table-layout: fixed;
+        width: 100%;
 
         td,th {
             height: 50px;

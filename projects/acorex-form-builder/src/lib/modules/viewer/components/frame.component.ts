@@ -18,6 +18,7 @@ export class ACFViewerFrameComponent {
     url: SafeResourceUrl;
     @ViewChild('frame', { static: true })
     frame: ElementRef<HTMLIFrameElement>;
+    isLoading: boolean = false;
 
     private uid: string = AXHtmlUtil.getUID();
 
@@ -110,10 +111,10 @@ export class ACFViewerFrameComponent {
                     });
                 }
                 break;
-            // case 'sync':
-            //     if (options.height && this.frame) {
-            //         this.frame.nativeElement.style.height = options.height + 'px';
-            //     }
+                // case 'sync':
+                //     if (options.height && this.frame) {
+                //         this.frame.nativeElement.style.height = options.height + 'px';
+                //     }
                 break;
         }
 
@@ -156,7 +157,9 @@ export class ACFViewerFrameComponent {
         const printbody = this.frame.nativeElement.contentDocument.querySelector('.theme-wrapper> ng-component >ng-component>div ').innerHTML;
         let result = '<html><head><title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
         result = result + printbody + '</body></html>';
+        this.isLoading = true;
         this.connectService.send('print', { data: result }).then(() => {
+            this.isLoading = false;
         });
     }
 

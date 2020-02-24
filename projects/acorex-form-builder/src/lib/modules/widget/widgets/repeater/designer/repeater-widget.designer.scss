@@ -3,6 +3,8 @@
         min-width: 100%;
         border-collapse: collapse;
         border-spacing: 0px;
+        table-layout: fixed;
+        width: 100%;
         td,th {
             height: 50px;
             min-width: 50px;
