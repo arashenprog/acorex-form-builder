@@ -9,7 +9,7 @@ import { AXBasePageComponent } from 'acorex-ui';
                 <label style='font-size: small;font-weight: 700;'>
                     Page Size
                 </label>
-                <ax-select-box [items]='items' [selectedValues]="selected">
+                <ax-select-box [items]='items' [(selectedValues)]="selected">
                 </ax-select-box>
             </div>
             <br>
