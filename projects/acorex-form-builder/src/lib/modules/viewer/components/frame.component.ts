@@ -165,7 +165,7 @@ export class ACFViewerFrameComponent {
         }).closed(c => {
             if (c.data) {
                 const printbody = this.frame.nativeElement.contentDocument.querySelector('.theme-wrapper> ng-component >ng-component>div ').innerHTML;
-                let result = '<html><head>' +
+                let result = '<html><head><meta charset="utf-8"/>' +
                     '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
                     + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
                 result = result + printbody + '</body></html>';
