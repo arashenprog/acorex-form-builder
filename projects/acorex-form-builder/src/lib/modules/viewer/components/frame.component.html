@@ -1,22 +1,33 @@
-<div class="view-container {{size}}">
+<div class="view-container {{size}}" [class.land]='orientation==1'>
     <iframe [src]="url" frameBorder="0" #frame class="viewer">
     </iframe>
 </div>
 <div class="device-size-container">
+    <div style="justify-content: start;">
+        <div class="btn-group" role="group" aria-label="Basic example" *ngIf="mode=='print'">
+            <ng-container>
+                <button type="button" class="btn btn-sm btn-primary " [class.active]="orientation==0"
+                    (click)="orientation=0">
+                    {{"Portrate"}}</button>
+                <button type="button" class="btn btn-sm btn-primary" [class.active]="orientation==1"
+                    (click)="orientation=1">{{"Landscape"}}</button>
+            </ng-container>
+        </div>
+    </div>
     <div class="btn-group" role="group" aria-label="Basic example">
         <button *ngFor="let i of sizes" type="button" class="btn btn-sm btn-primary" [class.active]="i.active"
             (click)="handleSetSize(i)"><i class="{{i.icon}}"></i> {{i.title}}</button>
     </div>
-    &nbsp;
-    &nbsp;
-    <div class="btn-group" role="group" aria-label="Basic example" *ngIf="mode=='print'">
-        <ng-container *ngIf="isLoading">
-            <button type="button" class="btn btn-sm btn-primary fa-2x">
-                <i class="fas fa-spinner fa-pulse"></i>  Generating</button>
-        </ng-container>
-        <ng-container *ngIf="!isLoading">
-            <button type="button" class="btn btn-sm btn-primary" (click)="pdfGenerate()">Generate
-                PDF</button>
-        </ng-container>
+    <div style="justify-content: flex-end;">
+        <div class="btn-group" role="group" aria-label="Basic example" *ngIf="mode=='print'">
+            <ng-container *ngIf="isLoading">
+                <button type="button" class="btn btn-sm btn-primary fa-2x">
+                    <i class="fas fa-spinner fa-pulse"></i> Generating</button>
+            </ng-container>
+            <ng-container *ngIf="!isLoading">
+                <button type="button" class="btn btn-sm btn-primary" (click)="pdfGenerate()">Generate
+                    PDF</button>
+            </ng-container>
+        </div>
     </div>
 </div>

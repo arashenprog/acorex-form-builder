@@ -21,12 +21,17 @@
     &.mobile {
         width: 425px;
     }
+
 }
 
 @media (min-width: 1281px) {
     .view-container {
         &.desktop {
             width: 1224px;
+
+            &.land {
+                width: 850px;
+            }
         }
 
         &.tablet {
@@ -43,6 +48,9 @@
     .view-container {
         &.desktop {
             width: 1024px;
+            &.land {
+                width: 716px;
+            }
         }
 
         &.tablet {
@@ -55,6 +63,9 @@
     .view-container {
         &.desktop {
             width: 985px;
+            &.land {
+                width: 690px;
+            }
         }
 
         &.tablet {
@@ -80,11 +91,19 @@
 
 .device-size-container {
     position: absolute;
-    position: absolute;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
+    left: 0;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     bottom: 10px;
+
+    &>div {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
 
     .btn-primary:not(:disabled):not(.disabled).active,
     .btn-primary:not(:disabled):not(.disabled):active,
