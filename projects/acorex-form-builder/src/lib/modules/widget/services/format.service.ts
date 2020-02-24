@@ -29,9 +29,9 @@ export class AXFFormatService {
 
 
     public format(value: any, useModel: boolean = true, dataContext?: any): string {
-        if (value && typeof value === 'string') {
-            const list = value.match(/\[.+\]/g);
-            if (list) {
+        if (value && typeof value === 'string') {  
+            const list = value.match(/\[(.*?)\]/g);
+            if (list) {  
                 list.forEach(w => {
                     const ww: AXFWordWithPipe = this.decompose(w.substring(1, w.length - 1));
                     let word = ww.word;
