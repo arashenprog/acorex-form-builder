@@ -77,7 +77,7 @@ export class ACFViewerFrameComponent {
 
     size: number;
     mode = 'view';
-    orientation = 0;
+    orientation = 1;
 
 
     @HostListener('window:message', ['$event'])

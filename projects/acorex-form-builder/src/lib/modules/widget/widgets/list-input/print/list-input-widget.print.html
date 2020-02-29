@@ -34,7 +34,7 @@
         </label>
     </ng-container>
 </div> -->
-<div #el [hidden]="visible==false" style="float: left;padding-left: 5px;">
+<div #el [hidden]="visible==false" style="padding-left: 5px;display: inline-block;">
     <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0"
         style="height: 27px; border: 1px solid var(--primary-color); font-weight: 700;width: 100%;">No Item</div>
 
@@ -44,7 +44,7 @@
     </span>    
     <ng-container *ngIf="dataSource && printMode=='allItems'">
         <label *ngFor="let item of dataSource.dataItems; let i=index;"
-            style="box-sizing: border-box;cursor: pointer; font-size: 14px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: 0px; "
+            style="display: inline-table ;box-sizing: border-box;cursor: pointer; font-size: 14px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: 0px; "
             [ngStyle]="{'padding':alignCheck=='left'? '0px 10px 0px 0px' : (alignCheck=='top'? '2px 8px' : (alignCheck=='bottom'? '0px 6px' : '0px 10px 0px 0px')),
         'width':(direction=='horizontal' && columns==1)?'inherit':(100.0/columns)+'%'}">
            

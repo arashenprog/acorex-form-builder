@@ -200,7 +200,8 @@ export const AXF_TEXT_STYLE_PROPERTY: AXFWidgetProperty = {
     editor: 'SelectionEditor',
     order: 34,
     options: {
-        items: [{ value: 'bold', title: 'Bold' }, { value: 'italic', title: 'Italic' }, { value: 'underline', title: 'Underline' }],
+        items: [{ value: 'bold', title: 'Bold' }, { value: 'italic', title: 'Italic' }, { value: 'underline', title: 'Underline' }
+        , { value: 'break', title: 'Break' }],
         mode: 'multiple',
         direction: 'horizontal'
     }
