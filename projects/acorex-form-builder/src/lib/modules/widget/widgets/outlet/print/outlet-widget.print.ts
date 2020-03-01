@@ -8,6 +8,8 @@ import { AXFWidgetPrint } from '../../../config/widget';
 })
 export class AXFOutletWidgetPrint extends AXFWidgetPrint implements OnInit {
     widgetId: string;
+    isLoading: boolean = true;
+
     
     constructor( private cdr: ChangeDetectorRef,private templateService: AXFTemplateService) { 
         super();
@@ -17,6 +19,7 @@ export class AXFOutletWidgetPrint extends AXFWidgetPrint implements OnInit {
     ngOnInit() {
         this.templateService.get(this.widgetId).then(c => {
             this.widgets = this.widgetService.parse(c.template).options.widgets;
+            this.isLoading = false;
             this.refresh();
         });
     }

@@ -5,8 +5,7 @@ import { AXFTemplateService } from '../../../services/template/template.service'
 @Component({
     selector: '[axf-outlet]',
     templateUrl: './outlet-widget.view.html',
-    styleUrls: ['./outlet-widget.view.scss'],
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFOutletWidgetView extends AXFWidgetView {
     constructor(private cdr: ChangeDetectorRef, private templateService: AXFTemplateService) {
@@ -14,10 +13,13 @@ export class AXFOutletWidgetView extends AXFWidgetView {
 
     }
     widgetId: string;
+    isLoading: boolean = true;
 
     ngOnInit() {
+
         this.templateService.get(this.widgetId).then(c => {
             this.widgets = this.widgetService.parse(c.template).options.widgets;
+            this.isLoading = false;
             this.refresh();
         });
     }

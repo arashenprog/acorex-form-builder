@@ -1,4 +1,6 @@
 <ng-container *ngIf="visible">
-    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w"  mode="view" [parent]="this">
+    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" mode="view" [parent]="this">
+    </div>
+    <div *ngIf="isLoading && (!widgets || !widgets.length)" class="skeleton" >
     </div>
 </ng-container>

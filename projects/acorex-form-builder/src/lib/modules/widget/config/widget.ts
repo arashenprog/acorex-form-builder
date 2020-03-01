@@ -425,6 +425,7 @@ export abstract class AXFWidgetPrint extends AXFWidget {
         super();
     }
     value: any;
+    visible: boolean;
 
     protected resolveProperty(name: string): any {
         return this.getParentPath() && !name.startsWith(`$${this.getParentPath()}.`)

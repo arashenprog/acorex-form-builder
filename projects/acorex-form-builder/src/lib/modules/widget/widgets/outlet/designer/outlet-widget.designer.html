@@ -1,10 +1,6 @@
-
-<div *ngIf="widgets.length; else elseTemplate"  >
-    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this"  mode="view" >
+<ng-container >
+    <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" mode="view" [parent]="this">
     </div>
-</div>
-<ng-template #elseTemplate>
-    <div class="align-center">
-        Empty Template!
+    <div *ngIf="isLoading && (!widgets || !widgets.length)" class="skeleton" >
     </div>
-</ng-template>
+</ng-container>
