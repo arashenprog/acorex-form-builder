@@ -3,7 +3,10 @@ border-collapse: collapse;
 border-spacing: 0px;
 table-layout: fixed;" class="realTable">
     <thead>
-        <ng-container *ngIf="headerRow" axf-widget-renderer [widget]="headerRow" [parent]="this" [mode]="'print'">
+        <!-- <ng-container *ngIf="headerRow" axf-widget-renderer [widget]="headerRow" [parent]="this" [mode]="'print'">
+        </ng-container> -->
+        <ng-container *ngFor="let w of headerRows;trackby: trackbyFunc" axf-widget-renderer [widget]="w"
+            [parent]="this" [mode]="'print'">
         </ng-container>
     </thead>
     <tbody>

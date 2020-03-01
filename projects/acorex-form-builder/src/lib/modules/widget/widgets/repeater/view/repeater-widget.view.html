@@ -1,6 +1,9 @@
 <table #table>
     <thead>
-        <ng-container *ngIf="headerRow" axf-widget-renderer [widget]="headerRow" [parent]="this" [mode]="'view'">
+        <!-- <ng-container *ngIf="headerRow" axf-widget-renderer [widget]="headerRow" [parent]="this" [mode]="'view'">
+        </ng-container> -->
+        <ng-container *ngFor="let w of headerRows;trackby: trackbyFunc" axf-widget-renderer [widget]="w"
+            [parent]="this" [mode]="'view'">
         </ng-container>
     </thead>
     <tbody>

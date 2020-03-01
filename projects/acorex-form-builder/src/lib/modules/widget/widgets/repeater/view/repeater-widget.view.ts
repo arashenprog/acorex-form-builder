@@ -13,7 +13,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
 
     dataSource: AXFDataSourceOption;
     showHeader: boolean;
-    headerRow: WidgetConfig;
+    headerRows: WidgetConfig[];
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
 
@@ -29,7 +29,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
 
     onRender() {
         if (this.showHeader) {
-            this.headerRow = this.widgets.find(c => c.options.isHeader === true);
+            this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
         this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
         if (this.allItems().length === 0) {

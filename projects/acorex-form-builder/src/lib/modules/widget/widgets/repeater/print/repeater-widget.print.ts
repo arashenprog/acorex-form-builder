@@ -13,7 +13,7 @@ import { AXFDataService } from '../../../services/data.service';
 export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
     dataSource: AXFDataSourceOption;
     showHeader: boolean;
-    headerRow: WidgetConfig;
+    headerRows: WidgetConfig[];
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
 
@@ -25,7 +25,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
 
     onRender() {
         if (this.showHeader) {
-            this.headerRow = this.widgets.find(c => c.options.isHeader === true);
+            this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
         this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
         this.bodyRows = this.allItems().map(c => {
