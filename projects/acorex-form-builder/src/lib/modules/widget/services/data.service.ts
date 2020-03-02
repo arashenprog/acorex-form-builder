@@ -198,7 +198,11 @@ export class AXFDataService {
                 if (failed.length) {
                     console.error(failed.map(c => c.message).join(', '));
                 } else {
-                    this.connectService.send('submit', { data: this.dataModel }).then(() => {
+                    //
+                    this.connectService.send('submit', {
+                        data: this.dataModel,
+                        html: 'This will be generated from form!'
+                    }).then(() => {
                     });
                 }
             });
