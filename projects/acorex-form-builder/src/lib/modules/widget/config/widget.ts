@@ -74,11 +74,14 @@ export abstract class AXFWidget implements AXFWidgetContainer {
         el.style.fontSize = this['fontSize'];
         el.style.verticalAlign = this['verticalAlign'];
         el.style.writingMode = this['textDirection'];
+        if (el.style.writingMode === 'tb') {
+            el.style.transform = 'rotate(180deg)';
+        }
         if (this['textStyle']) {
             el.style.fontWeight = this['textStyle'].includes('bold') ? 'bold' : 'inherit';
             el.style.fontStyle = this['textStyle'].includes('italic') ? 'italic' : 'inherit';
             el.style.textDecoration = this['textStyle'].includes('underline') ? 'underline' : 'inherit';
-            el.style.wordBreak=this['textStyle'].includes('break') ? 'break-all' :'unset'
+            el.style.wordBreak = this['textStyle'].includes('break') ? 'break-all' : 'unset'
         }
         el.style.width = this['width'];
         el.style.height = this['height'];
