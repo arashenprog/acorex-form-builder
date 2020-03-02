@@ -1,3 +1,4 @@
+<div [ngStyle]="{'border-bottom':(textStyle && textStyle.includes('underline')) ? '1px solid black':null}">
 <span  [ngStyle]="{'fontWeight':(textStyle && textStyle.includes('bold')) ? 'bold' : 'inherit',
-'fontStyle':(textStyle && textStyle.includes('italic')) ? 'italic' : 'inherit',
-'textDecoration':(textStyle && textStyle.includes('underline')) ? 'underline' : 'inherit'}">{{value | dt:"YYYY/MM/DD"}}</span>
+'fontStyle':(textStyle && textStyle.includes('italic')) ? 'italic' : 'inherit'}">{{value | dt:"YYYY/MM/DD"}}</span></div>
+ 
