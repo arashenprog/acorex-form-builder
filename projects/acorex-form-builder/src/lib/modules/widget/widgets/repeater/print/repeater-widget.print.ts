@@ -6,7 +6,7 @@ import { WidgetConfig } from '../../../services/widget.service';
 import { AXFDataService } from '../../../services/data.service';
 
 @Component({
-   // selector: "td",
+    // selector: "td",
     templateUrl: './repeater-widget.print.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -18,7 +18,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
     rowTemplate: WidgetConfig;
 
 
-    constructor(protected cdr: ChangeDetectorRef,private dataService:AXFDataService,
+    constructor(protected cdr: ChangeDetectorRef,
         private hostElement: ElementRef<HTMLTableCellElement>) {
         super()
     }

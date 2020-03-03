@@ -6,9 +6,11 @@ import { AXFWidgetPrint } from '../../../config/widget';
     templateUrl: './table-cell-widget.print.html',
     styleUrls: ['./table-cell-widget.print.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation:ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None
 })
 export class AXFTableCellWidgetPrint extends AXFWidgetPrint {
+
+    rIndex: number;
 
     constructor(
         private el: ElementRef<HTMLTableCellElement>,

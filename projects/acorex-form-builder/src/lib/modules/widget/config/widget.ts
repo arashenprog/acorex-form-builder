@@ -423,36 +423,22 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
 
 
 
-export abstract class AXFWidgetPrint extends AXFWidget {
+export abstract class AXFWidgetPrint extends AXFWidgetView {
     constructor() {
         super();
     }
     value: any;
     visible: boolean;
 
-    protected resolveProperty(name: string): any {
-        return this.getParentPath() && !name.startsWith(`$${this.getParentPath()}.`)
-            ? name.replace('$', `$${this.getParentPath()}.`)
-            : name;
+    protected extractValue(): any {
+        if (this.getPath()) {
+            return this.dataService.getValue(this.getPath());
+        }
+        return null;
     }
 
-    protected getParentPath() {
-        const parts: string[] = [];
-        let prt = this.parent;
-        while (prt != null) {
-            if (prt.config && prt.config.options &&
-                (prt.config.options.name ||
-                    (prt.rIndex !== undefined && prt.config.name !== 'table-cell' && prt.config.name !== 'table-row')
-                )
-            ) {
-                if (prt.rIndex !== undefined) {
-                    parts.push(`[${prt.rIndex}]`);
-                } else {
-                    parts.push(prt.config.options.name);
-                }
-            }
-            prt = prt.parent;
-        }
-        return parts.reverse().join('.').split('.[').join('[');
+    ngAfterViewInit() {
+        this.value = this.extractValue();
+        super.ngAfterViewInit();
     }
 }

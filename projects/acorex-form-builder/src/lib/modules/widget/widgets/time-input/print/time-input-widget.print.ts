@@ -2,18 +2,17 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
-    templateUrl: './time-input-widget.print.html', 
+    templateUrl: './time-input-widget.print.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTimeInputWidgetPrint extends AXFWidgetPrint {
 
-    constructor(private cdr:ChangeDetectorRef) {
+    constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
 
-    onRender(): void {
-        if(!this.value)
-            this.value="00:00";
-        this.cdr.markForCheck();
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        this.cdr.detectChanges();
     }
 }

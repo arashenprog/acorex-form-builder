@@ -2,14 +2,20 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
-    templateUrl: './checkbox-input-widget.print.html', 
-    changeDetection:ChangeDetectionStrategy.OnPush
+    templateUrl: './checkbox-input-widget.print.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
 
-    value: boolean;
-    label:string;
-    constructor() {
-        super()
+    label: string;
+   
+
+    constructor(protected cdr: ChangeDetectorRef) {
+        super();
+    }
+
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        this.cdr.detectChanges();
     }
 }

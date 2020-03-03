@@ -1,18 +1,23 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
-import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
-    templateUrl: './signature-input-widget.print.html' ,
+    templateUrl: './signature-input-widget.print.html',
     styleUrls: ['./signature-input-widget.print.scss'],
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFSignatureInputWidgetPrint extends AXFWidgetPrint {
 
-    //dataSource: AXFDataSourceOption; 
-    height:number;
+    height: number;
+
     width: number;
-    constructor() {
-        super()
+
+    constructor(protected cdr: ChangeDetectorRef) {
+        super();
+    }
+
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        this.cdr.detectChanges();
     }
 }

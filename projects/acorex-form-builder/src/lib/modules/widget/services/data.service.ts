@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { AXFConnectService } from './connect.service';
-import { PromisResult, EventService, IValidationRuleResult } from 'acorex-ui';
+import { PromisResult, EventService, IValidationRuleResult, AXRenderService } from 'acorex-ui';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AXFValidatorProp } from '../../property-editor/editors/validation/validation.class';
@@ -24,11 +24,8 @@ export class AXFDataService {
 
     constructor(
         private connectService: AXFConnectService,
-        private eventService: EventService
     ) {
-        eventService.on('__submit', (data) => {
-            this.submit();
-        });
+
     }
 
     setValue(path: string, value: any) {
@@ -156,7 +153,7 @@ export class AXFDataService {
     }
 
 
-    submit() {
+    validate(): Promise<void> {
         const ff = [];
         for (const key in this.widgets) {
             if (this.widgets.hasOwnProperty(key)) {
@@ -191,21 +188,32 @@ export class AXFDataService {
             }
         }
 
-        Promise.all(ff
-            .map(c => c.validate()))
-            .then((rules) => {
-                const failed = rules.filter((c: IValidationRuleResult) => !c.result);
-                if (failed.length) {
-                    console.error(failed.map(c => c.message).join(', '));
-                } else {
-                    //
-                    this.connectService.send('submit', {
-                        data: this.dataModel,
-                        html: 'This will be generated from form!'
-                    }).then(() => {
-                    });
-                }
+        return new Promise((resolve, reject) => {
+            Promise.all(ff
+                .map(c => c.validate()))
+                .then((rules) => {
+                    const failed = rules.filter((c: IValidationRuleResult) => !c.result);
+                    if (failed.length) {
+                        console.error(failed.map(c => c.message).join(', '));
+                        reject();
+                    } else {
+                        resolve();
+                        //                       
+                    }
+                });
+        });
+    }
+
+
+    submit(html?: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.connectService.send('submit', {
+                data: this.dataModel,
+                html
+            }).then(() => {
+                resolve();
             });
+        });
     }
 
     setWidget(name: string, value: any) {

@@ -10,11 +10,11 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
 
     @ViewChild('el') el: ElementRef<HTMLElement>;
 
-    mode: string = 'single';
+    mode = 'single';
 
     allowSearch: boolean;
     dataSource: AXFDataSourceOption;
-    isLoading: boolean = true;
+    isLoading = true;
 
     selectedItems: any = [];
 
@@ -64,9 +64,8 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     }
 
     onOpen() {
-        if (this.dataSource.mode === 'remote' ) {
-            if(this.dataSource.dataItems == null || this.dataSource.dataItems.length === 0)
-            {
+        if (this.dataSource.mode === 'remote') {
+            if (this.dataSource.dataItems == null || this.dataSource.dataItems.length === 0) {
                 this.dataSource.dataSource.params.forEach(p => {
                     if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
                         p.value = this.resolveProperty(p.value);
@@ -79,10 +78,10 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
                     this.dataSource.dataItems = c;
                     this.dataBound();
                 });
-            }
-            else
+            } else {
                 this.dataBound();
+            }
         }
-        
+
     }
 }

@@ -1,7 +1,11 @@
 <div class="pre-bootstrap" *ngIf="isBusy">
     <div class="pre-bootstrap-spinner"></div>
 </div>
-<div [hidden]="isBusy">
+<div [hidden]="isBusy" >
     <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [mode]="mode">
+    </ng-container>
+</div>
+<div  style="display: none;" *ngIf="printRendering" #print>
+    <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [mode]="'print'">
     </ng-container>
 </div>

@@ -2,27 +2,20 @@ import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorR
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
-    templateUrl: './text-area-widget.print.html', 
-    changeDetection:ChangeDetectionStrategy.OnPush
+    templateUrl: './text-area-widget.print.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTextAreaWidgetPrint extends AXFWidgetPrint {
 
-    text: String;
-    placeholder: String;
-    rows:number;
+    placeholder: string;
+    rows: number;
 
     constructor(protected cdr: ChangeDetectorRef) {
-        super() 
+        super();
     }
 
-    onRender()
-    {
-        if(this.value==undefined && this['dataContext']!=undefined && 
-        this['dataContext'].hasOwnProperty(this['name']))
-        {
-            this.value=this['dataContext'][this['name']];
-        }
-        this.cdr.markForCheck();
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        this.cdr.detectChanges();
     }
-     
 }

@@ -25,7 +25,7 @@ export class AXFOutletWidgetPrint extends AXFWidgetPrint implements OnInit {
     }
 
     refresh(): void {
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 }
 

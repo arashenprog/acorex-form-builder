@@ -8,23 +8,15 @@ import { AXDateTime } from 'acorex-ui';
 })
 export class AXFDateInputWidgetPrint extends AXFWidgetPrint {
 
-    // text: String;
-    // placeholder: String;
-    // color: String;
-    // bgColor: String;
-    // fontSize: string;
+
     textStyle: string[];
-    // textAlign: string;
-    // boxStyle: any;
-
-    value: any;
-
-    constructor() {
+    constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
 
-    ngOnInit() {
-        if (!this.value)
-            this.value = new AXDateTime();
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        this.cdr.detectChanges();
     }
+    
 }
