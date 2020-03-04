@@ -9,7 +9,8 @@ export class AXFTextAreaWidgetPrint extends AXFWidgetPrint {
 
     placeholder: string;
     rows: number;
-
+    textStyle: string[];
+    
     constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
