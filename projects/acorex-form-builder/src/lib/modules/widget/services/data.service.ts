@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { AXFConnectService } from './connect.service';
 import { PromisResult, EventService, IValidationRuleResult, AXRenderService } from 'acorex-ui';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AXFValidatorProp } from '../../property-editor/editors/validation/validation.class';
 
 export class EventData {
@@ -22,14 +22,21 @@ export class AXFDataService {
     private widgetRegisterChangeObserver: any;
     private widgets: any = {};
 
+    private dataChangeSubject = new Subject<boolean>();
+
     constructor(
         private connectService: AXFConnectService,
     ) {
 
     }
 
+    get onChange(): Observable<boolean> {
+        return this.dataChangeSubject.asObservable();
+    }
+
     setValue(path: string, value: any) {
         this.setPropByPath(this.dataModel, path, value);
+        this.dataChangeSubject.next(this.dataModel);
     }
 
     getValue(name: string) {

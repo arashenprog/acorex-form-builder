@@ -1,17 +1,16 @@
-<label
-    style="display: inline-table ;box-sizing: border-box;cursor: pointer; font-size: 14px;display: inherit; float: left; line-height:20px;user-select: none;margin-bottom: 0px; "
-    [ngStyle]="{'padding':'0px 10px 0px 0px','width':'100%'}">
-    <span
-        style="padding: 2px;position: relative;display: inherit; height: 20px; width: 20px; background-color: white; border: 1px solid;border-color: black;    box-sizing: border-box;"
-        [ngStyle]="{'top':'5px',
-                   'left':'0px',
-                   'float': 'inherit', 
-                   'border-radius':  '0'}"> </span>
-    <div [ngStyle]="{'padding-left':'25px',
-            'padding-right':null,
-            'display':null,
-             'float':null,
-             'margin-top':null
-         }"> <span style="line-height: 20px !important;">{{label | word}}</span>
-    </div>
-</label>
+<table>
+    <tr>
+        <td>
+            <div style="border: 2px solid #000;" [style.width.px]='size' [style.height.px]='size'>
+                <div *ngIf="value"
+                    style="background-size: contain;
+                    margin: auto;
+                    background-repeat: no-repeat;
+                    background-position: center;width:90%; height: 90%;background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9Ijc4LjM2OXB4IiBoZWlnaHQ9Ijc4LjM2OXB4IiB2aWV3Qm94PSIwIDAgNzguMzY5IDc4LjM2OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNzguMzY5IDc4LjM2OTsiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBhdGggZD0iTTc4LjA0OSwxOS4wMTVMMjkuNDU4LDY3LjYwNmMtMC40MjgsMC40MjgtMS4xMjEsMC40MjgtMS41NDgsMEwwLjMyLDQwLjAxNWMtMC40MjctMC40MjYtMC40MjctMS4xMTksMC0xLjU0N2w2LjcwNC02LjcwNA0KCQljMC40MjgtMC40MjcsMS4xMjEtMC40MjcsMS41NDgsMGwyMC4xMTMsMjAuMTEybDQxLjExMy00MS4xMTNjMC40MjktMC40MjcsMS4xMi0wLjQyNywxLjU0OCwwbDYuNzAzLDYuNzA0DQoJCUM3OC40NzcsMTcuODk0LDc4LjQ3NywxOC41ODYsNzguMDQ5LDE5LjAxNXoiLz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K')">
+                </div>
+            </div>
+        </td>
+        <td>
+            <span>{{label | word}}</span></td>
+    </tr>
+</table>

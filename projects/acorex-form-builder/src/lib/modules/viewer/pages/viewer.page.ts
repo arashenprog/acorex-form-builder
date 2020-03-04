@@ -51,6 +51,7 @@ export class ACFViewerPage extends AXBasePageComponent {
     super();
     this.mode = this.router.snapshot.queryParams.mode;
     //
+    debugger;
     this.loadingSubscription = templateService.loadingEvent()
       .pipe(debounceTime(500))
       .pipe(distinctUntilChanged())

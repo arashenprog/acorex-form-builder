@@ -17,6 +17,10 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
         private cdr: ChangeDetectorRef,
         private formatService: AXFFormatService) {
         super();
+        //
+        this.dataService.onChange.subscribe(() => {
+            this.refresh();
+        });
     }
 
     onRender(): void {

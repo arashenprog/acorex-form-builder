@@ -18,7 +18,12 @@ export class AXFDropdownInputWidgetPrint extends AXFWidgetPrint {
     ngAfterViewInit() {
         super.ngAfterViewInit();
         if (this.value) {
-            this.text = this.value[this.dataSource.columns[1]['fieldName']];
+            if (Array.isArray(this.value)) {
+                this.text = this.value.map(c => c[this.dataSource.columns[1]['fieldName']]).join(', ');
+            }
+            else {
+                this.text = this.value[this.dataSource.columns[1]['fieldName']];
+            }
             this.cdr.detectChanges();
         }
     }

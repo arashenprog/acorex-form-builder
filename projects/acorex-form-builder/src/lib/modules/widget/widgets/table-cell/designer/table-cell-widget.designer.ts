@@ -22,11 +22,11 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
 
     onRender() {
         this.applyStyle(this.el.nativeElement);
-        if (this["colspan"]) {
-            this.el.nativeElement.colSpan = this["colspan"];
+        if (this['colspan']) {
+            this.el.nativeElement.colSpan = this['colspan'];
         }
-        if (this["rowspan"]) {
-            this.el.nativeElement.rowSpan = this["rowspan"];
+        if (this['rowspan']) {
+            this.el.nativeElement.rowSpan = this['rowspan'];
         }
         this.cdr.markForCheck();
     }
@@ -38,62 +38,62 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
                     this.addChild(w);
                 });
             }
-        })
+        });
     }
 
     getContextMenu() {
-        const items: AXFContextMenuItem[] = super.getContextMenu().filter(c => c.action != "copy");
+        const items: AXFContextMenuItem[] = super.getContextMenu().filter(c => c.action != 'copy');
         items.splice(3, 0, ...[
             {
-                text: "Column",
-                icon: "fas fa-columns",
+                text: 'Column',
+                icon: 'fas fa-columns',
                 widget: this,
                 items: [
 
                     {
-                        text: "Insert column before",
-                        action: "insertColumnBefore",
-                        icon: "fas fa-chevron-left",
+                        text: 'Insert column before',
+                        action: 'insertColumnBefore',
+                        icon: 'fas fa-chevron-left',
                         widget: this
                     },
                     {
-                        text: "Insert column after",
-                        action: "insertColumnAfter",
-                        icon: "fas fa-chevron-right",
+                        text: 'Insert column after',
+                        action: 'insertColumnAfter',
+                        icon: 'fas fa-chevron-right',
                         widget: this
                     },
                     {
-                        text: "Delete column",
-                        icon: "fas fa-trash",
-                        action: "deleteColumn",
+                        text: 'Delete column',
+                        icon: 'fas fa-trash',
+                        action: 'deleteColumn',
                         widget: this
                     },
                 ]
             },
             {
-                text: "Merge",
-                icon: "fas fa-object-group",
+                text: 'Merge',
+                icon: 'fas fa-object-group',
                 widget: this,
                 items: [
                     {
-                        text: "Merge with next",
-                        icon: "fas fa-chevron-right",
-                        action: "mergeAfter",
+                        text: 'Merge with next',
+                        icon: 'fas fa-chevron-right',
+                        action: 'mergeAfter',
                     },
                     {
-                        text: "Merge with blow",
-                        icon: "fas fa-chevron-down",
-                        action: "mergeBelow",
+                        text: 'Merge with blow',
+                        icon: 'fas fa-chevron-down',
+                        action: 'mergeBelow',
                     },
                 ],
                 separator: true,
             }
-        ])
+        ]);
         return items;
     }
 
     insertColumnBefore() {
-        this.insertColumn(0)
+        this.insertColumn(0);
     }
     insertColumnAfter() {
         this.insertColumn(1);
@@ -102,7 +102,7 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
     private insertColumn(index: number) {
         const table = this.parent.parent;
         table.widgets.forEach(row => {
-            const col = this.widgetService.resolve("table-cell");
+            const col = this.widgetService.resolve('table-cell');
             row.options.widgets.splice(this.findIndex() + index, 0, col);
             row.$owner.refresh();
         });
@@ -118,8 +118,9 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
 
     private mergeAfter() {
         let colspan = Number(this.config.options.colspan);
-        if (!colspan)
+        if (!colspan) {
             colspan = 1;
+        }
 
         const nextCol = this.parent.widgets[this.findIndex() + 1];
         if (nextCol) {
@@ -132,8 +133,9 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
 
     private mergeBelow() {
         let rowspan = Number(this.config.options.rowspan);
-        if (!rowspan)
+        if (!rowspan) {
             rowspan = 1;
+        }
         const nextRow = this.parent.parent.widgets[this.parent.findIndex() + 1];
         if (nextRow) {
             this.config.options.rowspan = ++rowspan;

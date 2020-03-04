@@ -10,6 +10,8 @@ export class AXFDateInputWidgetPrint extends AXFWidgetPrint {
 
 
     textStyle: string[];
+    displayFormat: string;
+
     constructor(protected cdr: ChangeDetectorRef) {
         super();
     }

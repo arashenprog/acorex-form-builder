@@ -4,13 +4,12 @@ import { AXFWidgetView } from '../../../config/widget';
 @Component({
     selector: 'td',
     templateUrl: './table-cell-widget.view.html',
-    styleUrls: ['./table-cell-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation:ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None
 })
 export class AXFTableCellWidgetView extends AXFWidgetView {
 
-    rIndex:number;
+    rIndex: number;
 
     constructor(
         private el: ElementRef<HTMLTableCellElement>,
@@ -20,11 +19,14 @@ export class AXFTableCellWidgetView extends AXFWidgetView {
 
     onRender() {
         this.applyStyle(this.el.nativeElement);
-        if (this["colspan"]) {
-            this.el.nativeElement.colSpan = this["colspan"];
+        if (this['colspan']) {
+            this.el.nativeElement.colSpan = this['colspan'];
         }
-        if (this["rowspan"]) {
-            this.el.nativeElement.rowSpan = this["rowspan"];
+        if (this['rowspan']) {
+            this.el.nativeElement.rowSpan = this['rowspan'];
+        }
+        if (!this['width']) {
+            this.el.nativeElement.style.width = '100px';
         }
         this.cdr.markForCheck();
     }

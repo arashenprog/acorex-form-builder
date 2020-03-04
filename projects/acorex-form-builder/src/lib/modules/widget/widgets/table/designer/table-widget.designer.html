@@ -1,7 +1,6 @@
-<table  #table class="axf-widget-move-handler">
+<table #table>
     <tbody *ngIf="widgets && widgets.length">
-        <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w"
-            [parent]="this" >
+        <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
         </ng-container>
     </tbody>
 

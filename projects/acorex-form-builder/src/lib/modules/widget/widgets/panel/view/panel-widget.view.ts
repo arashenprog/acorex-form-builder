@@ -1,20 +1,36 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
+import { Subscription } from 'rxjs';
+import { AXFFormatService } from '../../../services/format.service';
 
 @Component({
     selector: '[axf-panel]',
     templateUrl: './panel-widget.view.html',
-    styleUrls: ['./panel-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFPanelWidgetView extends AXFWidgetView {
 
     caption: string;
-    allowCollapse:boolean;
-    collapsed:boolean;
+    allowCollapse: boolean;
+    collapsed: boolean;
+    internalCaption: string;
+    private dataSubscription: Subscription;
 
-    constructor() {
+    constructor(private formatService: AXFFormatService) {
         super();
+        this.dataSubscription = this.dataService.onChange.subscribe((data) => {
+            this.internalCaption = this.formatService.format(this.caption);
+        });
+    }
+
+    ngOnInit() {
+        super.ngOnInit();
+        this.internalCaption = this.formatService.format(this.caption);
+    }
+
+
+    ngOnDestroy() {
+        this.dataSubscription.unsubscribe();
     }
 }
 

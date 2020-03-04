@@ -14,14 +14,17 @@ export class AXFTextAreaWidgetView extends AXFValueWidgetView {
 
     constructor(protected cdr: ChangeDetectorRef) {
         super(cdr);
+        this.dataService.onChange.subscribe(() => {
+            this.refresh();
+        });
     }
 
-    onRender(): void {
-        if(this.value==undefined && this['rIndex'] >= 0 && this['dataContext']!=undefined && 
-        this['dataContext'].hasOwnProperty(this['name']))
-        {
-            this.value=this['dataContext'][this['name']];
-        }
-        this.cdr.markForCheck();
-    }
+    // onRender(): void {
+    //     if(this.value==undefined && this['rIndex'] >= 0 && this['dataContext']!=undefined && 
+    //     this['dataContext'].hasOwnProperty(this['name']))
+    //     {
+    //         this.value=this['dataContext'][this['name']];
+    //     }
+    //     this.cdr.markForCheck();
+    // }
 }

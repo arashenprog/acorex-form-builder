@@ -4,7 +4,6 @@ import { AXFWidgetView } from '../../../config/widget';
 @Component({
     selector: 'tr',
     templateUrl: './table-row-widget.view.html',
-    styleUrls: ['./table-row-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })

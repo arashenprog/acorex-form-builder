@@ -1,5 +1,6 @@
 :host {
     overflow-x: auto;
+    overflow-y: hidden;
 
     table {
         min-width: 100%;
@@ -8,8 +9,7 @@
         width: 100%;
 
         td,th {
-            height: 50px;
-            min-width: 50px;
+            min-height: 50px;
         }
 
     }

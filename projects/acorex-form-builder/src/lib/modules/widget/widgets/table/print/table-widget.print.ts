@@ -4,7 +4,6 @@ import { AXFWidgetPrint } from '../../../config/widget';
 @Component({
     selector: '[axf-table]',
     templateUrl: './table-widget.print.html',
-    styleUrls: ['./table-widget.print.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTableWidgetPrint extends AXFWidgetPrint {
