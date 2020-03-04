@@ -2,26 +2,18 @@ import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorR
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
-    templateUrl: './text-input-widget.print.html', 
-    changeDetection:ChangeDetectionStrategy.OnPush
+    templateUrl: './text-input-widget.print.html',
 })
 export class AXFTextInputWidgetPrint extends AXFWidgetPrint {
 
-    text: String;
-    placeholder:string;
-    textStyle:string[];
-    constructor(protected cdr: ChangeDetectorRef) {
-        super() 
+    placeholder: string;
+    textStyle: string[];
+    constructor(private cdr: ChangeDetectorRef) {
+        super();
     }
 
-    onRender()
-    {
-        if(this.value==undefined && this['dataContext']!=undefined && 
-        this['dataContext'].hasOwnProperty(this['name']))
-        {
-            this.value=this['dataContext'][this['name']];
-        }
-        this.cdr.markForCheck();
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        this.cdr.detectChanges();
     }
-     
 }

@@ -1,16 +1,25 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
-    templateUrl: './dropdown-input-widget.print.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    template: '<span *ngIf="visible">{{text}}</span>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AXFDropdownInputWidgetPrint extends AXFWidgetPrint {
 
     dataSource: AXFDataSourceOption;
-    constructor() {
+    text: string;
+
+    constructor(private cdr: ChangeDetectorRef) {
         super();
     }
 
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        if (this.value) {
+            this.text = this.value[this.dataSource.columns[1]['fieldName']];
+            this.cdr.detectChanges();
+        }
+    }
 }

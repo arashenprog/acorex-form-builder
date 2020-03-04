@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { PromisResult, AXMathUtil, AXHtmlUtil, EventService } from 'acorex-ui';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class AXFConnectService {
 
     private messageQueue: { action: string, reqId: string, callback: Function }[] = [];
 
     constructor(private eventService: EventService) {
-        window.addEventListener("message", this.handMessageEvent.bind(this));
+        window.addEventListener('message', this.handMessageEvent.bind(this));
 
     }
 
 
-    public send(action: string, options?: any): PromisResult<any> {
+    public send(action: string, options?: any): Promise<any> {
         const urlParams = new URLSearchParams(window.location.search);
         const uid = urlParams.get('uid');
-        return new PromisResult((resolve) => {
+        return new Promise((resolve) => {
             let reqId = AXHtmlUtil.getUID();
             window.parent.postMessage({
                 uid: uid,
@@ -27,7 +27,7 @@ export class AXFConnectService {
                 action: action,
                 callback: resolve,
                 reqId: reqId
-            })
+            });
         });
     }
 
@@ -45,8 +45,6 @@ export class AXFConnectService {
     }
 
     ngOnDestroy(): void {
-        window.removeEventListener("message", this.handMessageEvent);
+        window.removeEventListener('message', this.handMessageEvent);
     }
-
-
 }
