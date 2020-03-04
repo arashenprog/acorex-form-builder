@@ -12,5 +12,5 @@
         </ng-container>
     </tbody>
 </table>
-<button type="button" class="btn btn-sm btn-primary" (click)="addItemClick()" *ngIf="dataSource.mode=='manual'">Add
+<button type="button" class="btn btn-sm btn-primary" (click)="addItemClick()" *ngIf="dataSource.mode=='manual' && allowAdd">Add
     Item</button>

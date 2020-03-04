@@ -61,6 +61,20 @@ export class AXFRepeaterlWidgetModule {
                 AXF_BOX_STYLE_PROPERTY, 
                 AXF_NAME_PROPERTY, 
                 AXF_VALUE_CHANGE_EVENT,
+                {
+                    name: 'allowAdd',
+                    category: 'General',
+                    defaultValue: false,
+                    title: 'Allow Add Item',
+                    editor: 'CheckboxEditor',
+                    options: { label: 'Allow Add Item' },
+                    visible: (options: any) => {
+                        if(options.dataSource && options.dataSource.mode == "manual")
+                            return true;
+                        else
+                            return false;
+                    }
+                }
             ]
         })
     }

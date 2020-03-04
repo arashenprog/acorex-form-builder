@@ -16,7 +16,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     headerRows: WidgetConfig[];
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
-
+    allowAdd:boolean;
 
     constructor(
         protected cdr: ChangeDetectorRef) {
