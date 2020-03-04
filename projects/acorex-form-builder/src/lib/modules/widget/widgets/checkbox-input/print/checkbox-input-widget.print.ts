@@ -8,7 +8,7 @@ import { AXFWidgetPrint } from '../../../config/widget';
 export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
 
     label: string;
-    size: number = 25;
+    size: number = 20;
 
 
     constructor(protected cdr: ChangeDetectorRef) {
