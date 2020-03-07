@@ -18,6 +18,8 @@ export class AXFDateInputWidgetPrint extends AXFWidgetPrint {
 
     ngAfterViewInit() {
         super.ngAfterViewInit();
+        if(!this.value)
+            this.value=new Date();
         this.cdr.detectChanges();
     }
     
