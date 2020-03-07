@@ -10,7 +10,7 @@ import { AXFWidgetPickerService } from '../../../services/template/picker.servic
     styleUrls: ['./page-widget.designer.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: "axf-drop-zone"
+        class: 'axf-drop-zone'
     }
 })
 export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
@@ -25,19 +25,19 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         return this._showHeader;
     }
     public set showHeader(v: boolean) {
-        
+
         if (v != this._showHeader) {
             if (v) {
-                if (!this.widgets.some(w => w.name == "page-header")) {
-                    let header = this.widgetService.resolve("page-header");
+                if (!this.widgets.some(w => w.name == 'page-header')) {
+                    const header = this.widgetService.resolve('page-header');
                     this.widgets.splice(0, 0, header);
                 }
-            }
-            else {
-                
-                let headerindex = this.widgets.findIndex(w => w.name == "page-header");
-                if (headerindex > -1)
+            } else {
+
+                const headerindex = this.widgets.findIndex(w => w.name === 'page-header');
+                if (headerindex > -1) {
                     this.widgets.splice(headerindex, 1);
+                }
             }
             this._showHeader = v;
         }
@@ -49,19 +49,17 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         return this._showFooter;
     }
     public set showFooter(v: boolean) {
-        
-        if (v != this._showFooter) {
+        if (v !== this._showFooter) {
             if (v) {
-                if (!this.widgets.some(w => w.name == "page-footer")) {
-                    let footer = this.widgetService.resolve("page-footer");
+                if (!this.widgets.some(w => w.name == 'page-footer')) {
+                    const footer = this.widgetService.resolve('page-footer');
                     this.widgets.push(footer);
                 }
-            }
-            else {
-                
-                let footerIndex = this.widgets.findIndex(w => w.name == "page-footer");
-                if (footerIndex > -1)
+            } else {
+                const footerIndex = this.widgets.findIndex(w => w.name == 'page-footer');
+                if (footerIndex > -1) {
                     this.widgets.splice(footerIndex, 1);
+                }
             }
             this._showFooter = v;
         }
@@ -73,9 +71,9 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         private cdr: ChangeDetectorRef,
         private hostElement: ElementRef) {
         super();
-        eventService.on("SELECT", c => {
+        eventService.on('SELECT', c => {
             if (c == null) {
-                eventService.broadcast("SELECT", this);
+                eventService.broadcast('SELECT', this);
             }
         });
     }
@@ -92,16 +90,16 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
 
 
     onRender(): void {
-        let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
-        el.classList.remove("rtl", "ltr");
+        const el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
+        el.classList.remove('rtl', 'ltr');
         el.classList.add(this.pageDirection);
-        el.style.setProperty("--primary-color", this.themeColor);
+        el.style.setProperty('--primary-color', this.themeColor);
         this.applyStyle(el);
         this.cdr.markForCheck();
     }
 
     onContextMenu(items: AXFContextMenuItem[]): AXFContextMenuItem[] {
-        items = items.filter(c => c.action != "copy" && c.action != "delete");
+        items = items.filter(c => c.action !== 'copy' && c.action !== 'delete');
         return items;
     }
 
