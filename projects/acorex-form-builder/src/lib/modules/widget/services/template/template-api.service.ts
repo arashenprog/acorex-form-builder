@@ -68,8 +68,11 @@ export class AXFAPITemplateService extends AXFTemplateService {
     }
 
     public get(id: string): PromisResult<AXFTemplateModel> {
-        if (this.cacheList.some(c => c.id == id && c.template)) {
-            return PromisResult.resolve(this.cacheList.find(c => c.id == id && c.template));
+        if (this.cacheList.some(c => c.id === id && c.template)) {
+            const tpl = this.cacheList.find(c => c.id === id && c.template);
+            // clone
+            const clone = JSON.parse(JSON.stringify(tpl));
+            return PromisResult.resolve(clone);
         }
         const w: AXFTemplateModel = {
             id,

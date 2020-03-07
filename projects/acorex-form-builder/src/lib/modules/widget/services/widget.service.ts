@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AXPopupService, EventService, AXHtmlUtil, AXToastService } from 'acorex-ui';
+import { AXFConnectService } from './connect.service';
 
 
 export interface AXFWidgetProperty {
@@ -46,7 +47,7 @@ export class AXFWidgetService {
 
     static WIDGET_ITEMS: WidgetConfig[] = [];
 
-    constructor(private toastService: AXToastService) {
+    constructor(private toastService: AXToastService, private connectService: AXFConnectService) {
 
     }
 
@@ -79,11 +80,9 @@ export class AXFWidgetService {
             properties: []
         }
         if (c.properties)
-            //res.properties = JSON.parse(JSON.stringify(c.properties));
             res.properties = this.deepCopy(c.properties);
         if (c.options)
             res.options = JSON.parse(JSON.stringify(c.options));
-        //res.options = this.deepCopy(c.options);
         else
             res.options = {};
         res.options.uid = AXHtmlUtil.getUID();
@@ -132,7 +131,6 @@ export class AXFWidgetService {
         if (item.properties) {
             item.properties.forEach(p => {
                 if (item.options[p.name] && item.options[p.name].clone) {
-
                     obj.options[p.name] = item.options[p.name].clone();
                 } else {
                     obj.options[p.name] = item.options[p.name];
@@ -183,8 +181,18 @@ export class AXFWidgetService {
                 item.options.widgets.push(this.parseInternal(w));
             });
         }
-
         return item;
     }
 
+
+    readPropsFromHost(name: string, tag: string): Promise<any> {
+        return new Promise<any>((resolve) => {
+            this.connectService.send('readProps', {
+                name,
+                tag
+            }).then(c => {
+                resolve(c);
+            });
+        });
+    }
 }

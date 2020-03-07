@@ -15,7 +15,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     allowSearch: boolean;
     dataSource: AXFDataSourceOption;
     isLoading = true;
-
+    
     selectedItems: any = [];
 
     constructor(protected cdr: ChangeDetectorRef) {
@@ -64,7 +64,6 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     }
 
     onOpen() {
-        debugger;
         if (this.dataSource.mode === 'remote') {
             if (this.dataSource.dataItems == null || this.dataSource.dataItems.length === 0) {
                 this.dataSource.dataSource.params.forEach(p => {

@@ -51,7 +51,7 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
     }
 
     onCheckValueChange(val) {
-        if (this.readOnly) {
+        if (this.readonly) {
             return;
         }
 
