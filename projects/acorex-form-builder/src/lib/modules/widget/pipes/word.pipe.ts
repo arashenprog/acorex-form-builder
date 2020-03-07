@@ -9,7 +9,7 @@ export class AXFWordPipe implements PipeTransform {
     }
 
     transform(value: string): string {
-        debugger;
+   
         return this.formatService.format(value);
     }
 }

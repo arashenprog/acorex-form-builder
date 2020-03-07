@@ -25,6 +25,14 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     onRender(): void {
         if (this.el)
             this.applyStyle(this.el.nativeElement);
+        if (this.value==undefined && this.value==null && this.dataSource.mode =='manual')
+        {
+            this.value=[]; 
+            {
+                this.value.push(this.dataSource.dataItems[0][this.dataSource.columns[0].fieldName]);
+                this.cdr.markForCheck();
+            }
+        }    
     }
 
     ngAfterViewInit() {
@@ -32,12 +40,21 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     }
 
     refresh() {
+        
         if (this.dataSource.mode == "remote") {
             this.dataService.getList(
                 this.dataSource.dataSource.name,
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
+                if (this.value==undefined && this.value==null)
+                {
+                    this.value=[]; 
+                    {
+                        this.value.push(this.dataSource.dataItems[0][this.dataSource.columns[0].fieldName]);
+                        this.cdr.markForCheck();
+                    }
+                }  
                 this.cdr.markForCheck();
             })
         }

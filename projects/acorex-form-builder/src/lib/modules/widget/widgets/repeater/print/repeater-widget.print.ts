@@ -28,11 +28,15 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
             this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
         this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
-        this.bodyRows = this.allItems().map(c => {
-            const cloned = this.widgetService.clone(this.rowTemplate);
-            cloned.dataContext = c;
-            return cloned;
-        });
+        if (this.allItems().length === 0) {
+            this.bodyRows = [this.widgetService.clone(this.rowTemplate)];
+        } else {
+            this.bodyRows = this.allItems().map(c => {
+                const cloned = this.widgetService.clone(this.rowTemplate);
+                cloned.dataContext = c;
+                return cloned;
+            });
+        } 
         this.cdr.markForCheck();
     }
 

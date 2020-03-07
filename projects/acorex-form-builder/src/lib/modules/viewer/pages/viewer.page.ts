@@ -50,8 +50,7 @@ export class ACFViewerPage extends AXBasePageComponent {
   ) {
     super();
     this.mode = this.router.snapshot.queryParams.mode;
-    //
-    debugger;
+    // 
     this.loadingSubscription = templateService.loadingEvent()
       .pipe(debounceTime(500))
       .pipe(distinctUntilChanged())
@@ -68,8 +67,7 @@ export class ACFViewerPage extends AXBasePageComponent {
       });
     //
     eventService.on('__submit', (data) => {
-      this.dataService.validate().then(() => {
-        debugger;
+      this.dataService.validate().then(() => { 
         this.printRendering = true;
         this.isBusy = true;
         setTimeout(() => {
