@@ -51,15 +51,12 @@ export class ACFViewerPage extends AXBasePageComponent {
     super();
     this.mode = this.router.snapshot.queryParams.mode;
     //
-    debugger;
     this.loadingSubscription = templateService.loadingEvent()
       .pipe(debounceTime(500))
       .pipe(distinctUntilChanged())
       .subscribe(c => {
-        //debugger;
         this.isBusy = c;
         // if (this.printRendering && c) {
-        //   debugger;
         //   // const html = 'test';
         //   // this.dataService.submit(html).then(() => {
 
@@ -69,7 +66,6 @@ export class ACFViewerPage extends AXBasePageComponent {
     //
     eventService.on('__submit', (data) => {
       this.dataService.validate().then(() => {
-        debugger;
         this.printRendering = true;
         this.isBusy = true;
         setTimeout(() => {
