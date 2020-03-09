@@ -9,6 +9,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico&display=swap" rel="stylesheet">
+  <script>
+    with(document.documentElement.style)
+    {
+      setProperty('--primary-color', '#2196f3');
+      setProperty('--primary-light-color', '#51adf6');
+      setProperty('--primary-dark-color', '#0c7cd5');
+      setProperty('--primary-trans-color', '#2196f3');
+      setProperty('--primary-lighter-color', '#2196f3');
+    }
+        
+  </script>
   <style>
     .pre-bootstrap {
       position: absolute;
@@ -19,7 +30,7 @@
     .pre-bootstrap-spinner {
       width: 60px;
       height: 60px;
-      background-color: #4e1693;
+      background-color: var(--primary-color);
       -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
       animation: sk-rotateplane 1.2s infinite ease-in-out;
     }
@@ -57,7 +68,7 @@
   </style>
 </head>
 
-<body>
+<body >
   <app-root>
     <div class="pre-bootstrap">
       <div class="pre-bootstrap-spinner"></div>

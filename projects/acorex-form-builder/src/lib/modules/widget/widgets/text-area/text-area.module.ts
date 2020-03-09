@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_NAME_PROPERTY, AXF_PLACEHOLDER_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_TEXT_STYLE_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_PLACEHOLDER_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_TEXT_STYLE_PROPERTY, AXF_TAG_PROPERTY } from '../../config/general-properties';
 import { AXFTextAreaWidgetDesigner } from './designer/text-area-widget.designer';
 import { AXFTextAreaWidgetPrint } from './print/text-area-widget.print';
 import { AXFTextAreaWidgetView } from './view/text-area-widget.view';
@@ -52,6 +52,7 @@ export class AXFTextAreaWidgetModule {
                 AXF_TEXT_STYLE_PROPERTY,
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
+                AXF_TAG_PROPERTY,
             ]
         })
     }
