@@ -14,6 +14,7 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
     mode: string;
     direction: string;
     alignCheck: string;
+    alignCheckNew:string;
     viewType: string;
     columns: number;
     constructor(protected cdr: ChangeDetectorRef) {

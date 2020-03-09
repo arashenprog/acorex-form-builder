@@ -1,4 +1,4 @@
-<div #el [ngClass]="direction" class="allItems" *ngIf="visible">
+<!-- <div #el [ngClass]="direction" class="allItems" *ngIf="visible">
     <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0" class="noitem">No Item</div>
     <ng-container *ngIf="dataSource">
         <label class="radio-container" *ngFor="let item of dataSource.dataItems" [ngClass]="alignCheck"
@@ -12,6 +12,29 @@
             <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'" [ngClass]="{multiple: mode=='multiple'}"
             (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"></span>
         </label>
+    </ng-container>
+</div> -->
+<div #el class="second" [ngClass]="direction">
+    <ng-container *ngIf="dataSource">
+        <div class="rep" *ngFor="let item of dataSource.dataItems"
+            [ngStyle]="{'width':columns==1?'inherit':(100.0/columns)+'%'}">
+            <div class="groupObj" [ngClass]="viewType=='both'? alignCheckNew:alignCheck">
+                <div class="contSpan" *ngIf="viewType!='image' && dataSource.columns[1].type=='string'">
+                    <span (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                    >{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div class="contRadio" *ngIf="mode!='unselectable'">
+                    <input type="radio" [value]="item[dataSource.columns[0].fieldName]" 
+                    [ngClass]="(value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checked' : null" />
+                    <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'"
+                     (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"></span>
+                </div>
+                <div class="contImage"
+                    *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'">
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+            </div>
+        </div>
     </ng-container>
 </div>
  
