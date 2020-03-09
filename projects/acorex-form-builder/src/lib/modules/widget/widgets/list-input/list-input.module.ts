@@ -36,7 +36,8 @@ export class AXFListInputWidgetModule {
                 direction: "horizontal",
                 alignCheck: "left",
                 viewType: "text",
-                printMode:"allItems"
+                printMode:"allItems",
+                alignCheckNew:"ItopCleftSright"
             },
             properties: [
                 {
@@ -73,21 +74,6 @@ export class AXFListInputWidgetModule {
                     }
                 },
                 {
-                    name: "alignCheck",
-                    category: "General",
-                    title: "CheckBox/RadioButton Align",
-                    editor: "SelectionEditor",
-                    visible: (options: any) => {
-                        return options.mode != "unselectable";
-                    },
-                    options: {
-                        items: [{ value: "left", title: "Left" }, { value: "top", title: "Top" },
-                        { value: "right", title: "Right" }, { value: "bottom", title: "Bottom" }],
-                        mode: "single",
-                        direction: "horizontal"
-                    }
-                },
-                {
                     name: "viewType",
                     category: "General",
                     title: "View Type",
@@ -98,6 +84,48 @@ export class AXFListInputWidgetModule {
                         direction: "horizontal",
                     }
                 },
+                {
+                    name: "alignCheck",
+                    category: "General",
+                    title: "CheckBox/RadioButton Align",
+                    editor: "SelectionEditor",
+                    visible: (options: any) => {
+                        return options.mode != "unselectable" && options.viewType != "both";
+                    },
+                    options: {
+                        items: [{ value: "left", title: "Left" }, { value: "top", title: "Top" },
+                        { value: "right", title: "Right" }, { value: "bottom", title: "Bottom" }],
+                        mode: "single",
+                        direction: "horizontal"
+                    }
+                },
+                {
+                    name: "alignCheckNew",
+                    category: "General",
+                    title: "Alignment",
+                    editor: "SelectionEditor",
+                    visible: (options: any) => {
+                        return options.mode != "unselectable" && options.viewType == "both";
+                    },
+                    options: {
+                        items: [
+                            { value: "ItopCleftSright", title: "Image:top-CheckBox:left-Title:right" },  
+                            { value: "ItopCrightSleft", title: "Image:top-CheckBox:right-Title:left" }, 
+                            { value: "IbottomCleftSright", title: "Image:bottom-CheckBox:left-Title:right" }, 
+                            { value: "IbottomCrightSleft", title: "Image:bottom-CheckBox:right-Title:left" },
+                            { value: "StopImiddleCbottom", title: "Image:middle-CheckBox:bottom-Title:top" }, 
+                            { value: "ItopSmiddleCbottom", title: "Image:top-CheckBox:bottom-Title:middle" },
+                            { value: "CtopSmiddleIbottom", title: "Image:bottom-CheckBox:top-Title:middle" }, 
+                            { value: "CtopImiddleSbottom", title: "Image:middle-CheckBox:top-Title:bottom" } 
+                            // ,{ value: "StopCleftIright", title: "StopCleftIright" }, 
+                            // { value: "StopCrightIleft", title: "StopCrightIleft" },
+                            // { value: "CleftIrightSbottom", title: "CleftIrightSbottom" }, 
+                            // { value: "CrightIleftSbottom", title: "CrightIleftSbottom" }                        
+                        ],
+                        mode: "single",
+                        direction: "vertical"
+                    }
+                }, 
                 {
                     name: "printMode",
                     category: "General",
