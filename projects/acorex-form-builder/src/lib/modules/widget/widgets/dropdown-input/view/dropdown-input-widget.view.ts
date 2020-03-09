@@ -15,7 +15,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     allowSearch: boolean;
     dataSource: AXFDataSourceOption;
     isLoading = true;
-
+    
     selectedItems: any = [];
 
     constructor(protected cdr: ChangeDetectorRef) {

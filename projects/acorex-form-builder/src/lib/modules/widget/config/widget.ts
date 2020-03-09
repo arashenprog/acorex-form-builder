@@ -307,6 +307,11 @@ export abstract class AXFWidgetView extends AXFWidget {
     }
 
 
+    get uniqueName(): string {
+        return this.getPath();
+    }
+
+
     protected invokeEvent(name: string) {
         if (this[name]) {
             const action: string = this[name];
@@ -366,6 +371,7 @@ export abstract class AXFWidgetView extends AXFWidget {
         this.dataService = WidgetInjector.instance.get(AXFDataService);
     }
 
+
     ngAfterViewInit() {
         this.register();
     }
@@ -380,7 +386,7 @@ export abstract class AXFWidgetView extends AXFWidget {
 
 export abstract class AXFValueWidgetView extends AXFWidgetView {
 
-    readOnly: boolean;
+    readonly: boolean;
 
     constructor(protected cdr: ChangeDetectorRef) {
         super();

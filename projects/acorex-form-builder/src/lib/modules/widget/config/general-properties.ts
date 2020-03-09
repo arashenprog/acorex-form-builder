@@ -110,6 +110,16 @@ export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
     order: 11,
     editor: 'TextEditor'
 };
+
+export const AXF_TAG_PROPERTY: AXFWidgetProperty = {
+    name: 'tag',
+    category: 'Binding',
+    defaultValue: '',
+    title: 'Tag',
+    order: 12,
+    editor: 'TextEditor'
+};
+
 export const AXF_VALIDATION_PROPERTY: AXFWidgetProperty = {
     name: 'validator',
     category: 'Binding',
@@ -137,10 +147,10 @@ export const AXF_ENABLED_PROPERTY: AXFWidgetProperty = {
     editor: 'CheckboxEditor'
 };
 export const AXF_READONLY_PROPERTY: AXFWidgetProperty = {
-    name: 'visible',
+    name: 'readonly',
     category: 'General',
     defaultValue: false,
-    title: 'Visible',
+    title: 'ReadOnly',
     order: 83,
     editor: 'CheckboxEditor'
 };

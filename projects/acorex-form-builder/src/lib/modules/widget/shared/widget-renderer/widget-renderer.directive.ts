@@ -1,5 +1,5 @@
 import { Directive, ViewContainerRef, ComponentFactoryResolver, Input, Output, EventEmitter, NgZone } from '@angular/core';
-import { WidgetConfig } from '../../services/widget.service';
+import { WidgetConfig, AXFWidgetService } from '../../services/widget.service';
 import { AXFWidget, AXFWidgetDesigner, AXFContextMenuItem } from '../../config/widget';
 import { AXHtmlUtil, EventService, AXPoint } from 'acorex-ui';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -41,7 +41,8 @@ export class AXFWidgetRendererDirective {
         private target: ViewContainerRef,
         private zone: NgZone,
         private componentFactoryResolver: ComponentFactoryResolver,
-        private eventService: EventService
+        private eventService: EventService,
+        private widgetService: AXFWidgetService
     ) {
         this.eventService.on('SELECT', v => {
             this.zone.runOutsideAngular(() => {
@@ -106,6 +107,12 @@ export class AXFWidgetRendererDirective {
         //
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
+        if (this.mode === 'view' && (this.widgetInstance['name'] || this.widgetInstance['tag'])) {
+            this.widgetService.readPropsFromHost(this.widgetInstance['name'], this.widgetInstance['tag']).then(props => {
+                Object.assign(this.widgetInstance, props);
+                this.widgetInstance.refresh();
+            });
+        }
 
         if (this.mode === 'designer') {
             this.widgetInstance.onSelect.subscribe(c => {
