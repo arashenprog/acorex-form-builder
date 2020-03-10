@@ -162,12 +162,12 @@
           width: 22px;
           box-sizing: unset !important;
           input {
-            position: fixed;
+            position: absolute;
             opacity: 0;
             cursor: pointer;
           }
           .checkmark {
-            position: fixed;
+            position: absolute;
             margin-top: 2px;
             height: 20px;
             width: 20px;
