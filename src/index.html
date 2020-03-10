@@ -5,20 +5,22 @@
   <meta charset="utf-8" />
   <title>ACoreX Form Builder</title>
   <base href="/" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico&display=swap" rel="stylesheet">
   <script>
-    with(document.documentElement.style)
-    {
-      setProperty('--primary-color', '#2196f3');
-      setProperty('--primary-light-color', '#51adf6');
-      setProperty('--primary-dark-color', '#0c7cd5');
-      setProperty('--primary-trans-color', '#2196f3');
-      setProperty('--primary-lighter-color', '#2196f3');
-    }
-        
+    window.addEventListener('message', event => {
+      if (event.data.theme) {
+        with(document.documentElement.style)
+        {
+          setProperty('--primary-color',event.data.theme.primaryColor,'important');
+          setProperty('--primary-light-color',event.data.theme.primaryLightColor,'important');
+          setProperty('--primary-dark-color',event.data.theme.primaryDarkColor,'important');
+          setProperty('--primary-trans-color',event.data.theme.primaryTransColor,'important');
+          setProperty('--primary-lighter-color',event.data.theme.primaryLighetrColor,'important');
+        }
+      };
+    });
   </script>
   <style>
     .pre-bootstrap {
@@ -68,7 +70,7 @@
   </style>
 </head>
 
-<body >
+<body>
   <app-root>
     <div class="pre-bootstrap">
       <div class="pre-bootstrap-spinner"></div>
