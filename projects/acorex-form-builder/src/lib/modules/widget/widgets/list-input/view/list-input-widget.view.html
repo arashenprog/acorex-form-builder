@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div *ngSwitchCase="'right'" style="padding: 6px 2px;position: relative;">
-                <div style="float: left;">
+                <div style="width: 100%;float: right;padding-right: 25px;text-align: left;">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | safeUrl"
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'"
