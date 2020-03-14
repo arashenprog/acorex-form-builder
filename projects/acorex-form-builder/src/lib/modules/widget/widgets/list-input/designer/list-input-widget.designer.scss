@@ -102,7 +102,7 @@
 //       }
 // }
  
-.second{
+.alFirst{ 
   display: inline-block ;
   padding-left: 2px;
 
@@ -322,17 +322,36 @@
           } 
       }
 
-      &.right{
-        position: relative;
-        .contRadio{
-          position: absolute;
-          right: 2px; 
-        }
-      }
+    //  &.right{
+    //   .contSpan{
+    //     min-width: 80;;
+    //   }
+       // position: relative;
+        //.contRadio{
+          //position: absolute;
+          //right: 2px; 
+        //}
+      // }
 
       }
 
     }
 
   
+  } 
+
+  .allItem{
+    display: inline-block;  
+    width: 100%;
+    .rep{
+      min-width: max-content; 
+      .spanCheck{
+        position: absolute; 
+                    height: 20px;
+                    width: 20px;
+                    background-color: var(--white-color);
+                    border: 1px solid;
+                    border-color: var(--black-color);
+      }
+    }
   }

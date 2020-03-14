@@ -1,40 +1,4 @@
-<!-- <div #el [hidden]="visible==false" [ngStyle]="{'display': direction=='vertical'?'grid':null}">
-    <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0"
-        style="height: 27px; border: 1px solid var(--primary-color); font-weight: 700;width: 100%;">No Item</div>
-
-    <span *ngIf="dataSource && printMode=='onlySelected'"
-        style="display: block;height: 36px;border-radius:4px;border:1px solid var(--border-color); padding: 5px 0px 0px 5px;">{{dataSource.dataItems.length>0? dataSource.dataItems[0][dataSource.columns[1]["fieldName"]] : 'Item Selected'}}</span>
-
-    <ng-container *ngIf="dataSource && printMode=='allItems'">
-        <label *ngFor="let item of dataSource.dataItems; let i=index;" style="display:inline-flex; position: relative; cursor: pointer; font-size: 14px; line-height:30px; 
-        user-select: none;" [ngStyle]="{'padding':alignCheck=='left'? '0px 10px 0px 17px' : (alignCheck=='top'? '2px 8px' : (alignCheck=='bottom'? '0px 8px 28px 8px' : '0px 30px 0px 0px')),
-        'width':columns==1?'inherit':(100.0/columns)+'%'}">
-            <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'"
-                [ngStyle]="{'padding-left':alignCheck=='left'?'5px': (alignCheck=='right'?'2px': null),
-                       'padding-right':alignCheck=='right'?'4px': null,
-                       'padding-top':alignCheck=='top'?'15px': null,
-                       'display':alignCheck=='top'?'inline-block': null}">{{item[dataSource.columns[1].fieldName]}}</span>
-
-            <img *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'"
-                [src]="item[dataSource.columns[2].fieldName]" height="40" width="60" [ngStyle]="{'margin-left':alignCheck=='left'?'3px':null,
-                'padding-top':alignCheck=='top'?'15px':null,
-                'display':alignCheck=='top'?'inline-block':null}">
-
-            <input type="radio" [value]="item[dataSource.columns[0].fieldName]" *ngIf="mode!='unselectable'"
-                style="position: absolute;opacity: 0;cursor: pointer;" />
-
-            <span *ngIf="mode!='unselectable'"
-                style="padding: 2px;position: absolute;height: 20px; width: 20px; background-color: var(--white-color); border: 1px solid;border-color: var(--black-color);    box-sizing: border-box;"
-                [ngStyle]="{'top':(alignCheck=='left' || alignCheck=='right')?'5px':null,
-                       'left':alignCheck=='left'?'0px':(alignCheck=='top'?'5px': null),
-                       'right': alignCheck=='right'?'10px':null,
-                       'display':alignCheck=='bottom'?'flex':null,
-                       'border-radius': mode=='single' ? '100%' : '0'}"> 
-            </span>
-        </label>
-    </ng-container>
-</div> -->
-<div #el [hidden]="visible==false" style="padding-left: 5px;display: inline-block;width: 100%;">
+<!-- <div #el [hidden]="visible==false" style="padding-left: 5px;display: inline-block;width: 100%;">
     <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0"
         style="height: 27px; border: 1px solid var(--primary-color); font-weight: 700;width: 100%;">No Item</div>
 
@@ -69,9 +33,230 @@
                        'border-radius': mode=='single' ? '100%' : '0',
                        'padding': (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? '4px' : '2px',
                        'background-clip': (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'content-box' : 'unset',
-                       'background-color': (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'var(--primary-color)' : 'white'
+                       'background-color': (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'black' : 'white'
                     }">
             </span>    
         </label>
     </ng-container>
+</div> -->
+
+<div style="display: inline-block;width: 100%;">
+    <div *ngFor="let item of dataSource.dataItems"
+        [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?'left':'unset'}"
+        style="min-width: max-content;">
+        <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
+            <div *ngSwitchCase="'left'" style="padding: 6px 2px;">
+                <span *ngIf="mode!='unselectable'" style="position: absolute; 
+                    height: 20px;
+                    width: 20px;
+                    background-color: var(--white-color);
+                    border: 1px solid;
+                    border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>
+                </span>
+                <img style="margin-left: 22px;" *ngIf="viewType=='image'"
+                    [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                <span style="margin-left: 22px;"
+                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+            </div>
+            <div *ngSwitchCase="'top'" style="padding: 6px 2px;">
+                <div style="padding-bottom: 22px;">
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; 
+                    height: 20px;
+                    width: 20px;
+                    background-color: var(--white-color);
+                    border: 1px solid;
+                    border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i> 
+                    </span>
+                </div>
+                <div>
+                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | safeUrl"
+                        height="80px" width="60px">
+                    <span *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+            </div>
+            <div *ngSwitchCase="'bottom'" style="padding: 6px 2px;">
+                <div>
+                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | safeUrl"
+                        height="80px" width="60px">
+                    <span *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div style="padding-bottom: 22px;">
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; 
+                    height: 20px;
+                    width: 20px;
+                    background-color: var(--white-color);
+                    border: 1px solid;
+                    border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>  
+                </span>
+                </div>
+            </div>
+            <div *ngSwitchCase="'right'" style="padding: 6px 2px;position: relative;">
+                <div style="float: left;">
+                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | safeUrl"
+                        height="80px" width="60px">
+                    <span *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div style="position: absolute;right: 25px;">
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
+                    width: 20px; background-color: var(--white-color); border: 1px solid; border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>  
+                    </span>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="viewType=='both'" [ngSwitch]="alignCheckNew">
+            <div *ngSwitchCase="'ItopCleftSright'">
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+                <div>
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
+                    width: 20px; background-color: var(--white-color); border: 1px solid; border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>
+                    </span>
+                    <span style="margin-left: 22px;">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+            </div>
+            <div *ngSwitchCase="'ItopCrightSleft'">
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+                <div>
+                    <span style="margin-right: 5px;">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
+                    width: 20px; background-color: var(--white-color); border: 1px solid; border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>
+                    </span>
+                </div>
+            </div>
+            <div *ngSwitchCase="'IbottomCleftSright'">
+                <div>
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
+                    width: 20px; background-color: var(--white-color); border: 1px solid; border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>
+                    </span>
+                    <span style="margin-left: 22px;">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+            </div>
+            <div *ngSwitchCase="'IbottomCrightSleft'">
+                <div>
+                    <span style="margin-right: 5px;">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
+                    width: 20px; background-color: var(--white-color); border: 1px solid; border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>
+                    </span>
+                </div>
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+            </div>
+            <div *ngSwitchCase="'StopImiddleCbottom'">
+                <div><span>{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+                <div>
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
+                    width: 20px; background-color: var(--white-color); border: 1px solid; border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>
+                    </span>
+                </div>
+            </div>
+            <div *ngSwitchCase="'ItopSmiddleCbottom'">
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+                <div><span>{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div>
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
+                    width: 20px; background-color: var(--white-color); border: 1px solid; border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>
+                    </span>
+                </div>
+            </div>
+
+            <div *ngSwitchCase="'CtopSmiddleIbottom'">
+                <div style="padding-bottom: 22px;">
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
+                    width: 20px; background-color: var(--white-color); border: 1px solid; border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>
+                    </span>
+                </div>
+                <div><span >{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+            </div>
+            <div *ngSwitchCase="'CtopImiddleSbottom'">
+                <div style="padding-bottom: 22px;">
+                    <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
+                    width: 20px; background-color: var(--white-color); border: 1px solid; border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-weight: bold;">&#x2713;</i>   
+                    <i *ngIf="mode=='single' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>
+                    </span>
+                </div>
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+                <div><span >{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+            </div>
+        </ng-container>
+    </div>
 </div>

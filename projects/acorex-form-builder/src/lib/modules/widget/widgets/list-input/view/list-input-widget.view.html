@@ -14,20 +14,20 @@
         </label>
     </ng-container>
 </div> -->
-<div #el class="second" [ngClass]="direction">
+<!-- <div #el class="alFirst" [ngClass]="direction">
     <ng-container *ngIf="dataSource">
         <div class="rep" *ngFor="let item of dataSource.dataItems"
             [ngStyle]="{'width':columns==1?'inherit':(100.0/columns)+'%'}">
             <div class="groupObj" [ngClass]="viewType=='both'? alignCheckNew:alignCheck">
                 <div class="contSpan" *ngIf="viewType!='image' && dataSource.columns[1].type=='string'">
-                    <span (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
-                    >{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div class="contRadio" *ngIf="mode!='unselectable'">
-                    <input type="radio" [value]="item[dataSource.columns[0].fieldName]" 
-                    [ngClass]="(value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checked' : null" />
+                    <input type="radio" [value]="item[dataSource.columns[0].fieldName]"
+                        [ngClass]="(value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checked' : null" />
                     <span class="checkmark" [ngStyle]="getStyles(mode)" *ngIf="mode!='unselectable'"
-                     (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"></span>
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"></span>
                 </div>
                 <div class="contImage"
                     *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'">
@@ -36,5 +36,200 @@
             </div>
         </div>
     </ng-container>
+</div> -->
+<div #el class="allItem">
+    <div class="rep" *ngFor="let item of dataSource.dataItems"
+        [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?'left':'unset'}">
+        <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
+            <div *ngSwitchCase="'left'" style="padding: 6px 2px;">
+                <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                    [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                    <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                </span>
+                <img style="margin-left: 22px;" *ngIf="viewType=='image'"
+                    [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                <span style="margin-left: 22px;" (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+            </div>
+            <div *ngSwitchCase="'top'" style="padding: 6px 2px;">
+                <div style="padding-bottom: 22px;">
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div>
+                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | safeUrl"
+                        height="80px" width="60px">
+                    <span *ngIf="viewType=='text'"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+            </div>
+            <div *ngSwitchCase="'bottom'" style="padding: 6px 2px;">
+                <div>
+                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | safeUrl"
+                        height="80px" width="60px">
+                    <span *ngIf="viewType=='text'"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div style="padding-bottom: 22px;">
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+            <div *ngSwitchCase="'right'" style="padding: 6px 2px;position: relative;">
+                <div style="float: left;">
+                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | safeUrl"
+                        height="80px" width="60px">
+                    <span *ngIf="viewType=='text'"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div style="position: absolute;right: 25px;">
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="viewType=='both'" [ngSwitch]="alignCheckNew">
+            <div *ngSwitchCase="'ItopCleftSright'">
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+                <div>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span style="margin-left: 22px;"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">
+                        {{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+            </div>
+            <div *ngSwitchCase="'ItopCrightSleft'">
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+                <div>
+                    <span style="margin-right: 5px;"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">
+                        {{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+            <div *ngSwitchCase="'IbottomCleftSright'">
+                <div>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <span style="margin-left: 22px;"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+            </div>
+            <div *ngSwitchCase="'IbottomCrightSleft'">
+                <div>
+                    <span style="margin-right: 5px;"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+            </div>
+            <div *ngSwitchCase="'StopImiddleCbottom'">
+                <div><span
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+                <div>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+            <div *ngSwitchCase="'ItopSmiddleCbottom'">
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+                <div><span
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div *ngSwitchCase="'CtopSmiddleIbottom'">
+                <div style="padding-bottom: 22px;">
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div><span
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+            </div>
+            <div *ngSwitchCase="'CtopImiddleSbottom'">
+                <div style="padding-bottom: 22px;">
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                        [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                            style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div>
+                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                </div>
+                <div><span
+                        (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                </div>
+            </div>
+        </ng-container>
+    </div>
 </div>
- 
