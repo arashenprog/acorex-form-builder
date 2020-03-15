@@ -12,7 +12,7 @@ export class AXFDataItemPipe implements PipeTransform {
         const field = this.formatService.decompose(fieldName);
         if (field.word) {
             let val = dataItem[field.word];
-            return this.formatService.format(`[${val} | ${field.formetters.join('|')}]`, false);
+            return this.formatService.format(`[${val} | ${field.formetters.join('|')}]`);
         }
         return fieldName;
     }

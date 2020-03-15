@@ -355,7 +355,7 @@ export abstract class AXFWidgetView extends AXFWidget {
 
 
 
-    protected resolveProperty(name: string): any {
+    public  resolveProperty(name: string): any {
         if (this.getPath()) {
             return this.getPath().replace(this.config.options.name, name);
         } else {

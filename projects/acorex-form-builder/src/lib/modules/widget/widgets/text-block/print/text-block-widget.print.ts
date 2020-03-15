@@ -17,9 +17,11 @@ export class AXFTextBlockWidgetPrint extends AXFWidgetPrint {
     }
 
     onRender(): void {
-        //this.hostElement.nativeElement.innerHTML = this.text; 
-        this.hostElement.nativeElement.innerHTML = this.formatService.format(this.text, true, this.config.dataContext);
         this.applyStyle(this.hostElement.nativeElement);
         this.cdr.markForCheck();
+    }
+
+    ngDoCheck() {
+        this.hostElement.nativeElement.innerHTML = this.formatService.format(this.text, this);
     }
 }

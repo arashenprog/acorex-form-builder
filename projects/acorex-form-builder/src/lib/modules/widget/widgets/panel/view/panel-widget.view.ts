@@ -19,13 +19,13 @@ export class AXFPanelWidgetView extends AXFWidgetView {
     constructor(private formatService: AXFFormatService) {
         super();
         this.dataSubscription = this.dataService.onChange.subscribe((data) => {
-            this.internalCaption = this.formatService.format(this.caption);
+            this.internalCaption = this.formatService.format(this.caption, this);
         });
     }
 
     ngOnInit() {
         super.ngOnInit();
-        this.internalCaption = this.formatService.format(this.caption);
+        this.internalCaption = this.formatService.format(this.caption, this);
     }
 
 
