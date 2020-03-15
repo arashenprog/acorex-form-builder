@@ -6,6 +6,7 @@ export class UploadStructure{
     height:string;
     orginalWidth:string;
     orginalHeight:string;
+    sourceMethod:string;
 
     constructor(json)
     {
@@ -22,5 +23,7 @@ export class UploadStructure{
             this.orginalHeight=json.orginalHeight;
         else
             this.orginalHeight=json.height;    
+        if(json.sourceMethod)
+            this.sourceMethod=json.sourceMethod;
     }
 }

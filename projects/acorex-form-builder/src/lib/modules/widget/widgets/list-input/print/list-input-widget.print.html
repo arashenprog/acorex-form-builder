@@ -1,49 +1,7 @@
-<!-- <div #el [hidden]="visible==false" style="padding-left: 5px;display: inline-block;width: 100%;">
-    <div *ngIf="!dataSource || !dataSource.dataItems || dataSource.dataItems.length==0"
-        style="height: 27px; border: 1px solid var(--primary-color); font-weight: 700;width: 100%;">No Item</div>
-
-    <span *ngIf="dataSource && printMode=='onlySelected'"
-        style="display: block;height: 36px;border-radius:4px;border:1px solid var(--border-color); padding: 5px 0px 0px 5px;">
-        {{dataSource.dataItems.length>0? dataSource.dataItems[0][dataSource.columns[1]["fieldName"]] : 'Item Selected'}}
-    </span>    
-    <ng-container *ngIf="dataSource && printMode=='allItems'">
-        <label *ngFor="let item of dataSource.dataItems; let i=index;"
-            style="display: inline-table ;box-sizing: border-box;cursor: pointer; font-size: 14px;display: inherit; float: left; line-height:30px;user-select: none;margin-bottom: 0px; "
-            [ngStyle]="{'padding':alignCheck=='left'? '0px 10px 0px 0px' : (alignCheck=='top'? '2px 8px' : (alignCheck=='bottom'? '0px 6px' : '0px')),
-        'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%'}">
-           
-            <span *ngIf="viewType!='image' && dataSource.columns[1].type=='string'" 
-                [ngStyle]="{'padding-left':alignCheck=='left'?'5px': (alignCheck=='right'?'2px': null),
-                       'padding-right':alignCheck=='right'?'4px': null,
-                       'display':alignCheck=='top'?'inline-block': null,
-                        'float':alignCheck=='top'?'inherit':null,
-                        'margin-top':alignCheck=='top'?'20px':null
-                    }">{{item[dataSource.columns[1].fieldName]  | word}}</span>
-
-            <img *ngIf="viewType!='text' &&  dataSource.columns[2] && dataSource.columns[2].type=='image'"
-                [src]="item[dataSource.columns[2].fieldName]" height="80" width="60" [ngStyle]="{'margin-left':alignCheck=='left'?'3px':null,
-                'padding-top':alignCheck=='top'?'15px':null,
-                'display':alignCheck=='top'?'inline-block':null}">
-                <span *ngIf="mode!='unselectable'"
-                style="position: relative;display: inherit; height: 20px; width: 20px;  border: 1px solid;border-color: black;    box-sizing: border-box;"
-                [ngStyle]="{'top':(alignCheck=='left' || alignCheck=='right')?'4px':null,
-                       'left':alignCheck=='left'?'0px':(alignCheck=='top'?'5px': null),
-                       'right':alignCheck=='right'?'6px':null,
-                       'float': alignCheck=='right'?'right':(alignCheck=='left'?'inherit': null), 
-                       'border-radius': mode=='single' ? '100%' : '0',
-                       'padding': (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? '4px' : '2px',
-                       'background-clip': (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'content-box' : 'unset',
-                       'background-color': (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'black' : 'white'
-                    }">
-            </span>    
-        </label>
-    </ng-container>
-</div> -->
-
 <div style="display: inline-block;width: 100%;">
     <div *ngFor="let item of dataSource.dataItems"
         [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?'left':'unset'}"
-        style="min-width: max-content;">
+        >
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
             <div *ngSwitchCase="'left'" style="padding: 6px 2px;">
                 <span *ngIf="mode!='unselectable'" style="position: absolute; 
@@ -59,7 +17,7 @@
                         style="position: relative;top: -6px;left: 4px;font-style: unset;font-size: large;">&#x25CF;</i>
                 </span>
                 <img style="margin-left: 22px;" *ngIf="viewType=='image'"
-                    [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                    [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 <span style="margin-left: 22px;"
                     *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
             </div>
@@ -79,14 +37,14 @@
                     </span>
                 </div>
                 <div>
-                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | safeUrl"
+                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
             </div>
             <div *ngSwitchCase="'bottom'" style="padding: 6px 2px;">
                 <div>
-                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | safeUrl"
+                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
@@ -106,8 +64,8 @@
                 </div>
             </div>
             <div *ngSwitchCase="'right'" style="padding: 6px 2px;position: relative;">
-                <div style="float: left;">
-                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | safeUrl"
+                <div style="float: left;margin-right: 25px;"> 
+                    <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
@@ -126,7 +84,7 @@
         <ng-container *ngIf="viewType=='both'" [ngSwitch]="alignCheckNew">
             <div *ngSwitchCase="'ItopCleftSright'">
                 <div>
-                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                    <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
                 <div>
                     <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
@@ -142,7 +100,7 @@
             </div>
             <div *ngSwitchCase="'ItopCrightSleft'">
                 <div>
-                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                    <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
                 <div>
                     <span style="margin-right: 5px;">{{item[dataSource.columns[1].fieldName]}}</span>
@@ -169,7 +127,7 @@
                     <span style="margin-left: 22px;">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div>
-                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                    <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
             </div>
             <div *ngSwitchCase="'IbottomCrightSleft'">
@@ -185,14 +143,14 @@
                     </span>
                 </div>
                 <div>
-                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                    <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
             </div>
             <div *ngSwitchCase="'StopImiddleCbottom'">
                 <div><span>{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div>
-                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                    <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
                 <div>
                     <span *ngIf="mode!='unselectable'" style="position: absolute; height: 20px;
@@ -207,7 +165,7 @@
             </div>
             <div *ngSwitchCase="'ItopSmiddleCbottom'">
                 <div>
-                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                    <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
                 <div><span>{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
@@ -237,7 +195,7 @@
                 <div><span >{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div>
-                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                    <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
             </div>
             <div *ngSwitchCase="'CtopImiddleSbottom'">
@@ -252,7 +210,7 @@
                     </span>
                 </div>
                 <div>
-                    <img [src]="item[dataSource.columns[2].fieldName]  | safeUrl" height="80px" width="60px">
+                    <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
                 <div><span >{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
