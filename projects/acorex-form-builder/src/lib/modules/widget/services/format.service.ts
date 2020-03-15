@@ -29,14 +29,16 @@ export class AXFFormatService {
 
 
     public format(value: any, useModel: boolean = true, dataContext?: any): string {
-        if (value && typeof value === 'string') {  
+        if (value && typeof value === 'string') {
             const list = value.match(/\[(.*?)\]/g);
-            if (list) {  
+            if (list) {
                 list.forEach(w => {
                     const ww: AXFWordWithPipe = this.decompose(w.substring(1, w.length - 1));
                     let word = ww.word;
                     if (dataContext && typeof dataContext === 'object') {
                         word = dataContext[ww.word];
+                    } else if (dataContext && typeof dataContext === 'string') {
+                        word = this.dataService.getValue(dataContext);
                     } else if (useModel) {
                         word = this.dataService.getWord(ww.word);
                     }
@@ -50,7 +52,7 @@ export class AXFFormatService {
                 });
             }
         }
-        return value
+        return value && (value !== 'undefined') ? value : '';
     }
 
     private JDT(value: string) {

@@ -87,8 +87,13 @@ export class AXFWidgetRendererDirective {
         const pp: any = {};
         this.widgetConfig.properties.forEach(p => {
             if (this.widgetInstance[p.name] == null && p.defaultValue != null && this.widgetConfig.options[p.name] == null) {
-                pp[p.name] = p.defaultValue;
-                this.widgetConfig.options[p.name] = p.defaultValue;
+                let val = null;
+                if (typeof p.defaultValue === 'function') {
+                    val = p.defaultValue.call();
+                } else {
+                    val = p.defaultValue;
+                }
+                pp[p.name] = this.widgetConfig.options[p.name] = val;
             }
         });
         // add repeater index
@@ -107,10 +112,10 @@ export class AXFWidgetRendererDirective {
         //
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
-        if (this.mode === 'view' && (this.widgetInstance['name'] || this.widgetInstance['tag'])) {
-            this.widgetService.readPropsFromHost(this.widgetInstance['name'], this.widgetInstance['tag']).then(props => {
+        if (this.mode === 'view' && (this.widgetInstance['name'] || this.widgetInstance['tag'] || this.widgetConfig.name === 'page')) {
+            this.widgetService.readPropsFromHost(this.widgetConfig.name, this.widgetInstance['name'], this.widgetInstance['tag']).then(props => {
                 Object.assign(this.widgetInstance, props);
-                this.widgetInstance.refresh();
+                this.widgetInstance.onRender();
             });
         }
 

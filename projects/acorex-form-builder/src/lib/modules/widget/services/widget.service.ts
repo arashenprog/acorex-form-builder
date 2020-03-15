@@ -8,7 +8,7 @@ export interface AXFWidgetProperty {
     title: string
     hint?: string;
     defaultValue?: any;
-    category: "General" | "Style" | "Behavior" | "Data" | "Binding" | "Print";
+    category: 'General' | 'Style' | 'Behavior' | 'Data' | 'Binding' | 'Print';
     editor: any;
     visible?: boolean | Function;
     options?: any
@@ -42,7 +42,7 @@ export interface WidgetConfig {
 }
 
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class AXFWidgetService {
 
     static WIDGET_ITEMS: WidgetConfig[] = [];
@@ -62,8 +62,8 @@ export class AXFWidgetService {
     }
 
     resolve(name: string): WidgetConfig {
-        let c = AXFWidgetService.WIDGET_ITEMS.find(c => c.name == name)
-        let res: WidgetConfig = {
+        const c = AXFWidgetService.WIDGET_ITEMS.find(c => c.name == name)
+        const res: WidgetConfig = {
             category: c.category,
             hint: c.hint,
             icon: c.icon,
@@ -79,12 +79,14 @@ export class AXFWidgetService {
             toolbox: c.toolbox,
             properties: []
         }
-        if (c.properties)
+        if (c.properties) {
             res.properties = this.deepCopy(c.properties);
-        if (c.options)
+        }
+        if (c.options) {
             res.options = JSON.parse(JSON.stringify(c.options));
-        else
+        } else {
             res.options = {};
+        }
         res.options.uid = AXHtmlUtil.getUID();
         return res;
     }
@@ -93,7 +95,7 @@ export class AXFWidgetService {
     private deepCopy(obj) {
         let copy;
         // Handle the 3 simple types, and null or undefined
-        if (null == obj || "object" != typeof obj) return obj;
+        if (null == obj || 'object' != typeof obj) { return obj; }
         // Handle Date
         if (obj instanceof Date) {
             copy = new Date();
@@ -112,11 +114,11 @@ export class AXFWidgetService {
         if (obj instanceof Object) {
             copy = {};
             for (var attr in obj) {
-                if (obj.hasOwnProperty(attr)) copy[attr] = this.deepCopy(obj[attr]);
+                if (obj.hasOwnProperty(attr)) { copy[attr] = this.deepCopy(obj[attr]); }
             }
             return copy;
         }
-        throw new Error("Unable to copy obj! Its type isn't supported.");
+        throw new Error('Unable to copy obj! Its type isn\'t supported.');
     }
 
     serialize(item: WidgetConfig): string {
@@ -127,13 +129,13 @@ export class AXFWidgetService {
         const obj: any = {};
         obj.name = item.name;
         obj.options = {};
-        //        
+        // A
         if (item.properties) {
             item.properties.forEach(p => {
                 if (item.options[p.name] && item.options[p.name].clone) {
                     obj.options[p.name] = item.options[p.name].clone();
                 } else {
-                    obj.options[p.name] = item.options[p.name];
+                    obj.options[p.name] = this.deepCopy(item.options[p.name]);
                 }
             });
         }
@@ -148,16 +150,15 @@ export class AXFWidgetService {
 
 
     parse(json: string | any): WidgetConfig {
-        if (typeof json == "string") {
+        if (typeof json == 'string') {
             try {
-                let obj = JSON.parse(json);
+                const obj = JSON.parse(json);
                 return this.parseInternal(obj);
             } catch (error) {
-                console.log("Invalid widget's json to parse: ", json)
+                console.log('Invalid widget\'s json to parse: ', json)
                 return null;
             }
-        }
-        else {
+        } else {
             return this.parseInternal(json);
         }
     }
@@ -170,11 +171,12 @@ export class AXFWidgetService {
 
 
     private parseInternal(obj: any): WidgetConfig {
-        let item: WidgetConfig = this.resolve(obj.name);
-        if (!item.options)
+        const item: WidgetConfig = this.resolve(obj.name);
+        if (!item.options) {
             item.options = {};
+        }
         item.options.uid = AXHtmlUtil.getUID();
-        Object.assign(item.options, obj.options);
+        Object.assign(item.options, this.deepCopy(obj.options));
         if (obj.options.widgets) {
             item.options.widgets = []
             obj.options.widgets.forEach(w => {
@@ -185,9 +187,10 @@ export class AXFWidgetService {
     }
 
 
-    readPropsFromHost(name: string, tag: string): Promise<any> {
+    readPropsFromHost(widget: string, name: string, tag: string): Promise<any> {
         return new Promise<any>((resolve) => {
             this.connectService.send('readProps', {
+                widget,
                 name,
                 tag
             }).then(c => {

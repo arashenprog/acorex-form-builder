@@ -11,16 +11,22 @@
   <script>
     window.addEventListener('message', event => {
       if (event.data.theme) {
-        with(document.documentElement.style)
-        {
-          setProperty('--primary-color',event.data.theme.primaryColor,'important');
-          setProperty('--primary-light-color',event.data.theme.primaryLightColor,'important');
-          setProperty('--primary-dark-color',event.data.theme.primaryDarkColor,'important');
-          setProperty('--primary-trans-color',event.data.theme.primaryTransColor,'important');
-          setProperty('--primary-lighter-color',event.data.theme.primaryLighetrColor,'important');
+        with (document.documentElement.style) {
+          setProperty('--primary-color', event.data.theme.primaryColor, 'important');
+          setProperty('--primary-light-color', event.data.theme.primaryLightColor, 'important');
+          setProperty('--primary-dark-color', event.data.theme.primaryDarkColor, 'important');
+          setProperty('--primary-trans-color', event.data.theme.primaryTransColor, 'important');
+          setProperty('--primary-lighter-color', event.data.theme.primaryLighetrColor, 'important');
         }
+        //setTimeout(show, 200);
       };
     });
+    // setTimeout(show, 1000);
+    // function show() {
+    //   if (document.querySelector('.pre-bootstrap'))
+    //     document.querySelector('.pre-bootstrap').style.display = 'unset';
+    //   window['init'] = true;
+    // }
   </script>
   <style>
     .pre-bootstrap {
@@ -32,7 +38,7 @@
     .pre-bootstrap-spinner {
       width: 60px;
       height: 60px;
-      background-color: var(--primary-color);
+      background-color: #2196f3;
       -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
       animation: sk-rotateplane 1.2s infinite ease-in-out;
     }

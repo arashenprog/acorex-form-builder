@@ -1,7 +1,5 @@
-<table #table *ngIf="visible">
+<table #table >
     <thead>
-        <!-- <ng-container *ngIf="headerRow" axf-widget-renderer [widget]="headerRow" [parent]="this" [mode]="'view'">
-        </ng-container> -->
         <ng-container *ngFor="let w of headerRows;trackby: trackbyFunc" axf-widget-renderer [widget]="w" [parent]="this"
             [mode]="'view'">
         </ng-container>
@@ -13,6 +11,6 @@
     </tbody>
 </table>
 <button type="button" class="btn btn-sm btn-primary" (click)="addItemClick()"
-    *ngIf="dataSource.mode=='manual' && allowAdd && visible && !readonly">Add
+    *ngIf="dataSource.mode=='manual' && allowAdd && !readonly"><i class="fas fa-plus"></i> Add
     Item
 </button>

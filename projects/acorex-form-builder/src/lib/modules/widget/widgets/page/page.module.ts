@@ -32,58 +32,61 @@ export class AXFPagePageWidgetModule {
             category: 'Layout',
             visible: false,
             container: true,
-            draggable:false,
+            draggable: false,
             name: 'page',
             designerClass: AXFPageWidgetDesigner,
             printClass: AXFPageWidgetPrint,
             viewClass: AXFPageWidgetView,
             options: {
                 boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("0"),
-                    padding: new AXFBoxStyleBoxSizeValue("10"),
-                    margin: new AXFBoxStyleBoxSizeValue("0")
+                    border: new AXFBoxStyleBoxSizeValue('0'),
+                    padding: new AXFBoxStyleBoxSizeValue('10'),
+                    margin: new AXFBoxStyleBoxSizeValue('0')
                 },
-                bgColor: "inherit"
+                bgColor: 'inherit'
             },
             properties: [
                 {
-                    name: "pageDirection",
-                    category: "Style",
-                    defaultValue: "ltr",
-                    title: "Page Direction",
-                    editor: "SelectionEditor",
+                    name: 'pageDirection',
+                    category: 'Style',
+                    defaultValue: 'ltr',
+                    title: 'Page Direction',
+                    editor: 'SelectionEditor',
                     order: 0,
                     options: {
-                        items: [{ value: "ltr", title: "Left-To-Right" }, { value: "rtl", title: "Right-To-Left" }],
-                        mode: "single",
-                        direction: "horizontal"
+                        items: [{ value: 'ltr', title: 'Left-To-Right' }, { value: 'rtl', title: 'Right-To-Left' }],
+                        mode: 'single',
+                        direction: 'horizontal'
                     }
                 },
                 AXF_BG_COLOR_PROPERTY,
                 {
-                    name: "themeColor",
-                    category: "Style",
-                    defaultValue: "#673AB7",
-                    title: "Theme Color",
-                    editor: "ColorEditor",
+                    name: 'themeColor',
+                    category: 'Style',
+                    defaultValue: () => {
+                        const color = document.documentElement.style.getPropertyValue('--primary-color') || '#673AB7';
+                        return color;
+                    },
+                    title: 'Theme Color',
+                    editor: 'ColorEditor',
                     order: 33,
                 },
                 AXF_BOX_STYLE_PROPERTY,
                 {
-                    name: "showHeader",
-                    category: "Print",
-                    defaultValue:false,
-                    title: "Show Header",
-                    editor: "CheckboxEditor",
-                    options: { label:"Show Header"}
+                    name: 'showHeader',
+                    category: 'Print',
+                    defaultValue: false,
+                    title: 'Show Header',
+                    editor: 'CheckboxEditor',
+                    options: { label: 'Show Header' }
                 },
                 {
-                    name: "showFooter",
-                    category: "Print",
-                    defaultValue:false,
-                    title: "Show Footer",
-                    editor: "CheckboxEditor",
-                    options: { label:"Show Footer"}
+                    name: 'showFooter',
+                    category: 'Print',
+                    defaultValue: false,
+                    title: 'Show Footer',
+                    editor: 'CheckboxEditor',
+                    options: { label: 'Show Footer' }
                 }
             ]
         })

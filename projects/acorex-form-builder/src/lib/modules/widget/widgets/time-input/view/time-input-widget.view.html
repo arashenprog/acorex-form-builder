@@ -1,4 +1,4 @@
-<ax-text-box [mask]="timeMask" [(text)]="value" *ngIf="visible">
+<ax-text-box [mask]="timeMask" [(text)]="value" *ngIf="visible" [readonly]="readonly">
     <ax-button (onClick)="handleSetCurrent()">
         <i class="far fa-clock"></i>
     </ax-button>

@@ -51,6 +51,17 @@ export class AXFDataService {
                 resolve();
             });
         });
+
+        // const p2 = new Promise((resolve) => {
+
+        //     const intv = setInterval(() => {
+        //         if (window['init']) {
+        //             clearInterval(intv);
+        //             resolve();
+        //         }
+        //     }, 50);
+        // });
+
         return Promise.all([p1]);
     }
 
@@ -61,6 +72,8 @@ export class AXFDataService {
                 params.forEach(p => {
                     if (typeof p.value === 'string' && p.value.match(/\$([a-zA-Z1-9])+/)) {
                         keyValObject[p.name] = this.getValue(p.value.substring(1));
+                    } else if (typeof p.value === 'function' && p.value().match(/\$([a-zA-Z1-9])+/)) {
+                        keyValObject[p.name] = this.getValue(p.value().substring(1));
                     } else {
                         keyValObject[p.name] = p.value;
                     }

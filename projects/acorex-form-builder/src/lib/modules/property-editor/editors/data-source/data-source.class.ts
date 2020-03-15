@@ -31,11 +31,11 @@ export class AXFDataSourceOption {
     clone(): AXFDataSourceOption {
         const obj: any = {};
         obj.mode = this.mode;
-        obj.columns = this.columns;
+        obj.columns = JSON.parse(JSON.stringify(this.columns));
         if (this.mode === 'manual') {
-            obj.dataItems = this.dataItems;
+            obj.dataItems = JSON.parse(JSON.stringify(this.dataItems));
         } else {
-            obj.dataSource = this.dataSource;
+            obj.dataSource = JSON.parse(JSON.stringify(this.dataSource));
         }
         return obj;
     }
@@ -43,14 +43,14 @@ export class AXFDataSourceOption {
 
 export class AXFDataSourceRemoteOption {
     name: string;
-    params: AXFDataSourceRemoteParamOption[] = []
+    params: AXFDataSourceRemoteParamOption[] = [];
 }
 
 
 
 export class AXFDataSourceRemoteParamOption {
     name: string;
-    value: string;
+    value: any;
 }
 
 

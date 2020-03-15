@@ -24,8 +24,16 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
     }
 
     onRender(): void {
-        this.hostElement.nativeElement.innerHTML = this.formatService.format(this.text, true, this.config.dataContext);
         this.applyStyle(this.hostElement.nativeElement);
         this.cdr.markForCheck();
+    }
+
+    ngDoCheck() {
+        if (this.text.startsWith('[$')) {
+            this.hostElement.nativeElement.innerHTML =
+                this.formatService.format(this.text, true, this.resolveProperty(this.text.substring(2, this.text.length - 1)));
+        } else {
+            this.hostElement.nativeElement.innerHTML = this.formatService.format(this.text, true, this.config.dataContext);
+        }
     }
 }

@@ -307,6 +307,10 @@ export abstract class AXFWidgetView extends AXFWidget {
     }
 
 
+    // protected findChild(name: string): AXFWidgetView {
+
+    // }
+
     get uniqueName(): string {
         return this.getPath();
     }
@@ -327,7 +331,7 @@ export abstract class AXFWidgetView extends AXFWidget {
                     const params = {};
                     if (allWidgets) {
                         allWidgets.forEach(w => {
-                            const wname = this.getParentPath() ? `${this.getParentPath()}.${w.substring(1)}` : w.substring(1);
+                            const wname =   this.resolveProperty(w.substring(1));
                             const widget = this.dataService.getWidget(wname);
                             let p = '_' + wname.split('.').join('_');
                             p = p.replace(/\[/, '').replace(/]/, '');
@@ -343,14 +347,6 @@ export abstract class AXFWidgetView extends AXFWidget {
                     execCode = execCode.replace('#', 'this.').replace('$', 'this.$');
                     execCode = execCode.replace(/\[/, '').replace(/]/, '');
                     new Function(`try {${execCode}} catch(e){  }`).call(params);
-                    // if (allWidgets) {
-                    //     allWidgets.forEach(w => {
-                    //         const wname = this.getParentName() ? `${this.getParentName()}.${w.substring(1)}` : w.substring(1);
-                    //         if (params['_' + wname.replace('.', '_')]) {
-                    //             params['_' + wname.replace('.', '_')].refresh();
-                    //         }
-                    //     });
-                    // }
                 });
 
             }
@@ -360,11 +356,12 @@ export abstract class AXFWidgetView extends AXFWidget {
 
 
     protected resolveProperty(name: string): any {
-        return this.getParentPath() && !name.startsWith(`$${this.getParentPath()}.`)
-            ? name.replace('$', `$${this.getParentPath()}.`)
-            : name;
+        if (this.getPath()) {
+            return this.getPath().replace(this.config.options.name, name);
+        } else {
+            return name;
+        }
     }
-
 
     constructor() {
         super();

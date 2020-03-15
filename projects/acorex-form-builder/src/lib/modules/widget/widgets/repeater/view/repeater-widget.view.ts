@@ -16,7 +16,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     headerRows: WidgetConfig[];
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
-    allowAdd:boolean;
+    allowAdd: boolean;
 
     constructor(
         protected cdr: ChangeDetectorRef) {
@@ -32,7 +32,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
         this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
-        if (this.allItems().length === 0) {
+        if (this.allItems().length === 0 && !this.readonly) {
             this.bodyRows = [this.widgetService.clone(this.rowTemplate)];
         } else {
             this.bodyRows = this.allItems().map(c => {
