@@ -444,7 +444,9 @@ export abstract class AXFWidgetPrint extends AXFWidgetView {
     }
 
     ngAfterViewInit() {
-        this.value = this.extractValue();
+        if (this.getPath()) {
+            this.value = this.extractValue();
+        }
         super.ngAfterViewInit();
     }
 }

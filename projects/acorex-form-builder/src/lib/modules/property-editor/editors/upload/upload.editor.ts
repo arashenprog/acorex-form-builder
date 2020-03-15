@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 import { UploadStructure } from './upload.structure';
+import { AXFConnectService } from '../../../widget/services/connect.service';
 
 @Component({
   templateUrl: './upload.editor.html',
@@ -9,9 +10,9 @@ import { UploadStructure } from './upload.structure';
 export class AXFUploadEditorComponent extends AXFProperyEditor<UploadStructure> implements OnInit {
 
   modeItems: any[] = [{ value: "auto", title: "Auto Size" }, { value: "custom", title: "Custom Size" }]
+  methods:any[]=[{ value: "url", title: "URL" }, { value: "upload", title: "upload" }]
 
-
-  constructor(protected cdr: ChangeDetectorRef) {
+  constructor(protected cdr: ChangeDetectorRef, private connectService: AXFConnectService) {
     super();
   }
 
@@ -23,10 +24,9 @@ export class AXFUploadEditorComponent extends AXFProperyEditor<UploadStructure> 
   modeSizeChange(e) {
     if (e && this.value.modeSize != e) {
       this.value.modeSize = e;
-      if(e=="auto")
-      {
-        this.value.height=this.value.orginalHeight;
-        this.value.width=this.value.orginalWidth;
+      if (e == "auto") {
+        this.value.height = this.value.orginalHeight;
+        this.value.width = this.value.orginalWidth;
       }
       super.handleValueChange(this.value);
     }
@@ -55,7 +55,7 @@ export class AXFUploadEditorComponent extends AXFProperyEditor<UploadStructure> 
   }
 
   async handleValueChange(evt) {
-    this.value.srcData = evt.data;
+    let data = evt.data;
     let newDimension = await this.getImageDimensions(evt.data);
     this.value.orginalHeight = newDimension.h;
     this.value.orginalWidth = newDimension.w;
@@ -63,8 +63,13 @@ export class AXFUploadEditorComponent extends AXFProperyEditor<UploadStructure> 
       this.value.height = this.value.orginalHeight;
       this.value.width = this.value.orginalWidth;
     }
-    this.cdr.detectChanges();
-    super.handleValueChange(this.value);
+    this.connectService.send('uploadFile', { data }).then((c) => {
+      this.value.srcData = c;
+      this.cdr.detectChanges();
+      super.handleValueChange(this.value);
+    });
+    // this.cdr.detectChanges();
+    // super.handleValueChange(this.value);
   }
 
   getImageDimensions(file): any {
