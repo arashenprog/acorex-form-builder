@@ -41,13 +41,7 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
                 this.dataSource.dataSource.name,
                 this.dataSource.dataSource.params
             ).then(c => {
-                this.dataSource.dataItems = c;
-                if (this.value == undefined && this.value == null) {
-                    this.value = [];
-                    this.value.push(this.dataSource.dataItems[0][this.dataSource.columns[0].fieldName]);
-                    this.cdr.detectChanges();
-
-                }
+                this.dataSource.dataItems = c;                
                 this.cdr.detectChanges();
             })
         }
