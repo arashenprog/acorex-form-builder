@@ -106,9 +106,7 @@ export class ACFViewerFrameComponent {
                 this.postMessage(action, reqId, this.dataService.getModel());
                 break;
             case 'resolveUrl':
-                debugger
                 this.connectService.send(action, options).then(c=>{
-                    debugger
                     this.postMessage(action, reqId, c);
                 });
                 break;

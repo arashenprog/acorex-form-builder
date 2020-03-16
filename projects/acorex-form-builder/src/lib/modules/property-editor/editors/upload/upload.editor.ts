@@ -10,7 +10,7 @@ import { AXFConnectService } from '../../../widget/services/connect.service';
 export class AXFUploadEditorComponent extends AXFProperyEditor<UploadStructure> implements OnInit {
 
   modeItems: any[] = [{ value: "auto", title: "Auto Size" }, { value: "custom", title: "Custom Size" }]
-  methods:any[]=[{ value: "url", title: "URL" }, { value: "upload", title: "upload" }]
+  methods:any[]=[{ value: "url", title: "URL" }, { value: "upload", title: "Upload" }]
 
   constructor(protected cdr: ChangeDetectorRef, private connectService: AXFConnectService) {
     super();
@@ -91,5 +91,10 @@ export class AXFUploadEditorComponent extends AXFProperyEditor<UploadStructure> 
       }
       super.handleValueChange(this.value);
     }
+  }
+
+  handleTextChange()
+  {
+    super.handleValueChange(this.value);
   }
 }

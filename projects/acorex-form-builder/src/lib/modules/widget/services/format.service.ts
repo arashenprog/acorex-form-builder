@@ -57,7 +57,6 @@ export class AXFFormatService {
     // }
 
     public format(value: any, widget?: AXFWidgetView): string {
-        debugger;
         if (value && typeof value === 'string') {
             const list = value.match(/\[(.*?)\]/g);
             if (list) {

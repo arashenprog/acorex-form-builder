@@ -28,7 +28,7 @@
 </div>
 <div class="edit-row ng-star-inserted" *ngIf="value.sourceMethod=='url'">
     <div class="prop-caption"> URL </div>
-    <ax-text-box [text]="value.srcData">
+    <ax-text-box [(text)]="value.srcData" (textChange)="handleTextChange()">
     </ax-text-box>
 </div>
 <div class="edit-row ng-star-inserted" *ngIf="value.sourceMethod=='upload'">
