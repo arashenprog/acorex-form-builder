@@ -25,22 +25,17 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
 
     onRender(): void {
         if (this.el)
-            this.applyStyle(this.el.nativeElement);
-        if (this.value == undefined && this.value == null && this.dataSource.mode == 'manual') {
-            this.value = [];
-            {
-                this.value.push(this.dataSource.dataItems[0][this.dataSource.columns[0].fieldName]);
-                this.cdr.markForCheck();
-            }
-        }
+            this.applyStyle(this.el.nativeElement);        
     }
 
     ngAfterViewInit() {
+        super.ngAfterViewInit();
         this.refresh();
+        this.cdr.detectChanges();
     }
 
     refresh() {
-
+        debugger
         if (this.dataSource.mode == "remote") {
             this.dataService.getList(
                 this.dataSource.dataSource.name,
@@ -49,116 +44,24 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
                 this.dataSource.dataItems = c;
                 if (this.value == undefined && this.value == null) {
                     this.value = [];
-                    {
-                        this.value.push(this.dataSource.dataItems[0][this.dataSource.columns[0].fieldName]);
-                        this.cdr.markForCheck();
-                    }
+                    this.value.push(this.dataSource.dataItems[0][this.dataSource.columns[0].fieldName]);
+                    this.cdr.detectChanges();
+
                 }
-                this.cdr.markForCheck();
+                this.cdr.detectChanges();
             })
         }
+        // else {
+        //     debugger
+        //     if (this.value == undefined && this.value == null) {
+        //         this.value = [];
+        //         this.value.push(this.dataSource.dataItems[0][this.dataSource.columns[0].fieldName]);
+        //         this.cdr.markForCheck();
+
+        //     }
+        // }
     }
 
-    getStylesRadio(viewType, alignCheckNew, alignCheck) {
-        let styles: any = {};
-        if (viewType == 'both') {
-            switch (alignCheckNew) {
-                case 'ItopCrightSleft':
-                    styles = {
-                        'order': '2'
-                    };
-                    break;
-                case 'ItopCleftSright':
-                    styles = {
-                        'order': '1'
-                    };
-                    break;
-                default:
-                    break;
-            }
-        }
-        else {
-            switch (alignCheck) {
-                case 'left':
-                    styles = { 'order': '1' }
-                    break;
-                case 'top':
-                    styles = { 'order': '1', 'flex': '1 0 100%' }
-                    break;
-                    case 'right':
-                        styles = { 'right': '2px' } 
-                        break;    
-                default:
-                    break;
-            }
-        }
-        return styles;
-    }
-
-    getStylesSpan(viewType, alignCheckNew, alignCheck) {
-        let styles: any = {};
-        if (viewType == 'both') {
-            switch (alignCheckNew) {
-                case 'ItopCrightSleft':
-                    styles = {
-                        'order': '1'
-                    };
-                    break;
-                case 'ItopCleftSright':
-                    styles = {
-                        'order': '2'
-                    };
-                    break;
-                default:
-                    break;
-            }
-        }
-        else {
-            switch (alignCheck) {
-                case 'left':
-                    styles = { 'order': '2' }
-                    break;
-                case 'top':
-                    styles = { 'order': '2', 'margin-top': '22px' }
-                    break;
-                default:
-                    break;
-            }
-        }
-        return styles;
-    }
-
-    getStylesImage(viewType, alignCheckNew, alignCheck) {
-        let styles: any = {};
-        if (viewType == 'both') {
-            switch (alignCheckNew) {
-                case 'ItopCrightSleft':
-                    styles = {
-                        'order': '-1', 'flex': '1 0 100%'
-                    };
-                    break;
-                case 'ItopCleftSright':
-                    styles = {
-                        'order': '-1', 'flex': '1 0 100%'
-                    };
-                    break;
-                default:
-                    break;
-            }
-        }
-        else {
-            switch (alignCheck) {
-                case 'left':
-                    styles = { 'order': '2' }
-                    break;
-                case 'top':
-                    styles = { 'order': '2', 'margin-top': '22px' }
-                    break;
-                default:
-                    break;
-            }
-        }
-        return styles;
-    }
+    
 
 }
