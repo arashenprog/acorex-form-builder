@@ -16,13 +16,14 @@ export class AXFFormatService {
 
     public decompose(value: string): AXFWordWithPipe {
         const result: AXFWordWithPipe = { word: value ? value.toString() : null, formetters: [] };
-        if (value && typeof value == 'string') {
+        if (value && typeof value === 'string') {
             const parts = value.split('|');
             result.word = parts[0].trim();
             for (let i = 1; i < parts.length; i++) {
                 const pipe = parts[i].trim();
-                if (this[pipe])
+                if (this[pipe]) {
                     result.formetters.push(pipe);
+                }
             }
         }
         return result;
