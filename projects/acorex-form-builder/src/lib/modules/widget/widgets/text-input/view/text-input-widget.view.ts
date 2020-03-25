@@ -12,6 +12,7 @@ export class AXFTextInputWidgetView extends AXFValueWidgetView {
 
     validator: AXFValidatorProp;
     placeholder: string;
+    type: String;
 
     constructor(protected cdr: ChangeDetectorRef) {
         super(cdr);

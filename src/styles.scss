@@ -100,7 +100,9 @@ p {
   margin: 0.4rem !important;
 }
 
-
+ul{
+  margin-bottom: 0px;
+}
 
 $skeleton-color-base: #ccc;
 $skeleton-color-highlight: lighten($skeleton-color-base, 30%);
