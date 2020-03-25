@@ -1,6 +1,7 @@
 import { Component, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 import { AXFFormatService } from '../../../services/format.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     template: '',
@@ -10,6 +11,7 @@ import { AXFFormatService } from '../../../services/format.service';
 export class AXFTextBlockWidgetView extends AXFWidgetView {
 
     text: string;
+    private dataSubscription: Subscription;
 
 
     constructor(
@@ -18,8 +20,8 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
         private formatService: AXFFormatService) {
         super();
         //
-        this.dataService.onChange.subscribe(() => {
-            this.refresh();
+        this.dataSubscription = this.dataService.onChange.subscribe((data) => {
+            this.hostElement.nativeElement.innerHTML = this.formatService.format(this.text, this);
         });
     }
 
@@ -28,7 +30,12 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
         this.cdr.markForCheck();
     }
 
-    ngDoCheck() {
+    ngOnInit() {
+        super.ngOnInit();
         this.hostElement.nativeElement.innerHTML = this.formatService.format(this.text, this);
+    }
+
+    ngOnDestroy() {
+        this.dataSubscription.unsubscribe();
     }
 }

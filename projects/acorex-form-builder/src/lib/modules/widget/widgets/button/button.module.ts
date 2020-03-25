@@ -34,38 +34,38 @@ export class AXFButtonWidgetModule {
             printClass: AXFButtonWidgetPrint,
             viewClass: AXFButtonWidgetView,
             options: {
-                text: "Click Here",
+                text: 'Click Here',
             },
             properties: [
                 AXF_TEXT_PROPERTY,
                 {
-                    name: "type",
-                    category: "Style",
-                    title: "Type",
-                    defaultValue: "primary",
-                    editor: "DropdownEditor",
+                    name: 'type',
+                    category: 'Style',
+                    title: 'Type',
+                    defaultValue: 'primary',
+                    editor: 'DropdownEditor',
                     options: {
                         items: [
-                            { value: "primary", title: "primary" },
-                            { value: "success", title: "success" },
-                            { value: "warning", title: "warning" },
-                            { value: "info", title: "info" }
+                            { value: 'primary', title: 'primary' },
+                            { value: 'success', title: 'success' },
+                            { value: 'warning', title: 'warning' },
+                            { value: 'info', title: 'info' }
                         ],
                     }
                 },
                 {
-                    name: "size",
-                    category: "Style",
-                    title: "Size",
-                    defaultValue: "sm",
-                    editor: "DropdownEditor",
+                    name: 'size',
+                    category: 'Style',
+                    title: 'Size',
+                    defaultValue: 'sm',
+                    editor: 'DropdownEditor',
                     options: {
                         items: [
-                            { value: "xs", title: "x-small" },
-                            { value: "sm", title: "small" },
-                            { value: "md", title: "medium" },
-                            { value: "lg", title: "large" },
-                            { value: "xl", title: "x-large" }
+                            { value: 'xs', title: 'x-small' },
+                            { value: 'sm', title: 'small' },
+                            { value: 'md', title: 'medium' },
+                            { value: 'lg', title: 'large' },
+                            { value: 'xl', title: 'x-large' }
                         ],
                     }
                 },
@@ -87,48 +87,49 @@ export class AXFButtonWidgetModule {
             printClass: AXFButtonWidgetPrint,
             viewClass: AXFButtonWidgetView,
             options: {
-                text: "Submit",
+                text: 'Submit',
             },
             properties: [
                 AXF_TEXT_PROPERTY,
                 {
-                    name: "type",
-                    category: "Style",
-                    title: "Type",
-                    defaultValue: "success",
-                    editor: "DropdownEditor",
+                    name: 'type',
+                    category: 'Style',
+                    title: 'Type',
+                    defaultValue: 'success',
+                    editor: 'DropdownEditor',
                     options: {
                         items: [
-                            { value: "primary", title: "primary" },
-                            { value: "success", title: "success" },
-                            { value: "warning", title: "warning" },
-                            { value: "info", title: "info" }
+                            { value: 'primary', title: 'primary' },
+                            { value: 'success', title: 'success' },
+                            { value: 'warning', title: 'warning' },
+                            { value: 'info', title: 'info' },
+                            { value: 'danger', title: 'danger' }
                         ],
                     }
                 },
                 {
-                    name: "size",
-                    category: "Style",
-                    title: "Size",
-                    defaultValue: "sm",
-                    editor: "DropdownEditor",
+                    name: 'size',
+                    category: 'Style',
+                    title: 'Size',
+                    defaultValue: 'sm',
+                    editor: 'DropdownEditor',
                     options: {
                         items: [
-                            { value: "xs", title: "x-small" },
-                            { value: "sm", title: "small" },
-                            { value: "md", title: "medium" },
-                            { value: "lg", title: "large" },
-                            { value: "xl", title: "x-large" }
+                            { value: 'xs', title: 'x-small' },
+                            { value: 'sm', title: 'small' },
+                            { value: 'md', title: 'medium' },
+                            { value: 'lg', title: 'large' },
+                            { value: 'xl', title: 'x-large' }
                         ],
                     }
                 },
                 AXF_VISIBLE_PROPERTY,
                 {
-                    name: "onClick",
-                    category: "Behavior",
-                    defaultValue: "submit()",
-                    title: "Click",
-                    editor: "EventEditor",
+                    name: 'onClick',
+                    category: 'Behavior',
+                    defaultValue: 'submit()',
+                    title: 'Click',
+                    editor: 'EventEditor',
                     options: {
                     },
                     order: 9,

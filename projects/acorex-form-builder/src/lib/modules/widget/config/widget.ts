@@ -272,8 +272,27 @@ export abstract class AXFWidgetView extends AXFWidget {
 
     protected dataService: AXFDataService;
 
+    // protected getPath() {
+    //     if (this.config.options.name == null || this.config.options.name === '') {
+    //         return null;
+    //     }
+    //     if (this['rIndex'] >= 0) {
+    //         return this.getParentPath() ?
+    //             `${this.getParentPath()}[${this['rIndex']}].${this.config.options.name}`
+    //             : `${this.config.options.name}[${this['rIndex']}]`;
+    //     }
+    //     return this.getParentPath() ?
+    //         `${this.getParentPath()}.${this.config.options.name}`
+    //         : this.config.options.name;
+    // }
+
     protected getPath() {
         if (this.config.options.name == null || this.config.options.name === '') {
+            if (this['rIndex'] >= 0) {
+                return this.getParentPath() ?
+                    `${this.getParentPath()}[${this['rIndex']}]`
+                    : null;
+            }
             return null;
         }
         if (this['rIndex'] >= 0) {
@@ -331,7 +350,7 @@ export abstract class AXFWidgetView extends AXFWidget {
                     const params = {};
                     if (allWidgets) {
                         allWidgets.forEach(w => {
-                            const wname =   this.resolveProperty(w.substring(1));
+                            const wname = this.resolveProperty(w.substring(1));
                             const widget = this.dataService.getWidget(wname);
                             let p = '_' + wname.split('.').join('_');
                             p = p.replace(/\[/, '').replace(/]/, '');
@@ -355,9 +374,14 @@ export abstract class AXFWidgetView extends AXFWidget {
 
 
 
-    public  resolveProperty(name: string): any {
+    public resolveProperty(name: string): any {
         if (this.getPath()) {
-            return this.getPath().replace(this.config.options.name, name);
+            if (this.config.options.name !== '' && this.config.options.name !== null) {
+                return this.getPath().replace(this.config.options.name, name);
+            } else {
+                return `${this.getPath()}.${name}`;
+            }
+
         } else {
             return name;
         }
