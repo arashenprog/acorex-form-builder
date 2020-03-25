@@ -37,9 +37,21 @@ export class AXFTextInputWidgetModule {
             printClass: AXFTextInputWidgetPrint,
             viewClass: AXFTextInputWidgetView,
             options: {
+                type:"string"
             },
             properties: [
                 AXF_PLACEHOLDER_PROPERTY,
+                {
+                    name: 'type',
+                    category: 'General',
+                    title: 'Type',
+                    editor: 'SelectionEditor',
+                    options: {
+                        items: [{ value: 'string', title: 'String' }, { value: 'number', title: 'Number' }],
+                        mode: 'single',
+                        direction: 'horizontal'
+                    }
+                },
                 AXF_VISIBLE_PROPERTY,
                 AXF_TEXT_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
