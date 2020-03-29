@@ -92,7 +92,7 @@ export class AXFFormatService {
     private JDT(value: string) {
         try {
             const val = new AXDateTime(value, 'jalali');
-            return val.toString();
+            return val.format('YYYY/MM/DD');
         } catch (error) {
             return value;
         }

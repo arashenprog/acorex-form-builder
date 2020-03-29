@@ -4,6 +4,18 @@ import { PromisResult, EventService, IValidationRuleResult, AXRenderService } fr
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { AXFValidatorProp } from '../../property-editor/editors/validation/validation.class';
+// import * as memoizee_ from 'memoizee';
+// const memoizee = memoizee_;
+// //
+// export function memoize(config?) {
+//     return function (target, key, descriptor) {
+//         const oldFunction = descriptor.value;
+//         const newFunction = memoizee(oldFunction, config);
+//         descriptor.value = function () {
+//             return newFunction.apply(this, arguments);
+//         };
+//     };
+// };
 
 export class EventData {
     name: string;
@@ -65,6 +77,7 @@ export class AXFDataService {
         return Promise.all([p1]);
     }
 
+   //@memoize({ promise: true })
     getList(dataSourceName: string, params?: any): Promise<any[]> {
         return new Promise<any[]>((resolve, reject) => {
             const keyValObject = {};
@@ -90,7 +103,6 @@ export class AXFDataService {
             }
         });
     }
-
 
     getDSList(): PromisResult<any[]> {
         const result = this.findModelList();

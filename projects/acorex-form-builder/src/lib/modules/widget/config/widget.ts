@@ -274,19 +274,7 @@ export abstract class AXFWidgetView extends AXFWidget {
 
     protected dataService: AXFDataService;
 
-    // protected getPath() {
-    //     if (this.config.options.name == null || this.config.options.name === '') {
-    //         return null;
-    //     }
-    //     if (this['rIndex'] >= 0) {
-    //         return this.getParentPath() ?
-    //             `${this.getParentPath()}[${this['rIndex']}].${this.config.options.name}`
-    //             : `${this.config.options.name}[${this['rIndex']}]`;
-    //     }
-    //     return this.getParentPath() ?
-    //         `${this.getParentPath()}.${this.config.options.name}`
-    //         : this.config.options.name;
-    // }
+   
 
     protected getPath() {
         if (this.config.options.name == null || this.config.options.name === '') {
@@ -295,7 +283,7 @@ export abstract class AXFWidgetView extends AXFWidget {
                     `${this.getParentPath()}[${this['rIndex']}]`
                     : null;
             }
-            return null;
+            return  this.getParentPath();
         }
         if (this['rIndex'] >= 0) {
             return this.getParentPath() ?
@@ -313,7 +301,7 @@ export abstract class AXFWidgetView extends AXFWidget {
         while (prt != null) {
             if (prt.config && prt.config.options &&
                 (prt.config.options.name ||
-                    (prt.rIndex !== undefined && prt.config.name !== 'table-cell' && prt.config.name !== 'table-row')
+                    (prt.rIndex !== undefined && prt.config.name !== 'table-cell' && prt.config.name !== 'table-row' )
                 )
             ) {
                 if (prt.rIndex !== undefined) {
@@ -324,16 +312,7 @@ export abstract class AXFWidgetView extends AXFWidget {
             }
             prt = prt.parent;
         }
-        return parts.reverse().join('.').split('.[').join('[');
-    }
-
-
-    // protected findChild(name: string): AXFWidgetView {
-
-    // }
-
-    get uniqueName(): string {
-        return this.getPath();
+        return  [...new Set( parts)].reverse().join('.').split('.[').join('[');
     }
 
 
