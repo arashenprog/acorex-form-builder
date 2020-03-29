@@ -21,7 +21,8 @@ export class AXFTextBlockWidgetPrint extends AXFWidgetPrint {
         this.cdr.markForCheck();
     }
 
-    ngDoCheck() {
+    ngOnInit() {
+        super.ngOnInit();
         this.hostElement.nativeElement.innerHTML = this.formatService.format(this.text, this);
     }
 }

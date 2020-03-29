@@ -32,5 +32,9 @@ export class AXFPanelWidgetView extends AXFWidgetView {
     ngOnDestroy() {
         this.dataSubscription.unsubscribe();
     }
+
+    // ngDoCheck() {
+    //     this.internalCaption = this.formatService.format(this.caption, this);
+    // }
 }
 
