@@ -3,11 +3,11 @@ import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 import { AXFValidatorProp } from '../../../../property-editor/editors/validation/validation.class';
 
 @Component({
-    templateUrl: './text-input-widget.view.html',
-    styleUrls: ['./text-input-widget.view.scss'],
+    templateUrl: './number-input-widget.view.html',
+    //styleUrls: ['./number-input-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFTextInputWidgetView extends AXFValueWidgetView {
+export class AXFNumberInputWidgetView extends AXFValueWidgetView {
 
 
     validator: AXFValidatorProp;

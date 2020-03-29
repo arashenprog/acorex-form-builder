@@ -28,7 +28,7 @@ import { AXFTableCellWidgetModule } from '../widgets/table-cell/table-cel.module
 import { AXFRepeaterlWidgetModule } from '../widgets/repeater/repeater.module';
 import { AXFPageHeaderWidgetModule } from '../widgets/page-header/page-header.module';
 import { AXFPageFooterWidgetModule } from '../widgets/page-footer/page-footer.module';
-
+import { AXFNumberInputWidgetModule } from '../widgets/number-input/number-input.module';
 
 const MODULES = [
     CommonModule,
@@ -41,6 +41,7 @@ const MODULES = [
     AXFTimeInputWidgetModule,
     AXFPagePageWidgetModule,
     AXFTextInputWidgetModule,
+    AXFNumberInputWidgetModule,
     AXFTextAreaWidgetModule,
     AXFCheckboxInputWidgetModule,
     AXFImageInputWidgetModule,

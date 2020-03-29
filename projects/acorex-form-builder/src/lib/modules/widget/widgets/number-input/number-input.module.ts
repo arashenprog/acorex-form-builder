@@ -11,11 +11,11 @@ import {
     AXF_VALIDATION_PROPERTY,
     AXF_TAG_PROPERTY
 } from '../../config/general-properties';
-import { AXFTextInputWidgetDesigner } from './designer/text-input-widget.designer';
-import { AXFTextInputWidgetPrint } from './print/text-input-widget.print';
-import { AXFTextInputWidgetView } from './view/text-input-widget.view';
+import { AXFNumberInputWidgetDesigner } from './designer/number-input-widget.designer';
+import { AXFNumberInputWidgetPrint } from './print/number-input-widget.print';
+import { AXFNumberInputWidgetView } from './view/number-input-widget.view';
 
-export const COMPONENTS = [AXFTextInputWidgetDesigner, AXFTextInputWidgetView, AXFTextInputWidgetPrint]
+export const COMPONENTS = [AXFNumberInputWidgetDesigner, AXFNumberInputWidgetView, AXFNumberInputWidgetPrint]
 
 @NgModule({
     declarations: [...COMPONENTS],
@@ -24,19 +24,19 @@ export const COMPONENTS = [AXFTextInputWidgetDesigner, AXFTextInputWidgetView, A
     entryComponents: [...COMPONENTS],
     providers: [],
 })
-export class AXFTextInputWidgetModule {
+export class AXFNumberInputWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: 'Text Input',
-            hint: 'Text input element',
+            title: 'Number Input',
+            hint: 'Number input element',
             icon: 'fas fa-i-cursor',
             category: 'Editors',
             visible: true,
-            name: 'textbox',
-            designerClass: AXFTextInputWidgetDesigner,
-            printClass: AXFTextInputWidgetPrint,
-            viewClass: AXFTextInputWidgetView,
-            options: { 
+            name: 'numberbox',
+            designerClass: AXFNumberInputWidgetDesigner,
+            printClass: AXFNumberInputWidgetPrint,
+            viewClass: AXFNumberInputWidgetView,
+            options: {
             },
             properties: [
                 AXF_PLACEHOLDER_PROPERTY,

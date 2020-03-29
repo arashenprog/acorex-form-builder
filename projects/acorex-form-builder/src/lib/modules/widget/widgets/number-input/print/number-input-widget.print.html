@@ -1,0 +1,5 @@
+<div [ngStyle]="{'border-bottom':(textStyle && textStyle.includes('underline')) ? '1px solid black':null}">
+    <span [ngStyle]="{'fontWeight':(textStyle && textStyle.includes('bold')) ? 'bold' : 'inherit',
+'fontStyle':(textStyle && textStyle.includes('italic')) ? 'italic' : 'inherit'}">
+{{value ? value : (placeholder? placeholder:'&nbsp;' )}}</span>
+</div>

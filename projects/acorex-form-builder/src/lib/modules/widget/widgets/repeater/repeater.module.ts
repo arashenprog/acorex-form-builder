@@ -24,7 +24,7 @@ export class AXFRepeaterlWidgetModule {
         service.register({
             title: 'Repeater',
             hint: 'Repeater container element',
-            icon: 'fas fa-repeat',
+            icon: 'fa fa-sync',
             category: 'Layout',
             visible: true,
             name: 'repeater',

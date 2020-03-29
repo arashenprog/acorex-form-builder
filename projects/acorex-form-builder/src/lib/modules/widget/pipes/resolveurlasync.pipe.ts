@@ -12,8 +12,8 @@ export class ResolveUrlPipe implements PipeTransform {
        
     }
 
-    transform(url: string):Promise<string> {
-        if(url.includes("base64"))
+    transform(url: string):Promise<string> { 
+        if(url.includes("base64") || url==undefined)
         return new Promise((resolve) => { resolve(url)});
         else
         return new Promise((resolve) => { 
