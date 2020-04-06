@@ -345,7 +345,7 @@ export abstract class AXFWidgetView extends AXFWidget {
                     if (act === 'submit()') {
                         this.dataService.submit();
                         return;
-                    }
+                    } 
                     const allWidgets = act.match(/\#([a-zA-Z1-9])+/g);
                     const allVars = act.match(/\$([a-zA-Z1-9])+/g);
                     let execCode = act;
@@ -425,11 +425,17 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
     }
     public set value(v: any) {
         if (JSON.stringify(v) !== JSON.stringify(this._value)) {
+            let oldVal=this._value;
             this._value = v;
             this.valueChange.emit(v);
             const name: string = this.getPath();
             if (name) {
                 this.dataService.setValue(name, v);
+                let info={
+                    config:{componentName:this.config["name"],name:this.config.options["name"],tag:this.config.options["tag"]}, 
+                    eventName:"valueChange",
+                    value:{newValue:this._value,oldValue:oldVal}};
+                this.dataService.callEvent(info);
             }
             this.invokeEvent('onValueChange');
             this.cdr.markForCheck();
