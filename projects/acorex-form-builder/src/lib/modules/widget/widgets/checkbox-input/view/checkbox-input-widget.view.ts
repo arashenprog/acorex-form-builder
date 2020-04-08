@@ -15,8 +15,18 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
     }
 
 
-    onRender(): void {
-        // this.applyStyle(this.el.nativeElement.querySelector("label"));
-        // this.cdr.markForCheck();
+    onRender(): void { 
+        if(this.label.match(/\[(.*?)\]/g) && this['rIndex'] >= 0 && this['dataContext']!=undefined)
+        { 
+            this.label.match(/\[(.*?)\]/g).forEach(f=>{
+               let sw= f.substring(1, f.length - 1);
+               if(this['dataContext'].hasOwnProperty(sw))
+               {
+                 this.label=this.label.replace(f,this['dataContext'][sw]);
+               }
+            }) 
+            this.cdr.markForCheck();
+            // this.applyStyle(this.el.nativeElement.querySelector("label")); 
+        } 
     }
 }
