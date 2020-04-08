@@ -51,6 +51,14 @@ export class AXFDataService {
         this.dataChangeSubject.next(this.dataModel);
     }
 
+    callEvent(info:any): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.connectService.send('callEvent', info).then(() => {
+                resolve();
+            });
+        });
+    }
+
     getValue(name: string) {
         return this.getPropByPath(this.dataModel, name);
     }
