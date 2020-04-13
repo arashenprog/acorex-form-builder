@@ -35,7 +35,7 @@
                     </div>
                     <div class="breadcrumb">
                         <ul>
-                            <li *ngFor="let item of docTreeItems" (click)="handleBreadcrumbClick(item)">{{item.config.title}}</li>
+                            <li *ngFor="let item of docTreeItems" (click)="handleBreadcrumbClick(item)">{{getTitle(item.config)}}</li>
                         </ul>
                     </div>
                 </div>

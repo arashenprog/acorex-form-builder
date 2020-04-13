@@ -7,26 +7,24 @@ import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
- 
+
     label: string;
 
-    constructor(private el: ElementRef<HTMLElement>,protected cdr: ChangeDetectorRef) {
+    constructor(private el: ElementRef<HTMLElement>, protected cdr: ChangeDetectorRef) {
         super(cdr);
     }
 
 
-    onRender(): void { 
-        if(this.label.match(/\[(.*?)\]/g) && this['rIndex'] >= 0 && this['dataContext']!=undefined)
-        { 
-            this.label.match(/\[(.*?)\]/g).forEach(f=>{
-               let sw= f.substring(1, f.length - 1);
-               if(this['dataContext'].hasOwnProperty(sw))
-               {
-                 this.label=this.label.replace(f,this['dataContext'][sw]);
-               }
-            }) 
+    onRender(): void {
+        if (this.label.match(/\[(.*?)\]/g) && this['rIndex'] >= 0 && this['dataContext'] != undefined) {
+            this.label.match(/\[(.*?)\]/g).forEach(f => {
+                let sw = f.substring(1, f.length - 1);
+                if (this['dataContext'].hasOwnProperty(sw)) {
+                    this.label = this.label.replace(f, this['dataContext'][sw]);
+                }
+            })
             this.cdr.markForCheck();
             // this.applyStyle(this.el.nativeElement.querySelector("label")); 
-        } 
+        }
     }
 }

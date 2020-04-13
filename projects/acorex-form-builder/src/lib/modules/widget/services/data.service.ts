@@ -51,7 +51,7 @@ export class AXFDataService {
         this.dataChangeSubject.next(this.dataModel);
     }
 
-    callEvent(info:any): Promise<void> {
+    callEvent(info: any): Promise<void> {
         return new Promise((resolve, reject) => {
             this.connectService.send('callEvent', info).then(() => {
                 resolve();
@@ -85,7 +85,7 @@ export class AXFDataService {
         return Promise.all([p1]);
     }
 
-   //@memoize({ promise: true })
+    //@memoize({ promise: true })
     getList(dataSourceName: string, params?: any): Promise<any[]> {
         return new Promise<any[]>((resolve, reject) => {
             const keyValObject = {};
@@ -247,11 +247,13 @@ export class AXFDataService {
 
     submit(html?: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.connectService.send('submit', {
-                data: this.dataModel,
-                html
-            }).then(() => {
-                resolve();
+            this.validate().then(c => {
+                this.connectService.send('submit', {
+                    data: this.dataModel,
+                    html
+                }).then(() => {
+                    resolve();
+                });
             });
         });
     }

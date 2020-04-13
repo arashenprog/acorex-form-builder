@@ -35,7 +35,6 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     }
 
     refresh() {
-        debugger
         if (this.dataSource.mode == "remote") {
             this.dataService.getList(
                 this.dataSource.dataSource.name,
@@ -45,15 +44,6 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
                 this.cdr.detectChanges();
             })
         }
-        // else {
-        //     debugger
-        //     if (this.value == undefined && this.value == null) {
-        //         this.value = [];
-        //         this.value.push(this.dataSource.dataItems[0][this.dataSource.columns[0].fieldName]);
-        //         this.cdr.markForCheck();
-
-        //     }
-        // }
     }
 
     

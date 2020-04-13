@@ -13,8 +13,8 @@ export abstract class AXFTemplateService {
     abstract saveForm(name: string, type: 'form' | 'widget', widget: WidgetConfig, description?: string): PromisResult<boolean>;
 
     abstract load(): PromisResult<AXFTemplateModel>;
-    
-    abstract get(id: string): PromisResult<AXFTemplateModel>;
+
+    abstract get(id: string, findName?: boolean): PromisResult<AXFTemplateModel>;
 
     abstract getFormList(): PromisResult<AXFTemplateModel[]>;
 

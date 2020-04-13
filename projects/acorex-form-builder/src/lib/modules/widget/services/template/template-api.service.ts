@@ -67,7 +67,7 @@ export class AXFAPITemplateService extends AXFTemplateService {
         });
     }
 
-    public get(id: string): PromisResult<AXFTemplateModel> {
+    public get(id: string, findName?: boolean): PromisResult<AXFTemplateModel> {
         if (this.cacheList.some(c => c.id === id && c.template)) {
             const tpl = this.cacheList.find(c => c.id === id && c.template);
             // clone
@@ -86,10 +86,23 @@ export class AXFAPITemplateService extends AXFTemplateService {
             this.connectService.send('load', {
                 id,
             }).then((c) => {
-                w.name = c.name;
                 w.template = c.widgets;
-                resolve(w);
-                this.emitLoadingEvent();
+                w.name = c.name;
+                if (!w.name && findName) {
+                    this.getWidgetList().then(ll => {
+                        const ww = ll.find(i => i.id === id);
+                        console.log('map widget', ww, ll, id);
+                        if (ww) {
+                            w.name = ww.name;
+                        }
+                        resolve(w);
+                        
+                        this.emitLoadingEvent();
+                    });
+                } else {
+                    resolve(w);
+                    this.emitLoadingEvent();
+                }
             });
         });
     }

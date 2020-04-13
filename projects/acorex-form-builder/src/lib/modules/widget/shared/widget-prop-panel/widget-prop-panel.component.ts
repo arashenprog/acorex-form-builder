@@ -59,10 +59,11 @@ export class AXFWidgetPropPanelComponent {
             order: 11,
             collapsed: false
         },
-       
+
     ]
 
     tabNames: any[] = [];
+    title: string;
 
     constructor(private cdr: ChangeDetectorRef, private eventService: EventService) {
         eventService.on("SELECT", c => {
@@ -76,6 +77,12 @@ export class AXFWidgetPropPanelComponent {
                     }
                 });
                 this.tabNames = this.tabNames.sort(this.sortByOrder);
+                if (this.widget.config.name === 'outlet' && this.widget.config.options.title) {
+                    this.title = `${this.widget.config.title} (${this.widget.config.options.title})`;
+                } else {
+                    this.title = this.widget.config.title;
+                }
+
                 this.cdr.markForCheck();
             }
         });

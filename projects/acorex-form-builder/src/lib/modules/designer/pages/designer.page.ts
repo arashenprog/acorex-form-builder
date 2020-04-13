@@ -171,4 +171,12 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             });
         }
     }
+
+    getTitle(widget: WidgetConfig) {
+        if (widget.name === 'outlet' && widget.options.title) {
+            return `${widget.title} (${widget.options.title})`;
+        } else {
+            return widget.title;
+        }
+    }
 }

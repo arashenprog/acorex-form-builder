@@ -21,7 +21,6 @@ export class AXFPanelWidgetView extends AXFWidgetView {
     constructor(private formatService: AXFFormatService) {
         super();
         this.dataSubscription = this.dataService.onChange.subscribe((data) => {
-            debugger;
             this.internalCaption = this.formatService.format(this.caption, this);
         });
     }

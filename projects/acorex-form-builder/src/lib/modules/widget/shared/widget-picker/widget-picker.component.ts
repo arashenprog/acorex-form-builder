@@ -29,8 +29,9 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
             }
         });
         this.templateService.getWidgetList().then(c => {
-            if (c && c.length)
+            if (c && c.length) {
                 this.templates.push(...c);
+            }
         });
     }
 
@@ -45,22 +46,23 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
 
     selectTemplate(tpl: AXFTemplateModel) {
         this.templateService.get(tpl.id).then(c => {
-            let widget = this.widgetService.parse(c.template);
+
+            const widget = this.widgetService.parse(c.template);
             this.dialogService.show(
-                "Add saved widget",
-                "Do you want to add it as a referenced widget?",
+                'Add saved widget',
+                'Do you want to add it as a referenced widget?',
                 ...[
-                    { name: "cancel", text: "Cancel", type: "success" },
-                    { name: "no", text: "No", type: "danger" },
-                    { name: "yes", text: "Yes", type: "info" }
+                    { name: 'cancel', text: 'Cancel', type: 'success' },
+                    { name: 'no', text: 'No', type: 'danger' },
+                    { name: 'yes', text: 'Yes', type: 'info' }
                 ]
             ).then(name => {
-                if (name == "yes") {
-                    let outlet = this.widgetService.resolve("outlet");
+                if (name === 'yes') {
+                    const outlet = this.widgetService.resolve('outlet');
                     outlet.options.widgetId = c.id;
+                    outlet.options.title = tpl.name;
                     this.close([outlet]);
-                }
-                else if (name == "no") {
+                } else if (name === 'no') {
                     this.close(widget.options.widgets);
                 }
             });

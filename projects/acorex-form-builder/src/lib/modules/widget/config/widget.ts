@@ -346,6 +346,7 @@ export abstract class AXFWidgetView extends AXFWidget {
                     }
                     execCode = execCode.replace('#', 'this.').replace('$', 'this.$');
                     execCode = execCode.replace(/\[/, '').replace(/]/, '');
+                    console.log(execCode);
                     new Function(`try {${execCode}} catch(e){  }`).call(params);
                 });
 

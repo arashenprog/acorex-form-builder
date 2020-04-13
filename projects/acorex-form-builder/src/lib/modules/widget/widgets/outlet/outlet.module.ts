@@ -24,7 +24,7 @@ export const COMPONENTS = [
 export class AXFPageOutletWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: 'Saved Template',
+            title: 'Saved Widget',
             hint: 'Load template from gallery',
             icon: 'fas fa-database',
             category: 'Gallery',
@@ -35,10 +35,17 @@ export class AXFPageOutletWidgetModule {
             viewClass: AXFOutletWidgetView,
             properties: [
                 {
-                    editor: "TextEditor",
-                    category: "Data",
-                    name: "widgetId",
-                    title: "",
+                    editor: 'TextEditor',
+                    category: 'Data',
+                    name: 'widgetId',
+                    title: '',
+                    visible: false
+                },
+                {
+                    editor: 'TextEditor',
+                    category: 'Data',
+                    name: 'title',
+                    title: '',
                     visible: false
                 },
                 AXF_VISIBLE_PROPERTY,
