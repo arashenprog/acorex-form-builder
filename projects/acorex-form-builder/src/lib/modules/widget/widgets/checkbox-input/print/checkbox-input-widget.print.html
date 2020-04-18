@@ -1,6 +1,6 @@
-<table>
+<table style="width: 100%;">
     <tr>
-        <td>
+        <td style="display: inline-block;">
             <div style="border: 2px solid #000;" [style.width.px]='size' [style.height.px]='size'>
                 <div *ngIf="value"
                     style="background-size: contain;
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </td>
-        <td>
+        <td *ngIf="label!=''">
             <span style="font-size: small;">{{label | word}}</span></td>
     </tr>
 </table>
