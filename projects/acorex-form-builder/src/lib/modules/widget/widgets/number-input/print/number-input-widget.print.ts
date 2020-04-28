@@ -8,6 +8,7 @@ export class AXFNumberInputWidgetPrint extends AXFWidgetPrint {
 
     placeholder: string;
     textStyle: string[];
+    textAlign:string;
     constructor(private cdr: ChangeDetectorRef) {
         super();
     }

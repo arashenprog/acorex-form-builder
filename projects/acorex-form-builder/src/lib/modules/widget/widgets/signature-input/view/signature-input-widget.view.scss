@@ -31,6 +31,11 @@
 .signature {
     border: 1px black solid;
     position: relative; 
+    max-width: 100%;
+    img{
+        max-width: 100%;
+    }
+
     .clear-box {
         background-color: white;
         position: absolute;

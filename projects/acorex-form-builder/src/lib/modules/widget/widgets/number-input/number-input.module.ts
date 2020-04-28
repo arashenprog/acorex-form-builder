@@ -9,7 +9,8 @@ import {
     AXF_VISIBLE_PROPERTY,
     AXF_TEXT_STYLE_PROPERTY,
     AXF_VALIDATION_PROPERTY,
-    AXF_TAG_PROPERTY
+    AXF_TAG_PROPERTY,
+    AXF_HORIZONTAL_ALIGNMENT_PROPERTY
 } from '../../config/general-properties';
 import { AXFNumberInputWidgetDesigner } from './designer/number-input-widget.designer';
 import { AXFNumberInputWidgetPrint } from './print/number-input-widget.print';
@@ -45,6 +46,7 @@ export class AXFNumberInputWidgetModule {
                 AXF_NAME_PROPERTY,
                 AXF_VALIDATION_PROPERTY,
                 AXF_TAG_PROPERTY,
+                AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
             ]
         })
     }

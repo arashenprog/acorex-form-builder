@@ -82,6 +82,12 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             text: 'Save',
             style: 'ax-success',
         },
+        {
+            startIcon: 'fas fa-undo',
+            name: 'back',
+            text: 'Back',
+            style: 'light',
+        },
     ];
 
 
@@ -118,6 +124,14 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                     });
                     break;
                 }
+                case 'back':
+                    {
+                        this.connectService.send('back', {
+                            name:'',
+                            type:'form', 
+                            template: this.widgetService.serialize(this.widgets[0])
+                        })
+                    }
         }
     }
 
