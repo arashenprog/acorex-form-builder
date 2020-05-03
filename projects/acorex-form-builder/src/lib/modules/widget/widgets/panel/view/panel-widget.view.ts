@@ -27,6 +27,7 @@ export class AXFPanelWidgetView extends AXFWidgetView {
 
     ngOnInit() {
         super.ngOnInit();
+        debugger;
         this.internalCaption = this.formatService.format(this.caption, this);
     }
 

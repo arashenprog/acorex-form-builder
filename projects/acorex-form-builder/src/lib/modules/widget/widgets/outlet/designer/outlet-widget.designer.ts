@@ -17,7 +17,9 @@ export class AXFOutletWidgetDesigner extends AXFWidgetDesigner {
     }
 
     ngOnInit() {
-        this.templateService.get(this.widgetId, true).then(c => {
+        debugger;
+        this.templateService.get(this.widgetId).then(c => {
+            debugger;
             this.widgets = this.widgetService.parse(c.template).options.widgets;
             if (c.name && !this.config.options.title) {
                 this.config.options.title = c.name;

@@ -20,8 +20,8 @@ export class AXFFormatService {
             const parts = value.split('|');
             result.word = parts[0].trim();
             for (let i = 1; i < parts.length; i++) {
-                const pipe = parts[i].trim();
-                if (this[pipe]) {
+                const pipe = parts[i];
+                if (this[pipe.split(':')[0].trim()]) {
                     result.formetters.push(pipe);
                 }
             }
@@ -77,8 +77,10 @@ export class AXFFormatService {
                     }
                     if (word) {
                         for (let i = 0; i < ww.formetters.length; i++) {
-                            const pipe = ww.formetters[i];
-                            word = this[pipe](word);
+                            const pipeParts = ww.formetters[i].split(':');
+                            const pipe = pipeParts[0].trim();
+                            const pipeParams = pipeParts.slice(1);
+                            word = this[pipe](word, pipeParams);
                         }
                     }
                     value = value.replace(w, word || '');
@@ -100,5 +102,22 @@ export class AXFFormatService {
 
     private number(value: string) {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    private array(values: any[], params) {
+        if (!Array.isArray(params) || params.length === 0) {
+            return values.toString();
+        }
+        if (params.length === 1) {
+            return values.map(c => c != null && c[params[0]]).join(', ');
+        }
+        if (params.length === 2) {
+            const f = eval(`(x) => x!=null && x.${params[0]} `);
+            return values.filter(f).map(c => c[params[1]]).join(', ');
+        }
+        if (params.length === 3) {
+            const f = eval(`(x) =>  x!=null && x.${params[0]} `);
+            return values.filter(f).map(c => c[params[1]]).join(params[2]);
+        }
     }
 }

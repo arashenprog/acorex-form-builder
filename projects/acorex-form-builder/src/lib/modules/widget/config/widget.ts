@@ -82,7 +82,7 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             el.style.fontStyle = this['textStyle'].includes('italic') ? 'italic' : 'inherit';
             el.style.textDecoration = this['textStyle'].includes('underline') ? 'underline' : 'inherit';
             el.style.wordBreak = this['textStyle'].includes('break') ? 'break-all' : 'unset';
-            if(this['textStyle'].includes('break'))
+            if (this['textStyle'].includes('break'))
                 el.style.width = '10px';
         }
         el.style.width = this['width'];
@@ -274,16 +274,16 @@ export abstract class AXFWidgetView extends AXFWidget {
 
     protected dataService: AXFDataService;
 
-   
 
-    protected getPath() {
+
+    protected getPath(): string {
         if (this.config.options.name == null || this.config.options.name === '') {
             if (this['rIndex'] >= 0) {
                 return this.getParentPath() ?
                     `${this.getParentPath()}[${this['rIndex']}]`
                     : null;
             }
-            return  this.getParentPath();
+            return this.getParentPath();
         }
         if (this['rIndex'] >= 0) {
             return this.getParentPath() ?
@@ -295,13 +295,13 @@ export abstract class AXFWidgetView extends AXFWidget {
             : this.config.options.name;
     }
 
-    protected getParentPath() {
+    protected getParentPath(): string {
         const parts: string[] = [];
         let prt = this.parent;
         while (prt != null) {
             if (prt.config && prt.config.options &&
                 (prt.config.options.name ||
-                    (prt.rIndex !== undefined && prt.config.name !== 'table-cell' && prt.config.name !== 'table-row' )
+                    (prt.rIndex !== undefined && prt.config.name !== 'table-cell' && prt.config.name !== 'table-row')
                 )
             ) {
                 if (prt.rIndex !== undefined) {
@@ -312,7 +312,15 @@ export abstract class AXFWidgetView extends AXFWidget {
             }
             prt = prt.parent;
         }
-        return  [...new Set( parts)].reverse().join('.').split('.[').join('[');
+        return [...new Set(parts)].reverse().join('.').split('.[').join('[');
+    }
+
+    protected getName(): string {
+        return this.config.options.name;
+    }
+
+    protected getParentName(): string {
+        return this.getPath().split('.').reverse().slice(1).reverse().join('.');
     }
 
 
@@ -324,30 +332,37 @@ export abstract class AXFWidgetView extends AXFWidget {
                     if (act === 'submit()') {
                         this.dataService.submit();
                         return;
-                    } 
-                    const allWidgets = act.match(/\#([a-zA-Z1-9])+/g);
-                    const allVars = act.match(/\$([a-zA-Z1-9])+/g);
+                    }
+                    const allWidgets = act.match(/\#\#*([a-zA-Z1-9])+/g);
+                    const allVars = act.match(/\$\$*([a-zA-Z1-9])+/g);
+                    const widgetRefs: AXFWidget[] = [];
                     let execCode = act;
                     const params = {};
                     if (allWidgets) {
                         allWidgets.forEach(w => {
-                            const wname = this.resolveProperty(w.substring(1));
+                            const wname = w.substring(1).startsWith('#') ? w.substring(2) : this.resolveProperty(w.substring(1));
                             const widget = this.dataService.getWidget(wname);
                             let p = '_' + wname.split('.').join('_');
                             p = p.replace(/\[/, '').replace(/]/, '');
                             params[p] = widget;
+                            widgetRefs.push(widget);
                             execCode = execCode.replace(w, '#' + p);
                         });
                     }
                     if (allVars) {
                         allVars.forEach(v => {
-                            params[v] = this.dataService.getValue(this.resolveProperty(v));
+                            params[v] = v.substring(1).startsWith('$') ? this.dataService.getValue(v.substring(2)) : this.dataService.getValue(this.resolveProperty(v.substring(1)));
                         });
                     }
                     execCode = execCode.replace('#', 'this.').replace('$', 'this.$');
                     execCode = execCode.replace(/\[/, '').replace(/]/, '');
                     console.log(execCode);
-                    new Function(`try {${execCode}} catch(e){  }`).call(params);
+                    new Function(`try {${execCode}} catch(e){   }`).call(params);
+                    widgetRefs.forEach(w => {
+                        if (w) {
+                            w.refresh();
+                        }
+                    });
                 });
 
             }
@@ -405,22 +420,37 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
     }
     public set value(v: any) {
         if (JSON.stringify(v) !== JSON.stringify(this._value)) {
-            let oldVal=this._value;
-            this._value = v;
-            this.valueChange.emit(v);
-            const name: string = this.getPath();
-            if (name) {
-                this.dataService.setValue(name, v);
-                let info={
-                    config:{componentName:this.config["name"],name:this.config.options["name"],tag:this.config.options["tag"]}, 
-                    eventName:"valueChange",
-                    value:{newValue:this._value,oldValue:oldVal}};
-                this.dataService.callEvent(info);
-            }
-            this.invokeEvent('onValueChange');
-            this.cdr.markForCheck();
-            this.cdr.detectChanges();
+            this.internalSetValue(v);
         }
+    }
+
+    protected internalSetValue(v: any) {
+        let oldVal = this._value;
+        this._value = v;
+        this.valueChange.emit(v);
+        const name: string = this.getPath();
+        if (name) {
+            // if (this['dataContext'] && this.getName() && typeof (v) !== 'object') {
+            //     debugger;
+            //     const vv = {};
+            //     vv[this.getName()] = v;
+            //     Object.assign(this['dataContext'], vv);
+            //     this.dataService.setValue(this.getParentName(), this['dataContext']);
+            // }
+            // else {
+            //     this.dataService.setValue(name, v);
+            // }
+            this.dataService.setValue(name, v);
+            const info = {
+                config: { componentName: this.config['name'], name: this.config.options['name'], tag: this.config.options['tag'] },
+                eventName: 'valueChange',
+                value: { newValue: this._value, oldValue: oldVal }
+            };
+            this.dataService.callEvent(info);
+        }
+        this.invokeEvent('onValueChange');
+        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 
     protected extractValue(): any {
