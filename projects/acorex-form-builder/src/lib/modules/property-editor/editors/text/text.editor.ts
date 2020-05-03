@@ -1,9 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
 import { AXPopupService } from 'acorex-ui';
-import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import { AXFRichTextComponent } from './rich-text.component';
 
 @Component({

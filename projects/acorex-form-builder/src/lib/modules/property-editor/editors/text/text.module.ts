@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { AXFEditorService } from '../../services/editor.service';
 import { AXFTextEditorComponent } from './text.editor';
 import { ACoreXUIModule } from 'acorex-ui';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AXFRichTextComponent } from './rich-text.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [AXFTextEditorComponent,AXFRichTextComponent],
-    imports: [CommonModule,ACoreXUIModule,CKEditorModule],
+    declarations: [AXFTextEditorComponent, AXFRichTextComponent],
+    imports: [CommonModule, ACoreXUIModule,FormsModule, AngularEditorModule],
     exports: [AXFTextEditorComponent],
     entryComponents: [AXFTextEditorComponent],
     providers: [],

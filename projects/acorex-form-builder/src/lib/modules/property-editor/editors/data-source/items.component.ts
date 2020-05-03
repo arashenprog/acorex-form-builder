@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AXBasePageComponent, AXUploadFileLoadEvent } from 'acorex-ui';
 import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events';
 import { AXFDataSourceColumnOption } from './data-source.class';
-import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
 @Component({
     templateUrl: './items.component.html',
