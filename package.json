@@ -14,7 +14,7 @@
   "dependencies": {
     "@agm/core": "^1.1.0",
     "@angular/animations": "^9.0.1",
-    "@angular/cdk": "^8.2.3",
+    "@angular/cdk": "^9.2.2",
     "@angular/common": "^9.0.1",
     "@angular/compiler": "^9.0.1",
     "@angular/core": "^9.0.1",
@@ -26,7 +26,6 @@
     "@ckeditor/ckeditor5-build-classic": "^12.4.0",
     "@ckeditor/ckeditor5-editor-classic": "^15.0.0",
     "@fortawesome/fontawesome-free": "^5.11.2",
-    "acorex-spa": "file:C:/ACoreX/acorex-spa-0.0.1.tgz",
     "acorex-ui": "file:C:/ACoreX/acorex-ui-0.0.1.tgz",
     "angular2-signaturepad": "^2.9.0",
     "bootstrap": "^4.3.1",
