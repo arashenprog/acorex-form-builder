@@ -2,8 +2,6 @@ import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, ViewChild, 
 import { AXPopupService, AXBasePageComponent, AXHtmlUtil, MenuItem, EventService, AXToastService, AXToolbarMenuComponent } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { AXFWidgetContainer, AXFWidgetDesigner } from '../../widget/config/widget';
-import { AXFLoadTemplatePage } from './template/load-template.page';
-import { AXFSaveTemplatePage } from './template/save-template.page';
 import { AXFConnectService } from '../../widget/services/connect.service';
 import { AXFTemplateService } from '../../widget/services/template/template.service';
 
@@ -135,19 +133,6 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         }
     }
 
-    handleStartClick() {
-        const page = this.widgetService.resolve('page');
-        Object.assign(page.options, { uid: AXHtmlUtil.getUID() });
-        this.widgets.push(page);
-    }
-
-    handleLoadClick() {
-        this.popup.open(AXFLoadTemplatePage, 'Load Template').closed(c => {
-            if (c.data) {
-                this.widgets.push(c.data);
-            }
-        });
-    }
 
     handleBreadcrumbClick(item: AXFWidgetDesigner) {
         this.eventService.broadcast('SELECT', item);
