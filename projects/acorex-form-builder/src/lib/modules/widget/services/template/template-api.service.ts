@@ -88,21 +88,21 @@ export class AXFAPITemplateService extends AXFTemplateService {
             }).then((c) => {
                 w.template = c.widgets;
                 w.name = c.name;
-                if (!w.name && findName) {
-                    this.getWidgetList().then(ll => {
-                        const ww = ll.find(i => i.id === id);
-                        console.log('map widget', ww, ll, id);
-                        if (ww) {
-                            w.name = ww.name;
-                        }
-                        resolve(w);
+                // if (!w.name && findName) {
+                //     this.getWidgetList().then(ll => {
+                //         const ww = ll.find(i => i.id === id);
+                //         console.log('map widget', ww, ll, id);
+                //         if (ww) {
+                //             w.name = ww.name;
+                //         }
+                //         resolve(w);
                         
-                        this.emitLoadingEvent();
-                    });
-                } else {
+                //         this.emitLoadingEvent();
+                //     });
+                // } else {
                     resolve(w);
                     this.emitLoadingEvent();
-                }
+                // }
             });
         });
     }

@@ -77,8 +77,8 @@ export class AXFWidgetPropPanelComponent {
                     }
                 });
                 this.tabNames = this.tabNames.sort(this.sortByOrder);
-                if (this.widget.config.name === 'outlet' && this.widget.config.options.title) {
-                    this.title = `${this.widget.config.title} (${this.widget.config.options.title})`;
+                if (this.widget.config.name === 'outlet' && this.widget.config.options.widgetTitle) {
+                    this.title = `${this.widget.config.title} (${this.widget.config.options.widgetTitle})`;
                 } else {
                     this.title = this.widget.config.title;
                 }

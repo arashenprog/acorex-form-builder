@@ -60,7 +60,7 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
                 if (name === 'yes') {
                     const outlet = this.widgetService.resolve('outlet');
                     outlet.options.widgetId = c.id;
-                    outlet.options.title = tpl.name;
+                    outlet.options.widgetTitle = tpl.name;
                     this.close([outlet]);
                 } else if (name === 'no') {
                     this.close(widget.options.widgets);

@@ -187,8 +187,8 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     }
 
     getTitle(widget: WidgetConfig) {
-        if (widget.name === 'outlet' && widget.options.title) {
-            return `${widget.title} (${widget.options.title})`;
+        if (widget.name === 'outlet' && widget.options.widgetTitle) {
+            return `${widget.title} (${widget.options.widgetTitle})`;
         } else {
             return widget.title;
         }

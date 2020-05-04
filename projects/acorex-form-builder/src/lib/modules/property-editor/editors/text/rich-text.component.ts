@@ -23,7 +23,8 @@ export class AXFRichTextComponent extends AXBasePageComponent {
         sanitize: false,
         toolbarHiddenButtons: [
             [],
-            ['insertImage',
+            [
+                'insertImage',
                 'insertVideo'
             ]
         ]
@@ -34,7 +35,6 @@ export class AXFRichTextComponent extends AXBasePageComponent {
     }
 
     setValue(value) {
-        debugger;
         this.data = value;
     }
 

@@ -17,12 +17,10 @@ export class AXFOutletWidgetDesigner extends AXFWidgetDesigner {
     }
 
     ngOnInit() {
-        debugger;
         this.templateService.get(this.widgetId).then(c => {
-            debugger;
             this.widgets = this.widgetService.parse(c.template).options.widgets;
-            if (c.name && !this.config.options.title) {
-                this.config.options.title = c.name;
+            if (c.name && !this.config.options.widgetTitle) {
+                this.config.options.widgetTitle = c.name;
             }
             this.isLoading = false;
             this.refresh();

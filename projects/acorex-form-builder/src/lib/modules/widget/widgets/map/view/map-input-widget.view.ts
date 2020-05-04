@@ -49,7 +49,6 @@ export class AXFMapInputWidgetView extends AXFValueWidgetView  {
     //   })
     // });
 
-    debugger;
     this.map1 = new ol.Map({
         target: 'map',
         layers: [
