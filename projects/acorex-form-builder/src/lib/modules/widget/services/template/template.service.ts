@@ -1,7 +1,7 @@
 
 import { PromisResult } from 'acorex-ui';
 import { WidgetConfig } from '../widget.service';
-import { AXFTemplateModel } from '../db/database';
+import { AXFTemplateModel, AFXSaveTemplateModel } from '../db/database';
 import { Observable } from 'rxjs';
 
 
@@ -10,7 +10,7 @@ export abstract class AXFTemplateService {
 
     abstract checkExists(name: string): PromisResult<boolean>;
 
-    abstract saveForm(name: string, type: 'form' | 'widget', widget: WidgetConfig, description?: string): PromisResult<boolean>;
+    abstract saveForm(model: AFXSaveTemplateModel): PromisResult<boolean>;
 
     abstract load(): PromisResult<AXFTemplateModel>;
 

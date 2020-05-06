@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { PromisResult, AXHtmlUtil } from 'acorex-ui';
 import { AXFConnectService } from '../connect.service';
 import { AXFWidgetService, WidgetConfig } from '../widget.service';
-import { AXFTemplateModel } from '../db/database';
+import { AXFTemplateModel, AFXSaveTemplateModel } from '../db/database';
 import { AXFTemplateService } from './template.service';
 import { Subject, Observable } from 'rxjs';
 
@@ -36,13 +36,14 @@ export class AXFAPITemplateService extends AXFTemplateService {
         this.statusSubject.next(this.cacheList.some(c => c.template == null));
     }
 
-    public saveForm(name: string, type: 'form' | 'widget', widget: WidgetConfig, description?: string): PromisResult<boolean> {
+    public saveForm(prm:AFXSaveTemplateModel): PromisResult<boolean> {
         return new PromisResult((resolve) => {
             this.connectService.send('save', {
-                name,
-                type,
-                description,
-                template: this.widgetService.serialize(widget)
+                name:prm.name,
+                type:prm.type,
+                description:prm.description,
+                template: this.widgetService.serialize(prm.widget),
+                printHtml:prm.printHtml
             }).then(() => {
                 resolve(true);
             });

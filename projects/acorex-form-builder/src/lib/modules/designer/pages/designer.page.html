@@ -46,3 +46,7 @@
         <axf-viewer-frame [page]="widgets[0]"></axf-viewer-frame>
     </article>
 </div>
+<div  style="display: none;" *ngIf="printRendering" #print>
+    <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [mode]="'print'">
+    </ng-container>
+</div>

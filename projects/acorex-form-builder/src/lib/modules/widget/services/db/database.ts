@@ -1,4 +1,13 @@
 import Dexie from 'dexie';
+import { WidgetConfig } from '../widget.service';
+
+export interface AFXSaveTemplateModel{
+    name: string, 
+    type: 'form' | 'widget', 
+    widget: WidgetConfig, 
+    description?: string,
+    printHtml?:string
+}
 
 export interface AXFTemplateModel {
     id: string;
