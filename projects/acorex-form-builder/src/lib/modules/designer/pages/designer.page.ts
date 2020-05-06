@@ -4,6 +4,7 @@ import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.ser
 import { AXFWidgetContainer, AXFWidgetDesigner } from '../../widget/config/widget';
 import { AXFConnectService } from '../../widget/services/connect.service';
 import { AXFTemplateService } from '../../widget/services/template/template.service';
+import { AFXSaveTemplateModel } from '../../widget/services/db/database';
 
 @Component({
     templateUrl: './designer.page.html',
@@ -17,6 +18,9 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
 
     @ViewChild('actionToolbar')
     actionToolbar: AXToolbarMenuComponent;
+
+    @ViewChild('print')
+    printDiv: ElementRef<HTMLDivElement>;
 
     constructor(
         private popup: AXPopupService,
@@ -52,6 +56,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     mode = 'designer';
     view = 'designer';
     isSaving: boolean = false;
+    printRendering: boolean = false;
 
     viewModeItems: MenuItem[] = [
         {
@@ -113,13 +118,25 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                     this.isSaving = true;
                     this.actionItems[0].startIcon = 'fas fa-spinner fa-pulse';
                     this.actionToolbar.update();
-                    console.log(this.widgetService.serialize(this.widgets[0]));
-                    this.templateService.saveForm('', 'form', this.widgets[0]).then(s => {
-                        this.actionItems[0].startIcon = 'fas fa-save';
-                        this.isSaving = false;
-                        this.actionToolbar.update();
-                        this.toastService.success('Saved successfuly!');
-                    });
+                    //console.log(this.widgetService.serialize(this.widgets[0]));
+                    this.printRendering = true; 
+                    setTimeout(() => {
+                        const html = this.printDiv.nativeElement.innerHTML;
+                        let body = '<html><head><meta charset="utf-8"/>' +
+                        '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+                        + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
+                        body = body + html + '</body></html>';
+
+                        let param:AFXSaveTemplateModel= {name:'',type:'form',widget:this.widgets[0],printHtml:body};
+                        this.templateService.saveForm(param).then(s => {
+                            this.actionItems[0].startIcon = 'fas fa-save';
+                            this.isSaving = false;
+                            this.actionToolbar.update();
+                            this.printRendering = false; 
+                            this.toastService.success('Saved successfuly!');
+                        }); 
+                    }, 2000);
+                    
                     break;
                 }
                 case 'back':
