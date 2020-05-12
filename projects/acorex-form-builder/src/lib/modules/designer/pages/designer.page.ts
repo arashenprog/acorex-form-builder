@@ -57,7 +57,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     view = 'designer';
     isSaving: boolean = false;
     printRendering: boolean = false;
-    name:string="";
+    name: string = "";
 
     viewModeItems: MenuItem[] = [
         {
@@ -120,34 +120,34 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                     this.actionItems[0].startIcon = 'fas fa-spinner fa-pulse';
                     this.actionToolbar.update();
                     //console.log(this.widgetService.serialize(this.widgets[0]));
-                    this.printRendering = true; 
+                    this.printRendering = true;
                     setTimeout(() => {
                         const html = this.printDiv.nativeElement.innerHTML;
                         let body = '<html><head><meta charset="utf-8"/>' +
-                        '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
-                        + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
+                            '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+                            + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
                         body = body + html + '</body></html>';
 
-                        let param:AFXSaveTemplateModel= {name:'',type:'form',widget:this.widgets[0],printHtml:body};
+                        let param: AFXSaveTemplateModel = { name: '', type: 'form', widget: this.widgets[0], printHtml: body };
                         this.templateService.saveForm(param).then(s => {
                             this.actionItems[0].startIcon = 'fas fa-save';
                             this.isSaving = false;
                             this.actionToolbar.update();
-                            this.printRendering = false; 
+                            this.printRendering = false;
                             this.toastService.success('Saved successfuly!');
-                        }); 
+                        });
                     }, 2000);
-                    
+
                     break;
                 }
-                case 'back':
-                    {
-                        this.connectService.send('back', {
-                            name:'',
-                            type:'form', 
-                            template: this.widgetService.serialize(this.widgets[0])
-                        })
-                    }
+            case 'back':
+                {
+                    this.connectService.send('back', {
+                        name: '',
+                        type: 'form',
+                        template: this.widgetService.serialize(this.widgets[0])
+                    })
+                }
         }
     }
 
@@ -158,9 +158,8 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
 
     ngAfterViewInit() {
         this.connectService.send('load').then(data => {
-            if(data.name)
-                this.name=data.name; 
             if (data && data.widgets && data.widgets.length > 0) {
+                this.name = data.name;
                 this.widgets = [this.widgetService.parse(data.widgets)];
             } else {
                 const page = this.widgetService.resolve('page');
