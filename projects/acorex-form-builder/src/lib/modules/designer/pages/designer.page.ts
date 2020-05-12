@@ -59,6 +59,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     view = 'designer';
     isSaving: boolean = false;
     printRendering: boolean = false;
+    name:string="";
 
     viewModeItems: MenuItem[] = [
         {
@@ -172,6 +173,8 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
 
     ngAfterViewInit() {
         this.connectService.send('load').then(data => {
+            if(data.name)
+                this.name=data.name; 
             if (data && data.widgets && data.widgets.length > 0) {
                 this.widgets = [this.widgetService.parse(data.widgets)];
             } else {

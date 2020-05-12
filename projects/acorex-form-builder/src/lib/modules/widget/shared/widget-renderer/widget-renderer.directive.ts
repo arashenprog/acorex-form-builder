@@ -48,10 +48,11 @@ export class AXFWidgetRendererDirective {
             this.zone.runOutsideAngular(() => {
                 if (this.widgetElement) {
                     this.widgetElement.classList.remove('widget-selected');
+                    if (v && this.widgetInstance && v.uid === this.widgetInstance.uid && v.uid !== undefined) {
+                        this.widgetElement.classList.add('widget-selected');
+                    }
                 }
-                if (v && this.widgetInstance && v.uid === this.widgetInstance.uid && v.uid !== undefined) {
-                    this.widgetElement.classList.add('widget-selected');
-                }
+                
             });
         });
     }

@@ -83,6 +83,7 @@
             border-bottom: 1px solid var(--gray-color);
             align-items: center;
             display: flex;
+            justify-content: space-between;
 
             .controlls {
                 flex: 1;
@@ -91,6 +92,9 @@
                 .btn {
                     margin-inline-start: var(--sp-md-size);
                 }
+            }
+            .nameHeader{
+                padding-inline-end: 15px;
             }
 
         }
