@@ -9,7 +9,7 @@ import { AXFPageBreakWidgetModule } from '../widgets/page-break/page-break.modul
 import { AXFDateInputWidgetModule } from '../widgets/date-input/date-input.module';
 import { AXFPagePageWidgetModule } from '../widgets/page/page.module';
 import { AXFSignatureInputWidgetModule } from '../widgets/signature-input/signature-input.module';
-import { AXFImageWidgetModule } from '../widgets/image-input/image-view.module';
+import { AXFImageWidgetModule } from '../widgets/image/image-view.module';
 import { AXFCheckboxInputWidgetModule } from '../widgets/checkbox-input/checkbox-input.module';
 import { AXFTextInputWidgetModule } from '../widgets/text-input/text-input.module';
 import { AXFTextAreaWidgetModule } from '../widgets/text-area/text-area.module';
