@@ -29,6 +29,7 @@ import { AXFRepeaterlWidgetModule } from '../widgets/repeater/repeater.module';
 import { AXFPageHeaderWidgetModule } from '../widgets/page-header/page-header.module';
 import { AXFPageFooterWidgetModule } from '../widgets/page-footer/page-footer.module';
 import { AXFNumberInputWidgetModule } from '../widgets/number-input/number-input.module';
+import { AXFImageInputWidgetModule } from '../widgets/image-input/image-input.module';
 //import { AXFMapWidgetModule } from '../widgets/map/map.module';
 
 const MODULES = [
@@ -59,6 +60,7 @@ const MODULES = [
     AXFRepeaterlWidgetModule,
     AXFPageHeaderWidgetModule,
     AXFPageFooterWidgetModule,
+    AXFImageInputWidgetModule,
     //AXFMapWidgetModule
 ];
 
