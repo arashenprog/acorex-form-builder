@@ -3,10 +3,10 @@ import { AXFWidgetView } from '../../../config/widget';
 import { UploadStructure } from '../../../../property-editor/editors/upload/upload.structure';
 
 @Component({
-    templateUrl: './image-input-widget.view.html',
+    templateUrl: './image-widget.view.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFImageInputWidgetView extends AXFWidgetView {
+export class AXFImageWidgetView extends AXFWidgetView {
 
     value: UploadStructure; 
     alt: string;

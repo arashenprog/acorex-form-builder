@@ -5,11 +5,11 @@ import { UploadStructure } from '../../../../property-editor/editors/upload/uplo
 
 @Component({
     selector: "[axf-widget-image]",
-    templateUrl: './image-input-widget.designer.html',
+    templateUrl: './image-widget.designer.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class AXFImageInputWidgetDesigner extends AXFWidgetDesigner {
+export class AXFImageWidgetDesigner extends AXFWidgetDesigner {
 
 
     value: UploadStructure;

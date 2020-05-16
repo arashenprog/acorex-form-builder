@@ -3,10 +3,10 @@ import { AXFWidgetPrint } from '../../../config/widget';
 import { UploadStructure } from '../../../../property-editor/editors/upload/upload.structure';
 
 @Component({
-    templateUrl: './image-input-widget.print.html' ,
+    templateUrl: './image-widget.print.html' ,
     changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class AXFImageInputWidgetPrint extends AXFWidgetPrint {
+export class AXFImageWidgetPrint extends AXFWidgetPrint {
 
     value: UploadStructure; 
     alt:string;

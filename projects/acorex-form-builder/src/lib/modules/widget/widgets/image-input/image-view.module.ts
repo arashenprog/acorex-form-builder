@@ -6,12 +6,12 @@ import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
 
-import { AXFImageInputWidgetDesigner } from './designer/image-input-widget.designer';
-import { AXFImageInputWidgetPrint } from './print/image-input-widget.print';
-import { AXFImageInputWidgetView } from './view/image-input-widget.view';
+import { AXFImageWidgetDesigner } from './designer/image-widget.designer';
+import { AXFImageWidgetPrint } from './print/image-widget.print';
+import { AXFImageWidgetView } from './view/image-widget.view';
 import { UploadStructure } from '../../../property-editor/editors/upload/upload.structure';
 
-export const COMPONENTS = [AXFImageInputWidgetDesigner, AXFImageInputWidgetPrint, AXFImageInputWidgetView]
+export const COMPONENTS = [AXFImageWidgetDesigner, AXFImageWidgetPrint, AXFImageWidgetView]
 
 @NgModule({
     declarations: [...COMPONENTS],
@@ -20,7 +20,7 @@ export const COMPONENTS = [AXFImageInputWidgetDesigner, AXFImageInputWidgetPrint
     entryComponents: [...COMPONENTS],
     providers: [],
 })
-export class AXFImageInputWidgetModule {
+export class AXFImageWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
             title: "Image Box",
@@ -29,9 +29,9 @@ export class AXFImageInputWidgetModule {
             category: "Editors",
             visible: true,
             name: "image",
-            designerClass: AXFImageInputWidgetDesigner,
-            printClass: AXFImageInputWidgetPrint,
-            viewClass: AXFImageInputWidgetView,
+            designerClass: AXFImageWidgetDesigner,
+            printClass: AXFImageWidgetPrint,
+            viewClass: AXFImageWidgetView,
             options: {
                 value: new UploadStructure({
                     height: 100,
