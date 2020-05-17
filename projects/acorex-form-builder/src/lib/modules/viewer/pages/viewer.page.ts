@@ -78,7 +78,7 @@ export class ACFViewerPage extends AXBasePageComponent {
           this.printRendering = false;
           this.isBusy = false;
         });
-      }, 2000);
+      }, 5000);
     });
   }
 

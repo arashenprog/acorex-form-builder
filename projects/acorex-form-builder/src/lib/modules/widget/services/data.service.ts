@@ -33,7 +33,7 @@ export class AXFDataService {
     private dataModel: any = {};
     private widgetRegisterChangeObserver: any;
     private widgets: any = {};
-
+    private imageUrls:any[]=[]; 
     private dataChangeSubject = new Subject<boolean>();
 
     constructor(
@@ -280,5 +280,16 @@ export class AXFDataService {
 
     getWidget(name: string) {
         return this.widgets[name];
+    }
+
+
+    setImageUrl(data:any)
+    {
+        this.imageUrls.push(data);
+    }
+
+    getImageUrl(url:string)
+    {
+        return this.imageUrls.find(f=>f.url==url);
     }
 }

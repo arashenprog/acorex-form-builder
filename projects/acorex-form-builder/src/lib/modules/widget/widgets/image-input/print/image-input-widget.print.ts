@@ -1,23 +1,23 @@
-import { Component, OnInit, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import { AXFWidgetView } from '../../../config/widget';
+import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { AXFWidgetPrint } from '../../../config/widget';
 import { UploadStructure } from '../../../../property-editor/editors/upload/upload.structure';
 
 @Component({
     templateUrl: './image-input-widget.print.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFImageInputWidgetPrint extends AXFWidgetView {
+export class AXFImageInputWidgetPrint extends AXFWidgetPrint {
 
     height: number;
     width: number;
     alt: string;
-
-    constructor(private el: ElementRef<HTMLElement>) {
+    //value: UploadStructure; 
+    constructor(private el: ElementRef<HTMLElement>, private cdr: ChangeDetectorRef) {
         super()
     }
-
- 
-    onRender(): void {
-        //this.applyStyle(this.el.nativeElement.querySelector("img"));
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        this.cdr.detectChanges(); 
     }
+
 }

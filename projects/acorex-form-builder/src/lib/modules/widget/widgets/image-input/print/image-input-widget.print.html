@@ -1,1 +1,6 @@
-<img src="./assets/images/photocamera-add.png" [alt]="alt" [height]="height" [width]="width"> 
+<ng-container *ngIf="value && value.srcData">
+    <img [src]="value.srcData | resolveUrl | async" [alt]="alt"  [height]="height" [width]="width"> 
+</ng-container>
+<ng-container *ngIf="!value || !value.srcData">
+    <img src="./assets/images/photocamera-add.png" [alt]="alt"  [height]="height" [width]="width"> 
+</ng-container>
