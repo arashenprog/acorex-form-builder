@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ElementRef, Renderer2, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { AXFWidgetDesigner } from '../../../config/widget';
+import { AXFWidgetDesigner, AXFContextMenuItem } from '../../../config/widget';
 import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
 import { AXFWidgetPickerService } from '../../../services/template/picker.service';
 
@@ -39,13 +39,20 @@ export class AXFColWidgetDesigner extends AXFWidgetDesigner {
         this.parent.refresh();
     }
 
-    addElement() {
-        this.picker.showPicker().then(widgets => {
-            if (widgets) {
-                widgets.forEach(w => {
-                    this.addChild(w);
-                });
-            }
-        });
+    getContextMenu() {
+        return super.getContextMenu().filter(c =>
+            c.action !== 'addElementBefore' &&
+            c.action !== 'addElementAfter'
+        );
     }
+
+    // addElement() {
+    //     this.picker.showPicker().then(widgets => {
+    //         if (widgets) {
+    //             widgets.forEach(w => {
+    //                 this.addChild(w);
+    //             });
+    //         }
+    //     });
+    // }
 }

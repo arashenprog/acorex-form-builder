@@ -78,15 +78,15 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
         });
     }
 
-    addElement() {
-        this.picker.showPicker().then(widgets => {
-            if (widgets) {
-                widgets.forEach(w => {
-                    this.addChild(w);
-                });
-            };
-        })
-    }
+    // addElement() {
+    //     this.picker.showPicker().then(widgets => {
+    //         if (widgets) {
+    //             widgets.forEach(w => {
+    //                 this.addChild(w);
+    //             });
+    //         };
+    //     })
+    // }
 
 
     onRender(): void {

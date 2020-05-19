@@ -1,7 +1,8 @@
 <ax-tab-view>
     <ax-tab caption="All">
         <div class="list-container">
-            <div class="widget-item" *ngFor="let w of list" (click)="selectWidget(w)">
+            <div class="widget-item" *ngFor="let w of list" (click)="selectWidget(w)"
+                [class.selected]="isSelectedWidget(w)">
                 <div class="icon"><i class="{{w.icon}}"></i></div>
                 <div class="text">
                     <div class="title">{{ w.title }}</div>
@@ -12,7 +13,8 @@
     </ax-tab>
     <ax-tab *ngFor="let cat of categories" [caption]="cat">
         <div class="list-container">
-            <div class="widget-item" *ngFor="let w of getList(cat)" (click)="selectWidget(w)">
+            <div class="widget-item" *ngFor="let w of getList(cat)" (click)="selectWidget(w)"
+                [class.selected]="isSelectedWidget(w)">
                 <div class="icon"><i class="{{w.icon}}"></i></div>
                 <div class="text">
                     <div class="title">{{ w.title }}</div>
@@ -23,13 +25,25 @@
     </ax-tab>
     <ax-tab [caption]="'Saved Widgets'" *ngIf="templates && templates.length>0">
         <div class="list-container">
-            <div class="widget-item" *ngFor="let tpl of templates" (click)="selectTemplate(tpl)">
+            <div class="widget-item" *ngFor="let tpl of templates" (click)="selectTemplate(tpl)"
+                [class.selected]="isSelectedTemplate(tpl)">
                 <div class="icon"><i class="fas fa-database"></i></div>
                 <div class="text">
                     <div class="title">{{ tpl.name }}</div>
                     <div class="hint">{{ tpl.hint }}</div>
                 </div>
+
             </div>
         </div>
     </ax-tab>
 </ax-tab-view>
+<footer>
+    <div>
+        <small *ngIf="selectedWidgets.length == 0">Hold the CTRL key and click the items in a list to choose more than one element at a same time</small>
+    </div>
+    <div>
+        <ax-button (onClick)="insertMultiple()" *ngIf="selectedWidgets.length > 0">
+            Add Multiple ({{selectedWidgets.length}})
+        </ax-button>
+    </div>
+</footer>

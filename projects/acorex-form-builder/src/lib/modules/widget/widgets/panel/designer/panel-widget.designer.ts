@@ -20,16 +20,16 @@ export class AXFPanelWidgetDesigner extends AXFWidgetDesigner {
     }
 
 
-    addElement() {
-        this.picker.showPicker().then(widgets => {
-            if (widgets) {
-                widgets.forEach(w => {
-                    this.addChild(w);
-                });
-                this.refresh();
-            }
-        })
-    }
+    // addElement() {
+    //     this.picker.showPicker().then(widgets => {
+    //         if (widgets) {
+    //             widgets.forEach(w => {
+    //                 this.addChild(w);
+    //             });
+    //             this.refresh();
+    //         }
+    //     })
+    // }
 
 
     onRender() {

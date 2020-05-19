@@ -5,6 +5,7 @@ import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AXFDataService } from '../services/data.service';
+import { AXFWidgetPickerService } from '../services/template/picker.service';
 
 export const WidgetInjector: { instance?: Injector } = {};
 
@@ -68,6 +69,9 @@ export abstract class AXFWidget implements AXFWidgetContainer {
     }
 
     applyStyle(el: HTMLElement): void {
+        if (el == null) {
+            return;
+        }
         el.style.backgroundColor = this['bgColor'];
         el.style.color = this['color'];
         el.style.textAlign = this['textAlign'];
@@ -139,9 +143,12 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     onSelect: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
     onDelete: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
 
+    picker2: AXFWidgetPickerService;
+
 
     constructor() {
         super();
+        this.picker2 = WidgetInjector.instance.get(AXFWidgetPickerService);
     }
 
 
@@ -181,13 +188,50 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     addChild(widget: WidgetConfig, options?: any) {
+        this.addChildAt(-1, widget, options)
+    }
+
+    addChildAt(index: number, widget: WidgetConfig, options?: any) {
         const w = this.widgetService.parse(this.widgetService.serialize(widget));
         if (!w.options) {
             w.options = {};
         }
         Object.assign(w.options, options);
-        this.widgets.push(w);
+        if (index < 0) {
+            this.widgets.push(w);
+        } else {
+            this.widgets.splice(index, 0, w);
+        }
         this.refresh();
+    }
+
+    addElement() {
+        this.picker2.showPicker().then(widgets => {
+            if (widgets) {
+                widgets.forEach(w => {
+                    this.addChild(w);
+                });
+            }
+        });
+    }
+
+    addElementBefore() {
+        this.picker2.showPicker().then(widgets => {
+            if (widgets) {
+                widgets.forEach(w => {
+                    this.parent.addChildAt(this.findIndex(), w);
+                });
+            }
+        });
+    }
+    addElementAfter() {
+        this.picker2.showPicker().then(widgets => {
+            if (widgets) {
+                widgets.forEach(w => {
+                    this.parent.addChildAt(this.findIndex() + 1, w);
+                });
+            }
+        });
     }
 
 
@@ -201,6 +245,19 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 separator: true,
                 widget: this
             });
+        items.push({
+            text: 'Add Widget Before',
+            icon: 'fas fa-plus',
+            action: 'addElementBefore',
+            widget: this,
+        });
+        items.push({
+            text: 'Add Widget After',
+            icon: 'fas fa-plus',
+            action: 'addElementAfter',
+            separator: true,
+            widget: this,
+        });
         if (this.config.container && this.config.droppable !== false) {
             const cp = sessionStorage.getItem('clipboard');
             if (cp) {
@@ -212,13 +269,14 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 });
             }
             items.push({
-                text: 'Add Widget',
+                text: 'Add Widget Inside',
                 icon: 'fas fa-plus',
                 action: 'addElement',
                 separator: true,
                 widget: this,
             });
         }
+
         items.push(...[
             {
                 text: 'Delete',

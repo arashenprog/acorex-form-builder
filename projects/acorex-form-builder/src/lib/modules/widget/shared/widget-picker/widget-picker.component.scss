@@ -2,15 +2,15 @@
     display: flex;
     flex-direction: row;
     padding: var(--sp-sm-size);
-    min-height: 200px;
+    height: 55vh;
     align-items: flex-start;
     flex-wrap: wrap;
     align-content: baseline;
-    max-height: 600px;
     overflow-y: auto;
 
     .widget-item {
         margin-inline-end: var(--sp-sm-size);
+        margin-block-end: var(--sp-sm-size);
         padding: var(--sp-sm-size);
         cursor: pointer;
         display: flex;
@@ -24,6 +24,13 @@
 
             .icon {
                 background-color: var(--primary-color);
+            }
+        }
+
+        &.selected {
+            border: 1px solid var(--primary-dark-color);
+            .icon {
+                background-color: var(--primary-dark-color);
             }
         }
 
@@ -57,5 +64,15 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        
     }
+}
+
+footer {
+    background: var(--border-color) !important;
+    padding: 5px;
+    text-align: end;
+    border-top: 1px solid var(--primary-dark-color);
+    display: flex;
+    justify-content: space-between;
 }

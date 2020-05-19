@@ -31,18 +31,22 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
         this.cdr.markForCheck();
     }
 
-    addElement() {
-        this.picker.showPicker().then(widgets => {
-            if (widgets) {
-                widgets.forEach(w => {
-                    this.addChild(w);
-                });
-            }
-        });
-    }
+    // addElement() {
+    //     this.picker.showPicker().then(widgets => {
+    //         if (widgets) {
+    //             widgets.forEach(w => {
+    //                 this.addChild(w);
+    //             });
+    //         }
+    //     });
+    // }
 
     getContextMenu() {
-        const items: AXFContextMenuItem[] = super.getContextMenu().filter(c => c.action != 'copy');
+        const items: AXFContextMenuItem[] = super.getContextMenu().filter(c =>
+            c.action !== 'copy' &&
+            c.action !== 'addElementBefore' &&
+            c.action !== 'addElementAfter'
+        );
         items.splice(3, 0, ...[
             {
                 text: 'Column',
