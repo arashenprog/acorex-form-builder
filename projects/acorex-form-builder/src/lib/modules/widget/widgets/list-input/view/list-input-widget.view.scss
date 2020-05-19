@@ -2,10 +2,11 @@
   display: inline-block;  
   width: 100%;
   line-height: 1;
-  font-size: smaller;
+  font-size: 14px;
   direction: ltr;
   .rep{
      min-width: fit-content; 
+     display: table;
     .spanCheck{
       position: absolute; 
       height: 20px;

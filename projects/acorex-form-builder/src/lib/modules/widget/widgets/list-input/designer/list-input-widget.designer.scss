@@ -1,11 +1,11 @@
 .allItem{
-  font-size: smaller !important;
+  font-size: 14px !important;
   display: inline-block;  
   width: 100%;
   line-height: 1; 
   direction: ltr;
   .rep{
-    //min-width: max-content; 
+    display: table;
     .spanCheck{
       position: absolute; 
                   height: 20px;
