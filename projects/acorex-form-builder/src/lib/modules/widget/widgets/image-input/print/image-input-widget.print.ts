@@ -4,7 +4,8 @@ import { UploadStructure } from '../../../../property-editor/editors/upload/uplo
 
 @Component({
     templateUrl: './image-input-widget.print.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {role: 'image-input'}  
 })
 export class AXFImageInputWidgetPrint extends AXFWidgetPrint {
 
