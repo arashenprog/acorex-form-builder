@@ -13,7 +13,7 @@ export class AXFNumberInputWidgetView extends AXFValueWidgetView {
     validator: AXFValidatorProp;
     placeholder: string; 
 
-    constructor(protected cdr: ChangeDetectorRef) {
+    constructor(protected cdr: ChangeDetectorRef,private hostElement: ElementRef<HTMLTableCellElement>) {
         super(cdr);
     }
 
@@ -22,7 +22,12 @@ export class AXFNumberInputWidgetView extends AXFValueWidgetView {
         if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
             this['dataContext'].hasOwnProperty(this['name'])) {
             this.value = this['dataContext'][this['name']];
-        }
+        } 
         this.cdr.markForCheck();
     }
+
+    // ngAfterViewInit()
+    // {
+    //     let nudmn= this.hostElement.nativeElement;
+    // }
 }

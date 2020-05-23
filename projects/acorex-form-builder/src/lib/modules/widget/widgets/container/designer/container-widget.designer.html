@@ -1,0 +1,9 @@
+<div class="axf-drop-zone" >
+    <div *ngIf="widgets.length; else elseTemplate">
+        <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [parent]="this">
+        </div>
+    </div>
+    <ng-template #elseTemplate>
+        &nbsp;
+    </ng-template>
+</div>
