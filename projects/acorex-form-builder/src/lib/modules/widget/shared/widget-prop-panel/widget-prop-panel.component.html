@@ -1,28 +1,38 @@
 <div class="axf-widget-prop-panel">
-    <div class="toolbar" *ngIf="widget && widget.config">
-        <div class="start">
-            <ng-container>
-                <div class="icon"><i class="{{widget.config.icon}}"></i></div>
-                <div class="text">
-                    <div class="title">{{ title }}</div>
-                </div>
-            </ng-container>
-        </div>
-        <div class="end">
-            <!-- <ax-button type="light" size="sm" (onClick)="handleDeleteClick()">
-                <i class="fas fa-trash danger"></i>
-            </ax-button> -->
-        </div>
-    </div>
-    <div class="panel">
-        <ax-panel-box *ngFor="let t of tabNames" [caption]="t.title" [(collapsed)]="t.collapsed">
-            <div class="edit-row" *ngFor="let e of getProps(t.name)">
-                <div class="prop-caption">
-                    {{e.title}}
-                </div>
-                <ng-container axf-editor-renderer [property]="e" [widget]="widget">
+    <ng-container *ngIf="widget && widget.config;else emptyTemplate">
+        <div class="toolbar">
+            <div class="start">
+                <ng-container>
+                    <div class="icon"><i class="{{widget.config.icon}}"></i></div>
+                    <div class="text">
+                        <div class="title">{{ title }}</div>
+                    </div>
                 </ng-container>
             </div>
-        </ax-panel-box>
-    </div>
+            <div class="end">
+                <!-- <ax-button type="light" size="sm" (onClick)="handleDeleteClick()">
+                    <i class="fas fa-trash danger"></i>
+                </ax-button> -->
+            </div>
+        </div>
+        <div class="panel">
+            <ax-panel-box *ngFor="let t of tabNames" [caption]="t.title" [(collapsed)]="t.collapsed">
+                <div class="edit-row" *ngFor="let e of getProps(t.name)">
+                    <div class="prop-caption">
+                        {{e.title}}
+                    </div>
+                    <ng-container axf-editor-renderer [property]="e" [widget]="widget">
+                    </ng-container>
+                </div>
+            </ax-panel-box>
+        </div>
+    </ng-container>
+    <ng-template #emptyTemplate>
+        <div class="empty">
+            <div class="text">
+                <i class="fas fa-exclamation-circle fa-3x"></i>
+                No Items Selected!
+            </div>
+        </div>
+    </ng-template>
 </div>

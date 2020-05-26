@@ -22,9 +22,12 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     @ViewChild('print')
     printDiv: ElementRef<HTMLDivElement>;
 
+    private _renderTime: Date = new Date();
+    private intervalId: any;
+
+    private firstSelectabledWideget: AXFWidgetDesigner;
+
     constructor(
-        private popup: AXPopupService,
-        private cdr: ChangeDetectorRef,
         private widgetService: AXFWidgetService,
         private toastService: AXToastService,
         private eventService: EventService,
@@ -47,6 +50,25 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                     this.docTreeItems.reverse();
                 }
             }, 10);
+        });
+        this.intervalId = setInterval(() => {
+            const now = new Date();
+            const diff = now.getTime() - this._renderTime.getTime();
+            if (diff > 1000) {
+                if (this.firstSelectabledWideget) {
+                    this.firstSelectabledWideget.edit();
+                }
+                console.log(`Rendered in ${diff}ms`);
+                clearInterval(this.intervalId);
+            }
+
+        }, 300);
+        //
+        eventService.on('RENDER', (c: AXFWidgetDesigner) => {
+            if (c.locked !== true) {
+                this.firstSelectabledWideget = c;
+            }
+            this._renderTime = new Date();
         });
     }
 
@@ -153,7 +175,9 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
 
 
     handleBreadcrumbClick(item: AXFWidgetDesigner) {
-        this.eventService.broadcast('SELECT', item);
+        if (!item.locked) {
+            this.eventService.broadcast('SELECT', item);
+        }
     }
 
     ngAfterViewInit() {

@@ -144,27 +144,36 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     onDelete: EventEmitter<AXFWidget> = new EventEmitter<AXFWidget>();
 
     picker2: AXFWidgetPickerService;
+    toastService: AXToastService;
+
+
+    locked: boolean = false;
 
 
     constructor() {
         super();
         this.picker2 = WidgetInjector.instance.get(AXFWidgetPickerService);
+        this.toastService = WidgetInjector.instance.get(AXToastService);
     }
 
 
 
     delete() {
-        if (this.parent && this.parent.widgets) {
-            this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
-            if (this.parent.refresh) {
-                this.parent.refresh();
+        if (!this.locked) {
+            if (this.parent && this.parent.widgets) {
+                this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
+                if (this.parent.refresh) {
+                    this.parent.refresh();
+                }
             }
+            this.onDelete.emit(this);
         }
-        this.onDelete.emit(this);
     }
 
     edit() {
-        this.onSelect.emit(this);
+        if (!this.locked) {
+            this.onSelect.emit(this);
+        }
     }
 
     copy() {
@@ -172,23 +181,27 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         WidgetInjector.instance.get(AXToastService).success('Widget copied!');
     }
     cut() {
-        this.copy();
-        this.delete();
+        if (!this.locked) {
+            this.copy();
+            this.delete();
+        }
     }
     paste() {
-        const cp = sessionStorage.getItem('clipboard');
-        if (cp) {
-            const config = this.widgetService.parse(cp);
-            if (config && this.config.container) {
-                this.addChild(config);
-                WidgetInjector.instance.get(AXToastService).success('Widget pasted!');
-                sessionStorage.removeItem('clipboard');
+        if (!this.locked) {
+            const cp = sessionStorage.getItem('clipboard');
+            if (cp) {
+                const config = this.widgetService.parse(cp);
+                if (config && this.config.container) {
+                    this.addChild(config);
+                    WidgetInjector.instance.get(AXToastService).success('Widget pasted!');
+                    sessionStorage.removeItem('clipboard');
+                }
             }
         }
     }
 
     addChild(widget: WidgetConfig, options?: any) {
-        this.addChildAt(-1, widget, options)
+        this.addChildAt(-1, widget, options);
     }
 
     addChildAt(index: number, widget: WidgetConfig, options?: any) {
@@ -206,98 +219,148 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     }
 
     addElement() {
-        this.picker2.showPicker().then(widgets => {
-            if (widgets) {
-                widgets.forEach(w => {
-                    this.addChild(w);
-                });
-            }
-        });
+        if (!this.locked) {
+            this.picker2.showPicker().then(widgets => {
+                if (widgets) {
+                    widgets.forEach(w => {
+                        this.addChild(w);
+                    });
+                }
+            });
+        }
     }
 
     addElementBefore() {
-        this.picker2.showPicker().then(widgets => {
-            if (widgets) {
-                widgets.forEach(w => {
-                    this.parent.addChildAt(this.findIndex(), w);
-                });
-            }
-        });
+        if (!this.locked) {
+            this.picker2.showPicker().then(widgets => {
+                if (widgets) {
+                    widgets.forEach(w => {
+                        this.parent.addChildAt(this.findIndex(), w);
+                    });
+                }
+            });
+        }
     }
     addElementAfter() {
-        this.picker2.showPicker().then(widgets => {
-            if (widgets) {
-                widgets.forEach(w => {
-                    this.parent.addChildAt(this.findIndex() + 1, w);
-                });
-            }
-        });
+        if (!this.locked) {
+            this.picker2.showPicker().then(widgets => {
+                if (widgets) {
+                    widgets.forEach(w => {
+                        this.parent.addChildAt(this.findIndex() + 1, w);
+                    });
+                }
+            });
+        }
+    }
+
+
+    moveUp() {
+        const c = this.findIndex();
+        const widgets = this.parent.widgets;
+        if (widgets[c] == null || widgets[c - 1] == null) {
+            this.toastService.error('Thi action is not possible!');
+            return;
+        }
+        const temp = widgets[c];
+        widgets[c] = widgets[c - 1];
+        widgets[c - 1] = temp;
+        this.parent.refresh();
+    }
+
+    moveDown() {
+        const c = this.findIndex();
+        const widgets = this.parent.widgets;
+        if (widgets[c] == null || widgets[c + 1] == null) {
+            this.toastService.error('Thi action is not possible!');
+            return;
+        }
+        const temp = widgets[c];
+        widgets[c] = widgets[c + 1];
+        widgets[c + 1] = temp;
+        this.parent.refresh();
     }
 
 
     getContextMenu(parents: boolean = true): AXFContextMenuItem[] {
         let items: AXFContextMenuItem[] = [];
-        items.push(
-            {
-                text: 'Select',
-                icon: 'fas fa-mouse-pointer',
-                action: 'edit',
-                separator: true,
-                widget: this
+        if (!this.locked) {
+            items.push(
+                {
+                    text: 'Select',
+                    icon: 'fas fa-mouse-pointer',
+                    action: 'edit',
+                    separator: true,
+                    widget: this
+                });
+
+            items.push({
+                text: 'Add Widget Before',
+                icon: 'fas fa-plus',
+                action: 'addElementBefore',
+                widget: this,
             });
-        items.push({
-            text: 'Add Widget Before',
-            icon: 'fas fa-plus',
-            action: 'addElementBefore',
-            widget: this,
-        });
-        items.push({
-            text: 'Add Widget After',
-            icon: 'fas fa-plus',
-            action: 'addElementAfter',
-            separator: true,
-            widget: this,
-        });
-        if (this.config.container && this.config.droppable !== false) {
-            const cp = sessionStorage.getItem('clipboard');
-            if (cp) {
+            items.push({
+                text: 'Add Widget After',
+                icon: 'fas fa-plus',
+                action: 'addElementAfter',
+                separator: true,
+                widget: this,
+            });
+            items.push({
+                text: 'Move Widget Up',
+                icon: 'fas fa-arrow-up',
+                action: 'moveUp',
+                widget: this,
+            });
+            items.push({
+                text: 'Move Widget Down',
+                icon: 'fas fa-arrow-down',
+                action: 'moveDown',
+                separator: true,
+                widget: this,
+            });
+
+            if (this.config.container && this.config.droppable !== false) {
+                const cp = sessionStorage.getItem('clipboard');
+                if (cp) {
+                    items.push({
+                        text: 'Paste',
+                        icon: 'fas fa-paste',
+                        action: 'paste',
+                        widget: this,
+                    });
+                }
                 items.push({
-                    text: 'Paste',
-                    icon: 'fas fa-paste',
-                    action: 'paste',
+                    text: 'Add Widget Inside',
+                    icon: 'fas fa-plus',
+                    action: 'addElement',
+                    separator: true,
                     widget: this,
                 });
             }
-            items.push({
-                text: 'Add Widget Inside',
-                icon: 'fas fa-plus',
-                action: 'addElement',
-                separator: true,
-                widget: this,
-            });
-        }
 
-        items.push(...[
-            {
-                text: 'Delete',
-                icon: 'fas fa-trash',
-                action: 'delete',
-                widget: this
-            },
-            {
-                text: 'Copy',
-                icon: 'fas fa-copy',
-                action: 'copy',
-                widget: this,
-            },
-            {
-                text: 'Cut',
-                icon: 'fas fa-cut',
-                action: 'cut',
-                separator: true,
-                widget: this,
-            }
-        ]);
+            items.push(...[
+                {
+                    text: 'Delete',
+                    icon: 'fas fa-trash',
+                    action: 'delete',
+                    widget: this
+                },
+                {
+                    text: 'Copy',
+                    icon: 'fas fa-copy',
+                    action: 'copy',
+                    widget: this,
+                },
+                {
+                    text: 'Cut',
+                    icon: 'fas fa-cut',
+                    action: 'cut',
+                    separator: true,
+                    widget: this,
+                }
+            ]);
+        }
         let p = this.parent;
         while (p != null && parents) {
             if (p.config && p.config.name !== 'page') {

@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { AXFWidgetDesigner } from '../../../config/widget';
+import { AXFWidgetDesigner, AXFContextMenuItem } from '../../../config/widget';
 import { AXFTemplateService } from '../../../services/template/template.service';
+import { AXDialogService } from 'acorex-ui';
 
 @Component({
     selector: '[axf-outlet]',
@@ -12,7 +13,11 @@ export class AXFOutletWidgetDesigner extends AXFWidgetDesigner {
     widgetId: string;
     isLoading: boolean = true;
 
-    constructor(private cdr: ChangeDetectorRef, private templateService: AXFTemplateService) {
+
+    constructor(
+        private cdr: ChangeDetectorRef,
+        private templateService: AXFTemplateService,
+        private dialogService: AXDialogService) {
         super();
     }
 
@@ -26,8 +31,39 @@ export class AXFOutletWidgetDesigner extends AXFWidgetDesigner {
             this.refresh();
         });
     }
+
     refresh(): void {
         this.cdr.markForCheck();
+    }
+
+    private unWrap() {
+        this.dialogService.show(
+            'Unwrap saved widget',
+            'Are you sure you want to unwrap this widget?',
+            ...[
+                { name: 'no', text: 'No', type: 'light' },
+                { name: 'yes', text: 'Yes', type: 'success' },
+            ]
+        ).then(name => {
+            if (name === 'yes') {
+                this.parent.widgets.splice(this.findIndex(), 0, ...this.widgets);
+                this.delete();
+            }
+        });
+
+    }
+
+    onContextMenu(items: AXFContextMenuItem[]): AXFContextMenuItem[] {
+        items.splice(1, 0, ...[
+            {
+                text: 'Unwrap Items',
+                icon: 'fas fa-object-ungroup',
+                action: 'unWrap',
+                separator: true,
+                widget: this
+            }
+        ]);
+        return items;
     }
 }
 

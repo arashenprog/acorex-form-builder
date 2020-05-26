@@ -43,6 +43,20 @@
         .end {}
     }
 
+    .empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            color: var(--gray);
+            align-items: center;
+        }
+    }
+
     .panel {
         height: calc(100% - 50px);
         overflow-x: hidden;
@@ -65,6 +79,7 @@
                 font-size: small;
                 font-weight: bold;
             }
+
             .prop-caption-sub {
                 height: 100%;
                 display: flex;

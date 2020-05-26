@@ -33,8 +33,8 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
 
     constructor(
         private templateService: AXFTemplateService,
-        private widgetService: AXFWidgetService,
-        private dialogService: AXDialogService,
+        private widgetService: AXFWidgetService
+       
     ) {
         super();
     }
@@ -72,41 +72,21 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
 
     selectTemplate(tpl: AXFTemplateModel) {
         if (this.isMultiple || this.selectedWidgets.length > 0) {
-            this.templateService.get(tpl.id).then(c => {
-                const w = this.selectedWidgets.find(i => i.options && i.options.widgetId === c.id);
-                if (w) {
-                    this.selectedWidgets = this.selectedWidgets.filter(i => i !== w);
-                } else {
-                    const outlet = this.widgetService.resolve('outlet');
-                    outlet.options.widgetId = c.id;
-                    outlet.options.widgetTitle = tpl.name;
-                    this.selectedWidgets.push(outlet);
-                }
-            });
+            const w = this.selectedWidgets.find(i => i.options && i.options.widgetId === tpl.id);
+            if (w) {
+                this.selectedWidgets = this.selectedWidgets.filter(i => i !== w);
+            } else {
+                const outlet = this.widgetService.resolve('outlet');
+                outlet.options.widgetId = tpl.id;
+                outlet.options.widgetTitle = tpl.name;
+                this.selectedWidgets.push(outlet);
+            }
         } else {
-            this.templateService.get(tpl.id).then(c => {
-
-                const widget = this.widgetService.parse(c.template);
-                this.dialogService.show(
-                    'Add saved widget',
-                    'Do you want to add it as a referenced widget?',
-                    ...[
-                        { name: 'cancel', text: 'Cancel', type: 'success' },
-                        { name: 'no', text: 'No', type: 'danger' },
-                        { name: 'yes', text: 'Yes', type: 'info' }
-                    ]
-                ).then(name => {
-                    if (name === 'yes') {
-                        const outlet = this.widgetService.resolve('outlet');
-                        outlet.options.widgetId = c.id;
-                        outlet.options.widgetTitle = tpl.name;
-                        this.close([outlet]);
-                    } else if (name === 'no') {
-                        this.close(widget.options.widgets);
-                    }
-                });
-
-            });
+            //
+            const outlet = this.widgetService.resolve('outlet');
+            outlet.options.widgetId = tpl.id;
+            outlet.options.widgetTitle = tpl.name;
+            this.close([outlet]);
         }
     }
 
@@ -124,8 +104,4 @@ export class AXFWidgetPickerComponent extends AXBasePageComponent {
     isSelectedTemplate(tpl: AXFTemplateModel) {
         return this.selectedWidgets.some(c => c.options && c.options.widgetId === tpl.id);
     }
-
-
-
-
 }

@@ -1,8 +1,8 @@
 
 import { Injectable } from '@angular/core';
-import { PromisResult, AXHtmlUtil } from 'acorex-ui';
+import { PromisResult } from 'acorex-ui';
 import { AXFConnectService } from '../connect.service';
-import { AXFWidgetService, WidgetConfig } from '../widget.service';
+import { AXFWidgetService } from '../widget.service';
 import { AXFTemplateModel, AFXSaveTemplateModel } from '../db/database';
 import { AXFTemplateService } from './template.service';
 import { Subject, Observable } from 'rxjs';
@@ -20,13 +20,6 @@ export class AXFAPITemplateService extends AXFTemplateService {
     }
 
 
-    public checkExists(name: string): PromisResult<boolean> {
-        return new PromisResult((resolve) => {
-            resolve(false);
-        });
-    }
-
-
     loadingEvent(): Observable<boolean> {
         return this.statusSubject.asObservable();
     }
@@ -36,14 +29,14 @@ export class AXFAPITemplateService extends AXFTemplateService {
         this.statusSubject.next(this.cacheList.some(c => c.template == null));
     }
 
-    public saveForm(prm:AFXSaveTemplateModel): PromisResult<boolean> {
+    public saveForm(prm: AFXSaveTemplateModel): PromisResult<boolean> {
         return new PromisResult((resolve) => {
             this.connectService.send('save', {
-                name:prm.name,
-                type:prm.type,
-                description:prm.description,
+                name: prm.name,
+                type: prm.type,
+                description: prm.description,
                 template: this.widgetService.serialize(prm.widget),
-                printHtml:prm.printHtml
+                printHtml: prm.printHtml
             }).then(() => {
                 resolve(true);
             });
@@ -68,7 +61,7 @@ export class AXFAPITemplateService extends AXFTemplateService {
         });
     }
 
-    public get(id: string, findName?: boolean): PromisResult<AXFTemplateModel> {
+    public get(id: string): PromisResult<AXFTemplateModel> {
         if (this.cacheList.some(c => c.id === id && c.template)) {
             const tpl = this.cacheList.find(c => c.id === id && c.template);
             // clone
@@ -89,30 +82,8 @@ export class AXFAPITemplateService extends AXFTemplateService {
             }).then((c) => {
                 w.template = c.widgets;
                 w.name = c.name;
-                // if (!w.name && findName) {
-                //     this.getWidgetList().then(ll => {
-                //         const ww = ll.find(i => i.id === id);
-                //         console.log('map widget', ww, ll, id);
-                //         if (ww) {
-                //             w.name = ww.name;
-                //         }
-                //         resolve(w);
-                        
-                //         this.emitLoadingEvent();
-                //     });
-                // } else {
-                    resolve(w);
-                    this.emitLoadingEvent();
-                // }
-            });
-        });
-    }
-
-    public getFormList(): PromisResult<AXFTemplateModel[]> {
-        return new PromisResult((resolve) => {
-            this.connectService.send('getFormList', {
-            }).then((c) => {
-                resolve(c.items);
+                resolve(w);
+                this.emitLoadingEvent();
             });
         });
     }

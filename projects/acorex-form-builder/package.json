@@ -11,8 +11,7 @@
     "@angular/cdk": "^9.2.2", 
     "acorex-ui": "file:C:/acorex/acorex-ui-0.0.1.tgz",
     "angular2-signaturepad": "^2.9.0",
-    "@kolkov/angular-editor": "^1.0.0",
-    "dexie": "^3.0.0"
+    "@kolkov/angular-editor": "^1.0.0"
   },
   "dependencies": { 
   }

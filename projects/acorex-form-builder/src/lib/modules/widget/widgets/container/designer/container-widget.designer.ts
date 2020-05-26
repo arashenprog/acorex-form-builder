@@ -11,6 +11,9 @@ import { AXFWidgetPickerService } from '../../../services/template/picker.servic
 })
 export class AXFContainerWidgetDesigner extends AXFWidgetDesigner {
   
+
+    placeholder:string;
+
     constructor( private cdr: ChangeDetectorRef,
         private hostElement: ElementRef<HTMLTableCellElement>) {
         super();

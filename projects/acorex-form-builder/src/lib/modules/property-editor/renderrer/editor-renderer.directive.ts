@@ -27,7 +27,7 @@ export class AXFEditorRendererDirective {
         private editorService: AXFEditorService,
         private eventService: EventService
     ) {
-        
+
     }
 
     ngOnInit(): void {
@@ -56,6 +56,7 @@ export class AXFEditorRendererDirective {
             this.widget.refresh();
         });
         Object.assign(this.instance, this.property.options, { value: this.widget.config.options[this.property.name] });
+        this.instance.locked = this.widget.locked;
         this.assignRelatedProps();
     }
 

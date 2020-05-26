@@ -67,26 +67,17 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
 
     constructor(
         eventService: EventService,
-        private picker: AXFWidgetPickerService,
         private cdr: ChangeDetectorRef,
         private hostElement: ElementRef) {
         super();
         eventService.on('SELECT', c => {
-            if (c == null) {
+            if (c == null && !this.locked) {
                 eventService.broadcast('SELECT', this);
             }
         });
     }
 
-    // addElement() {
-    //     this.picker.showPicker().then(widgets => {
-    //         if (widgets) {
-    //             widgets.forEach(w => {
-    //                 this.addChild(w);
-    //             });
-    //         };
-    //     })
-    // }
+
 
 
     onRender(): void {
@@ -99,13 +90,16 @@ export class AXFPageWidgetDesigner extends AXFWidgetDesigner {
     }
 
     onContextMenu(items: AXFContextMenuItem[]): AXFContextMenuItem[] {
-        items = items.filter(c => c.action !== 'copy' && c.action !== 'delete');
+        const exclute = ['copy', 'delete', 'cut', 'addElementBefore', 'addElementAfter', 'moveUp', 'moveDown'];
+        items = items.filter(c => !exclute.some(i => i === c.action));
         return items;
     }
 
     delete() {
         return false;
     }
+
+
 
 }
 

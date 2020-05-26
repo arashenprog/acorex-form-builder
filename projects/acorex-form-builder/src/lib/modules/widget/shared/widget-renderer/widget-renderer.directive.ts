@@ -52,7 +52,7 @@ export class AXFWidgetRendererDirective {
                         this.widgetElement.classList.add('widget-selected');
                     }
                 }
-                
+
             });
         });
     }
@@ -113,12 +113,26 @@ export class AXFWidgetRendererDirective {
         //
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
-        if (this.mode === 'view' && (this.widgetInstance['name'] || this.widgetInstance['tag'] || this.widgetConfig.name === 'page')) {
-            this.widgetService.readPropsFromHost(this.widgetConfig.name, this.widgetInstance['name'], this.widgetInstance['tag']).then(props => {
+        //
+        if (this.widgetInstance.parent && this.widgetInstance.parent.tag !== undefined) {
+            this.widgetInstance.tag = this.widgetInstance.parent.tag;
+        }
+
+        this.widgetService.readPropsFromHost(this.widgetConfig.name, this.widgetInstance.name, this.widgetInstance.tag)
+            .then(props => {
                 Object.assign(this.widgetInstance, props);
                 this.widgetInstance.onRender();
-            });
-        }
+                if (this.widgetInstance.locked && this.widgetConfig.name !== 'page') {
+                    this.widgetElement.classList.add('axf-disabled-widget');
+                }
+                this.eventService.broadcast('RENDER', this.widgetInstance);
+            })
+        // .finally(() => {
+        //     this.eventService.broadcast('RENDER', this.widgetInstance);
+        // });
+        //
+        this.eventService.broadcast('RENDER', this.widgetInstance);
+        //
 
         if (this.mode === 'designer') {
             this.widgetInstance.onSelect.subscribe(c => {
@@ -172,6 +186,7 @@ export class AXFWidgetRendererDirective {
                     } else if (
                         this.widgetConfig.droppable !== false &&
                         this.widgetConfig.container !== false &&
+                        this.widgetInstance.locked !== true &&
                         !this.widgetElement.querySelector(`#bb-${this.widgetElement.id}`) &&
                         (!this.widgetConfig.options.widgets || this.widgetConfig.options.widgets.length == 0)) {
                         hoverDiv.classList.add('axf-blank-container');
@@ -242,7 +257,7 @@ export class AXFWidgetRendererDirective {
                 }, 500);
 
                 // add drag and drop functionality
-                if (this.widgetConfig.draggable != false) {
+                if (this.widgetConfig.draggable !== false && this.widgetInstance.locked !== true) {
                     this.widgetElement.classList.add('axf-draggable-widget');
                     this.widgetElement.setAttribute('draggable', 'true');
                     this.widgetElement.ondragstart = (e) => {
@@ -254,7 +269,7 @@ export class AXFWidgetRendererDirective {
                     };
                 }
                 //
-                if (this.widgetConfig.droppable != false && this.widgetConfig.container) {
+                if (this.widgetConfig.droppable !== false && this.widgetConfig.container && this.widgetInstance.locked !== true) {
                     this.widgetElement.addEventListener('dragover', (e: DragEvent) => {
                         if (window['dragged'] == null) {
                             return;
@@ -348,8 +363,6 @@ export class AXFWidgetRendererDirective {
                     });
                 }
             });
-            // select after added to container
-            this.widgetInstance.edit();
         }
     }
 

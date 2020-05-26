@@ -56,12 +56,6 @@ export class ACFViewerPage extends AXBasePageComponent {
       .pipe(distinctUntilChanged())
       .subscribe(c => {
         this.isBusy = c;
-        // if (this.printRendering && c) {
-        //   // const html = 'test';
-        //   // this.dataService.submit(html).then(() => {
-
-        //   // });
-        // }
       });
     //
     eventService.on('__submit', (data) => {
@@ -85,10 +79,6 @@ export class ACFViewerPage extends AXBasePageComponent {
   ngAfterViewInit() {
     this.templateService.load().then(data => {
       this.widgets = [this.widgetService.parse(data.template)];
-      // this.intervalId = window.setInterval(() => {
-      //   this.connectService.send("sync", { height: document.documentElement.offsetHeight }).then(data => {
-      //   })
-      // }, 300)
     });
   }
 
