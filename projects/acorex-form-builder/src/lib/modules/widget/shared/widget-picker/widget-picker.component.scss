@@ -16,8 +16,12 @@
         display: flex;
         align-items: center;
         flex-direction: row;
-        width: 220px;
+        flex: 0 0 49%;
+        max-width: 50%;
         border: 1px solid transparent;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &:hover {
             border: 1px solid var(--primary-color);
@@ -29,6 +33,7 @@
 
         &.selected {
             border: 1px solid var(--primary-dark-color);
+
             .icon {
                 background-color: var(--primary-dark-color);
             }
@@ -37,8 +42,10 @@
         .icon {
             background-color: var(--black-color);
             color: var(--white-color);
-            width: var(--el-lg-size);
-            height: var(--el-lg-size);
+            min-width: var(--el-xl-size);
+            width: var(--el-xl-size);
+            min-height: var(--el-xl-size);
+            height: var(--el-xl-size);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -47,24 +54,20 @@
 
         .text {
             margin-left: var(--sp-sm-size);
-            display: flex;
-            flex-direction: column;
-            justify-items: center;
         }
 
         .title {
             font-size: var(--font-md-size);
             font-weight: bold;
+         
         }
 
         .hint {
             font-size: var(--font-sm-size);
             color: var(--gray);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+      
         }
-        
+
     }
 }
 

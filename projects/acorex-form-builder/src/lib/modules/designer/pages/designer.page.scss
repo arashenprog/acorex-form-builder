@@ -93,7 +93,8 @@
                     margin-inline-start: var(--sp-md-size);
                 }
             }
-            .nameHeader{
+
+            .nameHeader {
                 padding-inline-end: 15px;
             }
 
@@ -108,7 +109,7 @@
 
             .widget-selected {
                 box-shadow: 0 0 0 0.2rem var(--primary-selected-color);
-                outline: var(--primary-selected-color)  solid  1px !important;
+                outline: var(--primary-selected-color) solid 1px !important;
                 outline-offset: 0px;
             }
         }
@@ -151,6 +152,11 @@
 
                     &:last-child::after {
                         content: "" !important;
+                    }
+
+                    &.disabled {
+                        cursor: not-allowed;
+                        text-decoration: none;
                     }
 
                 }
@@ -263,6 +269,14 @@ ax-tab-view {
 }
 
 .axf-widget-move-handler {}
+
+.axf-disabled-widget {
+    cursor: not-allowed !important;
+    -webkit-filter: grayscale(100%);
+    .axf-widget-hover {
+        cursor: not-allowed !important;
+    }
+}
 
 .axf-widget-hover {
     z-index: 1500;

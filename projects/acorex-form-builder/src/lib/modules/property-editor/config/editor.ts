@@ -1,9 +1,12 @@
-import { Output, EventEmitter, Input, Directive} from '@angular/core';
+import { Output, EventEmitter, Input, Directive } from '@angular/core';
 
 
 
 @Directive()
 export abstract class AXFProperyEditor<T>{
+
+
+    locked: boolean = false;
 
     @Output()
     valueChange: EventEmitter<T> = new EventEmitter<T>();

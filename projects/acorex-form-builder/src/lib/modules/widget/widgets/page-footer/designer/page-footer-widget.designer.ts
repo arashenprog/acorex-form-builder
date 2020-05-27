@@ -5,7 +5,6 @@ import { AXFWidgetPickerService } from '../../../services/template/picker.servic
 @Component({
     selector: '[axf-page-footer]',
     templateUrl: './page-footer-widget.designer.html',
-    //styleUrls: ['./page-header-widget.designer.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: { class: "axf-drop-zone" }
 
@@ -16,16 +15,7 @@ export class AXFPageFooterWidgetDesigner extends AXFWidgetDesigner {
         super();
     }
 
-    // addElement() {
-    //     this.picker.showPicker().then(widgets => {
-    //         if (widgets) {
-    //             widgets.forEach(w => {
-    //                 this.addChild(w);
-    //             });
-    //             this.refresh();
-    //         }
-    //     })
-    // }
+
 
     onRender() {
         this.cdr.markForCheck();
