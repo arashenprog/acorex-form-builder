@@ -65,20 +65,22 @@ export class ACFViewerPage extends AXBasePageComponent {
       });
     //
     eventService.on('__submit', (data) => {
-      this.printRendering = true;
-      this.isBusy = true;
-      setTimeout(() => {
-        const html = this.printDiv.nativeElement.innerHTML;
-        let body = '<html><head><meta charset="utf-8"/>' +
-          '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
-          + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
-        body = body + html + '</body></html>';
-
-        this.dataService.submit(body).then(() => {
-          this.printRendering = false;
-          this.isBusy = false;
-        });
-      }, 5000);
+      this.dataService.validate().then(()=>{
+        this.printRendering = true;
+        this.isBusy = true;
+        setTimeout(() => {
+          const html = this.printDiv.nativeElement.innerHTML;
+          let body = '<html><head><meta charset="utf-8"/>' +
+            '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+            + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
+          body = body + html + '</body></html>';
+  
+          this.dataService.submit(body).then(() => {
+            this.printRendering = false;
+            this.isBusy = false;
+          });
+        }, 5000);
+      })
     });
   }
 

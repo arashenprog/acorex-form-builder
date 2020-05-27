@@ -1,23 +1,29 @@
 import { Component, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
-import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events';
+import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events'; 
+import { AXBasePageComponent } from 'acorex-ui';
 
 @Component({
     selector:'ax-signature',
     styleUrls: ['./signaturepad.page.scss'],
-    template:' <div class="signature"><signature-pad #sigpad1 [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad><div class="clear-box"><button class="btn btn-outline-danger" (click)="clearClick()"><i class="fa fa-trash"></i></button></div></div>'
+    templateUrl: './signaturepad.page.html'
+    //,template:' <div class="signature"><signature-pad #sigpad1 [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad><div class="clear-box"><button class="btn btn-outline-danger" (click)="clearClick()"><i class="fa fa-trash"></i></button></div></div><ax-check-box *ngIf="confirmText!=null" [label]="confirmText"></ax-check-box>'
 })
 
-export class SignaturePadPage{
+export class SignaturePadPage extends AXBasePageComponent{
 
   @ViewChild('sigpad1') signaturePad: SignaturePad;
 
+  confirmText:string;
+  confirm:boolean=false;
   signaturePadOptions: Object = { 
     'canvasHeight': 300,
     'canvasWidth': 300
   };
 
-  constructor() {
+  constructor()
+   {
+     super();
   }
 
   @Output()
@@ -50,11 +56,29 @@ export class SignaturePadPage{
 
   clearClick()
   {
+    this.value="";
     this.signaturePad.clear();
   }
 
   onClosing(e: ClosingAction) {
-    e.data = this.value;
+    if((this.confirmText!=null && this.confirmText!='' && this.confirm ) || (this.confirmText==null || this.confirmText==''))
+      e.data = this.value;
+    else
+      e.data = "";
     e.resolve();
-}
+  }
+
+  save()
+  {
+    if((this.confirmText!=null && this.confirmText!='' && this.confirm ) || (this.confirmText==null || this.confirmText==''))
+    {  
+      this.close(this.value);
+      
+    } 
+  }
+
+  back()
+  {
+    this.close("");
+  }
 }

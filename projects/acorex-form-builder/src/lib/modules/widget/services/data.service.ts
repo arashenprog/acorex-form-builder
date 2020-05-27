@@ -33,7 +33,7 @@ export class AXFDataService {
     private dataModel: any = {};
     private widgetRegisterChangeObserver: any;
     private widgets: any = {};
-    private imageUrls:any[]=[]; 
+    private imageUrls: any[] = [];
     private dataChangeSubject = new Subject<boolean>();
 
     constructor(
@@ -197,13 +197,14 @@ export class AXFDataService {
         const ff = [];
         for (const key in this.widgets) {
             if (this.widgets.hasOwnProperty(key)) {
-                const widget = this.widgets[key];
-                if (widget.validator) {
+                const widget = this.widgets[key]; 
+                if (widget.validator && widget.readonly != true) {
                     ff.push(widget);
                     const v: AXFValidatorProp = new AXFValidatorProp();
                     Object.assign(v, widget.validator);
                     widget.validator = v;
                     widget.validate = (): Promise<IValidationRuleResult> => {
+                        debugger;
                         return new Promise<IValidationRuleResult>(resolve => {
                             widget.validator.validate(widget.value).then(r => {
                                 r.target = widget;
@@ -283,13 +284,11 @@ export class AXFDataService {
     }
 
 
-    setImageUrl(data:any)
-    {
+    setImageUrl(data: any) {
         this.imageUrls.push(data);
     }
 
-    getImageUrl(url:string)
-    {
-        return this.imageUrls.find(f=>f.url==url);
+    getImageUrl(url: string) {
+        return this.imageUrls.find(f => f.url == url);
     }
 }

@@ -1,0 +1,12 @@
+<div class="contain">
+    <div class="signature">
+        <signature-pad #sigpad1 [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+        <div class="clear-box"><button class="btn btn-outline-danger" (click)="clearClick()"><i class="fa fa-trash"></i></button></div>
+    </div>
+    <ax-check-box *ngIf="confirmText!=null && confirmText!=''" [label]="confirmText" [(value)]="confirm"></ax-check-box>
+
+    <div class="btnDiv" > 
+            <button type="button" class="btn btn-success" (click)="save()" > Save </button>
+            <button type="button" class="btn btn-primary" (click)="back()" >Back </button> 
+    </div>
+</div>

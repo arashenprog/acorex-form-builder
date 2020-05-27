@@ -25,4 +25,10 @@ export class AXFTextInputWidgetView extends AXFValueWidgetView {
         }
         this.cdr.markForCheck();
     }
+
+    setDateTime()
+    {
+        this.value=new Date().toLocaleDateString()+' ' +new Date().toLocaleTimeString(); 
+        this.cdr.markForCheck();
+    }
 }

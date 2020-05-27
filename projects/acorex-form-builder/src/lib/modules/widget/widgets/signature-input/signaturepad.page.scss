@@ -1,14 +1,24 @@
-.signature {
-    border: 1px #007bff dashed;
-    position: relative;
-    signature-pad {
-        display: flex;
-        
-    } 
-    .clear-box {
-        position: absolute;
-        right: 5px;
-        bottom: 5px;
+.contain{
+    padding: 10px;
+    .signature {
+        border: 1px #007bff dashed;
+        position: relative;
+        signature-pad {
+            display: flex;
+            
+        } 
+        .clear-box {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+        }        
     }
-    
+
+    .btnDiv{
+        margin-top: 10px; width: 100%; text-align: center;
+        button{
+            margin:5px;
+            width: 40%;
+        }
+    }
 }

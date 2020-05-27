@@ -14,6 +14,7 @@ export class AXFSignatureInputWidgetView extends AXFValueWidgetView {
 
     height: number;
     width: number;
+    confirmText: string;
     constructor(protected cdr: ChangeDetectorRef, private popupService: AXPopupService) {
         super(cdr);
     }
@@ -28,9 +29,13 @@ export class AXFSignatureInputWidgetView extends AXFValueWidgetView {
             title: 'Signature',
             size: 'md',
             data: {
-                data: this.value
+                value: this.value,
+                confirmText: this.confirmText
             }
         }).closed(c => {
+            if (c && c.data) {
+                this.invokeEvent("onSigned");
+            }
             this.value = c.data;
             this.cdr.markForCheck();
         });

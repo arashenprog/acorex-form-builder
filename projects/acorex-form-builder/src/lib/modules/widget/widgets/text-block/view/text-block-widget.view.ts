@@ -38,4 +38,5 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
     ngOnDestroy() {
         this.dataSubscription.unsubscribe();
     }
+ 
 }
