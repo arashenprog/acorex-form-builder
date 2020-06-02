@@ -1,15 +1,15 @@
-<div style="display: inline-block;width: 100%;line-height: 1;direction: ltr;">
+<div style="font-size: 14px!important;display: inline-block;width: 100%;line-height: 1;direction: ltr;">
     <div *ngFor="let item of dataSource.dataItems"
         [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?'left':'unset'}"
         >
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
             <div *ngSwitchCase="'left'" style="padding: 6px 2px;position: relative;">
-                <span *ngIf="mode!='unselectable'" style="position: absolute; 
-                    height: 20px;
-                    width: 20px;
-                    background-color: var(--white-color);
-                    border: 1px solid;
-                    border-color: var(--black-color);"
+                <span *ngIf="mode!='unselectable'" style="position: absolute;
+                height: 20px;
+                width: 20px;
+                background-color: var(--white-color);
+                border: 1px solid;
+                border-color: var(--black-color);"
                     [ngStyle]="{'border-radius': mode=='single' ? '100%' : '0' }">
                     <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
                         style="font-weight: bold;">&#x2713;</i>   
@@ -18,8 +18,8 @@
                 </span>
                 <img style="margin-left: 22px;" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
-                <span style="margin-left: 22px;"
-                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+                <div style="margin-left: 22px;"
+                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px 2px;position: relative;">
                 <div style="padding-bottom: 22px;">

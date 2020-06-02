@@ -6,8 +6,8 @@
                 <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
                 <img style="margin-left: 22px;" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
-                <span style="margin-left: 22px;"
-                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+                <div style="margin-left: 22px;"
+                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px 2px;">
                 <div style="padding-bottom: 22px;">
@@ -16,14 +16,14 @@
                 <div>
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
-                    <span *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <div *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
                 </div>
             </div>
             <div *ngSwitchCase="'bottom'" style="padding: 6px 2px;">
                 <div>
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
-                    <span *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <div *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
                 </div>
                 <div style="padding-bottom: 22px;">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
@@ -33,7 +33,7 @@
                 <div style="float: left;margin-right: 25px;">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
-                    <span *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <div *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
                 </div>
                 <div style="position: absolute;right: 25px;">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
