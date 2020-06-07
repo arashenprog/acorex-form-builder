@@ -38,7 +38,7 @@
 </ax-tab-view>
 <footer>
     <div>
-        <small *ngIf="selectedWidgets.length == 0">Hold the CTRL key and click the items in a list to choose more than one element at a same time</small>
+        <small  class="footer-hint" *ngIf="selectedWidgets.length == 0">Hold the CTRL key and click the items in a list to choose more than one element at a same time</small>
     </div>
     <div>
         <ax-button (onClick)="insertMultiple()" *ngIf="selectedWidgets.length > 0">

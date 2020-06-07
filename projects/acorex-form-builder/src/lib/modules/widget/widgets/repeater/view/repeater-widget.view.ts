@@ -32,15 +32,6 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
         this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
-        // if (this.allowAdd) {
-        //     debugger;
-        //     const cell = this.rowTemplate.options.widgets[0] as WidgetConfig;
-        //     const button = this.widgetService.resolve('button');
-        //     button.options.text = 'Remove';
-        //     button.options.type = 'danger';
-        //     button.options.onClick = `#${this.config.options.name}.remove()`;
-        //     cell.options.widgets.push(button);
-        // }
         if (this.allItems().length === 0 && !this.readonly) {
             this.bodyRows = [this.widgetService.clone(this.rowTemplate)];
         } else {

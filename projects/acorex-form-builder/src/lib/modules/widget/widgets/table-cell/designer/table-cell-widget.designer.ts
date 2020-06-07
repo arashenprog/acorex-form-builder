@@ -36,7 +36,9 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
         const items: AXFContextMenuItem[] = super.getContextMenu().filter(c =>
             c.action !== 'copy' &&
             c.action !== 'addElementBefore' &&
-            c.action !== 'addElementAfter'
+            c.action !== 'addElementAfter' &&
+            c.action !== 'moveUp' &&
+            c.action !== 'moveDown'
         );
         items.splice(3, 0, ...[
             {

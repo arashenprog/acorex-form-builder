@@ -20,9 +20,6 @@ export class AXFDateInputWidgetView extends AXFValueWidgetView {
         this.cdr.markForCheck();
     }
 
-
-
-
     @Input()
     public get date(): AXDateTime {
         return this.value ? new AXDateTime(this.value, this.calendarType) : null;
@@ -30,4 +27,9 @@ export class AXFDateInputWidgetView extends AXFValueWidgetView {
     public set date(v: AXDateTime) {
         this.value = v ? v.date.toJSON() : null;
     }
+
+    dateChanged() {
+        this.cdr.markForCheck();
+    }
+
 }

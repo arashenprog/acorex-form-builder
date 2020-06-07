@@ -22,9 +22,8 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
                 if (this['dataContext'].hasOwnProperty(sw)) {
                     this.label = this.label.replace(f, this['dataContext'][sw]);
                 }
-            })
-            this.cdr.markForCheck();
-            // this.applyStyle(this.el.nativeElement.querySelector("label")); 
+            });
         }
+        this.cdr.markForCheck();
     }
 }

@@ -2,7 +2,7 @@ import { IValidationRuleResult, AXValidationRule } from 'acorex-ui';
 
 export class AXFValidatorProp {
     items: AXValidationRule[] = [];
-    validateOn: 'blur' | 'change' | 'submit' = 'submit';
+    enabled: boolean = true;
     validate(value: any): Promise<IValidationRuleResult> {
         return new Promise<IValidationRuleResult>(resolve => {
             Promise.all(

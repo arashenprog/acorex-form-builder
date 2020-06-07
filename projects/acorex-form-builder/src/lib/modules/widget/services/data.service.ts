@@ -197,23 +197,18 @@ export class AXFDataService {
         const ff = [];
         for (const key in this.widgets) {
             if (this.widgets.hasOwnProperty(key)) {
-                const widget = this.widgets[key]; 
-                if (widget.validator && widget.readonly != true) {
+                const widget = this.widgets[key];
+                if (widget.validator && widget.validator.enabled !== false && widget.readonly !== true) {
                     ff.push(widget);
                     const v: AXFValidatorProp = new AXFValidatorProp();
                     Object.assign(v, widget.validator);
                     widget.validator = v;
-                    widget.validate = (): Promise<IValidationRuleResult> => {
-                        debugger;
+                    widget.validator.run = (): Promise<IValidationRuleResult> => {
                         return new Promise<IValidationRuleResult>(resolve => {
                             widget.validator.validate(widget.value).then(r => {
                                 r.target = widget;
                                 const elm: HTMLDivElement = widget._rootElement;
-                                elm.classList.remove('axf-validation-error');
-                                const exists = elm.querySelector('.error-text');
-                                if (exists) {
-                                    elm.removeChild(exists);
-                                }
+                                widget.validator.clear();
                                 if (!r.result) {
                                     elm.classList.add('axf-validation-error');
                                     const errorElm = document.createElement('div');
@@ -225,13 +220,21 @@ export class AXFDataService {
                             });
                         });
                     };
+                    widget.validator.clear = () => {
+                        const elm: HTMLDivElement = widget._rootElement;
+                        elm.classList.remove('axf-validation-error');
+                        const exists = elm.querySelector('.error-text');
+                        if (exists) {
+                            elm.removeChild(exists);
+                        }
+                    };
                 }
             }
         }
 
         return new Promise((resolve, reject) => {
             Promise.all(ff
-                .map(c => c.validate()))
+                .map(c => c.validator.run()))
                 .then((rules) => {
                     const failed = rules.filter((c: IValidationRuleResult) => !c.result);
                     if (failed.length) {
@@ -239,7 +242,6 @@ export class AXFDataService {
                         reject();
                     } else {
                         resolve();
-                        //                       
                     }
                 });
         });

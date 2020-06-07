@@ -102,7 +102,7 @@ p {
   margin: 0.4rem !important;
 }
 
-ul{
+ul {
   margin-bottom: 0px;
 }
 
@@ -136,4 +136,8 @@ $skeleton-color-highlight: lighten($skeleton-color-base, 30%);
   100% {
     transform: translate3d(100%, 0, 0);
   }
+}
+
+.ax-dropdown-popover-container {
+  z-index: 10000 !important;
 }

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AXFDataService } from '../services/data.service';
 import { AXFWidgetPickerService } from '../services/template/picker.service';
+import { AXFValidatorProp } from '../../property-editor/editors/validation/validation.class';
 
 export const WidgetInjector: { instance?: Injector } = {};
 
@@ -194,7 +195,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 if (config && this.config.container) {
                     this.addChild(config);
                     WidgetInjector.instance.get(AXToastService).success('Widget pasted!');
-                    sessionStorage.removeItem('clipboard');
+                    //sessionStorage.removeItem('clipboard');
                 }
             }
         }
@@ -395,8 +396,6 @@ export abstract class AXFWidgetView extends AXFWidget {
 
     protected dataService: AXFDataService;
 
-
-
     protected getPath(): string {
         if (this.config.options.name == null || this.config.options.name === '') {
             if (this['rIndex'] >= 0) {
@@ -446,6 +445,7 @@ export abstract class AXFWidgetView extends AXFWidget {
 
 
     protected invokeEvent(name: string) {
+
         if (this[name]) {
             const action: string = this[name];
             if (action) {
@@ -475,15 +475,16 @@ export abstract class AXFWidgetView extends AXFWidget {
                             params[v] = v.substring(1).startsWith('$') ? this.dataService.getValue(v.substring(2)) : this.dataService.getValue(this.resolveProperty(v.substring(1)));
                         });
                     }
+                    debugger;
                     execCode = execCode.replace('#', 'this.').replace('$', 'this.$');
                     execCode = execCode.replace(/\[/, '').replace(/]/, '');
                     console.log(execCode);
-                    new Function(`try {${execCode}} catch(e){   }`).call(params);
-                    widgetRefs.forEach(w => {
-                        if (w) {
-                            w.refresh();
-                        }
-                    });
+                    new Function(`try {${execCode}} catch(e){  console.log(e)  }`).call(params);
+                    // widgetRefs.forEach(w => {
+                    //     if (w) {
+                    //         w.refresh();
+                    //     }
+                    // });
                 });
 
             }
@@ -520,12 +521,21 @@ export abstract class AXFWidgetView extends AXFWidget {
             this.dataService.setWidget(this.getPath(), this);
         }
     }
+
+
+    // ****** api functions *******//
+
+    public setVisible(value: boolean) {
+        this.visible = value;
+        this.onRender();
+    }
 }
 
 
 export abstract class AXFValueWidgetView extends AXFWidgetView {
 
     readonly: boolean;
+    validator: AXFValidatorProp;
 
     constructor(protected cdr: ChangeDetectorRef) {
         super();
@@ -569,6 +579,9 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
             };
             this.dataService.callEvent(info);
         }
+        if (this.validator) {
+            (<any>this.validator).clear();
+        }
         this.invokeEvent('onValueChange');
         this.cdr.markForCheck();
         this.cdr.detectChanges();
@@ -584,6 +597,15 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
     ngAfterViewInit() {
         this.value = this.extractValue();
         super.ngAfterViewInit();
+    }
+
+    setValue(value: boolean) {
+        this.value = value;
+    }
+
+    setValidation(value: boolean) {
+        this.validator.enabled = value;
+        (<any>this.validator).clear();
     }
 }
 

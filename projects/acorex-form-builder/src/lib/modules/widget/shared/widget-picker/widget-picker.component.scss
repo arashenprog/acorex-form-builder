@@ -59,13 +59,13 @@
         .title {
             font-size: var(--font-md-size);
             font-weight: bold;
-         
+
         }
 
         .hint {
             font-size: var(--font-sm-size);
             color: var(--gray);
-      
+
         }
 
     }
@@ -78,4 +78,9 @@ footer {
     border-top: 1px solid var(--primary-dark-color);
     display: flex;
     justify-content: space-between;
+
+    .footer-hint {
+        font-weight: 500;
+        color: var(--danger-color);
+    }
 }

@@ -9,10 +9,17 @@ export class AXFDataItemPipe implements PipeTransform {
     }
 
     transform(dataItem: any, fieldName: string): string {
+        debugger;
         const field = this.formatService.decompose(fieldName);
         if (field.word) {
             let val = dataItem[field.word];
-            return this.formatService.format(`[${val} | ${field.formetters.join('|')}]`);
+            for (let i = 0; i < field.formetters.length; i++) {
+                const pipeParts = field.formetters[i].split(':');
+                const pipe = pipeParts[0].trim();
+                const pipeParams = pipeParts.slice(1);
+                val = this.formatService[pipe](val, pipeParams);
+            }
+            return val;
         }
         return fieldName;
     }

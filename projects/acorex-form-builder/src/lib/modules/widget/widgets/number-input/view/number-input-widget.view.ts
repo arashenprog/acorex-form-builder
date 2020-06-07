@@ -10,7 +10,7 @@ import { AXFValidatorProp } from '../../../../property-editor/editors/validation
 export class AXFNumberInputWidgetView extends AXFValueWidgetView {
 
 
-    validator: AXFValidatorProp;
+    
     placeholder: string; 
 
     constructor(protected cdr: ChangeDetectorRef,private hostElement: ElementRef<HTMLTableCellElement>) {

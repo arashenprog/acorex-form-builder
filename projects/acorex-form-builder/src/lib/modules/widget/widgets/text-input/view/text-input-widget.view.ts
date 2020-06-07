@@ -9,8 +9,7 @@ import { AXFValidatorProp } from '../../../../property-editor/editors/validation
 })
 export class AXFTextInputWidgetView extends AXFValueWidgetView {
 
-
-    validator: AXFValidatorProp;
+    
     placeholder: string; 
 
     constructor(protected cdr: ChangeDetectorRef) {
