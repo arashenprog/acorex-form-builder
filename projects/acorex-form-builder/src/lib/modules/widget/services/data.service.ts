@@ -194,6 +194,7 @@ export class AXFDataService {
 
 
     validate(): Promise<void> {
+        debugger;
         const ff = [];
         for (const key in this.widgets) {
             if (this.widgets.hasOwnProperty(key)) {

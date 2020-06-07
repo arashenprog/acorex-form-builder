@@ -1,6 +1,6 @@
 import { Injector, EventEmitter, Input, Output, Directive, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
-import { AXHtmlUtil, AXToastService, IValidationRuleResult } from 'acorex-ui';
+import { AXHtmlUtil, AXToastService, IValidationRuleResult, AXValidationRule } from 'acorex-ui';
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -603,8 +603,17 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
         this.value = value;
     }
 
-    setValidation(value: boolean) {
-        this.validator.enabled = value;
+    setRequired(value: boolean) {
+        if (!this.validator) {
+            this.validator = new AXFValidatorProp();
+        }
+        this.validator.items = this.validator.items.filter(c => c.type !== 'required');
+        if (value) {
+            const rule1 = new AXValidationRule();
+            rule1.type = 'required';
+            rule1.message = 'Required';
+            this.validator.items.push(rule1);
+        }
         (<any>this.validator).clear();
     }
 }
