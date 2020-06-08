@@ -24,7 +24,11 @@ export class AXFSignatureInputWidgetView extends AXFValueWidgetView {
         return parseInt(val) + 2;
     }
 
-    setSignatureClick() {
+    onRender(): void { 
+        this.cdr.markForCheck();
+    }
+
+    setSignatureClick() { 
         this.popupService.open(SignaturePadPage, {
             title: 'Signature',
             size: 'md',

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
@@ -8,15 +8,19 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFContainerWidgetView extends AXFWidgetView {
 
-    constructor(private hostElement: ElementRef<HTMLTableCellElement>) {
+    @ViewChild("el") el: ElementRef<HTMLElement>;
+
+    constructor(private hostElement: ElementRef<HTMLTableCellElement>, protected cdr: ChangeDetectorRef) {
         super();
     }
 
 
-    onRender() {
-        if (this.hostElement) {
-            this.applyStyle(this.hostElement.nativeElement);
+    onRender() { 
+        if (this.el) {
+            this.applyStyle(this.el.nativeElement);
+            this.cdr.markForCheck();
         }
+        this.cdr.markForCheck(); 
     }
 }
 

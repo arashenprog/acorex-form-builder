@@ -418,7 +418,7 @@ export abstract class AXFWidgetView extends AXFWidget {
     protected getParentPath(): string {
         const parts: string[] = [];
         let prt = this.parent;
-        while (prt != null) {
+        while (prt != null) {  
             if (prt.config && prt.config.options &&
                 (prt.config.options.name ||
                     (prt.rIndex !== undefined && prt.config.name !== 'table-cell' && prt.config.name !== 'table-row')
@@ -475,8 +475,7 @@ export abstract class AXFWidgetView extends AXFWidget {
                             params[v] = v.substring(1).startsWith('$') ? this.dataService.getValue(v.substring(2)) : this.dataService.getValue(this.resolveProperty(v.substring(1)));
                         });
                     }
-                    debugger;
-                    execCode = execCode.replace('#', 'this.').replace('$', 'this.$');
+                    execCode = execCode.replace(/#/g, 'this.').replace(/\$/g, 'this.$');
                     execCode = execCode.replace(/\[/, '').replace(/]/, '');
                     console.log(execCode);
                     new Function(`try {${execCode}} catch(e){  console.log(e)  }`).call(params);

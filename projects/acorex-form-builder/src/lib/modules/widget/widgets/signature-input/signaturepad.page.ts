@@ -56,17 +56,17 @@ export class SignaturePadPage extends AXBasePageComponent{
 
   clearClick()
   {
-    this.value="";
+    this.value=null;
     this.signaturePad.clear();
   }
 
-  onClosing(e: ClosingAction) {
-    if((this.confirmText!=null && this.confirmText!='' && this.confirm ) || (this.confirmText==null || this.confirmText==''))
-      e.data = this.value;
-    else
-      e.data = "";
-    e.resolve();
-  }
+  // onClosing(e: ClosingAction) {
+  //   if((this.confirmText!=null && this.confirmText!='' && this.confirm ) || (this.confirmText==null || this.confirmText==''))
+  //     e.data = this.value;
+  //   else
+  //     e.data = null;
+  //   e.resolve();
+  // }
 
   save()
   {
@@ -79,6 +79,6 @@ export class SignaturePadPage extends AXBasePageComponent{
 
   back()
   {
-    this.close("");
+    this.close(null);
   }
 }

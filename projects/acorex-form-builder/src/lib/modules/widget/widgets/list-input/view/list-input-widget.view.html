@@ -1,4 +1,4 @@
-<div #el class="allItem">
+<div #el class="allItem"  *ngIf="visible">
     <div class="rep" *ngFor="let item of dataSource.dataItems" 
         [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?'left':'unset'}">
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">

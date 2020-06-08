@@ -69,7 +69,20 @@ export class AXFDropdownInputWidgetModule {
                 AXF_VALUE_CHANGE_EVENT,
                 AXF_DATA_BOUND_EVENT,
                 AXF_VALIDATION_PROPERTY,
-                AXF_TAG_PROPERTY
+                AXF_TAG_PROPERTY,
+                {
+                    name: 'textAlign',
+                    category: 'Style',
+                    defaultValue: 'left',
+                    title: 'Print Horizontal Alignment',
+                    editor: 'SelectionEditor',
+                    order: 36,
+                    options: {
+                        items: [{ value: 'left', title: 'Left' }, { value: 'center', title: 'Center' }, { value: 'right', title: 'Right' }],
+                        mode: 'single',
+                        direction: 'horizontal'
+                    }
+                }
             ]
         });
     }

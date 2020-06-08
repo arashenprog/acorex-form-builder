@@ -27,6 +27,7 @@ export class AXFTextBlockWidgetView extends AXFWidgetView {
 
     onRender(): void {
         this.applyStyle(this.hostElement.nativeElement);
+        this.hostElement.nativeElement.style.display=this.visible?"block":"none";
         this.cdr.markForCheck();
     }
 
