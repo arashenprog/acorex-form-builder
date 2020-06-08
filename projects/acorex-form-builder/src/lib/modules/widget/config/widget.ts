@@ -579,8 +579,8 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
             };
             this.dataService.callEvent(info);
         }
-        if (this.validator) {
-            (<any>this.validator).clear();
+        if (this.validator && this.validator.clear) {
+            this.validator.clear();
         }
         this.invokeEvent('onValueChange');
         this.cdr.markForCheck();
@@ -600,6 +600,7 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
     }
 
     setValue(value: boolean) {
+        debugger;
         this.value = value;
     }
 
@@ -614,7 +615,9 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
             rule1.message = 'Required';
             this.validator.items.push(rule1);
         }
-        (<any>this.validator).clear();
+        if (this.validator.clear) {
+            this.validator.clear();
+        }
     }
 }
 

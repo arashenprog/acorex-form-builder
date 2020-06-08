@@ -22,4 +22,7 @@ export class AXFValidatorProp {
             });
         });
     }
+
+    clear() { }
+    run() { }
 }

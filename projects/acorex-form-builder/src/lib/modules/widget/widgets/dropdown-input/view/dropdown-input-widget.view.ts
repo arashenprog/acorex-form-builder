@@ -86,6 +86,13 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
                 this.dataBound();
             }
         }
+    }
 
+    // ****** api functions *******//
+    setSelectedIndex(index: number) {
+        const item = this.dataSource.dataItems[index];
+        if (item) {
+            this.value = item;
+        }
     }
 }
