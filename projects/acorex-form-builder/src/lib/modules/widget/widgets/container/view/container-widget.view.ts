@@ -8,19 +8,21 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFContainerWidgetView extends AXFWidgetView {
 
-    @ViewChild("el") el: ElementRef<HTMLElement>;
+    @ViewChild('ff', { read: ElementRef, static: false })
+    el: ElementRef<HTMLElement>;
 
-    constructor(private hostElement: ElementRef<HTMLTableCellElement>, protected cdr: ChangeDetectorRef) {
+    constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
 
 
-    onRender() { 
+    onRender() {
+        debugger;
+        this.cdr.markForCheck();
+        this.cdr.detectChanges();
         if (this.el) {
             this.applyStyle(this.el.nativeElement);
-            this.cdr.markForCheck();
         }
-        this.cdr.markForCheck(); 
     }
 }
 
