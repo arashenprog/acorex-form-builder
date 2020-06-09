@@ -51,18 +51,18 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                 }
             }, 10);
         });
-        this.intervalId = setInterval(() => {
-            const now = new Date();
-            const diff = now.getTime() - this._renderTime.getTime();
-            if (diff > 1000) {
-                if (this.firstSelectabledWideget) {
-                    this.firstSelectabledWideget.edit();
-                }
-                console.log(`Rendered in ${diff}ms`);
-                clearInterval(this.intervalId);
-            }
+        // this.intervalId = setInterval(() => {
+        //     const now = new Date();
+        //     const diff = now.getTime() - this._renderTime.getTime();
+        //     if (diff > 1000) {
+        //         if (this.firstSelectabledWideget) {
+        //             this.firstSelectabledWideget.edit();
+        //         }
+        //         console.log(`Rendered in ${diff}ms`);
+        //         clearInterval(this.intervalId);
+        //     }
 
-        }, 300);
+        // }, 300);
         //
         eventService.on('RENDER', (c: AXFWidgetDesigner) => {
             if (c.locked !== true) {
@@ -154,9 +154,18 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                         this.templateService.saveForm(param).then(s => {
                             this.actionItems[0].startIcon = 'fas fa-save';
                             this.isSaving = false;
-                            this.actionToolbar.update();
                             this.printRendering = false;
-                            this.toastService.success('Saved successfuly!');
+                            if(s==true)
+                            { 
+                                this.actionToolbar.update();
+                                this.toastService.success('Saved successfuly!');
+                            }
+                            else
+                            {
+                                this.actionToolbar.update();
+                                this.toastService.error('Error in Saving!');
+                            }
+                            
                         });
                     }, 2000);
 

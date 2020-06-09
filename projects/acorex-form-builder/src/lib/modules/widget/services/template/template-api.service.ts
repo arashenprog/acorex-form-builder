@@ -37,8 +37,8 @@ export class AXFAPITemplateService extends AXFTemplateService {
                 description: prm.description,
                 template: this.widgetService.serialize(prm.widget),
                 printHtml: prm.printHtml
-            }).then(() => {
-                resolve(true);
+            }).then((e) => {
+                resolve(((e==undefined || e.result==undefined)?true:e.result));
             });
         });
     }
