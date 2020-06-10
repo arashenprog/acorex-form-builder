@@ -92,6 +92,10 @@ export abstract class AXFWidget implements AXFWidgetContainer {
         }
         el.style.width = this['width'];
         el.style.height = this['height'];
+        if(this["font"] )
+            el.style.fontFamily=this["font"];
+        else
+            el.style.fontFamily='inherit';
         // apply padding
         if (this['boxStyle']) {
             const boxStyle = this['boxStyle'] as AXFBoxStyleValue;

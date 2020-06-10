@@ -13,7 +13,8 @@ import {
     AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
     AXF_READONLY_PROPERTY,
     AXF_VALUE_CHANGE_EVENT,
-    AXF_INIT_EVENT
+    AXF_INIT_EVENT,
+    AXF_FONT_PROPERTY
 } from '../../config/general-properties';
 import { AXFTextInputWidgetDesigner } from './designer/text-input-widget.designer';
 import { AXFTextInputWidgetPrint } from './print/text-input-widget.print';
@@ -53,6 +54,7 @@ export class AXFTextInputWidgetModule {
                 AXF_READONLY_PROPERTY,
                 AXF_VALUE_CHANGE_EVENT,
                 AXF_INIT_EVENT,
+                AXF_FONT_PROPERTY,
             ]
         })
     }

@@ -357,3 +357,21 @@ export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [
     AXF_TEXT_STYLE_PROPERTY,
     AXF_BOX_STYLE_PROPERTY,
 ];
+
+
+export const AXF_FONT_PROPERTY: AXFWidgetProperty = {
+    name: 'font',
+    category: 'Style',
+    defaultValue: 'inherit',
+    title: 'Font',
+    editor: 'DropdownEditor',
+    order: 38,
+    options: {
+        items: [
+            { value: 'inherit',title:'Default'},
+            { value: 'Arial', title: 'Arial' },
+            { value: 'Tahoma', title: 'Tahoma' },
+            { value: 'Times New Roman', title: 'Times New Roman' }, 
+        ],
+    }
+};
