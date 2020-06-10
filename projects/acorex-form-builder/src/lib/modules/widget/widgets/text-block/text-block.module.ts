@@ -51,7 +51,8 @@ export class AXFTextBlockWidgetModule {
                 AXF_VISIBLE_PROPERTY,
                 AXF_TEXT_DIRECTION_PROPERTY,
                 AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
-                ...AXF_STYLE_GENERAL_PROPERTIES
+                ...AXF_STYLE_GENERAL_PROPERTIES,
+                AXF_FONT_PROPERTY,
             ]
         })//
         service.register({
@@ -81,7 +82,8 @@ export class AXFTextBlockWidgetModule {
                 AXF_VISIBLE_PROPERTY,
                 AXF_TEXT_DIRECTION_PROPERTY,
                 AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
-                ...AXF_STYLE_GENERAL_PROPERTIES
+                ...AXF_STYLE_GENERAL_PROPERTIES,
+                AXF_FONT_PROPERTY,
             ]
         })
         service.register({
@@ -103,7 +105,7 @@ export class AXFTextBlockWidgetModule {
                 bgColor:"inherit",
                 color:"#999999",
                 text:"Hint Text",
-                fontSize:"x-small"
+                fontSize:"x-small" 
             },
             properties: [
                 AXF_RICH_TEXT_PROPERTY,
