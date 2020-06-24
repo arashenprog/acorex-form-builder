@@ -24,6 +24,7 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
  
     onRender(): void {
         //this.applyStyle(this.el.nativeElement.querySelector("img"));
+        this.cdr.markForCheck();
     }
 
     
