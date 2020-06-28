@@ -12,9 +12,9 @@ export class ResolveUrlPipe implements PipeTransform {
     constructor(private connectService: AXFConnectService,private dataService: AXFDataService) { 
     }
 
-    transform(url: string):Promise<string> { 
-        if(url.includes("base64") || url==undefined)
-        return new Promise((resolve) => { resolve(url)});
+    transform(url: string):Promise<string> {  
+        if(url.includes("base64") || url==undefined || url.startsWith('['))
+            return new Promise((resolve) => { resolve(url)}); 
         else
         {
             let savedUrl=this.dataService.getImageUrl(url)

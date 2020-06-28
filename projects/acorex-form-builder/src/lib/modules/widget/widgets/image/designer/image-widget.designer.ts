@@ -18,7 +18,7 @@ export class AXFImageWidgetDesigner extends AXFWidgetDesigner {
         super()
     }
 
-    onRender(): void {
+    onRender(): void { 
         this.applyStyle(this.el.nativeElement.querySelector("img"));
         this.cdr.markForCheck();
     }
