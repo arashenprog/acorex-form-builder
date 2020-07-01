@@ -1,17 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFProperyEditor } from '../../config/editor';
-import { AXFDataService } from '../../../widget/services/data.service';
 
 @Component({
     template: `
-        <ax-selection-list 
-            [direction]="direction" 
-            [mode]="mode" 
-            [textField]="textField" 
+        <ax-selection-list
+            [direction]="direction"
+            [mode]="mode"
+            [textField]="textField"
             [valueField]="valueField"
-            [items]="items" 
-            [selectedValues]="value" 
-            (selectedValuesChange)="handleValueChange($event)" 
+            [items]="items"
+            [selectedValues]="value"
+            (selectedValuesChange)="handleValueChange($event)"
         >
         </ax-selection-list>
     `,
@@ -20,16 +19,21 @@ import { AXFDataService } from '../../../widget/services/data.service';
 export class AXFSelectionEditorComponent extends AXFProperyEditor<any>  {
 
     items: any[] = [];
-    textField: string = "title";
-    valueField: string = "value";
-    direction: "horizontal" | "vertical" = "horizontal";
-    mode: "single" | "multiple" = "single";
+    textField: string = 'title';
+    valueField: string = 'value';
+    direction: 'horizontal' | 'vertical' = 'horizontal';
+    mode: 'single' | 'multiple' = 'single';
 
-    constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
-        super();
+    constructor(protected cdr: ChangeDetectorRef) {
+        super(cdr);
     }
 
     handleValueChange(v: any) {
         this.value = v;
     }
+
+    ngAfterViewInit() {
+        this.initiated = true;
+    }
+
 }

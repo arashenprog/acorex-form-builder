@@ -26,7 +26,7 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any>  {
     mode: 'single' | 'multiple' = 'single';
 
     constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
-        super();
+        super(cdr);
     }
 
     ngAfterViewInit(): void {
@@ -36,6 +36,7 @@ export class AXFDropdownEditorComponent extends AXFProperyEditor<any>  {
                 this.cdr.markForCheck();
             });
         }
+        this.initiated = true;
     }
 
     handleValueChange(v: any) {

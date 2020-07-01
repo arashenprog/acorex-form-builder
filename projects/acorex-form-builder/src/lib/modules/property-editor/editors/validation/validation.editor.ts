@@ -14,8 +14,7 @@ export class AXFValidationEditorComponent extends AXFProperyEditor<AXFValidatorP
     required: boolean = false;
 
     constructor(protected cdr: ChangeDetectorRef) {
-        super();
-        this.value = new AXFValidatorProp();
+        super(cdr);
     }
 
     ngOnInit(): void {
@@ -26,8 +25,16 @@ export class AXFValidationEditorComponent extends AXFProperyEditor<AXFValidatorP
             Object.assign(v, this.value);
             this.value = v;
         }
+    }
+
+    ngAfterViewInit() {
+        this.initiated = true;
+    }
+
+    ngDoCheck() {
         this.required = this.value.items.some(c => c.type === 'required');
     }
+
 
     handleRequiredChange(e) {
         if (e) {

@@ -21,10 +21,10 @@
                 <div class="board">
                     <div class="toolbar">
                         <div class="controlls end-controlls">
-                            <ax-button type="light" size="sm" tooltip="Undo" [placement]="'bottom'">
+                            <ax-button type="light" size="sm" tooltip="Undo" [placement]="'bottom'" [disabled]="!changeTracker.canUndo" (onClick)="changeTracker.undo()">
                                 <i class="fas fa-undo-alt"></i>
                             </ax-button>
-                            <ax-button type="light" size="sm" tooltip="Redo" [placement]="'bottom'">
+                            <ax-button type="light" size="sm" tooltip="Redo" [placement]="'bottom'" [disabled]="!changeTracker.canRedo" (onClick)="changeTracker.redo()">
                                 <i class="fas fa-redo-alt"></i>
                             </ax-button> 
                         </div>

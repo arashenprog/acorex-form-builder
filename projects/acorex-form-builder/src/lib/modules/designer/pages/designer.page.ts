@@ -5,6 +5,7 @@ import { AXFWidgetContainer, AXFWidgetDesigner } from '../../widget/config/widge
 import { AXFConnectService } from '../../widget/services/connect.service';
 import { AXFTemplateService } from '../../widget/services/template/template.service';
 import { AFXSaveTemplateModel } from '../../widget/services/db/database';
+import { AXFChangeTrackerService } from '../../widget/services/change-tracker.service';
 
 @Component({
     templateUrl: './designer.page.html',
@@ -22,17 +23,14 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     @ViewChild('print')
     printDiv: ElementRef<HTMLDivElement>;
 
-    private _renderTime: Date = new Date();
-    private intervalId: any;
-
-    private firstSelectabledWideget: AXFWidgetDesigner;
 
     constructor(
         private widgetService: AXFWidgetService,
         private toastService: AXToastService,
         private eventService: EventService,
         private templateService: AXFTemplateService,
-        private connectService: AXFConnectService
+        private connectService: AXFConnectService,
+        public changeTracker: AXFChangeTrackerService,
 
 
     ) {
@@ -51,25 +49,14 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                 }
             }, 10);
         });
-        // this.intervalId = setInterval(() => {
-        //     const now = new Date();
-        //     const diff = now.getTime() - this._renderTime.getTime();
-        //     if (diff > 1000) {
-        //         if (this.firstSelectabledWideget) {
+        // eventService.on('RENDER', (c: AXFWidgetDesigner) => {
+        //     if (c.locked !== true && this.firstSelectabledWideget == null) {
+        //         this.firstSelectabledWideget = c;
+        //         setTimeout(() => {
         //             this.firstSelectabledWideget.edit();
-        //         }
-        //         console.log(`Rendered in ${diff}ms`);
-        //         clearInterval(this.intervalId);
+        //         }, 1000);
         //     }
-
-        // }, 300);
-        //
-        eventService.on('RENDER', (c: AXFWidgetDesigner) => {
-            if (c.locked !== true) {
-                this.firstSelectabledWideget = c;
-            }
-            this._renderTime = new Date();
-        });
+        // });
     }
 
     docTreeItems: AXFWidgetDesigner[] = [];
@@ -79,7 +66,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     view = 'designer';
     isSaving: boolean = false;
     printRendering: boolean = false;
-    name: string = "";
+    name: string = '';
 
     viewModeItems: MenuItem[] = [
         {
@@ -155,17 +142,15 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                             this.actionItems[0].startIcon = 'fas fa-save';
                             this.isSaving = false;
                             this.printRendering = false;
-                            if(s==true)
-                            { 
+                            if (s == true) {
                                 this.actionToolbar.update();
                                 this.toastService.success('Saved successfuly!');
                             }
-                            else
-                            {
+                            else {
                                 this.actionToolbar.update();
                                 this.toastService.error('Error in Saving!');
                             }
-                            
+
                         });
                     }, 2000);
 
@@ -199,6 +184,9 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                 Object.assign(page.options, { uid: AXHtmlUtil.getUID() });
                 this.widgets.push(page);
             }
+            this.widgets[0].onRendered.subscribe(c => {
+                (c as any).componentRef.edit();
+            });
         });
     }
 

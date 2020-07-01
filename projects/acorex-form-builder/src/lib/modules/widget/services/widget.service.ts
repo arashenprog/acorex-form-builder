@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AXPopupService, EventService, AXHtmlUtil, AXToastService } from 'acorex-ui';
 import { AXFConnectService } from './connect.service';
+import { Subject } from 'rxjs';
 
 
 export interface AXFWidgetProperty {
@@ -39,6 +40,7 @@ export interface WidgetConfig {
     properties: AXFWidgetProperty[];
     toolbox?: AXFWidgetToolboxProperty;
     dataContext?: any;
+    onRendered?: Subject<WidgetConfig>;
 }
 
 
@@ -78,7 +80,8 @@ export class AXFWidgetService {
             droppable: c.droppable,
             toolbox: c.toolbox,
             properties: []
-        }
+        };
+        res.onRendered = new Subject<WidgetConfig>();
         if (c.properties) {
             res.properties = this.deepCopy(c.properties);
         }

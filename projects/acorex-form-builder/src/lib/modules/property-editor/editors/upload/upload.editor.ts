@@ -10,15 +10,20 @@ import { AXFConnectService } from '../../../widget/services/connect.service';
 export class AXFUploadEditorComponent extends AXFProperyEditor<UploadStructure> implements OnInit {
 
   modeItems: any[] = [{ value: "auto", title: "Auto Size" }, { value: "custom", title: "Custom Size" }]
-  methods:any[]=[{ value: "url", title: "URL" }, { value: "upload", title: "Upload" }]
+  methods: any[] = [{ value: "url", title: "URL" }, { value: "upload", title: "Upload" }]
 
   constructor(protected cdr: ChangeDetectorRef, private connectService: AXFConnectService) {
-    super();
+    super(cdr);
   }
 
 
   ngOnInit(): void {
   }
+
+  ngAfterViewInit() {
+    this.initiated = true;
+  }
+
 
 
   modeSizeChange(e) {
@@ -93,8 +98,7 @@ export class AXFUploadEditorComponent extends AXFProperyEditor<UploadStructure> 
     }
   }
 
-  handleTextChange()
-  {
+  handleTextChange() {
     super.handleValueChange(this.value);
   }
 }

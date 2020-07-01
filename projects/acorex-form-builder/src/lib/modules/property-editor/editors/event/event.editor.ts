@@ -10,11 +10,16 @@ import { AXFProperyEditor } from '../../config/editor';
 export class AXFEventEditorComponent extends AXFProperyEditor<string>  {
 
     constructor(protected cdr: ChangeDetectorRef) {
-        super();
+        super(cdr);
     }
 
 
     handleValueChange(value: any) {
         super.handleValueChange(value);
     }
+    
+    ngAfterViewInit() {
+        this.initiated = true;
+    }
+
 }
