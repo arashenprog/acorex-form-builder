@@ -101,7 +101,7 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
         table.widgets.forEach(row => {
             const col = this.widgetService.resolve('table-cell');
             row.options.widgets.splice(this.findIndex() + index, 0, col);
-            row.$owner.refresh();
+            row.componentRef.refresh();
         });
     }
 
@@ -109,7 +109,7 @@ export class AXFTableCellWidgetDesigner extends AXFWidgetDesigner {
         const table = this.parent.parent;
         table.widgets.forEach(row => {
             row.options.widgets.splice(this.findIndex(), 1);
-            row.$owner.refresh();
+            row.componentRef.refresh();
         });
     }
 

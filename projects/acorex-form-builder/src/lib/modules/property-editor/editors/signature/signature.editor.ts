@@ -14,29 +14,32 @@ export class AXFSignatureEditorComponent extends AXFProperyEditor<SignatureStruc
     showItems: any[] = [{ value: "item", title: "Item" }, { value: "grid", title: "Grid" }]
 
 
-    constructor(protected cdr: ChangeDetectorRef,private dataService: AXFDataService) {
-        super();
+    constructor(protected cdr: ChangeDetectorRef, private dataService: AXFDataService) {
+        super(cdr);
     }
 
     ngOnInit(): void {
     }
 
+    ngAfterViewInit() {
+        this.initiated = true;
+    }
+
+
 
     signatureTypeChange(e) {
-        if(this.value.SignatureType != e)
-        {
+        if (this.value.SignatureType != e) {
             this.value.SignatureType = e;
-            if (this.value.SignatureType=='supervisor') {
+            if (this.value.SignatureType == 'supervisor') {
                 this.value.StaffNumber = 1;
                 this.value.ShowType = ["item"];
             }
             super.handleValueChange(this.value);
-        } 
+        }
     }
 
     showTypeChange(e) {
-        if(e.length>0 && this.value.SignatureType !=e)
-        { 
+        if (e.length > 0 && this.value.SignatureType != e) {
             this.value.ShowType = e;
             super.handleValueChange(this.value);
         }
@@ -44,8 +47,8 @@ export class AXFSignatureEditorComponent extends AXFProperyEditor<SignatureStruc
 
 
     staffNumberChange(e) {
-        if(parseInt(e)!=NaN)
-        this.value.StaffNumber = parseInt(e.toString()); 
+        if (parseInt(e) != NaN)
+            this.value.StaffNumber = parseInt(e.toString());
         super.handleValueChange(this.value);
     }
 
@@ -55,14 +58,14 @@ export class AXFSignatureEditorComponent extends AXFProperyEditor<SignatureStruc
         super.handleValueChange(this.value);
     }
 
-    deleteClick(val) { 
-        let ind=this.value.Items.findIndex(w=>w.Value==val);
+    deleteClick(val) {
+        let ind = this.value.Items.findIndex(w => w.Value == val);
         this.value.Items.splice(ind, 1);
         super.handleValueChange(this.value);
     }
 
     hiddenClick(val) {
-        let ind=this.value.Items.findIndex(w=>w.Value==val);
+        let ind = this.value.Items.findIndex(w => w.Value == val);
         this.value.Items[ind].Visible = !this.value.Items[ind].Visible;
         super.handleValueChange(this.value);
     }

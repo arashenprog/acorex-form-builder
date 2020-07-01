@@ -9,11 +9,15 @@ import { AXFProperyEditor } from '../../config/editor';
 export class AXFCheckboxEditorComponent extends AXFProperyEditor<boolean> {
 
     constructor(protected cdr: ChangeDetectorRef) {
-        super();
+        super(cdr);
     }
 
     // handleCheckChange(e) {
     //     this.handleValueChange(e.target.checked);
     // }
+
+    ngAfterViewInit() {
+        this.initiated = true;
+    }
 
 }

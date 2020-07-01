@@ -14,7 +14,7 @@ export class AXFTextEditorComponent extends AXFProperyEditor<string>  {
     
 
     constructor(protected cdr: ChangeDetectorRef,private popupService: AXPopupService) {
-        super();
+        super(cdr);
     }
 
 
@@ -33,4 +33,9 @@ export class AXFTextEditorComponent extends AXFProperyEditor<string>  {
     handleValueChange(value: any) {
         super.handleValueChange(value);
     }
+
+    ngAfterViewInit() {
+        this.initiated = true;
+    }
+
 }

@@ -13,13 +13,18 @@ export class AXFBoxStyleEditorComponent extends AXFProperyEditor<AXFBoxStyleValu
     private prevValue = new AXFBoxStyleValue();
 
     constructor(protected cdr: ChangeDetectorRef) {
-        super();
+        super(cdr);
     }
 
     ngOnInit(): void {
         if (!this.value)
             this.value = new AXFBoxStyleValue();
     }
+
+    ngAfterViewInit() {
+        this.initiated = true;
+    }
+
 
 
     handleInnerValueChange(e: string, style: string, position: string) {

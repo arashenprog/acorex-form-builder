@@ -116,7 +116,9 @@ export class AXFDataService {
         const result = this.findModelList();
         return new PromisResult<any[]>((resolve) => {
             this.getList('ds-list').then(items => {
-                result.push(...items);
+                if (Array.isArray(items)) {
+                    result.push(...items);
+                }
                 resolve(result);
             });
         });

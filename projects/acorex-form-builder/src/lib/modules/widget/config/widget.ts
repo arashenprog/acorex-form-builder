@@ -1,12 +1,13 @@
-import { Injector, EventEmitter, Input, Output, Directive, ChangeDetectorRef } from '@angular/core';
+import { Injector, EventEmitter, Input, Output, Directive, ChangeDetectorRef, IterableDiffers, IterableDifferFactory, IterableDiffer } from '@angular/core';
 import { AXFWidgetService, WidgetConfig } from '../services/widget.service';
-import { AXHtmlUtil, AXToastService, IValidationRuleResult, AXValidationRule } from 'acorex-ui';
+import { AXHtmlUtil, AXToastService, IValidationRuleResult, AXValidationRule, EventService } from 'acorex-ui';
 import { AXFBoxStyleValue } from '../../property-editor/editors/style/box-style/box-style.class';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AXFDataService } from '../services/data.service';
 import { AXFWidgetPickerService } from '../services/template/picker.service';
 import { AXFValidatorProp } from '../../property-editor/editors/validation/validation.class';
+import { AXFChangeTrackerService } from '../services/change-tracker.service';
 
 export const WidgetInjector: { instance?: Injector } = {};
 
@@ -65,7 +66,6 @@ export abstract class AXFWidget implements AXFWidgetContainer {
     private renderChangeObserver: any;
 
     ngOnInit(): void {
-        (<any>this.config).$owner = this;
         this.onRender();
     }
 
@@ -92,10 +92,10 @@ export abstract class AXFWidget implements AXFWidgetContainer {
         }
         el.style.width = this['width'];
         el.style.height = this['height'];
-        if(this["font"] )
-            el.style.fontFamily=this["font"];
+        if (this['font'])
+            el.style.fontFamily = this['font'];
         else
-            el.style.fontFamily='inherit';
+            el.style.fontFamily = 'inherit';
         // apply padding
         if (this['boxStyle']) {
             const boxStyle = this['boxStyle'] as AXFBoxStyleValue;
@@ -150,6 +150,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
 
     picker2: AXFWidgetPickerService;
     toastService: AXToastService;
+    private changeTracker: AXFChangeTrackerService;
 
 
     locked: boolean = false;
@@ -159,6 +160,8 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         super();
         this.picker2 = WidgetInjector.instance.get(AXFWidgetPickerService);
         this.toastService = WidgetInjector.instance.get(AXToastService);
+        this.toastService = WidgetInjector.instance.get(AXToastService);
+        this.changeTracker = WidgetInjector.instance.get(AXFChangeTrackerService);
     }
 
 
@@ -166,7 +169,14 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     delete() {
         if (!this.locked) {
             if (this.parent && this.parent.widgets) {
+                const oldValue = this.parent.widgets.slice();
                 this.parent.widgets = this.parent.widgets.filter(c => c.options.uid != this.uid);
+                this.changeTracker.registerChange({
+                    prop: 'widgets',
+                    widget: this.parent,
+                    oldValue: oldValue,
+                    value: this.parent.widgets
+                });
                 if (this.parent.refresh) {
                     this.parent.refresh();
                 }
@@ -199,7 +209,6 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
                 if (config && this.config.container) {
                     this.addChild(config);
                     WidgetInjector.instance.get(AXToastService).success('Widget pasted!');
-                    //sessionStorage.removeItem('clipboard');
                 }
             }
         }
@@ -214,13 +223,24 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         if (!w.options) {
             w.options = {};
         }
+        w.onRendered.subscribe(c => {
+            (c as any).componentRef.edit();
+        });
         Object.assign(w.options, options);
+        const oldValue = this.widgets.slice();
         if (index < 0) {
             this.widgets.push(w);
         } else {
             this.widgets.splice(index, 0, w);
         }
+        this.changeTracker.registerChange({
+            prop: 'widgets',
+            widget: this,
+            oldValue: oldValue,
+            value: this.widgets
+        });
         this.refresh();
+
     }
 
     addElement() {
@@ -262,6 +282,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
     moveUp() {
         const c = this.findIndex();
         const widgets = this.parent.widgets;
+        const oldValue = widgets.slice();
         if (widgets[c] == null || widgets[c - 1] == null) {
             this.toastService.error('Thi action is not possible!');
             return;
@@ -269,12 +290,19 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         const temp = widgets[c];
         widgets[c] = widgets[c - 1];
         widgets[c - 1] = temp;
+        this.changeTracker.registerChange({
+            prop: 'widgets',
+            widget: this.parent,
+            oldValue: oldValue,
+            value: widgets
+        });
         this.parent.refresh();
     }
 
     moveDown() {
         const c = this.findIndex();
         const widgets = this.parent.widgets;
+        const oldValue = widgets.slice();
         if (widgets[c] == null || widgets[c + 1] == null) {
             this.toastService.error('Thi action is not possible!');
             return;
@@ -282,6 +310,12 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         const temp = widgets[c];
         widgets[c] = widgets[c + 1];
         widgets[c + 1] = temp;
+        this.changeTracker.registerChange({
+            prop: 'widgets',
+            widget: this.parent,
+            oldValue: oldValue,
+            value: widgets
+        });
         this.parent.refresh();
     }
 
@@ -326,6 +360,7 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
             });
 
             if (this.config.container && this.config.droppable !== false) {
+                //TODO: access denied on incognito window
                 const cp = sessionStorage.getItem('clipboard');
                 if (cp) {
                     items.push({
@@ -391,8 +426,6 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
         const index = this.parent.widgets.findIndex(c => c.options.uid == this.config.options.uid);
         return index;
     }
-
-
 }
 export abstract class AXFWidgetView extends AXFWidget {
 
@@ -422,7 +455,7 @@ export abstract class AXFWidgetView extends AXFWidget {
     protected getParentPath(): string {
         const parts: string[] = [];
         let prt = this.parent;
-        while (prt != null) {  
+        while (prt != null) {
             if (prt.config && prt.config.options &&
                 (prt.config.options.name ||
                     (prt.rIndex !== undefined && prt.config.name !== 'table-cell' && prt.config.name !== 'table-row')

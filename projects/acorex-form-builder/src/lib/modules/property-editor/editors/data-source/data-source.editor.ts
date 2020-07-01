@@ -21,13 +21,18 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
     allowColumns: boolean = true;
 
 
-    constructor(protected cdr: ChangeDetectorRef,
-                private dataService: AXFDataService,
-                private popupService: AXPopupService) {
-        super();
+    constructor(
+        protected cdr: ChangeDetectorRef,
+        private dataService: AXFDataService,
+        private popupService: AXPopupService,
+    ) {
+        super(cdr);
     }
 
     ngOnInit() {
+        this.valueChange.subscribe(c => {
+            this.cdr.markForCheck();
+        });
         if (this.value == null) {
             this.value = new AXFDataSourceOption();
             this.value.mode = 'manual';
@@ -51,7 +56,7 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
             });
             this.cdr.markForCheck();
         });
-
+        this.initiated = true;
     }
 
     handleRemoteChange(v: any[]) {

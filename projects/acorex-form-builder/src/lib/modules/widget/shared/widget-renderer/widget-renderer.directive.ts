@@ -125,15 +125,10 @@ export class AXFWidgetRendererDirective {
                 if (this.widgetInstance.locked && this.widgetConfig.name !== 'page') {
                     this.widgetElement.classList.add('axf-disabled-widget');
                 }
-                this.eventService.broadcast('RENDER', this.widgetInstance);
-            })
-        // .finally(() => {
-        //     this.eventService.broadcast('RENDER', this.widgetInstance);
-        // });
+            });
         //
-        this.eventService.broadcast('RENDER', this.widgetInstance);
+        (this.widgetConfig as any).componentRef = this.widgetInstance;
         //
-
         if (this.mode === 'designer') {
             this.widgetInstance.onSelect.subscribe(c => {
                 this.eventService.broadcast('SELECT', c);
@@ -363,6 +358,10 @@ export class AXFWidgetRendererDirective {
                     });
                 }
             });
+        }
+        //
+        if (this.widgetConfig.onRendered) {
+            this.widgetConfig.onRendered.next(this.widgetConfig);
         }
     }
 

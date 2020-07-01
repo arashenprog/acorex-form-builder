@@ -13,9 +13,14 @@ export class AXFColorEditorComponent extends AXFProperyEditor<string> implements
 
 
     constructor(protected cdr: ChangeDetectorRef) {
-        super();
+        super(cdr);
     }
 
     ngOnInit(): void {
     }
+
+    ngAfterViewInit() {
+        this.initiated = true;
+    }
+
 }
