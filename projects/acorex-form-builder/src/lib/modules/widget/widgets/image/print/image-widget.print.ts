@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 import { UploadStructure } from '../../../../property-editor/editors/upload/upload.structure';
 import { AXFFormatService } from '../../../services/format.service'; 
@@ -12,7 +12,7 @@ export class AXFImageWidgetPrint extends AXFWidgetPrint {
     value: UploadStructure; 
     alt:string;
     boxStyle:any;
-    constructor(private formatService: AXFFormatService) {
+    constructor(private formatService: AXFFormatService,private cdr:ChangeDetectorRef) {
         super()
     }
 
@@ -23,7 +23,10 @@ export class AXFImageWidgetPrint extends AXFWidgetPrint {
         {
             let imagurl=this.formatService.format(this.value.srcData, this);
             if(imagurl.includes("base64"))
+            {
                 this.value.srcData=imagurl; 
+                this.cdr.markForCheck();
+            }    
 
         }    
     }
