@@ -58,8 +58,7 @@ export class AXFEditorRendererDirective {
         const cmpRef = this.target.createComponent(factory);
         this.instance = cmpRef.instance as AXFProperyEditor<any>;
         //
-        this.instance.valueChange.subscribe(value => {
-            debugger;
+        this.instance.valueChange.subscribe(value => { 
             if (this.instance.initiated === true) {
                 const oldValue: any = this.widget.config.options[this.property.name];
                 this.widget.config.options[this.property.name] = value;

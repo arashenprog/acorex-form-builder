@@ -2,6 +2,7 @@ export class AXFBoxStyleValue {
     padding: AXFBoxStyleBoxSizeValue = new AXFBoxStyleBoxSizeValue();
     border: AXFBoxStyleBoxSizeValue = new AXFBoxStyleBoxSizeValue();;
     margin: AXFBoxStyleBoxSizeValue = new AXFBoxStyleBoxSizeValue();;
+    borderColor:string;
 }
 
 export class AXFBoxStyleBoxSizeValue {
@@ -20,4 +21,5 @@ export class AXFBoxStyleBoxSizeValue {
     right: string = "0";
     top: string = "0";
     bottom: string = "0";
+    borderColor:string="";
 }

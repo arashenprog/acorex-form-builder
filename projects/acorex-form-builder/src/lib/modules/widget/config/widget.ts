@@ -108,10 +108,10 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             }
             // apply border size
             if (boxStyle.border != null) {
-                el.style.borderTop = `${boxStyle.border.top}px solid #333`;
-                el.style.borderBottom = `${boxStyle.border.bottom}px solid #333`;
-                el.style.borderLeft = `${boxStyle.border.left}px solid #333`;
-                el.style.borderRight = `${boxStyle.border.right}px solid #333`;
+                el.style.borderTop = `${boxStyle.border.top}px solid`;
+                el.style.borderBottom = `${boxStyle.border.bottom}px solid`;
+                el.style.borderLeft = `${boxStyle.border.left}px solid`;
+                el.style.borderRight = `${boxStyle.border.right}px solid`;
             }
             // apply margin size
             if (boxStyle.margin != null) {
@@ -120,7 +120,10 @@ export abstract class AXFWidget implements AXFWidgetContainer {
                 el.style.marginLeft = `${boxStyle.margin.left}px`;
                 el.style.marginRight = `${boxStyle.margin.right}px`;
             }
-
+            if(boxStyle.borderColor)
+                el.style.borderColor=boxStyle.borderColor;
+            else
+                el.style.borderColor='#333';
         }
     }
 
