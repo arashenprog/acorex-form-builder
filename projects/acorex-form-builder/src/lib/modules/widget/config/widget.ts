@@ -639,7 +639,6 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
     }
 
     setValue(value: boolean) {
-        debugger;
         this.value = value;
     }
 

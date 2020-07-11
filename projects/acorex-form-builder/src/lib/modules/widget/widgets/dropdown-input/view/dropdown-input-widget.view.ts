@@ -59,8 +59,10 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     }
 
     reload() {
-        this.value = this.mode === 'single' ? null : [];
-        this.refresh();
+        setTimeout(() => {  
+                this.value = this.mode === 'single' ? null : [];
+                this.refresh();  
+        }, 1000); 
     }
 
     onOpen() {
