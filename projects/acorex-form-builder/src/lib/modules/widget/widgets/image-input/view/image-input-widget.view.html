@@ -1,11 +1,9 @@
-<!-- <ax-upload-file type="inline" (onLoad)="handleValueChange($event)">
-</ax-upload-file> -->
  <ng-container *ngIf="value && value.srcData">  
     <img [src]="value.srcData | resolveUrl | async" [alt]="alt" [height]="height" [width]="width" (click)="openFile()">
-    <input type="file" multiple="false" (change)="uploadImage($event)" accept=".png,.jpg,.jpeg" style="display:none" #fileInput name="filedata"/>  
+    <input type="file" multiple="false" (change)="uploadImage($event)" style="display: none;" #fileInput name="filedata"/>  
 </ng-container>
-<ng-container *ngIf="!value || !value.srcData"> 
-    <img src="./assets/images/photocamera-add.png"  [alt]="alt" [height]="height" [width]="width" (click)="openFile()">
-    <input type="file" multiple="false" (change)="uploadImage($event)" accept=".png,.jpg,.jpeg" style="display:none" #fileInput name="filedata"/>  
+<ng-container *ngIf="!value || !value.srcData">  
+    <img src="./assets/images/photocamera-add.png"  [alt]="alt" [height]="height" [width]="width" (click)="openFile()"> 
+    <input type="file" multiple="false" (change)="uploadImage($event)" style="display: none;" #fileInput name="filedata"/>  
 </ng-container> 
 
