@@ -11,7 +11,7 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 })
 export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
 
-
+    textAlign:string;
     value: boolean;
     label:string;
     constructor(private el: ElementRef<HTMLElement>,private cdr: ChangeDetectorRef) {
@@ -19,6 +19,7 @@ export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
     }
 
     onRender(): void {
+        this.el.nativeElement.style.textAlign = this.textAlign;
         this.applyStyle(this.el.nativeElement.querySelector("label"));
         this.cdr.markForCheck();
     }

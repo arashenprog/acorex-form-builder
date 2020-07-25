@@ -51,7 +51,7 @@ export class AXFListInputWidgetModule {
                         mode: "single",
                         direction: "horizontal"
                     }
-                },
+                }, 
                 {
                     name: "direction",
                     category: "General",
@@ -97,6 +97,18 @@ export class AXFListInputWidgetModule {
                         { value: "right", title: "Right" }, { value: "bottom", title: "Bottom" }],
                         mode: "single",
                         direction: "horizontal"
+                    }
+                },
+                {
+                    name: 'alignment',
+                    category: 'Style',
+                    defaultValue: 'ltr',
+                    title: 'Alignment',
+                    editor: 'SelectionEditor',
+                    options: {
+                        items: [{ value: 'ltr', title: 'Left-To-Right' }, { value: 'rtl', title: 'Right-To-Left' }],
+                        mode: 'single',
+                        direction: 'horizontal'
                     }
                 },
                 {

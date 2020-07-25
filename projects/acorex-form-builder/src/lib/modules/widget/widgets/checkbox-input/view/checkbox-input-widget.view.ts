@@ -8,6 +8,7 @@ import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 })
 export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
 
+    textAlign:string;
     label: string;
 
     constructor(private el: ElementRef<HTMLElement>, protected cdr: ChangeDetectorRef) {
@@ -24,6 +25,8 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
                 }
             });
         }
+        this.el.nativeElement.style.textAlign = this.textAlign;
+        this.applyStyle(this.el.nativeElement.querySelector("label"));
         this.cdr.markForCheck();
     }
 }

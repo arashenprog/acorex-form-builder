@@ -62,13 +62,15 @@ export class AXFFormatService {
             const list = value.match(/\[(.*?)\]/g);
             if (list) {
                 list.forEach(w => {
-                   
+                   let selected:any;
                     const ww: AXFWordWithPipe = this.decompose(w.substring(1, w.length - 1));
-                    let word = ww.word;
+                    let word:any = ww.word;
                     if (widget) {
                         if (word.startsWith('$')) {
+                            selected= word.replace('$','');
                             word = this.dataService.getValue(widget.resolveProperty(word.substring(1)));
-                        } else if (widget.config.dataContext) {
+                        } 
+                        else if (widget.config.dataContext) {
                             word = widget.config.dataContext[ww.word];
                         } else {
                             word = this.dataService.getWord(word);
@@ -77,12 +79,27 @@ export class AXFFormatService {
                         word = this.dataService.getWord(word);
                     }
                     if (word) {
-                        for (let i = 0; i < ww.formetters.length; i++) {
-                            const pipeParts = ww.formetters[i].split(':');
-                            const pipe = pipeParts[0].trim();
-                            const pipeParams = pipeParts.slice(1);
-                            word = this[pipe](word, pipeParams);
+                        if(ww.formetters.length>0)
+                        {   
+                            for (let i = 0; i < ww.formetters.length; i++) {
+                                const pipeParts = ww.formetters[i].split(':');
+                                const pipe = pipeParts[0].trim(); 
+
+                                let mergedResult="";
+                                word.forEach(s=>{
+                                    let ind= word.indexOf(s);
+                                    let selWdg= this.dataService.getWidget(selected+"["+ind+"]."+pipeParts[1]);
+                                    if(selWdg.value.toString()==pipeParts[2])
+                                    {
+                                        mergedResult += selWdg.dataContext[pipeParts[3].trim()]+" , ";
+                                    }
+                                 })
+                                 value=mergedResult.substring(0,mergedResult.length-3);
+                                 //const pipeParams = pipeParts.slice(1);
+                                //word = this[pipe](word, pipeParams); 
+                            }
                         }
+                       
                     }
                     value = value.replace(w, word || '');
                 });
