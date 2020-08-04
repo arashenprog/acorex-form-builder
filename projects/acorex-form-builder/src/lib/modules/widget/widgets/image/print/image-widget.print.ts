@@ -5,7 +5,8 @@ import { AXFFormatService } from '../../../services/format.service';
 
 @Component({
     templateUrl: './image-widget.print.html' ,
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection:ChangeDetectionStrategy.OnPush,
+    host: {role: 'image-box'} 
 })
 export class AXFImageWidgetPrint extends AXFWidgetPrint {
 

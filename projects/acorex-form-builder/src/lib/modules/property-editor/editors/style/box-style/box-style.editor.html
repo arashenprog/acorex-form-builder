@@ -56,5 +56,16 @@
             <ax-text-box [text]="value.margin.right" (textChange)="handleInnerValueChange($event,'margin','right')"></ax-text-box>
         </div>
     </div>
-    <!-- Finish Margin Box-->
+    <!-- Finish Margin Box--> 
+</div>
+<div class="row">
+    <div class="col-md-12 prop-caption">
+        Border Color
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <ax-color-picker  [value]="value.borderColor" (valueChange)="handleColorChange($event)" >
+        </ax-color-picker>
+    </div>
 </div>

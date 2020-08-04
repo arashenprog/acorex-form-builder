@@ -6,7 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFCheckboxInputWidgetDesigner } from './designer/checkbox-input-widget.designer';
 import { AXFCheckboxInputWidgetPrint } from './print/checkbox-input-widget.print';
 import { AXFCheckboxInputWidgetView } from './view/checkbox-input-widget.view';
-import { AXF_LABEL_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_NAME_PROPERTY, AXF_TAG_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_INIT_EVENT, AXF_READONLY_PROPERTY } from '../../config/general-properties';
+import { AXF_LABEL_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_NAME_PROPERTY, AXF_TAG_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_INIT_EVENT, AXF_READONLY_PROPERTY, AXF_HORIZONTAL_ALIGNMENT_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [AXFCheckboxInputWidgetDesigner, AXFCheckboxInputWidgetPrint, AXFCheckboxInputWidgetView]
 
@@ -36,6 +36,7 @@ export class AXFCheckboxInputWidgetModule {
                 AXF_LABEL_PROPERTY,
                 AXF_VISIBLE_PROPERTY,
                 AXF_READONLY_PROPERTY,
+                AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
                 AXF_NAME_PROPERTY,
                 AXF_TAG_PROPERTY,
                 {

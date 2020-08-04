@@ -59,8 +59,13 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     }
 
     reload() {
-        this.value = this.mode === 'single' ? null : [];
-        this.refresh();
+        setTimeout(() => {  
+            if(!this.readonly)
+            {
+                this.value = this.mode === 'single' ? null : [];
+                this.refresh();
+            }   
+        }, 2000); 
     }
 
     onOpen() {
@@ -68,7 +73,6 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
             if (this.dataSource.dataItems == null || this.dataSource.dataItems.length === 0) {
                 this.dataSource.dataSource.params.forEach(p => {
                     if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
-                        //p.value = '$' + this.resolveProperty(p.value.substring(1));
                         const name = p.value.substring(1);
                         p.value = () => {
                             return '$' + this.resolveProperty(name);

@@ -1,6 +1,6 @@
 <div #el class="allItem">
     <div class="rep" *ngFor="let item of dataSource.dataItems" 
-        [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?'left':'unset'}">
+        [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset'}">
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
             <div *ngSwitchCase="'left'" style="padding: 6px 2px;">
                 <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>

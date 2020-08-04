@@ -39,4 +39,10 @@ export class AXFBoxStyleEditorComponent extends AXFProperyEditor<AXFBoxStyleValu
         this.prevValue = JSON.parse(JSON.stringify(this.value));
         super.handleValueChange(this.value);
     }
+
+    handleColorChange(e)
+    {
+        this.value.borderColor=e;
+        super.handleValueChange(this.value);
+    }
 }

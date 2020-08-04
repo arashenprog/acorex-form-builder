@@ -19,6 +19,7 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     visible: boolean = true;
     printMode: string;
     columns: number;
+    alignment: string;
     constructor(private cdr: ChangeDetectorRef) {
         super()
     }

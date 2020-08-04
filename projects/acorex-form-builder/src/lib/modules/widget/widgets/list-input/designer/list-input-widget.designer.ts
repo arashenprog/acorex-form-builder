@@ -20,6 +20,7 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     alignCheckNew: string;
     viewType: string;
     columns:number;
+    alignment: string;
 
     constructor( private cdr: ChangeDetectorRef) {
         super()

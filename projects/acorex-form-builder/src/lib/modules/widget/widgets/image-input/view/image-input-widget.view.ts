@@ -19,7 +19,8 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
 
     openFile()
     {
-        this.fileInput.nativeElement.click(); 
+        if(!this.readonly)
+            this.fileInput.nativeElement.click(); 
     }
  
     onRender(): void {
