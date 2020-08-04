@@ -11,7 +11,7 @@ export interface AXFWidgetProperty {
     defaultValue?: any;
     category: 'General' | 'Style' | 'Behavior' | 'Data' | 'Binding' | 'Print';
     editor: any;
-    visible?: boolean | Function;
+    visible?: boolean | (() => boolean);
     options?: any
     order?: number;
 }
@@ -64,7 +64,7 @@ export class AXFWidgetService {
     }
 
     resolve(name: string): WidgetConfig {
-        const c = AXFWidgetService.WIDGET_ITEMS.find(c => c.name == name)
+        const c = AXFWidgetService.WIDGET_ITEMS.find(c => c.name === name)
         const res: WidgetConfig = {
             category: c.category,
             hint: c.hint,
@@ -98,7 +98,7 @@ export class AXFWidgetService {
     private deepCopy(obj) {
         let copy;
         // Handle the 3 simple types, and null or undefined
-        if (null == obj || 'object' != typeof obj) { return obj; }
+        if (null == obj || 'object' !== typeof obj) { return obj; }
         // Handle Date
         if (obj instanceof Date) {
             copy = new Date();
@@ -108,7 +108,7 @@ export class AXFWidgetService {
         // Handle Array
         if (obj instanceof Array) {
             copy = [];
-            for (var i = 0, len = obj.length; i < len; i++) {
+            for (const i = 0, len = obj.length; i < len; i++) {
                 copy[i] = this.deepCopy(obj[i]);
             }
             return copy;
@@ -116,7 +116,7 @@ export class AXFWidgetService {
         // Handle Object
         if (obj instanceof Object) {
             copy = {};
-            for (var attr in obj) {
+            for (const attr in obj) {
                 if (obj.hasOwnProperty(attr)) { copy[attr] = this.deepCopy(obj[attr]); }
             }
             return copy;
@@ -153,12 +153,12 @@ export class AXFWidgetService {
 
 
     parse(json: string | any): WidgetConfig {
-        if (typeof json == 'string') {
+        if (typeof json === 'string') {
             try {
                 const obj = JSON.parse(json);
                 return this.parseInternal(obj);
             } catch (error) {
-                console.log('Invalid widget\'s json to parse: ', json)
+                console.log('Invalid widget\'s json to parse: ', json);
                 return null;
             }
         } else {
@@ -181,7 +181,7 @@ export class AXFWidgetService {
         item.options.uid = AXHtmlUtil.getUID();
         Object.assign(item.options, this.deepCopy(obj.options));
         if (obj.options.widgets) {
-            item.options.widgets = []
+            item.options.widgets = [];
             obj.options.widgets.forEach(w => {
                 item.options.widgets.push(this.parseInternal(w));
             });
@@ -191,14 +191,10 @@ export class AXFWidgetService {
 
 
     readPropsFromHost(widget: string, name: string, tag: string): Promise<any> {
-        return new Promise<any>((resolve) => {
-            this.connectService.send('readProps', {
-                widget,
-                name,
-                tag
-            }).then(c => {
-                resolve(c);
-            });
+        return this.connectService.send('readProps', {
+            widget,
+            name,
+            tag
         });
     }
 }

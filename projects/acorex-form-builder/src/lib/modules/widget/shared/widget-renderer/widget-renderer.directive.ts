@@ -117,7 +117,7 @@ export class AXFWidgetRendererDirective {
         if (this.widgetInstance.parent && this.widgetInstance.parent.tag !== undefined) {
             this.widgetInstance.tag = this.widgetInstance.parent.tag;
         }
-
+        //debugger;
         this.widgetService.readPropsFromHost(this.widgetConfig.name, this.widgetInstance.name, this.widgetInstance.tag)
             .then(props => {
                 Object.assign(this.widgetInstance, props);
