@@ -67,6 +67,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     isSaving: boolean = false;
     printRendering: boolean = false;
     name: string = '';
+    orientation:number=1;
 
     viewModeItems: MenuItem[] = [
         {
@@ -179,6 +180,8 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             if (data && data.widgets && data.widgets.length > 0) {
                 this.name = data.name;
                 this.widgets = [this.widgetService.parse(data.widgets)];
+                if(data.orientation!=undefined && data.orientation!=null)
+                    this.orientation=data.orientation;
             } else {
                 const page = this.widgetService.resolve('page');
                 Object.assign(page.options, { uid: AXHtmlUtil.getUID() });

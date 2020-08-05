@@ -44,7 +44,7 @@
         </div>
     </article>
     <article *ngIf="this.view=='form'" class="preview-container">
-        <axf-viewer-frame [page]="widgets[0]"></axf-viewer-frame>
+        <axf-viewer-frame [page]="widgets[0]" [orientation]="orientation"></axf-viewer-frame>
     </article>
 </div>
 <div  style="display: none;" *ngIf="printRendering" #print>
