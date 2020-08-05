@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, HostBinding, ChangeDetectorRef, ChangeDe
 import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 import { WidgetConfig } from '../../../services/widget.service';
+import { AXFRepeaterlWidgetFormula } from '../formula';
 
 @Component({
     selector: "[axf-repeater]",
@@ -17,6 +18,11 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
     allowAdd: boolean;
+
+    get formula() {
+        debugger;
+        return new AXFRepeaterlWidgetFormula(this);
+    }
 
     constructor(
         protected cdr: ChangeDetectorRef) {
@@ -94,6 +100,4 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     remove(index: number) {
         this.bodyRows.splice(index, 1);
     }
-
-
 }

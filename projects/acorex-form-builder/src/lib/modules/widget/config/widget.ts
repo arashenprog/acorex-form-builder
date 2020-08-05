@@ -436,7 +436,7 @@ export abstract class AXFWidgetView extends AXFWidget {
 
     protected dataService: AXFDataService;
 
-    protected getPath(): string {
+    public getPath(): string {
         if (this.config.options.name == null || this.config.options.name === '') {
             if (this['rIndex'] >= 0) {
                 return this.getParentPath() ?
@@ -455,7 +455,7 @@ export abstract class AXFWidgetView extends AXFWidget {
             : this.config.options.name;
     }
 
-    protected getParentPath(): string {
+    public getParentPath(): string {
         const parts: string[] = [];
         let prt = this.parent;
         while (prt != null) {
@@ -475,11 +475,11 @@ export abstract class AXFWidgetView extends AXFWidget {
         return [...new Set(parts)].reverse().join('.').split('.[').join('[');
     }
 
-    protected getName(): string {
+    public getName(): string {
         return this.config.options.name;
     }
 
-    protected getParentName(): string {
+    public getParentName(): string {
         return this.getPath().split('.').reverse().slice(1).reverse().join('.');
     }
 
@@ -600,6 +600,7 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
         this.valueChange.emit(v);
         const name: string = this.getPath();
         if (name) {
+            //TODO: danger
             // if (this['dataContext'] && this.getName() && typeof (v) !== 'object') {
             //     debugger;
             //     const vv = {};
@@ -610,6 +611,7 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
             // else {
             //     this.dataService.setValue(name, v);
             // }
+            //
             this.dataService.setValue(name, v);
             const info = {
                 config: { componentName: this.config['name'], name: this.config.options['name'], tag: this.config.options['tag'] },

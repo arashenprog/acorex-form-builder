@@ -29,47 +29,36 @@ export class AXFFormatService {
         return result;
     }
 
-
-    // public format(value: any, useModel: boolean = true, dataContext?: any): string {
-    //     if (value && typeof value === 'string') {
-    //         const list = value.match(/\[(.*?)\]/g);
-    //         if (list) {
-    //             list.forEach(w => {
-    //                 const ww: AXFWordWithPipe = this.decompose(w.substring(1, w.length - 1));
-    //                 let word = ww.word;
-    //                 if (dataContext && typeof dataContext === 'object') {
-    //                     word = dataContext[ww.word];
-    //                 } else if (dataContext && typeof dataContext === 'string') {
-    //                     word = this.dataService.getValue(dataContext);
-    //                 } else if (useModel) {
-    //                     word = this.dataService.getWord(ww.word);
-    //                 }
-    //                 if (word) {
-    //                     for (let i = 0; i < ww.formetters.length; i++) {
-    //                         const pipe = ww.formetters[i];
-    //                         word = this[pipe](word);
-    //                     }
-    //                 }
-    //                 value = value.replace(w, word);
-    //             });
-    //         }
-    //     }
-    //     return value && (value !== 'undefined') ? value : '';
-    // }
-
     public format(value: any, widget?: AXFWidgetView): string {
+
         if (value && typeof value === 'string') {
+            const expr = value.match(/\[\#(.*?)\.formula\.(.*?)\((.*?)\)\]/);
+            if (expr) {
+                const wname = expr[1];
+                const methodName = expr[2];
+                const params = expr[3] ? expr[3].split(',').map(c => eval(c)) : [];
+                widget = this.dataService.getWidget(wname);
+                return widget['formula'][methodName](...params);
+            }
+            // const funcs = value.match(/\[(join|sum)\((.*?)\)\]/g);
+            // if (funcs) {
+            //     funcs.forEach(f => {
+            //         const funcName = f.substring(1, f.indexOf('('));
+            //         const params = f.substring(f.indexOf('(') + 1, f.length - 2).split(',');
+            //         this[funcName](...params);
+            //         debugger;
+            //     });
+            //     return;
+            // }
             const list = value.match(/\[(.*?)\]/g);
             if (list) {
                 list.forEach(w => {
-                   let selected:any;
                     const ww: AXFWordWithPipe = this.decompose(w.substring(1, w.length - 1));
-                    let word:any = ww.word;
+                    let word: any = ww.word;
                     if (widget) {
                         if (word.startsWith('$')) {
-                            selected= word.replace('$','');
                             word = this.dataService.getValue(widget.resolveProperty(word.substring(1)));
-                        } 
+                        }
                         else if (widget.config.dataContext) {
                             word = widget.config.dataContext[ww.word];
                         } else {
@@ -79,27 +68,15 @@ export class AXFFormatService {
                         word = this.dataService.getWord(word);
                     }
                     if (word) {
-                        if(ww.formetters.length>0)
-                        {   
+                        if (ww.formetters.length > 0) {
                             for (let i = 0; i < ww.formetters.length; i++) {
                                 const pipeParts = ww.formetters[i].split(':');
-                                const pipe = pipeParts[0].trim(); 
-
-                                let mergedResult="";
-                                word.forEach(s=>{
-                                    let ind= word.indexOf(s);
-                                    let selWdg= this.dataService.getWidget(selected+"["+ind+"]."+pipeParts[1]);
-                                    if(selWdg.value.toString()==pipeParts[2])
-                                    {
-                                        mergedResult += selWdg.dataContext[pipeParts[3].trim()]+" , ";
-                                    }
-                                 })
-                                 value=mergedResult.substring(0,mergedResult.length-3);
-                                 //const pipeParams = pipeParts.slice(1);
-                                //word = this[pipe](word, pipeParams); 
+                                const pipe = pipeParts[0].trim();
+                                const pipeParams = pipeParts.slice(1);
+                                word = this[pipe](word, pipeParams);
                             }
                         }
-                       
+
                     }
                     value = value.replace(w, word || '');
                 });

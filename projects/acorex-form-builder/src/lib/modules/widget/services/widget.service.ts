@@ -11,7 +11,7 @@ export interface AXFWidgetProperty {
     defaultValue?: any;
     category: 'General' | 'Style' | 'Behavior' | 'Data' | 'Binding' | 'Print';
     editor: any;
-    visible?: boolean | (() => boolean);
+    visible?: boolean | Function;
     options?: any
     order?: number;
 }
@@ -108,7 +108,7 @@ export class AXFWidgetService {
         // Handle Array
         if (obj instanceof Array) {
             copy = [];
-            for (const i = 0, len = obj.length; i < len; i++) {
+            for (let i = 0, len = obj.length; i < len; i++) {
                 copy[i] = this.deepCopy(obj[i]);
             }
             return copy;
