@@ -82,6 +82,7 @@ export abstract class AXFWidget implements AXFWidgetContainer {
         if (el.style.writingMode === 'tb') {
             el.style.transform = 'rotate(180deg)';
         }
+
         if (this['textStyle']) {
             el.style.fontWeight = this['textStyle'].includes('bold') ? 'bold' : 'inherit';
             el.style.fontStyle = this['textStyle'].includes('italic') ? 'italic' : 'inherit';
@@ -120,11 +121,18 @@ export abstract class AXFWidget implements AXFWidgetContainer {
                 el.style.marginLeft = `${boxStyle.margin.left}px`;
                 el.style.marginRight = `${boxStyle.margin.right}px`;
             }
-            if(boxStyle.borderColor)
-                el.style.borderColor=boxStyle.borderColor;
+            if (boxStyle.borderColor)
+                el.style.borderColor = boxStyle.borderColor;
             else
-                el.style.borderColor='#333';
+                el.style.borderColor = '#333';
         }
+        // if(this['textDirection']=== 'tb')
+        // {
+        //     el.style.transform = 'rotate(-90deg)';
+        //     el.style.webkitTransform = 'rotate(-90deg)';
+        //     el.style.transformOrigin= '20px';
+        //     el.style.position='absolute'; 
+        // }
     }
 
     refresh() {
@@ -437,6 +445,8 @@ export abstract class AXFWidgetView extends AXFWidget {
     protected dataService: AXFDataService;
 
     public getPath(): string {
+        if (this.config.name == 'table-row') {
+        }
         if (this.config.options.name == null || this.config.options.name === '') {
             if (this['rIndex'] >= 0) {
                 return this.getParentPath() ?

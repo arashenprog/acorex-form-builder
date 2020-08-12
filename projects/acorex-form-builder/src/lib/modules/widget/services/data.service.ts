@@ -264,23 +264,25 @@ export class AXFDataService {
     }
 
     setWidget(name: string, value: any) {
-        this.widgets[name] = value;
-        if (!this.widgetRegisterChangeObserver) {
-            Observable.create(observer => {
-                this.widgetRegisterChangeObserver = observer;
-            })
-                .pipe(debounceTime(100))
-                .pipe(distinctUntilChanged())
-                .subscribe(c => {
-                    for (const i in this.widgets) {
-                        if (this.widgets.hasOwnProperty(i)) {
-                            const w = this.widgets[i];
-                            w.invokeEvent('onInit');
+        if (this.widgets[name] == null) {
+            this.widgets[name] = value;
+            if (!this.widgetRegisterChangeObserver) {
+                Observable.create(observer => {
+                    this.widgetRegisterChangeObserver = observer;
+                })
+                    .pipe(debounceTime(100))
+                    .pipe(distinctUntilChanged())
+                    .subscribe(c => {
+                        for (const i in this.widgets) {
+                            if (this.widgets.hasOwnProperty(i)) {
+                                const w = this.widgets[i];
+                                w.invokeEvent('onInit');
+                            }
                         }
-                    }
-                });
+                    });
+            }
+            this.widgetRegisterChangeObserver.next(name);
         }
-        this.widgetRegisterChangeObserver.next(name);
     }
 
     getWidget(name: string) {

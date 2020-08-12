@@ -4,6 +4,7 @@ import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 import { WidgetConfig } from '../../../services/widget.service';
 import { AXFDataService } from '../../../services/data.service';
+import { AXFRepeaterlWidgetFormula } from '../formula';
 
 @Component({
     // selector: "td",
@@ -17,6 +18,10 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
 
+    get formula() {
+        debugger;
+        return new AXFRepeaterlWidgetFormula(this);
+    }
 
     constructor(protected cdr: ChangeDetectorRef,
         private hostElement: ElementRef<HTMLTableCellElement>) {

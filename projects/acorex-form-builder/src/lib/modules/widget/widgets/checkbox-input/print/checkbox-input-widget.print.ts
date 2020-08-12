@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 
 @Component({
@@ -9,14 +9,28 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
 
     label: string;
     size: number = 20;
+    textAlign:string;
 
-
-    constructor(protected cdr: ChangeDetectorRef) {
+    constructor(private el: ElementRef<HTMLElement>,protected cdr: ChangeDetectorRef) {
         super();
     }
 
     ngAfterViewInit() {
         super.ngAfterViewInit();
         this.cdr.detectChanges();
+    }
+
+    onRender(): void {
+        if (this.label.match(/\[(.*?)\]/g) && this['rIndex'] >= 0 && this['dataContext'] != undefined) {
+            this.label.match(/\[(.*?)\]/g).forEach(f => {
+                let sw = f.substring(1, f.length - 1);
+                if (this['dataContext'].hasOwnProperty(sw)) {
+                    this.label = this.label.replace(f, this['dataContext'][sw]);
+                }
+            });
+        }
+        this.el.nativeElement.style.textAlign = this.textAlign;
+        this.applyStyle(this.el.nativeElement.querySelector("label"));
+        this.cdr.markForCheck();
     }
 }
