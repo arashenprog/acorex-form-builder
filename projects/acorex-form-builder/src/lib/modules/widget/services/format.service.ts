@@ -78,7 +78,7 @@ export class AXFFormatService {
                         }
 
                     }
-                    value = value.replace(w, word || '');
+                    value = value.replace(w, word.toString() || '');
                 });
             }
         }

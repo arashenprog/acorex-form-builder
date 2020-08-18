@@ -107,12 +107,16 @@ export abstract class AXFWidget implements AXFWidgetContainer {
                 el.style.paddingLeft = `${boxStyle.padding.left}px`;
                 el.style.paddingRight = `${boxStyle.padding.right}px`;
             }
-            // apply border size
+            // apply border size            
             if (boxStyle.border != null) {
-                el.style.borderTop = `${boxStyle.border.top}px solid`;
-                el.style.borderBottom = `${boxStyle.border.bottom}px solid`;
-                el.style.borderLeft = `${boxStyle.border.left}px solid`;
-                el.style.borderRight = `${boxStyle.border.right}px solid`;
+                if (boxStyle.border.top && parseInt(boxStyle.border.top) > 0)
+                    el.style.borderTop = `${boxStyle.border.top}px solid` ;
+                if (boxStyle.border.bottom && parseInt(boxStyle.border.bottom) > 0)
+                    el.style.borderBottom = `${boxStyle.border.bottom}px solid`;
+                if (boxStyle.border.left && parseInt(boxStyle.border.left) > 0)
+                    el.style.borderLeft = `${boxStyle.border.left}px solid`;
+                if (boxStyle.border.right && parseInt(boxStyle.border.right) > 0)
+                    el.style.borderRight = `${boxStyle.border.right}px solid`;
             }
             // apply margin size
             if (boxStyle.margin != null) {
@@ -126,13 +130,7 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             else
                 el.style.borderColor = '#333';
         }
-        // if(this['textDirection']=== 'tb')
-        // {
-        //     el.style.transform = 'rotate(-90deg)';
-        //     el.style.webkitTransform = 'rotate(-90deg)';
-        //     el.style.transformOrigin= '20px';
-        //     el.style.position='absolute'; 
-        // }
+
     }
 
     refresh() {
