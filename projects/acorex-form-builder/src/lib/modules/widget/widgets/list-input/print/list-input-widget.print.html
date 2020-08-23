@@ -1,4 +1,4 @@
-<div style="font-size: 14px!important;display: inline-block;width: 100%;line-height: 1;direction: ltr;">
+<div *ngIf="visible" style="font-size: 14px!important;display: inline-block;width: 100%;line-height: 1;direction: ltr;">
     <div *ngFor="let item of dataSource.dataItems"
         [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset'}"
         >

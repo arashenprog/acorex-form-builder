@@ -1,4 +1,4 @@
-<table #table style="width: 100%;border-collapse: collapse;border-spacing: 0px;" class="realTable">
+<table *ngIf="visible" #table style="width: 100%;border-collapse: collapse;border-spacing: 0px;" class="realTable">
     <thead>
         <ng-container *ngFor="let w of getHeader()" axf-widget-renderer [widget]="w" [parent]="this" [mode]="'print'">
         </ng-container>

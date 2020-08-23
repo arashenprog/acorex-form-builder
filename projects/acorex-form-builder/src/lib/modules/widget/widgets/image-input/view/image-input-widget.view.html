@@ -1,8 +1,8 @@
- <ng-container *ngIf="value && value.srcData">  
+ <ng-container *ngIf="visible && value && value.srcData">  
     <img [src]="value.srcData | resolveUrl | async" [alt]="alt" [height]="height" [width]="width" (click)="openFile()">
     <input type="file" multiple="false" (change)="uploadImage($event)" style="display: none;" #fileInput name="filedata"/>  
 </ng-container>
-<ng-container *ngIf="!value || !value.srcData">  
+<ng-container *ngIf="visible && (!value || !value.srcData)">  
     <img src="./assets/images/photocamera-add.png"  [alt]="alt" [height]="height" [width]="width" (click)="openFile()"> 
     <input type="file" multiple="false" (change)="uploadImage($event)" style="display: none;" #fileInput name="filedata"/>  
 </ng-container> 

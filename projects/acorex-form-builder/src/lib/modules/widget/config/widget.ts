@@ -502,8 +502,8 @@ export abstract class AXFWidgetView extends AXFWidget {
                         this.dataService.submit();
                         return;
                     }
-                    const allWidgets = act.match(/\#\#*([a-zA-Z1-9])+/g);
-                    const allVars = act.match(/\$\$*([a-zA-Z1-9])+/g);
+                    const allWidgets = act.match(/\#\#*([a-zA-Z1-9_])+/g);
+                    const allVars = act.match(/\$\$*([a-zA-Z1-9_])+/g);
                     const widgetRefs: AXFWidget[] = [];
                     let execCode = act;
                     const params = {};

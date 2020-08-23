@@ -5,7 +5,8 @@ import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-
 @Component({
     selector: '[axf-page]',
     templateUrl: './page-widget.print.html',
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection:ChangeDetectionStrategy.OnPush,
+    host: { role: "page" }
 })
 export class AXFPageWidgetPrint extends AXFWidgetPrint {
 
