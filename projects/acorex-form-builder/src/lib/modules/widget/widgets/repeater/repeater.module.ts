@@ -7,7 +7,7 @@ import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFTextEditorComponent } from '../../../property-editor/editors/text/text.editor';
-import { AXF_STYLE_GENERAL_PROPERTIES, AXF_BG_COLOR_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_HORIZONTAL_ALIGNMENT_PROPERTY, AXF_VERTICAL_ALIGNMENT_PROPERTY, AXF_DS_LIST_PROPERTY, AXF_NAME_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_TAG_PROPERTY } from '../../config/general-properties';
+import { AXF_STYLE_GENERAL_PROPERTIES, AXF_BG_COLOR_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_HORIZONTAL_ALIGNMENT_PROPERTY, AXF_VERTICAL_ALIGNMENT_PROPERTY, AXF_DS_LIST_PROPERTY, AXF_NAME_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_TAG_PROPERTY, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 
 export const COMPONENTS = [AXFRepeaterWidgetDesigner, AXFRepeaterWidgetView, AXFRepeaterWidgetPrint]
@@ -60,6 +60,7 @@ export class AXFRepeaterlWidgetModule {
                 AXF_DS_LIST_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
+                AXF_DISPLAY_NAME_PROPERTY,
                 AXF_TAG_PROPERTY,
                 AXF_VALUE_CHANGE_EVENT,
                 {

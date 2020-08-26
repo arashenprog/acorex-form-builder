@@ -111,12 +111,21 @@ export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
     editor: 'TextEditor'
 };
 
+export const AXF_DISPLAY_NAME_PROPERTY: AXFWidgetProperty = {
+    name: 'displayName',
+    category: 'General',
+    defaultValue: '',
+    title: 'Display Name',
+    order: 12,
+    editor: 'TextEditor'
+};
+
 export const AXF_TAG_PROPERTY: AXFWidgetProperty = {
     name: 'tag',
     category: 'Binding',
     defaultValue: '',
     title: 'Tag',
-    order: 12,
+    order: 13,
     editor: 'TextEditor'
 };
 

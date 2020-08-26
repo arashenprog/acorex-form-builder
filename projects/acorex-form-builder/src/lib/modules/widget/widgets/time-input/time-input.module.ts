@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_TAG_PROPERTY, AXF_VALIDATION_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_INIT_EVENT } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_TAG_PROPERTY, AXF_VALIDATION_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_INIT_EVENT, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
 import { AXFTimeInputWidgetDesigner } from './designer/time-input-widget.designer';
 import { AXFTimeInputWidgetPrint } from './print/time-input-widget.print';
 import { AXFTimeInputWidgetView } from './view/time-input-widget.view';
@@ -37,6 +37,7 @@ export class AXFTimeInputWidgetModule {
                 AXF_VISIBLE_PROPERTY,
                 AXF_VALIDATION_PROPERTY,
                 AXF_NAME_PROPERTY,
+                AXF_DISPLAY_NAME_PROPERTY,
                 AXF_TAG_PROPERTY, 
                 AXF_VALUE_CHANGE_EVENT,
                 AXF_INIT_EVENT,

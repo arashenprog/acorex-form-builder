@@ -6,7 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFPageHeaderWidgetDesigner } from './designer/page-header-widget.designer';
 import { AXFPageHeaderWidgetPrint } from './print/page-header-widget.print';
 import { AXFPageHeaderWidgetView } from './view/page-header-widget.view';
-import { AXF_NAME_PROPERTY, AXF_CAPTION_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_CAPTION_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [
     AXFPageHeaderWidgetDesigner,
@@ -39,7 +39,8 @@ export class AXFPageHeaderWidgetModule {
             options: [],
             properties: [ 
                 AXF_VISIBLE_PROPERTY,
-                AXF_NAME_PROPERTY
+                AXF_NAME_PROPERTY,
+                AXF_DISPLAY_NAME_PROPERTY,
             ]
         })
     }

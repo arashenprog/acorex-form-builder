@@ -6,7 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFPageFooterWidgetDesigner } from './designer/page-footer-widget.designer';
 import { AXFPageFooterWidgetPrint } from './print/page-footer-widget.print';
 import { AXFPageFooterWidgetView } from './view/page-footer-widget.view';
-import { AXF_NAME_PROPERTY, AXF_CAPTION_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_CAPTION_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [
     AXFPageFooterWidgetDesigner,
@@ -39,7 +39,8 @@ export class AXFPageFooterWidgetModule {
             options: [],
             properties: [ 
                 AXF_VISIBLE_PROPERTY,
-                AXF_NAME_PROPERTY
+                AXF_NAME_PROPERTY,
+                AXF_DISPLAY_NAME_PROPERTY,
             ]
         })
     }

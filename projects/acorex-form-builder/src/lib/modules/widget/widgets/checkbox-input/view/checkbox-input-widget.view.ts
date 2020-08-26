@@ -22,16 +22,18 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
                 let sw = f.substring(1, f.length - 1);
                 if (this['dataContext'].hasOwnProperty(sw)) {
                     this.label = this.label.replace(f, this['dataContext'][sw]);
-                    this.cdr.markForCheck();
+                    this.cdr.detectChanges();
                 }
             });
-        }
+        } 
+        this.cdr.detectChanges();
     }
 
     ngAfterViewInit() {
+        super.ngAfterViewInit();
         this.el.nativeElement.style.textAlign = this.textAlign;
         this.el.nativeElement.style.display="block";
-        this.applyStyle(this.el.nativeElement.querySelector("label"));
-        this.cdr.markForCheck();
+        this.applyStyle(this.el.nativeElement.querySelector("label")); 
+        this.cdr.detectChanges();
     }
 }

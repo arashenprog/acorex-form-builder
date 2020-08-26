@@ -20,7 +20,7 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
         //this.el.nativeElement.style.textAlign = this.textAlign;
         //this.el.nativeElement.style.display="block";
         this.applyStyle(this.el.nativeElement);
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 
     onRender(): void {
@@ -29,11 +29,11 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
                 let sw = f.substring(1, f.length - 1);
                 if (this['dataContext'].hasOwnProperty(sw)) {
                     this.label = this.label.replace(f, this['dataContext'][sw]);
-                    this.cdr.markForCheck();
+                    this.cdr.detectChanges();
                 }
-            });
+            }); 
         } 
-        
+        this.cdr.detectChanges();
     }
 
  

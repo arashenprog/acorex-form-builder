@@ -6,7 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFPanelWidgetDesigner } from './designer/panel-widget.designer';
 import { AXFPanelWidgetPrint } from './print/panel-widget.print';
 import { AXFPanelWidgetView } from './view/panel-widget.view';
-import { AXF_NAME_PROPERTY, AXF_CAPTION_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_TAG_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_CAPTION_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_TAG_PROPERTY, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [
     AXFPanelWidgetDesigner,
@@ -53,6 +53,7 @@ export class AXFPanelWidgetModule {
                 },
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
+                AXF_DISPLAY_NAME_PROPERTY,
                 AXF_TAG_PROPERTY
             ]
         })

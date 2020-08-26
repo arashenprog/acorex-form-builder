@@ -6,7 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFButtonWidgetDesigner } from './designer/button-widget.designer';
 import { AXFButtonWidgetPrint } from './print/button-widget.print';
 import { AXFButtonWidgetView } from './view/button-widget.view';
-import { AXF_NAME_PROPERTY, AXF_TEXT_PROPERTY, AXF_CLICK_EVENT, AXF_INIT_EVENT, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_TEXT_PROPERTY, AXF_CLICK_EVENT, AXF_INIT_EVENT, AXF_VISIBLE_PROPERTY, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
 
 export const COMPONENTS = [
     AXFButtonWidgetDesigner,
@@ -71,6 +71,7 @@ export class AXFButtonWidgetModule {
                 },
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
+                AXF_DISPLAY_NAME_PROPERTY,
                 AXF_INIT_EVENT,
                 AXF_CLICK_EVENT,
             ]

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_NAME_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_TAG_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_TAG_PROPERTY, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
 import { AXFMapInputWidgetDesigner } from './designer/map-input-widget.designer';
 import { AXFMapInputWidgetPrint } from './print/map-input-widget.print';
 import { AXFMapInputWidgetView } from './view/map-input-widget.view';
@@ -52,6 +52,7 @@ export class AXFMapWidgetModule {
                     editor: "TextEditor"
                 }, 
                 AXF_NAME_PROPERTY, 
+                AXF_DISPLAY_NAME_PROPERTY,
                 AXF_TAG_PROPERTY,
                 AXF_VALUE_CHANGE_EVENT,
             ]
