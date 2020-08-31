@@ -9,13 +9,14 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFTableWidgetView extends AXFWidgetView {
 
-    @ViewChild("table", { static: true }) table: ElementRef<HTMLTableElement>;
+    @ViewChild("table") table: ElementRef<HTMLTableElement>;
     constructor(
         private cdr: ChangeDetectorRef) {
         super();
     }
 
-    onRender() {
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
         this.applyStyle(this.table.nativeElement);
         this.cdr.markForCheck();
     }

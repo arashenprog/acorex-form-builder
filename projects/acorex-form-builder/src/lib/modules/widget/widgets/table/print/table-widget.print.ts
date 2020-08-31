@@ -8,16 +8,17 @@ import { AXFWidgetPrint } from '../../../config/widget';
 })
 export class AXFTableWidgetPrint extends AXFWidgetPrint {
 
-    @ViewChild("table", { static: true }) table: ElementRef<HTMLTableElement>;
+    @ViewChild("table") table: ElementRef<HTMLTableElement>;
     constructor(
         private cdr: ChangeDetectorRef) {
         super();
     }
 
-    onRender() {
+    ngAfterViewInit() {
         this.applyStyle(this.table.nativeElement);
         this.cdr.markForCheck();
     }
+    
 
     getHeader() {
         return this.widgets.filter(c => c.options.isHeader == true);
