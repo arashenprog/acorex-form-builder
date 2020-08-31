@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_ITEM_DATASOURCE_PROPERTY, AXF_DS_LIST_PROPERTY, AXF_NAME_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_TAG_PROPERTY, AXF_VALIDATION_PROPERTY, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
+import { AXF_ITEM_DATASOURCE_PROPERTY, AXF_DS_LIST_PROPERTY, AXF_NAME_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_TAG_PROPERTY, AXF_VALIDATION_PROPERTY, AXF_DISPLAY_NAME_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
 import { AXFSignatureInputWidgetDesigner } from './designer/signature-input-widget.designer';
 import { AXFSignatureInputWidgetPrint } from './print/signature-input-widget.print';
 import { AXFSignatureInputWidgetView } from './view/signature-input-widget.view';
@@ -67,6 +67,7 @@ export class AXFSignatureInputWidgetModule {
                     options: { label: "Supervisior" }
                 },
                 AXF_NAME_PROPERTY,
+                AXF_VISIBLE_PROPERTY,
                 AXF_DISPLAY_NAME_PROPERTY,
                 AXF_TAG_PROPERTY,
                 AXF_VALUE_CHANGE_EVENT,
