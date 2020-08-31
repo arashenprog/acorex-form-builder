@@ -113,11 +113,28 @@ export const AXF_NAME_PROPERTY: AXFWidgetProperty = {
 
 export const AXF_DISPLAY_NAME_PROPERTY: AXFWidgetProperty = {
     name: 'displayName',
-    category: 'General',
+    category: 'Binding',
     defaultValue: '',
     title: 'Display Name',
     order: 12,
     editor: 'TextEditor'
+};
+
+export const AXF_DATA_TYPE_PROPERTY: AXFWidgetProperty = {
+    name: 'dataType',
+    category: 'Binding',
+    defaultValue: 'inherit',
+    title: 'Data Type',
+    editor: 'DropdownEditor',
+    order: 13,
+    options: {
+        items: [
+            { value: 'string',title:'String'},
+            { value: 'number', title: 'Number' },
+            { value: 'boolean', title: 'Boolean' },
+            { value: 'object', title: 'Object' }, 
+        ],
+    }
 };
 
 export const AXF_TAG_PROPERTY: AXFWidgetProperty = {
@@ -125,7 +142,7 @@ export const AXF_TAG_PROPERTY: AXFWidgetProperty = {
     category: 'Binding',
     defaultValue: '',
     title: 'Tag',
-    order: 13,
+    order: 14,
     editor: 'TextEditor'
 };
 

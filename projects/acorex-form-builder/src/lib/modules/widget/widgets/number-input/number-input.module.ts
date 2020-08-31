@@ -13,7 +13,8 @@ import {
     AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
     AXF_VALUE_CHANGE_EVENT,
     AXF_INIT_EVENT,
-    AXF_DISPLAY_NAME_PROPERTY
+    AXF_DISPLAY_NAME_PROPERTY,
+    AXF_DATA_TYPE_PROPERTY
 } from '../../config/general-properties';
 import { AXFNumberInputWidgetDesigner } from './designer/number-input-widget.designer';
 import { AXFNumberInputWidgetPrint } from './print/number-input-widget.print';
@@ -48,6 +49,7 @@ export class AXFNumberInputWidgetModule {
                 AXF_TEXT_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
                 AXF_DISPLAY_NAME_PROPERTY,
+                AXF_DATA_TYPE_PROPERTY,
                 AXF_VALIDATION_PROPERTY,
                 AXF_TAG_PROPERTY,
                 AXF_HORIZONTAL_ALIGNMENT_PROPERTY,

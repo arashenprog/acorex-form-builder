@@ -15,7 +15,8 @@ import {
     AXF_VALUE_CHANGE_EVENT,
     AXF_INIT_EVENT,
     AXF_FONT_PROPERTY,
-    AXF_DISPLAY_NAME_PROPERTY
+    AXF_DISPLAY_NAME_PROPERTY,
+    AXF_DATA_TYPE_PROPERTY
 } from '../../config/general-properties';
 import { AXFTextInputWidgetDesigner } from './designer/text-input-widget.designer';
 import { AXFTextInputWidgetPrint } from './print/text-input-widget.print';
@@ -51,6 +52,7 @@ export class AXFTextInputWidgetModule {
                 AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
                 AXF_NAME_PROPERTY,
                 AXF_DISPLAY_NAME_PROPERTY,
+                AXF_DATA_TYPE_PROPERTY,
                 AXF_VALIDATION_PROPERTY,
                 AXF_TAG_PROPERTY,
                 AXF_READONLY_PROPERTY,

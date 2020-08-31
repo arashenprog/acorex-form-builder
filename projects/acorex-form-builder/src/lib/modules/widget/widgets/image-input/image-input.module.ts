@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_DISPLAY_NAME_PROPERTY, AXF_DATA_TYPE_PROPERTY } from '../../config/general-properties';
 
 import { AXFImageInputWidgetDesigner } from './designer/image-input-widget.designer';
 import { AXFImageInputWidgetPrint } from './print/image-input-widget.print';
@@ -60,6 +60,7 @@ export class AXFImageInputWidgetModule {
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
                 AXF_DISPLAY_NAME_PROPERTY,
+                AXF_DATA_TYPE_PROPERTY,
             ]
         })
     }
