@@ -19,7 +19,7 @@
                 <img style="margin-left: 22px;" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 <div style="margin-left: 22px;"
-                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
+                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName] | word}}</div>
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px 2px;position: relative;">
                 <div style="padding-bottom: 22px;">

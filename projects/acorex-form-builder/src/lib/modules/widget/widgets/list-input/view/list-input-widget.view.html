@@ -12,7 +12,7 @@
                 <img style="margin-left: 22px;" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 <span style="margin-left: 22px;" (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
-                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</span>
+                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName] | word}}</span>
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px 2px;position: relative;display: flex;">
                 <div style="padding-bottom: 22px;">
