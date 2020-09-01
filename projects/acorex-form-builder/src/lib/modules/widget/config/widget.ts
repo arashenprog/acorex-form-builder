@@ -130,7 +130,10 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             else
                 el.style.borderColor = '#333';
         }
-
+        if (this['tableLayout']==true) {
+            debugger
+            el.style.tableLayout="fixed";
+        }
     }
 
     refresh() {

@@ -180,7 +180,14 @@ export const AXF_READONLY_PROPERTY: AXFWidgetProperty = {
     order: 83,
     editor: 'CheckboxEditor'
 };
-
+export const AXF_TABLE_LAYOUT_PROPERTY: AXFWidgetProperty = {
+    name: 'tableLayout',
+    category: 'General',
+    defaultValue: false,
+    title: 'Table Layout Fixed',
+    order: 84,
+    editor: 'CheckboxEditor'
+};
 
 
 export const AXF_CAPTION_PROPERTY: AXFWidgetProperty = {
