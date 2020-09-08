@@ -188,7 +188,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                 this.widgets.push(page);
             }
             this.widgets[0].onRendered.subscribe(c => {
-                (c as any).componentRef.edit();
+             //   (c as any).componentRef.edit();
             });
         });
     }

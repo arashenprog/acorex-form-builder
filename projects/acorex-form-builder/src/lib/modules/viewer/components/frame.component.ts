@@ -96,7 +96,6 @@ export class ACFViewerFrameComponent {
                         widgets: this.widgetService.serialize(this.page)
                     });
                 } else {
-                    debugger
                     this.templateService.get(options.id).then(c => {
                         this.postMessage(action, reqId, {
                             widgets: c.template
