@@ -29,7 +29,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
         if (this.el) {
             this.applyStyle(this.el.nativeElement);
         }
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 
     ngAfterViewInit() {

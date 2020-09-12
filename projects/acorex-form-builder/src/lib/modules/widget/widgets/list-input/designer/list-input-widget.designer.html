@@ -29,7 +29,7 @@
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
                 </div>
             </div>
-            <div *ngSwitchCase="'right'" style="padding: 6px 2px;position: relative;">
+            <div *ngSwitchCase="'right'" style="padding: 6px 2px;position: relative;display: flex;">
                 <div style="float: left;margin-right: 25px;">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">

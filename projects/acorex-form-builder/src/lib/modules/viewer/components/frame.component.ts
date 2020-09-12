@@ -96,7 +96,6 @@ export class ACFViewerFrameComponent {
                         widgets: this.widgetService.serialize(this.page)
                     });
                 } else {
-                    debugger
                     this.templateService.get(options.id).then(c => {
                         this.postMessage(action, reqId, {
                             widgets: c.template
@@ -173,7 +172,7 @@ export class ACFViewerFrameComponent {
             if (c.data) {
                 const printbody = this.frame.nativeElement.contentDocument.querySelector('.theme-wrapper> ng-component >ng-component>div ').innerHTML;
                 let result = '<html><head><meta charset="utf-8"/>' +
-                    '<style>.realTable {table-layout: fixed;} .realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid } ul{margin: 0px;}</style>'
+                    '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid } ul{margin: 0px;}</style>'
                     + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
                 result = result + printbody + '</body></html>';
                 this.isLoading = true;

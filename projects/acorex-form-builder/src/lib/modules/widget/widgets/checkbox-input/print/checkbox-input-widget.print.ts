@@ -19,7 +19,8 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
         super.ngAfterViewInit();
         //this.el.nativeElement.style.textAlign = this.textAlign;
         //this.el.nativeElement.style.display="block";
-        this.applyStyle(this.el.nativeElement);
+        if(this.el)
+            this.applyStyle(this.el.nativeElement);
         this.cdr.detectChanges();
     }
 

@@ -47,7 +47,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
                 return cloned;
             });
         }
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 
     addItemClick() {
