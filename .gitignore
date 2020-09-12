@@ -44,3 +44,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+.vs/VSWorkspaceState.json
+.vs/slnx.sqlite
+.vs/acorex-form-builder/v16/.suo
