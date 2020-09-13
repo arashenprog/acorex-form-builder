@@ -9,24 +9,27 @@ import { AXFWidgetView } from '../../../config/widget';
 })
 export class AXFTableWidgetView extends AXFWidgetView {
 
-    @ViewChild("table") table: ElementRef<HTMLTableElement>;
+    @ViewChild('table', { static: true }) table: ElementRef<HTMLTableElement>;
     constructor(
         private cdr: ChangeDetectorRef) {
         super();
     }
 
-    ngAfterViewInit() {
-        super.ngAfterViewInit();
-        this.applyStyle(this.table.nativeElement);
-        this.cdr.markForCheck();
+    onRender() {
+        debugger;
+        if (this.table) {
+            this.applyStyle(this.table.nativeElement);
+        }
     }
 
+
+
     getHeader() {
-        return this.widgets.filter(c => c.options.isHeader == true);
+        return this.widgets.filter(c => c.options.isHeader === true);
     }
 
     getBody() {
-        return this.widgets.filter(c => c.options.isHeader == false);
+        return this.widgets.filter(c => c.options.isHeader === false);
     }
 }
 

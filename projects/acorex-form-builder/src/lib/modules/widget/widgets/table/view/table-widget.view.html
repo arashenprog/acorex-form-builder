@@ -1,4 +1,4 @@
-<table #table *ngIf="visible">
+<table #table >
     <thead>
         <ng-container *ngFor="let w of getHeader()" axf-widget-renderer [widget]="w"
             [parent]="this" [mode]="'view'">

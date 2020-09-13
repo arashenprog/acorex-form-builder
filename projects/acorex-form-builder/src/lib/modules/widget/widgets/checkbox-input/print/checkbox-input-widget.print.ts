@@ -10,7 +10,7 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
     label: string;
     size: number = 20;
     textAlign:string;
-    @ViewChild("el") el: ElementRef<HTMLElement>;
+    @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
     constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
