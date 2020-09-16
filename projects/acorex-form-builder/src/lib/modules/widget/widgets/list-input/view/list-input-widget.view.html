@@ -15,7 +15,7 @@
                     *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName] | word}}</span>
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px 2px;position: relative;display: flex;">
-                <div style="padding-bottom: 22px;">
+                <div>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
                         [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
@@ -23,21 +23,21 @@
                             style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
                     </span>
                 </div>
-                <div>
+                <div style="padding-top: 22px;">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
             </div>
-            <div *ngSwitchCase="'bottom'" style="padding: 6px 2px;position: relative;display: flex;">
+            <div *ngSwitchCase="'bottom'" style="padding: 6px 2px 30px;position: relative;display: flex;">
                 <div>
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
-                <div style="padding-bottom: 22px;">
+                <div style="padding-top: 22px;position: fixed;">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
                         [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
