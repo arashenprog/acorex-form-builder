@@ -123,16 +123,18 @@ export const AXF_DISPLAY_NAME_PROPERTY: AXFWidgetProperty = {
 export const AXF_DATA_TYPE_PROPERTY: AXFWidgetProperty = {
     name: 'dataType',
     category: 'Binding',
-    defaultValue: 'inherit',
+    defaultValue: 'string',
     title: 'Data Type',
     editor: 'DropdownEditor',
     order: 13,
     options: {
         items: [
-            { value: 'string',title:'String'},
+            { value: 'string', title: 'String' },
             { value: 'number', title: 'Number' },
             { value: 'boolean', title: 'Boolean' },
-            { value: 'object', title: 'Object' }, 
+            { value: 'date', title: 'Date' },
+            { value: 'datetime', title: 'Datetime' },
+            { value: 'object', title: 'Object' },
         ],
     }
 };
@@ -244,7 +246,7 @@ export const AXF_TEXT_STYLE_PROPERTY: AXFWidgetProperty = {
     order: 34,
     options: {
         items: [{ value: 'bold', title: 'Bold' }, { value: 'italic', title: 'Italic' }, { value: 'underline', title: 'Underline' }
-        , { value: 'break', title: 'Break' }],
+            , { value: 'break', title: 'Break' }],
         mode: 'multiple',
         direction: 'horizontal'
     }
@@ -401,10 +403,10 @@ export const AXF_FONT_PROPERTY: AXFWidgetProperty = {
     order: 38,
     options: {
         items: [
-            { value: 'inherit',title:'Default'},
+            { value: 'inherit', title: 'Default' },
             { value: 'Arial', title: 'Arial' },
             { value: 'Tahoma', title: 'Tahoma' },
-            { value: 'Times New Roman', title: 'Times New Roman' }, 
+            { value: 'Times New Roman', title: 'Times New Roman' },
         ],
     }
 };
