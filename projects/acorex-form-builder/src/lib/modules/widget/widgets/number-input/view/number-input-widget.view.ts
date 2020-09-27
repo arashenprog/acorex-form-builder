@@ -14,6 +14,11 @@ export class AXFNumberInputWidgetView extends AXFValueWidgetView {
 
     constructor(protected cdr: ChangeDetectorRef, private hostElement: ElementRef<HTMLTableCellElement>) {
         super(cdr);
+        // this.valueChange.subscribe(c => {
+        //     this.internalValue = this.value;
+        //     this.setValue()
+        //     //this.cdr.detectChanges();
+        // });
     }
 
 
@@ -25,13 +30,9 @@ export class AXFNumberInputWidgetView extends AXFValueWidgetView {
         this.cdr.markForCheck();
     }
 
+
     onTextChanged(e) {
-        this.value = Number(this.internalValue);
+        //this.value = Number(e);
     }
 
-    ngAfterViewInit() {
-        super.ngAfterViewInit();
-        this.internalValue = this.value;
-        this.cdr.detectChanges();
-    }
 }

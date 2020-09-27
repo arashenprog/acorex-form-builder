@@ -110,7 +110,7 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             // apply border size            
             if (boxStyle.border != null) {
                 if (boxStyle.border.top && parseInt(boxStyle.border.top) > 0)
-                    el.style.borderTop = `${boxStyle.border.top}px solid` ;
+                    el.style.borderTop = `${boxStyle.border.top}px solid`;
                 if (boxStyle.border.bottom && parseInt(boxStyle.border.bottom) > 0)
                     el.style.borderBottom = `${boxStyle.border.bottom}px solid`;
                 if (boxStyle.border.left && parseInt(boxStyle.border.left) > 0)
@@ -130,9 +130,9 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             else
                 el.style.borderColor = '#333';
         }
-        if (this['tableLayout']==true) {
+        if (this['tableLayout'] == true) {
             debugger
-            el.style.tableLayout="fixed";
+            el.style.tableLayout = "fixed";
         }
     }
 
@@ -236,7 +236,9 @@ export abstract class AXFWidgetDesigner extends AXFWidget {
             w.options = {};
         }
         w.onRendered.subscribe(c => {
-            (c as any).componentRef.edit();
+            if (c && (c as any).componentRef && (c as any).componentRef.edit) {
+                (c as any).componentRef.edit();
+            }
         });
         Object.assign(w.options, options);
         const oldValue = this.widgets.slice();
@@ -651,7 +653,7 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
         super.ngAfterViewInit();
     }
 
-    setValue(value: boolean) {
+    setValue(value: any) {
         this.value = value;
     }
 
