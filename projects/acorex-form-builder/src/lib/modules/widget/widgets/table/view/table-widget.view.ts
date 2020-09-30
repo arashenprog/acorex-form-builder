@@ -15,8 +15,7 @@ export class AXFTableWidgetView extends AXFWidgetView {
         super();
     }
 
-    onRender() {
-        debugger;
+    onRender() { 
         if (this.table) {
             this.applyStyle(this.table.nativeElement);
         }

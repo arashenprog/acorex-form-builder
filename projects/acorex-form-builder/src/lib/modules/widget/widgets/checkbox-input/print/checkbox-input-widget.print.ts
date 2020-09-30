@@ -10,6 +10,7 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
     label: string;
     size: number = 20;
     textAlign:string;
+    fontSize: string;
     @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
     constructor(protected cdr: ChangeDetectorRef) {
         super();
@@ -37,5 +38,23 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
         this.cdr.detectChanges();
     }
 
- 
+    getSize(font: string) { 
+        switch (font) { 
+            case 'x-small':
+                return 10;
+            case 'smaller':
+            case 'inherit':
+                return 15;
+            case 'small':
+                return 20;
+            case 'medium':
+                return 25;
+            case 'large':
+                return 30;
+            case 'larger':
+                return 35;
+            case 'x-large':
+                return 40;
+        }
+    }
 }

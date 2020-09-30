@@ -45,25 +45,6 @@ export class AXFCheckboxInputWidgetModule {
                 AXF_DISPLAY_NAME_PROPERTY,
                 AXF_DATA_TYPE_PROPERTY,
                 AXF_TAG_PROPERTY,
-                {
-                    name: 'size',
-                    category: 'Print',
-                    defaultValue: 20,
-                    title: 'Size',
-                    editor: 'DropdownEditor',
-                    order: 35,
-                    options: {
-                        items: [
-                            { value: 10, title: 'x-small' },
-                            { value: 15, title: 'smaller' },
-                            { value: 20, title: 'small' },
-                            { value: 25, title: 'medium' },
-                            { value: 30, title: 'large' },
-                            { value: 35, title: 'larger' },
-                            { value: 40, title: 'x-large' },
-                        ],
-                    }
-                },
                 AXF_VALUE_CHANGE_EVENT,
                 AXF_INIT_EVENT
             ]
