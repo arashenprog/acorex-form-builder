@@ -1,9 +1,12 @@
 import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { AXFValueWidgetView } from '../../../config/widget';
 import { AXFConnectService } from '../../../services/connect.service';
+import { ImageModalPage } from '../imagemodal.page';
+import { AXPopupService } from 'acorex-ui';
 
 @Component({
     templateUrl: './image-input-widget.view.html',
+    styleUrls:['./image-input-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFImageInputWidgetView extends AXFValueWidgetView {
@@ -16,7 +19,7 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
 
     @ViewChild('fileInput') fileInput: ElementRef<HTMLElement>;
     constructor(private el: ElementRef<HTMLElement>, protected cdr: ChangeDetectorRef,
-        private connectService: AXFConnectService) {
+        private connectService: AXFConnectService,private popupService: AXPopupService) {
         super(cdr);
     }
 
@@ -49,9 +52,8 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
         });
     }
 
-    uploadImage(e) {
-        this.isLoading = true;
-
+    uploadImage(e) { 
+        this.isLoading = true; 
         const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
         const pattern = /image-*/;
         const reader = new FileReader();
@@ -63,11 +65,13 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
         reader.readAsDataURL(file);
     }
 
-    _handleReaderLoaded(e) {
+    async _handleReaderLoaded(e) { 
         const reader = e.target;
         const data = reader.result;
+        const newDimension = await this.getImageDimensions(data);
+        this.value= { orginalHeight : newDimension.h, orginalWidth : newDimension.w}; 
         this.connectService.send('uploadFile', { data }).then((c) => {
-            this.value = { srcData: c };
+            this.value.srcData =  c ;
         }).finally(() => {
             this.isLoading = false;
             this.cdr.detectChanges();
@@ -82,6 +86,18 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
                 resolved({ w: i.width, h: i.height });
             };
             i.src = file;
+        });
+    }
+
+
+    search()
+    {
+        this.popupService.open(ImageModalPage, {
+            title: 'View Image',
+            size: 'lg',
+            data: {
+                value: this.value
+            }
         });
     }
 }

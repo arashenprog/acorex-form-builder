@@ -13,7 +13,7 @@ export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
 
     textAlign: string;
     value: boolean;
-    label: string; 
+    label: string;
     constructor(private el: ElementRef<HTMLElement>, private cdr: ChangeDetectorRef) {
         super()
     }
@@ -24,11 +24,15 @@ export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
         if (this.el.nativeElement != null) {
             this.el.nativeElement.querySelector("span").style.width = `${this.getSize(this["fontSize"])}px`;
             this.el.nativeElement.querySelector("span").style.height = `${this.getSize(this["fontSize"])}px`;
-            if (document.getElementsByClassName("ltr").length > 0)
-                this.el.nativeElement.querySelector("label").style.paddingLeft = `${this.getSize(this["fontSize"]) + 5}px`;
+            if (this.label && this.label!="") {
+                if (document.getElementsByClassName("ltr").length > 0)
+                    this.el.nativeElement.querySelector("label").style.paddingLeft = `${this.getSize(this["fontSize"]) + 5}px`;
+                else
+                    this.el.nativeElement.querySelector("label").style.paddingRight = `${this.getSize(this["fontSize"]) + 5}px`;
+                (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.display = "inline-block";
+            }
             else
-                this.el.nativeElement.querySelector("label").style.paddingRight = `${this.getSize(this["fontSize"]) + 5}px`;
-            (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.display = "inline-block";
+                (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.display = "initial";
             (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.paddingBottom = `${this.getSize(this["fontSize"]) < 15 ? 0 : this.getSize(this["fontSize"]) - 15}px`;
         }
         this.cdr.markForCheck();

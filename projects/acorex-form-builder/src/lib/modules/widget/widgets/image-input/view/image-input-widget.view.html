@@ -1,17 +1,22 @@
- <ng-container *ngIf="visible && !isLoading && value && value.srcData">  
-    <img [src]="value.srcData | resolveUrl | async" [alt]="alt" [height]="height" [width]="width" (click)="openFile()">
-    <input type="file" multiple="false" (change)="uploadImage($event)" style="display: none;" #fileInput name="filedata"/>  
+<ng-container *ngIf="visible && !isLoading && value && value.srcData">
+    <div class="image">
+        <img [src]="value.srcData | resolveUrl | async" [alt]="alt" [height]="height" [width]="width">
+        <input type="file" multiple="false" (change)="uploadImage($event)" style="display: none;" #fileInput name="filedata" />
+        <div class="overlay">
+            <button class="btn" (click)="openFile()"><i class="fa fa-upload"></i></button>
+            <button class="btn" (click)="search()"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
 </ng-container>
-<ng-container *ngIf="visible && !isLoading && (!value || !value.srcData)">  
-    <img src="./assets/images/photocamera-add.png"  [alt]="alt" [height]="height" [width]="width" (click)="openFile()"> 
-    <input type="file" multiple="false" (change)="uploadImage($event)" style="display: none;" #fileInput name="filedata"/>  
-</ng-container> 
+<ng-container *ngIf="visible && !isLoading && (!value || !value.srcData)"> 
+    <img src="./assets/images/photocamera-add.png" [alt]="alt" [height]="height" [width]="width" (click)="openFile()">
+    <input type="file" multiple="false" (change)="uploadImage($event)" style="display: none;" #fileInput name="filedata" />
+</ng-container>
 <ng-container *ngIf="isLoading">
     <!-- <div class="fa-x3">
         <i class="fas fa-circle-notch fa-spin"></i>
     </div>   -->
-    <div class="skeleton" [style.width.px]="width" [style.height.px]="height" >
+    <div class="skeleton" [style.width.px]="width" [style.height.px]="height">
 
     </div>
 </ng-container>
-

@@ -9,8 +9,9 @@ import { AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_DISPLAY_NAME_PROPERTY, AXF
 import { AXFImageInputWidgetDesigner } from './designer/image-input-widget.designer';
 import { AXFImageInputWidgetPrint } from './print/image-input-widget.print';
 import { AXFImageInputWidgetView } from './view/image-input-widget.view'; 
+import { ImageModalPage } from './imagemodal.page';
 
-export const COMPONENTS = [AXFImageInputWidgetDesigner, AXFImageInputWidgetPrint, AXFImageInputWidgetView]
+export const COMPONENTS = [AXFImageInputWidgetDesigner, AXFImageInputWidgetPrint, AXFImageInputWidgetView,ImageModalPage]
 
 @NgModule({
     declarations: [...COMPONENTS],

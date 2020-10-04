@@ -1,0 +1,4 @@
+<div class="contain">
+        <img *ngIf="value" [src]="value.srcData | resolveUrl | async" [height]="value.orginalHeight" 
+        [width]="value.orginalWidth">
+</div>

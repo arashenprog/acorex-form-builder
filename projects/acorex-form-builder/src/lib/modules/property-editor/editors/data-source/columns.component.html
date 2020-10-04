@@ -4,6 +4,7 @@
             <tr>
                 <th>Title</th>
                 <th>Field Name</th>
+                <th>Display in Grid</th>
                 <th *ngIf="allowColumns">Type </th>
                 <th *ngIf="allowColumns">Fill by User</th>
                 <!-- <th>Sub Items</th>
@@ -18,6 +19,10 @@
                 </td>
                 <td>
                     <ax-text-box [(text)]="col.fieldName"></ax-text-box>
+                </td>
+                <td style="text-align: center">
+                   <ax-check-box label="" [(value)]="col.isDisplay">
+                   </ax-check-box>
                 </td>
                 <td *ngIf="allowColumns">
                     <ax-select-box [items]="columnTypeItems" valueField="value" textField="title"

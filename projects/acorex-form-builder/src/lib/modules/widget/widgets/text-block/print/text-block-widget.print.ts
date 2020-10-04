@@ -24,5 +24,9 @@ export class AXFTextBlockWidgetPrint extends AXFWidgetPrint {
     ngOnInit() {
         super.ngOnInit();
         this.hostElement.nativeElement.innerHTML = this.formatService.format(this.text, this);
+        if(this["tag"])
+        {
+            this.hostElement.nativeElement.setAttribute("role",this["tag"]); 
+        }
     }
 }

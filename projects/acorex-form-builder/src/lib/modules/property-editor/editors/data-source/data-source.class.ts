@@ -59,4 +59,5 @@ export class AXFDataSourceColumnOption {
     title: string;
     type: string;
     fillByUser: boolean = false;
+    isDisplay:boolean=false;
 }

@@ -58,7 +58,8 @@ export class AXFDataColumnEditorComponent extends AXBasePageComponent {
             fieldName: "field" + index.toString(),
             title: "Field " + index.toString(),
             type: "string",
-            fillByUser: false
+            fillByUser: false,
+            isDisplay:false
         };
         this.columns.push(newRow);
     }
