@@ -34,7 +34,8 @@ export class AXFImageInputWidgetModule {
             viewClass: AXFImageInputWidgetView,
             options: {
                 height: 100,
-                width: 100
+                width: 100,
+                dataType:'object'
             },
             properties: [
                 {

@@ -42,6 +42,7 @@ export class AXFNumberInputWidgetModule {
             printClass: AXFNumberInputWidgetPrint,
             viewClass: AXFNumberInputWidgetView,
             options: {
+                dataType:'number'
             },
             properties: [
                 AXF_PLACEHOLDER_PROPERTY,

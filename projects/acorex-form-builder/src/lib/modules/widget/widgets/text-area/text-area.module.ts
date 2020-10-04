@@ -37,7 +37,8 @@ export class AXFTextAreaWidgetModule {
                     padding: new AXFBoxStyleBoxSizeValue("2"),
                     margin: new AXFBoxStyleBoxSizeValue("1")
                 },
-                bgColor: "#FFFFFF"
+                bgColor: "#FFFFFF",
+                dataType:'string'
             },
             properties: [
                 AXF_PLACEHOLDER_PROPERTY,

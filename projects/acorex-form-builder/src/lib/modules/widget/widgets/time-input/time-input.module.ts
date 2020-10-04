@@ -32,6 +32,7 @@ export class AXFTimeInputWidgetModule {
             printClass: AXFTimeInputWidgetPrint,
             viewClass: AXFTimeInputWidgetView,
             options: {
+                dataType:'time'
             },
             properties: [
                 AXF_VISIBLE_PROPERTY,

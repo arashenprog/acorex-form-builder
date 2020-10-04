@@ -43,7 +43,8 @@ export class AXFTextBlockWidgetModule {
                 },
                 text:"Sample Text",
                 bgColor:"inherit",
-                fontSize:"small"
+                fontSize:"small",
+                dataType:'string'
             },
             properties: [
                 AXF_RICH_TEXT_PROPERTY,
@@ -77,7 +78,8 @@ export class AXFTextBlockWidgetModule {
                 bgColor:"inherit",
                 textStyle:["bold"],
                 text:"Heading Text",
-                fontSize:"medium"
+                fontSize:"medium",
+                dataType:'string'
             },
             properties: [
                 AXF_RICH_TEXT_PROPERTY,
@@ -110,7 +112,8 @@ export class AXFTextBlockWidgetModule {
                 bgColor:"inherit",
                 color:"#999999",
                 text:"Hint Text",
-                fontSize:"x-small" 
+                fontSize:"x-small" ,
+                dataType:'string'
             },
             properties: [
                 AXF_RICH_TEXT_PROPERTY,

@@ -42,7 +42,8 @@ export class AXFDropdownInputWidgetModule {
             printClass: AXFDropdownInputWidgetPrint,
             viewClass: AXFDropdownInputWidgetView,
             options: {
-                mode: 'single'
+                mode: 'single',
+                dataType:'object'
             },
             properties: [
                 {

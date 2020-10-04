@@ -39,8 +39,8 @@ export class AXFImageWidgetModule {
                     modeSize: "auto",
                     isAspectRatio: false,
                     sourceMethod:"url"
-                })
-
+                }),
+                dataType:'object'
             },
             properties: [
                 {

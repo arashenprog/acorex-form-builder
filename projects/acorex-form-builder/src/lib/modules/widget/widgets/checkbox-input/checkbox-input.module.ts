@@ -30,7 +30,8 @@ export class AXFCheckboxInputWidgetModule {
             printClass: AXFCheckboxInputWidgetPrint,
             viewClass: AXFCheckboxInputWidgetView,
             options: {
-                label: 'Checkbox'
+                label: 'Checkbox',
+                dataType:'boolean'
             },
             properties: [
                 AXF_LABEL_PROPERTY,

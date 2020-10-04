@@ -6,7 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFContainerWidgetDesigner } from './designer/container-widget.designer';
 import { AXFContainerWidgetPrint } from './print/container-widget.print';
 import { AXFContainerWidgetView } from './view/container-widget.view';
-import { AXF_NAME_PROPERTY, AXF_CAPTION_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_PLACEHOLDER_PROPERTY, AXF_DISPLAY_NAME_PROPERTY, AXF_DATA_TYPE_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_CAPTION_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_PLACEHOLDER_PROPERTY, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
 import { AXF_TAG_PROPERTY } from '../../config/general-properties';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 
@@ -60,7 +60,6 @@ export class AXFContainerWidgetModule {
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
                 AXF_DISPLAY_NAME_PROPERTY,
-                AXF_DATA_TYPE_PROPERTY,
                 AXF_TAG_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_PLACEHOLDER_PROPERTY,

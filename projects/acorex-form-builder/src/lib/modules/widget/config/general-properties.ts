@@ -127,6 +127,7 @@ export const AXF_DATA_TYPE_PROPERTY: AXFWidgetProperty = {
     title: 'Data Type',
     editor: 'DropdownEditor',
     order: 13,
+    visible:false,
     options: {
         items: [
             { value: 'string', title: 'String' },
@@ -134,6 +135,7 @@ export const AXF_DATA_TYPE_PROPERTY: AXFWidgetProperty = {
             { value: 'boolean', title: 'Boolean' },
             { value: 'date', title: 'Date' },
             { value: 'datetime', title: 'Datetime' },
+            { value: 'time', title: 'time' },
             { value: 'object', title: 'Object' },
         ],
     }

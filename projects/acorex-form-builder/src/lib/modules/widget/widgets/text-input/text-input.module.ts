@@ -44,6 +44,7 @@ export class AXFTextInputWidgetModule {
             printClass: AXFTextInputWidgetPrint,
             viewClass: AXFTextInputWidgetView,
             options: { 
+                dataType:'string'
             },
             properties: [
                 AXF_PLACEHOLDER_PROPERTY,

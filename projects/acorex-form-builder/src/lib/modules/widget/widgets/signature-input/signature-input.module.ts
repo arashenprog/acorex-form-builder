@@ -35,6 +35,7 @@ export class AXFSignatureInputWidgetModule {
             options: {
                 height: 100,
                 width: 150,
+                dataType:'object'
             },
             properties: [
                 {

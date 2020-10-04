@@ -32,6 +32,7 @@ export class AXFDateInputWidgetModule {
             printClass: AXFDateInputWidgetPrint,
             viewClass: AXFDateInputWidgetView,
             options: {
+                dataType:'date'
             },
             properties: [
                 AXF_VISIBLE_PROPERTY,
