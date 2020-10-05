@@ -29,7 +29,7 @@ export class AXFImageWidgetView extends AXFWidgetView  {
     ngOnInit()
     {
         super.ngOnInit();
-        if(this.value.srcData.match(/\[(.*?)\]/g))  
+        if(this.value.srcData && this.value.srcData.match(/\[(.*?)\]/g))  
         {
             let imagurl=this.formatService.format(this.value.srcData, this);
             if(imagurl.includes("base64"))

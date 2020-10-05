@@ -15,7 +15,7 @@
         <tbody>
             <tr *ngFor="let col of columns;let i = index">
                 <td>
-                    <ax-text-box [(text)]="col.title" [disabled]="!allowColumns"></ax-text-box>
+                    <ax-text-box [(text)]="col.title" ></ax-text-box>
                 </td>
                 <td>
                     <ax-text-box [(text)]="col.fieldName"></ax-text-box>

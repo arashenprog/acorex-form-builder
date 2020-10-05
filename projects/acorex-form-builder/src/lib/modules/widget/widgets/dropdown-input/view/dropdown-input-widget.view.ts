@@ -16,6 +16,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     dataSource: AXFDataSourceOption;
     isLoading = true;
     selectedItems: any = [];
+    displays: any[] = null;
 
     constructor(protected cdr: ChangeDetectorRef) {
         super(cdr);
@@ -28,11 +29,16 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     onRender(): void {
         if (this.el) {
             this.applyStyle(this.el.nativeElement);
-        }
+        } 
         this.cdr.detectChanges();
     }
 
     ngAfterViewInit() {
+        if (this.dataSource.columns.filter(s => s.isDisplay).length>1) 
+        {
+            this.displays = this.dataSource.columns.filter(s => s.isDisplay)
+                .map(function (m) { return { dataField: m.fieldName, title: m.title } });
+        }
         super.ngAfterViewInit();
         this.refresh();
     }
@@ -59,13 +65,12 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     }
 
     reload() {
-        setTimeout(() => {  
-            if(!this.readonly)
-            {
+        setTimeout(() => {
+            if (!this.readonly) {
                 this.value = this.mode === 'single' ? null : [];
                 this.refresh();
-            }   
-        }, 2000); 
+            }
+        }, 2000);
     }
 
     onOpen() {
