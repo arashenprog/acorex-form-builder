@@ -1,0 +1,34 @@
+<div class="pnlCol">
+    <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Variable</th>
+                <th>Expression</th> 
+                <th></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="data">
+            <tr *ngFor="let dt of data;let i = index">
+                <td>
+                    <ax-text-box [(text)]="dt.variable" ></ax-text-box>
+                </td>
+                <td> 
+                    <ax-text-box  [(text)]="dt.expression">
+                        <ax-button (onClick)="handleShowEditor(i,dt.expression)">
+                         EDIT
+                        </ax-button>
+                    </ax-text-box>
+                </td> 
+                <td>  
+                    <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
+                        <i class="fas fa-trash danger"></i>
+                    </ax-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
+        <i class="fas fa-plus"></i>&nbsp;
+        <span>Add New Variable</span>
+    </ax-button>
+</div>

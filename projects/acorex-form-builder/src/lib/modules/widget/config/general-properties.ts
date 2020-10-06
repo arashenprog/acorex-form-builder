@@ -316,6 +316,13 @@ export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
     editor: 'BoxStyleEditor'
 };
 
+export const AXF_ACTION_PROPERTY: AXFWidgetProperty = {
+    name: 'formulas',
+    category: 'Behavior',
+    defaultValue: [],
+    title: 'Formula',
+    editor: 'ActionEditor'
+};
 
 export const AXF_DS_LIST_PROPERTY: AXFWidgetProperty = {
     name: 'dataSource',
