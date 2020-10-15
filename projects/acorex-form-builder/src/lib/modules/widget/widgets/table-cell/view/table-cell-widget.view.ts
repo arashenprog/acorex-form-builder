@@ -28,7 +28,7 @@ export class AXFTableCellWidgetView extends AXFWidgetView {
         if (!this['width']) {
             this.el.nativeElement.style.width = '100px';
         }
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 }
 

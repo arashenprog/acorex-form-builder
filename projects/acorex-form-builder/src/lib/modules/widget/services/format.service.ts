@@ -67,7 +67,7 @@ export class AXFFormatService {
                     } else {
                         word = this.dataService.getWord(word);
                     }
-                    if (word) {
+                    if (word != null) {
                         if (ww.formetters.length > 0) {
                             for (let i = 0; i < ww.formetters.length; i++) {
                                 const pipeParts = ww.formetters[i].split(':');
@@ -78,11 +78,11 @@ export class AXFFormatService {
                         }
 
                     }
-                    value = value.replace(w, word || '');
+                    value = value.replace(w, (word !== undefined && word != null) ? word : '');
                 });
             }
         }
-        return value || '';
+        return (value !== undefined && value != null) ? value : '';
     }
 
 

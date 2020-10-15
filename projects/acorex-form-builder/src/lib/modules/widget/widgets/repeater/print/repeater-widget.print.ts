@@ -1,9 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
-import { AXFBoxStyleValue } from '../../../../property-editor/editors/style/box-style/box-style.class';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 import { WidgetConfig } from '../../../services/widget.service';
-import { AXFDataService } from '../../../services/data.service';
 import { AXFRepeaterlWidgetFormula } from '../formula';
 
 @Component({
@@ -19,13 +17,11 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
     rowTemplate: WidgetConfig;
 
     get formula() {
-        debugger;
         return new AXFRepeaterlWidgetFormula(this);
     }
 
-    constructor(protected cdr: ChangeDetectorRef,
-        private hostElement: ElementRef<HTMLTableCellElement>) {
-        super()
+    constructor(protected cdr: ChangeDetectorRef) {
+        super();
     }
 
     onRender() {
@@ -33,17 +29,39 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
             this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
         this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
-        if (this.allItems().length === 0) {
-            this.bodyRows = [this.widgetService.clone(this.rowTemplate)];
-        } else {
-            this.bodyRows = this.allItems().map(c => {
-                const cloned = this.widgetService.clone(this.rowTemplate);
-                cloned.dataContext = c;
-                return cloned;
-            });
-        } 
-        this.cdr.markForCheck();
+        this.bodyRows = this.allItems().map(c => {
+            const cloned = this.widgetService.clone(this.rowTemplate);
+            cloned.dataContext = c;
+            return cloned;
+        });
+        setTimeout(() => {
+            this.cdr.detectChanges();
+        }, 100);
     }
+
+
+    // onRender() {
+    //     if (this.showHeader) {
+    //         this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
+    //     }
+    //     if (!this.readonly || this.bodyRows === undefined) {
+    //         this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
+    //         this.bodyRows = this.allItems().map(c => {
+    //             const cloned = this.widgetService.clone(this.rowTemplate);
+    //             cloned.dataContext = c;
+    //             return cloned;
+    //         });
+    //     }
+    //     setTimeout(() => {
+    //         if (this.bodyRows.length === 0 && !this.readonly) {
+    //             this.addItemClick();
+    //         } else {
+    //             this.cdr.detectChanges();
+    //         }
+    //     }, 100);
+    // }
+
+
 
     ngOnInit() {
         if (this.dataSource.mode === 'remote') {

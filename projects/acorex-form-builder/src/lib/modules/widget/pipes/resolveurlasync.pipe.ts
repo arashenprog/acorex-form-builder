@@ -1,35 +1,18 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
-import { Observable } from 'rxjs';
-import { PromisResult } from 'acorex-ui';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AXFConnectService } from '../services/connect.service';
 import { AXFDataService } from '../services/data.service';
+import { AXFUrlResolverService } from '../services/url-resolver.service';
 
 @Pipe({ name: 'resolveUrl' })
 export class ResolveUrlPipe implements PipeTransform {
-    observable: string;
 
-    constructor(private connectService: AXFConnectService, private dataService: AXFDataService) {
+    constructor(private resolverService: AXFUrlResolverService) {
     }
 
-    transform(url: string): Promise<string> {
-        if (url.includes('base64') || url === undefined || url.startsWith('[')) {
-            return new Promise((resolve) => { resolve(url); });
-        } else {
-            const savedUrl = this.dataService.getImageUrl(url);
-            if (savedUrl && savedUrl != null) {
-                return new Promise((resolve) => { resolve(savedUrl.data); });
-            } else {
-                return new Promise((resolve) => {
-                    this.connectService.send('resolveUrl', { url }).then((c) => {
-                        const param: any = { url, data: c };
-                        this.dataService.setImageUrl(param);
-                        resolve(c);
-                    });
-                });
-            }
-        }
-
+    transform(url: string): Promise<SafeUrl> {
+        return this.resolverService.resolve(url);
     }
 
 }

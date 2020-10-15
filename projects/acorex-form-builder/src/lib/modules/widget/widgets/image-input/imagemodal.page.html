@@ -1,4 +1,3 @@
-<div class="contain">
-        <img *ngIf="value" [src]="value.srcData | resolveUrl | async" [height]="value.orginalHeight" 
-        [width]="value.orginalWidth">
+<div class="viewer-container">
+        <angular-image-viewer [config]="config" [src]="images" [index]="0"></angular-image-viewer>
 </div>

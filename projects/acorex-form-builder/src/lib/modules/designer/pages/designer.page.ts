@@ -129,7 +129,6 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                     this.isSaving = true;
                     this.actionItems[0].startIcon = 'fas fa-spinner fa-pulse';
                     this.actionToolbar.update();
-                    //console.log(this.widgetService.serialize(this.widgets[0]));
                     this.printRendering = true;
                     setTimeout(() => {
                         const html = this.printDiv.nativeElement.innerHTML;

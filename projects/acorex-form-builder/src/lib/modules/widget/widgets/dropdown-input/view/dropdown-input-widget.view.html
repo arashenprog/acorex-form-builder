@@ -1,4 +1,4 @@
-<div #el *ngIf="visible">
+<div #el [hidden]="!visible">
     <ax-select-box [textField]="dataSource.columns[1].fieldName" [mode]="mode"
         [valueField]="dataSource.columns[0].fieldName" [allowSearch]="allowSearch" [(selectedItems)]="selectedItems"
         (selectedItemsChange)="handleValueChange($event)" [isLoading]="isLoading" [items]="dataSource.dataItems"

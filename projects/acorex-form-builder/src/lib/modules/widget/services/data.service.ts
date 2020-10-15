@@ -34,7 +34,7 @@ export class AXFDataService {
     private widgetRegisterChangeObserver: any;
     private widgets: any = {};
     private imageUrls: any[] = [];
-    private dataChangeSubject = new Subject<boolean>();
+    private dataChangeSubject = new Subject<any>();
 
     constructor(
         private connectService: AXFConnectService,
@@ -42,13 +42,15 @@ export class AXFDataService {
 
     }
 
-    get onChange(): Observable<boolean> {
+    get onChange(): Observable<any> {
         return this.dataChangeSubject.asObservable();
     }
 
-    setValue(path: string, value: any) {
+    setValue(path: string, value: any, emitChnages: boolean = true) {
         this.setPropByPath(this.dataModel, path, value);
-        this.dataChangeSubject.next(this.dataModel);
+        if (emitChnages) {
+            this.dataChangeSubject.next(this.dataModel);
+        }
     }
 
     callEvent(info: any): Promise<void> {
@@ -270,7 +272,7 @@ export class AXFDataService {
                 Observable.create(observer => {
                     this.widgetRegisterChangeObserver = observer;
                 })
-                    .pipe(debounceTime(100))
+                    .pipe(debounceTime(500))
                     .pipe(distinctUntilChanged())
                     .subscribe(c => {
                         for (const i in this.widgets) {
@@ -296,5 +298,21 @@ export class AXFDataService {
 
     getImageUrl(url: string) {
         return this.imageUrls.find(f => f.url == url);
+    }
+
+
+    eval(act: string): any {
+        const allVars = act.match(/\$\$*([a-zA-Z1-9_])+/g);
+        let execCode = act;
+        const params = {};
+        if (allVars) {
+            allVars.forEach(v => {
+                params[v] = this.getValue(v.substring(1));
+            });
+        }
+        execCode = execCode.replace(/\$/g, '__params__.$');
+        const func = new Function('__params__', `try { return ${execCode}} catch(e){  console.log(e); return null;  }`);
+        const res = func(params);
+        return res;
     }
 }

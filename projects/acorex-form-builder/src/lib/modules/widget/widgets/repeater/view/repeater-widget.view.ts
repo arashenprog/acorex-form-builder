@@ -20,7 +20,6 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     allowAdd: boolean;
 
     get formula() {
-        debugger;
         return new AXFRepeaterlWidgetFormula(this);
     }
 
@@ -37,25 +36,28 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         if (this.showHeader) {
             this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
-        if (!this.readonly || this.bodyRows == undefined) {
+        if (!this.readonly || this.bodyRows === undefined) {
             this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
-            if (this.allItems().length === 0 && !this.readonly) {
-                this.bodyRows = [this.widgetService.clone(this.rowTemplate)];
-            } else {
-                this.bodyRows = this.allItems().map(c => {
-                    const cloned = this.widgetService.clone(this.rowTemplate);
-                    cloned.dataContext = c;
-                    return cloned;
-                });
-            }
+            this.bodyRows = this.allItems().map(c => {
+                const cloned = this.widgetService.clone(this.rowTemplate);
+                cloned.dataContext = c;
+                return cloned;
+            });
         }
-        this.cdr.detectChanges();
+        setTimeout(() => {
+            if (this.bodyRows.length === 0 && !this.readonly) {
+                this.addItemClick();
+            } else {
+                this.cdr.detectChanges();
+            }
+        }, 100);
     }
 
     addItemClick() {
         if (this.rowTemplate) {
             this.bodyRows.push(this.widgetService.clone(this.rowTemplate));
         }
+        this.cdr.detectChanges();
     }
 
     ngOnInit() {
@@ -90,8 +92,8 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
                     result[i] = item;
                 }
             }
-            return result;
         }
+        return result;
     }
 
     trackbyFunc(index: number, item: WidgetConfig) {

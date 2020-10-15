@@ -1,31 +1,45 @@
-import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, HostBinding } from '@angular/core';
 import { AXFValueWidgetView } from '../../../config/widget';
 import { AXFConnectService } from '../../../services/connect.service';
 import { ImageModalPage } from '../imagemodal.page';
 import { AXPopupService } from 'acorex-ui';
+import { AXFUrlResolverService } from '../../../services/url-resolver.service';
 
 @Component({
+    selector: '[axf-image-input]',
     templateUrl: './image-input-widget.view.html',
-    styleUrls:['./image-input-widget.view.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./image-input-widget.view.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: { style: 'display: flex;justify-content: center;align-items: center;' }
 })
 export class AXFImageInputWidgetView extends AXFValueWidgetView {
 
     height: number;
     width: number;
-    alt: string;
-    isLoading: boolean = false;
+    isLoading = false;
 
 
     @ViewChild('fileInput') fileInput: ElementRef<HTMLElement>;
-    constructor(private el: ElementRef<HTMLElement>, protected cdr: ChangeDetectorRef,
-        private connectService: AXFConnectService,private popupService: AXPopupService) {
+    constructor(
+        protected cdr: ChangeDetectorRef,
+        private connectService: AXFConnectService,
+        private resolverService: AXFUrlResolverService,
+        private ref: ElementRef<HTMLDivElement>,
+        private popupService: AXPopupService) {
         super(cdr);
     }
 
     openFile() {
         if (!this.readonly) {
-            this.fileInput.nativeElement.click();
+            this.connectService.send('getMedia').then(async (data) => {
+                debugger;
+                if (data) {
+                    await this.bindData(data);
+                }
+            }).catch(() => {
+                debugger;
+                this.fileInput.nativeElement.click();
+            });
         }
     }
 
@@ -36,24 +50,24 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
 
     async handleValueChange(evt) {
         const data = evt.data;
+        await this.bindData(data);
+    }
+
+    private async bindData(data) {
         this.isLoading = true;
-        const newDimension = await this.getImageDimensions(evt.data);
-        this.value.orginalHeight = newDimension.h;
-        this.value.orginalWidth = newDimension.w;
-        if (this.value.modeSize === 'auto') {
-            this.value.height = this.value.orginalHeight;
-            this.value.width = this.value.orginalWidth;
-        }
+        const newDimension = await this.getImageDimensions(data);
+        this.value = { orginalHeight: newDimension.h, orginalWidth: newDimension.w };
         this.connectService.send('uploadFile', { data }).then((c) => {
             this.value = Object.assign(this.value, { srcData: c });
         }).finally(() => {
             this.isLoading = false;
+            this.ref.nativeElement.scrollIntoView();
             this.cdr.detectChanges();
         });
     }
 
-    uploadImage(e) { 
-        this.isLoading = true; 
+    uploadImage(e) {
+        this.isLoading = true;
         const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
         const pattern = /image-*/;
         const reader = new FileReader();
@@ -65,17 +79,9 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
         reader.readAsDataURL(file);
     }
 
-    async _handleReaderLoaded(e) { 
+    async _handleReaderLoaded(e) {
         const reader = e.target;
-        const data = reader.result;
-        const newDimension = await this.getImageDimensions(data);
-        this.value= { orginalHeight : newDimension.h, orginalWidth : newDimension.w}; 
-        this.connectService.send('uploadFile', { data }).then((c) => {
-            this.value.srcData =  c ;
-        }).finally(() => {
-            this.isLoading = false;
-            this.cdr.detectChanges();
-        });
+        this.bindData(reader.result);
     }
 
 
@@ -89,15 +95,15 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
         });
     }
 
-
-    search()
-    {
-        this.popupService.open(ImageModalPage, {
-            title: 'View Image',
-            size: 'lg',
-            data: {
-                value: this.value
-            }
+    search() {
+        this.resolverService.resolve(this.value.srcData).then(c => {
+            this.popupService.open(ImageModalPage, {
+                title: 'View Image',
+                size: 'lg',
+                data: {
+                    value: c
+                }
+            });
         });
     }
 }

@@ -51,7 +51,6 @@ export class SignaturePadPage extends AXBasePageComponent{
   }
 
   drawStart() {
-    console.log('begin drawing');
   }
 
   clearClick()

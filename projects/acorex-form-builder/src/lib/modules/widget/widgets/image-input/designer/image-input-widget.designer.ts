@@ -1,24 +1,21 @@
-import { Component, ViewEncapsulation, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { AXFWidgetDesigner } from '../../../config/widget'; 
- 
+import { Component, ViewEncapsulation, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, HostBinding } from '@angular/core';
+import { AXFWidgetDesigner } from '../../../config/widget';
+
 @Component({
     selector: "[axf-widget-image-input]",
     templateUrl: './image-input-widget.designer.html',
+    styleUrls: ['../view/image-input-widget.view.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection:ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: { style: 'display: flex;justify-content: center;align-items: center;' }
 })
 export class AXFImageInputWidgetDesigner extends AXFWidgetDesigner {
- 
+
+
     height: number;
     width: number;
-    alt:string;
-    constructor(private el: ElementRef<HTMLElement>,private cdr: ChangeDetectorRef) {
-        super()
-    }
 
-    onRender(): void {
-        this.applyStyle(this.el.nativeElement.querySelector("img"));
-        this.cdr.markForCheck();
+    constructor(private el: ElementRef<HTMLElement>, private cdr: ChangeDetectorRef) {
+        super();
     }
-
 }

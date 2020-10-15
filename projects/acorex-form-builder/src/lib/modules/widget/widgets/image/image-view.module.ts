@@ -23,12 +23,12 @@ export const COMPONENTS = [AXFImageWidgetDesigner, AXFImageWidgetPrint, AXFImage
 export class AXFImageWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: "Image Box",
-            hint: "Image box element",
-            icon: "far fa-image",
-            category: "Editors",
+            title: 'Image Box',
+            hint: 'Image box element',
+            icon: 'far fa-image',
+            category: 'Editors',
             visible: true,
-            name: "image",
+            name: 'image',
             designerClass: AXFImageWidgetDesigner,
             printClass: AXFImageWidgetPrint,
             viewClass: AXFImageWidgetView,
@@ -36,31 +36,21 @@ export class AXFImageWidgetModule {
                 value: new UploadStructure({
                     height: 100,
                     width: 100,
-                    modeSize: "auto",
+                    modeSize: 'auto',
                     isAspectRatio: false,
-                    sourceMethod:"url"
-                }),
-                dataType:'object'
+                    sourceMethod: 'url'
+                })
             },
             properties: [
                 {
-                    name: "alt",
-                    category: "General",
-                    defaultValue: "",
-                    title: "Alt",
-                    editor: "TextEditor"
-                },
-                {
-                    name: "value",
-                    category: "General",
-                    defaultValue: "",
-                    title: "",
-                    editor: "UploadEditor"
+                    name: 'value',
+                    category: 'General',
+                    defaultValue: '',
+                    title: '',
+                    editor: 'UploadEditor'
                 },
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
-                AXF_DISPLAY_NAME_PROPERTY,
-                AXF_DATA_TYPE_PROPERTY,
                 AXF_TAG_PROPERTY,
             ]
         })

@@ -530,8 +530,7 @@ export abstract class AXFWidgetView extends AXFWidget {
                     }
                     execCode = execCode.replace(/#/g, 'this.').replace(/\$/g, 'this.$');
                     execCode = execCode.replace(/\[/, '').replace(/]/, '');
-                    console.log(execCode);
-                    new Function(`try {${execCode}} catch(e){  console.log(e)  }`).call(params);
+                    new Function(`try {${execCode}} catch(e){  console.log(e); }`).call(params);
                     // widgetRefs.forEach(w => {
                     //     if (w) {
                     //         w.refresh();

@@ -2,7 +2,7 @@
     <table class="table table-bordered table-sm">
         <thead class="thead-dark">
             <tr>
-                <th>Variable</th>
+                <th>Variable Name</th>
                 <th>Expression</th> 
                 <th></th>
             </tr>
@@ -13,9 +13,9 @@
                     <ax-text-box [(text)]="dt.variable" ></ax-text-box>
                 </td>
                 <td> 
-                    <ax-text-box  [(text)]="dt.expression">
+                    <ax-text-box  [(text)]="dt.expression" readonly="true">
                         <ax-button (onClick)="handleShowEditor(i,dt.expression)">
-                         EDIT
+                            <i class="fas fas fa-code"></i>
                         </ax-button>
                     </ax-text-box>
                 </td> 

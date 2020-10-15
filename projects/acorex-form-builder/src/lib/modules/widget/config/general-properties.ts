@@ -127,7 +127,7 @@ export const AXF_DATA_TYPE_PROPERTY: AXFWidgetProperty = {
     title: 'Data Type',
     editor: 'DropdownEditor',
     order: 13,
-    visible:false,
+    visible: false,
     options: {
         items: [
             { value: 'string', title: 'String' },
@@ -316,12 +316,12 @@ export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
     editor: 'BoxStyleEditor'
 };
 
-export const AXF_ACTION_PROPERTY: AXFWidgetProperty = {
-    name: 'formulas',
-    category: 'Behavior',
+export const AXF_FORMULA_PROPERTY: AXFWidgetProperty = {
+    name: 'formula',
+    category: 'Binding',
     defaultValue: [],
-    title: 'Formula',
-    editor: 'ActionEditor'
+    title: '',
+    editor: 'FormulaEditor'
 };
 
 export const AXF_DS_LIST_PROPERTY: AXFWidgetProperty = {
@@ -346,21 +346,21 @@ export const AXF_ITEM_DATASOURCE_PROPERTY: AXFWidgetProperty = {
                 title: 'Value Field',
                 type: 'string',
                 fillByUser: false,
-                isDisplay:false
+                isDisplay: false
             },
             {
                 fieldName: 'text',
                 title: 'Text Field',
                 type: 'string',
                 fillByUser: false,
-                isDisplay:true
+                isDisplay: true
             },
             {
                 fieldName: 'image',
                 title: 'Image Field',
                 type: 'image',
                 fillByUser: false,
-                isDisplay:false
+                isDisplay: false
             }
         ],
         dataItems: [

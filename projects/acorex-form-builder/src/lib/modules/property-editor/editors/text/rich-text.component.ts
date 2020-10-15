@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AXBasePageComponent } from 'acorex-ui';
-import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 ///
 
@@ -38,7 +37,7 @@ export class AXFRichTextComponent extends AXBasePageComponent {
         this.data = value;
     }
 
-    onClosing(e: ClosingAction) {
+    onClosing(e) {
         e.data = this.data;
         e.resolve();
     }

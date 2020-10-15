@@ -243,7 +243,6 @@ export class AXFWidgetRendererDirective {
                                     width = this.widgetElement.offsetWidth;
                                 }
                                 width += movX;
-                                console.log(movX, width);
                                 this.widgetConfig.options.width = width;
                                 this.widgetElement.style.width = `${width}px`;
                             }

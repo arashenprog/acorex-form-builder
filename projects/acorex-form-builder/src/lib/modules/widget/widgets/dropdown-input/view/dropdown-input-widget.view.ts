@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy, NgZone } from '@angular/core';
-import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
+import { AXFValueWidgetView } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
@@ -18,7 +18,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     selectedItems: any = [];
     displays: any[] = null;
 
-    constructor(protected cdr: ChangeDetectorRef) {
+    constructor(protected cdr: ChangeDetectorRef, private ref: ElementRef, private zone: NgZone) {
         super(cdr);
         this.valueChange.subscribe(() => {
             this.selectedItems = this.value ? (Array.isArray(this.value) ? this.value : [this.value]) : [];
@@ -29,15 +29,14 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     onRender(): void {
         if (this.el) {
             this.applyStyle(this.el.nativeElement);
-        } 
+        }
         this.cdr.detectChanges();
     }
 
     ngAfterViewInit() {
-        if (this.dataSource.columns.filter(s => s.isDisplay).length>1) 
-        {
+        if (this.dataSource.columns.filter(s => s.isDisplay).length > 1) {
             this.displays = this.dataSource.columns.filter(s => s.isDisplay)
-                .map(function (m) { return { dataField: m.fieldName, title: m.title } });
+                .map(function (m) { return { dataField: m.fieldName, title: m.title }; });
         }
         super.ngAfterViewInit();
         this.refresh();

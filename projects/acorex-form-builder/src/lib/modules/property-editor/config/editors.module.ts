@@ -13,7 +13,7 @@ import { AXFSignatureEditorModule } from '../editors/signature/signature.module'
 import { AXFEventEditorModule } from '../editors/event/event.module';
 import { AXFDataSourceEditorModule } from '../editors/data-source/data-source.module';
 import { AXFValidationEditorModule } from '../editors/validation/validation.module';
-import { AXFActionEditorModule } from '../editors/action/action.module';
+import { AXFActionEditorModule } from '../editors/action/formula.module';
 
 const WDIGET_MODULES = [
     AXFBoxStyleEditorModule,

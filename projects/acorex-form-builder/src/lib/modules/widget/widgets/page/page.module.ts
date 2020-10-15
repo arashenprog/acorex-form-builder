@@ -7,7 +7,7 @@ import { AXFPageWidgetDesigner } from './designer/page-widget.designer';
 import { AXFPageWidgetPrint } from './print/page-widget.print';
 import { AXFPageWidgetView } from './view/page-widget.view';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
-import { AXF_ACTION_PROPERTY, AXF_BG_COLOR_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_FONT_PROPERTY } from '../../config/general-properties';
+import { AXF_FORMULA_PROPERTY, AXF_BG_COLOR_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_FONT_PROPERTY } from '../../config/general-properties';
 
 
 export const COMPONENTS = [
@@ -89,7 +89,7 @@ export class AXFPagePageWidgetModule {
                     editor: 'CheckboxEditor',
                     options: { label: 'Show Footer' }
                 },
-                AXF_ACTION_PROPERTY
+                AXF_FORMULA_PROPERTY
             ]
         })
     }

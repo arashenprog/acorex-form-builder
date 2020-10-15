@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^9.1.4",
     "@angular/router": "^9.1.4",
     "@fortawesome/fontawesome-free": "^5.11.2",
+    "@hreimer/angular-image-viewer": "^0.9.5",
     "@kolkov/angular-editor": "^1.1.2",
     "acorex-ui": "file:C:/ACoreX/acorex-ui-0.0.1.tgz",
     "angular2-signaturepad": "^2.9.0",
@@ -31,6 +32,7 @@
     "core-js": "^2.5.4",
     "memoizee": "^0.4.14",
     "moment": "^2.24.0",
+    "ng2-ace-editor": "^0.3.9",
     "rxjs": "~6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
