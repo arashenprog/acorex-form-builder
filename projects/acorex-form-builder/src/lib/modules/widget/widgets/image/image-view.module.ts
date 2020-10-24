@@ -49,6 +49,13 @@ export class AXFImageWidgetModule {
                     title: '',
                     editor: 'UploadEditor'
                 },
+                {
+                    name: 'alt',
+                    category: 'General',
+                    defaultValue: '',
+                    title: 'Alt', 
+                    editor: 'TextEditor'
+                },
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
                 AXF_TAG_PROPERTY,
