@@ -1,4 +1,4 @@
-<div *ngIf="visible" [ngStyle]="{'border-bottom':(textStyle && textStyle.includes('underline')) ? '1px solid black':null,
+<div  [ngStyle]="{'border-bottom':(textStyle && textStyle.includes('underline')) ? '1px solid black':null,
 'textAlign':textAlign}">
     <span [ngStyle]="{'fontWeight':(textStyle && textStyle.includes('bold')) ? 'bold' : 'inherit',
 'fontStyle':(textStyle && textStyle.includes('italic')) ? 'italic' : 'inherit'}">
