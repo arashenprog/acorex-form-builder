@@ -134,6 +134,8 @@ export abstract class AXFWidget implements AXFWidgetContainer {
             el.style.tableLayout = "fixed";
             el.style.width = "max-content";
         }
+        if (this['minWidth'])
+            el.style.minWidth = `${this['minWidth']}px`;
     }
 
     refresh() {

@@ -6,7 +6,7 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFTableWidgetDesigner } from './designer/table-widget.designer';
 import { AXFTableWidgetPrint } from './print/table-widget.print';
 import { AXFTableWidgetView } from './view/table-widget.view';
-import {  AXF_BG_COLOR_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_TABLE_LAYOUT_PROPERTY } from '../../config/general-properties';
+import {  AXF_BG_COLOR_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_TABLE_LAYOUT_PROPERTY, AXF_MINWIDTH_PROPERTY } from '../../config/general-properties';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 
 export const COMPONENTS = [
@@ -49,6 +49,7 @@ export class AXFTableWidgetModule {
                 AXF_VISIBLE_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_TABLE_LAYOUT_PROPERTY,
+                AXF_MINWIDTH_PROPERTY
             ],
         })
     }

@@ -1,7 +1,7 @@
 <table [ngStyle]="{width: label==''?'100%':'inherit'}"  >
-    <tr>
+    <tr [style.background]='bgColor'>
         <td style="display: inline-block;">
-            <div style="border: 2px solid #000;" [style.width.px]='getSize(fontSize)' [style.height.px]='getSize(fontSize)'>
+            <div style="border: 2px solid #000;background-color: white;" [style.width.px]='getSize(fontSize)' [style.height.px]='getSize(fontSize)'>
                 <div *ngIf="value"
                     style="background-size: contain;
                     margin: auto;
@@ -11,6 +11,6 @@
             </div>
         </td>
         <td *ngIf="label!=''">
-            <span [style.font-size]='fontSize' #el>{{label | word}}</span></td>
+            <span [style.font-size]='fontSize' [style.color]='color' #el>{{label | word}}</span></td>
     </tr>
 </table>

@@ -1,12 +1,12 @@
 <div #el class="allItem">
     <div class="rep" *ngFor="let item of dataSource.dataItems" 
-        [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset'}">
+        [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset','background':bgColor}">
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
             <div *ngSwitchCase="'left'" style="padding: 6px 2px;">
                 <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
                 <img style="margin-left: 22px;" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
-                <div style="margin-left: 22px;"
+                <div style="margin-left: 22px;" [style.color]="color"
                     *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px 2px;">
@@ -16,14 +16,14 @@
                 <div>
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
-                    <div *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
+                    <div *ngIf="viewType=='text'" [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</div>
                 </div>
             </div>
             <div *ngSwitchCase="'bottom'" style="padding: 6px 2px;">
                 <div>
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
-                    <div *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
+                    <div *ngIf="viewType=='text'" [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</div>
                 </div>
                 <div style="padding-bottom: 22px;">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
@@ -33,7 +33,7 @@
                 <div style="float: left;margin-right: 25px;">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
-                    <div *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
+                    <div *ngIf="viewType=='text'" [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</div>
                 </div>
                 <div style="position: absolute;right: 25px;">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
@@ -47,7 +47,7 @@
                 </div>
                 <div>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
-                    <span style="margin-left: 22px;">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span style="margin-left: 22px;" [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
             </div>
             <div *ngSwitchCase="'ItopCrightSleft'">
@@ -55,14 +55,14 @@
                     <img [src]="item[dataSource.columns[2].fieldName] | resolveUrl | async" height="80px" width="60px">
                 </div>
                 <div>
-                    <span style="margin-right: 5px;">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span style="margin-right: 5px;" [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</span>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
                 </div>
             </div>
             <div *ngSwitchCase="'IbottomCleftSright'">
                 <div>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
-                    <span style="margin-left: 22px;">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span style="margin-left: 22px;" [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
@@ -70,7 +70,7 @@
             </div>
             <div *ngSwitchCase="'IbottomCrightSleft'">
                 <div>
-                    <span style="margin-right: 5px;">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span style="margin-right: 5px;" [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</span>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
                 </div>
                 <div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div *ngSwitchCase="'StopImiddleCbottom'">
-                <div><span>{{item[dataSource.columns[1].fieldName]}}</span></div>
+                <div><span [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</span></div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
@@ -90,7 +90,7 @@
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
-                <div><span>{{item[dataSource.columns[1].fieldName]}}</span></div>
+                <div><span [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</span></div>
                 <div>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
                 </div>
@@ -100,7 +100,7 @@
                 <div style="padding-bottom: 22px;">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
                 </div>
-                <div><span>{{item[dataSource.columns[1].fieldName]}}</span></div>
+                <div><span [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</span></div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
@@ -112,7 +112,7 @@
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
-                <div><span>{{item[dataSource.columns[1].fieldName]}}</span></div>
+                <div><span [style.color]="color">{{item[dataSource.columns[1].fieldName]}}</span></div>
             </div>
         </ng-container>
     </div>

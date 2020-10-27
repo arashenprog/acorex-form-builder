@@ -1,6 +1,6 @@
 <div #el class="allItem"  *ngIf="visible" [ngStyle]="{'pointer-events': readonly?'none':'inherit'}">
     <div class="rep" *ngFor="let item of dataSource.dataItems" 
-        [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset'}">
+        [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset','background':bgColor}">
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
             <div *ngSwitchCase="'left'" style="padding: 6px 2px;position: relative;display: flex;"> 
                 <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
@@ -12,7 +12,7 @@
                 <img style="margin-left: 22px;" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 <span style="margin-left: 22px;" (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
-                    *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName] | word}}</span>
+                    *ngIf="viewType=='text'" [style.color]="color">{{item[dataSource.columns[1].fieldName] | word}}</span>
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px 2px;position: relative;display: flex;">
                 <div>
@@ -26,7 +26,7 @@
                 <div style="padding-top: 22px;">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
-                    <span *ngIf="viewType=='text'"
+                    <span *ngIf="viewType=='text'" [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <div>
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
-                    <span *ngIf="viewType=='text'"
+                    <span *ngIf="viewType=='text'" [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div style="padding-top: 22px;position: fixed;">
@@ -50,7 +50,7 @@
                 <div style="width: 100%;float: right;padding-right: 25px;text-align: left;">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
-                    <span *ngIf="viewType=='text'"
+                    <span *ngIf="viewType=='text'" [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div style="position: absolute;right: 25px;">
@@ -75,7 +75,7 @@
                         <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
                             style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
                     </span>
-                    <span style="margin-left: 22px;"
+                    <span style="margin-left: 22px;" [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">
                         {{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
@@ -85,7 +85,7 @@
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
                 <div> 
-                    <span style="margin-right: 5px;"
+                    <span style="margin-right: 5px;" [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">
                         {{item[dataSource.columns[1].fieldName]}}</span>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
@@ -104,7 +104,7 @@
                         <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
                             style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
                     </span>
-                    <span style="margin-left: 22px;"
+                    <span style="margin-left: 22px;" [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div>
@@ -113,7 +113,7 @@
             </div>
             <div *ngSwitchCase="'IbottomCrightSleft'">
                 <div>
-                    <span style="margin-right: 5px;"
+                    <span style="margin-right: 5px;" [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
@@ -127,7 +127,7 @@
                 </div>
             </div>
             <div *ngSwitchCase="'StopImiddleCbottom'">
-                <div><span
+                <div><span [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div>
@@ -146,7 +146,7 @@
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
-                <div><span
+                <div><span [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div>
@@ -168,7 +168,7 @@
                             style="font-size: larger;" class="fa fa-check" aria-hidden="true"></i>
                     </span>
                 </div>
-                <div><span
+                <div><span [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
                 <div>
@@ -187,7 +187,7 @@
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
-                <div><span
+                <div><span [style.color]="color"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
             </div>

@@ -18,6 +18,8 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
     viewType: string;
     columns: number;
     alignment: string;
+    color: string;
+    bgColor: string;
     constructor(protected cdr: ChangeDetectorRef) {
         super(cdr);
     }

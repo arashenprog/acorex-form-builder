@@ -46,6 +46,7 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
             else
                 (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.display = "initial";
             (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.paddingBottom = `${this.getSize(this["fontSize"]) < 15 ? 0 : this.getSize(this["fontSize"]) - 15}px`;
+            (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.backgroundColor = this['bgColor'];
         }
         this.cdr.detectChanges();
 

@@ -21,7 +21,9 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     viewType: string;
     columns:number;
     alignment: string;
-
+    color: string;
+    bgColor: string;
+    
     constructor( private cdr: ChangeDetectorRef) {
         super()
     }

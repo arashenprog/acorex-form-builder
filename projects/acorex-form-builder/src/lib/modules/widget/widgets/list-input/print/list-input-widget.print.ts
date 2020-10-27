@@ -20,6 +20,9 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     printMode: string;
     columns: number;
     alignment: string;
+    color: string;
+    bgColor: string;
+    
     constructor(private cdr: ChangeDetectorRef) {
         super()
     }

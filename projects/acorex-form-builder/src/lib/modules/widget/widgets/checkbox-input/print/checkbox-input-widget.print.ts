@@ -11,6 +11,8 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
     size: number = 20;
     textAlign:string;
     fontSize: string;
+    color: string;
+    bgColor: string;
     @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
     constructor(protected cdr: ChangeDetectorRef) {
         super();

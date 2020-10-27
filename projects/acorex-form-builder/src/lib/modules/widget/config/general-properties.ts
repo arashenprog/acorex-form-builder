@@ -435,3 +435,15 @@ export const AXF_SET_CURRENT_TIME_PROPERTY: AXFWidgetProperty = {
     order: 40,
     editor: 'CheckboxEditor'
 };
+
+export const AXF_MINWIDTH_PROPERTY:AXFWidgetProperty ={
+    name: 'minWidth',
+    category: 'General',
+    defaultValue: '',
+    title: 'Min Width (px)',
+    editor: 'TextEditor',
+    order: 41,
+    options: {
+        allowHtml: false
+    }
+}
