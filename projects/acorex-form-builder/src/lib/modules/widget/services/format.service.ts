@@ -40,26 +40,17 @@ export class AXFFormatService {
                 widget = this.dataService.getWidget(wname);
                 return widget['formula'][methodName](...params);
             }
-            // const funcs = value.match(/\[(join|sum)\((.*?)\)\]/g);
-            // if (funcs) {
-            //     funcs.forEach(f => {
-            //         const funcName = f.substring(1, f.indexOf('('));
-            //         const params = f.substring(f.indexOf('(') + 1, f.length - 2).split(',');
-            //         this[funcName](...params);
-            //         debugger;
-            //     });
-            //     return;
-            // }
             const list = value.match(/\[(.*?)\]/g);
             if (list) {
                 list.forEach(w => {
                     const ww: AXFWordWithPipe = this.decompose(w.substring(1, w.length - 1));
                     let word: any = ww.word;
                     if (widget) {
-                        if (word.startsWith('$')) {
+                        if (word.startsWith('$$')) {
+                            word = this.dataService.getValue(word.substring(2));
+                        } else if (word.startsWith('$')) {
                             word = this.dataService.getValue(widget.resolveProperty(word.substring(1)));
-                        }
-                        else if (widget.config.dataContext) {
+                        } else if (widget.config.dataContext) {
                             word = widget.config.dataContext[ww.word];
                         } else {
                             word = this.dataService.getWord(word);
@@ -98,21 +89,20 @@ export class AXFFormatService {
     private number(value: string) {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
-
-    private array(values: any[], params) {
-        if (!Array.isArray(params) || params.length === 0) {
-            return values.toString();
-        }
-        if (params.length === 1) {
-            return values.map(c => c != null && c[params[0]]).join(', ');
-        }
-        if (params.length === 2) {
-            const f = eval(`(x) => x!=null && x.${params[0]} `);
-            return values.filter(f).map(c => c[params[1]]).join(', ');
-        }
-        if (params.length === 3) {
-            const f = eval(`(x) =>  x!=null && x.${params[0]} `);
-            return values.filter(f).map(c => c[params[1]]).join(params[2]);
-        }
-    }
+    // private array(values: any[], params) {
+    //     if (!Array.isArray(params) || params.length === 0) {
+    //         return values.toString();
+    //     }
+    //     if (params.length === 1) {
+    //         return values.map(c => c != null && c[params[0]]).join(', ');
+    //     }
+    //     if (params.length === 2) {
+    //         const f = eval(`(x) => x!=null && x.${params[0]} `);
+    //         return values.filter(f).map(c => c[params[1]]).join(', ');
+    //     }
+    //     if (params.length === 3) {
+    //         const f = eval(`(x) =>  x!=null && x.${params[0]} `);
+    //         return values.filter(f).map(c => c[params[1]]).join(params[2]);
+    //     }
+    // }
 }

@@ -297,19 +297,24 @@ export class AXFDataService {
     }
 
     getImageUrl(url: string) {
-        return this.imageUrls.find(f => f.url == url);
+        return this.imageUrls.find(f => f.url === url);
     }
 
 
-    eval(act: string): any {
+    eval(act: string, path?: string): any {
         const allVars = act.match(/\$\$*([a-zA-Z1-9_])+/g);
         let execCode = act;
         const params = {};
         if (allVars) {
             allVars.forEach(v => {
-                params[v] = this.getValue(v.substring(1));
+                if (v.startsWith('$$')) {
+                    params[v.substring(1)] = this.getValue(v.substring(2));
+                } else {
+                    params[v] = this.getValue((path ? `${path}.${v.substring(1)}` : v.substring(1)));
+                }
             });
         }
+        execCode = execCode.replace(/\$\$/g, '$');
         execCode = execCode.replace(/\$/g, '__params__.$');
         const func = new Function('__params__', `try { return ${execCode}} catch(e){  console.log(e); return null;  }`);
         const res = func(params);

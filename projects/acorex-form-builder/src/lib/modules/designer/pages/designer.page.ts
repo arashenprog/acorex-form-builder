@@ -67,7 +67,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
     isSaving: boolean = false;
     printRendering: boolean = false;
     name: string = '';
-    orientation:number=1;
+    orientation: number = 1;
 
     viewModeItems: MenuItem[] = [
         {
@@ -142,11 +142,10 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                             this.actionItems[0].startIcon = 'fas fa-save';
                             this.isSaving = false;
                             this.printRendering = false;
-                            if (s == true) {
+                            if (s === true) {
                                 this.actionToolbar.update();
                                 this.toastService.success('Saved successfuly!');
-                            }
-                            else {
+                            } else {
                                 this.actionToolbar.update();
                                 this.toastService.error('Error in Saving!');
                             }
@@ -179,15 +178,18 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             if (data && data.widgets && data.widgets.length > 0) {
                 this.name = data.name;
                 this.widgets = [this.widgetService.parse(data.widgets)];
-                if(data.orientation!=undefined && data.orientation!=null)
-                    this.orientation=data.orientation;
+                if (data.orientation !== undefined && data.orientation != null) {
+                    this.orientation = data.orientation;
+                }
             } else {
                 const page = this.widgetService.resolve('page');
                 Object.assign(page.options, { uid: AXHtmlUtil.getUID() });
                 this.widgets.push(page);
             }
             this.widgets[0].onRendered.subscribe(c => {
-             //   (c as any).componentRef.edit();
+                if ((c as any).componentRef && typeof (c as any).componentRef.edit === 'function') {
+                    (c as any).componentRef.edit();
+                }
             });
         });
     }

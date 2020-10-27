@@ -132,7 +132,7 @@ export abstract class AXFWidget implements AXFWidgetContainer {
         }
         if (this['tableLayout'] == true) {
             el.style.tableLayout = "fixed";
-            el.style.width="max-content";
+            el.style.width = "max-content";
         }
     }
 
@@ -477,10 +477,19 @@ export abstract class AXFWidgetView extends AXFWidget {
                     (prt.rIndex !== undefined && prt.config.name !== 'table-cell' && prt.config.name !== 'table-row')
                 )
             ) {
+                // if (prt.rIndex !== undefined && prt.config.options.name) {
+                //     parts.push(prt.config.options.name);
+                //     parts.push(`[${prt.rIndex}]`);
+                // } else if (prt.rIndex !== undefined) {
+                //     parts.push(`[${prt.rIndex}]`);
+                // } else {
+                //     parts.push(prt.config.options.name);
+                // }
+                if (prt.config.options.name) {
+                    parts.push(prt.config.options.name);
+                }
                 if (prt.rIndex !== undefined) {
                     parts.push(`[${prt.rIndex}]`);
-                } else {
-                    parts.push(prt.config.options.name);
                 }
             }
             prt = prt.parent;

@@ -6,7 +6,14 @@ import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXFContainerWidgetDesigner } from './designer/container-widget.designer';
 import { AXFContainerWidgetPrint } from './print/container-widget.print';
 import { AXFContainerWidgetView } from './view/container-widget.view';
-import { AXF_NAME_PROPERTY, AXF_CAPTION_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_PLACEHOLDER_PROPERTY, AXF_DISPLAY_NAME_PROPERTY } from '../../config/general-properties';
+import {
+    AXF_NAME_PROPERTY,
+    AXF_VISIBLE_PROPERTY,
+    AXF_BOX_STYLE_PROPERTY,
+    AXF_PLACEHOLDER_PROPERTY,
+    AXF_DISPLAY_NAME_PROPERTY,
+    AXF_FORMULA_PROPERTY
+} from '../../config/general-properties';
 import { AXF_TAG_PROPERTY } from '../../config/general-properties';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 
@@ -32,39 +39,26 @@ export class AXFContainerWidgetModule {
             category: 'Layout',
             visible: true,
             name: 'container',
-            container:true,
+            container: true,
             designerClass: AXFContainerWidgetDesigner,
             printClass: AXFContainerWidgetPrint,
             viewClass: AXFContainerWidgetView,
-            options: {boxStyle: {
-                border: new AXFBoxStyleBoxSizeValue('1'),
-                padding: new AXFBoxStyleBoxSizeValue('5'),
-                margin: new AXFBoxStyleBoxSizeValue('5', '0', '5', '0')
-            }},
+            options: {
+                boxStyle: {
+                    border: new AXFBoxStyleBoxSizeValue('1'),
+                    padding: new AXFBoxStyleBoxSizeValue('5'),
+                    margin: new AXFBoxStyleBoxSizeValue('5', '0', '5', '0')
+                }
+            },
             properties: [
-                // AXF_CAPTION_PROPERTY,
-                // {
-                //     category: "General",
-                //     name: "allowCollapse",
-                //     title: "Collapsable",
-                //     defaultValue: true,
-                //     editor: "CheckboxEditor"
-                // },
-                // {
-                //     category: "General",
-                //     name: "collapsed",
-                //     title: "Collapsed",
-                //     defaultValue: false,
-                //     editor: "CheckboxEditor"
-                // },
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,
                 AXF_DISPLAY_NAME_PROPERTY,
                 AXF_TAG_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
-                AXF_PLACEHOLDER_PROPERTY,
+                AXF_FORMULA_PROPERTY
             ]
-        })
+        });
     }
 }
 

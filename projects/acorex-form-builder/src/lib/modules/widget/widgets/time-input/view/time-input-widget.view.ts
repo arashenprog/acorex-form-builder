@@ -16,11 +16,21 @@ export class AXFTimeInputWidgetView extends AXFValueWidgetView {
         return [/[0-2]/, num2, ':', /[0-5]/, /[0-9]/];
     }
 
+    setCurrent: boolean = false;
+
     constructor(private el: ElementRef<HTMLElement>, protected cdr: ChangeDetectorRef) {
         super(cdr);
     }
 
     handleSetCurrent() {
         this.value = new AXDateTime().format('HH:mm');
+    }
+
+
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        if (!this.value && this.setCurrent) {
+            this.value = new AXDateTime().format('HH:mm');
+        }
     }
 }

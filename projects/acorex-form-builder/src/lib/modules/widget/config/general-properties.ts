@@ -159,6 +159,16 @@ export const AXF_VALIDATION_PROPERTY: AXFWidgetProperty = {
     editor: 'ValidationEditor'
 };
 
+export const AXF_FORMULA_PROPERTY: AXFWidgetProperty = {
+    name: 'formula',
+    category: 'Binding',
+    defaultValue: [],
+    title: '',
+    order: 30,
+    editor: 'FormulaEditor'
+};
+
+
 export const AXF_VISIBLE_PROPERTY: AXFWidgetProperty = {
     name: 'visible',
     category: 'General',
@@ -312,17 +322,10 @@ export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
     category: 'Style',
     defaultValue: new AXFBoxStyleValue(),
     title: 'Box Style',
-    order: 39,
+   
     editor: 'BoxStyleEditor'
 };
 
-export const AXF_FORMULA_PROPERTY: AXFWidgetProperty = {
-    name: 'formula',
-    category: 'Binding',
-    defaultValue: [],
-    title: '',
-    editor: 'FormulaEditor'
-};
 
 export const AXF_DS_LIST_PROPERTY: AXFWidgetProperty = {
     name: 'dataSource',
@@ -421,4 +424,14 @@ export const AXF_FONT_PROPERTY: AXFWidgetProperty = {
             { value: 'Times New Roman', title: 'Times New Roman' },
         ],
     }
+};
+
+
+export const AXF_SET_CURRENT_TIME_PROPERTY: AXFWidgetProperty = {
+    name: 'setCurrent',
+    category: 'General',
+    defaultValue: false,
+    title: 'Set Current Time As Default',
+    order: 40,
+    editor: 'CheckboxEditor'
 };

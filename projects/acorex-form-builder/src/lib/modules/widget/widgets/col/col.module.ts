@@ -22,32 +22,32 @@ export const COMPONENTS = [AXFColWidgetDesigner, AXFColWidgetView, AXFColWidgetP
 export class AXFColWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: "Column",
-            hint: "Column container element",
-            icon: "fas fa-columns",
-            category: "Layout",
+            title: 'Column',
+            hint: 'Column container element',
+            icon: 'fas fa-columns',
+            category: 'Layout',
             visible: false,
-            name: "col",
+            name: 'col',
             designerClass: AXFColWidgetDesigner,
             printClass: AXFColWidgetPrint,
             container: true,
-            draggable:false,
+            draggable: false,
             viewClass: AXFColWidgetView,
             options: {
                 boxStyle: {
-                    border: new AXFBoxStyleBoxSizeValue("0"),
-                    padding: new AXFBoxStyleBoxSizeValue("5"),
-                    margin: new AXFBoxStyleBoxSizeValue("0")
+                    border: new AXFBoxStyleBoxSizeValue('0'),
+                    padding: new AXFBoxStyleBoxSizeValue('5'),
+                    margin: new AXFBoxStyleBoxSizeValue('0')
                 },
-                verticalAlign: "middle"
+                verticalAlign: 'middle'
             },
             properties: [
                 {
-                    name: "size",
-                    category: "Style",
+                    name: 'size',
+                    category: 'Style',
                     defaultValue: 1,
-                    title: "Size",
-                    editor: "TextEditor",
+                    title: 'Size',
+                    editor: 'TextEditor',
                     order: 0,
                 },
 

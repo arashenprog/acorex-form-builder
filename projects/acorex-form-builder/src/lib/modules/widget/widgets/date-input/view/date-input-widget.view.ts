@@ -11,6 +11,8 @@ export class AXFDateInputWidgetView extends AXFValueWidgetView {
 
     calendarType: any;
     displayFormat: string;
+    setCurrent: boolean = false;
+
 
     constructor(protected cdr: ChangeDetectorRef) {
         super(cdr);
@@ -18,6 +20,14 @@ export class AXFDateInputWidgetView extends AXFValueWidgetView {
 
     onRender(): void {
         this.cdr.markForCheck();
+    }
+
+
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        if (!this.value && this.setCurrent) {
+            this.value = new Date();
+        }
     }
 
     @Input()
