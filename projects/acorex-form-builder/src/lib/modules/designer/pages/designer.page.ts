@@ -6,6 +6,7 @@ import { AXFConnectService } from '../../widget/services/connect.service';
 import { AXFTemplateService } from '../../widget/services/template/template.service';
 import { AFXSaveTemplateModel } from '../../widget/services/db/database';
 import { AXFChangeTrackerService } from '../../widget/services/change-tracker.service';
+import { AXFDataService } from '../../widget/services/data.service';
 
 @Component({
     templateUrl: './designer.page.html',
@@ -30,10 +31,8 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         private eventService: EventService,
         private templateService: AXFTemplateService,
         private connectService: AXFConnectService,
-        public changeTracker: AXFChangeTrackerService,
-
-
-    ) {
+        private dataService: AXFDataService,
+        public changeTracker: AXFChangeTrackerService) {
         super();
         eventService.on('SELECT', (c: AXFWidgetDesigner) => {
             setTimeout(() => {
@@ -57,6 +56,31 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         //         }, 1000);
         //     }
         // });
+
+        eventService.on('__save', (data) => {  
+            if (this.isSaving) {
+                return;
+            }
+            this.isSaving = true;
+            this.actionItems[0].startIcon = 'fas fa-spinner fa-pulse';
+            this.actionToolbar.update();
+            this.printRendering = true;
+            setTimeout(() => {
+                const html = this.printDiv.nativeElement.innerHTML;
+                let body = '<html><head><meta charset="utf-8"/>' +
+                    '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+                    + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
+                body = body + html + '</body></html>';
+
+                let param: AFXSaveTemplateModel = { name: '', type: 'form', widget: this.widgets[0], printHtml: body };
+                this.templateService.saveForm(param).then(s => {
+                    this.actionItems[0].startIcon = 'fas fa-save';
+                    this.isSaving = false;
+                    this.printRendering = false;
+                    this.actionToolbar.update(); 
+                });
+            }, 2000); 
+          });
     }
 
     docTreeItems: AXFWidgetDesigner[] = [];
@@ -222,4 +246,6 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             return widget.title;
         }
     }
+
+    
 }
