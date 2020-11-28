@@ -35,6 +35,11 @@ export class AXFPageWidgetView extends AXFWidgetView {
         }
     }
 
+    ngOnInit() {
+        super.ngOnInit();
+        this.calcFormula();
+    }
+
     onRender(): void {
         const el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         el.classList.remove('rtl', 'ltr');
@@ -42,6 +47,9 @@ export class AXFPageWidgetView extends AXFWidgetView {
         el.classList.add(this.pageDirection);
         this.applyStyle(el);
     }
+
+
+
 
     ngOnDestroy() {
         this.dataSubscription.unsubscribe();

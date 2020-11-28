@@ -26,11 +26,15 @@ export class AXFContainerWidgetView extends AXFWidgetView {
     private calcFormula() {
         if (this.formula && this.formula.length) {
             this.formula.forEach(f => {
-                debugger;
                 const val = this.dataService.eval(f.expression, this.getPath());
                 this.dataService.setValue(`${this.getPath()}.${f.variable}`, val, false);
             });
         }
+    }
+
+    ngOnInit() {
+        super.ngOnInit();
+        this.calcFormula();
     }
 
 

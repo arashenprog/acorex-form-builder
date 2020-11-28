@@ -14,7 +14,8 @@ import {
     AXF_VALUE_CHANGE_EVENT,
     AXF_INIT_EVENT,
     AXF_DISPLAY_NAME_PROPERTY,
-    AXF_DATA_TYPE_PROPERTY
+    AXF_DATA_TYPE_PROPERTY,
+    AXF_DEFAULT_NUMBER_PROPERTY
 } from '../../config/general-properties';
 import { AXFNumberInputWidgetDesigner } from './designer/number-input-widget.designer';
 import { AXFNumberInputWidgetPrint } from './print/number-input-widget.print';
@@ -42,7 +43,7 @@ export class AXFNumberInputWidgetModule {
             printClass: AXFNumberInputWidgetPrint,
             viewClass: AXFNumberInputWidgetView,
             options: {
-                dataType:'number'
+                dataType: 'number'
             },
             properties: [
                 AXF_PLACEHOLDER_PROPERTY,
@@ -56,7 +57,8 @@ export class AXFNumberInputWidgetModule {
                 AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
                 AXF_VALUE_CHANGE_EVENT,
                 AXF_INIT_EVENT,
+                AXF_DEFAULT_NUMBER_PROPERTY
             ]
-        })
+        });
     }
 }

@@ -8,7 +8,7 @@ import { AXFValueWidgetView } from '../../../config/widget';
 })
 export class AXFNumberInputWidgetView extends AXFValueWidgetView {
 
-
+    defaultValue: number;
     placeholder: string;
 
     constructor(protected cdr: ChangeDetectorRef, private hostElement: ElementRef<HTMLTableCellElement>) {
@@ -17,12 +17,19 @@ export class AXFNumberInputWidgetView extends AXFValueWidgetView {
 
 
     onRender(): void {
-        if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
+        if (this.value === undefined && this['rIndex'] >= 0 && this['dataContext'] !== undefined &&
             this['dataContext'].hasOwnProperty(this['name'])) {
             this.value = this['dataContext'][this['name']];
         }
         this.cdr.markForCheck();
     }
 
+
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        if (this.value === undefined && this.defaultValue !== undefined) {
+            this.value = this.defaultValue;
+        }
+    }
 
 }
