@@ -10,7 +10,7 @@ export class AXFRepeaterlWidgetFormula {
     }
 
     join(widget: string, textField: string, condition?: string): string {
-        debugger;
+        //debugger;
         const service = (this.ww as any).dataService as AXFDataService;
         const items: any[] = [];
         let i = 0;

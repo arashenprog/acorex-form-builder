@@ -64,6 +64,30 @@ export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
 
 };
 
+export const AXF_DEFAULT_TEXT_PROPERTY: AXFWidgetProperty = {
+    name: 'defaultValue',
+    category: 'General',
+    defaultValue: null,
+    title: 'Default Value',
+    editor: 'TextEditor',
+    order: 22,
+    options: {
+        allowHtml: false
+    },
+};
+
+export const AXF_DEFAULT_NUMBER_PROPERTY: AXFWidgetProperty = {
+    name: 'defaultValue',
+    category: 'General',
+    defaultValue: null,
+    title: 'Default Value',
+    editor: 'TextEditor',
+    order: 22,
+    options: {
+        allowHtml: false
+    },
+};
+
 export const AXF_VALUE_PROPERTY: AXFWidgetProperty = {
     name: 'value',
     category: 'General',
