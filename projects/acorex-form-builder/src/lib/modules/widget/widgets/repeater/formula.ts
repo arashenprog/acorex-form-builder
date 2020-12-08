@@ -47,7 +47,6 @@ export class AXFRepeaterlWidgetFormula {
 
     addNewRow(obj)
     {
-        debugger
         let view= (this.ww as any);
         if (view.rowTemplate) {
             let cloned=view.widgetService.clone(view.rowTemplate);
