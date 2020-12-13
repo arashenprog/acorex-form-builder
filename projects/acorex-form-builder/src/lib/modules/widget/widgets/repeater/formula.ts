@@ -10,7 +10,6 @@ export class AXFRepeaterlWidgetFormula {
     }
 
     join(widget: string, textField: string, condition?: string): string {
-        //debugger;
         const service = (this.ww as any).dataService as AXFDataService;
         const items: any[] = [];
         let i = 0;
@@ -32,7 +31,6 @@ export class AXFRepeaterlWidgetFormula {
     }
 
     sum(widget: string): number {
-        debugger
         const service = (this.ww as any).dataService as AXFDataService;
         const items: any[] = [];
         let i = 0;
@@ -47,7 +45,6 @@ export class AXFRepeaterlWidgetFormula {
 
     addNewRow(obj)
     {
-        debugger
         let view= (this.ww as any);
         if (view.rowTemplate) {
             let cloned=view.widgetService.clone(view.rowTemplate);
