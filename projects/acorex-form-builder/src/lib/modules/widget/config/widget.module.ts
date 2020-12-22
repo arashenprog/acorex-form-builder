@@ -31,6 +31,7 @@ import { AXFPageFooterWidgetModule } from '../widgets/page-footer/page-footer.mo
 import { AXFNumberInputWidgetModule } from '../widgets/number-input/number-input.module';
 import { AXFImageInputWidgetModule } from '../widgets/image-input/image-input.module';
 import { AXFContainerWidgetModule } from '../widgets/container/container.module';
+import { AXFFileUploadWidgetModule } from '../widgets/file-upload/file-upload.module';
 //import { AXFMapWidgetModule } from '../widgets/map/map.module';
 
 const MODULES = [
@@ -63,6 +64,7 @@ const MODULES = [
     AXFPageFooterWidgetModule,
     AXFImageInputWidgetModule,
     AXFContainerWidgetModule,
+    AXFFileUploadWidgetModule,
     //AXFMapWidgetModule
 ];
 
