@@ -83,11 +83,12 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         if (Array.isArray(this.value)) {
             result.push(...this.value);
         }
+        let fixedCols= this.dataSource.columns.filter(d=>d.fillByUser==false).map(d=>d.fieldName);
         if (Array.isArray(this.dataSource.dataItems)) {
             for (let i = 0; i < this.dataSource.dataItems.length; i++) {
                 const item = this.dataSource.dataItems[i];
                 if (result[i]) {
-                    Object.assign(result[i], item);
+                    Object.assign(result[i], fixedCols.reduce(function(o, k) { o[k] = item[k]; return o; }, {}));
                 } else {
                     result[i] = item;
                 }

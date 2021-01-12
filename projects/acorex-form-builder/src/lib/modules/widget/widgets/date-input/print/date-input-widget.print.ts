@@ -11,6 +11,7 @@ export class AXFDateInputWidgetPrint extends AXFWidgetPrint {
 
     textStyle: string[];
     displayFormat: string;
+    setCurrent: boolean = false;
 
     constructor(protected cdr: ChangeDetectorRef) {
         super();
@@ -18,7 +19,7 @@ export class AXFDateInputWidgetPrint extends AXFWidgetPrint {
 
     ngAfterViewInit() {
         super.ngAfterViewInit();
-        if(!this.value)
+        if(!this.value && this.setCurrent)
             this.value=new Date();
         this.cdr.detectChanges();
     }
