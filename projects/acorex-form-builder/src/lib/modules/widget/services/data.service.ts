@@ -242,8 +242,8 @@ export class AXFDataService {
                 .then((rules) => {
                     const failed = rules.filter((c: IValidationRuleResult) => !c.result);
                     if (failed.length) {
-                        console.error(failed.map(c => c.message).join(', '));
-                        reject();
+                        //console.error(failed.map(c => c.message).join(', '));
+                        reject(failed[0]);
                     } else {
                         resolve();
                     }
@@ -254,14 +254,18 @@ export class AXFDataService {
 
     submit(html?: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.validate().then(c => {
-                this.connectService.send('submit', {
-                    data: this.dataModel,
-                    html
-                }).then(() => {
-                    resolve();
-                });
+            //this.validate().then(c => {
+            this.connectService.send('submit', {
+                data: this.dataModel,
+                html
+            }).then(() => {
+                resolve();
+            }).catch(() => {
+                reject();
             });
+            // }).catch((e) => {
+            //     reject(e);
+            // });
         });
     }
 
@@ -278,6 +282,10 @@ export class AXFDataService {
                         for (const i in this.widgets) {
                             if (this.widgets.hasOwnProperty(i)) {
                                 const w = this.widgets[i];
+                                if (!w['__meta__']) {
+                                    w['__meta__'] = {};
+                                }
+                                w['__meta__'].pageLoaded = true;
                                 w.invokeEvent('onInit');
                             }
                         }
@@ -285,6 +293,19 @@ export class AXFDataService {
             }
             this.widgetRegisterChangeObserver.next(name);
         }
+        else {
+            this.widgets[name] = value;
+            const w = this.widgets[name];
+            if (!w['__meta__']) {
+                w['__meta__'] = {};
+            }
+            w['__meta__'].pageLoaded = true;
+            w.invokeEvent('onInit');
+        }
+    }
+
+    removeWidget(name: string) {
+        delete this.widgets[name];
     }
 
     getWidget(name: string) {
