@@ -33,6 +33,7 @@ export class AXFPanelWidgetView extends AXFWidgetView {
 
     ngOnDestroy() {
         this.dataSubscription.unsubscribe();
+        super.ngOnDestroy();
     }
 
     // ngDoCheck() {

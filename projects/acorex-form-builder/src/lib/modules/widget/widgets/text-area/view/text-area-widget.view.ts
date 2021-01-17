@@ -31,5 +31,6 @@ export class AXFTextAreaWidgetView extends AXFValueWidgetView {
 
     ngOnDestroy() {
         this.dataSubscription.unsubscribe();
+        super.ngOnDestroy();
     }
 }

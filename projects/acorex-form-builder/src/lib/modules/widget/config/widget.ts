@@ -584,6 +584,14 @@ export abstract class AXFWidgetView extends AXFWidget {
         }
     }
 
+    ngOnDestroy() {
+        // if (this.getPath()) {
+        //     //this.dataService.removeWidget(this.getPath());
+        //     this.dataService.setValue(this.getPath(), null);
+        // }
+
+    }
+
 
     // ****** api functions *******//
 
@@ -646,7 +654,20 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
         if (this.validator && this.validator.clear) {
             this.validator.clear();
         }
-        this.invokeEvent('onValueChange');
+        const check = () => {
+            let loaded = this['__meta__'] ? this['__meta__'].pageLoaded : false;
+            //console.log(new Date());
+            if (loaded) {
+                this.invokeEvent('onValueChange');
+                this.cdr.markForCheck();
+                this.cdr.detectChanges();
+            }
+            else {
+                setTimeout(check, 50);
+            }
+        }
+        setTimeout(check, 50);
+
         this.cdr.markForCheck();
         this.cdr.detectChanges();
     }
@@ -682,6 +703,8 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
             this.validator.clear();
         }
     }
+
+
 }
 
 

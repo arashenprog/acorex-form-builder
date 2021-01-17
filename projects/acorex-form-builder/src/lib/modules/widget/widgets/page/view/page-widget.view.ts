@@ -53,6 +53,7 @@ export class AXFPageWidgetView extends AXFWidgetView {
 
     ngOnDestroy() {
         this.dataSubscription.unsubscribe();
+        super.ngOnDestroy();
     }
 }
 
