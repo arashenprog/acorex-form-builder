@@ -7,14 +7,14 @@ import { AXDateTime } from 'acorex-ui';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFTimeInputWidgetPrint extends AXFWidgetPrint {
-
+    setCurrent: boolean = false;
     constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
 
     ngAfterViewInit() {
         super.ngAfterViewInit();
-        if(!this.value)
+        if(!this.value && this.setCurrent)
             this.value= new AXDateTime().format('HH:mm');
         this.cdr.detectChanges();
     }
