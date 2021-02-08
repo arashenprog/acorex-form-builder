@@ -7,14 +7,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                 </svg>
                 <span *ngIf="mode!='unselectable' && mode=='multiple'"
                     [ngStyle]="{'height': getSize(),'width': getSize()}" 
                     style="position: absolute; background-color: var(--white-color);border: 1px solid;
                     border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                    <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <i *ngIf="hasItem(item)"
                         style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                 </span>
                 <img *ngIf="viewType=='image'" [style.margin-left]="getSize()"
@@ -29,14 +29,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                 </div>
@@ -59,14 +59,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                 </div>
@@ -83,14 +83,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                 </div>
@@ -106,14 +106,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                     <span
@@ -131,14 +131,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                 </div>
@@ -149,14 +149,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                     <span
@@ -174,14 +174,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                 </div>
@@ -201,14 +201,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                 </div>
@@ -225,14 +225,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                 </div>
@@ -244,14 +244,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                 </div>
@@ -268,14 +268,14 @@
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
                     <circle className="radioOutline" cx="25" cy="25" r="23" fill="none" stroke="black" strokeWidth="3" />
-                    <circle *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                    <circle *ngIf="hasItem(item)"
                         className="radioDot" cx="25" cy="25" r="14" fill="black" />
                     </svg>
                     <span *ngIf="mode!='unselectable' && mode=='multiple'"
                         [ngStyle]="{'height': getSize(),'width': getSize()}" 
                         style="position: absolute; background-color: var(--white-color);border: 1px solid;
                         border-color: var(--black-color);border-radius: 0;box-sizing: border-box;">
-                        <i *ngIf="value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
+                        <i *ngIf="hasItem(item)"
                             style="font-weight: bold;" [style.font-size]="getSize()">&#x2713;</i>
                     </span>
                 </div>

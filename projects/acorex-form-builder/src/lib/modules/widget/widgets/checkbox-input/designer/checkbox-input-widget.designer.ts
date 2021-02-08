@@ -41,8 +41,9 @@ export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
 
     getSize(font: string) {
         switch (font) {
+            case 'xx-small':
             case 'x-small':
-                return 10;
+                return 12;
             case 'smaller':
                 return 15;
             case 'small':
@@ -54,6 +55,7 @@ export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
             case 'larger':
                 return 35;
             case 'x-large':
+            case 'xx-large':
                 return 40;
         }
     }

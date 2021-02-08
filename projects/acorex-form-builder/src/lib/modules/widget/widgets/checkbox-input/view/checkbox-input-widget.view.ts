@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { $ } from 'protractor';
 import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 
 @Component({
@@ -12,6 +13,19 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
     label: string;
     constructor(private el: ElementRef<HTMLElement>, protected cdr: ChangeDetectorRef) {
         super(cdr);
+        // var self = this
+        // this.valueChange.subscribe(e => {
+        //     debugger
+        //     if(e==true)
+        //     {
+        //         let element = self.el.nativeElement.querySelector("span");
+        //         if (element != null) { 
+        //             let style = window.getComputedStyle(element, '::after');
+        //             // style.width=`${self.getSize(self["fontSize"])-10}px)`;
+        //             // style.height=`${self.getSize(self["fontSize"])-5}px)`; 
+        //         }
+        //     } 
+        // })
     }
 
 
@@ -56,7 +70,8 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
     getSize(font: string) {
         switch (font) {
             case 'x-small':
-                return 10;
+            case 'xx-small':
+                return 12;
             case 'smaller':
                 return 15;
             case 'small':
@@ -68,7 +83,10 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
             case 'larger':
                 return 35;
             case 'x-large':
+            case 'xx-large':
                 return 40;
         }
     }
+
+
 }

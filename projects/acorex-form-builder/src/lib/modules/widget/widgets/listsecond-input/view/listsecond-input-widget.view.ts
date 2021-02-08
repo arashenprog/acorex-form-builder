@@ -3,12 +3,12 @@ import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
-    templateUrl: './list-input-widget.view.html',
-    styleUrls: ['./list-input-widget.view.scss'],
+    templateUrl: './listsecond-input-widget.view.html',
+    styleUrls: ['./listsecond-input-widget.view.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFListInputWidgetView extends AXFValueWidgetView {
+export class AXFListSecondInputWidgetView extends AXFValueWidgetView {
 
     dataSource: AXFDataSourceOption;
     mode: string;
@@ -29,9 +29,19 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
         this.cdr.markForCheck();
     }
 
+    hasItem(item)
+    {
+        if ((this.mode=='multiple' && this.value && this.value.map(d=>d[this.dataSource.columns[0].fieldName]).indexOf(item[this.dataSource.columns[0].fieldName])>-1) ||
+        (this.mode=='single' && this.value && this.value[this.dataSource.columns[0].fieldName]==item[this.dataSource.columns[0].fieldName]))
+        return true; 
+        else
+        return false;
+    }
+
     ngAfterViewInit() {
         super.ngAfterViewInit();
         this.refresh();
+        //this.cdr.detectChanges();
     }
 
     refresh() {
@@ -41,10 +51,10 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
-                super.refresh();
+                super.refresh(); 
             });
         } else {
-            super.refresh();
+            super.refresh(); 
         }
     }
 
@@ -58,22 +68,22 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
         return styles;
     }
 
-    onCheckValueChange(val) {
+    onCheckValueChange(item) {
         if (this.readonly) {
             return;
         }
 
         if (this.mode === 'single') {
-            this.value = [val];
+            this.value = item;
         } else {
             if (!this.value) {
                 this.value = [];
             }
-
-            if (!this.value.includes(val)) {
-                this.value = [...this.value, ...[val]];
+            
+            if (!this.value.includes(item)) {
+                this.value = [...this.value, ...[item]];
             } else {
-                this.value = this.value.filter(c => c !== val);
+                this.value = this.value.filter(c => c !== item);
             }
         }
     }

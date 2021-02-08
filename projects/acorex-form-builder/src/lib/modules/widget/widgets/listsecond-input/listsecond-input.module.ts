@@ -5,12 +5,12 @@ import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
 import { AXF_NAME_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_VALUE_CHANGE_EVENT, AXF_INIT_EVENT, AXF_ITEM_DATASOURCE_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_TAG_PROPERTY, AXF_DISPLAY_NAME_PROPERTY, AXF_VALIDATION_PROPERTY, AXF_COLOR_PROPERTY, AXF_BG_COLOR_PROPERTY, AXF_TEXT_SIZE_PROPERTY } from '../../config/general-properties';
-import { AXFListInputWidgetDesigner } from './designer/list-input-widget.designer';
-import { AXFListInputWidgetPrint } from './print/list-input-widget.print';
-import { AXFListInputWidgetView } from './view/list-input-widget.view';
+import { AXFListSecondInputWidgetDesigner } from './designer/listsecond-input-widget.designer';
+import { AXFListSecondInputWidgetPrint } from './print/listsecond-input-widget.print';
+import { AXFListSecondInputWidgetView } from './view/listsecond-input-widget.view';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 
-export const COMPONENTS = [AXFListInputWidgetDesigner, AXFListInputWidgetPrint, AXFListInputWidgetView]
+export const COMPONENTS = [AXFListSecondInputWidgetDesigner, AXFListSecondInputWidgetPrint, AXFListSecondInputWidgetView]
 
 @NgModule({
     declarations: [...COMPONENTS],
@@ -19,18 +19,18 @@ export const COMPONENTS = [AXFListInputWidgetDesigner, AXFListInputWidgetPrint, 
     entryComponents: [...COMPONENTS],
     providers: [],
 })
-export class AXFListInputWidgetModule {
+export class AXFListSecondInputWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: "Data List",
+            title: "Data List2",
             hint: "Data list element",
             icon: "fas fa-list",
             category: "Editors",
             visible: true,
-            name: "list",
-            designerClass: AXFListInputWidgetDesigner,
-            printClass: AXFListInputWidgetPrint,
-            viewClass: AXFListInputWidgetView,
+            name: "listsecond",
+            designerClass: AXFListSecondInputWidgetDesigner,
+            printClass: AXFListSecondInputWidgetPrint,
+            viewClass: AXFListSecondInputWidgetView,
             options: {
                 mode: "single",
                 direction: "horizontal",

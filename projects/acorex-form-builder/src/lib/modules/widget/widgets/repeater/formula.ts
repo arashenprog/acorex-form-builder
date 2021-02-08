@@ -18,7 +18,10 @@ export class AXFRepeaterlWidgetFormula {
             const w = service.getWidget(`${this.ww.getName()}[${i}].${widget}`);
             if (w) {
                 if (!condition || w.value == condition) {
-                    items.push(w.dataContext[textField]);
+                    if(w.dataContext[textField] && w.dataContext[textField]!="")
+                        items.push(w.dataContext[textField]);
+                    else
+                        items.push(element[textField]);
                 }
             }
             else {
@@ -52,6 +55,21 @@ export class AXFRepeaterlWidgetFormula {
             let cloned=view.widgetService.clone(view.rowTemplate);
             cloned.dataContext = obj;
             view.bodyRows.push(cloned);
+            view.cdr.detectChanges();
+        }
+    }
+
+    setData(arr:any[])
+    {
+        let view= (this.ww as any);
+        if (view.rowTemplate) { 
+            view.bodyRows = arr.map(c => {
+                const cloned = view.widgetService.clone(view.rowTemplate);
+                cloned.dataContext = c;
+                return cloned;
+            }); 
+            view.value=arr;
+            view.cdr.detectChanges();
         }
     }
 }

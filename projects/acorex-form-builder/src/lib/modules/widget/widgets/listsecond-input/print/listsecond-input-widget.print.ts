@@ -4,10 +4,10 @@ import { AXFDataSourceOption } from '../../../../property-editor/editors/data-so
 import { AXFDataService } from '../../../services/data.service';
 
 @Component({
-    templateUrl: './list-input-widget.print.html',
+    templateUrl: './listsecond-input-widget.print.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFListInputWidgetPrint extends AXFWidgetPrint {
+export class AXFListSecondInputWidgetPrint extends AXFWidgetPrint {
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
     dataSource: AXFDataSourceOption;
@@ -28,9 +28,18 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
         super()
     }
 
+    hasItem(item)
+    {
+        if ((this.mode=='multiple' && this.value && this.value.map(d=>d[this.dataSource.columns[0].fieldName]).indexOf(item[this.dataSource.columns[0].fieldName])>-1) ||
+        (this.mode=='single' && this.value && this.value[this.dataSource.columns[0].fieldName]==item[this.dataSource.columns[0].fieldName]))
+        return true; 
+        else
+        return false;
+    }
+
     onRender(): void {
         if (this.el)
-            this.applyStyle(this.el.nativeElement);
+            this.applyStyle(this.el.nativeElement); 
     }
 
     ngAfterViewInit() {
@@ -45,7 +54,8 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
                 this.dataSource.dataSource.name,
                 this.dataSource.dataSource.params
             ).then(c => {
-                this.dataSource.dataItems = c;
+                this.dataSource.dataItems = c; 
+                let val=this.value;
                 this.cdr.detectChanges();
             })
         }

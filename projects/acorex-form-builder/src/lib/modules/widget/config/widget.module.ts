@@ -15,6 +15,7 @@ import { AXFTextInputWidgetModule } from '../widgets/text-input/text-input.modul
 import { AXFTextAreaWidgetModule } from '../widgets/text-area/text-area.module';
 import { AXFPageOutletWidgetModule } from '../widgets/outlet/outlet.module';
 import { AXFListInputWidgetModule } from '../widgets/list-input/list-input.module';
+import { AXFListSecondInputWidgetModule } from '../widgets/listsecond-input/listsecond-input.module';
 import { AXFDropdownInputWidgetModule } from '../widgets/dropdown-input/dropdown-input.module';
 import { AXFButtonWidgetModule } from '../widgets/button/button.module';
 import { AXFGridInputWidgetModule } from '../widgets/grid-input/grid-input.module';
@@ -52,6 +53,7 @@ const MODULES = [
     AXFSignatureInputWidgetModule,
     AXFPageOutletWidgetModule,
     AXFListInputWidgetModule,
+    AXFListSecondInputWidgetModule,
     AXFDropdownInputWidgetModule,
     AXFButtonWidgetModule,
     AXFGridInputWidgetModule,

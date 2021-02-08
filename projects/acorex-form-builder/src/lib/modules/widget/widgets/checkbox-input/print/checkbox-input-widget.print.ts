@@ -43,7 +43,8 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
     getSize(font: string) { 
         switch (font) { 
             case 'x-small':
-                return 10;
+            case 'xx-small':
+                return 12;
             case 'smaller':
             case 'inherit':
                 return 15;
@@ -56,6 +57,7 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
             case 'larger':
                 return 35;
             case 'x-large':
+            case 'xx-large':
                 return 40;
         }
     }

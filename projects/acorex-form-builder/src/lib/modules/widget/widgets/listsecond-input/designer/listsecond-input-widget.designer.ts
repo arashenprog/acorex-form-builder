@@ -4,13 +4,13 @@ import { AXFDataService } from '../../../services/data.service';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 
 @Component({
-    selector: "[axf-widget-list]",
-    templateUrl: './list-input-widget.designer.html',
-    styleUrls: ['./list-input-widget.designer.scss'],
+    selector: "[axf-widget-list1]",
+    templateUrl: './listsecond-input-widget.designer.html',
+    styleUrls: ['./listsecond-input-widget.designer.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
+export class AXFListSecondInputWidgetDesigner extends AXFWidgetDesigner {
 
 
     dataSource: AXFDataSourceOption;
