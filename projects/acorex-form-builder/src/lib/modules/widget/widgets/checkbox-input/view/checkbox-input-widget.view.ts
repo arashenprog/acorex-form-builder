@@ -11,21 +11,11 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
 
     textAlign: string;
     label: string;
+    color: string;
+    bgColor: string; 
+    fontSize: string;
     constructor(private el: ElementRef<HTMLElement>, protected cdr: ChangeDetectorRef) {
         super(cdr);
-        // var self = this
-        // this.valueChange.subscribe(e => {
-        //     debugger
-        //     if(e==true)
-        //     {
-        //         let element = self.el.nativeElement.querySelector("span");
-        //         if (element != null) { 
-        //             let style = window.getComputedStyle(element, '::after');
-        //             // style.width=`${self.getSize(self["fontSize"])-10}px)`;
-        //             // style.height=`${self.getSize(self["fontSize"])-5}px)`; 
-        //         }
-        //     } 
-        // })
     }
 
 
@@ -44,27 +34,9 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
 
     ngAfterViewInit() {
         super.ngAfterViewInit();
-        this.el.nativeElement.style.textAlign = this.textAlign;
-        this.el.nativeElement.style.display = "block";
-        this.applyStyle(this.el.nativeElement.querySelector("label"));
-        if (this.el.nativeElement != null) {
-            this.el.nativeElement.querySelector("span").style.width = `${this.getSize(this["fontSize"])}px`;
-            this.el.nativeElement.querySelector("span").style.height = `${this.getSize(this["fontSize"])}px`;
-            if (this.label && this.label != "") {
-                if (document.getElementsByClassName("ltr").length > 0)
-                    this.el.nativeElement.querySelector("label").style.paddingLeft = `${this.getSize(this["fontSize"]) + 5}px`;
-                else
-                    this.el.nativeElement.querySelector("label").style.paddingRight = `${this.getSize(this["fontSize"]) + 5}px`;
-                (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.display = "inline-block";
-            }
-            else
-                (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.display = "initial";
-            (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.paddingBottom = `${this.getSize(this["fontSize"]) < 15 ? 0 : this.getSize(this["fontSize"]) - 15}px`;
-            (this.el.nativeElement.querySelector("ax-check-box") as HTMLElement).style.backgroundColor = this['bgColor'];
-        }
+        if(this.el)
+        this.applyStyle(this.el.nativeElement);
         this.cdr.detectChanges();
-
-
     }
 
     getSize(font: string) {
@@ -88,5 +60,10 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
         }
     }
 
-
+    onCheckValueChange() {
+        if (this.readonly) {
+            return;
+        }
+        this.value = !this.value;
+    }
 }
