@@ -10,7 +10,6 @@ export class AXFRepeaterlWidgetFormula {
     }
 
     join(widget: string, textField: string, condition?: string): string {
-        //debugger;
         const service = (this.ww as any).dataService as AXFDataService;
         const items: any[] = [];
         let i = 0;
@@ -35,7 +34,6 @@ export class AXFRepeaterlWidgetFormula {
     }
 
     sum(widget: string): number {
-        debugger
         const service = (this.ww as any).dataService as AXFDataService;
         const items: any[] = [];
         let i = 0;

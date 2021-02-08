@@ -32,12 +32,10 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
     openFile() {
         if (!this.readonly) {
             this.connectService.send('getMedia').then(async (data) => {
-                debugger;
                 if (data) {
                     await this.bindData(data);
                 }
             }).catch(() => {
-                debugger;
                 this.fileInput.nativeElement.click();
             });
         }

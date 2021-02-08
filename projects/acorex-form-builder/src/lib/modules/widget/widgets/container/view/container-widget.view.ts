@@ -48,6 +48,7 @@ export class AXFContainerWidgetView extends AXFWidgetView {
 
     ngOnDestroy() {
         this.dataSubscription.unsubscribe();
+        super.ngOnDestroy();
     }
 }
 
