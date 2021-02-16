@@ -39,7 +39,6 @@ export class AXFContainerWidgetView extends AXFWidgetView {
 
 
     onRender() {
-        this.cdr.markForCheck();
         this.cdr.detectChanges();
         if (this.el) {
             this.applyStyle(this.el.nativeElement);

@@ -448,6 +448,7 @@ export abstract class AXFWidgetView extends AXFWidget {
     visible: boolean;
 
     protected dataService: AXFDataService;
+    protected eventService: EventService;
 
     public getPath(): string {
         if (this.config.name == 'table-row') {
@@ -515,7 +516,7 @@ export abstract class AXFWidgetView extends AXFWidget {
             if (action) {
                 action.split(';').forEach(act => {
                     if (act === 'submit()') {
-                        this.dataService.submit();
+                        this.eventService.broadcast('__submit');
                         return;
                     }
                     const allWidgets = act.match(/\#\#*([a-zA-Z1-9_])+/g);
@@ -571,6 +572,7 @@ export abstract class AXFWidgetView extends AXFWidget {
     constructor() {
         super();
         this.dataService = WidgetInjector.instance.get(AXFDataService);
+        this.eventService = WidgetInjector.instance.get(EventService);
     }
 
 
@@ -579,17 +581,18 @@ export abstract class AXFWidgetView extends AXFWidget {
     }
 
     protected register() {
-        if (this.getPath()) {
+        if (this.getName()) {
             this.dataService.setWidget(this.getPath(), this);
         }
     }
 
     ngOnDestroy() {
-        // if (this.getPath()) {
-        //     //this.dataService.removeWidget(this.getPath());
-        //     this.dataService.setValue(this.getPath(), null);
-        // }
-
+        if (this.getPath()) {
+            if (this.getName()) {
+                this.dataService.removeWidget(this.getPath());
+                this.dataService.setValue(this.getPath(), null);
+            }
+        }
     }
 
 
@@ -685,6 +688,7 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
     }
 
     setValue(value: any) {
+        debugger;
         this.value = value;
     }
 
@@ -727,6 +731,11 @@ export abstract class AXFWidgetPrint extends AXFWidgetView {
         if (this.getPath()) {
             this.value = this.extractValue();
         }
+
         super.ngAfterViewInit();
+    }
+
+    ngOnDestroy() {
+
     }
 }

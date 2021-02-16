@@ -59,22 +59,50 @@ export class ACFViewerPage extends AXBasePageComponent {
       });
     //
     eventService.on('__submit', (data) => {
-      this.dataService.validate().then(()=>{
-        this.printRendering = true;
+      if ("sendHtmlPrint") {
+        this.dataService.validate().then(() => {
+          //this.printRendering = true;
+          this.isBusy = true;
+          setTimeout(() => {
+            let body = "";
+            if (this.printRendering) {
+              const html = this.printDiv.nativeElement.innerHTML;
+              body = '<html><head><meta charset="utf-8"/>' +
+                '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+                + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
+              body = body + html + '</body></html>';
+            }
+
+            this.dataService.submit(body)
+              .catch((e) => {
+                if (e && e.target && e.target._rootElement) {
+                  (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
+                }
+              })
+              .finally(() => {
+                this.printRendering = false;
+                this.isBusy = false;
+              });
+          }, this.printRendering ? 5000 : 100);
+        }).catch((e) => {
+          if (e && e.target && e.target._rootElement) {
+            (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
+          }
+        }).finally(() => {
+          this.isBusy = false;
+        });
+      } else {
         this.isBusy = true;
-        setTimeout(() => {
-          const html = this.printDiv.nativeElement.innerHTML;
-          let body = '<html><head><meta charset="utf-8"/>' +
-            '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
-            + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
-          body = body + html + '</body></html>';
-  
-          this.dataService.submit(body).then(() => {
-            this.printRendering = false;
+        this.dataService.submit()
+          .catch((e) => {
+            if (e && e.target && e.target._rootElement) {
+              (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
+            }
+          })
+          .finally(() => {
             this.isBusy = false;
           });
-        }, 5000);
-      })
+      }
     });
   }
 
