@@ -57,6 +57,7 @@ export class AXFFileUploadWidgetView extends AXFValueWidgetView {
         this.cdr.detectChanges();
         this.connectService.send('uploadFile', { data })
         .then((c) => { 
+            
             this.value[lengt] = Object.assign(this.value[lengt], { srcData: c ,isLoading:false});
         }) 
         .finally(() => {
@@ -93,5 +94,21 @@ export class AXFFileUploadWidgetView extends AXFValueWidgetView {
     {
         this.value=this.value.filter(d=>d.index!=i);
         this.cdr.detectChanges();
+    }
+
+    viewClick(fileName) {
+        this.connectService.send('openFile',{fileName}).then((data) => { 
+            if(data!=true)
+            {
+                this.resolverService.resolve(fileName).then(c => { 
+                    const linkSource = c["changingThisBreaksApplicationSecurity"];
+                    const downloadLink = document.createElement("a");
+                    downloadLink.href = linkSource;
+                    downloadLink.download = fileName;
+                    downloadLink.click();
+                });
+            }
+        }).catch(() => {  
+        });
     }
 }
