@@ -45,6 +45,7 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
             case 'xx-small':
                 return 12;
             case 'smaller':
+            case 'inherit':
                 return 15;
             case 'small':
                 return 20;

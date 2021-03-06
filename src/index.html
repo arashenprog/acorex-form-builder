@@ -19,7 +19,9 @@
           setProperty('--primary-lighter-color', event.data.theme.primaryLighetrColor, 'important');
         }
         //setTimeout(show, 200);
-      };
+      }; 
+      if (event.data.createHtml)  
+        localStorage.setItem("CreateHtml",event.data.createHtml); 
     });
     // setTimeout(show, 1000);
     // function show() {

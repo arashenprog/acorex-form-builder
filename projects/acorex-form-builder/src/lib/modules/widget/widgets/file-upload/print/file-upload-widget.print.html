@@ -1,20 +1,19 @@
 <ng-container *ngIf="value">
-    <table class="table table-bordered table-sm">
-        <thead class="thead-dark">
+    <table class="table table-bordered table-sm" style="width: 100%;">
+        <thead>
             <tr>
-                <th>Row</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Create Date</th>
+                <th style="text-align: left;">Row</th>
+                <th style="text-align: left;">Image</th>
+                <th style="text-align: left;">Name</th>
+                <th style="text-align: left;">Create Date</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of value;let i=index">
                 <td>{{i+1}}</td>
-                <td><img *ngIf="item.srcData" src="./assets/images/file-icon.png" height="35" width="45"></td>
+                <td role="image-input"><img *ngIf="item.srcData" src="./assets/images/file-icon.png" height="35" width="45"></td>
                 <td>
-                    <ax-text-box [(text)]="item.name">
-                    </ax-text-box>
+                    {{item.name}}
                 </td>
                 <td>
                     {{item.createDate}}

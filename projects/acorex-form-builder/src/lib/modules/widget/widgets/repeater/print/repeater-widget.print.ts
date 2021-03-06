@@ -20,7 +20,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
         return new AXFRepeaterlWidgetFormula(this);
     }
 
-    constructor(protected cdr: ChangeDetectorRef) {
+    constructor(protected cdr: ChangeDetectorRef,private hostElement: ElementRef) {
         super();
     }
 
@@ -78,6 +78,10 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
             });
         } else {
             this.refresh();
+        }
+        if(this["tag"])
+        {
+            this.hostElement.nativeElement.setAttribute("role",this["tag"]); 
         }
     }
 

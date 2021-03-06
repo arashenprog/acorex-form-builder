@@ -45,6 +45,7 @@ export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
             case 'x-small':
                 return 12;
             case 'smaller':
+            case 'inherit':
                 return 15;
             case 'small':
                 return 20;

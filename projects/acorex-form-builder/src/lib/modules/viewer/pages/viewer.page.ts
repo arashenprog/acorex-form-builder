@@ -59,9 +59,9 @@ export class ACFViewerPage extends AXBasePageComponent {
       });
     //
     eventService.on('__submit', (data) => {
-      if ("sendHtmlPrint") {
+      if (localStorage.getItem("CreateHtml")) {
         this.dataService.validate().then(() => {
-          //this.printRendering = true;
+          this.printRendering = true;
           this.isBusy = true;
           setTimeout(() => {
             let body = "";
@@ -92,16 +92,24 @@ export class ACFViewerPage extends AXBasePageComponent {
           this.isBusy = false;
         });
       } else {
-        this.isBusy = true;
-        this.dataService.submit()
-          .catch((e) => {
-            if (e && e.target && e.target._rootElement) {
-              (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
-            }
-          })
-          .finally(() => {
-            this.isBusy = false;
-          });
+        this.dataService.validate().then(() => {
+          this.isBusy = true;
+          this.dataService.submit()
+            .catch((e) => {
+              if (e && e.target && e.target._rootElement) {
+                (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
+              }
+            })
+            .finally(() => {
+              this.isBusy = false;
+            });
+        }).catch((e) => {
+          if (e && e.target && e.target._rootElement) {
+            (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
+          }
+        }).finally(() => {
+          this.isBusy = false;
+        });
       }
     });
   }
