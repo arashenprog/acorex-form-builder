@@ -3,5 +3,9 @@
 }
 
 .viewer-container ::ng-deep .img-container{
-    height: calc(90vh )!important; 
+    height: calc(70vh )!important; 
+}
+
+.viewer-container ::ng-deep .btn-container button{
+    margin: 5px !important;
 }

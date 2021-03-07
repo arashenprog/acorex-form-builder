@@ -101,7 +101,16 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
                 data: {
                     value: c
                 }
-            });
+            }).closed(e=>{
+                debugger
+                if(e.data && c!=e.data)
+                { 
+                    this.connectService.send('uploadFile', { data:e.data }).then((g) => {
+                        this.value.srcData = g;
+                        this.cdr.detectChanges();
+                    })
+                } 
+            }); 
         });
     }
 }

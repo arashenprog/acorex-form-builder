@@ -1,3 +1,8 @@
 <div class="viewer-container" #el>
-        <angular-image-viewer [config]="config" [src]="images" [index]="0" ></angular-image-viewer>
-</div>
+        <angular-image-viewer 
+        [src]="images" [index]="0" [config]="config" 
+        ></angular-image-viewer>
+        <button (click)="saveChanges()" class="btn btn-success" style="position:relative;z-index: 100;margin: 5px;">
+                <i class="fas fa-plus"></i>&nbsp;
+                <span>Save </span></button>
+</div>  
