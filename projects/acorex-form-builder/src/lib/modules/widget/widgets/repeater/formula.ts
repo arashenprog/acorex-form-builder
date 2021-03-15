@@ -57,6 +57,16 @@ export class AXFRepeaterlWidgetFormula {
         }
     }
 
+    deleteRow(selUid)
+    {
+        debugger
+        let view= (this.ww as any);        
+        let delindex= view.bodyRows.findIndex(e=>e.options.uid==selUid) 
+        view.bodyRows.splice(delindex, 1);
+        view.cdr.detectChanges();
+      
+    }
+
     setData(arr:any[])
     {
         let view= (this.ww as any);

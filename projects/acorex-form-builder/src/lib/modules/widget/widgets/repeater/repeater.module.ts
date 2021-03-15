@@ -77,6 +77,20 @@ export class AXFRepeaterlWidgetModule {
                         else
                             return false;
                     }
+                },
+                {
+                    name: 'deleteItem',
+                    category: 'General',
+                    defaultValue: false,
+                    title: 'Delete Item',
+                    editor: 'CheckboxEditor',
+                    options: { label: 'Delete Item' },
+                    visible: (options: any) => {
+                        if (options.dataSource && options.dataSource.mode == 'manual')
+                            return true;
+                        else
+                            return false;
+                    }
                 }
             ]
         })

@@ -11,6 +11,55 @@ export class AXFRepeaterWidgetDesigner extends AXFWidgetDesigner {
 
     @ViewChild('table', { static: true }) table: ElementRef<HTMLTableElement>;
 
+    private _deleteItems:boolean;
+    public get deleteItem(): boolean {
+        return this._deleteItems;
+    }
+    public set deleteItem(v: boolean) {
+        if (v !== this._deleteItems) {
+            this._deleteItems = v;
+            if (v === true) { 
+                this.widgets.filter(c => c.name == "table-row").forEach(( element )=> {
+                    const cell = this.widgetService.resolve('table-cell');
+                    if(element.options.widgets.some(s=>s.options.isDelete==true))
+                        return;
+                    const optheadCell = { widgets: [],isDelete:true };
+                    if(element.options.isHeader === true)
+                    {
+                        const txtblock = this.widgetService.resolve('text');
+                        txtblock.options.text="Actions";
+                        optheadCell.widgets.push(txtblock);
+                    }
+                    else
+                    {
+                        const btn = this.widgetService.resolve('button');
+                        btn.options.text="Delete";
+                        btn.properties.find(w=>w.name=="name").defaultValue="btnDelete";
+                        btn.properties.find(s=>s.name=="type").defaultValue="danger";
+                        btn.properties.find(s=>s.name=="onClick").defaultValue="#btnDelete.parent.parent.parent.formula.deleteRow(#btnDelete.parent.parent.uid)";
+                        optheadCell.widgets.push(btn);
+                    }
+                    Object.assign(cell.options, optheadCell); 
+                    element.options.widgets.push(cell); 
+                    (element as any).componentRef.refresh(); 
+                });
+                this.cdr.markForCheck();
+            } 
+            else {
+                this.widgets.filter(c => c.name == "table-row").forEach(( element )=> {
+                    const delindex = element.options.widgets.findIndex(d =>d.options.isDelete==true);
+                    if (delindex > -1) {
+                        element.options.widgets.splice(delindex, 1);
+                        (element as any).componentRef.refresh();  
+                    }
+                }); 
+                this.cdr.markForCheck();
+            }
+        }
+    }
+
+
+
     private _showHeader: boolean;
     public get showHeader(): boolean {
         return this._showHeader;
