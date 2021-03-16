@@ -73,6 +73,15 @@ export class AXFTableCellWidgetModule {
                     defaultValue: "1",
                     visible:false,
                     order: 1,
+                },
+                {
+                    name:"isDelete",
+                    category: "General",
+                    defaultValue: false,
+                    title: "IsDelete",
+                    order: 0,
+                    editor: "CheckboxEditor",
+                    visible:false 
                 }
             ]
         })

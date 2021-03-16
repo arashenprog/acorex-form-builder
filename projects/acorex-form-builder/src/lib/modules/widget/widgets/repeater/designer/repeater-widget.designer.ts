@@ -23,7 +23,7 @@ export class AXFRepeaterWidgetDesigner extends AXFWidgetDesigner {
                     const cell = this.widgetService.resolve('table-cell');
                     if(element.options.widgets.some(s=>s.options.isDelete==true))
                         return;
-                    const optheadCell = { widgets: [],isDelete:true };
+                    const optheadCell = { widgets: [],isDelete:true,width:"100px" };
                     if(element.options.isHeader === true)
                     {
                         const txtblock = this.widgetService.resolve('text');
