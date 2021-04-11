@@ -252,11 +252,11 @@ export class AXFDataService {
     }
 
 
-    submit(html?: string): Promise<void> {
+    submit(model: any = this.dataModel, html?: string): Promise<void> {
         return new Promise((resolve, reject) => {
             //this.validate().then(c => {
             this.connectService.send('submit', {
-                data: this.dataModel,
+                data: model,
                 html
             }).then(() => {
                 resolve();

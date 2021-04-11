@@ -14,6 +14,7 @@ import { AXFEventEditorModule } from '../editors/event/event.module';
 import { AXFDataSourceEditorModule } from '../editors/data-source/data-source.module';
 import { AXFValidationEditorModule } from '../editors/validation/validation.module';
 import { AXFActionEditorModule } from '../editors/action/formula.module';
+import { AXFAnswerEditorModule } from '../editors/answer/answer.module';
 
 const WDIGET_MODULES = [
     AXFBoxStyleEditorModule,
@@ -27,7 +28,8 @@ const WDIGET_MODULES = [
     AXFEventEditorModule,
     AXFDataSourceEditorModule,
     AXFValidationEditorModule,
-    AXFActionEditorModule
+    AXFActionEditorModule,
+    AXFAnswerEditorModule
 ]
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, HostListener, ElementRef, ViewEncapsulation, Output, EventEmitter, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { AXBasePageComponent, EventService, AXRenderService } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { ActivatedRoute } from '@angular/router';
@@ -61,35 +61,37 @@ export class ACFViewerPage extends AXBasePageComponent {
     eventService.on('__submit', (data) => {
       if (localStorage.getItem("CreateHtml")) {
         this.dataService.validate().then(() => {
+          var model = JSON.parse(JSON.stringify(this.dataService.getModel()));
           this.printRendering = true;
           this.isBusy = true;
+          
           setTimeout(() => {
-            let body = "";
-            if (this.printRendering) {
-              const html = this.printDiv.nativeElement.innerHTML;
-              body = '<html><head><meta charset="utf-8"/>' +
-                '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
-                + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
-              body = body + html + '</body></html>';
-            }
+            let body = ""; 
+            const html = this.printDiv.nativeElement.innerHTML;
+            body = '<html><head><meta charset="utf-8"/>' +
+              '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+              + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
+            body = body + html + '</body></html>';  
 
-            this.dataService.submit(body)
+            
+            this.dataService.submit(model, body)
               .catch((e) => {
                 if (e && e.target && e.target._rootElement) {
                   (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
                 }
               })
               .finally(() => {
-                this.printRendering = false;
                 this.isBusy = false;
+                this.printRendering = false;
               });
-          }, this.printRendering ? 5000 : 100);
+          }, 5000);
         }).catch((e) => {
           if (e && e.target && e.target._rootElement) {
             (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
           }
         }).finally(() => {
-          this.isBusy = false;
+          this.isBusy = false; 
+          
         });
       } else {
         this.dataService.validate().then(() => {

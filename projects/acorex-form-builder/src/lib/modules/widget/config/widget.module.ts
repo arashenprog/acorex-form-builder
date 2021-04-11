@@ -34,6 +34,7 @@ import { AXFImageInputWidgetModule } from '../widgets/image-input/image-input.mo
 import { AXFContainerWidgetModule } from '../widgets/container/container.module';
 import { AXFFileUploadWidgetModule } from '../widgets/file-upload/file-upload.module';
 //import { AXFMapWidgetModule } from '../widgets/map/map.module';
+import { AXFQuestionWidgetModule } from '../widgets/question/question.module';
 
 const MODULES = [
     CommonModule,
@@ -67,6 +68,7 @@ const MODULES = [
     AXFImageInputWidgetModule,
     AXFContainerWidgetModule,
     AXFFileUploadWidgetModule,
+    //AXFQuestionWidgetModule,
     //AXFMapWidgetModule
 ];
 

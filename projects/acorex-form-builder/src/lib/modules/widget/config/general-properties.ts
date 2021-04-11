@@ -471,3 +471,14 @@ export const AXF_MINWIDTH_PROPERTY:AXFWidgetProperty ={
         allowHtml: false
     }
 }
+
+export const AXF_ANSWER_PROPERTY: AXFWidgetProperty = {
+    name: 'answer',
+    category: 'Data', 
+    title: 'Answer',
+    editor: 'AnswerEditor',
+    defaultValue: {
+        mode: 'text' ,
+        questionText:'Sample'
+    }
+};

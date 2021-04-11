@@ -1,0 +1,51 @@
+<div class="pnlCol">
+    <div class="dvSec">
+        <span>Question Text</span>
+        <ax-text-box [(text)]="value.questionText">
+        </ax-text-box>
+    </div>
+    <div class="dvSec">
+        <span>َAnswer Type</span>
+        <ax-selection-list #modeSelection direction="horizontal" [mode]="'single'" [items]="modeItems"
+            (selectedItemsChange)="handleModeChange($event)" textField="text" valueField="value"
+            [selectedValues]="value.mode">
+        </ax-selection-list>
+    </div>
+    <div *ngIf="value.mode=='text'" class="dvSec">
+        <span>Place Holder Answer</span>
+        <ax-text-box [(text)]="value.textPlaceHolder">
+        </ax-text-box>
+    </div>
+    <div *ngIf="value.mode=='multiple' || value.mode=='single'">
+        <h4>Items</h4>
+        <div *ngFor="let item of value.dataItems;let i = index" class="row">
+            <div class="col-md-1">
+                <span style="position: absolute; height: 20px; width: 20px; background-color: var(--white-color); border: 1px solid;
+            border-color: var(--black-color);"
+                    [ngStyle]="{'border-radius': value.mode == 'single' ?'100%':'inherit'}"></span>
+            </div>
+            <div class="col-md-6">
+                <ax-text-box class="nodeItem" [(text)]="item.text">
+                </ax-text-box>
+            </div>
+            <div class="col-md-5">
+                <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">
+                    <i class="fas fa-trash danger"></i>
+                </ax-button>
+                <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,item)">
+                    <i class="fas fa-arrow-up primary"></i>
+                </ax-button>
+                <ax-button type="light" size="sm" tooltip="Down" (onClick)="downClick(i,item)">
+                    <i class="fas fa-arrow-down primary"></i>
+                </ax-button> 
+                <ax-button type="light" size="sm" tooltip="Condition" (onClick)="setCondition(i)">
+                    Set Condition
+                </ax-button>
+            </div>
+        </div>
+        <ax-button type="primary" size="sm" (onClick)="addItemClick()" tooltip="Add New">
+            <i class="fas fa-plus"></i>&nbsp;
+            <span>Add New Item</span>
+        </ax-button>
+    </div>
+</div>

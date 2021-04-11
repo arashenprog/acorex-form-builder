@@ -1,0 +1,12 @@
+<div>{{answer.questionText}}</div>
+<div *ngIf="answer.mode=='text'">
+    <ax-text-box></ax-text-box>
+</div>
+<div #el class="allItem"  *ngIf="answer.mode=='multiple'">
+    <div class="rep" *ngFor="let item of answer.dataItems">
+        <div style="padding: 6px 2px;">
+            <span class="spanCheck" style="border-radius:100%" [ngStyle]="getStyles()"></span> 
+            <div [style.margin-left]="getSize()" [style.color]="color" [style.font-size]="getSize()">{{item.text}}</div>
+        </div>
+    </div>
+</div>
