@@ -35,6 +35,7 @@ import { AXFContainerWidgetModule } from '../widgets/container/container.module'
 import { AXFFileUploadWidgetModule } from '../widgets/file-upload/file-upload.module';
 //import { AXFMapWidgetModule } from '../widgets/map/map.module';
 import { AXFQuestionWidgetModule } from '../widgets/question/question.module';
+import { AXFLovInputWidgetModule } from '../widgets/lov/lov-input.module';
 
 const MODULES = [
     CommonModule,
@@ -70,6 +71,7 @@ const MODULES = [
     AXFFileUploadWidgetModule,
     //AXFQuestionWidgetModule,
     //AXFMapWidgetModule
+    AXFLovInputWidgetModule,
 ];
 
 @NgModule({

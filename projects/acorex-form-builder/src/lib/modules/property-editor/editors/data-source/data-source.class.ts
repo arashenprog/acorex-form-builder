@@ -51,6 +51,12 @@ export class AXFDataSourceRemoteOption {
 export class AXFDataSourceRemoteParamOption {
     name: string;
     value: any;
+
+    constructor(nam:string,val:any)
+    {
+        this.name=nam;
+        this.value=val;
+    }
 }
 
 

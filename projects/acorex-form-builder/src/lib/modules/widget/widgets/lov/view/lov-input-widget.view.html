@@ -1,0 +1,8 @@
+<div #el [hidden]="!visible">
+    <!-- (textChange)="handleValueChange($event)" -->
+    <ax-text-box [text]="value"> 
+        <ax-button (onClick)="showPopup()" >
+             <i class="fas fa-list"></i> 
+        </ax-button>
+    </ax-text-box>
+</div>
