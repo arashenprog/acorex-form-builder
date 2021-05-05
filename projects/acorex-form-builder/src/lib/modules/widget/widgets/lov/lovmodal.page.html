@@ -1,24 +1,24 @@
-<!-- <table style="width: 100%;">
+<table style="width: 100%;">
     <thead>
         <tr>
             <th *ngFor="let col of infoSource.columns">{{col.title}}</th>
         </tr>
     </thead>
     <tbody>
-        <cdk-virtual-scroll-viewport itemSize="10" class="fact-scroll-viewport"> 
+        <cdk-virtual-scroll-viewport itemSize="40" class="fact-scroll-viewport"> 
             <tr *cdkVirtualFor="let item of dataSource" class="fact-item">
                 <td *ngFor="let col of infoSource.columns">{{item[col.fieldName]}}</td>
             </tr> 
         </cdk-virtual-scroll-viewport>
     </tbody>
-</table> style="float: left;width: 50%;"-->
-<div>
-    <div  class="fact-item">
-        <div *ngFor="let col of infoSource.columns" class="fact-text">{{col.title}}</div> 
+</table>
+<!-- <div>
+    <div >
+        <div *ngFor="let col of infoSource.columns">{{col.title}}</div> 
     </div> 
-    <cdk-virtual-scroll-viewport itemSize="10" class="fact-scroll-viewport"> 
+    <cdk-virtual-scroll-viewport itemSize="40" class="fact-scroll-viewport"> 
         <div *cdkVirtualFor="let item of dataSource" class="fact-item">
-            <div class="fact-text"  *ngFor="let col of infoSource.columns">{{item[col.fieldName]}}</div>
+            <div *ngFor="let col of infoSource.columns">{{item[col.fieldName]}}</div>
         </div> 
     </cdk-virtual-scroll-viewport>
-</div>
+</div> -->
