@@ -1,4 +1,4 @@
-<table style="width: 100%;">
+<!-- <table style="width: 100%;">
     <thead>
         <tr>
             <th *ngFor="let col of infoSource.columns">{{col.title}}</th>
@@ -11,14 +11,25 @@
             </tr> 
         </cdk-virtual-scroll-viewport>
     </tbody>
-</table>
-<!-- <div>
+</table> -->
+<!-- <ax-text-box [(text)]="filter" (handleKeyEvent)="onChange($event)" placeholder="search"   >
+</ax-text-box> -->
+<div class="mrgnDiv">
+    <!-- <input type="text"  placeholder="search" style="width: 100%;" (keyup)="onChange($event)"  class="ax-text-box"  />  -->
+    <ax-search-box [(text)]="filter" (onTextChanged)="onChange($event)"></ax-search-box>
+</div>
+
+<div class="mrgnDiv">
     <div >
-        <div *ngFor="let col of infoSource.columns">{{col.title}}</div> 
+        <div *ngFor="let col of infoSource.columns" class="divhead"
+        [ngStyle]="{'width':(infoSource.columns.length==1)?null:(100.0/infoSource.columns.length)+'%'}"
+         >{{col.title}}</div> 
     </div> 
-    <cdk-virtual-scroll-viewport itemSize="40" class="fact-scroll-viewport"> 
+    <cdk-virtual-scroll-viewport itemSize="30" class="fact-scroll-viewport"> 
         <div *cdkVirtualFor="let item of dataSource" class="fact-item">
-            <div *ngFor="let col of infoSource.columns">{{item[col.fieldName]}}</div>
+            <div *ngFor="let col of infoSource.columns"  class="fact-cell"
+            [ngStyle]="{'width':(infoSource.columns.length==1)?null:(100.0/infoSource.columns.length)+'%'}"
+             >{{item[col.fieldName]}}</div>
         </div> 
     </cdk-virtual-scroll-viewport>
-</div> -->
+</div>

@@ -14,11 +14,13 @@ import { AXFWidgetView } from '../../config/widget';
 })
 
 export class LovModalPage extends AXBasePageComponent {
- 
+     
     constructor(protected cdr: ChangeDetectorRef,private resolveService: AXFUrlResolverService,private dataService: AXFDataService) {
         super(); 
         
     }
+
+    filter:string="";
 
     @Input()
     public value: string;
@@ -39,5 +41,13 @@ export class LovModalPage extends AXBasePageComponent {
         //     }
         // );  
         this.dataSource = new LovDataSource(this.dataService,this.infoSource,this.ww);
+    }
+
+    onChange(e)
+    {debugger
+        let fltr:string=null;
+        if(e!="")
+        fltr=e;
+        this.dataSource = new LovDataSource(this.dataService,this.infoSource,this.ww,fltr);
     }
 }

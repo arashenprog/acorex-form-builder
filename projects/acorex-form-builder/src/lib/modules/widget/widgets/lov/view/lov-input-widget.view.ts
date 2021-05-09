@@ -52,8 +52,7 @@ export class AXFLovInputWidgetView extends AXFValueWidgetView {
      
 
     showPopup()
-    {  
-        debugger 
+    {   
         // if (this.dataSource.mode === 'remote') {
         //     if (this.dataSource.dataItems == null || this.dataSource.dataItems.length === 0) {
         //         this.dataSource.dataSource.params.forEach(p => {
