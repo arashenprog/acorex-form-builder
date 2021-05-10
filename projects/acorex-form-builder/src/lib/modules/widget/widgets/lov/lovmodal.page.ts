@@ -33,14 +33,7 @@ export class LovModalPage extends AXBasePageComponent {
 
     dataSource: LovDataSource;
 
-    ngOnInit() { 
-        //  new LovDataSource(this.dataService,this.infoSource,this.ww).load().then(d=> 
-        //     {debugger
-        //         this.dataSource =d;
-        //         this.cdr.detectChanges();
-        //     }
-        // );  
-        this.dataSource = new LovDataSource(this.dataService,this.infoSource,this.ww);
+    ngOnInit() {  
     }
 
     onChange(e)

@@ -22,7 +22,7 @@ export class LovDataSource extends DataSource<any> {
 
     connect(collectionViewer: CollectionViewer): Observable<(any | undefined)[] | ReadonlyArray<any | undefined>>  {
         this.subscription.add(collectionViewer.viewChange.subscribe(range => {
-            setTimeout(() => {
+            
             
                     
           const currentPage = this._getPageForIndex(range.end);
@@ -35,7 +35,7 @@ export class LovDataSource extends DataSource<any> {
             this.lastPage = currentPage;
             this._fetchFactPage();
           }
-        }, 300);
+        
         }));
         return this.dataStream;
     } 
@@ -59,10 +59,10 @@ export class LovDataSource extends DataSource<any> {
             params.push(new AXFDataSourceRemoteParamOption("Filter", this.filter));
             this.dataService.getList(this.info.dataSource.name, params).then(items => {
                 if (items && items.length) {
-                    
+                    setTimeout(() => {
                         this.cachedFacts = this.cachedFacts.concat(items);
                     this.dataStream.next(this.cachedFacts);
-                                    
+                }, 300);   
                 }
             });
         } 
