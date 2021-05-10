@@ -64,15 +64,7 @@ export class AXFLovInputWidgetModule {
                         mode: 'single',
                         direction: 'horizontal'
                     }
-                },
-                {
-                    name: 'allowSearch',
-                    category: 'General',
-                    defaultValue: false,
-                    title: 'Allow Search',
-                    editor: 'CheckboxEditor',
-                    options: { label: 'Allow Search' }
-                },
+                }, 
                 AXF_DS_LIST_PROPERTY,
                 AXF_VISIBLE_PROPERTY,
                 AXF_NAME_PROPERTY,

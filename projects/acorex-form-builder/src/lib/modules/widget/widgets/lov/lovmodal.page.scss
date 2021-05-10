@@ -1,5 +1,5 @@
 .fact-scroll-viewport {
-    height: 75vh;
+    height: 65vh;
     width: 100%;
   }
   
@@ -11,13 +11,28 @@
   font-weight: bold;
   } 
 
+  .fact-item-single:hover{
+    background-color: #6ab8f7;
+  }
+
+  .fact-item-multiple{
+    background-color: #6ab8f7;
+  }
+
   .fact-item {
     height: 40px; 
-  
+    cursor: default;
+
     .fact-cell {
       float: left;
-  padding: 5px;
-  font-weight: 400;
+      padding: 5px;
+      font-weight: 400;
+
+      input[type=checkbox]
+      {
+        width: 20px;
+        height: 20px;
+      }
     } 
   }
 

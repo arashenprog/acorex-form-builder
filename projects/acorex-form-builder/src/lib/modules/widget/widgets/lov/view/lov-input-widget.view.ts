@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, ElementRef, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { AXPopupService } from 'acorex-ui';
+import { type } from 'os';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 import { AXFValueWidgetView, AXFWidgetDesigner } from '../../../config/widget';
 import { AXFUrlResolverService } from '../../../services/url-resolver.service';
@@ -16,6 +17,7 @@ export class AXFLovInputWidgetView extends AXFValueWidgetView {
     @ViewChild("el") el: ElementRef<HTMLElement>;
 
     dataSource: AXFDataSourceOption; 
+    mode:string;
     constructor(protected cdr: ChangeDetectorRef, private ref: ElementRef,
         private resolverService: AXFUrlResolverService,
         private popupService: AXPopupService) {
@@ -53,55 +55,35 @@ export class AXFLovInputWidgetView extends AXFValueWidgetView {
 
     showPopup()
     {   
-        // if (this.dataSource.mode === 'remote') {
-        //     if (this.dataSource.dataItems == null || this.dataSource.dataItems.length === 0) {
-        //         this.dataSource.dataSource.params.forEach(p => {
-        //             if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
-        //                 const name = p.value.substring(1);
-        //                 p.value = () => {
-        //                     return '$' + this.resolveProperty(name);
-        //                 };
-        //             }
-        //         });
-        //         this.dataService.getList(
-        //             this.dataSource.dataSource.name,
-        //             this.dataSource.dataSource.params
-        //         ).then(c => {
-        //             this.dataSource.dataItems = c; 
+        this.popupService.open(LovModalPage, {
+            title: 'Select Lov',
+            size: 'lg',
+            data: {
+                // value: this.value,
+                // infoSource:this.dataSource,
+                ww:this
+            }
+        }).closed(e=>{  
+            if(e.data)
+            {  
+                this.value=e.data;
+                this.cdr.markForCheck();
+            } 
+        }); 
+    }
 
-        //             this.popupService.open(LovModalPage, {
-        //                 title: 'Select Lov',
-        //                 size: 'lg',
-        //                 data: {
-        //                     value: this.value,
-        //                     columns:this.dataSource.columns,
-        //                     dataItems:c
-        //                 }
-        //             }).closed(e=>{ 
-        //                 //if(e.data && c!=e.data)
-        //                 //{  
-        //                 // } 
-        //             }); 
-        //         });
-        //     } 
-        // }
-        // else
-        // {
-            this.popupService.open(LovModalPage, {
-                title: 'Select Lov',
-                size: 'lg',
-                data: {
-                    value: this.value,
-                    infoSource:this.dataSource,
-                    ww:this
-                }
-            }).closed(e=>{ 
-                //if(e.data && c!=e.data)
-                //{  
-                // } 
-            }); 
-        // }
+    showText(val)
+    {
+        if(!val)
+            return "";
+           
+        let colBase= this.dataSource.columns.find(w=>w.isDisplay);
+        if(!colBase)
+            colBase=this.dataSource.columns[0];
 
-         
+        if(Array.isArray(val)) 
+            return val.map(c => c[colBase.fieldName]).join(', '); 
+        else 
+            return val[colBase.fieldName];  
     }
 }
