@@ -62,7 +62,7 @@ export class LovDataSource extends DataSource<any> {
                     setTimeout(() => {
                         this.cachedFacts = this.cachedFacts.concat(items);
                     this.dataStream.next(this.cachedFacts);
-                }, 300);   
+                }, 500);   
                 }
             });
         } 
