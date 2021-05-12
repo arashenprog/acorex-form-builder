@@ -8,7 +8,7 @@
   color: var(--white-color);
   float: left;
   padding: 5px;
-  font-weight: bold;
+  font-weight: bold; 
   } 
 
   .fact-item-single:hover{
@@ -20,10 +20,11 @@
   }
 
   .fact-item {
-    height: 40px; 
+    // height: 40px; 
     cursor: default;
 
     .fact-cell {
+      border: 1px solid #dee2e6;
       float: left;
       padding: 5px;
       font-weight: 400;
