@@ -12,7 +12,7 @@ import { AXFWidgetDesigner } from '../../../config/widget';
 export class AXFCheckboxInputWidgetDesigner extends AXFWidgetDesigner {
 
     textAlign: string;
-    value: boolean;
+    defaultValue: boolean;
     label: string;
     constructor(private el: ElementRef<HTMLElement>, private cdr: ChangeDetectorRef) {
         super()

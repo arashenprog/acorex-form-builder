@@ -13,6 +13,7 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
     fontSize: string;
     color: string;
     bgColor: string;
+    defaultValue: boolean;
     @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
     constructor(protected cdr: ChangeDetectorRef) {
         super();
@@ -22,6 +23,9 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
         super.ngAfterViewInit();
         //this.el.nativeElement.style.textAlign = this.textAlign;
         //this.el.nativeElement.style.display="block";
+        if (this.value === undefined && this.defaultValue !== undefined) {
+            this.value = this.defaultValue;
+        }
         if(this.el)
             this.applyStyle(this.el.nativeElement);
         this.cdr.detectChanges();

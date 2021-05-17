@@ -88,6 +88,15 @@ export const AXF_DEFAULT_NUMBER_PROPERTY: AXFWidgetProperty = {
     },
 };
 
+export const AXF_DEFAULT_BOOLEAN_PROPERTY: AXFWidgetProperty = {
+    name: 'defaultValue',
+    category: 'General',
+    defaultValue: false,
+    title: 'Default Value',
+    order: 22,
+    editor: 'CheckboxEditor'
+};
+
 export const AXF_VALUE_PROPERTY: AXFWidgetProperty = {
     name: 'value',
     category: 'General',

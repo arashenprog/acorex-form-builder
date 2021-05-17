@@ -14,6 +14,7 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
     color: string;
     bgColor: string; 
     fontSize: string;
+    defaultValue: boolean;
     constructor(private el: ElementRef<HTMLElement>, protected cdr: ChangeDetectorRef) {
         super(cdr);
     }
@@ -33,11 +34,15 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
     }
 
     ngAfterViewInit() {
+        debugger
         super.ngAfterViewInit();
+        if (this.value == undefined && this.defaultValue != undefined) {
+            this.value = this.defaultValue;
+        }
         if(this.el)
         this.applyStyle(this.el.nativeElement);
         this.cdr.detectChanges();
-    }
+    }  
 
     getSize(font: string) {
         switch (font) {

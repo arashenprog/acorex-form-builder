@@ -10,6 +10,7 @@ import { AXFUrlResolverService } from '../../../services/url-resolver.service';
     templateUrl: './file-upload-widget.view.html',
     styleUrls: ['./file-upload-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush, 
+    //host: { style: 'display: flex;justify-content: center;align-items: center;' }
 })
 export class AXFFileUploadWidgetView extends AXFValueWidgetView {
   
