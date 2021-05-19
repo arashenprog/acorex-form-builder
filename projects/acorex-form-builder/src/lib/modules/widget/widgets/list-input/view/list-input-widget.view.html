@@ -2,7 +2,7 @@
     <div class="rep" *ngFor="let item of dataSource.dataItems" 
         [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset','background':bgColor}">
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
-            <div *ngSwitchCase="'left'" style="padding: 6px 2px;position: relative;display: flex;"> 
+            <div *ngSwitchCase="'left'" style="padding: 6px;position: relative;display: flex;"> 
                 <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
                     (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
                     [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
@@ -14,7 +14,7 @@
                 <span [style.margin-left]="getSize()" (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
                     *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName] | word}}</span>
             </div>
-            <div *ngSwitchCase="'top'" style="padding: 6px 2px;position: relative;display: flex;">
+            <div *ngSwitchCase="'top'" style="padding: 6px;position: relative;display: flex;">
                 <div>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
@@ -30,7 +30,7 @@
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
             </div>
-            <div *ngSwitchCase="'bottom'" style="padding: 6px 2px;position: relative;display: flex;" [style.padding-bottom]="getSize()">
+            <div *ngSwitchCase="'bottom'" style="padding: 6px;position: relative;display: flex;" [style.padding-bottom]="getSize()">
                 <div>
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
@@ -46,7 +46,7 @@
                     </span>
                 </div>
             </div>
-            <div *ngSwitchCase="'right'" style="padding: 6px 2px;position: relative;display: flex;">
+            <div *ngSwitchCase="'right'" style="padding: 6px 0px 6px 10px;position: relative;display: flex;">
                 <div style="width: 100%;float: right;text-align: left;" [style.padding-right]="getSize()">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">

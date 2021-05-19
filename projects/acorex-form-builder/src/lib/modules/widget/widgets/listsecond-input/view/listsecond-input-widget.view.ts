@@ -32,7 +32,10 @@ export class AXFListSecondInputWidgetView extends AXFValueWidgetView {
     hasItem(item)
     {
         if ((this.mode=='multiple' && this.value && this.value.map(d=>d[this.dataSource.columns[0].fieldName]).indexOf(item[this.dataSource.columns[0].fieldName])>-1) ||
-        (this.mode=='single' && this.value && this.value[this.dataSource.columns[0].fieldName]==item[this.dataSource.columns[0].fieldName]))
+            (this.mode=='single' && this.value && 
+               ((typeof(this.value)=="object" && this.value[this.dataSource.columns[0].fieldName]==item[this.dataSource.columns[0].fieldName]) || 
+                (typeof(this.value)!="object" && this.value==item[this.dataSource.columns[0].fieldName]) ))         
+           )
         return true; 
         else
         return false;

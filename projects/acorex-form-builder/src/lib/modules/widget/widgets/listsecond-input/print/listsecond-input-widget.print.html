@@ -2,7 +2,7 @@
     <div *ngFor="let item of dataSource.dataItems"
         [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset','background':bgColor}">
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
-            <div *ngSwitchCase="'left'" style="padding: 6px 2px;position: relative;">
+            <div *ngSwitchCase="'left'" style="padding: 6px;position: relative;">
                 <svg *ngIf="mode!='unselectable' && mode=='single'" className="svg" fill="currentColor"
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
@@ -23,7 +23,7 @@
                     [ngStyle]="{'margin-left': getSize(),'color': color,'font-size':getSize()}">
                     {{item[dataSource.columns[1].fieldName] | word}}</div>
             </div>
-            <div *ngSwitchCase="'top'" style="padding: 6px 2px;position: relative;">
+            <div *ngSwitchCase="'top'" style="padding: 6px;position: relative;">
                 <div [style.padding-bottom]="getSize()">
                     <svg *ngIf="mode!='unselectable' && mode=='single'" className="svg" fill="currentColor"
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
@@ -47,7 +47,7 @@
                         [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
             </div>
-            <div *ngSwitchCase="'bottom'" style="padding: 6px 2px;position: relative;">
+            <div *ngSwitchCase="'bottom'" style="padding: 6px;position: relative;">
                 <div>
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
@@ -71,7 +71,7 @@
                     </span>
                 </div>
             </div>
-            <div *ngSwitchCase="'right'" style="padding: 2px;position: relative;display: flex;">
+            <div *ngSwitchCase="'right'" style="padding: 2px 2px 2px 10px;position: relative;display: flex;">
                 <div style="float: left;margin-bottom: 10px;" [style.margin-right]="getSize()">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
