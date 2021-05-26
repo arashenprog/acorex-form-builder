@@ -32,6 +32,14 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
     ngAfterViewInit() {
         super.ngAfterViewInit();
         this.refresh();
+        if (this.value == undefined && this.dataSource.mode === 'manual') { 
+           let defaultVals= this.dataSource.dataItems.filter(s=>s.DefaultValue==true).map((s)=>{return s.value});
+           if(defaultVals.length>0)
+           {
+               this.value =defaultVals;
+           } 
+        }
+        this.cdr.detectChanges();
     }
 
     refresh() {

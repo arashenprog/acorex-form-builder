@@ -3,7 +3,10 @@
         [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset','background':bgColor}">
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
             <div *ngSwitchCase="'left'" style="padding: 6px;">
-                <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                 [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                    <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                     aria-hidden="true"></i></span>
                 <img [style.margin-left]="getSize()" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 <div [style.margin-left]="getSize()" [style.color]="color" [style.font-size]="getSize()"
