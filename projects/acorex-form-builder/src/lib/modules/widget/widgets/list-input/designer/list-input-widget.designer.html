@@ -8,13 +8,13 @@
                     <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
                      aria-hidden="true"></i>
                 </span>
-                <img [style.margin-left]="getSize()" *ngIf="viewType=='image'"
+                <img [style.margin-left]="getMargin()" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
-                <div [style.margin-left]="getSize()" [style.color]="color" [style.font-size]="getSize()"
+                <div [style.margin-left]="getMargin()" [style.color]="color" [style.font-size]="getSize()"
                     *ngIf="viewType=='text'">{{item[dataSource.columns[1].fieldName]}}</div>
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px;">
-                <div  [style.padding-bottom]="getSize()">
+                <div  [style.padding-bottom]="getMargin()">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
                     [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
                         <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div *ngSwitchCase="'right'" style="padding: 6px 0px 6px 10px;position: relative;display: flex;">
-                <div style="float: left;" [style.margin-right]="getSize()">
+                <div style="float: left;" [style.margin-right]="getMargin()">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
                     <div *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()">

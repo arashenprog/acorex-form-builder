@@ -9,9 +9,9 @@
                     <i *ngIf="mode=='multiple' && value && value.indexOf(item[dataSource.columns[0].fieldName])>-1"
                         [style.font-size]="getSize()" class="fa fa-check" aria-hidden="true"></i>
                 </span>
-                <img [style.margin-left]="getSize()" *ngIf="viewType=='image'"
+                <img [style.margin-left]="getMargin()" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
-                <span [style.margin-left]="getSize()" (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
+                <span [style.margin-left]="getMargin()" (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
                     *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName] | word}}</span>
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px;position: relative;display: flex;">
@@ -23,21 +23,21 @@
                             [style.font-size]="getSize()" class="fa fa-check" aria-hidden="true"></i>
                     </span>
                 </div>
-                <div [style.padding-top]="getSize()">
+                <div [style.padding-top]="getMargin()">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
             </div>
-            <div *ngSwitchCase="'bottom'" style="padding: 6px;position: relative;display: flex;" [style.padding-bottom]="getSize()">
+            <div *ngSwitchCase="'bottom'" style="padding: 6px;position: relative;display: flex;" [style.padding-bottom]="getMargin()">
                 <div>
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
-                <div style="position: fixed;" [style.padding-top]="getSize()">
+                <div style="position: fixed;" [style.padding-top]="getMargin()">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
                         [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
@@ -47,13 +47,13 @@
                 </div>
             </div>
             <div *ngSwitchCase="'right'" style="padding: 6px 0px 6px 10px;position: relative;display: flex;">
-                <div style="width: 100%;float: right;text-align: left;" [style.padding-right]="getSize()">
+                <div style="width: 100%;float: right;text-align: left;" [style.padding-right]="getMargin()">
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
-                <div style="position: absolute;" [style.right]="getSize()">
+                <div style="position: absolute;" [style.right]="getMargin()">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
                         [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">

@@ -84,7 +84,28 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
        return this.getNumberSize() + 'px';
     }
 
-    
+    getMargin()
+    {
+        switch (this.fontSize) { 
+            case 'xx-small':
+            case 'x-small':
+                return 18+'px';
+            case 'smaller':
+            case 'inherit':
+                return 20+'px';
+            case 'small':
+                return 25+'px';
+            case 'medium':
+                return 30+'px';
+            case 'large':
+                return 35+'px';
+            case 'larger':
+                return 40+'px';
+            case 'x-large':
+            case 'xx-large':
+                return 45+'px';
+        }
+    }
 
     
 
