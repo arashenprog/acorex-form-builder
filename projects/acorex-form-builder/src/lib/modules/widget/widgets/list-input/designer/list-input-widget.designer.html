@@ -3,7 +3,11 @@
         [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset','background':bgColor}">
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
             <div *ngSwitchCase="'left'" style="padding: 6px;">
-                <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                    <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                     aria-hidden="true"></i>
+                </span>
                 <img [style.margin-left]="getSize()" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 <div [style.margin-left]="getSize()" [style.color]="color" [style.font-size]="getSize()"
@@ -11,7 +15,10 @@
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px;">
                 <div  [style.padding-bottom]="getSize()">
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                 </div>
                 <div>
                     <img *ngIf="viewType=='image'" [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async"
@@ -28,7 +35,10 @@
                         {{item[dataSource.columns[1].fieldName]}}</div>
                 </div>
                 <div  [style.padding-bottom]="getSize()">
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                 </div>
             </div>
             <div *ngSwitchCase="'right'" style="padding: 6px 0px 6px 10px;position: relative;display: flex;">
@@ -39,7 +49,10 @@
                         {{item[dataSource.columns[1].fieldName]}}</div>
                 </div>
                 <div style="position: absolute;" [style.right]="getSize()">
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                 </div>
             </div>
         </ng-container>
@@ -49,7 +62,10 @@
                     <img [src]="item[dataSource.columns[2].fieldName] | resolveUrl | async" height="80px" width="60px">
                 </div>
                 <div>
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                     <span [style.margin-left]="getSize()" [style.color]="color" [style.font-size]="getSize()">
                         {{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
@@ -61,12 +77,18 @@
                 <div [style.margin-right]="getSize()">
                     <span style="margin-right: 5px;" [style.color]="color" [style.font-size]="getSize()">
                         {{item[dataSource.columns[1].fieldName]}}</span>
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                 </div>
             </div>
             <div *ngSwitchCase="'IbottomCleftSright'">
                 <div>
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                     <span [ngStyle]="{'margin-left': getSize(),'color': color,'font-size':getSize()}">
                         {{item[dataSource.columns[1].fieldName]}}</span>
                 </div>
@@ -78,7 +100,10 @@
                 <div [style.margin-right]="getSize()">
                     <span style="margin-right: 5px;" [style.color]="color" [style.font-size]="getSize()">
                         {{item[dataSource.columns[1].fieldName]}}</span>
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                 </div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
@@ -90,7 +115,10 @@
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
                 <div>
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                 </div>
             </div>
             <div *ngSwitchCase="'ItopSmiddleCbottom'" [style.padding-bottom]="getSize()">
@@ -99,13 +127,19 @@
                 </div>
                 <div><span [style.color]="color" [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span></div>
                 <div>
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                 </div>
             </div>
 
             <div *ngSwitchCase="'CtopSmiddleIbottom'">
                 <div [style.padding-bottom]="getSize()">
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                 </div>
                 <div><span [style.color]="color" [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span></div>
                 <div>
@@ -114,7 +148,10 @@
             </div>
             <div *ngSwitchCase="'CtopImiddleSbottom'">
                 <div [style.padding-bottom]="getSize()">
-                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"></span>
+                    <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
+                    [ngClass]="mode=='single' && item.DefaultValue ? 'checkmark' : null">
+                        <i *ngIf="mode=='multiple' && item.DefaultValue" [style.font-size]="getSize()" class="fa fa-check"
+                         aria-hidden="true"></i></span>
                 </div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">

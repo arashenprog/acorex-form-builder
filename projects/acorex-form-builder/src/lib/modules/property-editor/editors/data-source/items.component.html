@@ -4,7 +4,8 @@
             <tr>
                 <th *ngFor="let col of columns">{{col.title}}
                 </th>
-                <th>Actions</th>
+                <th>Default</th>
+                <th style="min-width: 105px;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,8 +36,11 @@
                                         class="fa fa-trash"></i></button>
                             </div>
                         </div>
-                    </ng-container>
-
+                    </ng-container> 
+                </td>
+                <td>
+                    <ax-check-box [(value)]="item.DefaultValue" label=" " >
+                    </ax-check-box> 
                 </td>
                 <td>
                     <ax-button type="light" size="sm" tooltip="Delete" (onClick)="deleteClick(i)">

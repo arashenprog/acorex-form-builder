@@ -8,11 +8,16 @@
     display: table;
     .spanCheck{
       position: absolute; 
-                  height: 20px;
-                  width: 20px;
-                  background-color: var(--white-color);
-                  border: 1px solid;
-                  border-color: var(--black-color);
+      height: 20px;
+      width: 20px;
+      background-color: var(--white-color);
+      border: 1px solid;
+      border-color: var(--black-color);
+    }
+    .spanCheck.checkmark{
+      background-clip: content-box;
+      background-color: var(--primary-color);
+      padding: 4px;
     }
   }
 }

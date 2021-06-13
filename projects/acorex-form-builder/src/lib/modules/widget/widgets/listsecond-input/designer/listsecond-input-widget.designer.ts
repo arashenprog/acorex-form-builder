@@ -30,6 +30,14 @@ export class AXFListSecondInputWidgetDesigner extends AXFWidgetDesigner {
     }
 
     onRender(): void {
+        if(this.mode=='single' && this.dataSource.dataItems.filter(s=>s.DefaultValue==true).length)
+        {
+            let firstIndex= this.dataSource.dataItems.findIndex(s=>s.DefaultValue==true);
+            this.dataSource.dataItems.filter(s=>s.DefaultValue==true && this.dataSource.dataItems.indexOf(s)!=firstIndex)
+            .forEach(
+                f=>{f.DefaultValue=false;}
+            );
+        }
         this.cdr.markForCheck();
     }
 
