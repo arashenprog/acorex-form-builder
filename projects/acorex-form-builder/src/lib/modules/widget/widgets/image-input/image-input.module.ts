@@ -24,8 +24,8 @@ export const COMPONENTS = [AXFImageInputWidgetDesigner, AXFImageInputWidgetPrint
 export class AXFImageInputWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: 'Image Input',
-            hint: 'Image input element',
+            title: 'Image Uploader',
+            hint: 'Upload image from device or camera',
             icon: 'far fa-image',
             category: 'Editors',
             visible: true,

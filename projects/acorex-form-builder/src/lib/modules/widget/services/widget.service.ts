@@ -33,6 +33,7 @@ export interface WidgetConfig {
     container?: boolean;
     draggable?: boolean;
     droppable?: boolean,
+    blankHover?:boolean,
     designerClass: any;
     viewClass: any;
     printClass: any;
@@ -74,6 +75,7 @@ export class AXFWidgetService {
             designerClass: c.designerClass,
             printClass: c.printClass,
             viewClass: c.viewClass,
+            blankHover: c.blankHover,
             visible: c.visible,
             container: c.container,
             draggable: c.draggable,

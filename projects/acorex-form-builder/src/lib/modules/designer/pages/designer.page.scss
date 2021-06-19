@@ -232,8 +232,6 @@ ax-tab-view {
 }
 
 .add-element {
-    min-width: 30px;
-    height: 30px;
     background: var(--white-color);
     display: flex;
     justify-content: center;
@@ -242,6 +240,7 @@ ax-tab-view {
     border-radius: var(--border-radius-size);
     color: #8e8e8e;
     cursor: pointer;
+    padding: 7px;
 
     &:hover {
         background: var(--primary-color);
@@ -279,7 +278,7 @@ ax-tab-view {
 }
 
 .axf-widget-hover {
-    z-index: 1500;
+    z-index: 990;
     position: absolute;
     cursor: pointer;
     background-color: var(--primary-hover-color);

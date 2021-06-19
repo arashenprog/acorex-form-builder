@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorR
 import { AXFValueWidgetView } from '../../../config/widget';
 import { AXFConnectService } from '../../../services/connect.service';
 import { ImageModalPage } from '../imagemodal.page';
-import { AXPopupService } from 'acorex-ui';
+import { AXPopupService, AXToastService } from 'acorex-ui';
 import { AXFUrlResolverService } from '../../../services/url-resolver.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AXFUrlResolverService } from '../../../services/url-resolver.service';
     templateUrl: './image-input-widget.view.html',
     styleUrls: ['./image-input-widget.view.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: { style: 'display: flex;justify-content: center;align-items: center;' }
+    host: { style: 'display: flex;justify-content: center;align-items: center;', tabIndex: "0" }
 })
 export class AXFImageInputWidgetView extends AXFValueWidgetView {
 
@@ -24,9 +24,11 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
         protected cdr: ChangeDetectorRef,
         private connectService: AXFConnectService,
         private resolverService: AXFUrlResolverService,
+        private toastService: AXToastService,
         private ref: ElementRef<HTMLDivElement>,
         private popupService: AXPopupService) {
         super(cdr);
+        document.addEventListener("paste", this.onDocPaste.bind(this));
     }
 
     openFile() {
@@ -77,6 +79,11 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
         reader.readAsDataURL(file);
     }
 
+    remove()
+    {
+        this.value = null;
+    }
+
     async _handleReaderLoaded(e) {
         const reader = e.target;
         this.bindData(reader.result);
@@ -93,6 +100,7 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
         });
     }
 
+
     search() {
         this.resolverService.resolve(this.value.srcData).then(c => {
             this.popupService.open(ImageModalPage, {
@@ -101,20 +109,44 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
                 data: {
                     value: c
                 }
-            }).closed(e=>{
-                debugger
-                if(e.data && c!=e.data)
-                { 
+            }).closed(e => {
+                if (e.data && c != e.data) {
                     this.isLoading = true;
-                    this.connectService.send('uploadFile', { data:e.data }).then((g) => {
-                        this.value.srcData = g; 
+                    this.connectService.send('uploadFile', { data: e.data }).then((g) => {
+                        this.value.srcData = g;
                     })
-                    .finally(() => {
-                        this.isLoading = false; 
-                        this.cdr.detectChanges();
-                    })
-                } 
-            }); 
+                        .finally(() => {
+                            this.isLoading = false;
+                            this.cdr.detectChanges();
+                        })
+                }
+            });
         });
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        document.removeEventListener("paste", this.onDocPaste.bind(this));
+    }
+
+    private onDocPaste(event: ClipboardEvent) {
+        debugger
+        if (this.ref.nativeElement == document.activeElement) {
+            var items = event.clipboardData.items;
+            var blob = items[0].getAsFile();
+            if (blob) {
+                var reader = new FileReader();
+                reader.onload = this._handleReaderLoaded.bind(this);
+                reader.readAsDataURL(blob);
+            }
+        }
+    }
+
+    onClickPaste(e: MouseEvent) {
+        e.stopPropagation();
+        this.ref.nativeElement.focus();
+        setTimeout(() => {
+            this.toastService.success("Now press (Ctrl + V) to paste image", { timeOut: 3000 });
+        }, 200);
     }
 }
