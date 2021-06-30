@@ -138,6 +138,8 @@ export class AXFWidgetRendererDirective {
             });
             this.widgetElement = (widgetComponent.location.nativeElement as HTMLElement);
             this.widgetElement.id = this.widgetConfig.options.uid;
+            debugger;
+
             this.zone.runOutsideAngular(() => {
                 const dropZone = this.widgetElement.querySelector('.axf-drop-zone');
                 this.widgetElement.style.position = 'relative';
@@ -146,7 +148,7 @@ export class AXFWidgetRendererDirective {
                 this.widgetElement.addEventListener('mouseover', (c) => {
                     c.stopPropagation();
                     c.stopImmediatePropagation();
-                    if (this.isInResizng) {
+                    if (this.isInResizng || this.widgetConfig.blankHover == false) {
                         return;
                     }
                     this.widgetElement.style.pointerEvents = 'all';
@@ -356,6 +358,7 @@ export class AXFWidgetRendererDirective {
                     });
                 }
             });
+
         }
         //
         if (this.widgetConfig.onRendered) {

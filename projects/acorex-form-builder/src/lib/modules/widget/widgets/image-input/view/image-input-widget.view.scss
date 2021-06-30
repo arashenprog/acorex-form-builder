@@ -26,11 +26,25 @@
 .image {
     position: relative;
 
+    &.preview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        outline: 2px dashed var(--primary-dark-color);
+        background-color: var(--primary-trans-color);
+        
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: scale-down;
+        }
+    }
 
     .overlay {
         width: 100%;
         height: 100%;
-        opacity: 90%;
+        opacity: 75%;
         position: absolute;
         top: 0;
         left: 0;
@@ -38,7 +52,7 @@
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
-        background: #545b62;
+        background: #000;
         justify-content: center;
 
         i {

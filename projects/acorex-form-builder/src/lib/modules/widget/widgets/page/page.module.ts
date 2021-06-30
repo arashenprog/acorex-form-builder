@@ -33,6 +33,7 @@ export class AXFPagePageWidgetModule {
             visible: false,
             container: true,
             draggable: false,
+            blankHover: false,
             name: 'page',
             designerClass: AXFPageWidgetDesigner,
             printClass: AXFPageWidgetPrint,
