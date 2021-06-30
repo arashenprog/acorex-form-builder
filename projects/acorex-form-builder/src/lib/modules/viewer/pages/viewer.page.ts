@@ -3,7 +3,7 @@ import { AXBasePageComponent, EventService, AXRenderService } from 'acorex-ui';
 import { WidgetConfig, AXFWidgetService } from '../../widget/services/widget.service';
 import { ActivatedRoute } from '@angular/router';
 import { AXFTemplateService } from '../../widget/services/template/template.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AXFDataService } from '../../widget/services/data.service';
 
@@ -65,7 +65,7 @@ export class ACFViewerPage extends AXBasePageComponent {
           this.printRendering = true;
           this.isBusy = true;
           
-          setTimeout(() => {
+          const printFunc=() => {
             let body = ""; 
             const html = this.printDiv.nativeElement.innerHTML;
             body = '<html><head><meta charset="utf-8"/>' +
@@ -84,7 +84,36 @@ export class ACFViewerPage extends AXBasePageComponent {
                 this.isBusy = false;
                 this.printRendering = false;
               });
-          }, 5000);
+          };
+
+
+          
+
+          setTimeout(()=>{
+
+          const startDate:Date = new Date();
+          console.log("start", new Date());
+          let renderChangeObserver:any=null;
+          Observable.create(observer => {
+            renderChangeObserver = observer;
+        })
+            .pipe(debounceTime(100))
+            .pipe(distinctUntilChanged())
+            .subscribe(c => {
+              const diff = new Date().getTime() - startDate.getTime();
+              console.log("finish", new Date(),diff);
+               printFunc();
+            });
+            
+            this.printDiv.nativeElement.addEventListener("DOMSubtreeModified",()=>{
+              renderChangeObserver.next(new Date().getTime());
+            })
+
+          },500);
+
+
+
+     
         }).catch((e) => {
           if (e && e.target && e.target._rootElement) {
             (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
@@ -120,6 +149,8 @@ export class ACFViewerPage extends AXBasePageComponent {
     this.templateService.load().then(data => {
       this.widgets = [this.widgetService.parse(data.template)];
     });
+
+ 
   }
 
   ngOnDestroy() {
