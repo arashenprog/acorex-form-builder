@@ -55,6 +55,7 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     getSize() { 
         switch (this.fontSize) { 
             case 'xx-small':
+                return 11+'px';
             case 'x-small':
                 return 13+'px';
             case 'smaller':

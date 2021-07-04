@@ -89,6 +89,7 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
     getSize() { 
         switch (this.fontSize) { 
             case 'xx-small':
+                return 11+'px';
             case 'x-small':
                 return 13+'px';
             case 'smaller':

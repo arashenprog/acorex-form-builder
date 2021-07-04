@@ -61,6 +61,7 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     getNumberSize() {
         switch (this.fontSize) {
             case 'xx-small':
+                return 11;
             case 'x-small':
                 return 13;
             case 'smaller':
@@ -88,6 +89,7 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     {
         switch (this.fontSize) { 
             case 'xx-small':
+                return 15+'px';
             case 'x-small':
                 return 18+'px';
             case 'smaller':

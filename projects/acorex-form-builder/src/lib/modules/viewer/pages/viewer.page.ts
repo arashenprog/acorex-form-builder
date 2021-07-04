@@ -64,8 +64,30 @@ export class ACFViewerPage extends AXBasePageComponent {
           var model = JSON.parse(JSON.stringify(this.dataService.getModel()));
           this.printRendering = true;
           this.isBusy = true;
+
+          // setTimeout(() => {
+          //   let body = ""; 
+          //   const html = this.printDiv.nativeElement.innerHTML;
+          //   body = '<html><head><meta charset="utf-8"/>' +
+          //     '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+          //     + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
+          //   body = body + html + '</body></html>';  
+
+            
+          //   this.dataService.submit(model, body)
+          //     .catch((e) => {
+          //       if (e && e.target && e.target._rootElement) {
+          //         (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
+          //       }
+          //     })
+          //     .finally(() => {
+          //       this.isBusy = false;
+          //       this.printRendering = false;
+          //     });
+          // }, 10000);
           
           const printFunc=() => {
+            console.log("print", new Date());
             let body = ""; 
             const html = this.printDiv.nativeElement.innerHTML;
             body = '<html><head><meta charset="utf-8"/>' +
@@ -73,7 +95,6 @@ export class ACFViewerPage extends AXBasePageComponent {
               + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
             body = body + html + '</body></html>';  
 
-            
             this.dataService.submit(model, body)
               .catch((e) => {
                 if (e && e.target && e.target._rootElement) {
@@ -85,35 +106,35 @@ export class ACFViewerPage extends AXBasePageComponent {
                 this.printRendering = false;
               });
           };
-
-
-          
-
-          setTimeout(()=>{
-
-          const startDate:Date = new Date();
-          console.log("start", new Date());
-          let renderChangeObserver:any=null;
-          Observable.create(observer => {
-            renderChangeObserver = observer;
-        })
-            .pipe(debounceTime(100))
-            .pipe(distinctUntilChanged())
-            .subscribe(c => {
-              const diff = new Date().getTime() - startDate.getTime();
-              console.log("finish", new Date(),diff);
-               printFunc();
+  
+          // timeout for print element visibility
+          setTimeout(() => {
+            console.log("start", new Date());
+            let elementObserver:MutationObserver;
+            //
+            const observerable$ = new Observable<number>(observer => {
+              elementObserver = new MutationObserver(()=>{
+                console.log("length", this.printDiv.nativeElement.innerHTML.length);
+                observer.next(new Date().getTime());
+              });
+              elementObserver.observe( this.printDiv.nativeElement,{ attributes: true, childList: true, characterData: true , subtree : true });
             });
-            
-            this.printDiv.nativeElement.addEventListener("DOMSubtreeModified",()=>{
-              renderChangeObserver.next(new Date().getTime());
-            })
+  
+            const subscription = observerable$
+            .pipe(
+              debounceTime(1000),
+              distinctUntilChanged()
+            )
+            .subscribe(() => {
+              console.log("finish", new Date());
+              printFunc();
+              if(elementObserver)
+                elementObserver.disconnect();
+              subscription.unsubscribe();
+            });
+          }, 500);
 
-          },500);
 
-
-
-     
         }).catch((e) => {
           if (e && e.target && e.target._rootElement) {
             (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });

@@ -9,17 +9,24 @@ import { AXFWidgetPrint } from '../../../config/widget';
 export class AXFOutletWidgetPrint extends AXFWidgetPrint implements OnInit {
     widgetId: string;
     isLoading: boolean = true;
+    loadingTimer:number = 0;
+    loadingInterval:number = -1;
 
     
     constructor( private cdr: ChangeDetectorRef,private templateService: AXFTemplateService) { 
         super();
+        this.loadingTimer = 0;
+        this.loadingInterval = window.setInterval(()=>{
+            this.loadingTimer++;
+            this.cdr.markForCheck();
+        },700);
     }
-   
 
     ngOnInit() {
         this.templateService.get(this.widgetId).then(c => {
             this.widgets = this.widgetService.parse(c.template).options.widgets;
             this.isLoading = false;
+            window.clearInterval(this.loadingInterval);
             this.refresh();
         });
     }

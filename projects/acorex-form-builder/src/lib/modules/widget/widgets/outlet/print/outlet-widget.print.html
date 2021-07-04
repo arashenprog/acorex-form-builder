@@ -2,5 +2,6 @@
     <div *ngFor="let w of widgets" axf-widget-renderer [widget]="w" mode="print" [parent]="this">
     </div>
     <div *ngIf="isLoading && (!widgets || !widgets.length)" class="skeleton" >
+        <span >Loading {{loadingTimer}}</span>
     </div>
 </ng-container>
