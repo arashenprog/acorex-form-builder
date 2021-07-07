@@ -35,7 +35,7 @@ export class ACFViewerPrintPopup extends AXBasePageComponent {
     items: any[] = [
         {
             value: 0,
-            text: 'A4 Portrate'
+            text: 'A4 Portrait'
         },
         {
             value: 1,
@@ -43,7 +43,7 @@ export class ACFViewerPrintPopup extends AXBasePageComponent {
         },
         {
             value: 2,
-            text: 'A3 Portrate'
+            text: 'A3 Portrait'
         },
         {
             value: 4,

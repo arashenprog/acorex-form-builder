@@ -269,6 +269,12 @@ export class AXFDataService {
         });
     }
 
+
+    clearWidgets()
+    {
+        this.widgets={};
+    }
+
     setWidget(name: string, value: any) {
         if (this.widgets[name] == null) {
             this.widgets[name] = value;

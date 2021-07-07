@@ -62,29 +62,7 @@ export class ACFViewerPage extends AXBasePageComponent {
       if (localStorage.getItem("CreateHtml")) {
         this.dataService.validate().then(() => {
           var model = JSON.parse(JSON.stringify(this.dataService.getModel()));
-          this.printRendering = true;
-          this.isBusy = true;
-
-          // setTimeout(() => {
-          //   let body = ""; 
-          //   const html = this.printDiv.nativeElement.innerHTML;
-          //   body = '<html><head><meta charset="utf-8"/>' +
-          //     '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
-          //     + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
-          //   body = body + html + '</body></html>';  
-
-            
-          //   this.dataService.submit(model, body)
-          //     .catch((e) => {
-          //       if (e && e.target && e.target._rootElement) {
-          //         (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
-          //       }
-          //     })
-          //     .finally(() => {
-          //       this.isBusy = false;
-          //       this.printRendering = false;
-          //     });
-          // }, 10000);
+          this.dataService.clearWidgets();
           
           const printFunc=() => {
             console.log("print", new Date());
@@ -108,7 +86,6 @@ export class ACFViewerPage extends AXBasePageComponent {
           };
   
           // timeout for print element visibility
-          setTimeout(() => {
             console.log("start", new Date());
             let elementObserver:MutationObserver;
             //
@@ -119,29 +96,28 @@ export class ACFViewerPage extends AXBasePageComponent {
               });
               elementObserver.observe( this.printDiv.nativeElement,{ attributes: true, childList: true, characterData: true , subtree : true });
             });
-  
             const subscription = observerable$
             .pipe(
-              debounceTime(1000),
+              debounceTime(500),
               distinctUntilChanged()
             )
             .subscribe(() => {
               console.log("finish", new Date());
-              printFunc();
+              //printFunc();
+              setTimeout(printFunc, 3000);
               if(elementObserver)
                 elementObserver.disconnect();
               subscription.unsubscribe();
             });
-          }, 500);
-
-
+            //
+            this.printRendering = true;
+            this.isBusy = true;
         }).catch((e) => {
           if (e && e.target && e.target._rootElement) {
             (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
           }
         }).finally(() => {
           this.isBusy = false; 
-          
         });
       } else {
         this.dataService.validate().then(() => {

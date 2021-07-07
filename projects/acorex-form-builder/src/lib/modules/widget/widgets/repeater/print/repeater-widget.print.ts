@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { AXFWidgetPrint } from '../../../config/widget';
+import { AXFValueWidgetView, AXFWidgetPrint } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 import { WidgetConfig } from '../../../services/widget.service';
 import { AXFRepeaterlWidgetFormula } from '../formula';
@@ -36,7 +36,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
         });
         setTimeout(() => {
             this.cdr.detectChanges();
-        }, 100);
+        }, 500);
     }
 
 
@@ -87,6 +87,9 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
 
     private allItems(): any[] {
         const result = [];
+        if(!this.value && this.dataService['dataModel'][this.getPath()])
+           this.value=this.dataService['dataModel'][this.getPath()];
+
         if (Array.isArray(this.value)) {
             result.push(...this.value);
         }
@@ -106,6 +109,11 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
 
     trackbyFunc(index: number, item: WidgetConfig) {
         return index;
+    }
+
+    ngAfterViewInit() {
+        super.ngAfterViewInit(); 
+        this.cdr.detectChanges();
     }
 
 }

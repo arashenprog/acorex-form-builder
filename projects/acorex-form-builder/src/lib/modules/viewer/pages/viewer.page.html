@@ -5,7 +5,9 @@
     <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [mode]="mode">
     </ng-container>
 </div>
-<div  style="display: none;" *ngIf="printRendering" #print>
-    <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [mode]="'print'">
+<div  style="display: none;"  #print>
+    <ng-container *ngIf="printRendering">
+        <ng-container *ngFor="let w of widgets" axf-widget-renderer [widget]="w" [mode]="'print'" >
+        </ng-container>
     </ng-container>
 </div>

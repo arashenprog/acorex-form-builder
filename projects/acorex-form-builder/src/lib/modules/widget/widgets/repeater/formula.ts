@@ -80,4 +80,20 @@ export class AXFRepeaterlWidgetFormula {
             view.cdr.detectChanges();
         }
     }
+
+    setRequired(widget: string,value:boolean) {
+        const service = (this.ww as any).dataService as AXFDataService;
+        const items: any[] = [];
+        let i = 0; 
+        (this.ww as any).bodyRows.forEach(element => {
+            const w = service.getWidget(`${this.ww.getName()}[${i}].${widget}`);
+            if(w)
+            {
+                if(value)
+                    w.setRequired(value);
+                else
+                    w.validator=null;
+            }  
+        }); 
+    }
 }
