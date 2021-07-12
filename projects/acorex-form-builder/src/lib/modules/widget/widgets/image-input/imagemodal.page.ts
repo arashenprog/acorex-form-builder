@@ -95,18 +95,20 @@ export class ImageModalPage extends AXBasePageComponent {
             var i = new Image()
             i.onload = function () {
                 let result = file;
-                if (i.height > 500) {
-                    var canvas = document.createElement("canvas");
-                    var scale = 500 / i.height;
-                    var iwScaled = i.width * scale;
-                    var ihScaled = i.height * scale;
-                    canvas.width = iwScaled;
-                    canvas.height = ihScaled;
-                    var ctx = canvas.getContext("2d");
-                    ctx.drawImage(i, 0, 0, iwScaled, ihScaled);
-                    var dataURL1 = canvas.toDataURL("image/jpeg", 0.5);
-                    result = dataURL1.replace(/^data:image\/(png|jpg);base64,/, "");
-                }
+                // if (i.height > 500) {
+                //     var canvas = document.createElement("canvas");
+                //     var scale = 500 / i.height;
+                //     var iwScaled = i.width * scale;
+                //     var ihScaled = i.height * scale;
+                //     canvas.width = iwScaled;
+                //     canvas.height = ihScaled;
+                //     var ctx = canvas.getContext("2d");
+                //     ctx.imageSmoothingEnabled = false;
+                //     ctx.imageSmoothingQuality="high";
+                //     ctx.drawImage(i, 0, 0, iwScaled, ihScaled);
+                //     var dataURL1 = canvas.toDataURL("image/jpeg", 0.5);
+                //     result = dataURL1.replace(/^data:image\/(png|jpg);base64,/, "");
+                // }
                 resolved({ w: i.width, h: i.height, src: result })
             };
             i.src = file
@@ -153,6 +155,8 @@ export class ImageModalPage extends AXBasePageComponent {
                 }
                 canvas.height = ch;
                 canvas.width = cw;
+                ctx.imageSmoothingEnabled = false;
+                ctx.imageSmoothingQuality="high";
 
                 ctx.rotate(deg * Math.PI / 180);
                 if (scl != 1)
@@ -161,8 +165,7 @@ export class ImageModalPage extends AXBasePageComponent {
                     ctx.drawImage(i, dx, dy, cw, ch);
                 }
                 else
-                    ctx.drawImage(i, cx, cy);
-                
+                    ctx.drawImage(i, cx, cy); 
                 resolved({ w: cw, h: ch, src: canvas.toDataURL() })
             };
         })
