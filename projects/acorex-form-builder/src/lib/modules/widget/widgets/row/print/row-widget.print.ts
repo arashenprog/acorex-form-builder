@@ -12,7 +12,7 @@ export class AXFRowWidgetPrint extends AXFWidgetPrint {
     bgColor: String;
     boxStyle: AXFBoxStyleValue;
 
-    constructor(
+    constructor(protected cdr: ChangeDetectorRef,
         private hostElement: ElementRef<HTMLTableCellElement>) {
         super()
     }
@@ -24,6 +24,7 @@ export class AXFRowWidgetPrint extends AXFWidgetPrint {
         el.style.boxSizing = "box-sizing";
         el.style.borderSpacing = "0px";
         this.applyStyle(el);
+        this.cdr.detectChanges();
     }
 
 }
