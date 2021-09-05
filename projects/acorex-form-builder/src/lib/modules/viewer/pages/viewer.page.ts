@@ -146,8 +146,6 @@ export class ACFViewerPage extends AXBasePageComponent {
     this.templateService.load().then(data => {
       this.widgets = [this.widgetService.parse(data.template)];
     });
-
- 
   }
 
   ngOnDestroy() {

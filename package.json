@@ -26,7 +26,7 @@
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@hreimer/angular-image-viewer": "^0.9.5",
     "@kolkov/angular-editor": "^1.1.2",
-    "acorex-ui": "file:C:/ACoreX/acorex-ui-2.0.8.tgz",
+    "acorex-ui": "file:C:/ACorex/acorex-ui-2.0.10.tgz",
     "angular2-signaturepad": "^2.9.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",

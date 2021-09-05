@@ -119,4 +119,11 @@ export class AXFWidgetPropPanelComponent {
         this.widget.delete();
     }
 
+    handleBindClick(p:AXFWidgetProperty)
+    {
+        // if(!this.widget.config.options['bindings'])
+        //     this.widget.config.options['bindings']={};
+        // this.widget.config.options['bindings'][p.name]="true";
+    }
+
 }

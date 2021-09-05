@@ -8,8 +8,12 @@ import { AXFWidgetModule } from './modules/widget/config/widget.module';
 import { AXFViewerModule } from './modules/viewer/config/viewer.module';
 import { AXFDataService } from './modules/widget/services/data.service';
 
+/**
+ * @dynamic
+ */
 export function init_app(dataService: AXFDataService) {
-  return () => dataService.init();
+  const x= () => dataService.init();
+  return x;
 }
 
 const MODULES = [

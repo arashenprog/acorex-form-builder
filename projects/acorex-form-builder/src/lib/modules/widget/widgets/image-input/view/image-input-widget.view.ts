@@ -130,7 +130,6 @@ export class AXFImageInputWidgetView extends AXFValueWidgetView {
     }
 
     private onDocPaste(event: ClipboardEvent) {
-        debugger
         if (this.ref.nativeElement == document.activeElement) {
             var items = event.clipboardData.items;
             var blob = items[0].getAsFile();

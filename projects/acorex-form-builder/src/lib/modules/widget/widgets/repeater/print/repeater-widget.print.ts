@@ -16,6 +16,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
 
+
     get formula() {
         return new AXFRepeaterlWidgetFormula(this);
     }
@@ -25,6 +26,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
     }
 
     onRender() {
+        console.log('repeater render',this.config.options.name,this.visible);
         if (this.showHeader) {
             this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
@@ -35,8 +37,9 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
             return cloned;
         });
         setTimeout(() => {
+            this.cdr.markForCheck();
             this.cdr.detectChanges();
-        }, 500);
+        }, 50);
     }
 
 
@@ -64,6 +67,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
 
 
     ngOnInit() {
+        console.log('repeater ngOnInit',this.config.options.name,this.visible);
         if (this.dataSource.mode === 'remote') {
             this.dataSource.dataSource.params.forEach(p => {
                 if (typeof (p.value) === 'string' && p.value.startsWith('$')) {

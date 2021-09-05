@@ -515,6 +515,7 @@ export abstract class AXFWidgetView extends AXFWidget {
             const action: string = this[name];
             if (action) {
                 action.split(';').forEach(act => {
+                    let canceled = false;
                     if (act === 'submit()') {
                         this.eventService.broadcast('__submit');
                         return;
@@ -528,6 +529,9 @@ export abstract class AXFWidgetView extends AXFWidget {
                         allWidgets.forEach(w => {
                             const wname = w.substring(1).startsWith('#') ? w.substring(2) : this.resolveProperty(w.substring(1));
                             const widget = this.dataService.getWidget(wname);
+                            if (widget == null) {
+                                console.log(`${wname} is null`);
+                            }
                             let p = '_' + wname.split('.').join('_');
                             p = p.replace(/\[/, '').replace(/]/, '');
                             params[p] = widget;
@@ -543,11 +547,6 @@ export abstract class AXFWidgetView extends AXFWidget {
                     execCode = execCode.replace(/#/g, 'this.').replace(/\$/g, 'this.$');
                     execCode = execCode.replace(/\[/, '').replace(/]/, '');
                     new Function(`try {${execCode}} catch(e){  console.log(e); }`).call(params);
-                    // widgetRefs.forEach(w => {
-                    //     if (w) {
-                    //         w.refresh();
-                    //     }
-                    // });
                 });
 
             }
@@ -581,6 +580,24 @@ export abstract class AXFWidgetView extends AXFWidget {
     }
 
     protected register() {
+        // if (this.config.bindings) {
+        //     debugger;
+        //     this.dataService.onChange.subscribe(c => {
+
+        //         for (const key in this.config.bindings) {
+        //             debugger;
+        //             if (Object.prototype.hasOwnProperty.call(this.config.bindings, key)) {
+        //                 const expression = this.config.bindings[key];
+        //                 if (expression != null && expression != "") {
+        //                     const val = this.dataService.eval(expression, this.getPath());
+        //                     this[key] = val;
+        //                 }
+        //             }
+        //         }
+
+        //     });
+        // }
+        //console.log(this['bindings']);
         if (this.getName()) {
             this.dataService.setWidget(this.getPath(), this);
         }
@@ -591,6 +608,7 @@ export abstract class AXFWidgetView extends AXFWidget {
             if (this.getName()) {
                 this.dataService.removeWidget(this.getPath());
                 this.dataService.setValue(this.getPath(), null);
+
             }
         }
     }
@@ -688,7 +706,6 @@ export abstract class AXFValueWidgetView extends AXFWidgetView {
     }
 
     setValue(value: any) {
-        debugger;
         this.value = value;
     }
 

@@ -30,6 +30,7 @@ export class EventData {
 @Injectable({ providedIn: 'root' })
 export class AXFDataService {
 
+    private pageLoaded: boolean = false;
     private dataModel: any = {};
     private widgetRegisterChangeObserver: any;
     private widgets: any = {};
@@ -270,19 +271,21 @@ export class AXFDataService {
     }
 
 
-    clearWidgets()
-    {
-        this.widgets={};
+    clearWidgets() {
+        this.widgets = {};
+        this.widgetRegisterChangeObserver = null;
+        this.pageLoaded = false;
     }
 
     setWidget(name: string, value: any) {
-        if (this.widgets[name] == null) {
+        if (this.widgets[name] == null && !this.pageLoaded) {
+            console.log('setwidget: ', name);
             this.widgets[name] = value;
             if (!this.widgetRegisterChangeObserver) {
                 Observable.create(observer => {
                     this.widgetRegisterChangeObserver = observer;
                 })
-                    .pipe(debounceTime(500))
+                    .pipe(debounceTime(50))
                     .pipe(distinctUntilChanged())
                     .subscribe(c => {
                         for (const i in this.widgets) {
@@ -295,9 +298,11 @@ export class AXFDataService {
                                 w.invokeEvent('onInit');
                             }
                         }
+                        this.pageLoaded = true;
+                        console.log('render finish');
                     });
             }
-            this.widgetRegisterChangeObserver.next(name);
+            this.widgetRegisterChangeObserver.next(Object.keys(this.widgets).length);
         }
         else {
             this.widgets[name] = value;
@@ -305,8 +310,11 @@ export class AXFDataService {
             if (!w['__meta__']) {
                 w['__meta__'] = {};
             }
-            w['__meta__'].pageLoaded = true;
-            w.invokeEvent('onInit');
+            if(!w['__meta__'].pageLoaded)
+            {
+                w['__meta__'].pageLoaded = true;
+                w.invokeEvent('onInit');
+            }
         }
     }
 

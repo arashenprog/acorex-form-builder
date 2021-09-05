@@ -138,7 +138,6 @@ export class AXFWidgetRendererDirective {
             });
             this.widgetElement = (widgetComponent.location.nativeElement as HTMLElement);
             this.widgetElement.id = this.widgetConfig.options.uid;
-            debugger;
 
             this.zone.runOutsideAngular(() => {
                 const dropZone = this.widgetElement.querySelector('.axf-drop-zone');

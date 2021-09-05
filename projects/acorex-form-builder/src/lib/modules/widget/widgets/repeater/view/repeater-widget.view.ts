@@ -61,6 +61,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     }
 
     ngOnInit() {
+       
         if (this.dataSource.mode === 'remote') {
             this.dataSource.dataSource.params.forEach(p => {
                 if (typeof (p.value) === 'string' && p.value.startsWith('$')) {

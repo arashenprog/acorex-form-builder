@@ -34,7 +34,6 @@ export class AXFCheckboxInputWidgetView extends AXFValueWidgetView {
     }
 
     ngAfterViewInit() {
-        debugger
         super.ngAfterViewInit();
         if (this.value == undefined && this.defaultValue != undefined) {
             this.value = this.defaultValue;

@@ -3,5 +3,9 @@
   "dest": "../../dist/acorex-form-builder",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "tslib",
+    "acorex-ui"
+  ]
 }

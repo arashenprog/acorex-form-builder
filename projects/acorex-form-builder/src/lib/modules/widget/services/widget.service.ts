@@ -14,6 +14,7 @@ export interface AXFWidgetProperty {
     visible?: boolean | Function;
     options?: any
     order?: number;
+    bindable?:boolean
 }
 
 export interface AXFWidgetToolboxProperty {
@@ -44,7 +45,7 @@ export interface WidgetConfig {
     onRendered?: Subject<WidgetConfig>;
 }
 
-
+// @dynamic
 @Injectable({ providedIn: 'root' })
 export class AXFWidgetService {
 

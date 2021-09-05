@@ -2,17 +2,19 @@
   "name": "acorex-form-builder",
   "version": "0.0.1",
   "scripts": {
-    "start": "ng build acorex-form-builder --watch"
+    "start": "ng build acorex-form-builder --watch",
+    "build": "ng build acorex-form-builder"
   },
   "peerDependencies": {
     "@angular/common": "^9.1.4",
     "@angular/core": "^9.1.4",
-    "@angular/router": "^9.1.4",  
-    "@angular/cdk": "^9.2.2", 
-    "acorex-ui": "file:C:/acorex/acorex-ui-0.0.1.tgz",
+    "@angular/router": "^9.1.4",
+    "@angular/cdk": "^9.2.2",
+    "acorex-ui": "file:C:/acorex/acorex-ui-2.0.10.tgz",
     "angular2-signaturepad": "^2.9.0",
     "@kolkov/angular-editor": "^1.0.0"
   },
-  "dependencies": { 
+  "dependencies": {
+    "acorex-ui": "file:C:/ACorex/acorex-ui-2.0.10.tgz"
   }
 }

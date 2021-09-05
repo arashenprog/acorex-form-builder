@@ -49,6 +49,17 @@ export const AXF_CLICK_EVENT: AXFWidgetProperty = {
     order: 9,
 };
 
+export const AXF_ITEM_CLICK_EVENT: AXFWidgetProperty = {
+    name: 'onItemClick',
+    category: 'Behavior',
+    defaultValue: null,
+    title: 'Item Click',
+    editor: 'EventEditor',
+    options: {
+    },
+    order: 10,
+};
+
 
 
 export const AXF_TEXT_PROPERTY: AXFWidgetProperty = {
@@ -208,7 +219,8 @@ export const AXF_VISIBLE_PROPERTY: AXFWidgetProperty = {
     defaultValue: true,
     title: 'Visible',
     order: 81,
-    editor: 'CheckboxEditor'
+    editor: 'CheckboxEditor',
+    bindable : true
 };
 
 export const AXF_ENABLED_PROPERTY: AXFWidgetProperty = {

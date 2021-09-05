@@ -183,7 +183,6 @@ export class ImageModalPage extends AXBasePageComponent {
             var ih = img.height;
             var iwScaled = iw * that.scale;
             var ihScaled = ih * that.scale;
-            debugger
             var canvas = document.createElement("canvas");
             canvas.width = iwScaled;
             canvas.height = ihScaled;

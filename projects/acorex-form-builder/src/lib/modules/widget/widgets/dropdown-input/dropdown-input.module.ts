@@ -14,7 +14,8 @@ import {
     AXF_VALIDATION_PROPERTY,
     AXF_TAG_PROPERTY,
     AXF_DISPLAY_NAME_PROPERTY,
-    AXF_DATA_TYPE_PROPERTY
+    AXF_DATA_TYPE_PROPERTY,
+    AXF_ITEM_CLICK_EVENT
 } from '../../config/general-properties';
 import { AXFDropdownInputWidgetDesigner } from './designer/dropdown-input-widget.designer';
 import { AXFDropdownInputWidgetPrint } from './print/dropdown-input-widget.print';
@@ -73,6 +74,7 @@ export class AXFDropdownInputWidgetModule {
                 AXF_INIT_EVENT,
                 AXF_VALUE_CHANGE_EVENT,
                 AXF_DATA_BOUND_EVENT,
+                AXF_ITEM_CLICK_EVENT,
                 AXF_VALIDATION_PROPERTY,
                 AXF_TAG_PROPERTY,
                 {

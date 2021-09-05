@@ -6,7 +6,7 @@ export interface AXFEditorConfig {
 }
 
 
-
+// @dynamic
 @Injectable({ providedIn: "root" })
 export class AXFEditorService {
 

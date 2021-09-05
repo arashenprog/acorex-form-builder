@@ -21,8 +21,17 @@
                     <div class="prop-caption">
                         {{e.title}}
                     </div>
-                    <ng-container axf-editor-renderer [property]="e" [widget]="widget">
-                    </ng-container>
+                    <div style="display: flex;flex-direction: row;justify-content: space-between;">
+                        <div style="width: 100%;">
+                            <ng-container axf-editor-renderer [property]="e" [widget]="widget">
+                            </ng-container>
+                        </div>
+                        <div *ngIf="e.bindable" >
+                            <ax-button title="Bind to ..."  type="light" size="sm" (onClick)="handleBindClick(e)">
+                                <i class="fas fa-link" [class.primary]="widget.config.options['bindings'] && widget.config.options['bindings'][e.name]"></i>
+                            </ax-button>
+                        </div>
+                    </div>
                 </div>
             </ax-panel-box>
         </div>

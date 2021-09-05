@@ -16,6 +16,7 @@ export class AXFRowWidgetView extends AXFWidgetView {
     onRender(): void {
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         el.classList.add("row");
+        el.style.display=(this.visible?"flex":"none");
         this.applyStyle(el);    
         this.cdr.detectChanges();    
     }
