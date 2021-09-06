@@ -84,6 +84,7 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
                 this.value = this.value.filter(c => c !== val);
             }
         }
+        this.invokeEvent('onItemClick');
     }
 
     getSize() { 

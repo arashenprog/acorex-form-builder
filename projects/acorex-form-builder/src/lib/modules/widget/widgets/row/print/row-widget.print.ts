@@ -16,13 +16,19 @@ export class AXFRowWidgetPrint extends AXFWidgetPrint {
         private hostElement: ElementRef<HTMLTableCellElement>) {
         super()
     }
+    onRender() {
+        let el = this.hostElement.nativeElement;
+        el.style.display=(this.visible?"table-row-group":"none");
+        this.applyStyle(el);
+        this.cdr.detectChanges();
+    }
 
     ngOnInit() {
         let el = this.hostElement.nativeElement;
         el.style.width = "100%";
         el.style.tableLayout = "fixed";
         el.style.boxSizing = "box-sizing";
-        el.style.borderSpacing = "0px";
+        el.style.borderSpacing = "0px"; 
         this.applyStyle(el);
         this.cdr.detectChanges();
     }
