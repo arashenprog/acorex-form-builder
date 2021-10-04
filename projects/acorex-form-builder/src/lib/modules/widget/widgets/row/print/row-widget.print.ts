@@ -17,10 +17,13 @@ export class AXFRowWidgetPrint extends AXFWidgetPrint {
         super()
     }
     onRender() {
-        let el = this.hostElement.nativeElement;
-        el.style.display=(this.visible?"table-row-group":"none");
-        this.applyStyle(el);
-        this.cdr.detectChanges();
+        if (!this.visible)
+        {
+            let el = this.hostElement.nativeElement; 
+            el.style.display="none";
+            this.applyStyle(el);
+            this.cdr.detectChanges();
+        }
     }
 
     ngOnInit() {

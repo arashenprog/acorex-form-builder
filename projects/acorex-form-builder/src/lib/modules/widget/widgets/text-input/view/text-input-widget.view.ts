@@ -27,7 +27,7 @@ export class AXFTextInputWidgetView extends AXFValueWidgetView {
 
     setDateTime()
     {
-        this.value=new Date().toLocaleDateString()+' ' +new Date().toLocaleTimeString(); 
+        this.value=new Date().toLocaleDateString()+' ' +new Date().toLocaleTimeString('en-GB').substr(0,5); 
         this.cdr.markForCheck();
     }
 }
