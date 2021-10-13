@@ -220,7 +220,7 @@ export const AXF_VISIBLE_PROPERTY: AXFWidgetProperty = {
     title: 'Visible',
     order: 81,
     editor: 'CheckboxEditor',
-    bindable : true
+    bindable: true
 };
 
 export const AXF_ENABLED_PROPERTY: AXFWidgetProperty = {
@@ -367,7 +367,7 @@ export const AXF_BOX_STYLE_PROPERTY: AXFWidgetProperty = {
     category: 'Style',
     defaultValue: new AXFBoxStyleValue(),
     title: 'Box Style',
-   
+
     editor: 'BoxStyleEditor'
 };
 
@@ -453,6 +453,9 @@ export const AXF_STYLE_GENERAL_PROPERTIES: AXFWidgetProperty[] = [
     AXF_BOX_STYLE_PROPERTY,
 ];
 
+function getCustomFonts(): { value: string, title: string }[] {
+    return [{ value: 'IRANSans', title: 'IRAN Sans' }];
+}
 
 export const AXF_FONT_PROPERTY: AXFWidgetProperty = {
     name: 'font',
@@ -467,6 +470,7 @@ export const AXF_FONT_PROPERTY: AXFWidgetProperty = {
             { value: 'Arial', title: 'Arial' },
             { value: 'Tahoma', title: 'Tahoma' },
             { value: 'Times New Roman', title: 'Times New Roman' },
+            ...getCustomFonts()
         ],
     }
 };
@@ -481,7 +485,7 @@ export const AXF_SET_CURRENT_TIME_PROPERTY: AXFWidgetProperty = {
     editor: 'CheckboxEditor'
 };
 
-export const AXF_MINWIDTH_PROPERTY:AXFWidgetProperty ={
+export const AXF_MINWIDTH_PROPERTY: AXFWidgetProperty = {
     name: 'minWidth',
     category: 'General',
     defaultValue: '',
@@ -495,11 +499,11 @@ export const AXF_MINWIDTH_PROPERTY:AXFWidgetProperty ={
 
 export const AXF_ANSWER_PROPERTY: AXFWidgetProperty = {
     name: 'answer',
-    category: 'Data', 
+    category: 'Data',
     title: 'Answer',
     editor: 'AnswerEditor',
     defaultValue: {
-        mode: 'text' ,
-        questionText:'Sample'
+        mode: 'text',
+        questionText: 'Sample'
     }
 };

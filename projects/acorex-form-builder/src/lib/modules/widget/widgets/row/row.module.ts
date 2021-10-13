@@ -6,7 +6,7 @@ import { AXFRowWidgetPrint } from './print/row-widget.print';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_BG_COLOR_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
+import { AXF_BG_COLOR_PROPERTY, AXF_BOX_STYLE_PROPERTY, AXF_INIT_EVENT, AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY } from '../../config/general-properties';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
 
 export const COMPONENTS = [AXFRowWidgetDesigner, AXFRowWidgetView, AXFRowWidgetPrint]
@@ -45,6 +45,7 @@ export class AXFRowWidgetModule {
                 AXF_VISIBLE_PROPERTY,
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_NAME_PROPERTY,
+                AXF_INIT_EVENT
             ],
         })
     }

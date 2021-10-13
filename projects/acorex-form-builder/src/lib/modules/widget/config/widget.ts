@@ -525,6 +525,7 @@ export abstract class AXFWidgetView extends AXFWidget {
                     const widgetRefs: AXFWidget[] = [];
                     let execCode = act;
                     const params = {};
+                    params['$this'] = this;
                     if (allWidgets) {
                         allWidgets.forEach(w => {
                             const wname = w.substring(1).startsWith('#') ? w.substring(2) : this.resolveProperty(w.substring(1));
@@ -544,9 +545,10 @@ export abstract class AXFWidgetView extends AXFWidget {
                             params[v] = v.substring(1).startsWith('$') ? this.dataService.getValue(v.substring(2)) : this.dataService.getValue(this.resolveProperty(v.substring(1)));
                         });
                     }
+                    execCode = execCode.replace('this', '$this');
                     execCode = execCode.replace(/#/g, 'this.').replace(/\$/g, 'this.$');
                     execCode = execCode.replace(/\[/, '').replace(/]/, '');
-                    new Function(`try {${execCode}} catch(e){  console.log(e); }`).call(params);
+                    new Function(`try {${execCode}} catch(e){  console.error(e); }`).call(params);
                 });
 
             }

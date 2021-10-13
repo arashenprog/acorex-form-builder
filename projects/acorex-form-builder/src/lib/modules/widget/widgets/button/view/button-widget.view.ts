@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, ElementRef } from '@angular/core';
 import { AXFWidgetView } from '../../../config/widget';
 
 @Component({
@@ -13,11 +13,16 @@ export class AXFButtonWidgetView extends AXFWidgetView {
     type: string;
     text: string;
     size: string;
-    
 
-    constructor() {
+
+    constructor(private hostElement: ElementRef<HTMLDivElement>) {
         super();
     }
+
+    onRender(): void {
+        this.applyStyle(this.hostElement.nativeElement);
+    }
+
 
 
     handleClickEvent(e: MouseEvent) {

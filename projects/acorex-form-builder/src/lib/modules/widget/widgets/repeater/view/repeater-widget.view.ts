@@ -1,8 +1,9 @@
 import { Component, OnInit, ElementRef, HostBinding, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild } from '@angular/core';
-import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
+import { AXFWidgetView, AXFValueWidgetView, AXFWidget } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 import { WidgetConfig } from '../../../services/widget.service';
 import { AXFRepeaterlWidgetFormula } from '../formula';
+import { AXFTableRowWidgetView } from '../../table-row/view/table-row-widget.view';
 
 @Component({
     selector: "[axf-repeater]",
@@ -46,7 +47,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         }
         setTimeout(() => {
             if (this.bodyRows.length === 0 && !this.readonly) {
-                this.addItemClick();
+                this.addNew();
             } else {
                 this.cdr.detectChanges();
             }
@@ -54,14 +55,19 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     }
 
     addItemClick() {
-        if (this.rowTemplate) {
+        this.addNew();
+    }
+
+
+    addNew() {
+        if (this.rowTemplate && this.dataSource.mode == 'manual' && !this.readonly) {
             this.bodyRows.push(this.widgetService.clone(this.rowTemplate));
         }
         this.cdr.detectChanges();
     }
 
     ngOnInit() {
-       
+
         if (this.dataSource.mode === 'remote') {
             this.dataSource.dataSource.params.forEach(p => {
                 if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
@@ -81,12 +87,12 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
 
     private allItems(): any[] {
         const result = [];
-        if(!this.value && this.dataService['dataModel'][this.getPath()])
-           this.value=this.dataService['dataModel'][this.getPath()];
-       
+        if (!this.value && this.dataService['dataModel'][this.getPath()])
+            this.value = this.dataService['dataModel'][this.getPath()];
+
         if (Array.isArray(this.value)) {
             result.push(...this.value);
-        } 
+        }
         let fixedCols = this.dataSource.columns.filter(d => d.fillByUser == false).map(d => d.fieldName);
         if (Array.isArray(this.dataSource.dataItems)) {
             for (let i = 0; i < this.dataSource.dataItems.length; i++) {
@@ -108,5 +114,21 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
 
     remove(index: number) {
         this.bodyRows.splice(index, 1);
+        this.refresh();
+    }
+
+    deleteRow(widget: AXFWidget) {
+        debugger;
+        if (widget && widget.parent) {
+            let parent = widget.parent
+            while (parent != null) {
+                if (parent instanceof AXFTableRowWidgetView) {
+                    break;
+                }
+                parent = parent.parent;
+            }
+            if (parent)
+                this.bodyRows = this.bodyRows.filter(c => c.options.uid != parent.uid);
+        }
     }
 }

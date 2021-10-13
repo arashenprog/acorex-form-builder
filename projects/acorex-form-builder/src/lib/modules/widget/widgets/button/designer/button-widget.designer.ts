@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, SimpleChanges, ChangeDetectorRef, ChangeDetectionStrategy, ElementRef } from '@angular/core';
 import { AXFWidgetDesigner } from '../../../config/widget';
 
 @Component({
@@ -13,11 +13,12 @@ export class AXFButtonWidgetDesigner extends AXFWidgetDesigner {
     text: string;
     size: string;
 
-    constructor(private cdr: ChangeDetectorRef) {
+    constructor(private cdr: ChangeDetectorRef,private hostElement: ElementRef<HTMLDivElement>) {
         super();
     }
 
     onRender() {
+        this.applyStyle(this.hostElement.nativeElement);
         this.cdr.markForCheck();
     }
 }
