@@ -62,6 +62,14 @@ export class AXFDataService {
         });
     }
 
+    NoValid(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.connectService.send('NoValid').then(() => {
+                resolve();
+            });
+        });
+    }
+
     getValue(name: string) {
         return this.getPropByPath(this.dataModel, name);
     }
@@ -262,6 +270,7 @@ export class AXFDataService {
             }).then(() => {
                 resolve();
             }).catch(() => {
+                debugger
                 reject();
             });
             // }).catch((e) => {

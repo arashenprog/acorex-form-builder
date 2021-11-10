@@ -59,7 +59,7 @@ export class ACFViewerPage extends AXBasePageComponent {
       });
     //
     eventService.on('__submit', (data) => {
-      if (localStorage.getItem("CreateHtml")) {
+      if (localStorage.getItem("CreateHtml")) { 
         this.dataService.validate().then(() => {
           var model = JSON.parse(JSON.stringify(this.dataService.getModel()));
           this.dataService.clearWidgets();
@@ -115,6 +115,7 @@ export class ACFViewerPage extends AXBasePageComponent {
         }).catch((e) => {
           if (e && e.target && e.target._rootElement) {
             (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
+            this.dataService.NoValid();
           }
         }).finally(() => {
           this.isBusy = false; 
@@ -134,6 +135,7 @@ export class ACFViewerPage extends AXBasePageComponent {
         }).catch((e) => {
           if (e && e.target && e.target._rootElement) {
             (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
+            this.dataService.NoValid();
           }
         }).finally(() => {
           this.isBusy = false;
