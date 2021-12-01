@@ -36,8 +36,7 @@ export class AXFImageWidgetPrint extends AXFWidgetPrint {
         const el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
         if(el && el.children.length>0 && this["tag"] && this["tag"]!="")
         {
-            el.firstElementChild.setAttribute("role",this["tag"]); 
-           // this.hostElement.nativeElement.firstElementChild.setAttribute("role",this["tag"]);  
+            this.hostElement.nativeElement.firstElementChild.setAttribute("role",this["tag"]);  
         }
     }
 }
