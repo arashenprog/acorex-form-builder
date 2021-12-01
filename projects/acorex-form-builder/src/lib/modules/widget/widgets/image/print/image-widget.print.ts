@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 import { UploadStructure } from '../../../../property-editor/editors/upload/upload.structure';
 import { AXFFormatService } from '../../../services/format.service'; 
@@ -13,7 +13,7 @@ export class AXFImageWidgetPrint extends AXFWidgetPrint {
     value: UploadStructure; 
     alt:string;
     boxStyle:any;
-    constructor(private formatService: AXFFormatService,private cdr:ChangeDetectorRef) {
+    constructor(private formatService: AXFFormatService,private cdr:ChangeDetectorRef,private hostElement: ElementRef) {
         super()
     }
 
@@ -27,8 +27,17 @@ export class AXFImageWidgetPrint extends AXFWidgetPrint {
             {
                 this.value.srcData=imagurl; 
                 this.cdr.markForCheck();
-            }    
-
+            }     
         }    
+    }
+
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        const el: HTMLElement = (this.hostElement.nativeElement as HTMLElement);
+        if(el && el.children.length>0 && this["tag"] && this["tag"]!="")
+        {
+            el.firstElementChild.setAttribute("role",this["tag"]); 
+           // this.hostElement.nativeElement.firstElementChild.setAttribute("role",this["tag"]);  
+        }
     }
 }

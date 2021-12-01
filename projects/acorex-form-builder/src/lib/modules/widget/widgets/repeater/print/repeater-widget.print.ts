@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { AXFValueWidgetView, AXFWidgetPrint } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
 import { WidgetConfig } from '../../../services/widget.service';
@@ -15,7 +15,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
     headerRows: WidgetConfig[];
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
-
+    @ViewChild("table", { static: true }) table: ElementRef<HTMLTableElement>;
 
     get formula() {
         return new AXFRepeaterlWidgetFormula(this);
@@ -37,6 +37,10 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
             return cloned;
         });
         setTimeout(() => {
+            debugger
+            if (this.hostElement) { 
+                this.applyStyle(<HTMLTableElement>this.hostElement.nativeElement.firstElementChild);
+            }
             this.cdr.markForCheck();
             this.cdr.detectChanges();
         }, 50);

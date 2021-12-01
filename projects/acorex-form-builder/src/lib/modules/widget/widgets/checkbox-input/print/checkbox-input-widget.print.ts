@@ -15,6 +15,7 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
     bgColor: string;
     defaultValue: boolean;
     @ViewChild("el", { static: true }) el: ElementRef<HTMLElement>;
+    @ViewChild("chk", { static: true }) chk: ElementRef<HTMLElement>;
     constructor(protected cdr: ChangeDetectorRef) {
         super();
     }
@@ -28,6 +29,8 @@ export class AXFCheckboxInputWidgetPrint extends AXFWidgetPrint {
         }
         if(this.el)
             this.applyStyle(this.el.nativeElement);
+        if(this["tag"]) 
+            this.chk.nativeElement.setAttribute("role",this["tag"]);  
         this.cdr.detectChanges();
     }
 

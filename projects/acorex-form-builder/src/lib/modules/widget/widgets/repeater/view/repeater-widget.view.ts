@@ -12,7 +12,7 @@ import { AXFTableRowWidgetView } from '../../table-row/view/table-row-widget.vie
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AXFRepeaterWidgetView extends AXFValueWidgetView {
-
+    @ViewChild('table', { static: true }) table: ElementRef<HTMLTableElement>;
     dataSource: AXFDataSourceOption;
     showHeader: boolean;
     headerRows: WidgetConfig[];
@@ -24,7 +24,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         return new AXFRepeaterlWidgetFormula(this);
     }
 
-    constructor(
+    constructor(private hostElement: ElementRef<HTMLDivElement>,
         protected cdr: ChangeDetectorRef) {
         super(cdr);
         this.valueChange.subscribe(() => {
@@ -32,8 +32,9 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             this.cdr.detectChanges();
         });
     }
-
-    onRender() {
+ 
+    onRender() {  
+             
         if (this.showHeader) {
             this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
@@ -45,13 +46,17 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
                 return cloned;
             });
         }
-        setTimeout(() => {
+        setTimeout(() => { 
             if (this.bodyRows.length === 0 && !this.readonly) {
                 this.addNew();
             } else {
                 this.cdr.detectChanges();
             }
+            if (this.hostElement) { 
+                this.applyStyle(<HTMLTableElement>this.hostElement.nativeElement.firstElementChild);
+            }  
         }, 100);
+        
     }
 
     addItemClick() {
@@ -83,6 +88,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         } else {
             this.refresh();
         }
+        
     }
 
     private allItems(): any[] {
