@@ -19,6 +19,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
     allowAdd: boolean;
+    //isResponsive:boolean;
 
     get formula() {
         return new AXFRepeaterlWidgetFormula(this);
@@ -43,6 +44,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             this.bodyRows = this.allItems().map(c => {
                 const cloned = this.widgetService.clone(this.rowTemplate);
                 cloned.dataContext = c;
+                debugger
                 return cloned;
             });
         }
@@ -54,6 +56,9 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             }
             if (this.hostElement) { 
                 this.applyStyle(<HTMLTableElement>this.hostElement.nativeElement.firstElementChild);
+
+                // if(this.isResponsive &&  !(this.hostElement.nativeElement.firstElementChild.classList.contains("reponsive")))
+                //     this.hostElement.nativeElement.firstElementChild.classList.add("reponsive");
             }  
         }, 100);
         
@@ -66,7 +71,15 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
 
     addNew() {
         if (this.rowTemplate && this.dataSource.mode == 'manual' && !this.readonly) {
-            this.bodyRows.push(this.widgetService.clone(this.rowTemplate));
+            let cln=this.widgetService.clone(this.rowTemplate); 
+            // if(this.isResponsive)
+            // {
+            //     cln.options.widgets.forEach(lmn => {
+            //         debugger
+            //         lmn.options.data_header="dfsdf";
+            //     }); 
+            // }
+            this.bodyRows.push(cln);
         }
         this.cdr.detectChanges();
     }
@@ -123,8 +136,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         this.refresh();
     }
 
-    deleteRow(widget: AXFWidget) {
-        debugger;
+    deleteRow(widget: AXFWidget) { 
         if (widget && widget.parent) {
             let parent = widget.parent
             while (parent != null) {

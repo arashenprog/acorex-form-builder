@@ -20,8 +20,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
 
     constructor(protected cdr: ChangeDetectorRef, private ref: ElementRef, private zone: NgZone) {
         super(cdr);
-        this.valueChange.subscribe(() => {
-            debugger;
+        this.valueChange.subscribe(() => { 
             this.selectedItems = this.value ? (Array.isArray(this.value) ? this.value : [this.value]) : [];
             this.cdr.detectChanges();
         });
@@ -34,8 +33,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
         this.cdr.detectChanges();
     }
 
-    ngAfterViewInit() {
-        debugger
+    ngAfterViewInit() { 
         if (this.dataSource.columns.filter(s => s.isDisplay).length > 1) {
             this.displays = this.dataSource.columns.filter(s => s.isDisplay)
                 .map(function (m) { return { dataField: m.fieldName, title: m.title }; });

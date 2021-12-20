@@ -28,6 +28,9 @@ export class AXFTableCellWidgetView extends AXFWidgetView {
         if (!this['width']) {
             this.el.nativeElement.style.width = '100px';
         }
+        // if (this['data_header']) {
+        //     this.el.nativeElement.setAttribute('data-header', this['data_header']); 
+        // }
         this.cdr.detectChanges();
     }
 }

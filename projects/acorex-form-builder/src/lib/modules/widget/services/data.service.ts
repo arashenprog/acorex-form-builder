@@ -269,8 +269,7 @@ export class AXFDataService {
                 html
             }).then(() => {
                 resolve();
-            }).catch(() => {
-                debugger
+            }).catch(() => { 
                 reject();
             });
             // }).catch((e) => {

@@ -36,8 +36,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
             cloned.dataContext = c;
             return cloned;
         });
-        setTimeout(() => {
-            debugger
+        setTimeout(() => { 
             if (this.hostElement) { 
                 this.applyStyle(<HTMLTableElement>this.hostElement.nativeElement.firstElementChild);
             }

@@ -15,52 +15,79 @@
     }
 }
     
-@media only screen and (max-width: 800px) {
-    
-    /* Force table to not be like tables anymore */
-	#no-more-tables table, 
-	#no-more-tables thead, 
-	#no-more-tables tbody, 
-	#no-more-tables th, 
-	#no-more-tables td, 
-	#no-more-tables tr { 
-		display: block; 
-	}
- 
-	/* Hide table headers (but not display: none;, for accessibility) */
-	#no-more-tables thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
- 
-	#no-more-tables tr { border: 1px solid #ccc; }
- 
-	#no-more-tables td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-		white-space: normal;
-		text-align:left;
-	}
- 
-	#no-more-tables td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-		text-align:left;
-		font-weight: bold;
-	}
- 
-	/*
-	Label the data
-	*/
-	#no-more-tables td:before { content: attr(data-title); }
-}
+// @media only screen and (max-width: 800px) {  
+// 	.reponsive {
+// 		margin: 0 auto;
+// 		width: 100%;
+// 		border-spacing: 0;
+
+// 		thead {
+// 			position: absolute;
+// 			clip: rect(1px, 1px, 1px, 1px);
+// 			padding: 0;
+// 			border: 0;
+// 			height: 1px;
+// 			width: 1px;
+// 			overflow: hidden;
+// 		}
+
+// 		tbody{
+// 			display: block;
+// 			padding: 0;
+// 			text-align: left;
+// 			white-space: normal;
+
+// 			tr{
+// 				display: block;
+// 				padding: 0;
+// 				text-align: left;
+// 				white-space: normal;
+
+// 				td {
+// 					display: block;
+// 					padding: 0;
+// 					text-align: left;
+// 					white-space: normal;
+
+// 					padding: 2em 1em; 
+// 					overflow: hidden;
+// 					position: relative; 
+// 					border: 1px solid #EDF0F1;
+// 					border-top: none;
+// 					width: 100%;
+// 					white-space: normal;
+// 				}
+
+// 				td:before {
+// 					content: attr(data-header);
+// 					display: block;
+// 					float: left;
+// 					width: 50%;
+// 					color: #000000;
+// 					font-weight: bold;
+// 					text-align: left;
+// 				}
+
+// 				td > * {
+// 					display: block;
+// 					width: 50%;
+// 					float: right;
+// 					clear: right;
+// 					padding-left: 1em;
+// 					margin-top: 0;
+// 				}
+
+// 				td:after {
+// 					content: "";
+// 					position: absolute;
+// 					left: 0;
+// 					top: 0;
+// 					width: 50%;
+// 					border-right: 1px solid #EDF0F1;
+// 					padding-bottom: 200%;
+// 					display: block;
+// 				}
+// 			}
+// 		}
+// 	}  
+// }

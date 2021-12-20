@@ -93,6 +93,20 @@ export class AXFRepeaterlWidgetModule {
                             return false;
                     }
                 },
+                // {
+                //     name: 'isResponsive',
+                //     category: 'General',
+                //     defaultValue: false,
+                //     title: 'Responsive',
+                //     editor: 'CheckboxEditor',
+                //     options: { label: 'Responsive' },
+                //     visible: (options: any) => {
+                //         if (options.dataSource && options.dataSource.mode == 'manual')
+                //             return true;
+                //         else
+                //             return false;
+                //     }
+                // },
                 AXF_MINWIDTH_PROPERTY
             ]
         })

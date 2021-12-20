@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef, Input } from '@angular/core';
 import { AXFValueWidgetView, AXFWidgetView } from '../../../config/widget';
 import { UploadStructure } from '../../../../property-editor/editors/upload/upload.structure';
 import { AXFFormatService } from '../../../services/format.service';
@@ -7,15 +7,25 @@ import { AXFFormatService } from '../../../services/format.service';
     templateUrl: './image-widget.view.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFImageWidgetView extends AXFValueWidgetView {
-
-    //value: UploadStructure;
+export class AXFImageWidgetView extends AXFWidgetView {
+ 
+    private _value: UploadStructure;
+    @Input()
+    public get value(): UploadStructure {
+        return this._value;
+    }
+    public set value(v: UploadStructure) {
+        if (JSON.stringify(v) !== JSON.stringify(this._value)) {
+            this._value=v;
+            this.cdr.markForCheck(); 
+        }
+    }
 
     constructor(
         private el: ElementRef<HTMLElement>,
         protected cdr: ChangeDetectorRef,
         private formatService: AXFFormatService) {
-        super(cdr); 
+        super(); 
     }
 
 
