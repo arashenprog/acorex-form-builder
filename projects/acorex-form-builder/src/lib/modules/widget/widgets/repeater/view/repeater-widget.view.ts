@@ -4,6 +4,7 @@ import { AXFDataSourceOption } from '../../../../property-editor/editors/data-so
 import { WidgetConfig } from '../../../services/widget.service';
 import { AXFRepeaterlWidgetFormula } from '../formula';
 import { AXFTableRowWidgetView } from '../../table-row/view/table-row-widget.view';
+import { strictEqual } from 'assert';
 
 @Component({
     selector: "[axf-repeater]",
@@ -43,8 +44,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
             this.bodyRows = this.allItems().map(c => {
                 const cloned = this.widgetService.clone(this.rowTemplate);
-                cloned.dataContext = c;
-                debugger
+                cloned.dataContext = c; 
                 return cloned;
             });
         }
@@ -72,6 +72,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     addNew() {
         if (this.rowTemplate && this.dataSource.mode == 'manual' && !this.readonly) {
             let cln=this.widgetService.clone(this.rowTemplate); 
+            cln.dataContext= this.setIndex(this.bodyRows.length);
             // if(this.isResponsive)
             // {
             //     cln.options.widgets.forEach(lmn => {
@@ -82,6 +83,15 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             this.bodyRows.push(cln);
         }
         this.cdr.detectChanges();
+    }
+
+    setIndex(length)
+    {
+        let lIndex=String.fromCharCode((length%26)+97) ;
+        if(Math.floor(length/26)>0)
+            lIndex= String.fromCharCode(Math.floor(length/26)+96)+lIndex;
+        let nIndex=length+1;
+        return { NIndex:nIndex,LIndex:lIndex}
     }
 
     ngOnInit() {
@@ -115,14 +125,15 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         let fixedCols = this.dataSource.columns.filter(d => d.fillByUser == false).map(d => d.fieldName);
         if (Array.isArray(this.dataSource.dataItems)) {
             for (let i = 0; i < this.dataSource.dataItems.length; i++) {
-                const item = this.dataSource.dataItems[i];
+                const item = this.dataSource.dataItems[i]; 
                 if (result[i]) {
                     Object.assign(result[i], fixedCols.reduce(function (o, k) { o[k] = item[k]; return o; }, {}));
                 } else {
                     result[i] = item;
-                }
+                }   
             }
         }
+        result.forEach((f,i)=>f=Object.assign(f, this.setIndex(i)));
         return result;
     }
 

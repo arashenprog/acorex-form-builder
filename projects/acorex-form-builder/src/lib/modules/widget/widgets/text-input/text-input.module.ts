@@ -16,7 +16,9 @@ import {
     AXF_INIT_EVENT,
     AXF_FONT_PROPERTY,
     AXF_DISPLAY_NAME_PROPERTY,
-    AXF_DATA_TYPE_PROPERTY
+    AXF_DATA_TYPE_PROPERTY,
+    AXF_DEFAULT_TEXT_PROPERTY,
+    AXF_COLOR_PROPERTY
 } from '../../config/general-properties';
 import { AXFTextInputWidgetDesigner } from './designer/text-input-widget.designer';
 import { AXFTextInputWidgetPrint } from './print/text-input-widget.print';
@@ -59,7 +61,9 @@ export class AXFTextInputWidgetModule {
                 AXF_READONLY_PROPERTY,
                 AXF_VALUE_CHANGE_EVENT,
                 AXF_INIT_EVENT,
-                AXF_FONT_PROPERTY,
+                AXF_FONT_PROPERTY, 
+                AXF_COLOR_PROPERTY,
+                AXF_DEFAULT_TEXT_PROPERTY
             ]
         })
     }

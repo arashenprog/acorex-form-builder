@@ -9,12 +9,17 @@ export class AXFTextInputWidgetPrint extends AXFWidgetPrint {
     placeholder: string;
     textStyle: string[];
     textAlign:string;
+    color:string;
+    defaultValue:string;
     constructor(private cdr: ChangeDetectorRef) {
         super();
     }
 
     ngAfterViewInit() {
         super.ngAfterViewInit();
+        if (this.value === undefined && this.defaultValue !== undefined) {
+            this.value = this.defaultValue;
+        }
         if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
             this['dataContext'].hasOwnProperty(this['name'])) {
             this.value = this['dataContext'][this['name']];

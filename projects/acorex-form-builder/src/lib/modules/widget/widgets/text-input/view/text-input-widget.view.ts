@@ -11,7 +11,7 @@ export class AXFTextInputWidgetView extends AXFValueWidgetView {
 
     
     placeholder: string; 
-
+    defaultValue: number;
     constructor(protected cdr: ChangeDetectorRef) {
         super(cdr);
     }
@@ -25,9 +25,16 @@ export class AXFTextInputWidgetView extends AXFValueWidgetView {
         this.cdr.markForCheck();
     }
 
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        if (this.value === undefined && this.defaultValue !== undefined) {
+            this.value = this.defaultValue;
+        }
+    }
+
     setDateTime()
     {
-        this.value=new Date().toLocaleDateString()+' ' +new Date().toLocaleTimeString('en-GB').substr(0,5); 
+        this.value=new Date().toLocaleDateString('en-GB')+' ' +new Date().toLocaleTimeString('en-GB').substr(0,5); 
         this.cdr.markForCheck();
     }
 

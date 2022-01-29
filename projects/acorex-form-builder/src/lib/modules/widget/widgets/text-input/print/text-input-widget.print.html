@@ -2,7 +2,8 @@
 'textAlign':textAlign}">
     <span [ngStyle]="{'fontWeight':(textStyle && textStyle.includes('bold')) ? 'bold' : 'inherit',
 'fontStyle':(textStyle && textStyle.includes('italic')) ? 'italic' : 'inherit' ,
-'word-break':(textStyle && textStyle.includes('break')) ? 'break-all' : 'unset'
+'word-break':(textStyle && textStyle.includes('break')) ? 'break-all' : 'unset',
+'color':color
 }">
 {{value ? value : (placeholder? placeholder:'&nbsp;' )}}</span>
 </div>

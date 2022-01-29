@@ -110,6 +110,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
                     result[i] = item;
                 }
             }
+            result.forEach((f,i)=>f=Object.assign(f, this.setIndex(i)));
             return result;
         }
     }
@@ -121,6 +122,15 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
     ngAfterViewInit() {
         super.ngAfterViewInit(); 
         this.cdr.detectChanges();
+    }
+
+    setIndex(length)
+    {
+        let lIndex=String.fromCharCode((length%26)+97) ;
+        if(Math.floor(length/26)>0)
+            lIndex= String.fromCharCode(Math.floor(length/26)+96)+lIndex;
+        let nIndex=length+1;
+        return { NIndex:nIndex,LIndex:lIndex}
     }
 
 }
