@@ -107,7 +107,15 @@ export class AXFRepeaterlWidgetModule {
                 //             return false;
                 //     }
                 // },
-                AXF_MINWIDTH_PROPERTY
+                AXF_MINWIDTH_PROPERTY,
+                {
+                    name: 'indexStart',
+                    category: 'Data',
+                    defaultValue: 1,
+                    title: 'Index Start Number',
+                    editor: 'TextEditor',
+                    options: { allowHtml: false }
+                }
             ]
         })
     }

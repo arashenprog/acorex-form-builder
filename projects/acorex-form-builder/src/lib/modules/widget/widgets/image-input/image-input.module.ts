@@ -34,8 +34,8 @@ export class AXFImageInputWidgetModule {
             printClass: AXFImageInputWidgetPrint,
             viewClass: AXFImageInputWidgetView,
             options: {
-                height: 250,
-                width: 250,
+                height: 150,
+                width: 150,
                 dataType: 'object'
             },
             properties: [

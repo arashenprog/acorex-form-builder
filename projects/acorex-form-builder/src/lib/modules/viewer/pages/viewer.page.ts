@@ -69,7 +69,7 @@ export class ACFViewerPage extends AXBasePageComponent {
             let body = ""; 
             const html = this.printDiv.nativeElement.innerHTML;
             body = '<html><head><meta charset="utf-8"/>' +
-              '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+              '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid } .realRow { page-break-inside: avoid} </style>'
               + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
             body = body + html + '</body></html>';  
 

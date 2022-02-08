@@ -15,9 +15,10 @@ export class AXFImageWidgetView extends AXFWidgetView {
         return this._value;
     }
     public set value(v: UploadStructure) {
-        if (JSON.stringify(v) !== JSON.stringify(this._value)) {
+        if (JSON.stringify(v) !== JSON.stringify(this._value)) { 
             this._value=v;
-            this.cdr.markForCheck(); 
+            this.dataService.setValue(this.getPath(), v);
+            this.cdr.detectChanges();  
         }
     }
 

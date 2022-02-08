@@ -68,7 +68,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
             setTimeout(() => {
                 const html = this.printDiv.nativeElement.innerHTML;
                 let body = '<html><head><meta charset="utf-8"/>' +
-                    '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+                    '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid } .realRow { page-break-inside: avoid} </style>'
                     + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
                 body = body + html + '</body></html>';
 
@@ -157,7 +157,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
                     setTimeout(() => {
                         const html = this.printDiv.nativeElement.innerHTML;
                         let body = '<html><head><meta charset="utf-8"/>' +
-                            '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid }</style>'
+                            '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid } .realRow { page-break-inside: avoid} </style>'
                             + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
                         body = body + html + '</body></html>';
 

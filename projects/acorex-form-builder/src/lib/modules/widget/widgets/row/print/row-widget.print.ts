@@ -32,6 +32,7 @@ export class AXFRowWidgetPrint extends AXFWidgetPrint {
         el.style.tableLayout = "fixed";
         el.style.boxSizing = "box-sizing";
         el.style.borderSpacing = "0px"; 
+        el.classList.add("realRow");
         this.applyStyle(el);
         this.cdr.detectChanges();
     }

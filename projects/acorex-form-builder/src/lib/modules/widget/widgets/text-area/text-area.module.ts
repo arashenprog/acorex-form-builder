@@ -9,8 +9,9 @@ import { AXFTextAreaWidgetDesigner } from './designer/text-area-widget.designer'
 import { AXFTextAreaWidgetPrint } from './print/text-area-widget.print';
 import { AXFTextAreaWidgetView } from './view/text-area-widget.view';
 import { AXFBoxStyleBoxSizeValue } from '../../../property-editor/editors/style/box-style/box-style.class';
+import { ExpandTextPage } from './expandtext.page';
 
-export const COMPONENTS = [AXFTextAreaWidgetDesigner, AXFTextAreaWidgetView, AXFTextAreaWidgetPrint]
+export const COMPONENTS = [AXFTextAreaWidgetDesigner, AXFTextAreaWidgetView, AXFTextAreaWidgetPrint,ExpandTextPage]
 
 @NgModule({
     declarations: [...COMPONENTS],

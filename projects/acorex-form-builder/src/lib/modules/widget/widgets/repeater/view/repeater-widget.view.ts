@@ -20,6 +20,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
     allowAdd: boolean;
+    indexStart:string;
     //isResponsive:boolean;
 
     get formula() {
@@ -87,10 +88,11 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
 
     setIndex(length)
     {
-        let lIndex=String.fromCharCode((length%26)+97) ;
-        if(Math.floor(length/26)>0)
-            lIndex= String.fromCharCode(Math.floor(length/26)+96)+lIndex;
-        let nIndex=length+1;
+        let lLength=length+parseInt(this.indexStart)-1;
+        let lIndex=String.fromCharCode((lLength%26)+97) ;
+        if(Math.floor(lLength/26)>0)
+        lIndex= String.fromCharCode(Math.floor(lLength/26)+96)+lIndex;
+        let nIndex=length+parseInt(this.indexStart);
         return { NIndex:nIndex,LIndex:lIndex}
     }
 

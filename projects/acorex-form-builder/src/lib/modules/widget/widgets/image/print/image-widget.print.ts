@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, Input } from '@angular/core';
 import { AXFWidgetPrint } from '../../../config/widget';
 import { UploadStructure } from '../../../../property-editor/editors/upload/upload.structure';
 import { AXFFormatService } from '../../../services/format.service'; 
@@ -10,11 +10,17 @@ import { AXFFormatService } from '../../../services/format.service';
 })
 export class AXFImageWidgetPrint extends AXFWidgetPrint {
 
-    value: UploadStructure; 
+    value: UploadStructure;   
+    
     alt:string;
     boxStyle:any;
     constructor(private formatService: AXFFormatService,private cdr:ChangeDetectorRef,private hostElement: ElementRef) {
         super()
+         
+    }
+
+    onRender(): void {
+        this.cdr.detectChanges();
     }
 
     ngOnInit()
