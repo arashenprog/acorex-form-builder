@@ -1,2 +1,5 @@
-<ax-text-area [(text)]="value" rows="10" > 
+<ax-text-area [(text)]="value" rows="10" >
 </ax-text-area>
+<div style="text-align: center; padding: 5px;" *ngIf="!readonly">
+    <button (click)="saveChanges()" class="btn btn-primary"> <span>Save </span></button>
+</div>

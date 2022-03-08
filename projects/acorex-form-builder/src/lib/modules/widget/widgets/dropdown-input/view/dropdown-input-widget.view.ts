@@ -11,7 +11,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     @ViewChild('el') el: ElementRef<HTMLElement>;
 
     mode = 'single';
-
+ 
     allowSearch: boolean;
     dataSource: AXFDataSourceOption;
     isLoading = true;
@@ -29,8 +29,13 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     onRender(): void {
         if (this.el) {
             this.applyStyle(this.el.nativeElement);
-        }
-        this.cdr.detectChanges();
+            this.cdr.detectChanges();
+        } 
+        if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
+            this['dataContext'].hasOwnProperty(this['name'])) {
+                this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==this['dataContext'][this['name']]); 
+            this.cdr.detectChanges();
+        } 
     }
 
     ngAfterViewInit() { 

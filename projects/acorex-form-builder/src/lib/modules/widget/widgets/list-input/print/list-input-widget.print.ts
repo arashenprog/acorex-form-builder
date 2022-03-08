@@ -43,6 +43,10 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
                 this.value =defaultVals;
             } 
          }
+         if(!Array.isArray(this.value))
+         {
+            this.value =[this.value.toString()];
+         }
         //  debugger;
         // this.invokeEvent('onValueChange');
         this.cdr.detectChanges();

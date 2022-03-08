@@ -25,8 +25,13 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
         super(cdr);
     }
 
-    onRender(): void {
-        this.cdr.markForCheck();
+    onRender(): void { 
+        if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
+            this['dataContext'].hasOwnProperty(this['name'])) {
+            this.value =[(this['dataContext'][this['name']]).toString()];
+            this.cdr.detectChanges(); 
+        }
+        
     }
 
     ngAfterViewInit() {

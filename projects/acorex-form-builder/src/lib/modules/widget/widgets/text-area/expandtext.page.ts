@@ -16,9 +16,15 @@ export class ExpandTextPage extends AXBasePageComponent {
   @Input()
   public value: string;
    
+  @Input()
+  public readonly:boolean;
 
   // back()
   // {
   //   this.close(null);
   // }
+
+  saveChanges() {
+    this.close(this.value)
+}
 }

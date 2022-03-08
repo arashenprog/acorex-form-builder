@@ -44,13 +44,13 @@ export class AXFFormatService {
             if (list) {
                 list.forEach(w => {
                     const ww: AXFWordWithPipe = this.decompose(w.substring(1, w.length - 1));
-                    let word: any = ww.word;
+                    let word: any = ww.word; 
                     if (widget) {
                         if (word.startsWith('$$')) {
                             word = this.dataService.getValue(word.substring(2));
                         } else if (word.startsWith('$')) {
                             word = this.dataService.getValue(widget.resolveProperty(word.substring(1)));
-                        } else if (widget.config.dataContext) {
+                        } else if (widget.config.dataContext && widget.config.dataContext.hasOwnProperty(ww.word)) {
                             word = widget.config.dataContext[ww.word];
                         } else {
                             word = this.dataService.getWord(word);

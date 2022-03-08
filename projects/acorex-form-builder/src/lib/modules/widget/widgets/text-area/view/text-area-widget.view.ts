@@ -31,6 +31,7 @@ export class AXFTextAreaWidgetView extends AXFValueWidgetView {
     }
 
     ngAfterViewInit() {
+        super.ngAfterViewInit();
         let el: HTMLElement = (this.hostElement.nativeElement as HTMLElement); 
         let axButtonPlace=(el.firstElementChild.firstElementChild.firstChild.lastChild as HTMLElement);
         axButtonPlace.innerHTML='<ax-button style="bottom: 2px;position: absolute;right: 6px;"/></ax-button>';
@@ -41,11 +42,14 @@ export class AXFTextAreaWidgetView extends AXFValueWidgetView {
         button.onclick = function(){  
             that.popupService.open(ExpandTextPage, {
                 title: "Expand Text",
-                size: "lg",
+                size: "md",
                 data: {
-                    value: that.value
+                    value: that.value,
+                    readonly:that.readonly
                 }
             }).closed(c => {
+                if(c.data)
+                that.value=c.data;
             })
         };
         (axButtonPlace.firstChild as HTMLElement).append(button);
