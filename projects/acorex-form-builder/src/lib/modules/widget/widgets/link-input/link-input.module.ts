@@ -20,11 +20,11 @@ import {
     AXF_DEFAULT_TEXT_PROPERTY,
     AXF_COLOR_PROPERTY
 } from '../../config/general-properties';
-import { AXFTextInputWidgetDesigner } from './designer/text-input-widget.designer';
-import { AXFTextInputWidgetPrint } from './print/text-input-widget.print';
-import { AXFTextInputWidgetView } from './view/text-input-widget.view';
+import { AXFLinkInputWidgetDesigner } from './designer/link-input-widget.designer';
+import { AXFLinkInputWidgetPrint } from './print/link-input-widget.print';
+import { AXFLinkInputWidgetView } from './view/link-input-widget.view';
 
-export const COMPONENTS = [AXFTextInputWidgetDesigner, AXFTextInputWidgetView, AXFTextInputWidgetPrint]
+export const COMPONENTS = [AXFLinkInputWidgetDesigner, AXFLinkInputWidgetView, AXFLinkInputWidgetPrint]
 
 @NgModule({
     declarations: [...COMPONENTS],
@@ -33,18 +33,18 @@ export const COMPONENTS = [AXFTextInputWidgetDesigner, AXFTextInputWidgetView, A
     entryComponents: [...COMPONENTS],
     providers: [],
 })
-export class AXFTextInputWidgetModule {
+export class AXFLinkInputWidgetModule {
     constructor(service: AXFWidgetService) {
         service.register({
-            title: 'Text Input',
-            hint: 'Text input element',
-            icon: 'fas fa-i-cursor',
+            title: 'Link Input',
+            hint: 'Link input element',
+            icon: 'fas fa-link',
             category: 'Editors',
             visible: true,
-            name: 'textbox',
-            designerClass: AXFTextInputWidgetDesigner,
-            printClass: AXFTextInputWidgetPrint,
-            viewClass: AXFTextInputWidgetView,
+            name: 'link',
+            designerClass: AXFLinkInputWidgetDesigner,
+            printClass: AXFLinkInputWidgetPrint,
+            viewClass: AXFLinkInputWidgetView,
             options: { 
                 dataType:'string'
             },
@@ -62,17 +62,15 @@ export class AXFTextInputWidgetModule {
                 AXF_VALUE_CHANGE_EVENT,
                 AXF_INIT_EVENT,
                 AXF_FONT_PROPERTY, 
-                AXF_COLOR_PROPERTY,
-                AXF_DEFAULT_TEXT_PROPERTY,
                 {
-                    name: 'allowExtend',
-                    category: 'General',
-                    defaultValue: false,
-                    title: 'Allow Extend',
-                    order: 81,
-                    editor: 'CheckboxEditor',
-                    bindable: true
-                }
+                    name: 'color',
+                    category: 'Style',
+                    defaultValue: '#007bff',
+                    title: 'Color',
+                    order: 31,
+                    editor: 'ColorEditor'
+                },
+                AXF_DEFAULT_TEXT_PROPERTY
             ]
         })
     }

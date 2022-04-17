@@ -1,15 +1,13 @@
 import { Component, OnInit, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
-import { AXFValidatorProp } from '../../../../property-editor/editors/validation/validation.class';
-import { ExpandTextPage } from '../../text-area/expandtext.page';
+import { AXFValidatorProp } from '../../../../property-editor/editors/validation/validation.class'; 
 import { AXPopupService } from 'acorex-ui';
 
 @Component({
-    templateUrl: './text-input-widget.view.html',
-    styleUrls: ['./text-input-widget.view.scss'],
+    templateUrl: './link-input-widget.view.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AXFTextInputWidgetView extends AXFValueWidgetView {
+export class AXFLinkInputWidgetView extends AXFValueWidgetView {
 
     
     placeholder: string; 
@@ -34,31 +32,9 @@ export class AXFTextInputWidgetView extends AXFValueWidgetView {
             this.value = this.defaultValue;
         }
     }
-
-    setDateTime()
-    {
-        this.value=new Date().toLocaleDateString('en-GB')+' ' +new Date().toLocaleTimeString('en-GB').substr(0,5); 
-        this.cdr.markForCheck();
-    }
-
-    setTime()
-    {
-        this.value = new Date().toLocaleTimeString('en-GB').substr(0,5); 
-        this.cdr.markForCheck();
-    }
-
-    extendData()
-    {
-        this.popupService.open(ExpandTextPage, {
-            title: "Expand Text",
-            size: "md",
-            data: {
-                value: this.value,
-                readonly:this.readonly
-            }
-        }).closed(c => {
-            if(c.data)
-            this.value=c.data;
-        })
+  
+    direct()
+    { 
+        window.open(this.value,"_blank");
     }
 }

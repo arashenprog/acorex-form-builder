@@ -43,7 +43,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         }
         if (!this.readonly || this.bodyRows === undefined) {
             this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
-            this.bodyRows = this.allItems().map(c => {
+            this.bodyRows = this.allItems().filter(s=>s!=null).map(c => {
                 const cloned = this.widgetService.clone(this.rowTemplate);
                 cloned.dataContext = c; 
                 return cloned;
@@ -129,13 +129,16 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             for (let i = 0; i < this.dataSource.dataItems.length; i++) {
                 const item = this.dataSource.dataItems[i]; 
                 if (result[i]) {
-                    Object.assign(result[i], fixedCols.reduce(function (o, k) { o[k] = item[k]; return o; }, {}));
+                    if(this.value[i].hasOwnProperty("btnDelete"))
+                        result[i] =null;
+                    else
+                        Object.assign(result[i], fixedCols.reduce(function (o, k) { o[k] = item[k]; return o; }, {}));
                 } else {
                     result[i] = item;
                 }   
             }
         }
-        result.forEach((f,i)=>f=Object.assign(f, this.setIndex(i)));
+        result.filter(s=>s!=null).forEach((f,i)=>f=Object.assign(f, this.setIndex(i))); 
         return result;
     }
 

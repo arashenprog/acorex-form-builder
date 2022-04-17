@@ -19,6 +19,10 @@ export class AXFDateInputWidgetPrint extends AXFWidgetPrint {
 
     ngAfterViewInit() {
         super.ngAfterViewInit();
+        if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
+            this['dataContext'].hasOwnProperty(this['name'])) {
+            this.value =new AXDateTime((this['dataContext'][this['name']]).toString()); 
+        } 
         if(!this.value && this.setCurrent)
             this.value=new Date();
         this.cdr.detectChanges();

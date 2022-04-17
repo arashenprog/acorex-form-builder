@@ -1,2 +1,5 @@
 <ax-text-box [(text)]="value" *ngIf="visible" [placeholder]="placeholder" [readonly]="readonly" >
+    <ax-button *ngIf="allowExtend" (onClick)="extendData()">
+         <i class="fa-expand fas"></i>  
+    </ax-button>
 </ax-text-box>

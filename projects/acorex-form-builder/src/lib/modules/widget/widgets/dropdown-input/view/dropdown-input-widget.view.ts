@@ -33,7 +33,27 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
         } 
         if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
             this['dataContext'].hasOwnProperty(this['name'])) {
-                this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==this['dataContext'][this['name']]); 
+                if(this.dataSource.mode=='remote')
+                {
+                    this.dataSource.dataSource.params.forEach(p => {
+                        if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
+                            const name = p.value.substring(1);
+                            p.value = () => {
+                                return '$' + this.resolveProperty(name);
+                            };
+                        }
+                    });
+                    this.dataService.getList(
+                        this.dataSource.dataSource.name,
+                        this.dataSource.dataSource.params
+                    ).then(c => {
+                        this.dataSource.dataItems = c;
+                        this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==this['dataContext'][this['name']]); 
+                        this.dataBound();
+                    });
+                }
+                else
+                    this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==this['dataContext'][this['name']]); 
             this.cdr.detectChanges();
         } 
     }
