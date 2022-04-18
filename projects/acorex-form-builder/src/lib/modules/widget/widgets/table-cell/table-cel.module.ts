@@ -82,6 +82,17 @@ export class AXFTableCellWidgetModule {
                     order: 0,
                     editor: "CheckboxEditor",
                     visible:false 
+                },
+                {
+                    name: 'title',
+                    category: 'General',
+                    defaultValue: '',
+                    title: 'Responsive Label',
+                    editor: 'TextEditor',
+                    order: 11,
+                    options: {
+                        allowHtml: false
+                    }
                 }
             ]
         })

@@ -10,11 +10,46 @@
         td,th {
             height: 50px;
             min-width: 50px;
-        }
+        } 
+    }
+    @media (max-width: 800px) { 
+        table.reponsive>thead>tr { 
+                background-color: red !important;
+                position: absolute !important;
+                top: -9999px !important;
+                left: -9999px !important;
+            } 
 
+        
     }
 }
+// @media only screen and (max-width: 800px) { 
+//     //:host {  
+//         thead tr { 
+//             position: absolute !important;
+//             top: -9999px !important;
+//             left: -9999px !important;
+//         }
+//         table td {    
+//             position: relative;
+//             padding-left: 50%; 
+//             white-space: normal;
+//             text-align:left;
+//         }         
+//         table td:before {  
+//                 position: absolute; 
+//                 top: 6px;
+//                 left: 6px;
+//                 width: 45%; 
+//                 padding-right: 10px; 
+//                 white-space: nowrap;
+//                 text-align:left; 
+//                 font-weight: bold;
+//             } 
+//         table td:before { content: attr(data-title); }
     
+// }
+
 // @media only screen and (max-width: 800px) {  
 // 	.reponsive {
 // 		margin: 0 auto;

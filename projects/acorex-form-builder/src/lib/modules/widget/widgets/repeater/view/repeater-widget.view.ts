@@ -21,7 +21,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     rowTemplate: WidgetConfig;
     allowAdd: boolean;
     indexStart:string;
-    //isResponsive:boolean;
+    isResponsive:boolean;
 
     get formula() {
         return new AXFRepeaterlWidgetFormula(this);
@@ -57,9 +57,9 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             }
             if (this.hostElement) { 
                 this.applyStyle(<HTMLTableElement>this.hostElement.nativeElement.firstElementChild);
-
-                // if(this.isResponsive &&  !(this.hostElement.nativeElement.firstElementChild.classList.contains("reponsive")))
-                //     this.hostElement.nativeElement.firstElementChild.classList.add("reponsive");
+                
+                if(this.isResponsive &&  !(this.hostElement.nativeElement.firstElementChild.classList.contains("reponsive")))
+                    this.hostElement.nativeElement.firstElementChild.classList.add("reponsive");
             }  
         }, 100);
         

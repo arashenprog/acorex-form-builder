@@ -1,0 +1,15 @@
+ 
+@media (max-width: 800px) { 
+    .reponsive{
+        thead tr{  
+            position: absolute !important;
+            top: -9999px !important;
+            left: -9999px !important;
+        }
+        tr{
+            display: block; 
+            border: 1px solid;
+        } 
+
+    }
+}

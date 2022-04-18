@@ -43,7 +43,7 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
                 this.value =defaultVals;
             } 
          }
-         if(!Array.isArray(this.value))
+         if(this.value && !Array.isArray(this.value))
          {
             this.value =[this.value.toString()];
          }
