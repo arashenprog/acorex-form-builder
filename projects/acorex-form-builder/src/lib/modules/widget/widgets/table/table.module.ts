@@ -50,7 +50,15 @@ export class AXFTableWidgetModule {
                 AXF_BOX_STYLE_PROPERTY,
                 AXF_TABLE_LAYOUT_PROPERTY,
                 AXF_MINWIDTH_PROPERTY,
-                AXF_NAME_PROPERTY, 
+                AXF_NAME_PROPERTY,
+                {
+                    name: 'isResponsive',
+                    category: 'General',
+                    defaultValue: false,
+                    title: 'Responsive',
+                    editor: 'CheckboxEditor',
+                    options: { label: 'Responsive' }
+                },
             ],
         })
     }

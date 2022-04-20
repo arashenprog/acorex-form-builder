@@ -8,7 +8,7 @@
     </div> 
     <cdk-virtual-scroll-viewport itemSize="30" class="fact-scroll-viewport"> 
         <div *cdkVirtualFor="let item of dataSource" class="fact-item"
-        (click)="selectItem(item)" [ngClass]="{'fact-item-single': ww.mode=='single','fact-item-multiple':ww.mode=='multiple' && showChecked(item)}">
+        (click)="selectItem(item)" [ngClass]="{'fact-item-single': ww.mode=='single' && showChecked(item),'fact-item-multiple':ww.mode=='multiple' && showChecked(item)}">
             <div *ngFor="let col of ww.dataSource.columns"  class="fact-cell"
             [ngStyle]="{'width':(columnCount==1)?null:(100.0/columnCount)+'%'}">
              {{item[col.fieldName]}}</div> 

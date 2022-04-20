@@ -58,8 +58,8 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             if (this.hostElement) { 
                 this.applyStyle(<HTMLTableElement>this.hostElement.nativeElement.firstElementChild);
                 
-                if(this.isResponsive &&  !(this.hostElement.nativeElement.firstElementChild.classList.contains("reponsive")))
-                    this.hostElement.nativeElement.firstElementChild.classList.add("reponsive");
+                if(this.isResponsive &&  !(this.hostElement.nativeElement.firstElementChild.classList.contains("responsive")))
+                    this.hostElement.nativeElement.firstElementChild.classList.add("responsive");
             }  
         }, 100);
         

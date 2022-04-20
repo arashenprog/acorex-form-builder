@@ -36,7 +36,13 @@ export class LovModalPage extends AXBasePageComponent {
     ngOnInit() {   
         this.columnCount=this.ww.dataSource.columns.length; 
         if(this.ww.value)
-            this.vals=this.ww.value;
+        {
+            if(this.ww.mode=="single")
+                this.vals=[this.ww.value];
+            else
+                this.vals=this.ww.value;
+        }
+            
     }
 
     onChange(e)

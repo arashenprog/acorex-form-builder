@@ -9,6 +9,7 @@ import { AXFTableWidgetFormula } from '../formula';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AXFTableWidgetView extends AXFWidgetView {
+    isResponsive:boolean;
 
     @ViewChild('table', { static: true }) table: ElementRef<HTMLTableElement>;
     constructor(
@@ -23,6 +24,8 @@ export class AXFTableWidgetView extends AXFWidgetView {
     onRender() { 
         if (this.table) {
             this.applyStyle(this.table.nativeElement);
+            if(this.isResponsive &&  !(this.table.nativeElement.classList.contains("responsive")))
+                    this.table.nativeElement.classList.add("responsive");
             this.cdr.markForCheck();
         }
     }

@@ -29,10 +29,23 @@ export class AXFTableCellWidgetView extends AXFWidgetView {
         if (!this['width']) {
             this.el.nativeElement.style.width = '100px';
         }
-        if(this.rIndex>-1 && this.title && this.title!="")
+        if (this.rIndex>-1 || this.el.nativeElement.parentElement.parentElement.parentElement.classList.contains("responsive"))
         {
-            this.el.nativeElement.setAttribute("data-title",this.title)
+            if(this.title && this.title!="") { 
+                this.el.nativeElement.setAttribute("data-title",this.title)
+            }
+            else 
+            {
+                if(this.el.nativeElement.parentElement.parentElement.localName=='tbody')
+                {
+                    let tt= this.el.nativeElement.parentElement.parentElement.firstElementChild.children[this.el.nativeElement.cellIndex].getAttribute("data-title")
+                    if(tt && tt!="") {
+                     this.el.nativeElement.setAttribute("data-title",tt)
+                    }
+                } 
+            }
         }
+        
         // if (this['data_header']) {
         //     this.el.nativeElement.setAttribute('data-header', this['data_header']); 
         // }

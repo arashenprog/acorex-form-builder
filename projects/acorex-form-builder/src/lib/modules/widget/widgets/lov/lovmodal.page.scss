@@ -11,17 +11,24 @@
   font-weight: bold; 
   } 
 
-  .fact-item-single:hover{
-    background-color: #6ab8f7;
+  .fact-item-single .fact-cell{
+    background-color: var(--primary-color);
+    color: var(--white-color);
   }
 
-  .fact-item-multiple{
-    background-color: #6ab8f7;
+  .fact-item-multiple .fact-cell{
+    background-color: var(--primary-color);
+    color: var(--white-color);
   }
 
+  .fact-item:hover .fact-cell{
+    background-color: var(--primary-color);
+    color: var(--white-color);
+  }
   .fact-item {
     // height: 40px; 
     cursor: default;
+    
 
     .fact-cell {
       border: 1px solid #dee2e6;

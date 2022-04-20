@@ -13,4 +13,17 @@
         }
 
     }
+
+    @media (max-width: 800px) { 
+        table.responsive{
+            min-width: auto !important;
+        }
+        table.responsive>thead>tr {  
+                position: absolute !important;
+                top: -9999px !important;
+                left: -9999px !important;
+            } 
+
+        
+    }
 }
