@@ -72,12 +72,12 @@ export class AXFRepeaterlWidgetModule {
                     title: 'Allow Add Item',
                     editor: 'CheckboxEditor',
                     options: { label: 'Allow Add Item' },
-                    visible: (options: any) => {
-                        if (options.dataSource && options.dataSource.mode == 'manual')
-                            return true;
-                        else
-                            return false;
-                    }
+                    // visible: (options: any) => {
+                    //     if (options.dataSource && options.dataSource.mode == 'manual')
+                    //         return true;
+                    //     else
+                    //         return false;
+                    // }
                 },
                 {
                     name: 'deleteItem',

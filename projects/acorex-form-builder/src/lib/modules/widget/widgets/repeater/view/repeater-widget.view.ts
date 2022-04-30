@@ -20,8 +20,8 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     bodyRows: WidgetConfig[];
     rowTemplate: WidgetConfig;
     allowAdd: boolean;
-    indexStart:string;
-    isResponsive:boolean;
+    indexStart: string;
+    isResponsive: boolean;
 
     get formula() {
         return new AXFRepeaterlWidgetFormula(this);
@@ -35,34 +35,34 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             this.cdr.detectChanges();
         });
     }
- 
-    onRender() {  
-             
+
+    onRender() {
+
         if (this.showHeader) {
             this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
         if (!this.readonly || this.bodyRows === undefined) {
             this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
-            this.bodyRows = this.allItems().filter(s=>s!=null).map(c => {
+            this.bodyRows = this.allItems().filter(s => s != null).map(c => {
                 const cloned = this.widgetService.clone(this.rowTemplate);
-                cloned.dataContext = c; 
+                cloned.dataContext = c;
                 return cloned;
             });
         }
-        setTimeout(() => { 
+        setTimeout(() => {
             if (this.bodyRows.length === 0 && !this.readonly) {
                 this.addNew();
             } else {
                 this.cdr.detectChanges();
             }
-            if (this.hostElement) { 
+            if (this.hostElement) {
                 this.applyStyle(<HTMLTableElement>this.hostElement.nativeElement.firstElementChild);
-                
-                if(this.isResponsive &&  !(this.hostElement.nativeElement.firstElementChild.classList.contains("responsive")))
+
+                if (this.isResponsive && !(this.hostElement.nativeElement.firstElementChild.classList.contains("responsive")))
                     this.hostElement.nativeElement.firstElementChild.classList.add("responsive");
-            }  
+            }
         }, 100);
-        
+
     }
 
     addItemClick() {
@@ -71,29 +71,26 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
 
 
     addNew() {
-        if (this.rowTemplate && this.dataSource.mode == 'manual' && !this.readonly) {
-            let cln=this.widgetService.clone(this.rowTemplate); 
-            cln.dataContext= this.setIndex(this.bodyRows.length);
-            // if(this.isResponsive)
-            // {
-            //     cln.options.widgets.forEach(lmn => {
-            //         debugger
-            //         lmn.options.data_header="dfsdf";
-            //     }); 
-            // }
+        if (this.dataSource.mode == "remote") {
+            this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
+            if(!this.bodyRows)
+                this.bodyRows = [];
+        }
+        if (this.rowTemplate && !this.readonly) {//&& this.dataSource.mode == 'manual'
+            let cln = this.widgetService.clone(this.rowTemplate);
+            cln.dataContext = this.setIndex(this.bodyRows.length);
             this.bodyRows.push(cln);
         }
         this.cdr.detectChanges();
     }
 
-    setIndex(length)
-    {
-        let lLength=length+parseInt(this.indexStart)-1;
-        let lIndex=String.fromCharCode((lLength%26)+97) ;
-        if(Math.floor(lLength/26)>0)
-        lIndex= String.fromCharCode(Math.floor(lLength/26)+96)+lIndex;
-        let nIndex=length+parseInt(this.indexStart);
-        return { NIndex:nIndex,LIndex:lIndex}
+    setIndex(length) {
+        let lLength = length + parseInt(this.indexStart) - 1;
+        let lIndex = String.fromCharCode((lLength % 26) + 97);
+        if (Math.floor(lLength / 26) > 0)
+            lIndex = String.fromCharCode(Math.floor(lLength / 26) + 96) + lIndex;
+        let nIndex = length + parseInt(this.indexStart);
+        return { NIndex: nIndex, LIndex: lIndex }
     }
 
     ngOnInit() {
@@ -113,7 +110,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         } else {
             this.refresh();
         }
-        
+
     }
 
     private allItems(): any[] {
@@ -125,20 +122,22 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             result.push(...this.value);
         }
         let fixedCols = this.dataSource.columns.filter(d => d.fillByUser == false).map(d => d.fieldName);
+        
         if (Array.isArray(this.dataSource.dataItems)) {
-            for (let i = 0; i < this.dataSource.dataItems.length; i++) {
-                const item = this.dataSource.dataItems[i]; 
+            let i = 0;
+            for (; i < this.dataSource.dataItems.length; i++) {
+                const item = this.dataSource.dataItems[i];
                 if (result[i]) {
-                    if(this.value[i].hasOwnProperty("btnDelete"))
-                        result[i] =null;
+                    if (this.value[i].hasOwnProperty("btnDelete"))
+                        result[i] = null;
                     else
                         Object.assign(result[i], fixedCols.reduce(function (o, k) { o[k] = item[k]; return o; }, {}));
                 } else {
                     result[i] = item;
-                }   
-            }
+                }
+            } 
         }
-        result.filter(s=>s!=null).forEach((f,i)=>f=Object.assign(f, this.setIndex(i))); 
+        result.filter(s => s != null).forEach((f, i) => f = Object.assign(f, this.setIndex(i)));
         return result;
     }
 
@@ -152,7 +151,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         this.refresh();
     }
 
-    deleteRow(widget: AXFWidget) { 
+    deleteRow(widget: AXFWidget) {
         if (widget && widget.parent) {
             let parent = widget.parent
             while (parent != null) {

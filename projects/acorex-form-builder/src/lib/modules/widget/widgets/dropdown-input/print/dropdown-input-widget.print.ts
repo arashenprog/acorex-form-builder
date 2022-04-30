@@ -19,43 +19,59 @@ export class AXFDropdownInputWidgetPrint extends AXFWidgetPrint {
     onRender(): void {
         if (this.el) {
             this.applyStyle(this.el.nativeElement);
-        } 
+            this.binding(); 
+        }
         this.cdr.detectChanges();
     }
 
     ngAfterViewInit() {
         super.ngAfterViewInit();
-        if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
-            this['dataContext'].hasOwnProperty(this['name'])) {
-                if(this.dataSource.mode=='remote')
-                {
-                    this.dataSource.dataSource.params.forEach(p => {
-                        if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
-                            const name = p.value.substring(1);
-                            p.value = () => {
-                                return '$' + this.resolveProperty(name);
-                            };
-                        }
-                    });
-                    this.dataService.getList(
-                        this.dataSource.dataSource.name,
-                        this.dataSource.dataSource.params
-                    ).then(c => {
-                        this.dataSource.dataItems = c;
-                        this.value = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==this['dataContext'][this['name']]); 
-                    });
-                }
-                else
-                    this.value = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==this['dataContext'][this['name']]);
-        }
-        if (this.value) {
-            if (Array.isArray(this.value)) {
-                this.text = this.value.map(c => c[this.dataSource.columns[1]['fieldName']]).join(', ');
+        //this.binding();
+    }
+
+    prepareText(val) {
+        if (val) {
+            if (Array.isArray(val)) {
+                this.text = val.map(c => c[this.dataSource.columns[1]['fieldName']]).join(', ');
             }
             else {
-                this.text = this.value[this.dataSource.columns[1]['fieldName']];
+                this.text = val[this.dataSource.columns[1]['fieldName']];
             }
             this.cdr.detectChanges();
         }
+    }
+
+    binding() {
+        if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
+            this['dataContext'].hasOwnProperty(this['name'])) {
+            if (this.dataSource.mode == 'remote') {
+                this.dataSource.dataSource.params.forEach(p => {
+                    if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
+                        const name = p.value.substring(1);
+                        p.value = () => {
+                            return '$' + this.resolveProperty(name);
+                        };
+                    }
+                });
+
+                this.dataService.getList(
+                    this.dataSource.dataSource.name,
+                    this.dataSource.dataSource.params
+                ).then(c => {
+                    this.dataSource.dataItems = c;
+                    let val = this['dataContext'][this['name']];
+                    if (typeof this['dataContext'][this['name']] == 'object')
+                        val = this['dataContext'][this['name']][this.dataSource.columns[0]['fieldName']];
+                    this.value = this.dataSource.dataItems.filter(w => w[this.dataSource.columns[0]['fieldName']] == val);
+                     this.prepareText(this.value);
+                });
+            }
+            else {
+                this.value = this.dataSource.dataItems.filter(w => w[this.dataSource.columns[0]['fieldName']] == this['dataContext'][this['name']]);
+                this.prepareText(this.value);
+            }
+        }
+        else
+         this.prepareText(this.value); 
     }
 }

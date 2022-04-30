@@ -27,7 +27,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
     }
 
     onRender() {
-        console.log('repeater render',this.config.options.name,this.visible);
+        
         if (this.showHeader) {
             this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
         }
@@ -36,7 +36,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
             const cloned = this.widgetService.clone(this.rowTemplate);
             cloned.dataContext = c;
             return cloned;
-        });
+        }); 
         setTimeout(() => { 
             if (this.hostElement) { 
                 this.applyStyle(<HTMLTableElement>this.hostElement.nativeElement.firstElementChild);

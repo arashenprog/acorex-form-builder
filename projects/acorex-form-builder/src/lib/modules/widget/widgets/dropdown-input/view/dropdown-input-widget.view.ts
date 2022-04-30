@@ -48,7 +48,10 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
                         this.dataSource.dataSource.params
                     ).then(c => {
                         this.dataSource.dataItems = c;
-                        this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==this['dataContext'][this['name']]); 
+                        let val=this['dataContext'][this['name']];
+                        if(typeof this['dataContext'][this['name']]=='object')
+                            val =this['dataContext'][this['name']][this.dataSource.columns[0]['fieldName']]; 
+                        this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==val); 
                         this.dataBound();
                     });
                 }

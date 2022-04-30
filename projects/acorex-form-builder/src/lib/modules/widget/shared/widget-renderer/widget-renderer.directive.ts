@@ -114,11 +114,11 @@ export class AXFWidgetRendererDirective {
         Object.assign(this.widgetInstance, pp);
         Object.assign(this.widgetInstance, this.widgetConfig.options);
         //
-        if (this.widgetInstance.parent && this.widgetInstance.parent.tag !== undefined) {
+        if (!this.widgetInstance.tag  && (this.widgetInstance.parent && this.widgetInstance.parent.tag !== undefined)) {
             this.widgetInstance.tag = this.widgetInstance.parent.tag;
         }
         this.widgetService.readPropsFromHost(this.widgetConfig.name, this.widgetInstance.name, this.widgetInstance.tag)
-            .then(props => {
+            .then(props => { 
                 Object.assign(this.widgetInstance, props);
                 this.widgetInstance.onRender();
                 if (this.widgetInstance.locked && this.widgetConfig.name !== 'page') {
