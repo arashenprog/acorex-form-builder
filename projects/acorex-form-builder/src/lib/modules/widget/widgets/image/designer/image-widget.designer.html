@@ -1,6 +1,6 @@
-<ng-container *ngIf="value.srcData && !value.srcData.startsWith('[')">
+<ng-container *ngIf="value && value.srcData && !value.srcData.startsWith('[')">
     <img [src]="value.srcData | resolveUrl | async" [alt]="alt" [height]="value.height" [width]="value.width"> 
 </ng-container>
-<ng-container *ngIf="!value.srcData || value.srcData.startsWith('[')">
+<ng-container *ngIf="!value || !value.srcData || value.srcData.startsWith('[')">
     <img src="./assets/images/noimage.png" [alt]="alt" [height]="value.height" [width]="value.width"> 
 </ng-container>

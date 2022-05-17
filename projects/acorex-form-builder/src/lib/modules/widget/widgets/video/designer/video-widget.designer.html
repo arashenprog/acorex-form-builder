@@ -1,0 +1,7 @@
+<ng-container *ngIf="value.srcData && !value.srcData.startsWith('[')"> 
+    <video controls [attr.src]="value.srcData | resolveUrl | async" [style.width.px]="value.width" [style.height.px]="value.height">
+    </video> 
+</ng-container>
+<ng-container *ngIf="!value.srcData || value.srcData.startsWith('[')">
+    <img src="./assets/images/no-video.jpg" [height]="value.height" [width]="value.width"> 
+</ng-container>

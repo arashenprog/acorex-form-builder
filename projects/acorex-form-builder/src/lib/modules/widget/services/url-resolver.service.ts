@@ -12,7 +12,10 @@ export class AXFUrlResolverService {
     resolve(url: string): Promise<SafeUrl> {
         if (url.includes('base64') || url === undefined || url.startsWith('[')) {
             return new Promise((resolve) => { resolve(this.sanitized.bypassSecurityTrustUrl(url)); });
-        } else {
+        }
+        else if(url.startsWith("http"))
+            return new Promise((resolve) => { resolve(url); });
+        else {
             const savedUrl = this.dataService.getImageUrl(url);
             if (savedUrl && savedUrl != null) {
                 return new Promise((resolve) => { resolve(savedUrl.data); });

@@ -96,6 +96,9 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     ngOnInit() {
 
         if (this.dataSource.mode === 'remote') {
+            if (this.showHeader)
+                this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
+           
             this.dataSource.dataSource.params.forEach(p => {
                 if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
                     p.value = this.resolveProperty(p.value);

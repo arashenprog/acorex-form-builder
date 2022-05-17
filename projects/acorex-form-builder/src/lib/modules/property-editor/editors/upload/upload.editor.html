@@ -33,6 +33,12 @@
 </div>
 <div class="edit-row ng-star-inserted" *ngIf="value.sourceMethod=='upload'">
     <div class="prop-caption"> Upload </div>
-    <ax-upload-file type="inline" (onLoad)="handleValueChange($event)">
+    <ax-upload-file type="inline" *ngIf="mode=='image'" (onLoad)="handleValueChange($event)">
     </ax-upload-file>
+    <ax-text-box  *ngIf="mode=='video'"  >
+        <ax-button (onClick)="selectVideo()">
+            <i class="fas fa-upload"></i> 
+        </ax-button>
+    </ax-text-box>  
+<input type="file" multiple="false" (change)="uploadVideo($event)" style="display: none;" #fileVideoBox name="fileVideoBox" />
 </div>

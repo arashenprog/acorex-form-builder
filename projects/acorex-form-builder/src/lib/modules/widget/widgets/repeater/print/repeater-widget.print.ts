@@ -72,7 +72,10 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
 
     ngOnInit() {
         console.log('repeater ngOnInit',this.config.options.name,this.visible);
-        if (this.dataSource.mode === 'remote') {
+        if (this.dataSource.mode === 'remote') { 
+            if (this.showHeader)
+                this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
+
             this.dataSource.dataSource.params.forEach(p => {
                 if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
                     p.value = this.resolveProperty(p.value);

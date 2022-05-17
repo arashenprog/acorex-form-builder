@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AXFWidgetService } from '../../services/widget.service';
 import { ACoreXUIModule } from 'acorex-ui';
 import { AXFWidgetSharedModule } from '../../shared/shared.module';
-import { AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_TEXT_STYLE_PROPERTY, AXF_TAG_PROPERTY, AXF_VALIDATION_PROPERTY, AXF_DISPLAY_NAME_PROPERTY, AXF_DATA_TYPE_PROPERTY, AXF_SET_CURRENT_TIME_PROPERTY } from '../../config/general-properties';
+import { AXF_NAME_PROPERTY, AXF_VISIBLE_PROPERTY, AXF_TEXT_STYLE_PROPERTY, AXF_TAG_PROPERTY, AXF_VALIDATION_PROPERTY, AXF_DISPLAY_NAME_PROPERTY, AXF_DATA_TYPE_PROPERTY, AXF_SET_CURRENT_TIME_PROPERTY, AXF_INIT_EVENT, AXF_VALUE_CHANGE_EVENT, AXF_DATA_BOUND_EVENT } from '../../config/general-properties';
 import { AXFDateInputWidgetDesigner } from './designer/date-input-widget.designer';
 import { AXFDateInputWidgetPrint } from './print/date-input-widget.print';
 import { AXFDateInputWidgetView } from './view/date-input-widget.view';
@@ -74,7 +74,10 @@ export class AXFDateInputWidgetModule {
                             { value: 'YYYY-MM-DD', title: 'YYYY-MM-DD' },
                         ],
                     }
-                }
+                },
+                AXF_INIT_EVENT,
+                AXF_VALUE_CHANGE_EVENT,
+                AXF_DATA_BOUND_EVENT,
             ]
         })
     }

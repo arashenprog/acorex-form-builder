@@ -38,6 +38,7 @@ import { AXFQuestionWidgetModule } from '../widgets/question/question.module';
 import { AXFLovInputWidgetModule } from '../widgets/lov/lov-input.module';
 import { AXFLinkInputWidgetModule } from '../widgets/link-input/link-input.module';
 import { AXFVideoInputWidgetModule } from '../widgets/video-input/video-input.module';
+import { AXFVideoWidgetModule } from '../widgets/video/video-view.module';
 
 const MODULES = [
     CommonModule,
@@ -75,7 +76,8 @@ const MODULES = [
     //AXFMapWidgetModule
     AXFLovInputWidgetModule,
     AXFLinkInputWidgetModule,
-    AXFVideoInputWidgetModule
+    AXFVideoInputWidgetModule,
+    AXFVideoWidgetModule
 ];
 
 @NgModule({

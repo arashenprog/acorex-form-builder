@@ -1,0 +1,9 @@
+<ng-container *ngIf="visible && value && value.srcData">
+    <div class="video preview" [style.width.px]="value.width" [style.height.px]="value.height">
+        <video controls [attr.src]="value.srcData | resolveUrl | async" [style.width.px]="value.width" [style.height.px]="value.height">
+        </video> 
+    </div>
+</ng-container>
+<ng-container *ngIf="visible && (!value || !value.srcData)">
+    <img src="./assets/images/no-video.jpg"  [height]="value.height" [width]="value.width">
+</ng-container>
