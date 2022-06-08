@@ -57,7 +57,15 @@ export class AXFNumberInputWidgetModule {
                 AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
                 AXF_VALUE_CHANGE_EVENT,
                 AXF_INIT_EVENT,
-                AXF_DEFAULT_NUMBER_PROPERTY
+                AXF_DEFAULT_NUMBER_PROPERTY,
+                {
+                    name: 'decimalNumber',
+                    category: 'General',
+                    defaultValue: '',
+                    title: 'Decimal Number',
+                    order: 11,
+                    editor: 'TextEditor'
+                }
             ]
         });
     }
