@@ -25,20 +25,32 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     bgColor: string;
     fontSize:string;
     
-    constructor( private cdr: ChangeDetectorRef) {
+    constructor( private cdr: ChangeDetectorRef,private dataService: AXFDataService,) {
         super()
     }
 
     onRender(): void {       
-        if(this.mode=='single' && this.dataSource.dataItems.filter(s=>s.DefaultValue==true).length)
+        if(this.mode=='single' && this.dataSource.dataItems && this.dataSource.dataItems.filter(s=>s.DefaultValue==true).length)
         {
             let firstIndex= this.dataSource.dataItems.findIndex(s=>s.DefaultValue==true);
             this.dataSource.dataItems.filter(s=>s.DefaultValue==true && this.dataSource.dataItems.indexOf(s)!=firstIndex)
             .forEach(
                 f=>{f.DefaultValue=false;}
             );
+            this.cdr.markForCheck();
         }
-        this.cdr.markForCheck();
+        if (this.dataSource.mode === 'remote' && !this.dataSource.dataItems) {
+
+            this.dataSource.dataSource.params=[];
+            this.dataService.getList(
+                this.dataSource.dataSource.name,
+                this.dataSource.dataSource.params
+            ).then(c => {
+                this.dataSource.dataItems = c;
+                this.cdr.markForCheck();
+            });
+
+        } 
     }
 
 

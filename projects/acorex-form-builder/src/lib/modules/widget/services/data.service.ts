@@ -278,6 +278,17 @@ export class AXFDataService {
         });
     }
 
+    generatePDF(html?: string): Promise<void> {
+        return new Promise((resolve, reject) => { 
+            this.connectService.send('generatePDF', { 
+                html
+            }).then(() => {
+                resolve();
+            }).catch(() => { 
+                reject();
+            }); 
+        });
+    }
 
     clearWidgets() {
         this.widgets = {};

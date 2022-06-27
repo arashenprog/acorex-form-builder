@@ -14,37 +14,52 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
     mode: string;
     direction: string;
     alignCheck: string;
-    alignCheckNew:string;
+    alignCheckNew: string;
     viewType: string;
     columns: number;
     alignment: string;
     color: string;
     bgColor: string;
-    fontSize:string;
+    fontSize: string;
     constructor(protected cdr: ChangeDetectorRef) {
         super(cdr);
     }
 
-    onRender(): void { 
+    onRender(): void {
         if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
             this['dataContext'].hasOwnProperty(this['name'])) {
-            this.value =[(this['dataContext'][this['name']]).toString()];
-            this.cdr.detectChanges(); 
+            this.value = [(this['dataContext'][this['name']]).toString()]; 
         }
-        
+        this.cdr.detectChanges();
     }
 
     ngAfterViewInit() {
         super.ngAfterViewInit();
-        this.refresh();
-        if (this.value == undefined && this.dataSource.mode === 'manual') { 
-           let defaultVals= this.dataSource.dataItems.filter(s=>s.DefaultValue==true).map((s)=>{return s.value});
-           if(defaultVals.length>0)
-           {
-               this.value =defaultVals;
-           } 
+        //this.refresh();
+        if (this.value == undefined && this.dataSource.dataItems && this.dataSource.mode === 'manual') {
+            let defaultVals = this.dataSource.dataItems.filter(s => s.DefaultValue == true).map((s) => { return s.value });
+            if (defaultVals.length > 0) {
+                this.value = defaultVals;
+                this.cdr.detectChanges();
+            }
         }
-        this.cdr.detectChanges();
+        if (this.dataSource.mode === 'remote' &&  !this.dataSource.dataItems) {
+            this.dataSource.dataSource.params.forEach(p => {
+                if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
+                    const name = p.value.substring(1);
+                    p.value = () => {
+                        return '$' + this.resolveProperty(name);
+                    };
+                }
+            });
+            this.dataService.getList(
+                this.dataSource.dataSource.name,
+                this.dataSource.dataSource.params
+            ).then(c => {
+                this.dataSource.dataItems = c;
+                this.cdr.detectChanges();
+            });
+        } 
     }
 
     refresh() {
@@ -62,11 +77,11 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
     }
 
     getStyles(mode) {
-        let currentSize=this.getSize();
+        let currentSize = this.getSize();
         const styles = {
             'border-radius': mode === 'single' ? 100 + '%' : 0,
-            'height':currentSize,
-            'width':currentSize
+            'height': currentSize,
+            'width': currentSize
         };
         return styles;
     }
@@ -92,50 +107,48 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
         this.invokeEvent('onItemClick');
     }
 
-    getSize() { 
-        switch (this.fontSize) { 
+    getSize() {
+        switch (this.fontSize) {
             case 'xx-small':
-                return 11+'px';
+                return 11 + 'px';
             case 'x-small':
-                return 13+'px';
+                return 13 + 'px';
             case 'smaller':
             case 'inherit':
-                return 15+'px';
+                return 15 + 'px';
             case 'small':
-                return 20+'px';
+                return 20 + 'px';
             case 'medium':
-                return 25+'px';
+                return 25 + 'px';
             case 'large':
-                return 30+'px';
+                return 30 + 'px';
             case 'larger':
-                return 35+'px';
+                return 35 + 'px';
             case 'x-large':
             case 'xx-large':
-                return 40+'px';
+                return 40 + 'px';
         }
     }
 
-    getMargin()
-    {
-        switch (this.fontSize) { 
+    getMargin() {
+        switch (this.fontSize) {
             case 'xx-small':
             case 'x-small':
-                return 18+'px';
+                return 18 + 'px';
             case 'smaller':
             case 'inherit':
-                return 20+'px';
+                return 20 + 'px';
             case 'small':
-                return 25+'px';
+                return 25 + 'px';
             case 'medium':
-                return 30+'px';
+                return 30 + 'px';
             case 'large':
-                return 35+'px';
+                return 35 + 'px';
             case 'larger':
-                return 40+'px';
+                return 40 + 'px';
             case 'x-large':
             case 'xx-large':
-                return 45+'px';
+                return 45 + 'px';
         }
     }
 }
- 

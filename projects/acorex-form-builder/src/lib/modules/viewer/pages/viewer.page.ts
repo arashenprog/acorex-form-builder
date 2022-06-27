@@ -58,6 +58,53 @@ export class ACFViewerPage extends AXBasePageComponent {
         this.isBusy = c;
       });
     //
+
+    eventService.on('__generatePDF', (data) => {
+      debugger
+      const printFunc=() => {
+        console.log("print", new Date());
+        let body = ""; 
+        const html = this.printDiv.nativeElement.innerHTML;
+        body = '<html><head><meta charset="utf-8"/>' +
+          '<style>.realTable thead { display: table-header-group } .realTable tr { page-break-inside: avoid } .realRow { page-break-inside: avoid} </style>'
+          + '<title>SmartForms Api Sample</title></head><body style="font-family: Segoe UI;padding: 0px;margin: 0px;  ">';
+        body = body + html + '</body></html>';  
+
+        this.dataService.generatePDF(body)
+          .catch((e) => {
+            if (e && e.target && e.target._rootElement) {
+              (e.target._rootElement as HTMLDivElement).scrollIntoView({ behavior: 'smooth' });
+            }
+          })
+          .finally(() => { 
+            this.printRendering = false;
+            this.isBusy = false;
+          });
+      };
+  
+        let elementObserver:MutationObserver; 
+        const observerable$ = new Observable<number>(observer => {
+          elementObserver = new MutationObserver(()=>{ 
+            observer.next(new Date().getTime());
+          });
+          elementObserver.observe( this.printDiv.nativeElement,{ attributes: true, childList: true, characterData: true , subtree : true });
+        });
+        const subscription = observerable$
+        .pipe(
+          debounceTime(500),
+          distinctUntilChanged()
+        )
+        .subscribe(() => { 
+          setTimeout(printFunc, 3000);
+          if(elementObserver)
+            elementObserver.disconnect();
+          subscription.unsubscribe();
+        });
+        //
+        this.printRendering = true;
+        this.isBusy = true;
+    });
+    
     eventService.on('__submit', (data) => {
       if (localStorage.getItem("CreateHtml")) { 
         this.dataService.validate().then(() => {

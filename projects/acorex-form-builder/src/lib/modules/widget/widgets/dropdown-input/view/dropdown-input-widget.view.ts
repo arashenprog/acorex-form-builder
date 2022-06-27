@@ -20,55 +20,106 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
 
     constructor(protected cdr: ChangeDetectorRef, private ref: ElementRef, private zone: NgZone) {
         super(cdr);
-        this.valueChange.subscribe(() => { 
-            this.selectedItems = this.value ? (Array.isArray(this.value) ? this.value : [this.value]) : [];
-            this.cdr.detectChanges();
-        });
+        // this.valueChange.subscribe(() => { 
+        //     this.selectedItems = this.value ? (Array.isArray(this.value) ? this.value : [this.value]) : [];
+        //     this.cdr.detectChanges();
+        // });
+    }
+
+    showItems()
+    {
+        return this.value ? (Array.isArray(this.value) ? this.value : [this.value]) : [];
     }
 
     onRender(): void {
         if (this.el) {
-            this.applyStyle(this.el.nativeElement);
-            this.cdr.detectChanges();
+            this.applyStyle(this.el.nativeElement); 
         } 
         if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
             this['dataContext'].hasOwnProperty(this['name'])) {
-                if(this.dataSource.mode=='remote')
-                {
-                    this.dataSource.dataSource.params.forEach(p => {
-                        if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
-                            const name = p.value.substring(1);
-                            p.value = () => {
-                                return '$' + this.resolveProperty(name);
-                            };
-                        }
-                    });
-                    this.dataService.getList(
-                        this.dataSource.dataSource.name,
-                        this.dataSource.dataSource.params
-                    ).then(c => {
-                        this.dataSource.dataItems = c;
-                        let val=this['dataContext'][this['name']];
-                        if(typeof this['dataContext'][this['name']]=='object')
-                            val =this['dataContext'][this['name']][this.dataSource.columns[0]['fieldName']]; 
-                        this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==val); 
-                        this.dataBound();
-                    });
-                }
-                else
-                    this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==this['dataContext'][this['name']]); 
-            this.cdr.detectChanges();
-        } 
+            this.value = [this['dataContext'][this['name']]];
+        }
+        this.cdr.detectChanges();
     }
 
-    ngAfterViewInit() { 
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
+        //this.refresh();
         if (this.dataSource.columns.filter(s => s.isDisplay).length > 1) {
             this.displays = this.dataSource.columns.filter(s => s.isDisplay)
                 .map(function (m) { return { dataField: m.fieldName, title: m.title }; });
         }
-        super.ngAfterViewInit();
-        this.refresh();
+        if (this.value == undefined && this.dataSource.dataItems && this.dataSource.mode === 'manual') {
+            let defaultVals = this.dataSource.dataItems.filter(s => s.DefaultValue == true).map((s) => { return s.value });
+            if (defaultVals.length > 0) {
+                this.value = defaultVals;
+                this.cdr.detectChanges();
+            }
+        }
+        if (this.dataSource.mode === 'remote' &&  !this.dataSource.dataItems) {
+            this.dataSource.dataSource.params.forEach(p => {
+                if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
+                    const name = p.value.substring(1);
+                    p.value = () => {
+                        return '$' + this.resolveProperty(name);
+                    };
+                }
+            });
+            this.dataService.getList(
+                this.dataSource.dataSource.name,
+                this.dataSource.dataSource.params
+            ).then(c => {
+                this.dataSource.dataItems = c;
+                if(Number.isInteger(this.value))
+                    this.value= this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0].fieldName]==this.value);
+                this.cdr.detectChanges();
+            });
+        } 
     }
+
+    // onRender(): void {
+    //     if (this.el) {
+    //         this.applyStyle(this.el.nativeElement);
+    //         this.cdr.detectChanges();
+    //     } 
+    //     if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
+    //         this['dataContext'].hasOwnProperty(this['name'])) {
+    //             if(this.dataSource.mode=='remote')
+    //             {
+    //                 this.dataSource.dataSource.params.forEach(p => {
+    //                     if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
+    //                         const name = p.value.substring(1);
+    //                         p.value = () => {
+    //                             return '$' + this.resolveProperty(name);
+    //                         };
+    //                     }
+    //                 });
+    //                 this.dataService.getList(
+    //                     this.dataSource.dataSource.name,
+    //                     this.dataSource.dataSource.params
+    //                 ).then(c => {
+    //                     this.dataSource.dataItems = c;
+    //                     let val=this['dataContext'][this['name']];
+    //                     if(typeof this['dataContext'][this['name']]=='object')
+    //                         val =this['dataContext'][this['name']][this.dataSource.columns[0]['fieldName']]; 
+    //                     this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==val); 
+    //                     this.dataBound();
+    //                 });
+    //             }
+    //             else
+    //                 this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==this['dataContext'][this['name']]); 
+    //         this.cdr.detectChanges();
+    //     } 
+    // }
+
+    // ngAfterViewInit() { 
+    //     if (this.dataSource.columns.filter(s => s.isDisplay).length > 1) {
+    //         this.displays = this.dataSource.columns.filter(s => s.isDisplay)
+    //             .map(function (m) { return { dataField: m.fieldName, title: m.title }; });
+    //     }
+    //     super.ngAfterViewInit();
+    //     this.refresh();
+    // }
 
     refresh() {
         this.isLoading = true;
@@ -122,6 +173,8 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
                 this.dataBound();
             }
         }
+        else
+        this.dataBound();
     }
 
     // ****** api functions *******//
