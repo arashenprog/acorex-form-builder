@@ -101,6 +101,14 @@ export class AXFRepeaterlWidgetModule {
                     editor: 'CheckboxEditor',
                     options: { label: 'Responsive' }
                 },
+                {
+                    name: 'clearOnCopy',
+                    category: 'General',
+                    defaultValue: false,
+                    title: 'Clear on Copy',
+                    editor: 'CheckboxEditor',
+                    options: { label: 'Clear on Copy' }
+                },
                 AXF_MINWIDTH_PROPERTY,
                 {
                     name: 'indexStart',

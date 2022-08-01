@@ -104,7 +104,7 @@ export class ACFViewerPage extends AXBasePageComponent {
         this.printRendering = true;
         this.isBusy = true;
     });
-    
+     
     eventService.on('__submit', (data) => {
       if (localStorage.getItem("CreateHtml")) { 
         this.dataService.validate().then(() => {

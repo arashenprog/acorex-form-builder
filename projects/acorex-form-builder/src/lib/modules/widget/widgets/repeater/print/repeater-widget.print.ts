@@ -116,10 +116,10 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
                 } else {
                     result[i] = item;
                 }
-            }
-            result.filter(s=>s!=null).forEach((f,i)=>f=Object.assign(f, this.setIndex(i)));
-            return result;
-        }
+            } 
+        } 
+        result.filter(s=>s!=null).forEach((f,i)=>f=Object.assign(f, this.setIndex(i)));
+        return result;
     }
 
     trackbyFunc(index: number, item: WidgetConfig) {
