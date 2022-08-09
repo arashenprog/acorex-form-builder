@@ -59,11 +59,31 @@ export class AXFDataColumnEditorComponent extends AXBasePageComponent {
             title: "Field " + index.toString(),
             type: "string",
             fillByUser: false,
-            isDisplay:false
+            isDisplay:false,
+            valueField:false,
+            textField:false
         };
         this.columns.push(newRow);
     }
 
+    setValueField(e,i)
+    {
+        if(e!=undefined)
+        {
+            if(e) 
+                this.columns.filter(d=>d.valueField==true).forEach(s=>s.valueField=false);  
+            this.columns[i].valueField=e;
+        }  
+    }
 
+    setTextField(e,i)
+    {
+        if(e!=undefined)
+        {
+            if(e) 
+                this.columns.filter(d=>d.textField==true).forEach(s=>s.textField=false);  
+            this.columns[i].textField=e;
+        }  
+    }
 
 }

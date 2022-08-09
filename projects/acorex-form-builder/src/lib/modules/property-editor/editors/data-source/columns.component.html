@@ -5,10 +5,10 @@
                 <th>Title</th>
                 <th>Field Name</th>
                 <th>Display in Grid</th>
+                <th>Value Field</th>
+                <th>Text Field</th>
                 <th *ngIf="allowColumns">Type </th>
-                <th *ngIf="allowColumns">Fill by User</th>
-                <!-- <th>Sub Items</th>
-                <th>Multiple</th> -->
+                <th *ngIf="allowColumns">Fill by User</th> 
                 <th *ngIf="allowColumns">Actions</th>
             </tr>
         </thead>
@@ -24,6 +24,14 @@
                    <ax-check-box label="" [(value)]="col.isDisplay">
                    </ax-check-box>
                 </td>
+                <td style="text-align: center">
+                    <ax-check-box label="" [value]="col.valueField"  (valueChange)="setValueField($event,i)">
+                    </ax-check-box>
+                 </td>
+                 <td style="text-align: center">
+                    <ax-check-box label="" [value]="col.textField" (valueChange)="setTextField($event,i)">
+                    </ax-check-box>
+                 </td>
                 <td *ngIf="allowColumns">
                     <ax-select-box [items]="columnTypeItems" valueField="value" textField="title"
                         [(selectedValues)]="col.type">
@@ -33,17 +41,7 @@
                 <td *ngIf="allowColumns">
                     <ax-check-box label="Fill By User" [(value)]="col.fillByUser">
                     </ax-check-box>
-                </td>
-                <!-- <td>
-                    <ax-text-box [text]="item.subText" placeholder="declare items using ','"
-                        (textChange)="subTextChange(i,$event)" *ngIf="item.type.includes('selectionList')">
-                    </ax-text-box>
-                </td>
-                <td>
-                    <ax-check-box label="Multiple" [value]="item.mode" (change)="modeChange(i,$event)"
-                        *ngIf="item.type.includes('selectionList')">
-                    </ax-check-box>
-                </td> -->
+                </td> 
                 <td *ngIf="allowColumns">
                     <ax-button type="light" size="sm" tooltip="Up" (onClick)="upClick(i,col)">
                         <i class="fas fa-arrow-up primary"></i>

@@ -82,7 +82,9 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
                                     fillByUser: false,
                                     title: key,
                                     type: typeof obj[key],
-                                    isDisplay:false
+                                    isDisplay:false,
+                                    textField:false,
+                                    valueField:false
                                 });
                             }
                         }
@@ -150,9 +152,9 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
     private initColumns() {
         if (this.allowColumns) {
             this.value.columns = [];
-            this.value.columns.push({ fieldName: 'column1', title: 'Column 1', fillByUser: false, type: 'string',isDisplay:true });
-            this.value.columns.push({ fieldName: 'column2', title: 'Column 2', fillByUser: false, type: 'string',isDisplay:false });
-            this.value.columns.push({ fieldName: 'column3', title: 'Column 3', fillByUser: false, type: 'string' ,isDisplay:false});
+            this.value.columns.push({ fieldName: 'column1', title: 'Column 1', fillByUser: false, type: 'string',isDisplay:true ,textField:false,valueField:false});
+            this.value.columns.push({ fieldName: 'column2', title: 'Column 2', fillByUser: false, type: 'string',isDisplay:false,textField:false,valueField:false });
+            this.value.columns.push({ fieldName: 'column3', title: 'Column 3', fillByUser: false, type: 'string' ,isDisplay:false,textField:false,valueField:false});
         }
     }
 
