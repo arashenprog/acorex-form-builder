@@ -50,13 +50,33 @@ export class AXFTextBlockWidgetModule {
                 AXF_RICH_TEXT_PROPERTY,
                 AXF_NAME_PROPERTY,
                 AXF_DISPLAY_NAME_PROPERTY,
-                AXF_DATA_TYPE_PROPERTY,
+               // AXF_DATA_TYPE_PROPERTY,
                 AXF_VISIBLE_PROPERTY,
                 AXF_TEXT_DIRECTION_PROPERTY,
                 AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
                 ...AXF_STYLE_GENERAL_PROPERTIES,
                 AXF_FONT_PROPERTY,
                 AXF_TAG_PROPERTY,
+                {
+                    name: 'dataType',
+                    category: 'General',
+                    defaultValue: 'string',
+                    title: 'Data Type',
+                    editor: 'DropdownEditor',
+                    order: 13,
+                    visible: true,
+                    options: {
+                        items: [
+                            { value: 'string', title: 'String' },
+                            { value: 'number', title: 'Number' },
+                            { value: 'boolean', title: 'Boolean' },
+                            { value: 'date', title: 'Date' },
+                            { value: 'datetime', title: 'Datetime' },
+                            { value: 'time', title: 'time' },
+                            { value: 'object', title: 'Object' },
+                        ],
+                    } 
+                },
             ]
         })//
         service.register({
@@ -67,7 +87,7 @@ export class AXFTextBlockWidgetModule {
             visible: true,
             name: "text-heading",
             designerClass: AXFTextBlockWidgetDesigner,
-            printClass: AXFTextBlockWidgetPrint,
+            printClass: AXFTextBlockWidgetPrint, 
             viewClass: AXFTextBlockWidgetView,
             options: {
                 boxStyle: {
@@ -79,7 +99,7 @@ export class AXFTextBlockWidgetModule {
                 textStyle:["bold"],
                 text:"Heading Text",
                 fontSize:"medium",
-                dataType:'string'
+                dataType:'string' 
             },
             properties: [
                 AXF_RICH_TEXT_PROPERTY,
@@ -91,6 +111,7 @@ export class AXFTextBlockWidgetModule {
                 AXF_HORIZONTAL_ALIGNMENT_PROPERTY,
                 ...AXF_STYLE_GENERAL_PROPERTIES,
                 AXF_FONT_PROPERTY,
+                
             ]
         })
         service.register({

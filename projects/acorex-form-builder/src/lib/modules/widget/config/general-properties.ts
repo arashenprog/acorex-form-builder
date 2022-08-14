@@ -394,21 +394,27 @@ export const AXF_ITEM_DATASOURCE_PROPERTY: AXFWidgetProperty = {
                 title: 'Value Field',
                 type: 'string',
                 fillByUser: false,
-                isDisplay: false
+                isDisplay: false,
+                valueField:true,
+                textField:false
             },
             {
                 fieldName: 'text',
                 title: 'Text Field',
                 type: 'string',
                 fillByUser: false,
-                isDisplay: true
+                isDisplay: true,
+                valueField:false,
+                textField:true
             },
             {
                 fieldName: 'image',
                 title: 'Image Field',
                 type: 'image',
                 fillByUser: false,
-                isDisplay: false
+                isDisplay: false,
+                valueField:false,
+                textField:false
             }
         ],
         dataItems: [
