@@ -9,7 +9,8 @@ import { AXFDataService } from '../../../services/data.service';
 })
 export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     @ViewChild("el") el: ElementRef<HTMLElement>;
-
+ 
+    downloadUrl:string="";
     dataSource: AXFDataSourceOption;
     mode: string;
     direction: string;
@@ -23,6 +24,7 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     color: string;
     bgColor: string;
     fontSize: string;
+    items: any[] = [];
 
     constructor(private cdr: ChangeDetectorRef) {
         super()
@@ -36,8 +38,13 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     ngAfterViewInit() {
         super.ngAfterViewInit();
         this.refresh();
+        if (this.dataSource.mode === 'remote' && this.dataSource.dataItems && this.dataSource.displayMode === 'onlySelected' && this.dataSource.displayItems && this.dataSource.displayItems.length > 0)
+            this.items = this.dataSource.dataItems.filter(d => this.dataSource.displayItems.includes(d[this.dataSource.columns[0].fieldName]));   
+        else
+            this.items =this.dataSource.dataItems; 
+
         if (this.value == undefined && this.dataSource.mode === 'manual') { 
-            let defaultVals= this.dataSource.dataItems.filter(s=>s.DefaultValue==true).map((s)=>{return s.value});
+            let defaultVals= this.items.filter(s=>s.DefaultValue==true).map((s)=>{return s.value});
             if(defaultVals.length>0)
             {
                 this.value =defaultVals;
@@ -49,6 +56,8 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
          }
         //  debugger;
         // this.invokeEvent('onValueChange');
+        if(this.dataService.getValue("ShowDocumentUrl"))
+            this.downloadUrl=this.dataService.getValue("ShowDocumentUrl");
         this.cdr.detectChanges();
     }
 
@@ -59,6 +68,10 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
+                if (this.dataSource.displayMode === 'onlySelected' && this.dataSource.displayItems && this.dataSource.displayItems.length > 0)
+                    this.items = c.filter(d => this.dataSource.displayItems.includes(d[this.dataSource.columns[0].fieldName]));
+                else
+                    this.items = c;
                 this.cdr.detectChanges();
             })
         }

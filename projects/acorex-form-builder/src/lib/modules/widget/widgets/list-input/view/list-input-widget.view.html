@@ -1,5 +1,5 @@
 <div #el class="allItem"  *ngIf="visible" [ngStyle]="{'pointer-events': readonly?'none':'inherit'}">
-    <div class="rep" *ngFor="let item of dataSource.dataItems" 
+    <div class="rep" *ngFor="let item of items" 
         [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset','background':bgColor}">
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
             <div *ngSwitchCase="'left'" style="padding: 6px;position: relative;display: flex;"> 
@@ -12,7 +12,9 @@
                 <img [style.margin-left]="getMargin()" *ngIf="viewType=='image'"
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 <span [style.margin-left]="getMargin()" (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
-                    *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName] | word}}</span>
+                    *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName] | word}} </span>
+                <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px;position: relative;display: flex;">
                 <div>
@@ -28,6 +30,8 @@
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                    (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>
                 </div>
             </div>
             <div *ngSwitchCase="'bottom'" style="padding: 6px;position: relative;display: flex;" [style.padding-bottom]="getMargin()">
@@ -36,6 +40,8 @@
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                    (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>
                 </div>
                 <div style="position: fixed;" [style.padding-top]="getMargin()">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
@@ -52,6 +58,8 @@
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'" [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                        (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>    
                 </div>
                 <div style="position: absolute;" [style.right]="getMargin()">
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
@@ -78,6 +86,8 @@
                     <span [ngStyle]="{'margin-left': getSize(),'color': color,'font-size':getSize()}"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">
                         {{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                        (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span> 
                 </div>
             </div>
             <div *ngSwitchCase="'ItopCrightSleft'">
@@ -88,6 +98,8 @@
                     <span style="margin-right: 5px;" [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">
                         {{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                        (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
                         [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
@@ -106,6 +118,8 @@
                     </span>
                     <span [ngStyle]="{'margin-left': getSize(),'color': color,'font-size':getSize()}"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                        (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>
                 </div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
@@ -115,6 +129,8 @@
                 <div [style.margin-right]="getSize()">
                     <span style="margin-right: 5px;" [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                        (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>    
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])"
                         [ngClass]="mode=='single' && (value && value.indexOf(item[dataSource.columns[0].fieldName])>-1) ? 'checkmark' : null">
@@ -129,6 +145,8 @@
             <div *ngSwitchCase="'StopImiddleCbottom'" [style.padding-bottom]="getSize()">
                 <div><span [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                        (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>
                 </div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
@@ -146,8 +164,11 @@
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
-                <div><span [style.color]="color" [style.font-size]="getSize()"
+                <div>
+                    <span [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                        (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>
                 </div>
                 <div>
                     <span *ngIf="mode!='unselectable'" class="spanCheck" [ngStyle]="getStyles(mode)"
@@ -170,6 +191,8 @@
                 </div>
                 <div><span [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                        (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>
                 </div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
@@ -187,8 +210,11 @@
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 </div>
-                <div><span [style.color]="color" [style.font-size]="getSize()"
+                <div>
+                    <span [style.color]="color" [style.font-size]="getSize()"
                         (click)="onCheckValueChange(item[dataSource.columns[0].fieldName])">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <span *ngIf="dataSource.showDocument && item['fileID']"  style="margin-left: 5px;color: dimgray;cursor: pointer;" [style.font-size]="getSize()" 
+                        (click)="openFile(item['fileID'])"><i  class="fa fa-file" aria-hidden="true"></i></span>
                 </div>
             </div>
         </ng-container>

@@ -1,0 +1,23 @@
+.allItem{
+    font-size: 14px !important;
+    display: inline-block;  
+    width: 100%;
+    line-height: 1; 
+    direction: ltr;
+    .rep{
+      display: table;
+      .spanCheck{
+        position: absolute; 
+        height: 20px;
+        width: 20px;
+        background-color: var(--white-color);
+        border: 1px solid;
+        border-color: var(--black-color);
+      }
+      .spanCheck.checkmark{
+        background-clip: content-box;
+        background-color: var(--primary-color);
+        padding: 2px;
+      }
+    }
+  }

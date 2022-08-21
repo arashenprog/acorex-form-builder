@@ -1,5 +1,5 @@
 <div *ngIf="visible" style="font-size: 14px!important;display: inline-block;width: 100%;line-height: 1;direction: ltr;">
-    <div *ngFor="let item of dataSource.dataItems"
+    <div *ngFor="let item of items"
         [ngStyle]="{'width':(direction=='horizontal' && columns==1)?null:(100.0/columns)+'%','float':direction=='horizontal'?(alignment=='ltr'?'left':'right'):'unset','background':bgColor}">
         <ng-container *ngIf="viewType!='both'" [ngSwitch]="alignCheck">
             <div *ngSwitchCase="'left'" style="padding: 6px;position: relative;">
@@ -21,7 +21,11 @@
                     [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
                 <div *ngIf="viewType=='text'"
                     [ngStyle]="{'margin-left': getMargin(),'color': color,'font-size':getSize()}">
-                    {{item[dataSource.columns[1].fieldName] | word}}</div>
+                    {{item[dataSource.columns[1].fieldName] | word}}  
+                    <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
+                </div>
+               
             </div>
             <div *ngSwitchCase="'top'" style="padding: 6px;position: relative;">
                 <div [style.padding-bottom]="getMargin()">
@@ -45,6 +49,8 @@
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'" [style.color]="color"
                         [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span>
+                        <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
                 </div>
             </div>
             <div *ngSwitchCase="'bottom'" style="padding: 6px;position: relative;">
@@ -53,6 +59,8 @@
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'" [style.color]="color"
                         [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
                 </div>
                 <div [style.padding-bottom]="getMargin()">
                     <svg *ngIf="mode!='unselectable' && mode=='single'" className="svg" fill="currentColor"
@@ -77,6 +85,8 @@
                         height="80px" width="60px">
                     <span *ngIf="viewType=='text'" [style.color]="color"
                         [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                        [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>    
                 </div>
                 <div style="position: absolute;" [style.right]="getMargin()"> 
                     <svg *ngIf="mode!='unselectable' && mode=='single'" className="svg" fill="currentColor"
@@ -118,6 +128,8 @@
                     </span>
                     <span
                         [ngStyle]="{'margin-left': getSize(),'color':color,'font-size': getSize()}">{{item[dataSource.columns[1].fieldName]}}</span>
+                        <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
                 </div>
             </div>
             <div *ngSwitchCase="'ItopCrightSleft'">
@@ -127,6 +139,8 @@
                 <div [style.margin-right]="getSize()">
                     <span style="margin-right: 5px;" [style.color]="color"
                         [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span>  
+                        <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
                     <svg *ngIf="mode!='unselectable' && mode=='single'" className="svg" fill="currentColor"
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
@@ -161,6 +175,8 @@
                     </span>
                     <span
                         [ngStyle]="{'margin-left': getSize(),'color':color,'font-size': getSize()}">{{item[dataSource.columns[1].fieldName]}}</span>
+                        <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
                 </div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
@@ -170,6 +186,8 @@
                 <div [style.margin-right]="getSize()">
                     <span style="margin-right: 5px;" [style.color]="color"
                         [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span>
+                        <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
                     <svg *ngIf="mode!='unselectable' && mode=='single'" className="svg" fill="currentColor"
                     preserveAspectRatio="xMidYMid meet" style="position: absolute;" [attr.height]="getNumberSize()"
                     [attr.width]="getNumberSize()" viewBox="0 0 50 50">
@@ -192,6 +210,8 @@
             <div *ngSwitchCase="'StopImiddleCbottom'" [style.padding-bottom]="getSize()">
                 <div><span [style.color]="color"
                         [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span>
+                        <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
                 </div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
@@ -219,6 +239,8 @@
                 </div>
                 <div><span [style.color]="color"
                         [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
                 </div>
                 <div>
                     <svg *ngIf="mode!='unselectable' && mode=='single'" className="svg" fill="currentColor"
@@ -257,6 +279,8 @@
                 </div>
                 <div><span [style.color]="color"
                         [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span>
+                    <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
                 </div>
                 <div>
                     <img [src]="item[dataSource.columns[2].fieldName]  | resolveUrl | async" height="80px" width="60px">
@@ -284,6 +308,8 @@
                 </div>
                 <div><span [style.color]="color"
                         [style.font-size]="getSize()">{{item[dataSource.columns[1].fieldName]}}</span>
+                     <a *ngIf="dataSource.showDocument && item['fileID']" style="text-decoration: underline;cursor: pointer;" [style.font-size]="getSize()" 
+                    [href]="downloadUrl+item['fileID']" target="_blank"> Link </a>
                 </div>
             </div>
         </ng-container>

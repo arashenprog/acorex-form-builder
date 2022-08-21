@@ -63,7 +63,7 @@ export class AXIDataItemEditorComponent extends AXBasePageComponent {
     addItemClick() {
         if (!this.items)
             this.items = [];
-        let param: any = { id: new Date().getTime() };
+        let param: any = { id: new Date().getTime(),DefaultValue:true };
         this.items.push(param);
     }
 

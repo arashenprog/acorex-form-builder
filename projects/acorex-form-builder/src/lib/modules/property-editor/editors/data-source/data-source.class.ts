@@ -2,6 +2,8 @@ export class AXFDataSourceOption {
     dataSource: AXFDataSourceRemoteOption;
     dataItems: any[];
     columns: AXFDataSourceColumnOption[] = [];
+    displayItems:any[];
+    showDocument:boolean=false;
 
     private _mode: 'remote' | 'manual';
     public get mode(): 'remote' | 'manual' {
@@ -13,15 +15,31 @@ export class AXFDataSourceOption {
             if (v === 'remote') {
                 this.dataItems = null;
                 this.dataSource = new AXFDataSourceRemoteOption();
+                this.displayItems=null;
             } else {
                 this.dataItems = [];
                 this.dataSource = null;
+                this.displayItems= [];
             }
             if (this.columns == null) {
                 this.columns = [];
             }
         }
     }
+
+    private _displayMode: 'allItems' | 'onlySelected';
+    public get displayMode(): 'allItems' | 'onlySelected' {
+        return this._displayMode;
+    }
+    public set displayMode(v: 'allItems' | 'onlySelected') {
+        if (v !== this._displayMode) {
+            this._displayMode = v;
+            if (v === 'allItems') {
+                this.displayItems = null;  
+            }
+        }
+    }
+
 
     constructor() {
 
@@ -36,7 +54,14 @@ export class AXFDataSourceOption {
             obj.dataItems = JSON.parse(JSON.stringify(this.dataItems));
         } else {
             obj.dataSource = JSON.parse(JSON.stringify(this.dataSource));
-        }
+            obj.displayMode = this.displayMode;
+            if(this.displayMode=='onlySelected')
+                obj.displayItems = this.displayItems;
+            else
+                obj.displayItems =[];
+            obj.showDocument=this.showDocument;
+            //obj.dataItems = [];
+        } 
         return obj;
     }
 }

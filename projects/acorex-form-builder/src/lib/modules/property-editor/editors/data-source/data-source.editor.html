@@ -34,3 +34,15 @@
             {{  value &&  value.dataItems ? value.dataItems.length : 0}}</span>
     </ax-button>
 </div>
+<div *ngIf="value.mode=='remote'" class="mt-2">
+    <div class="prop-caption"> Display </div>
+    <ax-selection-list #displaySelection direction="horizontal" [mode]="'single'" [items]="displayList" [(selectedValues)]="value.displayMode"
+    style="margin-bottom: 50px !important;"
+        (selectedItemsChange)="handleDisplayChange($event)" textField="text" valueField="value">
+    </ax-selection-list>
+    <ax-button  *ngIf="value.displayMode=='onlySelected'"  type="primary" size="sm" (onClick)="handleDisplayItemEditor()" block="true" class="mt-2">
+        <span>Select Items to Display</span>
+    </ax-button>
+
+    <ax-check-box  label="Show Document Link" [(value)]="value.showDocument"  (valueChange)="showDocumentChange($event)"></ax-check-box>
+</div>

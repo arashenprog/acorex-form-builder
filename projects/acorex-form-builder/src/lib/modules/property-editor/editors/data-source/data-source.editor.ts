@@ -5,6 +5,7 @@ import { AXFDataSourceOption, AXFDataSourceRemoteOption, AXFDataSourceColumnOpti
 import { AXSelectionListComponent, AXSelectBoxComponent, AXPopupService } from 'acorex-ui';
 import { AXIDataItemEditorComponent } from './items.component';
 import { AXFDataColumnEditorComponent } from './columns.component';
+import { AXIDataDisplayEditorComponent } from './display.component';
 
 @Component({
     templateUrl: `data-source.editor.html`,
@@ -15,11 +16,12 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
 
     @ViewChild('modeSelection') modeSelection: AXSelectionListComponent;
     @ViewChild('remoteSelection') remoteSelection: AXSelectBoxComponent;
+    @ViewChild('displaySelection') displaySelection: AXSelectBoxComponent;
 
     modeItems: any[] = [{ value: 'manual', text: 'Manual' }, { value: 'remote', text: 'Remote' }];
     remoteItems: any[] = [];
     allowColumns: boolean = true;
-
+    displayList: any[] = [{ value: 'allItems', text: 'All Items' }, { value: 'onlySelected', text: 'Only Selected' }];
 
     constructor(
         protected cdr: ChangeDetectorRef,
@@ -39,6 +41,11 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
             this.initColumns();
         } else {
             const v: AXFDataSourceOption = new AXFDataSourceOption();
+            if(!this.value.displayMode)
+            {
+                this.value.displayMode='allItems';
+                this.value.displayItems=[];
+            } 
             Object.assign(v, this.value);
             this.value = v;
         }
@@ -90,15 +97,16 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
                         }
                         this.value.columns = cols;
                     }
+                    this.value.displayItems = items.map(d=> d[this.value.columns[0].fieldName]); 
                     super.handleValueChange(this.value);
-                    this.cdr.markForCheck();
+                    this.cdr.detectChanges();
                 } else {
                     this.initColumns();
                 }
             });
             //
             super.handleValueChange(this.value);
-            this.cdr.markForCheck();
+            this.cdr.detectChanges();
         }
     }
 
@@ -112,6 +120,11 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
             if (this.value.mode === 'manual') {
                 this.initColumns();
                 this.value.dataItems = [];
+                this.value.displayItems=[];
+            }
+            if (this.value.mode === 'remote') {
+                this.value.displayMode='allItems';
+                this.value.displayItems=[];
             }
             super.handleValueChange(this.value);
             this.cdr.markForCheck();
@@ -130,8 +143,30 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
             this.value.columns = c.data.columns;
             this.value.dataItems = c.data.items;
             this.handleValueChange(this.value);
+            this.cdr.markForCheck(); 
+        });
+    }
+
+    handleDisplayItemEditor()
+    {
+        if(!this.value.columns || !this.value.dataItems || this.value.columns.length==0 || this.value.dataItems.length==0)
+        return;
+        this.popupService.open(AXIDataDisplayEditorComponent, {
+            title: 'Display Editor',
+            size: this.value.columns.length > 3 ? 'lg' : 'md',
+            data: {
+                columns: this.value.columns,
+                items: this.value.dataItems,
+                displayItems:this.value.displayItems
+            }
+        }).closed(c => {
+            this.value.columns = c.data.columns;
+            this.value.dataItems = c.data.items;
+            this.value.displayItems= c.data.displayItems;
+            this.handleValueChange(this.value);
             this.cdr.markForCheck();
         });
+        
     }
 
     handleColumnEditor() {
@@ -155,6 +190,41 @@ export class AXFDataSourceEditorComponent extends AXFProperyEditor<AXFDataSource
             this.value.columns.push({ fieldName: 'column1', title: 'Column 1', fillByUser: false, type: 'string',isDisplay:true ,textField:false,valueField:false});
             this.value.columns.push({ fieldName: 'column2', title: 'Column 2', fillByUser: false, type: 'string',isDisplay:false,textField:false,valueField:false });
             this.value.columns.push({ fieldName: 'column3', title: 'Column 3', fillByUser: false, type: 'string' ,isDisplay:false,textField:false,valueField:false});
+        }
+    }
+
+
+    handleDisplayChange(v: any){
+        if (v && v.length>0 && v[0].value !== this.value.displayMode) {
+            this.value.displayMode = v[0].value;
+            if (this.value.displayMode === 'allItems') {
+                this.value.displayItems=[];
+            }
+            else
+            {
+                this.value.displayItems=this.value.dataItems.map(d=> d[this.value.columns[0].fieldName]);
+            } 
+            super.handleValueChange(this.value);
+            this.cdr.markForCheck();
+        }
+    }
+
+    showDocumentChange(v: any)
+    {
+        if(v!=undefined)
+        {
+            if(v)
+            {
+                if(this.value.dataItems.length>0 && this.value.dataItems[0].hasOwnProperty("fileID") && !this.value.columns.some(d=>d.fieldName=="fileID"))
+                    this.value.columns.push({ fieldName: 'fileID', title: 'fileID', fillByUser: false, type: 'string',isDisplay:false ,textField:false,valueField:false});
+            }
+            else
+            {
+                if(this.value.dataItems.length>0 && this.value.columns.some(d=>d.fieldName=="fileID"))
+                    this.value.columns=this.value.columns.filter(d=>d.fieldName!="fileID");
+            }
+            super.handleValueChange(this.value);
+            this.cdr.markForCheck();
         }
     }
 

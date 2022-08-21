@@ -19,94 +19,102 @@ export class AXFListInputWidgetDesigner extends AXFWidgetDesigner {
     alignCheck: string;
     alignCheckNew: string;
     viewType: string;
-    columns:number;
+    columns: number;
     alignment: string;
     color: string;
     bgColor: string;
-    fontSize:string;
-    
-    constructor( private cdr: ChangeDetectorRef,private dataService: AXFDataService,) {
+    fontSize: string;
+    items: any[] = [];
+
+    constructor(private cdr: ChangeDetectorRef, private dataService: AXFDataService,) {
         super()
     }
 
-    onRender(): void {       
-        if(this.mode=='single' && this.dataSource.dataItems && this.dataSource.dataItems.filter(s=>s.DefaultValue==true).length)
-        {
-            let firstIndex= this.dataSource.dataItems.findIndex(s=>s.DefaultValue==true);
-            this.dataSource.dataItems.filter(s=>s.DefaultValue==true && this.dataSource.dataItems.indexOf(s)!=firstIndex)
-            .forEach(
-                f=>{f.DefaultValue=false;}
-            );
-            this.cdr.markForCheck();
+    onRender(): void {
+        this.items = this.dataSource.dataItems;
+        if (this.mode == 'single' && this.items && this.items.filter(s => s.DefaultValue == true).length) {
+            let firstIndex = this.items.findIndex(s => s.DefaultValue == true);
+            this.items.filter(s => s.DefaultValue == true && this.items.indexOf(s) != firstIndex)
+                .forEach(
+                    f => { f.DefaultValue = false; }
+                );
+            this.cdr.detectChanges();
         }
-        if (this.dataSource.mode === 'remote' && !this.dataSource.dataItems) {
-
-            this.dataSource.dataSource.params=[];
+        if (this.dataSource.mode === 'remote' && !this.items) {
+            this.dataSource.dataSource.params = [];
             this.dataService.getList(
                 this.dataSource.dataSource.name,
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
-                this.cdr.markForCheck();
+                if (this.dataSource.displayMode === 'onlySelected' && this.dataSource.displayItems && this.dataSource.displayItems.length > 0)
+                    this.items = c.filter(d => this.dataSource.displayItems.includes(d[this.dataSource.columns[0].fieldName]));
+                else
+                    this.items = c;
+                this.cdr.detectChanges();
             });
-
-        } 
+        }
+        else
+            this.cdr.detectChanges();
+        if (this.dataSource.mode === 'remote' && this.dataSource.dataItems && this.dataSource.displayMode === 'onlySelected' && this.dataSource.displayItems && this.dataSource.displayItems.length > 0) {
+            this.items = this.dataSource.dataItems.filter(d => this.dataSource.displayItems.includes(d[this.dataSource.columns[0].fieldName]));
+            this.cdr.detectChanges();
+        }
     }
 
 
     getStyles(mode) {
-        let currentSize=this.getSize();
+        let currentSize = this.getSize();
         const styles = {
             'border-radius': mode == 'single' ? 100 + "%" : 0,
-            'height':currentSize,
-            'width':currentSize
+            'height': currentSize,
+            'width': currentSize
         };
         return styles;
     }
 
-    getSize() { 
-        switch (this.fontSize) { 
+    getSize() {
+        switch (this.fontSize) {
             case 'xx-small':
-                return 11+'px';
+                return 11 + 'px';
             case 'x-small':
-                return 13+'px';
+                return 13 + 'px';
             case 'smaller':
             case 'inherit':
-                return 15+'px';
+                return 15 + 'px';
             case 'small':
-                return 20+'px';
+                return 20 + 'px';
             case 'medium':
-                return 25+'px';
+                return 25 + 'px';
             case 'large':
-                return 30+'px';
+                return 30 + 'px';
             case 'larger':
-                return 35+'px';
+                return 35 + 'px';
             case 'x-large':
             case 'xx-large':
-                return 40+'px';
+                return 40 + 'px';
         }
     }
 
-    getMargin()
-    {
-        switch (this.fontSize) { 
+    getMargin() {
+        switch (this.fontSize) {
             case 'xx-small':
             case 'x-small':
-                return 18+'px';
+                return 18 + 'px';
             case 'smaller':
             case 'inherit':
-                return 20+'px';
+                return 20 + 'px';
             case 'small':
-                return 25+'px';
+                return 25 + 'px';
             case 'medium':
-                return 30+'px';
+                return 30 + 'px';
             case 'large':
-                return 35+'px';
+                return 35 + 'px';
             case 'larger':
-                return 40+'px';
+                return 40 + 'px';
             case 'x-large':
             case 'xx-large':
-                return 45+'px';
+                return 45 + 'px';
         }
     }
 }

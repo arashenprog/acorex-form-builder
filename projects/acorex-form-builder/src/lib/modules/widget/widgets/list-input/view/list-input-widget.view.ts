@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AXFWidgetView, AXFValueWidgetView } from '../../../config/widget';
 import { AXFDataSourceOption } from '../../../../property-editor/editors/data-source/data-source.class';
+import { AXFConnectService } from '../../../services/connect.service';
 
 @Component({
     templateUrl: './list-input-widget.view.html',
@@ -21,14 +22,15 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
     color: string;
     bgColor: string;
     fontSize: string;
-    constructor(protected cdr: ChangeDetectorRef) {
+    items: any[] = [];
+    constructor(protected cdr: ChangeDetectorRef, private connectService: AXFConnectService) {
         super(cdr);
     }
 
     onRender(): void {
         if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
             this['dataContext'].hasOwnProperty(this['name'])) {
-            this.value = [(this['dataContext'][this['name']]).toString()]; 
+            this.value = [(this['dataContext'][this['name']]).toString()];
         }
         this.cdr.detectChanges();
     }
@@ -36,14 +38,19 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
     ngAfterViewInit() {
         super.ngAfterViewInit();
         //this.refresh();
-        if (this.value == undefined && this.dataSource.dataItems && this.dataSource.mode === 'manual') {
+        if (this.dataSource.mode === 'remote' && this.dataSource.dataItems && this.dataSource.displayMode === 'onlySelected' && this.dataSource.displayItems && this.dataSource.displayItems.length > 0)
+            this.items = this.dataSource.dataItems.filter(d => this.dataSource.displayItems.includes(d[this.dataSource.columns[0].fieldName]));
+        else
+            this.items = this.dataSource.dataItems;
+
+        if (this.value == undefined && this.dataSource.dataItems  && this.dataSource.mode === 'manual') {
             let defaultVals = this.dataSource.dataItems.filter(s => s.DefaultValue == true).map((s) => { return s.value });
             if (defaultVals.length > 0) {
-                this.value = defaultVals;
-                this.cdr.detectChanges();
+                this.value = defaultVals; 
             }
         }
-        if (this.dataSource.mode === 'remote' &&  !this.dataSource.dataItems) {
+        this.cdr.detectChanges();
+        if (this.dataSource.mode === 'remote' && !this.dataSource.dataItems) {
             this.dataSource.dataSource.params.forEach(p => {
                 if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
                     const name = p.value.substring(1);
@@ -57,9 +64,13 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
+                if (this.dataSource.displayMode === 'onlySelected' && this.dataSource.displayItems && this.dataSource.displayItems.length > 0)
+                    this.items = c.filter(d => this.dataSource.displayItems.includes(d[this.dataSource.columns[0].fieldName]));
+                else
+                    this.items = c;
                 this.cdr.detectChanges();
             });
-        } 
+        }
     }
 
     refresh() {
@@ -69,6 +80,10 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
+                if (this.dataSource.displayMode === 'onlySelected' && this.dataSource.displayItems && this.dataSource.displayItems.length > 0)
+                    this.items = c.filter(d => this.dataSource.displayItems.includes(d[this.dataSource.columns[0].fieldName]));
+                else
+                    this.items = c;
                 super.refresh();
             });
         } else {
@@ -150,5 +165,9 @@ export class AXFListInputWidgetView extends AXFValueWidgetView {
             case 'xx-large':
                 return 45 + 'px';
         }
+    }
+ 
+    openFile(fileID) {
+        this.connectService.send('openUrl',{url:fileID}) 
     }
 }

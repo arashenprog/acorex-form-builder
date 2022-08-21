@@ -430,7 +430,9 @@ export const AXF_ITEM_DATASOURCE_PROPERTY: AXFWidgetProperty = {
                 value: '3',
                 text: 'Item 3',
             }
-        ]
+        ],
+        displayItems:[],
+        displayMode:'allItems'
     },
     options: {
         allowColumns: false
