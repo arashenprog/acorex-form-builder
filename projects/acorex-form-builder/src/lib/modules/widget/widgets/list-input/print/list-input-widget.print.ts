@@ -17,7 +17,7 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     alignCheck: string;
     alignCheckNew: string;
     viewType: string;
-    visible: boolean = true;
+   // visible: boolean;
     printMode: string;
     columns: number;
     alignment: string;
@@ -33,6 +33,7 @@ export class AXFListInputWidgetPrint extends AXFWidgetPrint {
     onRender(): void {
         if (this.el)
             this.applyStyle(this.el.nativeElement);
+            this.cdr.detectChanges();
     }
 
     ngAfterViewInit() {

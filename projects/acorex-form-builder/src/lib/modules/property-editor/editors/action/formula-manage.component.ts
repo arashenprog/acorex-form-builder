@@ -11,6 +11,12 @@ import { AXFFormulaModel } from './formula.class';
 export class AXFFormulaManageComponent extends AXBasePageComponent {
 
     public data: AXFFormulaModel[] = [];
+    typeItems:any[]=[{ value: "string", title: "String" },
+    { value: "number", title: "Number" },
+    { value: "boolean", title: "Boolean" },
+    { value: "date", title: "Date" },
+    { value: "time", title: "Time" },
+    { value: "image", title: "Image" }];
 
     constructor(private popupService: AXPopupService) {
         super();
@@ -32,7 +38,7 @@ export class AXFFormulaManageComponent extends AXBasePageComponent {
             this.data = [];
         }
         const index = this.data.length + 1;
-        const newRow: AXFFormulaModel = { variable: 'var' + index.toString(), expression: '' };
+        const newRow: AXFFormulaModel = { variable: 'var' + index.toString(), expression: '',dataType:'string'  };
         this.data.push(newRow);
     }
 

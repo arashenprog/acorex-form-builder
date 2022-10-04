@@ -3,7 +3,8 @@
         <thead class="thead-dark">
             <tr>
                 <th>Variable Name</th>
-                <th>Expression</th> 
+                <th>Data Type</th> 
+                <th>Expression</th>
                 <th></th>
             </tr>
         </thead>
@@ -11,6 +12,11 @@
             <tr *ngFor="let dt of data;let i = index">
                 <td>
                     <ax-text-box [(text)]="dt.variable" ></ax-text-box>
+                </td>
+                <td> 
+                    <ax-select-box [items]="typeItems" valueField="value" textField="title"
+                        [(selectedValues)]="dt.dataType">
+                    </ax-select-box>
                 </td>
                 <td> 
                     <ax-text-box  [(text)]="dt.expression" readonly="true">

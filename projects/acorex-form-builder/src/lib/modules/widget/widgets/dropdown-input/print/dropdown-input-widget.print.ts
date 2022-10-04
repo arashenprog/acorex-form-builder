@@ -43,14 +43,32 @@ export class AXFDropdownInputWidgetPrint extends AXFWidgetPrint {
     ngAfterViewInit() {
         super.ngAfterViewInit();
         //this.binding();
-        if (this.value == undefined && this.dataSource.dataItems && this.dataSource.mode === 'manual') {
-            let defaultVals = this.dataSource.dataItems.filter(s => s.DefaultValue == true).map((s) => { return s.value });
-            if (defaultVals.length > 0) {
-                this.value = defaultVals;
-                this.cdr.detectChanges();
+
+        if(this.mode=='multiple')
+        {
+            if(Array.isArray(this.value) && this.value.length>0 && Array.isArray(this.value[0]))
+                this.value=this.value[0];
+        }
+ 
+        if (this.dataSource.mode === 'manual' && this.dataSource.dataItems) {
+            if(this.value)
+            {
+                if(Number.isInteger(this.value) || typeof(this.value)=='string')
+                {
+                    this.value= this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0].fieldName]==this.value);
+                    this.cdr.detectChanges();
+                }    
+            }
+            else
+            {
+                let defaultVals = this.dataSource.dataItems.filter(s => s.DefaultValue == true).map((s) => { return s.value });
+                if (defaultVals.length > 0) {
+                    this.value = defaultVals;
+                    this.cdr.detectChanges();
+                }
             }
         }
-        if (this.dataSource.mode === 'remote' &&  !this.dataSource.dataItems) {
+        if (this.dataSource.mode === 'remote') {
             this.dataSource.dataSource.params.forEach(p => {
                 if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
                     const name = p.value.substring(1);
@@ -68,7 +86,7 @@ export class AXFDropdownInputWidgetPrint extends AXFWidgetPrint {
                     this.value= this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0].fieldName]==this.value);
                 this.cdr.detectChanges();
             });
-        }
+        }  
     }
 
     prepareText(val) {
