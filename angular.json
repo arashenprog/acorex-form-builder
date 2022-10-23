@@ -42,8 +42,7 @@
               "node_modules/ace-builds/src-min-noconflict/ext-language_tools.js",
               "node_modules/ace-builds/src-min-noconflict/ext-rtl.js",
               "node_modules/ace-builds/src-min-noconflict/theme-tomorrow.js"
-            ],
-            "es5BrowserSupport": true
+            ]
           },
           "configurations": {
             "production": {
