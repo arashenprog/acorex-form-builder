@@ -17,6 +17,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
     isLoading = true;
     selectedItems: any = [];
     displays: any[] = null;
+    items: any[] = [];
 
     constructor(protected cdr: ChangeDetectorRef, private ref: ElementRef, private zone: NgZone) {
         super(cdr);
@@ -46,6 +47,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
         super.ngAfterViewInit();
         //this.refresh();
         debugger
+        this.items=this.dataSource.dataItems;
         if (this.dataSource.columns.filter(s => s.isDisplay).length > 1) {
             this.displays = this.dataSource.columns.filter(s => s.isDisplay)
                 .map(function (m) { return { dataField: m.fieldName, title: m.title }; });
@@ -88,6 +90,10 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
                 this.dataSource.dataSource.params
             ).then(c => {
                 this.dataSource.dataItems = c;
+                if (this.dataSource.displayMode === 'onlySelected' && this.dataSource.displayItems && this.dataSource.displayItems.length > 0)
+                    this.items = c.filter(d => this.dataSource.displayItems.includes(d[this.dataSource.columns[0].fieldName]));
+                else
+                    this.items = c;
                 if(Number.isInteger(this.value))
                     this.value= this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0].fieldName]==this.value);
                 this.cdr.detectChanges();
@@ -95,49 +101,6 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
         } 
     }
 
-    // onRender(): void {
-    //     if (this.el) {
-    //         this.applyStyle(this.el.nativeElement);
-    //         this.cdr.detectChanges();
-    //     } 
-    //     if (this.value == undefined && this['rIndex'] >= 0 && this['dataContext'] != undefined &&
-    //         this['dataContext'].hasOwnProperty(this['name'])) {
-    //             if(this.dataSource.mode=='remote')
-    //             {
-    //                 this.dataSource.dataSource.params.forEach(p => {
-    //                     if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
-    //                         const name = p.value.substring(1);
-    //                         p.value = () => {
-    //                             return '$' + this.resolveProperty(name);
-    //                         };
-    //                     }
-    //                 });
-    //                 this.dataService.getList(
-    //                     this.dataSource.dataSource.name,
-    //                     this.dataSource.dataSource.params
-    //                 ).then(c => {
-    //                     this.dataSource.dataItems = c;
-    //                     let val=this['dataContext'][this['name']];
-    //                     if(typeof this['dataContext'][this['name']]=='object')
-    //                         val =this['dataContext'][this['name']][this.dataSource.columns[0]['fieldName']]; 
-    //                     this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==val); 
-    //                     this.dataBound();
-    //                 });
-    //             }
-    //             else
-    //                 this.selectedItems = this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0]['fieldName']]==this['dataContext'][this['name']]); 
-    //         this.cdr.detectChanges();
-    //     } 
-    // }
-
-    // ngAfterViewInit() { 
-    //     if (this.dataSource.columns.filter(s => s.isDisplay).length > 1) {
-    //         this.displays = this.dataSource.columns.filter(s => s.isDisplay)
-    //             .map(function (m) { return { dataField: m.fieldName, title: m.title }; });
-    //     }
-    //     super.ngAfterViewInit();
-    //     this.refresh();
-    // }
 
     refresh() {
         this.isLoading = true;
@@ -185,6 +148,10 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
                     this.dataSource.dataSource.params
                 ).then(c => {
                     this.dataSource.dataItems = c;
+                    if (this.dataSource.displayMode === 'onlySelected' && this.dataSource.displayItems && this.dataSource.displayItems.length > 0)
+                        this.items = c.filter(d => this.dataSource.displayItems.includes(d[this.dataSource.columns[0].fieldName]));
+                    else
+                        this.items = c;
                     this.dataBound();
                 });
             } else {

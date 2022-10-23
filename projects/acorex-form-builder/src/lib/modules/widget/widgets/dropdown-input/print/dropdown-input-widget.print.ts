@@ -57,7 +57,9 @@ export class AXFDropdownInputWidgetPrint extends AXFWidgetPrint {
                 {
                     this.value= this.dataSource.dataItems.filter(w=>w[this.dataSource.columns[0].fieldName]==this.value);
                     this.cdr.detectChanges();
-                }    
+                } 
+                else 
+                this.cdr.detectChanges();   
             }
             else
             {

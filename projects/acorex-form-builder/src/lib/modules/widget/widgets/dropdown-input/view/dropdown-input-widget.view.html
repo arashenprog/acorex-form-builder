@@ -1,7 +1,7 @@
 <div #el *ngIf="visible">
     <ax-select-box [textField]="dataSource.columns[1].fieldName" [mode]="mode"
         [valueField]="dataSource.columns[0].fieldName" [allowSearch]="allowSearch" [selectedItems]="showItems()"
-        (selectedItemsChange)="handleValueChange($event)" [isLoading]="isLoading" [items]="dataSource.dataItems"
+        (selectedItemsChange)="handleValueChange($event)" [isLoading]="isLoading" [items]="items"
         [readonly]="readonly" [columns]="displays"
         (onOpen)="onOpen()" (onItemClick)="handleItemClick($event)">
     </ax-select-box>
