@@ -17,6 +17,7 @@
     "@angular/pwa": "^0.6.8"
   },
   "dependencies": {
+    "@angular/localize": "^9.1.13",
     "acorex-ui": "file:C:/ACorex/acorex-ui-2.0.10.tgz"
   }
 }
