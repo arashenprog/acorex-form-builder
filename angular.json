@@ -25,7 +25,10 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.json",
+              "src/ngsw-config.json",
+              "src/ngsw-worker.js"
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
@@ -69,7 +72,9 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "src/ngsw-config.json"
             }
           }
         },
@@ -104,6 +109,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/manifest.json",
+              "src/ngsw-config.json",
+              "src/ngsw-worker.js",
               { "glob": "**/*", "input": "src/assets", "output": "/assets" }
             ]
           }

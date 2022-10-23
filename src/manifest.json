@@ -1,0 +1,54 @@
+{
+    "name": "angular-offline",
+    "short_name": "angular-offline",
+    "theme_color": "#1976d2",
+    "background_color": "#fafafa",
+    "offline_enabled": true,
+    "display": "standalone",
+    "scope": "./",
+    "start_url": "./",
+    "icons": [
+        {
+            "src": "/assets/images/file-icon.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "/assets/images/manualsignature.jpg",
+            "type": "image/jpeg",
+            "sizes": "350x350"
+        },
+        {
+            "src": "/assets/images/noimage.png",
+            "type": "image/png",
+            "sizes": "100x100"
+        },
+        {
+            "src": "/assets/images/No-Signature.jpg",
+            "type": "image/jpeg",
+            "sizes": "200x200"
+        },
+        {
+            "src": "/assets/images/no-video.jpg",
+            "type": "image/jpeg",
+            "sizes": "100x100"
+        },
+        {
+            "src": "/assets/images/novideo.png",
+            "type": "image/png",
+            "sizes": "480x303"
+        },
+        {
+            "src": "/assets/images/photocamera-add.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "/assets/images/videoadd.png",
+            "type": "image/png",
+            "sizes": "225x225"
+        }
+        
+    ],
+    "description": "Weather forecast information"
+}
