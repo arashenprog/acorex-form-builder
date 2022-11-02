@@ -6,7 +6,6 @@ import { AXFTemplateService } from '../../widget/services/template/template.serv
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AXFDataService } from '../../widget/services/data.service';
-import { AXFUpdateService } from '../../widget/services/update.service';
 
 @Component({
   templateUrl: './viewer.page.html',
@@ -47,8 +46,7 @@ export class ACFViewerPage extends AXBasePageComponent {
     private templateService: AXFTemplateService,
     private dataService: AXFDataService,
     private eventService: EventService,
-    private renderService: AXRenderService,
-    private updateService:AXFUpdateService
+    private renderService: AXRenderService
   ) {
     super();
     this.mode = this.router.snapshot.queryParams.mode;

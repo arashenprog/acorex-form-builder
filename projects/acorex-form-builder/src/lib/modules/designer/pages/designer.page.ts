@@ -7,7 +7,6 @@ import { AXFTemplateService } from '../../widget/services/template/template.serv
 import { AFXSaveTemplateModel } from '../../widget/services/db/database';
 import { AXFChangeTrackerService } from '../../widget/services/change-tracker.service';
 import { AXFDataService } from '../../widget/services/data.service';
-import { AXFUpdateService } from '../../widget/services/update.service';
 
 @Component({
     templateUrl: './designer.page.html',
@@ -33,8 +32,7 @@ export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetCon
         private templateService: AXFTemplateService,
         private connectService: AXFConnectService,
         private dataService: AXFDataService,
-        public changeTracker: AXFChangeTrackerService,
-        private updateService:AXFUpdateService) {
+        public changeTracker: AXFChangeTrackerService) {
         super();
         eventService.on('SELECT', (c: AXFWidgetDesigner) => {
             setTimeout(() => {

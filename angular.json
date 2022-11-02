@@ -25,10 +25,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/manifest.json",
-              "src/ngsw-config.json",
-              "src/ngsw-worker.js"
+              "src/assets"
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
@@ -42,7 +39,8 @@
               "node_modules/ace-builds/src-min-noconflict/ext-language_tools.js",
               "node_modules/ace-builds/src-min-noconflict/ext-rtl.js",
               "node_modules/ace-builds/src-min-noconflict/theme-tomorrow.js"
-            ]
+            ],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
@@ -71,9 +69,7 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ],
-              "serviceWorker": true,
-              "ngswConfigPath": "src/ngsw-config.json"
+              ]
             }
           }
         },
@@ -108,9 +104,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.json",
-              "src/ngsw-config.json",
-              "src/ngsw-worker.js",
               { "glob": "**/*", "input": "src/assets", "output": "/assets" }
             ]
           }
