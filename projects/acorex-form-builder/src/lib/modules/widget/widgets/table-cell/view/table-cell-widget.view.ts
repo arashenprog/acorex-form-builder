@@ -38,9 +38,9 @@ export class AXFTableCellWidgetView extends AXFWidgetView {
             {
                 if(this.el.nativeElement.parentElement.parentElement.localName=='tbody')
                 {
-                    let tt= this.el.nativeElement.parentElement.parentElement.firstElementChild.children[this.el.nativeElement.cellIndex].getAttribute("data-title")
-                    if(tt && tt!="") {
-                     this.el.nativeElement.setAttribute("data-title",tt)
+                    let ttElm= this.el.nativeElement.parentElement.parentElement.firstElementChild.children[this.el.nativeElement.cellIndex]
+                    if(ttElm && ttElm.getAttribute("data-title")!=null && ttElm.getAttribute("data-title")!="") {
+                     this.el.nativeElement.setAttribute("data-title",ttElm.getAttribute("data-title"))
                     }
                 } 
             }

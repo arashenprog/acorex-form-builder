@@ -117,6 +117,13 @@ export class AXFRepeaterlWidgetModule {
                     title: 'Index Start Number',
                     editor: 'TextEditor',
                     options: { allowHtml: false }
+                },
+                {
+                    name: 'responsiveBorderColor',
+                    category: 'Style',
+                    defaultValue: 'inherit',
+                    title: 'Responsive Border Color',
+                    editor: 'ColorEditor'
                 }
             ]
         })

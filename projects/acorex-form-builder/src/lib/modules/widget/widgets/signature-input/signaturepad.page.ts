@@ -1,6 +1,5 @@
 import { Component, ViewChild, Output, EventEmitter, Input } from '@angular/core';
-import { SignaturePad } from 'angular2-signaturepad/signature-pad';
-import { ClosingAction } from 'acorex-ui/lib/components/nav/popup/popup.events'; 
+import { SignaturePad } from 'angular2-signaturepad/signature-pad'; 
 import { AXBasePageComponent } from 'acorex-ui';
 
 @Component({

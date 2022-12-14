@@ -22,6 +22,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     allowAdd: boolean;
     indexStart: string;
     isResponsive: boolean;
+    responsiveBorderColor: any;
 
     get formula() {
         return new AXFRepeaterlWidgetFormula(this);
@@ -58,8 +59,14 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             if (this.hostElement) {
                 this.applyStyle(<HTMLTableElement>this.hostElement.nativeElement.firstElementChild);
 
-                if (this.isResponsive && !(this.hostElement.nativeElement.firstElementChild.classList.contains("responsive")))
+                if (this.isResponsive && !(this.hostElement.nativeElement.firstElementChild.classList.contains("responsive"))) {
                     this.hostElement.nativeElement.firstElementChild.classList.add("responsive");
+                    (this.hostElement.nativeElement.firstElementChild as HTMLElement).style.borderColor = this.responsiveBorderColor
+                    let trs = Array.from(this.hostElement.nativeElement.firstElementChild.lastElementChild.children);
+                    trs.forEach((w: HTMLElement) => {
+                        w.style.borderColor = this.responsiveBorderColor;
+                    });
+                }
             }
         }, 100);
 
@@ -73,7 +80,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
     addNew() {
         if (this.dataSource.mode == "remote") {
             this.rowTemplate = this.widgets.find(c => c.options.isHeader === false);
-            if(!this.bodyRows)
+            if (!this.bodyRows)
                 this.bodyRows = [];
         }
         if (this.rowTemplate && !this.readonly) {//&& this.dataSource.mode == 'manual'
@@ -98,7 +105,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
         if (this.dataSource.mode === 'remote') {
             if (this.showHeader)
                 this.headerRows = this.widgets.filter(c => c.options.isHeader === true);
-           
+
             this.dataSource.dataSource.params.forEach(p => {
                 if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
                     p.value = this.resolveProperty(p.value);
@@ -125,7 +132,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
             result.push(...this.value);
         }
         let fixedCols = this.dataSource.columns.filter(d => d.fillByUser == false).map(d => d.fieldName);
-        
+
         if (Array.isArray(this.dataSource.dataItems)) {
             let i = 0;
             for (; i < this.dataSource.dataItems.length; i++) {
@@ -138,7 +145,7 @@ export class AXFRepeaterWidgetView extends AXFValueWidgetView {
                 } else {
                     result[i] = item;
                 }
-            } 
+            }
         }
         result.filter(s => s != null).forEach((f, i) => f = Object.assign(f, this.setIndex(i)));
         return result;

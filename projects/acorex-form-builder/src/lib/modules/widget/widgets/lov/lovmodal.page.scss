@@ -1,6 +1,7 @@
 .fact-scroll-viewport {
     height: 65vh;
     width: 100%;
+    display: grid;
   }
   
 .divhead{ 
@@ -11,27 +12,27 @@
   font-weight: bold; 
   } 
 
-  .fact-item-single .fact-cell{
+  .fact-item-single{
     background-color: var(--primary-color);
     color: var(--white-color);
   }
 
-  .fact-item-multiple .fact-cell{
+  .fact-item-multiple {
     background-color: var(--primary-color);
     color: var(--white-color);
   }
 
-  .fact-item:hover .fact-cell{
-    background-color: var(--primary-color);
-    color: var(--white-color);
+  .fact-item:hover {
+    background-color: var(--primary-trans-color);
+    color: var(--primary-color); 
   }
   .fact-item {
     // height: 40px; 
     cursor: default;
-    
-
+    border: 1px solid #dee2e6;
+    display: flex;
     .fact-cell {
-      border: 1px solid #dee2e6;
+      
       float: left;
       padding: 5px;
       font-weight: 400;

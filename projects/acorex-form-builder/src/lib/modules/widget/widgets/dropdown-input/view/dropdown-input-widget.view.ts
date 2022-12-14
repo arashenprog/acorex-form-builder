@@ -45,8 +45,7 @@ export class AXFDropdownInputWidgetView extends AXFValueWidgetView {
 
     ngAfterViewInit() {
         super.ngAfterViewInit();
-        //this.refresh();
-        debugger
+        //this.refresh(); 
         this.items=this.dataSource.dataItems;
         if (this.dataSource.columns.filter(s => s.isDisplay).length > 1) {
             this.displays = this.dataSource.columns.filter(s => s.isDisplay)

@@ -30,11 +30,12 @@ export class AXFLovInputWidgetView extends AXFValueWidgetView {
 
     onRender(): void {
         // if (this.el)
-        //     this.applyStyle(this.el.nativeElement);
-       this.cdr.markForCheck();
+        //     this.applyStyle(this.el.nativeElement);   
+       this.cdr.detectChanges();
     }
 
-    ngAfterViewInit() { 
+    ngAfterViewInit() {
+        super.ngAfterViewInit();
         if (this.dataSource.mode === 'remote') {
             this.dataSource.dataSource.params.forEach(p => {
                 if (typeof (p.value) === 'string' && p.value.startsWith('$')) {
@@ -75,7 +76,7 @@ export class AXFLovInputWidgetView extends AXFValueWidgetView {
     showText(val)
     {
         if(!val)
-            return "";
+            return ""; 
            
         let colBase= this.dataSource.columns.find(w=>w.isDisplay);
         if(!colBase)

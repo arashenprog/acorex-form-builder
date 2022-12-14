@@ -23,16 +23,18 @@ export class AXFOutletWidgetPrint extends AXFWidgetPrint implements OnInit {
     }
 
     ngOnInit() {
-        this.templateService.get(this.widgetId).then(c => {
-            this.widgets = this.widgetService.parse(c.template).options.widgets;
-            this.isLoading = false;
-            window.clearInterval(this.loadingInterval);
-            this.refresh();
-        });
+        if (this.widgets == null || this.widgets.length == 0) {
+            this.templateService.get(this.widgetId).then(c => {
+                this.widgets = this.widgetService.parse(c.template).options.widgets;
+                this.isLoading = false;
+                window.clearInterval(this.loadingInterval);
+                this.refresh();
+            });
+        }
     }
 
     refresh(): void {
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
     }
 }
 

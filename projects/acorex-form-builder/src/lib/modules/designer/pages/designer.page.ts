@@ -15,6 +15,7 @@ import { AXFDataService } from '../../widget/services/data.service';
 })
 export class ACFDesignerPage extends AXBasePageComponent implements AXFWidgetContainer {
 
+    version: string = require( '../../../../../../../package.json').version;
     @ViewChild('paper')
     paper: ElementRef<HTMLDivElement>;
 

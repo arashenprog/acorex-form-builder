@@ -43,7 +43,7 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
             }
             this.cdr.markForCheck();
             this.cdr.detectChanges();
-        }, 50);
+        }, 100);
     }
 
 
@@ -97,6 +97,8 @@ export class AXFRepeaterWidgetPrint extends AXFWidgetPrint {
     }
 
     private allItems(): any[] {
+        debugger
+        console.log('repeater Value',this.config.options.name,this.value);
         const result = [];
         if(!this.value && this.dataService['dataModel'][this.getPath()])
            this.value=this.dataService['dataModel'][this.getPath()];

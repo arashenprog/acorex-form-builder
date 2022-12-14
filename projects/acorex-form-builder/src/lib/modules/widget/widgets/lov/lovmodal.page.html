@@ -1,24 +1,25 @@
-<div class="mrgnDiv">  
+<div class="mrgnDiv">
     <ax-search-box [(text)]="filter" (onTextChanged)="onChange($event)"></ax-search-box>
-</div> 
-<div class="mrgnDiv"> 
-    <div>
-        <div *ngFor="let col of ww.dataSource.columns" class="divhead"
-        [ngStyle]="{'width':(columnCount==1)?null:(100.0/columnCount)+'%'}" >{{col.title}}</div> 
-    </div> 
-    <cdk-virtual-scroll-viewport itemSize="30" class="fact-scroll-viewport"> 
-        <div *cdkVirtualFor="let item of dataSource" class="fact-item"
-        (click)="selectItem(item)" [ngClass]="{'fact-item-single': ww.mode=='single' && showChecked(item),'fact-item-multiple':ww.mode=='multiple' && showChecked(item)}">
-            <div *ngFor="let col of ww.dataSource.columns"  class="fact-cell"
-            [ngStyle]="{'width':(columnCount==1)?null:(100.0/columnCount)+'%'}">
-             {{item[col.fieldName]}}</div> 
-        </div> 
-        
-    </cdk-virtual-scroll-viewport>
+</div>
+<div class="mrgnDiv">
+    <table style="width: 100%;">
+        <tr>
+            <th *ngFor="let col of ww.dataSource.columns" class="divhead"
+            [ngStyle]="{'width':(columnCount==1)?null:(100.0/columnCount)+'%'}">{{col.title}}</th>
+        </tr> 
+        <cdk-virtual-scroll-viewport itemSize="30" class="fact-scroll-viewport">
+
+            <tr *cdkVirtualFor="let item of dataSource" class="fact-item" (click)="selectItem(item)"
+                [ngClass]="{'fact-item-single': ww.mode=='single' && showChecked(item),'fact-item-multiple':ww.mode=='multiple' && showChecked(item)}">
+                <td [ngStyle]="{'width':(columnCount==1)?null:(100.0/columnCount)+'%'}" *ngFor="let col of ww.dataSource.columns" class="fact-cell">
+                    {{item[col.fieldName]}}</td>
+            </tr>
+        </cdk-virtual-scroll-viewport>
+    </table>
     <div class="mrgnDiv" *ngIf="ww.mode=='multiple'">
-        <ax-button (onClick)="submit()" *ngIf="ww.mode=='multiple'" >
+        <ax-button (onClick)="submit()" *ngIf="ww.mode=='multiple'">
             Submit
         </ax-button>
     </div>
- 
+
 </div>
